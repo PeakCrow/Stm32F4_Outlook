@@ -306,6 +306,6 @@ void SysTick_Handler(void)
 	if(g_ucEnableSystickISR == 0){	/*代表没有进行多定时器任务初始化*/
 		return;
 	}
-	SysTick_ISR();	/*需要在中断中不停的调用的中断服务程序*/	
+	SysTick_ISR();					/*需要在中断中不停的调用的中断服务程序*/	
 }
 

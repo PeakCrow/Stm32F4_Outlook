@@ -1,6 +1,6 @@
 Dependencies for Project 'Run_Xian', Target 'xian': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
-F (.\stm32f4_main\main.c)(0x624D615E)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Obj -I ..\User -I ..\SYSTEM\sys -I ..\HAL_lib\Inc -I ..\HAL_lib\STM32F4xx_HAL_Driver\Inc -I ..\HAL_lib\CMSIS\Include -I ..\HAL_lib\STM32F4xx_HAL_Driver\Src -I .\stm32f4_main -I ..\SYSTEM\ticktim-I.\RTE\Compiler-I.\RTE\_xian-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+F (.\stm32f4_main\main.c)(0x624E4F91)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Obj -I ..\User -I ..\SYSTEM\sys -I ..\HAL_lib\Inc -I ..\HAL_lib\STM32F4xx_HAL_Driver\Inc -I ..\HAL_lib\CMSIS\Include -I ..\HAL_lib\STM32F4xx_HAL_Driver\Src -I .\stm32f4_main -I ..\SYSTEM\ticktim-I.\RTE\Compiler-I.\RTE\_xian-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
 I (..\SYSTEM\sys\sys.h)(0x624D2CD6)
 I (.\stm32f4_main\stm32f4xx.h)(0x624D1199)
 I (.\stm32f4_main\stm32f407xx.h)(0x624D1199)
@@ -1251,7 +1251,7 @@ I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h)(0x624D1198)
 I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x624D1198)
 I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x624D1198)
 I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x624D1198)
-F (D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Source\EventRecorder.c)(0x620B551A)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Obj -I ..\User -I ..\SYSTEM\sys -I ..\HAL_lib\Inc -I ..\HAL_lib\STM32F4xx_HAL_Driver\Inc -I ..\HAL_lib\CMSIS\Include -I ..\HAL_lib\STM32F4xx_HAL_Driver\Src -I .\stm32f4_main -I ..\SYSTEM\ticktim-I.\RTE\Compiler-I.\RTE\_xian-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o ..\obj\eventrecorder.o --omf_browse ..\obj\eventrecorder.crf --depend ..\obj\eventrecorder.d)
+F (D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Source\EventRecorder.c)(0x620B551A)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --bss-threshold=0 --split_sections -I ..\Core -I ..\Obj -I ..\User -I ..\SYSTEM\sys -I ..\HAL_lib\Inc -I ..\HAL_lib\STM32F4xx_HAL_Driver\Inc -I ..\HAL_lib\CMSIS\Include -I ..\HAL_lib\STM32F4xx_HAL_Driver\Src -I .\stm32f4_main -I ..\SYSTEM\ticktim-I.\RTE\Compiler-I.\RTE\_xian-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o ..\obj\eventrecorder.o --omf_browse ..\obj\eventrecorder.crf --depend ..\obj\eventrecorder.d)
 I (.\RTE\_xian\RTE_Components.h)(0x624D5FE8)
 I (.\stm32f4_main\stm32f4xx.h)(0x624D1199)
 I (.\stm32f4_main\stm32f407xx.h)(0x624D1199)
@@ -1319,7 +1319,7 @@ I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x624D1198)
 I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x624D1198)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
 I (D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include\EventRecorder.h)(0x5B8F507E)
-I (.\RTE\Compiler\EventRecorderConf.h)(0x624D1199)
+I (.\RTE\Compiler\EventRecorderConf.h)(0x624E4E60)
 F (D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Source\retarget_io.c)(0x584E29BE)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Obj -I ..\User -I ..\SYSTEM\sys -I ..\HAL_lib\Inc -I ..\HAL_lib\STM32F4xx_HAL_Driver\Inc -I ..\HAL_lib\CMSIS\Include -I ..\HAL_lib\STM32F4xx_HAL_Driver\Src -I .\stm32f4_main -I ..\SYSTEM\ticktim-I.\RTE\Compiler-I.\RTE\_xian-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o ..\obj\retarget_io.o --omf_browse ..\obj\retarget_io.crf --depend ..\obj\retarget_io.d)
 I (D:\Keil_v5\ARM\ARMCC\include\string.h)(0x6025237E)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
@@ -1329,4 +1329,4 @@ I (D:\Keil_v5\ARM\ARMCC\include\assert.h)(0x60252378)
 I (D:\Keil_v5\ARM\ARMCC\include\rt_sys.h)(0x6025237E)
 I (.\RTE\_xian\RTE_Components.h)(0x624D5FE8)
 I (D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include\EventRecorder.h)(0x5B8F507E)
-F (RTE\Compiler\EventRecorderConf.h)(0x624D1199)()
+F (RTE\Compiler\EventRecorderConf.h)(0x624E4E60)()

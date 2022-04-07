@@ -15,6 +15,7 @@ void func3(void)
 {
 	printf("单次4.0s调用\r\n");
 }
+uint32_t i = 0;
 int main(void)
 {	
     HAL_Init();                    	 			//初始化HAL库    
@@ -25,6 +26,7 @@ int main(void)
 	bsp_StartAutoTimer(0,1500,func1);
 	bsp_StartAutoTimer(1,2000,func2);
 	bsp_StartOnceTimer(2,4000,func3);
+	
 	while(1)
 	{	
 		EventStartA(0);
@@ -41,5 +43,8 @@ int main(void)
 		EventStopA(2);
 	}
 }
-
+void bsp_RunPer1ms()
+{
+	printf("%d\r\n",i++);
+}
 
