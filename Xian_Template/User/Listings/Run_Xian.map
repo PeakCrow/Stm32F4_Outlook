@@ -4,8 +4,8 @@ Component: ARM Compiler 5.06 update 7 (build 960) Tool: armlink [4d3601]
 
 Section Cross References
 
-    main.o(i.bsp_RunPer1ms) refers to printf3.o(i.__0printf$3) for __2printf
-    main.o(i.bsp_RunPer1ms) refers to main.o(.data) for i
+    main.o(i.bsp_RunPer50ms) refers to printf3.o(i.__0printf$3) for __2printf
+    main.o(i.bsp_RunPer50ms) refers to main.o(.data) for i
     main.o(i.func1) refers to printf3.o(i.__0printf$3) for __2printf
     main.o(i.func2) refers to printf3.o(i.__0printf$3) for __2printf
     main.o(i.func3) refers to printf3.o(i.__0printf$3) for __2printf
@@ -13,7 +13,6 @@ Section Cross References
     main.o(i.main) refers to sys.o(i.Stm32_Clock_Init) for Stm32_Clock_Init
     main.o(i.main) refers to ticktim.o(i.bsp_InitTimer) for bsp_InitTimer
     main.o(i.main) refers to eventrecorder.o(i.EventRecorderInitialize) for EventRecorderInitialize
-    main.o(i.main) refers to eventrecorder.o(i.EventRecorderStart) for EventRecorderStart
     main.o(i.main) refers to ticktim.o(i.bsp_StartAutoTimer) for bsp_StartAutoTimer
     main.o(i.main) refers to ticktim.o(i.bsp_StartOnceTimer) for bsp_StartOnceTimer
     main.o(i.main) refers to eventrecorder.o(i.EventRecord2) for EventRecord2
@@ -31,8 +30,9 @@ Section Cross References
     ticktim.o(i.SysTick_Handler) refers to ticktim.o(i.SysTick_ISR) for SysTick_ISR
     ticktim.o(i.SysTick_Handler) refers to ticktim.o(.data) for g_ucEnableSystickISR
     ticktim.o(i.SysTick_ISR) refers to ticktim.o(i.bsp_SoftTimerDec) for bsp_SoftTimerDec
-    ticktim.o(i.SysTick_ISR) refers to main.o(i.bsp_RunPer1ms) for bsp_RunPer1ms
+    ticktim.o(i.SysTick_ISR) refers to ticktim.o(i.bsp_RunPer1ms) for bsp_RunPer1ms
     ticktim.o(i.SysTick_ISR) refers to ticktim.o(i.bsp_RunPer10ms) for bsp_RunPer10ms
+    ticktim.o(i.SysTick_ISR) refers to main.o(i.bsp_RunPer50ms) for bsp_RunPer50ms
     ticktim.o(i.SysTick_ISR) refers to ticktim.o(.bss) for s_tTmr
     ticktim.o(i.SysTick_ISR) refers to ticktim.o(.data) for g_iRunTime
     ticktim.o(i.bsp_DelayMs) refers to ticktim.o(i.bsp_DelayUs) for bsp_DelayUs
@@ -588,7 +588,6 @@ Removing Unused input sections from the image.
     Removing ticktim.o(.rev16_text), (4 bytes).
     Removing ticktim.o(.revsh_text), (4 bytes).
     Removing ticktim.o(.rrx_text), (6 bytes).
-    Removing ticktim.o(i.bsp_RunPer1ms), (2 bytes).
     Removing ticktim.o(i.bsp_RunPer50ms), (2 bytes).
     Removing ticktim.o(i.bsp_StopTimer), (16 bytes).
     Removing startup_stm32f407xx.o(HEAP), (512 bytes).
@@ -860,7 +859,7 @@ Removing Unused input sections from the image.
     Removing cdrcmple.o(.text), (48 bytes).
     Removing depilogue.o(.text), (186 bytes).
 
-292 unused section(s) (total 23576 bytes) removed from the image.
+291 unused section(s) (total 23574 bytes) removed from the image.
 
 ==============================================================================
 
@@ -870,44 +869,44 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12a.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry12a.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
     ../clib/microlib/printf/stubs.s          0x00000000   Number         0  stubs.o ABSOLUTE
     ../clib/microlib/stdio/fputs.c           0x00000000   Number         0  fputs.o ABSOLUTE
     ../clib/microlib/stdio/fputs.c           0x00000000   Number         0  fputs_e.o ABSOLUTE
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdout.o ABSOLUTE
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stderr.o ABSOLUTE
-    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
     ../clib/microlib/string/memset.c         0x00000000   Number         0  memseta.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
@@ -1041,7 +1040,8 @@ Image Symbol Table
     i.bsp_DelayUs                            0x080014ac   Section        0  ticktim.o(i.bsp_DelayUs)
     i.bsp_InitTimer                          0x08001500   Section        0  ticktim.o(i.bsp_InitTimer)
     i.bsp_RunPer10ms                         0x080015ac   Section        0  ticktim.o(i.bsp_RunPer10ms)
-    i.bsp_RunPer1ms                          0x080015b0   Section        0  main.o(i.bsp_RunPer1ms)
+    i.bsp_RunPer1ms                          0x080015ae   Section        0  ticktim.o(i.bsp_RunPer1ms)
+    i.bsp_RunPer50ms                         0x080015b0   Section        0  main.o(i.bsp_RunPer50ms)
     i.bsp_SoftTimerDec                       0x080015d4   Section        0  ticktim.o(i.bsp_SoftTimerDec)
     bsp_SoftTimerDec                         0x080015d5   Thumb Code    28  ticktim.o(i.bsp_SoftTimerDec)
     i.bsp_StartAutoTimer                     0x080015f0   Section        0  ticktim.o(i.bsp_StartAutoTimer)
@@ -1053,14 +1053,14 @@ Image Symbol Table
     i.func2                                  0x080017b4   Section        0  main.o(i.func2)
     i.func3                                  0x080017d0   Section        0  main.o(i.func3)
     i.main                                   0x080017ec   Section        0  main.o(i.main)
-    i.stdout_putchar                         0x080018dc   Section        0  retarget_io.o(i.stdout_putchar)
-    stdout_putchar                           0x080018dd   Thumb Code    68  retarget_io.o(i.stdout_putchar)
-    .constdata                               0x0800192c   Section       24  system_stm32f4xx.o(.constdata)
-    .constdata                               0x08001944   Section       38  ticktim.o(.constdata)
-    __FUNCTION__                             0x08001944   Data          19  ticktim.o(.constdata)
-    __FUNCTION__                             0x08001957   Data          19  ticktim.o(.constdata)
-    .constdata                               0x0800196c   Section       24  eventrecorder.o(.constdata)
-    __tagsym$$used                           0x0800196c   Number         0  eventrecorder.o(.constdata)
+    i.stdout_putchar                         0x080018d8   Section        0  retarget_io.o(i.stdout_putchar)
+    stdout_putchar                           0x080018d9   Thumb Code    68  retarget_io.o(i.stdout_putchar)
+    .constdata                               0x08001928   Section       24  system_stm32f4xx.o(.constdata)
+    .constdata                               0x08001940   Section       38  ticktim.o(.constdata)
+    __FUNCTION__                             0x08001940   Data          19  ticktim.o(.constdata)
+    __FUNCTION__                             0x08001953   Data          19  ticktim.o(.constdata)
+    .constdata                               0x08001968   Section       24  eventrecorder.o(.constdata)
+    __tagsym$$used                           0x08001968   Number         0  eventrecorder.o(.constdata)
     .data                                    0x20000000   Section        4  main.o(.data)
     .data                                    0x20000004   Section        4  system_stm32f4xx.o(.data)
     .data                                    0x20000008   Section        7  ticktim.o(.data)
@@ -1296,19 +1296,20 @@ Image Symbol Table
     bsp_DelayUs                              0x080014ad   Thumb Code    76  ticktim.o(i.bsp_DelayUs)
     bsp_InitTimer                            0x08001501   Thumb Code   150  ticktim.o(i.bsp_InitTimer)
     bsp_RunPer10ms                           0x080015ad   Thumb Code     2  ticktim.o(i.bsp_RunPer10ms)
-    bsp_RunPer1ms                            0x080015b1   Thumb Code    22  main.o(i.bsp_RunPer1ms)
+    bsp_RunPer1ms                            0x080015af   Thumb Code     2  ticktim.o(i.bsp_RunPer1ms)
+    bsp_RunPer50ms                           0x080015b1   Thumb Code    22  main.o(i.bsp_RunPer50ms)
     bsp_StartAutoTimer                       0x080015f1   Thumb Code    94  ticktim.o(i.bsp_StartAutoTimer)
     bsp_StartOnceTimer                       0x08001695   Thumb Code    92  ticktim.o(i.bsp_StartOnceTimer)
     fputc                                    0x08001779   Thumb Code    26  retarget_io.o(i.fputc)
     func1                                    0x08001799   Thumb Code    10  main.o(i.func1)
     func2                                    0x080017b5   Thumb Code    10  main.o(i.func2)
     func3                                    0x080017d1   Thumb Code    10  main.o(i.func3)
-    main                                     0x080017ed   Thumb Code   174  main.o(i.main)
-    AHBPrescTable                            0x0800192c   Data          16  system_stm32f4xx.o(.constdata)
-    APBPrescTable                            0x0800193c   Data           8  system_stm32f4xx.o(.constdata)
-    EventRecorderInfo                        0x0800196c   Data          24  eventrecorder.o(.constdata)
-    Region$$Table$$Base                      0x08001984   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x080019a4   Number         0  anon$$obj.o(Region$$Table)
+    main                                     0x080017ed   Thumb Code   170  main.o(i.main)
+    AHBPrescTable                            0x08001928   Data          16  system_stm32f4xx.o(.constdata)
+    APBPrescTable                            0x08001938   Data           8  system_stm32f4xx.o(.constdata)
+    EventRecorderInfo                        0x08001968   Data          24  eventrecorder.o(.constdata)
+    Region$$Table$$Base                      0x08001980   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x080019a0   Number         0  anon$$obj.o(Region$$Table)
     i                                        0x20000000   Data           4  main.o(.data)
     SystemCoreClock                          0x20000004   Data           4  system_stm32f4xx.o(.data)
     g_iRunTime                               0x20000008   Data           4  ticktim.o(.data)
@@ -1326,9 +1327,9 @@ Memory Map of the image
 
   Image Entry point : 0x08000189
 
-  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000019d0, Max: 0x00100000, ABSOLUTE)
+  Load Region LR_IROM1 (Base: 0x08000000, Size: 0x000019cc, Max: 0x00100000, ABSOLUTE)
 
-    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000019a4, Max: 0x00100000, ABSOLUTE)
+    Execution Region ER_IROM1 (Exec base: 0x08000000, Load base: 0x08000000, Size: 0x000019a0, Max: 0x00100000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -1404,8 +1405,8 @@ Memory Map of the image
     0x080014ac   0x080014ac   0x00000054   Code   RO          524    i.bsp_DelayUs       ticktim.o
     0x08001500   0x08001500   0x000000ac   Code   RO          525    i.bsp_InitTimer     ticktim.o
     0x080015ac   0x080015ac   0x00000002   Code   RO          526    i.bsp_RunPer10ms    ticktim.o
-    0x080015ae   0x080015ae   0x00000002   PAD
-    0x080015b0   0x080015b0   0x00000024   Code   RO            4    i.bsp_RunPer1ms     main.o
+    0x080015ae   0x080015ae   0x00000002   Code   RO          527    i.bsp_RunPer1ms     ticktim.o
+    0x080015b0   0x080015b0   0x00000024   Code   RO            4    i.bsp_RunPer50ms    main.o
     0x080015d4   0x080015d4   0x0000001c   Code   RO          529    i.bsp_SoftTimerDec  ticktim.o
     0x080015f0   0x080015f0   0x000000a4   Code   RO          530    i.bsp_StartAutoTimer  ticktim.o
     0x08001694   0x08001694   0x000000a0   Code   RO          531    i.bsp_StartOnceTimer  ticktim.o
@@ -1415,38 +1416,38 @@ Memory Map of the image
     0x08001798   0x08001798   0x0000001c   Code   RO            5    i.func1             main.o
     0x080017b4   0x080017b4   0x0000001c   Code   RO            6    i.func2             main.o
     0x080017d0   0x080017d0   0x0000001c   Code   RO            7    i.func3             main.o
-    0x080017ec   0x080017ec   0x000000f0   Code   RO            8    i.main              main.o
-    0x080018dc   0x080018dc   0x00000050   Code   RO         2318    i.stdout_putchar    retarget_io.o
-    0x0800192c   0x0800192c   0x00000018   Data   RO          369    .constdata          system_stm32f4xx.o
-    0x08001944   0x08001944   0x00000026   Data   RO          534    .constdata          ticktim.o
-    0x0800196a   0x0800196a   0x00000002   PAD
-    0x0800196c   0x0800196c   0x00000018   Data   RO         2200    .constdata          eventrecorder.o
-    0x08001984   0x08001984   0x00000020   Data   RO         2689    Region$$Table       anon$$obj.o
+    0x080017ec   0x080017ec   0x000000ec   Code   RO            8    i.main              main.o
+    0x080018d8   0x080018d8   0x00000050   Code   RO         2318    i.stdout_putchar    retarget_io.o
+    0x08001928   0x08001928   0x00000018   Data   RO          369    .constdata          system_stm32f4xx.o
+    0x08001940   0x08001940   0x00000026   Data   RO          534    .constdata          ticktim.o
+    0x08001966   0x08001966   0x00000002   PAD
+    0x08001968   0x08001968   0x00000018   Data   RO         2200    .constdata          eventrecorder.o
+    0x08001980   0x08001980   0x00000020   Data   RO         2689    Region$$Table       anon$$obj.o
 
 
-    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080019a4, Size: 0x00000470, Max: 0x00010000, ABSOLUTE)
+    Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x080019a0, Size: 0x00000470, Max: 0x00010000, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
-    0x20000000   0x080019a4   0x00000004   Data   RW            9    .data               main.o
-    0x20000004   0x080019a8   0x00000004   Data   RW          370    .data               system_stm32f4xx.o
-    0x20000008   0x080019ac   0x00000007   Data   RW          535    .data               ticktim.o
-    0x2000000f   0x080019b3   0x00000001   PAD
-    0x20000010   0x080019b4   0x00000009   Data   RW          666    .data               stm32f4xx_hal.o
-    0x20000019   0x080019bd   0x00000003   PAD
-    0x2000001c   0x080019c0   0x0000000c   Data   RW         2319    .data               retarget_io.o
-    0x20000028   0x080019cc   0x00000004   Data   RW         2379    .data               mc_w.l(stdout.o)
+    0x20000000   0x080019a0   0x00000004   Data   RW            9    .data               main.o
+    0x20000004   0x080019a4   0x00000004   Data   RW          370    .data               system_stm32f4xx.o
+    0x20000008   0x080019a8   0x00000007   Data   RW          535    .data               ticktim.o
+    0x2000000f   0x080019af   0x00000001   PAD
+    0x20000010   0x080019b0   0x00000009   Data   RW          666    .data               stm32f4xx_hal.o
+    0x20000019   0x080019b9   0x00000003   PAD
+    0x2000001c   0x080019bc   0x0000000c   Data   RW         2319    .data               retarget_io.o
+    0x20000028   0x080019c8   0x00000004   Data   RW         2379    .data               mc_w.l(stdout.o)
     0x2000002c        -       0x00000040   Zero   RW          533    .bss                ticktim.o
-    0x2000006c   0x080019d0   0x00000004   PAD
+    0x2000006c   0x080019cc   0x00000004   PAD
     0x20000070        -       0x00000400   Zero   RW          629    STACK               startup_stm32f407xx.o
 
 
-    Execution Region RW_IRAM2 (Exec base: 0x20010000, Load base: 0x080019d0, Size: 0x000080e4, Max: 0x00010000, ABSOLUTE, UNINIT)
+    Execution Region RW_IRAM2 (Exec base: 0x20010000, Load base: 0x080019cc, Size: 0x000080e4, Max: 0x00010000, ABSOLUTE, UNINIT)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x20010000        -       0x00000001   Zero   RW         2198    .bss                eventrecorder.o
-    0x20010001   0x080019d0   0x0000003f   PAD
+    0x20010001   0x080019cc   0x0000003f   PAD
     0x20010040        -       0x000080a4   Zero   RW         2199    .bss.noinit         eventrecorder.o
 
 
@@ -1458,7 +1459,7 @@ Image component sizes
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
       1412         94         24          0      32933      19629   eventrecorder.o
-       360        134          0          4          0     639483   main.o
+       356        134          0          4          0     639576   main.o
        112         18          0         12          0       2636   retarget_io.o
         36          8        392          0       1024        824   startup_stm32f407xx.o
        172         34          0          9          0       4444   stm32f4xx_hal.o
@@ -1468,12 +1469,12 @@ Image component sizes
         24          0          0          0          0       3720   stm32f4xx_it.o
        204         14          0          0          0       1219   sys.o
        100         18         24          4          0       1147   system_stm32f4xx.o
-       852        190         38          7         64      37513   ticktim.o
+       854        190         38          7         64      37973   ticktim.o
 
     ----------------------------------------------------------------------
-      5214        590        512         40      34088     744975   Object Totals
+      5210        590        512         40      34088     745528   Object Totals
          0          0         32          0          0          0   (incl. Generated)
-        12          0          2          4         67          0   (incl. Padding)
+        10          0          2          4         67          0   (incl. Padding)
 
     ----------------------------------------------------------------------
 
@@ -1519,15 +1520,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      6052        620        512         44      34088     740603   Grand Totals
-      6052        620        512         44      34088     740603   ELF Image Totals
-      6052        620        512         44          0          0   ROM Totals
+      6048        620        512         44      34088     741056   Grand Totals
+      6048        620        512         44      34088     741056   ELF Image Totals
+      6048        620        512         44          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 6564 (   6.41kB)
+    Total RO  Size (Code + RO Data)                 6560 (   6.41kB)
     Total RW  Size (RW Data + ZI Data)             34132 (  33.33kB)
-    Total ROM Size (Code + RO Data + RW Data)       6608 (   6.45kB)
+    Total ROM Size (Code + RO Data + RW Data)       6604 (   6.45kB)
 
 ==============================================================================
 

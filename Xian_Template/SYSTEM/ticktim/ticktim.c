@@ -177,9 +177,8 @@ static void SysTick_ISR(void)
 	}
 	if(++s_count50ms >= 50){
 		s_count50ms = 0;
-		bsp_RunPer10ms();	/*每隔50ms调用一次此函数*/
+		bsp_RunPer50ms();	/*每隔50ms调用一次此函数*/
 	}
-	
 }
 /************************************************
 *Function name	:bsp_RunPer1ms

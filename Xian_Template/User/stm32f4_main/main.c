@@ -22,7 +22,6 @@ int main(void)
     Stm32_Clock_Init(336,8,2,7);   				//设置时钟,168Mhz
 	bsp_InitTimer();
 	EventRecorderInitialize(EventRecordAll, 1U);/* 初始化 EventRecorder 并开启 */
-	EventRecorderStart();
 	bsp_StartAutoTimer(0,1500,func1);
 	bsp_StartAutoTimer(1,2000,func2);
 	bsp_StartOnceTimer(2,4000,func3);
@@ -43,7 +42,8 @@ int main(void)
 		EventStopA(2);
 	}
 }
-void bsp_RunPer1ms()
+
+void bsp_RunPer50ms()
 {
 	printf("%d\r\n",i++);
 }
