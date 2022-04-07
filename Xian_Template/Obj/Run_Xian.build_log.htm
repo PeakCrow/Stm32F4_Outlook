@@ -5,11 +5,11 @@
 <h2>Tool Versions:</h2>
 IDE-Version: ¦ÌVision V5.36.0.0
 Copyright (C) 2021 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: XIAN Administrator, XIAN, LIC=WHYH9-4DSDA-II85V-PT8DG-BZKP9-U4WGQ
+License Information: trx TRX, trx, LIC=RC93N-Y4WCH-RA4DM-XG62G-JICFD-GV5K7
  
 Tool Versions:
 Toolchain:       MDK-ARM Plus  Version: 5.36.0.0
-Toolchain Path:  E:\Keil_v5\ARM\ARMCC\Bin
+Toolchain Path:  D:\Keil_v5\ARM\ARMCC\Bin
 C Compiler:      Armcc.exe V5.06 update 7 (build 960)
 Assembler:       Armasm.exe V5.06 update 7 (build 960)
 Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
@@ -17,31 +17,50 @@ Library Manager: ArmAr.exe V5.06 update 7 (build 960)
 Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
 CPU DLL:         SARMCM3.DLL V5.36.0.0
 Dialog DLL:      DCM.DLL V1.17.3.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.0.9.0
+Target DLL:      CMSIS_AGDI.dll V1.33.0.0
 Dialog DLL:      TCM.DLL V1.53.0.0
  
 <h2>Project:</h2>
-D:\UPAN\STM32_F4_Xian\Xian_Template - ¸±±¾\User\Run_Xian.uvprojx
-Project File Date:  04/05/2022
+E:\stm32F407zet6Template\Xian_Template\User\Run_Xian.uvprojx
+Project File Date:  04/06/2022
 
 <h2>Output:</h2>
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'xian'
+compiling system_stm32f4xx.c...
+assembling startup_stm32f407xx.s...
 compiling main.c...
+compiling sys.c...
+compiling stm32f4xx_hal_msp.c...
 compiling stm32f4xx_it.c...
-compiling delay.c...
+compiling ticktim.c...
+compiling stm32f4xx_hal.c...
+compiling stm32f4xx_hal_crc.c...
+compiling stm32f4xx_hal_cortex.c...
+compiling stm32f4xx_hal_dma.c...
+compiling stm32f4xx_hal_eth.c...
+compiling stm32f4xx_hal_gpio.c...
+compiling stm32f4xx_hal_pwr.c...
+compiling stm32f4xx_hal_usart.c...
+compiling stm32f4xx_hal_uart.c...
+compiling stm32f4xx_hal_pwr_ex.c...
+compiling retarget_io.c...
+compiling stm32f4xx_hal_dma_ex.c...
+compiling stm32f4xx_hal_rcc.c...
+compiling stm32f4xx_hal_rcc_ex.c...
+compiling EventRecorder.c...
 linking...
-Program Size: Code=5524 RO-data=512 RW-data=40 ZI-data=2304  
+Program Size: Code=5744 RO-data=512 RW-data=40 ZI-data=2304  
 FromELF: creating hex file...
 "..\Obj\Run_Xian.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: Keil
-                http://www.keil.com/pack/Keil.ARM_Compiler.1.6.3.pack
-                Keil.ARM_Compiler.1.6.3
+                http://www.keil.com/pack/Keil.ARM_Compiler.1.7.0.pack
+                Keil.ARM_Compiler.1.7.0
                 Keil ARM Compiler extensions for ARM Compiler 5 and ARM Compiler 6
-   * Component: Event Recorder Variant: DAP Version: 1.4.0
+   * Component: Event Recorder Variant: DAP Version: 1.5.0
    * Component: STDOUT Variant: EVR Version: 1.2.0
 
 Package Vendor: Keil
@@ -52,19 +71,19 @@ Package Vendor: Keil
 <h2>Collection of Component include folders:</h2>
   .\RTE\Compiler
   .\RTE\_xian
-  E:\Users\Administrator\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\Include
-  E:\Users\Administrator\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
+  D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include
+  D:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: Keil.ARM Compiler::Compiler:Event Recorder:DAP:1.4.0
-      Source file:   Source\EventRecorder.c
+   * Component: Keil.ARM Compiler::Compiler:Event Recorder:DAP:1.5.0
       Include file:  Config\EventRecorderConf.h
       Include file:  Include\EventRecorder.h
+      Source file:   Source\EventRecorder.c
 
    * Component: Keil.ARM Compiler::Compiler:I/O:STDOUT:EVR:1.2.0
       Source file:   Source\retarget_io.c
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:22
 </pre>
 </body>
 </html>

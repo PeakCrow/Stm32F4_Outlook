@@ -1,4 +1,4 @@
-#include "delay.h"
+#include "ticktim.h"
 
 /*全局运行时间，单位1ms,最长可以表示 24.85天，如果你的产品连续运行时间超过这个数，则必须考虑溢出问题*/
 __IO int32_t g_iRunTime = 0;

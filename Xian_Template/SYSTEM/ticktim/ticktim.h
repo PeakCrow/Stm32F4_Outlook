@@ -1,5 +1,5 @@
-#ifndef __DELAY_H
-#define __DELAY_H
+#ifndef __TICK_TIM_H
+#define __TICK_TIM_H
 #include "stdint.h"
 #include "stdio.h"
 #include "stm32f4xx_hal.h"
