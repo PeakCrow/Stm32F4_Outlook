@@ -2,6 +2,7 @@
 #include "ticktim.h"
 #include "EventRecorder.h"
 #include "stdio.h"
+#include "bsp_usart_fifo.h"
 
 void func1(void)
 {
@@ -21,6 +22,7 @@ int main(void)
     HAL_Init();                    	 			//初始化HAL库    
     Stm32_Clock_Init(336,8,2,7);   				//设置时钟,168Mhz
 	bsp_InitTimer();
+	bsp_InitUart();
 	EventRecorderInitialize(EventRecordAll, 1U);/* 初始化 EventRecorder 并开启 */
 	bsp_StartAutoTimer(0,1500,func1);
 	bsp_StartAutoTimer(1,2000,func2);

@@ -5,6 +5,7 @@
 "..\obj\system_stm32f4xx.o"
 "..\obj\sys.o"
 "..\obj\ticktim.o"
+"..\obj\bsp_usart_fifo.o"
 "..\obj\startup_stm32f407xx.o"
 "..\obj\stm32f4xx_hal.o"
 "..\obj\stm32f4xx_hal_cortex.o"

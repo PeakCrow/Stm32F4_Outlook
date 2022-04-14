@@ -68,3 +68,4 @@
 ..\obj\main.o: ..\SYSTEM\ticktim\ticktim.h
 ..\obj\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 ..\obj\main.o: D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include\EventRecorder.h
+..\obj\main.o: ..\SYSTEM\usart_fifo\bsp_usart_fifo.h
