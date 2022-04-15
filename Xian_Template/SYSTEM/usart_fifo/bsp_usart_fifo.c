@@ -28,6 +28,13 @@ static void UartSend(UART_T *_pUart,uint8_t *_ucaBuf,uint16_t _usLen);
 static uint8_t UartGetChar(UART_T *_pUart,uint8_t *_pByte);
 static void UartIRQ(UART_T *_pUart);
 
+/*
+*	函 数 名: bsp_InitUart
+*	功能说明: 主函数中调用的串口初始化函数
+*	形    参: none
+*	返 回 值: none
+*	时间：2022年4月15日21点27分
+*/
 void bsp_InitUart()
 {
 	UartVarInit();
@@ -61,44 +68,14 @@ static void UartVarInit(void)
 	g_tUart1.Sending  = 0;						/* 正在发送中标志 */
 #endif
 }
+
 /*
-*	函 数 名: bsp_SetUartParam
-*	功能说明: 配置串口的硬件参数
-*	形    参: Instance	USART_TypeDef类型结构体
-				BaudRate	波特率
-				Partity		校验类型，奇校验或者偶校验
-				Mode		发送和接收模式使能
-*	返 回 值: 无
-*	时间：2022年4月14日13点33分
+*	函 数 名: InitHardUart
+*	功能说明: 串口外设的初始化
+*	形    参: none
+*	返 回 值: none
+*	时间：2022年4月15日21点28分
 */
-void bsp_SetUartParam(USART_TypeDef *Instance,uint32_t BaudRate,uint32_t Parity,uint32_t Mode)
-{
-	UART_HandleTypeDef UartHandle;
-	
-/*	串口1硬件配置参数
-	异步串口模式
-	-字长	= 8位
-	-停止位 = 1个停止位
-	-校验	= 参数Parity
-	-波特率	= 参数BaudRate
-	-硬件流控制关闭(RTS and CTS signals) */
-	UartHandle.Instance			= Instance;
-	UartHandle.Init.BaudRate	= BaudRate;
-	UartHandle.Init.WordLength	= UART_WORDLENGTH_8B;
-	UartHandle.Init.StopBits	= UART_STOPBITS_1;
-	UartHandle.Init.Parity		= Parity;
-	UartHandle.Init.HwFlowCtl	= UART_HWCONTROL_NONE;
-	UartHandle.Init.Mode 		= Mode;
-	UartHandle.Init.OverSampling= UART_OVERSAMPLING_16;
-	
-	if(HAL_UART_Init(&UartHandle) != HAL_OK)
-	{
-		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__); 
-	}
-	
-}
-
-
 void InitHardUart(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
@@ -139,6 +116,51 @@ void InitHardUart(void)
 #endif
 }
 
+
+/*
+*	函 数 名: bsp_SetUartParam
+*	功能说明: 配置串口的硬件参数
+*	形    参: Instance	USART_TypeDef类型结构体
+				BaudRate	波特率
+				Partity		校验类型，奇校验或者偶校验
+				Mode		发送和接收模式使能
+*	返 回 值: 无
+*	时间：2022年4月14日13点33分
+*/
+void bsp_SetUartParam(USART_TypeDef *Instance,uint32_t BaudRate,uint32_t Parity,uint32_t Mode)
+{
+	UART_HandleTypeDef UartHandle;
+	
+/*	串口1硬件配置参数
+	异步串口模式
+	-字长	= 8位
+	-停止位 = 1个停止位
+	-校验	= 参数Parity
+	-波特率	= 参数BaudRate
+	-硬件流控制关闭(RTS and CTS signals) */
+	UartHandle.Instance			= Instance;
+	UartHandle.Init.BaudRate	= BaudRate;
+	UartHandle.Init.WordLength	= UART_WORDLENGTH_8B;
+	UartHandle.Init.StopBits	= UART_STOPBITS_1;
+	UartHandle.Init.Parity		= Parity;
+	UartHandle.Init.HwFlowCtl	= UART_HWCONTROL_NONE;
+	UartHandle.Init.Mode 		= Mode;
+	UartHandle.Init.OverSampling= UART_OVERSAMPLING_16;
+	
+	if(HAL_UART_Init(&UartHandle) != HAL_OK)
+	{
+		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__); 
+	}
+	
+}
+
+/*
+*	函 数 名: UartIRQ
+*	功能说明: 串口发送接收中断的处理函数
+*	形    参: _pUart:串口外设自定义结构体的全局变量
+*	返 回 值: none
+*	时间：2022年4月15日21点30分
+*/
 static void UartIRQ(UART_T *_pUart)
 {
 	
@@ -223,31 +245,26 @@ static void UartIRQ(UART_T *_pUart)
 	}
 }
 
-
+/*
+*	函 数 名: USART1_IRQHandler
+*	功能说明: HAL库的中段处理函数
+*	形    参: none
+*	返 回 值: none
+*	时间：2022年4月15日21点31分
+*/
 #if UART1_FIFO_EN == 1
 void USART1_IRQHandler(void)
 {
 	UartIRQ(&g_tUart1);
 }
 #endif
-
-
-void comSenBuf(COM_PORT_E _ucPort,uint8_t *_ucaBuf,uint16_t _usLen)
-{
-	UART_T *pUart;
-	
-	pUart = &g_tUart1;
-	if(pUart == 0)
-	{
-		return;
-	}
-	if(pUart->SendBefor != 0)
-	{
-		pUart->SendBefor();/* 如果是RS485通信，可以在这个函数中将RS485设置为发送模式 */
-	}
-	UartSend(pUart,_ucaBuf,_usLen);
-}
-
+/*
+*	函 数 名: UartSend
+*	功能说明: 使能串口发送中断
+*	形    参: _pUart：串口外设自定义结构体指针；_ucaBuf：要发送的buff；_usLen：发送的buff长度
+*	返 回 值: none
+*	时间：2022年4月15日21点38分
+*/
 static void UartSend(UART_T *_pUart,uint8_t *_ucaBuf,uint16_t _usLen)
 {
 	uint16_t i;
@@ -290,10 +307,49 @@ static void UartSend(UART_T *_pUart,uint8_t *_ucaBuf,uint16_t _usLen)
 	SET_BIT(_pUart->uart->CR1,USART_CR1_TXEIE);
 }
 
+/*
+*	函 数 名: comSenBuf
+*	功能说明: 配置串口发送字符串
+*	形    参: _ucPort：准备发送的串口外设；_ucaBuf：要发送的数据buff；_usLen：要发送的buff长度
+*	返 回 值: none
+*	时间：2022年4月15日21点40分
+*/
+void comSenBuf(COM_PORT_E _ucPort,uint8_t *_ucaBuf,uint16_t _usLen)
+{
+	UART_T *pUart;
+	
+	pUart = &g_tUart1;
+	if(pUart == 0)
+	{
+		return;
+	}
+	if(pUart->SendBefor != 0)
+	{
+		pUart->SendBefor();/* 如果是RS485通信，可以在这个函数中将RS485设置为发送模式 */
+	}
+	UartSend(pUart,_ucaBuf,_usLen);
+}
+
+
+/*
+*	函 数 名: comSendChar
+*	功能说明: 串口发送一个字节
+*	形    参: _ucPort:串口外设枚举变量；_ucByte：发送的字节数据
+*	返 回 值: none
+*	时间：2022年4月15日21点36分
+*/
 void comSendChar(COM_PORT_E _ucPort,uint8_t _ucByte)
 {
 	comSenBuf(_ucPort,&_ucByte,1);
 }
+
+/*
+*	函 数 名: fputc
+*	功能说明: 重定向C标准库的printf函数
+*	形    参: ...
+*	返 回 值: 返回写入的字符总数，否则返回一个负数
+*	时间：2022年4月15日21点41分
+*/
 #if DEBUG_SWITCH_EN == 0
 int fputc(int ch,FILE *f)
 {
