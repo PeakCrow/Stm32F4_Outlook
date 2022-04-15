@@ -28,10 +28,9 @@ static void UartSend(UART_T *_pUart,uint8_t *_ucaBuf,uint16_t _usLen);
 static uint8_t UartGetChar(UART_T *_pUart,uint8_t *_pByte);
 static void UartIRQ(UART_T *_pUart);
 
-void bsp_InitUart(void)
+void bsp_InitUart()
 {
 	UartVarInit();
-	//bsp_SetUartParam(USART1,UART1_BAUD,UART_PARITY_NONE,UART_MODE_TX_RX);
 	InitHardUart();
 }
 
@@ -295,7 +294,7 @@ void comSendChar(COM_PORT_E _ucPort,uint8_t _ucByte)
 {
 	comSenBuf(_ucPort,&_ucByte,1);
 }
-
+#if DEBUG_SWITCH_EN == 0
 int fputc(int ch,FILE *f)
 {
 #if 1
@@ -308,3 +307,5 @@ int fputc(int ch,FILE *f)
 		return ch;
 #endif
 }
+#endif
+

@@ -3,7 +3,10 @@
 
 #include "stm32f4xx.h"
 #include "stdio.h"
-#define UART1_FIFO_EN 1	//PA9 PA10
+
+#define DEBUG_SWITCH_EN 0		//0使用外部串口打印，1使用组件在DEBUG界面打印
+#define UART1_FIFO_EN 	1		//PA9 PA10
+
 /* 定义端口号 */
 typedef enum
 {
