@@ -1,8 +1,10 @@
 #include "sys.h"
 #include "ticktim.h"
 #include "EventRecorder.h"
-#include "stdio.h"
+#include <stdio.h>
 #include "bsp_usart_fifo.h"
+#include <stdlib.h>
+#include <string.h>
 
 void func1(void)
 {
@@ -13,7 +15,6 @@ void func2(void)
 	printf("重复2.0s调用\r\n");
 }
 
-uint32_t i = 0;
 int main(void)
 {	
 	
@@ -28,12 +29,36 @@ int main(void)
 	
 	while(1)
 	{	
-
+		
 	}
 }
 
 void bsp_RunPer50ms()
 {
-	printf("%d\r\n",i++);
+	uint8_t read;
+	const char buf1[] = "接收到串口命令1\r\n";
+	const char buf2[] = "接收到串口命令2\r\n";
+	const char buf3[] = "接收到串口命令3\r\n";
+	const char buf4[] = "接收到串口命令4\r\n";
+
+	if(comGetChar(COM1,&read))
+	{
+		switch(read)
+		{
+			case '1':
+				comSendBuf(COM1,(uint8_t *)buf1,strlen(buf1));
+				break;
+			case '2':
+				comSendBuf(COM1,(uint8_t *)buf2,strlen(buf2));
+				break;
+			case '3':
+				comSendBuf(COM1,(uint8_t *)buf3,strlen(buf3));
+				break;
+			case '4':
+				comSendBuf(COM1,(uint8_t *)buf4,strlen(buf4));
+			default:
+				break;
+		}
+	}
 }
 

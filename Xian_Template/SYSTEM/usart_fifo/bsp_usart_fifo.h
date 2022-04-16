@@ -46,5 +46,6 @@ void bsp_InitUart(void);
 void bsp_SetUartParam(USART_TypeDef *Instance,uint32_t BaudRate,uint32_t Parity,uint32_t Mode);
 void comSendBuf(COM_PORT_E _ucPort,uint8_t *_ucaBuf,uint16_t _usLen);
 void comSendChar(COM_PORT_E _ucPort,uint8_t _ucByte);
+uint8_t comGetChar(COM_PORT_E _ucPort,uint8_t *_pByte);
 #endif
 

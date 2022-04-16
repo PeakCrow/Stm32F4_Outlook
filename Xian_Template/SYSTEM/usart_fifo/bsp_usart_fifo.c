@@ -115,7 +115,29 @@ void InitHardUart(void)
 	SET_BIT(USART1->CR1,USART_CR1_RXNEIE);
 #endif
 }
-
+/*
+*********************************************************************************************************
+*	函 数 名: ComToUart
+*	功能说明: 将COM端口号转换为UART指针
+*	形    参: _ucPort: 端口号(COM1 - COM8)
+*	返 回 值: uart指针
+*********************************************************************************************************
+*/
+UART_T *ComToUart(COM_PORT_E _ucPort)
+{
+	if (_ucPort == COM1)
+	{
+		#if UART1_FIFO_EN == 1
+			return &g_tUart1;
+		#else
+			return 0;
+		#endif
+	}else
+	{
+		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+		return 0;
+	}
+}
 
 /*
 *	函 数 名: bsp_SetUartParam
@@ -170,11 +192,11 @@ static void UartIRQ(UART_T *_pUart)
 	uint32_t cr3its		= READ_REG(_pUart->uart->CR3);
 	
 	/* 处理接收中断 */
-	if((isrflags & USART_SR_RXNE) != RESET)/* 进行位与判断是否准备好读取接收到的数据 */
+	if((isrflags & USART_SR_RXNE) != RESET)/* 进行 位与 判断是否准备好读取接收到的数据 */
 	{
 		/* 从串口接收数据寄存器读取数据存放到接收FIFO */
 		uint8_t ch;
-		/* 数据寄存器只有低8位有效 */
+		/* 数据寄存器DR只有低8位有效 */
 		ch = READ_REG(_pUart->uart->DR);
 		_pUart->pRxBuf[_pUart->usRxWrite] = ch;
 		/* 接收数据读指针大于buf，则清0，否则计数自加 */
@@ -182,6 +204,7 @@ static void UartIRQ(UART_T *_pUart)
 		{
 			_pUart->usRxWrite = 0;
 		}
+		/*  */
 		if(_pUart->usRxCount < _pUart->usRxBufSize)
 		{
 			_pUart->usRxCount++;
@@ -206,6 +229,7 @@ static void UartIRQ(UART_T *_pUart)
 			SET_BIT(_pUart->uart->CR1,USART_CR1_TCIE);
 		}else
 		{
+			/* 正在发送串口数据 */
 			_pUart->Sending = 1;
 			
 			/* 从发送FIFO中取1个字节写入串口发送数据寄存器 */
@@ -314,11 +338,11 @@ static void UartSend(UART_T *_pUart,uint8_t *_ucaBuf,uint16_t _usLen)
 *	返 回 值: none
 *	时间：2022年4月15日21点40分
 */
-void comSenBuf(COM_PORT_E _ucPort,uint8_t *_ucaBuf,uint16_t _usLen)
+void comSendBuf(COM_PORT_E _ucPort,uint8_t *_ucaBuf,uint16_t _usLen)
 {
 	UART_T *pUart;
 	
-	pUart = &g_tUart1;
+	pUart = ComToUart(_ucPort);
 	if(pUart == 0)
 	{
 		return;
@@ -340,8 +364,65 @@ void comSenBuf(COM_PORT_E _ucPort,uint8_t *_ucaBuf,uint16_t _usLen)
 */
 void comSendChar(COM_PORT_E _ucPort,uint8_t _ucByte)
 {
-	comSenBuf(_ucPort,&_ucByte,1);
+	comSendBuf(_ucPort,&_ucByte,1);
 }
+
+/*
+*	函 数 名: UartGetChar
+*	功能说明: 从串口外设的接收缓冲区中读取一个字节
+*	形    参: _pUart：串口外设自定义结构体；_pByte：存放读取数据的指针
+*	返 回 值: 0：表示无数据读取；1：表示读取到数据
+*	时间：2022年4月16日14点49分
+*/
+static uint8_t UartGetChar(UART_T *_pUart,uint8_t * _pByte)
+{
+	uint16_t usCount;
+	
+	/* usRxWrite 变量在中断函数中被改写，主程序读取该变量时，必须进行临界区保护 */
+	__set_PRIMASK(1);	/* 禁止全局中断 */
+	usCount = _pUart->usRxCount;
+	__set_PRIMASK(0);	/* 开启全局中断 */
+
+	
+	/* 如果读和写索引相同，则返回0 */
+	if(usCount == 0)
+	{
+		return 0;
+	}
+	else
+	{
+		/* 从串口接收FIFO取1个数据 */
+		*_pByte = _pUart->pRxBuf[_pUart->usRxRead];
+		
+		/* 改写FIFO读索引 */
+		__set_PRIMASK(1);	/* 禁止全局中断 */
+		if(++_pUart->usRxRead >= _pUart->usRxBufSize)
+		{
+			_pUart->usRxRead = 0;
+		}
+		_pUart->usRxCount--;
+		__set_PRIMASK(0);	/* 开启全局中断 */
+		return 1;
+	}
+}
+/*
+*	函 数 名: comGetChar
+*	功能说明: 从串口接收缓冲区中读取数据
+*	形    参: _usPort:串口外设号的枚举变量；_pByte：存放数据的指针
+*	返 回 值: 0：表示无数据；1：表示读取到有效数据
+*	时间：2022年4月16日15点05分
+*/
+uint8_t comGetChar(COM_PORT_E _usPort,uint8_t *_pByte)
+{
+	UART_T *pUart;
+	pUart = ComToUart(_usPort);
+	if(pUart == 0)
+	{
+		return 0;
+	}
+	return UartGetChar(pUart,_pByte);
+}
+
 
 /*
 *	函 数 名: fputc
@@ -364,4 +445,30 @@ int fputc(int ch,FILE *f)
 #endif
 }
 #endif
+
+
+/*
+*	函 数 名: fgetc
+*	功能说明: 重定义getc函数，这样可以使用getchar函数从串口1输入数据
+*	形    参: none
+*	返 回 值: none
+*	时间：2022年4月16日15点09分
+*/
+#if DEBUG_SWITCH_EN == 0
+int fgetc(FILE *f)
+{
+#if 1
+	/* 从串口1接收FIFO中取1个数据，只有取到数据才返回 */
+	uint8_t ucData;
+	while(comGetChar(COM1,&ucData) == 0);
+	
+	return ucData;
+#else
+	while((USART1->SR & USART_SR_RXNE) == 0){}
+	return (int)USART1->DR;
+#endif
+}
+#endif
+
+
 
