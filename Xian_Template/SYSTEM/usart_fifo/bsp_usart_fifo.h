@@ -6,11 +6,14 @@
 
 #define DEBUG_SWITCH_EN 0		//0使用外部串口打印，1使用组件在DEBUG界面打印
 #define UART1_FIFO_EN 	1		//PA9 PA10
-
+#define UART2_FIFO_EN	1
+#define UART3_FIFO_EN	1
 /* 定义端口号 */
 typedef enum
 {
-	COM1 = 0
+	COM1 = 0,
+	COM2 = 1,	/* USART2 */
+	COM3 = 2,	/* USART3 */
 }COM_PORT_E;
 
 /* 定义串口波特率和FIFO缓冲区的大小，分为发送缓冲区和接收缓冲区，支持全双工 */
@@ -19,7 +22,17 @@ typedef enum
 	#define UART1_TX_BUF_SIZE	1*1024
 	#define UART1_RX_BUF_SIZE	1*1024
 #endif
+#if UART2_FIFO_EN == 1
+	#define UART2_BAUD			9600
+	#define UART2_TX_BUF_SIZE	10
+	#define UART2_RX_BUF_SIZE	2*1024
+#endif
 
+#if UART3_FIFO_EN == 1
+	#define UART3_BAUD			9600
+	#define UART3_TX_BUF_SIZE	1*1024
+	#define UART3_RX_BUF_SIZE	1*1024
+#endif
 /* 串口设备结构体 */
 typedef struct
 {

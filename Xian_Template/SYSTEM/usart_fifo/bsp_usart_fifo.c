@@ -14,14 +14,48 @@
 #define USART1_RX_GPIO_PORT			GPIOA
 #define USART1_RX_PIN				GPIO_PIN_10
 #define USART1_RX_AF				GPIO_AF7_USART1
+/* 串口2的GPIO --- PA2 PA3  GPS (只用RX。 TX被以太网占用） */
+#define USART2_CLK_ENABLE()              __HAL_RCC_USART2_CLK_ENABLE()
 
+#define USART2_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
+#define USART2_TX_GPIO_PORT              GPIOA
+#define USART2_TX_PIN                    GPIO_PIN_2
+#define USART2_TX_AF                     GPIO_AF7_USART2
+
+#define USART2_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
+#define USART2_RX_GPIO_PORT              GPIOA
+#define USART2_RX_PIN                    GPIO_PIN_3
+#define USART2_RX_AF                     GPIO_AF7_USART2
+
+/* 串口3的GPIO --- PB10 PB11  RS485 */
+#define USART3_CLK_ENABLE()              __HAL_RCC_USART3_CLK_ENABLE()
+
+#define USART3_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOB_CLK_ENABLE()
+#define USART3_TX_GPIO_PORT              GPIOB
+#define USART3_TX_PIN                    GPIO_PIN_10
+#define USART3_TX_AF                     GPIO_AF7_USART3
+
+#define USART3_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOB_CLK_ENABLE()
+#define USART3_RX_GPIO_PORT              GPIOB
+#define USART3_RX_PIN                    GPIO_PIN_11
+#define USART3_RX_AF                     GPIO_AF7_USART3
 /* 定义每个串口结构体变量 */
 #if UART1_FIFO_EN == 1
 	static UART_T g_tUart1;
 	static uint8_t g_TxBuff1[UART1_TX_BUF_SIZE];	/* 发送缓冲区 */
 	static uint8_t g_RxBuff1[UART1_RX_BUF_SIZE];	/* 接收缓冲区 */
 #endif
+#if UART2_FIFO_EN == 1
+	static UART_T g_tUart2;
+	static uint8_t g_TxBuf2[UART2_TX_BUF_SIZE];		/* 发送缓冲区 */
+	static uint8_t g_RxBuf2[UART2_RX_BUF_SIZE];		/* 接收缓冲区 */
+#endif
 
+#if UART3_FIFO_EN == 1
+	static UART_T g_tUart3;
+	static uint8_t g_TxBuf3[UART3_TX_BUF_SIZE];		/* 发送缓冲区 */
+	static uint8_t g_RxBuf3[UART3_RX_BUF_SIZE];		/* 接收缓冲区 */
+#endif
 static void UartVarInit(void);
 static void InitHardUart(void);
 static void UartSend(UART_T *_pUart,uint8_t *_ucaBuf,uint16_t _usLen);
@@ -66,6 +100,42 @@ static void UartVarInit(void)
 	g_tUart1.SendOver = 0;						/* 发送完毕后的回调函数 */
 	g_tUart1.ReciveNew = 0;						/* 接收到新数据后的回调函数 */
 	g_tUart1.Sending  = 0;						/* 正在发送中标志 */
+#endif
+
+#if UART2_FIFO_EN == 1
+	g_tUart2.uart = USART2;						/* STM32 串口设备 */
+	g_tUart2.pTxBuf = g_TxBuf2;					/* 发送缓冲区指针 */
+	g_tUart2.pRxBuf = g_RxBuf2;					/* 接收缓冲区指针 */
+	g_tUart2.usTxBufSize = UART2_TX_BUF_SIZE;	/* 发送缓冲区大小 */
+	g_tUart2.usRxBufSize = UART2_RX_BUF_SIZE;	/* 接收缓冲区大小 */
+	g_tUart2.usTxWrite = 0;						/* 发送FIFO写索引 */
+	g_tUart2.usTxRead = 0;						/* 发送FIFO读索引 */
+	g_tUart2.usRxWrite = 0;						/* 接收FIFO写索引 */
+	g_tUart2.usRxRead = 0;						/* 接收FIFO读索引 */
+	g_tUart2.usRxCount = 0;						/* 接收到的新数据个数 */
+	g_tUart2.usTxCount = 0;						/* 待发送的数据个数 */
+	g_tUart2.SendBefor = 0;						/* 发送数据前的回调函数 */
+	g_tUart2.SendOver = 0;						/* 发送完毕后的回调函数 */
+	g_tUart2.ReciveNew = 0;						/* 接收到新数据后的回调函数 */
+	g_tUart2.Sending = 0;						/* 正在发送中标志 */
+#endif
+
+#if UART3_FIFO_EN == 1
+	g_tUart3.uart = USART3;						/* STM32 串口设备 */
+	g_tUart3.pTxBuf = g_TxBuf3;					/* 发送缓冲区指针 */
+	g_tUart3.pRxBuf = g_RxBuf3;					/* 接收缓冲区指针 */
+	g_tUart3.usTxBufSize = UART3_TX_BUF_SIZE;	/* 发送缓冲区大小 */
+	g_tUart3.usRxBufSize = UART3_RX_BUF_SIZE;	/* 接收缓冲区大小 */
+	g_tUart3.usTxWrite = 0;						/* 发送FIFO写索引 */
+	g_tUart3.usTxRead = 0;						/* 发送FIFO读索引 */
+	g_tUart3.usRxWrite = 0;						/* 接收FIFO写索引 */
+	g_tUart3.usRxRead = 0;						/* 接收FIFO读索引 */
+	g_tUart3.usRxCount = 0;						/* 接收到的新数据个数 */
+	g_tUart3.usTxCount = 0;						/* 待发送的数据个数 */
+	g_tUart3.SendBefor = 0;						/* 发送数据前的回调函数 */
+	g_tUart3.SendOver = 0;						/* 发送完毕后的回调函数 */
+	g_tUart3.ReciveNew = 0;						/* 接收到新数据后的回调函数 */
+	g_tUart3.Sending = 0;						/* 正在发送中标志 */
 #endif
 }
 
@@ -114,6 +184,72 @@ void InitHardUart(void)
 	/* 使能PE，RX接收中断 */
 	SET_BIT(USART1->CR1,USART_CR1_RXNEIE);
 #endif
+
+#if UART2_FIFO_EN == 1		/* 串口2 */
+	/* 使能 GPIO TX/RX 时钟 */
+	USART2_TX_GPIO_CLK_ENABLE();
+	USART2_RX_GPIO_CLK_ENABLE();
+	
+	/* 使能 USARTx 时钟 */
+	USART2_CLK_ENABLE();	
+
+	/* 配置TX引脚 */
+	GPIO_InitStruct.Pin       = USART2_TX_PIN;
+	GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
+	GPIO_InitStruct.Pull      = GPIO_PULLUP;
+	GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+	GPIO_InitStruct.Alternate = USART2_TX_AF;
+	HAL_GPIO_Init(USART2_TX_GPIO_PORT, &GPIO_InitStruct);	
+	
+	/* 配置RX引脚 */
+	GPIO_InitStruct.Pin = USART2_RX_PIN;
+	GPIO_InitStruct.Alternate = USART2_RX_AF;
+	HAL_GPIO_Init(USART2_RX_GPIO_PORT, &GPIO_InitStruct);
+
+	/* 配置NVIC the NVIC for UART */   
+	HAL_NVIC_SetPriority(USART2_IRQn, 0, 2);
+	HAL_NVIC_EnableIRQ(USART2_IRQn);
+  
+	/* 配置波特率、奇偶校验 */
+	bsp_SetUartParam(USART2,  UART2_BAUD, UART_PARITY_NONE, UART_MODE_TX_RX);	// UART_MODE_TX_RX
+
+	CLEAR_BIT(USART2->SR, USART_SR_TC);   /* 清除TC发送完成标志 */
+    CLEAR_BIT(USART2->SR, USART_SR_RXNE); /* 清除RXNE接收标志 */
+	SET_BIT(USART2->CR1, USART_CR1_RXNEIE);	/* 使能PE. RX接受中断 */
+#endif
+
+#if UART3_FIFO_EN == 1			/* 串口3 */
+	/* 使能 GPIO TX/RX 时钟 */
+	USART3_TX_GPIO_CLK_ENABLE();
+	USART3_RX_GPIO_CLK_ENABLE();
+	
+	/* 使能 USARTx 时钟 */
+	USART3_CLK_ENABLE();	
+
+	/* 配置TX引脚 */
+	GPIO_InitStruct.Pin       = USART3_TX_PIN;
+	GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
+	GPIO_InitStruct.Pull      = GPIO_PULLUP;
+	GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+	GPIO_InitStruct.Alternate = USART3_TX_AF;
+	HAL_GPIO_Init(USART3_TX_GPIO_PORT, &GPIO_InitStruct);	
+	
+	/* 配置RX引脚 */
+	GPIO_InitStruct.Pin = USART3_RX_PIN;
+	GPIO_InitStruct.Alternate = USART3_RX_AF;
+	HAL_GPIO_Init(USART3_RX_GPIO_PORT, &GPIO_InitStruct);
+
+	/* 配置NVIC the NVIC for UART */   
+	HAL_NVIC_SetPriority(USART3_IRQn, 0, 3);
+	HAL_NVIC_EnableIRQ(USART3_IRQn);
+  
+	/* 配置波特率、奇偶校验 */
+	bsp_SetUartParam(USART3,  UART3_BAUD, UART_PARITY_NONE, UART_MODE_TX_RX);
+
+	CLEAR_BIT(USART3->SR, USART_SR_TC);   /* 清除TC发送完成标志 */
+    CLEAR_BIT(USART3->SR, USART_SR_RXNE); /* 清除RXNE接收标志 */
+	SET_BIT(USART3->CR1, USART_CR1_RXNEIE);	/* 使能PE. RX接受中断 */
+#endif
 }
 /*
 *********************************************************************************************************
@@ -132,7 +268,24 @@ UART_T *ComToUart(COM_PORT_E _ucPort)
 		#else
 			return 0;
 		#endif
-	}else
+	}
+	else if (_ucPort == COM2)
+	{
+		#if UART2_FIFO_EN == 1
+			return &g_tUart2;
+		#else
+			return 0;
+		#endif
+	}
+	else if (_ucPort == COM3)
+	{
+		#if UART3_FIFO_EN == 1
+			return &g_tUart3;
+		#else
+			return 0;
+		#endif
+	}
+	else
 	{
 		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 		return 0;
@@ -280,6 +433,19 @@ static void UartIRQ(UART_T *_pUart)
 void USART1_IRQHandler(void)
 {
 	UartIRQ(&g_tUart1);
+}
+#endif
+#if UART2_FIFO_EN == 1
+void USART2_IRQHandler(void)
+{
+	UartIRQ(&g_tUart2);
+}
+#endif
+
+#if UART3_FIFO_EN == 1
+void USART3_IRQHandler(void)
+{
+	UartIRQ(&g_tUart3);
 }
 #endif
 /*
