@@ -3,8 +3,9 @@ bin-debug/
 bin-release/
 [Oo]bj/
 [Bb]in/
-Obj
+/Obj
 # Other files and folders
+*.o
 .settings/
 Run_Xian.uvguix.TRX
 Run_Xian.uvoptix
