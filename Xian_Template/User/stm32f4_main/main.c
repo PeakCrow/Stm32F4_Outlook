@@ -5,6 +5,8 @@
 #include "bsp_usart_fifo.h"
 #include <stdlib.h>
 #include <string.h>
+#include "bsp_key.h"
+
 
 void func1(void)
 {
@@ -20,22 +22,44 @@ void func3(void)
 }
 int main(void)
 {	
-	
+	uint8_t ucKeyCode;
     HAL_Init();                    	 			/* 初始化HAL库 */   
     Stm32_Clock_Init(336,8,2,7);   				/* 设置时钟,168Mhz */
 	bsp_InitTimer();							/* 初始化滴答定时器 */
 	bsp_InitUart();								/* 初始化串口1外设 */
+	bsp_InitKey();
 	EventRecorderInitialize(EventRecordAll, 1U);/* 初始化 EventRecorder 并开启 */
-	bsp_StartAutoTimer(0,1500,func1);
-	bsp_StartAutoTimer(1,2000,func2);
-	bsp_StartOnceTimer(3,4000,func3);
+//	bsp_StartAutoTimer(0,1500,func1);
+//	bsp_StartAutoTimer(1,2000,func2);
+//	bsp_StartOnceTimer(3,4000,func3);
 	
 	while(1)
 	{	
-		
+		ucKeyCode = bsp_GetKey();
+		if(ucKeyCode != KEY_NONE)
+		{
+			switch(ucKeyCode)
+			{
+				case KEY_0_DOWN:
+						printf("K0按键按下\r\n");
+					break;
+				case KEY_0_UP:
+						printf("K0按键弹起\r\n");
+					break;
+				case KEY_UP_DOWN:
+						printf("KUP按键按下\r\n");
+					break;
+				case KEY_UP_UP:
+						printf("KUP按键弹起\r\n");
+					break;
+			}
+		}
 	}
 }
-
+void bsp_RunPer10ms()
+{
+	bsp_Key_Scan10ms();
+}
 void bsp_RunPer50ms()
 {
 	uint8_t read;

@@ -6,6 +6,7 @@
 "..\obj\sys.o"
 "..\obj\ticktim.o"
 "..\obj\bsp_usart_fifo.o"
+"..\obj\bsp_key.o"
 "..\obj\startup_stm32f407xx.o"
 "..\obj\stm32f4xx_hal.o"
 "..\obj\stm32f4xx_hal_cortex.o"

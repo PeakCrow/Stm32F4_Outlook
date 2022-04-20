@@ -71,3 +71,4 @@
 ..\obj\main.o: ..\SYSTEM\usart_fifo\bsp_usart_fifo.h
 ..\obj\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 ..\obj\main.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+..\obj\main.o: ..\SYSTEM\key_fifo\bsp_key.h
