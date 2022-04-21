@@ -5,14 +5,14 @@
 #include "stdio.h"
 
 
-/* 根据应用程序的功能重命名按键宏 */
-#define KEY_DOWM_K0		KEY_0_DOWN
-#define KEY_UP_K0		KEY_0_UP
-#define KEY_LONG_K0		KEY_0_LONG
+///* 根据应用程序的功能重命名按键宏 */
+//#define KEY_DOWM_K0		KEY_0_DOWN
+//#define KEY_UP_K0		KEY_0_UP
+//#define KEY_LONG_K0		KEY_0_LONG
 
-#define KEY_DOWN_Kup	KEY_up_DOWN
-#define	KEY_UP_Kup		KEY_up_UP
-#define	KEY_LONG_Kup	KEY_up_LONG
+//#define KEY_DOWN_Kup	KEY_up_DOWN
+//#define	KEY_UP_Kup		KEY_up_UP
+//#define	KEY_LONG_Kup	KEY_up_LONG
 
 /* 按键ID */
 typedef enum{
@@ -58,7 +58,13 @@ typedef enum
 
 	KEY_UP_DOWN,			/* 2键按下 */
 	KEY_UP_UP,				/* 2键弹起 */
-	KEY_UP_LONG,			/* 2键长按 */	
+	KEY_UP_LONG,			/* 2键长按 */
+
+	/* 组合键 */
+	KEY_MULTI_DOWM,
+	KEY_MULTI_UP,
+	KEY_MULTI_LONG,
+	
 }KEY_ENUM;	
 
 

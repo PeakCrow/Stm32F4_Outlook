@@ -22,7 +22,7 @@ void func3(void)
 }
 int main(void)
 {	
-	uint8_t ucKeyCode;
+	vu8 ucKeyCode;	
     HAL_Init();                    	 			/* 初始化HAL库 */   
     Stm32_Clock_Init(336,8,2,7);   				/* 设置时钟,168Mhz */
 	bsp_InitTimer();							/* 初始化滴答定时器 */
@@ -30,7 +30,7 @@ int main(void)
 	bsp_InitKey();
 	EventRecorderInitialize(EventRecordAll, 1U);/* 初始化 EventRecorder 并开启 */
 //	bsp_StartAutoTimer(0,1500,func1);
-//	bsp_StartAutoTimer(1,2000,func2);
+	bsp_StartAutoTimer(1,2000,func2);
 //	bsp_StartOnceTimer(3,4000,func3);
 	
 	while(1)
@@ -52,6 +52,21 @@ int main(void)
 				case KEY_UP_UP:
 						printf("KUP按键弹起\r\n");
 					break;
+				case KEY_0_LONG:
+						printf("K0按键长按\r\n");
+					break;
+				case KEY_UP_LONG:
+						printf("KUP按键长按\r\n");
+					break;
+				case KEY_MULTI_DOWM:
+						printf("MULTI_DOWM按键按下\r\n");
+					break;
+				case KEY_MULTI_UP:
+						printf("MULTI_UP按键弹起\r\n");
+					break;
+				case KEY_MULTI_LONG:
+						printf("MULTI_LONG按键长按\r\n");
+					break;				
 			}
 		}
 	}

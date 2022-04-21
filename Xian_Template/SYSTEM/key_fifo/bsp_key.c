@@ -36,7 +36,7 @@ static const X_GPIO_T s_gpio_list[HARD_KEY_NUM] = {
 定义一个宏函数简化后续代码
 判断GPIO引脚是否有效按下
 */
-static KEY_T s_tBtn[HARD_KEY_NUM] = {0};
+static KEY_T s_tBtn[KEY_COUNT] = {0};
 static KEY_FIFO_T s_tKey;	/* 按键FIFO变量，结构体 */
 
 static void bsp_InitKeyVar(void);
@@ -107,7 +107,7 @@ static uint8_t IsKeyDownFunc(uint8_t _id)
 	}
 	
 	/* 组合键K0Kup */
-	if(_id == HARD_KEY_NUM + 0)
+	if(_id == HARD_KEY_NUM + 0) // 0 - 1 - 2(组合键)
 	{
 		if(KeyPinActive(KID_K0) && KeyPinActive(KID_Kup))
 		{
@@ -169,7 +169,7 @@ static void bsp_InitKeyVar(void)
 	/* 每个按键结构体成员变量赋一组缺省值 */
 	for(i = 0;i < KEY_COUNT;i++)
 	{
-		s_tBtn[i].LongCount = KEY_LONG_TIME;	/* 长按时间0，表示不检测长按 */
+		s_tBtn[i].LongTime = KEY_LONG_TIME;	/* 长按时间0，表示不检测长按 */
 		s_tBtn[i].Count = KEY_FILTER_TIME / 2;	/* 计数器设置为滤波时间的一半 */
 		s_tBtn[i].State = 0;					/* 未按下 */
 		s_tBtn[i].RepeatSpeed = 0;				/* 按键连发的速度，0表示不支持连按 */
@@ -247,7 +247,7 @@ static void bsp_DetectKey(uint8_t i)
 		if(pBtn->Count < KEY_FILTER_TIME)	//count作为滤波计数器初始值为25ms
 		{
 			pBtn->Count = KEY_FILTER_TIME;	//如果按键按下的时间小于50ms，就将其赋值为50ms，代表按下
-		}else if(pBtn->Count < 2 * KEY_FILTER_TIME)//按下时间小于1s(长按时间)??
+		}else if(pBtn->Count < 2 * KEY_FILTER_TIME)//按下时间小于100ms
 		{
 			pBtn->Count++;					//滤波计数器自增
 		}else
@@ -322,7 +322,7 @@ void bsp_Key_Scan10ms(void)
 {
 	uint8_t i;
 	
-	for(i = 0;i < HARD_KEY_NUM;i++)
+	for(i = 0;i < KEY_COUNT;i++)
 	{
 		bsp_DetectKey(i);
 	}
