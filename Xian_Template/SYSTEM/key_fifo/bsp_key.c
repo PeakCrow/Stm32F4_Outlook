@@ -174,7 +174,7 @@ static void bsp_InitKeyVar(void)
 	{
 		s_tBtn[i].LongTime = KEY_LONG_TIME;	/* 长按时间0，表示不检测长按 */
 		s_tBtn[i].Count = KEY_FILTER_TIME / 2;	/* 计数器设置为滤波时间的一半 */
-		s_tBtn[i].State = 0;					/* 未按下 */
+		s_tBtn[i].State = 0;							/* 未按下 */
 		s_tBtn[i].RepeatSpeed = 0;				/* 按键连发的速度，0表示不支持连按 */
 		s_tBtn[i].RepeatCount = 0;				/* 连发计数器 */
 	}
