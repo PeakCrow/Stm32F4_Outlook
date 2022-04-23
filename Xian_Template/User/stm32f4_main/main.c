@@ -10,25 +10,25 @@
 
 void func1(void)
 {
-	printf("ÖØ¸´1.5sµ÷ÓÃ\r\n");
+	printf("ï¿½Ø¸ï¿½1.5sï¿½ï¿½ï¿½ï¿½\r\n");
 }
 void func2(void)
 {
-	printf("ÖØ¸´2.0sµ÷ÓÃ\r\n");
+	printf("ï¿½Ø¸ï¿½2.0sï¿½ï¿½ï¿½ï¿½\r\n");
 }
 void func3(void)
 {
-	printf("µ¥´Î4.0s\r\n");
+	printf("ï¿½ï¿½ï¿½ï¿½4.0s\r\n");
 }
 int main(void)
 {	
 	vu8 ucKeyCode;	
-    HAL_Init();                    	 			/* ³õÊ¼»¯HAL¿â */   
-    Stm32_Clock_Init(336,8,2,7);   				/* ÉèÖÃÊ±ÖÓ,168Mhz */
-	bsp_InitTimer();							/* ³õÊ¼»¯µÎ´ð¶¨Ê±Æ÷ */
-	bsp_InitUart();								/* ³õÊ¼»¯´®¿Ú1ÍâÉè */
+    HAL_Init();                    	 			/* ï¿½ï¿½Ê¼ï¿½ï¿½HALï¿½ï¿½ */   
+    Stm32_Clock_Init(336,8,2,7);   				/* ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½,168Mhz */
+	bsp_InitTimer();							/* ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Î´ï¿½Ê±ï¿½ï¿½ */
+	bsp_InitUart();								/* ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ */
 	bsp_InitKey();
-	EventRecorderInitialize(EventRecordAll, 1U);/* ³õÊ¼»¯ EventRecorder ²¢¿ªÆô */
+	EventRecorderInitialize(EventRecordAll, 1U);/* ï¿½ï¿½Ê¼ï¿½ï¿½ EventRecorder ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
 //	bsp_StartAutoTimer(0,1500,func1);
 	bsp_StartAutoTimer(1,2000,func2);
 //	bsp_StartOnceTimer(3,4000,func3);
@@ -41,31 +41,31 @@ int main(void)
 			switch(ucKeyCode)
 			{
 				case KEY_0_DOWN:
-						printf("K0°´¼ü°´ÏÂ\r\n");
+						printf("K0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
 					break;
 				case KEY_0_UP:
-						printf("K0°´¼üµ¯Æð\r\n");
+						printf("K0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
 					break;
 				case KEY_UP_DOWN:
-						printf("KUP°´¼ü°´ÏÂ\r\n");
+						printf("KUPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
 					break;
 				case KEY_UP_UP:
-						printf("KUP°´¼üµ¯Æð\r\n");
+						printf("KUPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
 					break;
 				case KEY_0_LONG:
-						printf("K0°´¼ü³¤°´\r\n");
+						printf("K0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
 					break;
 				case KEY_UP_LONG:
-						printf("KUP°´¼ü³¤°´\r\n");
+						printf("KUPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
 					break;
 				case KEY_MULTI_DOWM:
-						printf("MULTI_DOWM°´¼ü°´ÏÂ\r\n");
+						printf("MULTI_DOWMï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
 					break;
 				case KEY_MULTI_UP:
-						printf("MULTI_UP°´¼üµ¯Æð\r\n");
+						printf("MULTI_UPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
 					break;
 				case KEY_MULTI_LONG:
-						printf("MULTI_LONG°´¼ü³¤°´\r\n");
+						printf("MULTI_LONGï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
 					break;				
 			}
 		}
@@ -78,10 +78,10 @@ void bsp_RunPer10ms()
 void bsp_RunPer50ms()
 {
 	uint8_t read;
-	const char buf1[] = "½ÓÊÕµ½´®¿ÚÃüÁî1\r\n";
-	const char buf2[] = "½ÓÊÕµ½´®¿ÚÃüÁî2\r\n";
-	const char buf3[] = "½ÓÊÕµ½´®¿ÚÃüÁî3\r\n";
-	const char buf4[] = "½ÓÊÕµ½´®¿ÚÃüÁî4\r\n";
+	const char buf1[] = "ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1\r\n";
+	const char buf2[] = "ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½2\r\n";
+	const char buf3[] = "ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½3\r\n";
+	const char buf4[] = "ï¿½ï¿½ï¿½Õµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4\r\n";
 
 	if(comGetChar(COM2,&read))
 	{

@@ -3,11 +3,11 @@
 <title>Static Call Graph - [..\Obj\Run_Xian.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\Obj\Run_Xian.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Fri Apr 22 22:35:12 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat Apr 23 21:29:15 2022
 <BR><P>
-<H3>Maximum Stack Usage =        192 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        264 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; Stm32_Clock_Init &rArr; HAL_RCC_ClockConfig &rArr; HAL_RCC_GetSysClockFreq &rArr; __aeabi_uldivmod
+SysTick_Handler &rArr; SysTick_ISR &rArr; bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
 <P>
 <H3>
 Mutually Recursive functions
@@ -536,8 +536,8 @@ Global Symbols
 <P><STRONG><a name="[8d]"></a>HAL_GPIO_Init</STRONG> (Thumb, 466 bytes, Stack size 24 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = HAL_GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitHardUart
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_InitKeyHard
+<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_InitKeyHard
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitHardUart
 </UL>
 
 <P><STRONG><a name="[93]"></a>HAL_GetREVID</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f4xx_hal.o(i.HAL_GetREVID))
@@ -556,9 +556,9 @@ Global Symbols
 <P><STRONG><a name="[7a]"></a>HAL_Init</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, stm32f4xx_hal.o(i.HAL_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = HAL_Init &rArr; HAL_InitTick &rArr; HAL_NVIC_SetPriority &rArr; NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
+<BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriorityGrouping
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -587,8 +587,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_GetPriorityGrouping
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitHardUart
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
+<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitHardUart
 </UL>
 
 <P><STRONG><a name="[7b]"></a>HAL_NVIC_SetPriorityGrouping</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, stm32f4xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping))
@@ -689,7 +689,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[9]"></a>SysTick_Handler</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, ticktim.o(i.SysTick_Handler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = SysTick_Handler &rArr; SysTick_ISR &rArr; bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = SysTick_Handler &rArr; SysTick_ISR &rArr; bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_IncTick
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_ISR
@@ -732,11 +732,11 @@ Global Symbols
 <P><STRONG><a name="[6a]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf3.o(i.__0printf$3))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_StartAutoTimer
+<BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_SetUartParam
+<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_StartAutoTimer
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;func2
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_SetUartParam
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
 </UL>
 
 <P><STRONG><a name="[c4]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
@@ -797,13 +797,13 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_ISR
 </UL>
 
-<P><STRONG><a name="[99]"></a>bsp_RunPer50ms</STRONG> (Thumb, 164 bytes, Stack size 96 bytes, main.o(i.bsp_RunPer50ms))
-<BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
+<P><STRONG><a name="[99]"></a>bsp_RunPer50ms</STRONG> (Thumb, 164 bytes, Stack size 192 bytes, main.o(i.bsp_RunPer50ms))
+<BR><BR>[Stack]<UL><LI>Max Depth = 248<LI>Call Chain = bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comSendBuf
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comGetChar
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comSendBuf
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comGetChar
 </UL>
 <BR>[Called By]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_ISR
 </UL>
@@ -829,8 +829,8 @@ Global Symbols
 <P><STRONG><a name="[aa]"></a>comGetChar</STRONG> (Thumb, 30 bytes, Stack size 16 bytes, bsp_usart_fifo.o(i.comGetChar))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = comGetChar &rArr; ComToUart &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartGetChar
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
+<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartGetChar
 </UL>
 <BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_RunPer50ms
 </UL>
@@ -838,11 +838,11 @@ Global Symbols
 <P><STRONG><a name="[ac]"></a>comSendBuf</STRONG> (Thumb, 46 bytes, Stack size 24 bytes, bsp_usart_fifo.o(i.comSendBuf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = comSendBuf &rArr; ComToUart &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartSend
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
+<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartSend
 </UL>
-<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_RunPer50ms
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comSendChar
+<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comSendChar
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_RunPer50ms
 </UL>
 
 <P><STRONG><a name="[af]"></a>comSendChar</STRONG> (Thumb, 16 bytes, Stack size 16 bytes, bsp_usart_fifo.o(i.comSendChar))
@@ -886,7 +886,7 @@ Global Symbols
 Local Symbols
 </H3>
 <P><STRONG><a name="[95]"></a>SysTick_ISR</STRONG> (Thumb, 168 bytes, Stack size 8 bytes, ticktim.o(i.SysTick_ISR))
-<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = SysTick_ISR &rArr; bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 256<LI>Call Chain = SysTick_ISR &rArr; bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_RunPer1ms
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_SoftTimerDec
@@ -1008,8 +1008,8 @@ Local Symbols
 <LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__asm___15_EventRecorder_c_e8d3082c__atomic_wr32
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__asm___15_EventRecorder_c_e8d3082c__atomic_wr8
 </UL>
-<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderInitialize
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderStart
+<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderStart
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderInitialize
 </UL>
 
 <P><STRONG><a name="[6f]"></a>EventRecordItem</STRONG> (Thumb, 206 bytes, Stack size 56 bytes, eventrecorder.o(i.EventRecordItem))
@@ -1019,8 +1019,8 @@ Local Symbols
 <LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__asm___15_EventRecorder_c_e8d3082c__LockRecord
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__asm___15_EventRecorder_c_e8d3082c__atomic_inc32
 </UL>
-<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderInitialize
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderStart
+<BR>[Called By]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderStart
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderInitialize
 </UL>
 
 <P><STRONG><a name="[75]"></a>crc16_ccitt</STRONG> (Thumb, 66 bytes, Stack size 12 bytes, eventrecorder.o(i.crc16_ccitt))
