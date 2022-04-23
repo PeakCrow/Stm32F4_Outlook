@@ -16,6 +16,7 @@
                 "e:\\stm32F407zet6Template\\Xian_Template\\SYSTEM\\key_fifo",
                 "e:\\stm32F407zet6Template\\Xian_Template\\SYSTEM\\spi",
                 "D:\\Users\\TRX\\AppData\\Local\\Arm\\Packs\\Keil\\ARM_Compiler\\1.7.0\\Include",
+                "e:\\stm32F407zet6Template\\Xian_Template\\SYSTEM\\flash",
                 "D:\\Keil_v5\\ARM\\ARMCC\\include",
                 "D:\\Keil_v5\\ARM\\ARMCC\\include\\rw"
             ],

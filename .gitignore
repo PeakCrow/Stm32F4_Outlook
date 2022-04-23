@@ -5,6 +5,7 @@ bin-release/
 [Bb]in/
 Obj/
 [Obj]
+/Obj/*
 # Other files and folders
 *.o
 .settings/
@@ -19,5 +20,8 @@ Run_Xian.uvoptix
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
-Obj
+'Obj'
+'Obj/'
+'[Obj]'
 *.o
+/Obj/*

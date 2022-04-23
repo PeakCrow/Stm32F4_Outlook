@@ -3,7 +3,7 @@
 <title>Static Call Graph - [..\Obj\Run_Xian.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\Obj\Run_Xian.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat Apr 23 21:29:15 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat Apr 23 22:07:43 2022
 <BR><P>
 <H3>Maximum Stack Usage =        264 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -536,8 +536,8 @@ Global Symbols
 <P><STRONG><a name="[8d]"></a>HAL_GPIO_Init</STRONG> (Thumb, 466 bytes, Stack size 24 bytes, stm32f4xx_hal_gpio.o(i.HAL_GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = HAL_GPIO_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_InitKeyHard
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitHardUart
+<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitHardUart
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_InitKeyHard
 </UL>
 
 <P><STRONG><a name="[93]"></a>HAL_GetREVID</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, stm32f4xx_hal.o(i.HAL_GetREVID))
@@ -556,9 +556,9 @@ Global Symbols
 <P><STRONG><a name="[7a]"></a>HAL_Init</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, stm32f4xx_hal.o(i.HAL_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = HAL_Init &rArr; HAL_InitTick &rArr; HAL_NVIC_SetPriority &rArr; NVIC_SetPriority
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
+<BR>[Calls]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 <LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_NVIC_SetPriorityGrouping
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_MspInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -587,8 +587,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_SetPriority
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_GetPriorityGrouping
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitHardUart
+<BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitHardUart
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 </UL>
 
 <P><STRONG><a name="[7b]"></a>HAL_NVIC_SetPriorityGrouping</STRONG> (Thumb, 32 bytes, Stack size 0 bytes, stm32f4xx_hal_cortex.o(i.HAL_NVIC_SetPriorityGrouping))
@@ -598,9 +598,9 @@ Global Symbols
 <P><STRONG><a name="[82]"></a>HAL_RCC_ClockConfig</STRONG> (Thumb, 366 bytes, Stack size 16 bytes, stm32f4xx_hal_rcc.o(i.HAL_RCC_ClockConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = HAL_RCC_ClockConfig &rArr; HAL_RCC_GetSysClockFreq &rArr; __aeabi_uldivmod
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
+<BR>[Calls]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetSysClockFreq
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_InitTick
 <LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_GetTick
-<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_RCC_GetSysClockFreq
 </UL>
 <BR>[Called By]<UL><LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Stm32_Clock_Init
 </UL>
@@ -732,11 +732,11 @@ Global Symbols
 <P><STRONG><a name="[6a]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf3.o(i.__0printf$3))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_SetUartParam
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_StartAutoTimer
+<BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_StartAutoTimer
 <LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;func2
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_SetUartParam
+<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
 </UL>
 
 <P><STRONG><a name="[c4]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
@@ -829,8 +829,8 @@ Global Symbols
 <P><STRONG><a name="[aa]"></a>comGetChar</STRONG> (Thumb, 30 bytes, Stack size 16 bytes, bsp_usart_fifo.o(i.comGetChar))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = comGetChar &rArr; ComToUart &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartGetChar
+<BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartGetChar
+<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
 </UL>
 <BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_RunPer50ms
 </UL>
@@ -838,11 +838,11 @@ Global Symbols
 <P><STRONG><a name="[ac]"></a>comSendBuf</STRONG> (Thumb, 46 bytes, Stack size 24 bytes, bsp_usart_fifo.o(i.comSendBuf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = comSendBuf &rArr; ComToUart &rArr; __2printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartSend
+<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartSend
+<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ComToUart
 </UL>
-<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comSendChar
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_RunPer50ms
+<BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_RunPer50ms
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comSendChar
 </UL>
 
 <P><STRONG><a name="[af]"></a>comSendChar</STRONG> (Thumb, 16 bytes, Stack size 16 bytes, bsp_usart_fifo.o(i.comSendChar))
