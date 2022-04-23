@@ -9,6 +9,7 @@ Obj/
 # Other files and folders
 *.o
 .settings/
+*.json
 Run_Xian.uvguix.TRX
 Run_Xian.uvoptix
 # Executables
