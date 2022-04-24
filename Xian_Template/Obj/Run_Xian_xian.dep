@@ -1,6 +1,6 @@
 Dependencies for Project 'Run_Xian', Target 'xian': (DO NOT MODIFY !)
 CompilerVersion: 5060960::V5.06 update 7 (build 960)::.\ARMCC
-F (.\stm32f4_main\main.c)(0x6263EAD7)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Obj -I ..\User -I ..\SYSTEM\sys -I ..\HAL_lib\STM32F4xx_HAL_Driver\Inc -I ..\HAL_lib\CMSIS\Include -I ..\HAL_lib\STM32F4xx_HAL_Driver\Src -I .\stm32f4_main -I ..\SYSTEM\ticktim -I ..\SYSTEM\usart_fifo -I ..\SYSTEM\key_fifo -I ..\SYSTEM\spi -I D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include -I ..\SYSTEM\flash-I.\RTE\Compiler-I.\RTE\_xian-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
+F (.\stm32f4_main\main.c)(0x6265416E)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Obj -I ..\User -I ..\SYSTEM\sys -I ..\HAL_lib\STM32F4xx_HAL_Driver\Inc -I ..\HAL_lib\CMSIS\Include -I ..\HAL_lib\STM32F4xx_HAL_Driver\Src -I .\stm32f4_main -I ..\SYSTEM\ticktim -I ..\SYSTEM\usart_fifo -I ..\SYSTEM\key_fifo -I ..\SYSTEM\spi -I D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include -I ..\SYSTEM\flash-I.\RTE\Compiler-I.\RTE\_xian-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o ..\obj\main.o --omf_browse ..\obj\main.crf --depend ..\obj\main.d)
 I (..\SYSTEM\sys\sys.h)(0x624D2CD6)
 I (.\stm32f4_main\stm32f4xx.h)(0x624D1199)
 I (.\stm32f4_main\stm32f407xx.h)(0x624D1199)
@@ -539,8 +539,8 @@ I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x624D1198)
 I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x624D1198)
 I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x624D1198)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
-F (..\SYSTEM\spi\bsp_spi_bus.c)(0x6262BDAB)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Obj -I ..\User -I ..\SYSTEM\sys -I ..\HAL_lib\STM32F4xx_HAL_Driver\Inc -I ..\HAL_lib\CMSIS\Include -I ..\HAL_lib\STM32F4xx_HAL_Driver\Src -I .\stm32f4_main -I ..\SYSTEM\ticktim -I ..\SYSTEM\usart_fifo -I ..\SYSTEM\key_fifo -I ..\SYSTEM\spi -I D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include -I ..\SYSTEM\flash-I.\RTE\Compiler-I.\RTE\_xian-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o ..\obj\bsp_spi_bus.o --omf_browse ..\obj\bsp_spi_bus.crf --depend ..\obj\bsp_spi_bus.d)
-I (..\SYSTEM\spi\bsp_spi_bus.h)(0x6262BDAB)
+F (..\SYSTEM\spi\bsp_spi_bus.c)(0x6265416E)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Obj -I ..\User -I ..\SYSTEM\sys -I ..\HAL_lib\STM32F4xx_HAL_Driver\Inc -I ..\HAL_lib\CMSIS\Include -I ..\HAL_lib\STM32F4xx_HAL_Driver\Src -I .\stm32f4_main -I ..\SYSTEM\ticktim -I ..\SYSTEM\usart_fifo -I ..\SYSTEM\key_fifo -I ..\SYSTEM\spi -I D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include -I ..\SYSTEM\flash-I.\RTE\Compiler-I.\RTE\_xian-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o ..\obj\bsp_spi_bus.o --omf_browse ..\obj\bsp_spi_bus.crf --depend ..\obj\bsp_spi_bus.d)
+I (..\SYSTEM\spi\bsp_spi_bus.h)(0x62654392)
 I (.\stm32f4_main\stm32f4xx.h)(0x624D1199)
 I (.\stm32f4_main\stm32f407xx.h)(0x624D1199)
 I (..\Core\core_cm4.h)(0x624D1198)
@@ -606,8 +606,8 @@ I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x624D1198)
 I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x624D1198)
 I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x624D1198)
 I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
-F (..\SYSTEM\flash\bsp_spi_flash.c)(0x6263EEBE)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Obj -I ..\User -I ..\SYSTEM\sys -I ..\HAL_lib\STM32F4xx_HAL_Driver\Inc -I ..\HAL_lib\CMSIS\Include -I ..\HAL_lib\STM32F4xx_HAL_Driver\Src -I .\stm32f4_main -I ..\SYSTEM\ticktim -I ..\SYSTEM\usart_fifo -I ..\SYSTEM\key_fifo -I ..\SYSTEM\spi -I D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include -I ..\SYSTEM\flash-I.\RTE\Compiler-I.\RTE\_xian-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o ..\obj\bsp_spi_flash.o --omf_browse ..\obj\bsp_spi_flash.crf --depend ..\obj\bsp_spi_flash.d)
-I (..\SYSTEM\flash\bsp_spi_flash.h)(0x62640C4D)
+F (..\SYSTEM\flash\bsp_spi_flash.c)(0x626546EF)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ..\Core -I ..\Obj -I ..\User -I ..\SYSTEM\sys -I ..\HAL_lib\STM32F4xx_HAL_Driver\Inc -I ..\HAL_lib\CMSIS\Include -I ..\HAL_lib\STM32F4xx_HAL_Driver\Src -I .\stm32f4_main -I ..\SYSTEM\ticktim -I ..\SYSTEM\usart_fifo -I ..\SYSTEM\key_fifo -I ..\SYSTEM\spi -I D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include -I ..\SYSTEM\flash-I.\RTE\Compiler-I.\RTE\_xian-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="536" -D_RTE_ -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx-o ..\obj\bsp_spi_flash.o --omf_browse ..\obj\bsp_spi_flash.crf --depend ..\obj\bsp_spi_flash.d)
+I (..\SYSTEM\flash\bsp_spi_flash.h)(0x626546C0)
 I (.\stm32f4_main\stm32f407xx.h)(0x624D1199)
 I (..\Core\core_cm4.h)(0x624D1198)
 I (D:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x6025237E)
@@ -616,6 +616,64 @@ I (..\Core\cmsis_armcc.h)(0x624D1198)
 I (..\Core\core_cmFunc.h)(0x624D1198)
 I (..\Core\core_cmSimd.h)(0x624D1198)
 I (.\stm32f4_main\system_stm32f4xx.h)(0x624D1199)
+I (..\SYSTEM\spi\bsp_spi_bus.h)(0x62654392)
+I (.\stm32f4_main\stm32f4xx.h)(0x624D1199)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal.h)(0x624D1198)
+I (.\stm32f4_main\stm32f4xx_hal_conf.h)(0x624D1199)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h)(0x624D1198)
+I (D:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x6025237E)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dma_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cortex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_adc_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_can.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_crc.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_cryp.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dac.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dac_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dcmi.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_dcmi_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_flash_ramfunc.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sram.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_fsmc.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nor.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_nand.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pccard.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hash.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2c_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2s.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_i2s_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_iwdg.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pwr_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rng.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rtc_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_sd.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_sdmmc.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_spi.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_tim_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_uart.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_usart.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_irda.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_smartcard.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_wwdg.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_ll_usb.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_pcd_ex.h)(0x624D1198)
+I (..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_hcd.h)(0x624D1198)
+I (D:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x60252374)
 F (..\Core\startup_stm32f407xx.s)(0x624D1198)(--cpu Cortex-M4.fp.sp -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\Compiler-I.\RTE\_xian-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include-ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 536" --pd "_RTE_ SETA 1" --pd "STM32F407xx SETA 1" --pd "_RTE_ SETA 1"--list .\listings\startup_stm32f407xx.lst --xref -o ..\obj\startup_stm32f407xx.o --depend ..\obj\startup_stm32f407xx.d)
 F (..\Core\cmsis_armcc.h)(0x624D1198)()
 F (..\Core\core_cm4.h)(0x624D1198)()

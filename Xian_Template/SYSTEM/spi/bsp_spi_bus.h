@@ -27,6 +27,15 @@ void bsp_SpiBusEnter(void);
 void bsp_SpiBusExit(void);
 uint8_t bsp_SpiBusBusy(void);
 
+
+extern uint8_t g_spiTxBuf[SPI_BUFFER_SIZE];
+extern uint8_t g_spiRxBuf[SPI_BUFFER_SIZE];
+extern uint32_t g_spiLen;
+
+extern uint8_t g_spi_busy;
+
+
+
 #endif
 
 
