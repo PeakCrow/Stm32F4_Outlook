@@ -1,7 +1,19 @@
+/*******************************************************************************
+  * @file        bsp_spi_flash.c
+  * @version     v1.0.0
+  * @copyright   COPYRIGHT &copy; 2022 CSG
+  * @author      trx
+  * @date        2022-4-24
+  * @brief
+  * @attention
+  * Modification History
+  * DATE         DESCRIPTION
+  * ------------------------
+  * - 2022-4-24  trx Created
+*******************************************************************************/
 #include "bsp_spi_flash.h"
 
-<<<<<<< HEAD
-=======
+
 /* 串行Flash的片选GPIO端口， PB14  */
 #define SF_CS_CLK_ENABLE() 			__HAL_RCC_GPIOF_CLK_ENABLE()
 #define SF_CS_GPIO					GPIOB
@@ -69,6 +81,7 @@ void sf_SetCS(uint8_t _Level)
 *	返 回 值: 无
 *********************************************************************************************************
 */
+
 static void sf_WaitForWriteEnd(void)
 {
 	sf_SetCS(0);									/* 使能片选 */
@@ -121,6 +134,7 @@ static void sf_WriteEnable(void)
 *	返 回 值: 无
 *********************************************************************************************************
 */
+
 void sf_ReadInfo(void)
 {
 	/* 自动识别串行Flash型号 */
@@ -242,5 +256,5 @@ void bsp_InitSFlash(void)
 	/* 读取芯片ID, 自动识别芯片型号 */
 	sf_ReadInfo();
 }	
->>>>>>> 2d17175b1a60c1661ce88bee1d047014f6da185d
+
 

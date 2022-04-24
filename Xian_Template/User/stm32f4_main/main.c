@@ -1,3 +1,16 @@
+/*******************************************************************************
+  * @file        main.c
+  * @version     v1.0.0
+  * @copyright   COPYRIGHT &copy; 2022 CSG
+  * @author      TRX
+  * @date        2022-4-25
+  * @brief
+  * @attention
+  * Modification History
+  * DATE         DESCRIPTION
+  * ------------------------
+  * - 2022-4-25  TRX Created
+*******************************************************************************/
 #include "sys.h"
 #include "ticktim.h"
 #include "EventRecorder.h"
@@ -10,20 +23,27 @@
 
 void func1(void)
 {
-	printf("ï¿½Ø¸ï¿½1.5sï¿½ï¿½ï¿½ï¿½\r\n");
+	printf("1.5så‘¨æœŸè°ƒç”¨\r\n");
 }
 void func2(void)
 {
-	printf("ï¿½Ø¸ï¿½2.0sï¿½ï¿½ï¿½ï¿½\r\n");
+	printf("2.0så‘¨æœŸè°ƒç”¨\r\n");
 }
 void func3(void)
 {
-	printf("ï¿½ï¿½ï¿½ï¿½4.0s\r\n");
+	printf("4.0så•æ¬¡è°ƒç”¨\r\n");
 }
+
+/*******************************************************************************
+  * @FunctionName: main
+  * @Author:       trx
+  * @DateTime:     2022å¹´4æœˆ25æ—¥T0:45:22 
+  * @Purpose:      
+  * @param:        void               
+  * @return:
+*******************************************************************************/
 int main(void)
 {	
-<<<<<<< HEAD
-		
 		vu8 ucKeyCode;	
 		HAL_Init();                    	 			/* ³õÊ¼»¯HAL¿â */   
 		Stm32_Clock_Init(336,8,2,7);   				/* ÉèÖÃÊ±ÖÓ,168Mhz */
@@ -31,15 +51,6 @@ int main(void)
 		bsp_InitUart();												/* ³õÊ¼»¯´®¿Ú1ÍâÉè */
 		bsp_InitKey();
 		EventRecorderInitialize(EventRecordAll, 1U);/* ³õÊ¼»¯ EventRecorder ²¢¿ªÆô */
-=======
-	vu8 ucKeyCode;	
-    HAL_Init();                    	 			/* ï¿½ï¿½Ê¼ï¿½ï¿½HALï¿½ï¿½ */   
-    Stm32_Clock_Init(336,8,2,7);   				/* ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½,168Mhz */
-	bsp_InitTimer();							/* ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Î´ï¿½Ê±ï¿½ï¿½ */
-	bsp_InitUart();								/* ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½1ï¿½ï¿½ï¿½ï¿½ */
-	bsp_InitKey();
-	EventRecorderInitialize(EventRecordAll, 1U);/* ï¿½ï¿½Ê¼ï¿½ï¿½ EventRecorder ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ */
->>>>>>> 2d17175b1a60c1661ce88bee1d047014f6da185d
 //	bsp_StartAutoTimer(0,1500,func1);
 		bsp_StartAutoTimer(1,2000,func2);
 //	bsp_StartOnceTimer(3,4000,func3);
@@ -82,10 +93,24 @@ int main(void)
 		}
 	}
 }
+/*******************************************************************************
+  * @FunctionName: bsp_RunPer10ms
+  * @Author:       trx
+  * @DateTime:     2022å¹´4æœˆ25æ—¥T0:52:20 
+  * @Purpose:      
+  * @param:                           
+*******************************************************************************/
 void bsp_RunPer10ms()
 {
 	bsp_Key_Scan10ms();
 }
+/*******************************************************************************
+  * @FunctionName: bsp_RunPer50ms
+  * @Author:       trx
+  * @DateTime:     2022å¹´4æœˆ25æ—¥T0:48:14 
+  * @Purpose:      
+  * @param:                           
+*******************************************************************************/
 void bsp_RunPer50ms()
 {
 	uint8_t read;
