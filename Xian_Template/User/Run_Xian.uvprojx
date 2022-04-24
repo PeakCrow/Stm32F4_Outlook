@@ -339,7 +339,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Core;..\Obj;..\User;..\SYSTEM\sys;..\HAL_lib\Inc;..\HAL_lib\STM32F4xx_HAL_Driver\Inc;..\HAL_lib\CMSIS\Include;..\HAL_lib\STM32F4xx_HAL_Driver\Src;.\stm32f4_main;..\SYSTEM\ticktim;..\SYSTEM\usart_fifo;..\SYSTEM\key_fifo;..\SYSTEM\spi</IncludePath>
+              <IncludePath>..\Core;..\Obj;..\User;..\SYSTEM\sys;..\HAL_lib\Inc;..\HAL_lib\STM32F4xx_HAL_Driver\Inc;..\HAL_lib\CMSIS\Include;..\HAL_lib\STM32F4xx_HAL_Driver\Src;.\stm32f4_main;..\SYSTEM\ticktim;..\SYSTEM\usart_fifo;..\SYSTEM\key_fifo;..\SYSTEM\spi;..\SYSTEM\flash</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -432,6 +432,11 @@
               <FileName>bsp_spi_bus.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\spi\bsp_spi_bus.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_spi_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\flash\bsp_spi_flash.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -546,9 +551,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Hardware</GroupName>
-        </Group>
-        <Group>
           <GroupName>::Compiler</GroupName>
         </Group>
       </Groups>
@@ -578,8 +580,8 @@
     <files>
       <file attr="config" category="header" name="Config\EventRecorderConf.h" version="1.1.0">
         <instance index="0">RTE\Compiler\EventRecorderConf.h</instance>
-        <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="Keil" Cversion="1.5.0" condition="Cortex-M Device"/>
-        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.7.0"/>
+        <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="Keil" Cversion="1.4.0" condition="Cortex-M Device"/>
+        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.6.3"/>
         <targetInfos>
           <targetInfo name="xian"/>
         </targetInfos>

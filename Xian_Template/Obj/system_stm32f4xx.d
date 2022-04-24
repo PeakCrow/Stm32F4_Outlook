@@ -2,7 +2,7 @@
 ..\obj\system_stm32f4xx.o: stm32f4_main\stm32f4xx.h
 ..\obj\system_stm32f4xx.o: stm32f4_main\stm32f407xx.h
 ..\obj\system_stm32f4xx.o: ..\Core\core_cm4.h
-..\obj\system_stm32f4xx.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\system_stm32f4xx.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 ..\obj\system_stm32f4xx.o: ..\Core\core_cmInstr.h
 ..\obj\system_stm32f4xx.o: ..\Core\cmsis_armcc.h
 ..\obj\system_stm32f4xx.o: ..\Core\core_cmFunc.h
@@ -14,7 +14,7 @@
 ..\obj\system_stm32f4xx.o: ..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_def.h
 ..\obj\system_stm32f4xx.o: .\stm32f4_main\stm32f4xx.h
 ..\obj\system_stm32f4xx.o: ..\HAL_lib\STM32F4xx_HAL_Driver\Inc\Legacy/stm32_hal_legacy.h
-..\obj\system_stm32f4xx.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+..\obj\system_stm32f4xx.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 ..\obj\system_stm32f4xx.o: ..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_rcc_ex.h
 ..\obj\system_stm32f4xx.o: ..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_exti.h
 ..\obj\system_stm32f4xx.o: ..\HAL_lib\STM32F4xx_HAL_Driver\Inc\stm32f4xx_hal_gpio.h

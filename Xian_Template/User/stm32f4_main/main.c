@@ -22,17 +22,18 @@ void func3(void)
 }
 int main(void)
 {	
-	vu8 ucKeyCode;	
-    HAL_Init();                    	 			/* 初始化HAL库 */   
-    Stm32_Clock_Init(336,8,2,7);   				/* 设置时钟,168Mhz */
-	bsp_InitTimer();							/* 初始化滴答定时器 */
-	bsp_InitUart();								/* 初始化串口1外设 */
-	bsp_InitKey();
-	EventRecorderInitialize(EventRecordAll, 1U);/* 初始化 EventRecorder 并开启 */
+		
+		vu8 ucKeyCode;	
+		HAL_Init();                    	 			/* 初始化HAL库 */   
+		Stm32_Clock_Init(336,8,2,7);   				/* 设置时钟,168Mhz */
+		bsp_InitTimer();											/* 初始化滴答定时器 */
+		bsp_InitUart();												/* 初始化串口1外设 */
+		bsp_InitKey();
+		EventRecorderInitialize(EventRecordAll, 1U);/* 初始化 EventRecorder 并开启 */
 //	bsp_StartAutoTimer(0,1500,func1);
-	bsp_StartAutoTimer(1,2000,func2);
+		bsp_StartAutoTimer(1,2000,func2);
 //	bsp_StartOnceTimer(3,4000,func3);
-	
+		
 	while(1)
 	{	
 		ucKeyCode = bsp_GetKey();

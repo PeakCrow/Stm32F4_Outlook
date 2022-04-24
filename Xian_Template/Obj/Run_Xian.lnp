@@ -8,6 +8,7 @@
 "..\obj\bsp_usart_fifo.o"
 "..\obj\bsp_key.o"
 "..\obj\bsp_spi_bus.o"
+"..\obj\bsp_spi_flash.o"
 "..\obj\startup_stm32f407xx.o"
 "..\obj\stm32f4xx_hal.o"
 "..\obj\stm32f4xx_hal_cortex.o"
