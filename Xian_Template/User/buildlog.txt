@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'xian'
 compiling main.c...
@@ -6,3 +7,24 @@ Program Size: Code=9576 RO-data=528 RW-data=28 ZI-data=40352
 FromELF: creating hex file...
 "..\Obj\Run_Xian.axf" - 0 Error(s), 0 Warning(s).
 Build Time Elapsed:  00:00:02
+=======
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'xian'
+compiling bsp_spi_flash.c...
+..\SYSTEM\flash\bsp_spi_flash.c(131): warning:  #223-D: function "strcpy" declared implicitly
+  				strcpy(g_tSF.ChipName, "SST25VF016B");
+..\SYSTEM\flash\bsp_spi_flash.c(33): warning:  #177-D: function "sf_NeedErase"  was declared but never referenced
+  static uint8_t sf_NeedErase(uint8_t * _ucpOldBuf, uint8_t *_ucpNewBuf, uint16_t _uiLen);
+..\SYSTEM\flash\bsp_spi_flash.c(34): warning:  #177-D: function "sf_CmpData"  was declared but never referenced
+  static uint8_t sf_CmpData(uint32_t _uiSrcAddr, uint8_t *_ucpTar, uint32_t _uiSize);
+..\SYSTEM\flash\bsp_spi_flash.c(35): warning:  #177-D: function "sf_AutoWriteSector"  was declared but never referenced
+  static uint8_t sf_AutoWriteSector(uint8_t *_ucpSrc, uint32_t _uiWrAddr, uint16_t _usWrLen);
+..\SYSTEM\flash\bsp_spi_flash.c(37): warning:  #177-D: variable "s_spiBuf"  was declared but never referenced
+  static uint8_t s_spiBuf[4*1024];	/* 用于写函数，先读出整个扇区，修改缓冲区后，再整个扇区回写 */
+..\SYSTEM\flash\bsp_spi_flash.c: 5 warnings, 0 errors
+linking...
+Program Size: Code=9752 RO-data=528 RW-data=28 ZI-data=40416  
+FromELF: creating hex file...
+"..\Obj\Run_Xian.axf" - 0 Error(s), 5 Warning(s).
+Build Time Elapsed:  00:00:03
+>>>>>>> 2d17175b1a60c1661ce88bee1d047014f6da185d

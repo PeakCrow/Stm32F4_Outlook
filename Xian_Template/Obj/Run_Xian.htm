@@ -3,11 +3,15 @@
 <title>Static Call Graph - [..\Obj\Run_Xian.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image ..\Obj\Run_Xian.axf</H1><HR>
+<<<<<<< HEAD
 <BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sat Apr 23 18:56:26 2022
+=======
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060960: Last Updated: Sun Apr 24 20:47:51 2022
+>>>>>>> 2d17175b1a60c1661ce88bee1d047014f6da185d
 <BR><P>
-<H3>Maximum Stack Usage =        192 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        264 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
-main &rArr; Stm32_Clock_Init &rArr; HAL_RCC_ClockConfig &rArr; HAL_RCC_GetSysClockFreq &rArr; __aeabi_uldivmod
+SysTick_Handler &rArr; SysTick_ISR &rArr; bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
 <P>
 <H3>
 Mutually Recursive functions
@@ -686,7 +690,7 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[9]"></a>SysTick_Handler</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, ticktim.o(i.SysTick_Handler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 168<LI>Call Chain = SysTick_Handler &rArr; SysTick_ISR &rArr; bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
+<BR><BR>[Stack]<UL><LI>Max Depth = 264<LI>Call Chain = SysTick_Handler &rArr; SysTick_ISR &rArr; bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_IncTick
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_ISR
@@ -794,6 +798,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_ISR
 </UL>
 
+<<<<<<< HEAD
 <P><STRONG><a name="[98]"></a>bsp_RunPer50ms</STRONG> (Thumb, 164 bytes, Stack size 96 bytes, main.o(i.bsp_RunPer50ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
 </UL>
@@ -801,6 +806,15 @@ Global Symbols
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comGetChar
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+=======
+<P><STRONG><a name="[99]"></a>bsp_RunPer50ms</STRONG> (Thumb, 164 bytes, Stack size 192 bytes, main.o(i.bsp_RunPer50ms))
+<BR><BR>[Stack]<UL><LI>Max Depth = 248<LI>Call Chain = bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;strlen
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comSendBuf
+<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comGetChar
+>>>>>>> 2d17175b1a60c1661ce88bee1d047014f6da185d
 </UL>
 <BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_ISR
 </UL>
@@ -808,8 +822,13 @@ Global Symbols
 <P><STRONG><a name="[8e]"></a>bsp_SetUartParam</STRONG> (Thumb, 54 bytes, Stack size 88 bytes, bsp_usart_fifo.o(i.bsp_SetUartParam))
 <BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = bsp_SetUartParam &rArr; HAL_UART_Init &rArr; UART_SetConfig &rArr; HAL_RCC_GetPCLK2Freq
 </UL>
+<<<<<<< HEAD
 <BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+=======
+<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_UART_Init
+>>>>>>> 2d17175b1a60c1661ce88bee1d047014f6da185d
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;InitHardUart
 </UL>
@@ -817,8 +836,13 @@ Global Symbols
 <P><STRONG><a name="[ac]"></a>bsp_StartAutoTimer</STRONG> (Thumb, 94 bytes, Stack size 16 bytes, ticktim.o(i.bsp_StartAutoTimer))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = bsp_StartAutoTimer &rArr; __2printf
 </UL>
+<<<<<<< HEAD
 <BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_PRIMASK
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+=======
+<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_PRIMASK
+>>>>>>> 2d17175b1a60c1661ce88bee1d047014f6da185d
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -867,6 +891,7 @@ Global Symbols
 <P><STRONG><a name="[5b]"></a>main</STRONG> (Thumb, 166 bytes, Stack size 8 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 192<LI>Call Chain = main &rArr; Stm32_Clock_Init &rArr; HAL_RCC_ClockConfig &rArr; HAL_RCC_GetSysClockFreq &rArr; __aeabi_uldivmod
 </UL>
+<<<<<<< HEAD
 <BR>[Calls]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_StartAutoTimer
 <LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_InitUart
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_InitTimer
@@ -876,14 +901,30 @@ Global Symbols
 <LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
 <LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderInitialize
 <LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+=======
+<BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_StartAutoTimer
+<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_InitUart
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_InitTimer
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_InitKey
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_GetKey
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Stm32_Clock_Init
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HAL_Init
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;EventRecorderInitialize
+>>>>>>> 2d17175b1a60c1661ce88bee1d047014f6da185d
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL><P>
 <H3>
 Local Symbols
 </H3>
+<<<<<<< HEAD
 <P><STRONG><a name="[94]"></a>SysTick_ISR</STRONG> (Thumb, 168 bytes, Stack size 8 bytes, ticktim.o(i.SysTick_ISR))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = SysTick_ISR &rArr; bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
+=======
+<P><STRONG><a name="[95]"></a>SysTick_ISR</STRONG> (Thumb, 168 bytes, Stack size 8 bytes, ticktim.o(i.SysTick_ISR))
+<BR><BR>[Stack]<UL><LI>Max Depth = 256<LI>Call Chain = SysTick_ISR &rArr; bsp_RunPer50ms &rArr; comSendBuf &rArr; ComToUart &rArr; __2printf
+>>>>>>> 2d17175b1a60c1661ce88bee1d047014f6da185d
 </UL>
 <BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_RunPer1ms
 <LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;bsp_SoftTimerDec
