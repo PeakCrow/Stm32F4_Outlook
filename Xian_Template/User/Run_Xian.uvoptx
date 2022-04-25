@@ -184,11 +184,6 @@
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
-      <ScvdPack>
-        <Filename>E:\Users\Administrator\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\EventRecorder.scvd</Filename>
-        <Type>Keil.ARM_Compiler.1.6.3</Type>
-        <SubType>1</SubType>
-      </ScvdPack>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
