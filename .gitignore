@@ -8,7 +8,7 @@ Obj/
 xian.si4project/
 # Other files and folders
 *.o
-Untitled Project.si4project/
+/Untitled Project.si4project/
 .settings
 *.json
 Run_Xian.uvguix.TRX

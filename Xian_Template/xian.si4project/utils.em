@@ -112,7 +112,7 @@ macro InsertFunHeader()
     sys_time = GetSysTime(1)
     temp_buffer = "  * \@DateTime:     "
     temp_buffer = cat(temp_buffer,sys_time.date)
-    temp_buffer = cat(temp_buffer,"T")
+    temp_buffer = cat(temp_buffer," ")
     temp_buffer = cat(temp_buffer,sys_time.time)
     temp_buffer = cat(temp_buffer," ")
 
@@ -123,7 +123,11 @@ macro InsertFunHeader()
 
     if(strmid(process_txt,0,4) != "void")
     {
-        InsBufLine(handle,param_line,"  * \@return:")
+        InsBufLine(handle,param_line,"  * \@return:       ")
+    }
+    else
+    {
+    	InsBufLine(handle,param_line,"  * \@return:       none");
     }
 
     while(param_num > 0)
