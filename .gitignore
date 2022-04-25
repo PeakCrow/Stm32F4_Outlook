@@ -5,6 +5,7 @@ bin-release/
 [Bb]in/
 Obj/
 /Obj/
+/xian.si4project
 xian.si4project/
 # Other files and folders
 *.o
