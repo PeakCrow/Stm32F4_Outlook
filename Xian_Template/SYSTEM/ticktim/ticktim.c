@@ -308,3 +308,15 @@ void SysTick_Handler(void)
 	SysTick_ISR();					/*需要在中断中不停的调用的中断服务程序*/	
 }
 
+
+int32_t bsp_GetRunTime(void)
+{
+	int32_t runtime;
+
+	__set_PRIMASK(1);	/* 鍏抽棴鍏ㄥ眬涓柇 */
+	runtime = g_iRunTime;
+	__set_PRIMASK(0);	/* 鎵撳紑鍏ㄥ眬涓柇 */
+	return runtime;
+}
+
+

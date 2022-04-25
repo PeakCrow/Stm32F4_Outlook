@@ -1,9 +1,9 @@
 #include "bsp_spi_bus.h"
 
 
-#define USR_SPI_DMA		/* DMA方式 */
+//#define USR_SPI_DMA		/* DMA方式 */
 //#define USE_SPI_INT		/* 中断方式 */
-//#define USR_SPI_POLL	/* 查询方式 */
+#define USR_SPI_POLL	/* 查询方式 */
 
 
 /* 

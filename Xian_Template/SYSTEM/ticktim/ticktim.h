@@ -31,6 +31,8 @@ void bsp_InitTimer(void);
 void bsp_StartOnceTimer(uint8_t _id,uint32_t _period,void (*callfunc) (void));
 void bsp_StartAutoTimer(uint8_t _id,uint32_t _period,void (*callfunc) (void));
 void bsp_StopTimer(uint8_t _id);
+int32_t bsp_GetRunTime(void);
+
 /*周期调用函数，不允许放在while(1)中*/
 void bsp_RunPer1ms(void);
 void bsp_RunPer10ms(void);

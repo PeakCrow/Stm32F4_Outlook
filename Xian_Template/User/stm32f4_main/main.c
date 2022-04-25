@@ -19,7 +19,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "bsp_key.h"
-
+#include "bsp_spi_flash_demo.h"
 
 void func1(void)
 {
@@ -50,11 +50,15 @@ int main(void)
 		bsp_InitTimer();											/* ³õÊ¼»¯µÎ´ğ¶¨Ê±Æ÷ */
 		bsp_InitUart();												/* ³õÊ¼»¯´®¿Ú1ÍâÉè */
 		bsp_InitKey();
+		bsp_InitSPIBus();	/* é…ç½®SPIæ€»çº¿ */		
+		bsp_InitSFlash();	/* åˆå§‹åŒ–SPI ä¸²è¡ŒFlash */
 		EventRecorderInitialize(EventRecordAll, 1U);/* ³õÊ¼»¯ EventRecorder ²¢¿ªÆô */
 //	bsp_StartAutoTimer(0,1500,func1);
 		bsp_StartAutoTimer(1,2000,func2);
 //	bsp_StartOnceTimer(3,4000,func3);
-		
+//		DemoSpiFlash();
+	
+/*
 	while(1)
 	{	
 		ucKeyCode = bsp_GetKey();
@@ -63,35 +67,36 @@ int main(void)
 			switch(ucKeyCode)
 			{
 				case KEY_0_DOWN:
-						printf("K0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
+						printf("K0æŒ‰é”®æŒ‰ä¸‹\r\n");
 					break;
 				case KEY_0_UP:
-						printf("K0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
+						printf("K0æŒ‰é”®å¼¹èµ·\r\n");
 					break;
 				case KEY_UP_DOWN:
-						printf("KUPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
+						printf("KUPæŒ‰é”®æŒ‰ä¸‹\r\n");
 					break;
 				case KEY_UP_UP:
-						printf("KUPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
+						printf("KUPæŒ‰é”®å¼¹èµ·\r\n");
 					break;
 				case KEY_0_LONG:
-						printf("K0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
+						printf("K0æŒ‰é”®é•¿æŒ‰\r\n");
 					break;
 				case KEY_UP_LONG:
-						printf("KUPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
+						printf("KUPæŒ‰é”®é•¿æŒ‰\r\n");
 					break;
 				case KEY_MULTI_DOWM:
-						printf("MULTI_DOWMï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
+						printf("MULTI_DOWMæŒ‰é”®æŒ‰ä¸‹\r\n");
 					break;
 				case KEY_MULTI_UP:
-						printf("MULTI_UPï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
+						printf("MULTI_UPæŒ‰é”®å¼¹èµ·\r\n");
 					break;
 				case KEY_MULTI_LONG:
-						printf("MULTI_LONGï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½\r\n");
+						printf("MULTI_LONGæŒ‰é”®é•¿æŒ‰\r\n");
 					break;				
 			}
 		}
 	}
+*/
 }
 /*******************************************************************************
   * @FunctionName: bsp_RunPer10ms
