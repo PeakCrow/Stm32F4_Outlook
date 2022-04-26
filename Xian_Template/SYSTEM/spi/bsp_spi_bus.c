@@ -3,7 +3,7 @@
 
 //#define USR_SPI_DMA		/* DMA方式 */
 //#define USE_SPI_INT		/* 中断方式 */
-#define USR_SPI_POLL	/* 查询方式 */
+#define USR_SPI_POLL		/* 查询方式 */
 
 
 /* 
@@ -122,6 +122,7 @@ void bsp_InitSPIParam(uint32_t _BaudRatePrescaler,uint32_t _CLKPhase,uint32_t _C
 	hspi.Init.NSS				= SPI_NSS_SOFT;				/* 使用软件方式管理片选引脚 */
 	hspi.Init.Mode 				= SPI_MODE_MASTER;			/* SPI1工作在主控模式 */
 	
+		
 	/* 复位SPI */
 	if(HAL_SPI_DeInit(&hspi) != HAL_OK)
 	{
@@ -133,6 +134,8 @@ void bsp_InitSPIParam(uint32_t _BaudRatePrescaler,uint32_t _CLKPhase,uint32_t _C
 	{
 		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 	}
+	
+	__HAL_SPI_ENABLE(&hspi);
 }
 
 /*
@@ -159,7 +162,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 		/* SPI SCK */
 		gpio_initstruct.Pin 		= SPIx_SCK_PIN;
 		gpio_initstruct.Mode		= GPIO_MODE_AF_PP;
-		gpio_initstruct.Pull		= GPIO_NOPULL;
+		gpio_initstruct.Pull		= GPIO_PULLUP;
 		gpio_initstruct.Speed		= GPIO_SPEED_FREQ_HIGH;
 		gpio_initstruct.Alternate	= SPIx_SCK_AF;
 		HAL_GPIO_Init(SPIx_SCK_GPIO,&gpio_initstruct);

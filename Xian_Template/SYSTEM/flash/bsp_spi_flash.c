@@ -29,7 +29,7 @@
 #define CMD_WREN      0x06		/* 写使能命令 */
 #define CMD_READ      0x03  	/* 读数据区命令 */
 #define CMD_RDSR      0x05		/* 读状态寄存器命令 */
-#define CMD_RDID      0x9F		/* 读器件ID命令 */
+#define CMD_RDID      0x90		/* 读器件ID命令 */
 #define CMD_SE        0x20		/* 擦除扇区命令 */
 #define CMD_BE        0xC7		/* 批量擦除命令 */
 #define DUMMY_BYTE    0xA5		/* 哑命令，可以为任意值，用于读操作 */
@@ -199,7 +199,8 @@ uint32_t sf_ReadID(void)
 	id3 = g_spiRxBuf[3];					/* 读ID的第3个字节 */
 	sf_SetCS(1);							/* 禁能片选 */
 
-	uiID = ((uint32_t)id1 << 16) | ((uint32_t)id2 << 8) | id3;
+//	uiID = ((uint32_t)id1 << 16) | ((uint32_t)id2 << 8) | id3;
+	uiID = ((uint32_t)id1 << 8) | id2;
 
 	return uiID;
 }
@@ -221,6 +222,9 @@ void sf_EraseChip(void)
 	sf_SetCS(0);		/* 使能片选 */
 	g_spiLen = 0;
 	g_spiTxBuf[g_spiLen++] = CMD_BE;				/* 发送整片擦除命令 */
+	g_spiTxBuf[g_spiLen++] = 0x00;				/* 发送整片擦除命令 */
+	g_spiTxBuf[g_spiLen++] = 0x00;				/* 发送整片擦除命令 */	
+	g_spiTxBuf[g_spiLen++] = 0x00;				/* 发送整片擦除命令 */
 	bsp_spiTransfer();
 	sf_SetCS(1);									/* 禁能片选 */
 

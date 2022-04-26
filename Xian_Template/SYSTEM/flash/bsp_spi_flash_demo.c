@@ -220,7 +220,14 @@ static void sfDispMenu(void)
 	printf("∆‰À˚»Œ“‚º¸ - œ‘ æ√¸¡ÓÃ· æ\r\n");
 	printf("\r\n");
 }
-
+/*******************************************************************************
+  * @FunctionName: DemoSpiFlash
+  * @Author:       trx
+  * @DateTime:     2022Âπ¥4Êúà26Êó•21:24:26 
+  * @Purpose:      
+  * @param:        void               
+  * @return:       none
+*******************************************************************************/
 void DemoSpiFlash(void)
 {
 	uint8_t cmd;
