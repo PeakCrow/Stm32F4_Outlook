@@ -18,6 +18,9 @@
 //得到:Fvco=8*(336/8)=336Mhz
 //     SYSCLK=336/2=168Mhz
 //     Fusb=336/7=48Mhz
+//     AHB总线时钟=168/1 = 168Mhz
+//     APB1总线时钟=168/4 = 42Mhz
+//     APB2总线时钟=168/2 = 84Mhz
 //返回值:0,成功;1,失败
 void Stm32_Clock_Init(u32 plln,u32 pllm,u32 pllp,u32 pllq)
 {
@@ -35,10 +38,10 @@ void Stm32_Clock_Init(u32 plln,u32 pllm,u32 pllp,u32 pllq)
     RCC_OscInitStructure.HSEState=RCC_HSE_ON;                      //打开HSE
     RCC_OscInitStructure.PLL.PLLState=RCC_PLL_ON;//打开PLL
     RCC_OscInitStructure.PLL.PLLSource=RCC_PLLSOURCE_HSE;//PLL时钟源选择HSE
-    RCC_OscInitStructure.PLL.PLLM=pllm; //主PLL和音频PLL分频系数(PLL之前的分频),取值范围:2~63.
-    RCC_OscInitStructure.PLL.PLLN=plln; //主PLL倍频系数(PLL倍频),取值范围:64~432.  
-    RCC_OscInitStructure.PLL.PLLP=pllp; //系统时钟的主PLL分频系数(PLL之后的分频),取值范围:2,4,6,8.(仅限这4个值!)
-    RCC_OscInitStructure.PLL.PLLQ=pllq; //USB/SDIO/随机数产生器等的主PLL分频系数(PLL之后的分频),取值范围:2~15.
+    RCC_OscInitStructure.PLL.PLLM=pllm; //主PLL和音频PLL分频系数(PLL之前的分频),取值范围:2~63.--8
+    RCC_OscInitStructure.PLL.PLLN=plln; //主PLL倍频系数(PLL倍频),取值范围:64~432.  					--336
+    RCC_OscInitStructure.PLL.PLLP=pllp; //系统时钟的主PLL分频系数(PLL之后的分频),取值范围:2,4,6,8.(仅限这4个值!)--2
+    RCC_OscInitStructure.PLL.PLLQ=pllq; //USB/SDIO/随机数产生器等的主PLL分频系数(PLL之后的分频),取值范围:2~15.  --7
     ret=HAL_RCC_OscConfig(&RCC_OscInitStructure);//初始化
 	
     if(ret!=HAL_OK) while(1);

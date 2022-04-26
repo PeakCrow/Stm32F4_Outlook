@@ -1,2 +1,3 @@
 Load "..\\Obj\\Run_Xian.axf" 
-Erase Done.Programming Done.Verify OK.Flash Load finished at 23:48:07
+Erase Done.Programming Done.Verify OK.Application running ...
+Flash Load finished at 18:12:26

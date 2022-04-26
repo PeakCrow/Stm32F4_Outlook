@@ -71,7 +71,7 @@ uint8_t g_spiRxBuf[SPI_BUFFER_SIZE];
 void bsp_InitSPIBus(void)
 {
 	g_spi_busy = 0;
-	bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_8,SPI_PHASE_2EDGE,SPI_POLARITY_HIGH);
+	bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_256,SPI_PHASE_2EDGE,SPI_POLARITY_HIGH);
 }
 /*
 *	函 数 名: bsp_InitSPIBusParam
@@ -144,6 +144,7 @@ void bsp_InitSPIParam(uint32_t _BaudRatePrescaler,uint32_t _CLKPhase,uint32_t _C
 */
 void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 {
+//	printf("引脚初始化");
 	/* 配置SPI总线GPIO:SCK MOSI MISO */
 	/* 此外还有片选信号 */
 	{

@@ -8,11 +8,15 @@ Obj/
 /xian.si4project
 xian.si4project/
 Run_Xian.uvguix.Administrator
+DebugConfig/
+/DebugConfig/
+/DebugConfig
 # Other files and folders
 *.o
 /Untitled Project.si4project/
 .settings
 *.json
+*.dbgconf
 Run_Xian.uvguix.TRX
 Run_Xian.uvoptix
 # Executables
