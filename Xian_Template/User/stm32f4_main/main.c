@@ -20,6 +20,7 @@
 #include <string.h>
 #include "bsp_key.h"
 #include "bsp_spi_flash_demo.h"
+#include "bsp_spi_bus.h"
 
 void func1(void)
 {
@@ -57,6 +58,17 @@ int main(void)
 //		bsp_StartAutoTimer(1,2000,func2);
 //	bsp_StartOnceTimer(3,4000,func3);
 		DemoSpiFlash();
+		while (1)
+			{
+				//sf_ReadID();
+				//bsp_spiTransfer();
+				switch (ucKeyCode = bsp_GetKey())
+					{
+					case KEY_UP_DOWN:
+						sf_ReadID();
+					break;
+					}
+			}
 }
 /*******************************************************************************
   * @FunctionName: bsp_RunPer10ms

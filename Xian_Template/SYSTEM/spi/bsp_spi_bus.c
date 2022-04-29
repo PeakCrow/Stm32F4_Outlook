@@ -1,9 +1,10 @@
 #include "bsp_spi_bus.h"
 
 
-//#define USR_SPI_DMA		/* DMA方式 */
-//#define USE_SPI_INT		/* 中断方式 */
-#define USR_SPI_POLL		/* 查询方式 */
+//#define USE_SPI_DMA		/* DMA方式 */
+#define USE_SPI_INT		/* 中断方式 */
+//#define USE_SPI_POLL		/* 查询方式 */
+
 
 
 /* 
@@ -65,13 +66,13 @@ uint32_t g_spiLen;
 uint8_t g_spi_busy;		/* SPI忙状态，0表示不忙，1表示忙 */
 __IO uint32_t wTransferState = TRANSFER_WAIT;
 
-uint8_t g_spiTxBuf[SPI_BUFFER_SIZE];
-uint8_t g_spiRxBuf[SPI_BUFFER_SIZE];
+uint8_t g_spiTxBuf[SPI_BUFFER_SIZE] = {0};
+uint8_t g_spiRxBuf[SPI_BUFFER_SIZE] = {0};
 
 void bsp_InitSPIBus(void)
 {
 	g_spi_busy = 0;
-	bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_256,SPI_PHASE_2EDGE,SPI_POLARITY_HIGH);
+	bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_2,SPI_PHASE_2EDGE,SPI_POLARITY_HIGH);
 }
 /*
 *	函 数 名: bsp_InitSPIBusParam
@@ -109,11 +110,11 @@ void bsp_InitSPIParam(uint32_t _BaudRatePrescaler,uint32_t _CLKPhase,uint32_t _C
 	s_CLKPolarity = _CLKPolarity;
 	
 	/* 设置SPI参数 */
-	hspi.Instance				= SPIx;						/* 指定SPI */
-	hspi.Init.BaudRatePrescaler = _BaudRatePrescaler;		/* 设置波特率 */
+	hspi.Instance				= SPI1;						/* 指定SPI */
+	hspi.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256;		/* 设置波特率 */
 	hspi.Init.Direction 		= SPI_DIRECTION_2LINES;		/* 全双工 */
-	hspi.Init.CLKPhase 			= _CLKPhase;				/* 配置时钟相位 */
-	hspi.Init.CLKPolarity 		= _CLKPolarity;				/* 配置时钟极性 */
+	hspi.Init.CLKPhase 			= SPI_PHASE_2EDGE;				/* 配置时钟相位 */
+	hspi.Init.CLKPolarity 		= SPI_POLARITY_HIGH;				/* 配置时钟极性 */
 	hspi.Init.DataSize			= SPI_DATASIZE_8BIT;		/* 设置数据宽度 */
 	hspi.Init.FirstBit 			= SPI_FIRSTBIT_MSB;			/* 数据高位在前 */
 	hspi.Init.TIMode			= SPI_TIMODE_DISABLE;		/* 禁止TI模式 */
@@ -140,7 +141,7 @@ void bsp_InitSPIParam(uint32_t _BaudRatePrescaler,uint32_t _CLKPhase,uint32_t _C
 
 /*
 *	函 数 名: HAL_SPI_MspInit
-*	功能说明: 初始化SPI的引脚以及DMA和IT
+*	功能说明: 初始化SPI的引脚以及DMA和IT,此函数由HAL_SPI_DeInit()函数回调
 *	形    参: _hspi：SPI句柄结构体
 *	返 回 值: none
 *	时间：2022年4月22日22点11分
@@ -194,10 +195,10 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 		hdma_tx.Init.PeriphBurst			= DMA_PBURST_SINGLE;		/* 禁止FIFO此位不起作用，用于外设突发 */
 		hdma_tx.Init.Direction				= DMA_MEMORY_TO_PERIPH;		/* 传输方向是从存储器到外设 */
 		hdma_tx.Init.PeriphInc				= DMA_PINC_DISABLE;			/* 外设地址自增禁止 */
-		hdma_tx.Init.MenInc					= DMA_MINC_ENABLE;			/* 存储器地址自增使能 */
+		hdma_tx.Init.MemInc					= DMA_MINC_ENABLE;			/* 存储器地址自增使能 */
 		hdma_tx.Init.PeriphDataAlignment	= DMA_PDATAALIGN_BYTE;		/* 外设地址传输位宽选择字节，即8bit */
 		hdma_tx.Init.MemDataAlignment		= DMA_NORMAL;				/* 正常模式 */
-		hdma_tx.Init.Priority				= DMA_PRIORITY_LOW;			/* 优先级低 */
+		hdma_tx.Init.Priority				= DMA_PRIORITY_HIGH;			/* 优先级低 */
 		
 		/* 复位DMA */
 		if(HAL_DMA_DeInit(&hdma_tx) != HAL_OK)
@@ -223,7 +224,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 		hdma_rx.Init.MemBurst			= DMA_MBURST_SINGLE;		/* 禁止FIFO此位无效，用于存储器突发 */
 		hdma_rx.Init.Direction			= DMA_PERIPH_TO_MEMORY;		/* 传输方向从外设到存储器 */
 		hdma_rx.Init.PeriphInc			= DMA_PINC_DISABLE;			/* 外设地址自增禁止 */
-		hdma_rx.Init.MenInc				= DMA_MINC_ENABLE;			/* 存储器地址自增使能 */
+		hdma_rx.Init.MemInc				= DMA_MINC_ENABLE;			/* 存储器地址自增使能 */
 		hdma_rx.Init.PeriphDataAlignment= DMA_PDATAALIGN_BYTE;		/* 外设数据传输位宽选择字节，即8bit */
 		hdma_rx.Init.MemDataAlignment	= DMA_MDATAALIGN_BYTE;		/* 存储器数据传输位宽选择字节，即8bit */
 		hdma_rx.Init.Mode				= DMA_NORMAL;				/* 正常模式 */
@@ -302,7 +303,7 @@ void bsp_spiTransfer(void)
 	{
 		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 	}
-	while(wTransferState = TRANSFER_WAIT)
+	while(wTransferState == TRANSFER_WAIT)
 	{
 		;
 	}
@@ -310,11 +311,20 @@ void bsp_spiTransfer(void)
 	
 	/* 查询方式传输 */
 #ifdef USE_SPI_POLL
-		if(HAL_SPI_TransmitReceive(&hspi,(uint8_t*)g_spiTxBuf,(uint8_t*)g_spiRxBuf,g_spiLen) != HAL_OK)
-		{
-			printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-		}
-	
+		if(HAL_SPI_TransmitReceive(&hspi,(uint8_t*)g_spiTxBuf,(uint8_t*)g_spiRxBuf,g_spiLen,1000) != HAL_OK)
+			{
+				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+			}
+		printf("查询方式传输\r\n");
+		for (int i = 0; i < 6; ++i)
+			{
+				printf("0x%X\r\n",g_spiTxBuf[i]);
+			}
+		for (int i = 0;i < 6; ++i)
+			{
+				printf("0x%X\r\n",g_spiRxBuf[i]);
+			}
+
 #endif
 }
 
@@ -389,7 +399,7 @@ uint8_t bsp_SpiBusBusy(void)
 #ifdef USE_SPI_INT
 void SPIx_IRQHandler(void)
 {
-	HAL_SPI_IRQHandler(*hspi);
+	HAL_SPI_IRQHandler(&hspi);
 }
 #endif
 

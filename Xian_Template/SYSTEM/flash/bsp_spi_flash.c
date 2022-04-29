@@ -13,13 +13,14 @@
 *******************************************************************************/
 #include "bsp_spi_flash.h"
 
+/* 芯片ID 	0x5217   21015 */
 
 /* 串行Flash的片选GPIO端口， PB14  */
 #define SF_CS_CLK_ENABLE() 			__HAL_RCC_GPIOB_CLK_ENABLE()
 #define SF_CS_GPIO					GPIOB
 #define SF_CS_PIN					GPIO_PIN_14
 
-#define SF_CS_0()					SF_CS_GPIO->BSRR = ((uint32_t)SF_CS_PIN << 16U) 
+#define SF_CS_0()					SF_CS_GPIO->BSRR = ((uint32_t)SF_CS_PIN << 16U)
 #define SF_CS_1()					SF_CS_GPIO->BSRR = SF_CS_PIN
 	
 #define CMD_AAI       0xAD  	/* AAI 连续编程指令(FOR SST25VF016B) */
@@ -29,7 +30,7 @@
 #define CMD_WREN      0x06		/* 写使能命令 */
 #define CMD_READ      0x03  	/* 读数据区命令 */
 #define CMD_RDSR      0x05		/* 读状态寄存器命令 */
-#define CMD_RDID      0x90		/* 读器件ID命令 */
+#define CMD_RDID      0x9F		/* 读器件ID命令 */
 #define CMD_SE        0x20		/* 擦除扇区命令 */
 #define CMD_BE        0xC7		/* 批量擦除命令 */
 #define DUMMY_BYTE    0xA5		/* 哑命令，可以为任意值，用于读操作 */
@@ -50,20 +51,20 @@ static uint8_t sf_AutoWriteSector(uint8_t *_ucpSrc, uint32_t _uiWrAddr, uint16_t
 
 static uint8_t s_spiBuf[4*1024];	/* 用于写函数，先读出整个扇区，修改缓冲区后，再整个扇区回写 */
 
-/*
-*********************************************************************************************************
-*	函 数 名: sf_SetCS
-*	功能说明: 串行FALSH片选控制函数
-*	形    参: 无
-*	返 回 值: 无
-*********************************************************************************************************
-*/
+/*******************************************************************************
+  * @FunctionName: sf_SetCS
+  * @Author:       trx
+  * @DateTime:     2022年4月29日 13:13:02 
+  * @Purpose:      串行flash片选控制函数
+  * @param:        _Level：0：片选；1：禁止片选
+  * @return:       none
+*******************************************************************************/
 void sf_SetCS(uint8_t _Level)
 {
 	if (_Level == 0)
 	{
 		bsp_SpiBusEnter();	
-		bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_256, SPI_PHASE_2EDGE, SPI_POLARITY_HIGH);
+		//bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_2, SPI_PHASE_2EDGE, SPI_POLARITY_HIGH);
 		SF_CS_0();
 	}
 	else
@@ -199,9 +200,9 @@ uint32_t sf_ReadID(void)
 	id3 = g_spiRxBuf[3];					/* 读ID的第3个字节 */
 	sf_SetCS(1);							/* 禁能片选 */
 
-//	uiID = ((uint32_t)id1 << 16) | ((uint32_t)id2 << 8) | id3;
-	uiID = ((uint32_t)id1 << 8) | id2;
-
+	uiID = ((uint32_t)id1 << 16) | ((uint32_t)id2 << 8) | id3;
+//	uiID = ((uint32_t)id1 << 8) | id2;
+	printf("芯片ID:0x%X\n\r",uiID);
 	return uiID;
 }
 
