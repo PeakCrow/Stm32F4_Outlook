@@ -16,7 +16,7 @@ enum
     SST25VF016B_ID  = 0xBF2541,
     MX25L1606E_ID   = 0xC22015,
     W25Q64BV_ID     = 0xEF4017,
-    W25Q128_ID      = 0x522118
+    N25Q128_ID      = 0x522118
 };
 
 typedef struct

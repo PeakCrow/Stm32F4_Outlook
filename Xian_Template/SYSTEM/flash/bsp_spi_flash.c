@@ -160,8 +160,8 @@ void sf_ReadInfo(void)
 				g_tSF.SectorSize = 4 * 1024;		/* 扇区大小 = 4K */
 				break;
 			
-			case W25Q128_ID:
-				strcpy(g_tSF.ChipName, "W25Q128");
+			case N25Q128_ID:
+				strcpy(g_tSF.ChipName, "N25Q128");
 				g_tSF.TotalSize = 16 * 1024 * 1024;	/* 总容量 = 8M */
 				g_tSF.SectorSize = 4 * 1024;		/* 扇区大小 = 4K */
 				break;			
@@ -201,8 +201,6 @@ uint32_t sf_ReadID(void)
 	sf_SetCS(1);							/* 禁能片选 */
 
 	uiID = ((uint32_t)id1 << 16) | ((uint32_t)id2 << 8) | id3;
-//	uiID = ((uint32_t)id1 << 8) | id2;
-	printf("芯片ID:0x%X\n\r",uiID);
 	return uiID;
 }
 
@@ -391,7 +389,7 @@ void sf_ReadBuffer(uint8_t * _pBuf, uint32_t _uiReadAddr, uint32_t _uiSize)
 		}
 
 	/* 擦除扇区操作 */
-	sf_SetCS(0);			/* 使能片选 */
+	sf_SetCS(0);								/* 使能片选 */
 	g_spiLen = 0;
 	g_spiTxBuf[g_spiLen++] = (CMD_READ);						/* 发送读指令 */
 	g_spiTxBuf[g_spiLen++] = ((_uiReadAddr & 0xff0000) >> 16);	/* 发送扇区地址的高8bit */
@@ -402,20 +400,20 @@ void sf_ReadBuffer(uint8_t * _pBuf, uint32_t _uiReadAddr, uint32_t _uiSize)
 	/* 开始读数据，因为底层DMA缓冲区有限，必须分包读 */
 	for (i = 0; i < _uiSize / SPI_BUFFER_SIZE; ++i)
 		{
-			g_spiLen = SPI_BUFFER_SIZE;
+			g_spiLen = SPI_BUFFER_SIZE;							/* 每次读取4k大小的扇区 */
 			bsp_spiTransfer();
 			/* 从存储区g_spiRxBuf复制SPI_BUFFER_SIZE个字节到_pBuf */
 			/* 返回一个指向_pBuf存储区的指针 */
 			memcpy(_pBuf, g_spiRxBuf,SPI_BUFFER_SIZE);
-			_pBuf += SPI_BUFFER_SIZE;
+			_pBuf += SPI_BUFFER_SIZE;							/* 地址运算，将_pBuf指针指向下一个扇区的首地址 */
 		}
-	rem = _uiSize % SPI_BUFFER_SIZE;			/* 剩余字节 */
+	rem = _uiSize % SPI_BUFFER_SIZE;			/* 剩余字节，计算要读取的数据是否是整扇区 */
 
 	if (rem > 0)
 		{
 			g_spiLen = rem;
 			bsp_spiTransfer();
-			memcpy(_pBuf,g_spiRxBuf,rem);
+			memcpy(_pBuf,g_spiRxBuf,rem);		/* 将多余的字节再次进行复制 */
 		}
 	sf_SetCS(1);								/* 禁止片选 */
 }
@@ -525,7 +523,7 @@ static uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_
   * @FunctionName: sf_WriteBuffer
   * @Author:       trx
   * @DateTime:     2022年4月25日 17:59:58 
-  * @Purpose:      写一个扇区并校验，如果不正确则再重写两次，函数自动安城
+  * @Purpose:      写一个扇区并校验，如果不正确则再重写两次，函数自动完成
   * @param:        _pBuf        数据源缓冲区
   * @param:        _uiWriteAddr 目标区域首地址
   * @param:        _usWriteSize  数据个数，不允许超过芯片容量
@@ -566,7 +564,7 @@ uint8_t sf_WriteBuffer(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint32_t _usWrite
 						}
 				}
 		}
-	else						/* 起始地址不是扇区首地址 */
+	else							/* 起始地址不是扇区首地址 */
 		{
 			if(NumOfPage == 0)		/* 数据长度小于扇区大小 */
 			{

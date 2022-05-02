@@ -573,7 +573,7 @@ static uint8_t UartGetChar(UART_T *_pUart,uint8_t * _pByte)
 }
 /*
 *	函 数 名: comGetChar
-*	功能说明: 从串口接收缓冲区中读取数据
+*	功能说明: 从串口接收缓冲区中读取一个数据
 *	形    参: _usPort:串口外设号的枚举变量；_pByte：存放数据的指针
 *	返 回 值: 0：表示无数据；1：表示读取到有效数据
 *	时间：2022年4月16日15点05分
@@ -588,8 +588,6 @@ uint8_t comGetChar(COM_PORT_E _usPort,uint8_t *_pByte)
 	}
 	return UartGetChar(pUart,_pByte);
 }
-
-
 /*
 *	函 数 名: fputc
 *	功能说明: 重定向C标准库的printf函数

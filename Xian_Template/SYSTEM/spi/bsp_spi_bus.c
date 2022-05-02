@@ -1,12 +1,6 @@
 #include "bsp_spi_bus.h"
 
 
-//#define USE_SPI_DMA		/* DMA方式 */
-#define USE_SPI_INT		/* 中断方式 */
-//#define USE_SPI_POLL		/* 查询方式 */
-
-
-
 /* 
 时钟，引脚，DMA，中断等宏定义
 APB2 高速时钟最大频率为84MHz
@@ -66,13 +60,17 @@ uint32_t g_spiLen;
 uint8_t g_spi_busy;		/* SPI忙状态，0表示不忙，1表示忙 */
 __IO uint32_t wTransferState = TRANSFER_WAIT;
 
-uint8_t g_spiTxBuf[SPI_BUFFER_SIZE] = {0};
-uint8_t g_spiRxBuf[SPI_BUFFER_SIZE] = {0};
+uint8_t g_spiTxBuf[SPI_BUFFER_SIZE];
+uint8_t g_spiRxBuf[SPI_BUFFER_SIZE];
 
 void bsp_InitSPIBus(void)
 {
 	g_spi_busy = 0;
-	bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_2,SPI_PHASE_2EDGE,SPI_POLARITY_HIGH);
+	/*
+		时钟相位：CPHA = 1，在串行同步时钟的第二个跳变沿(上升或下降)数据被采样
+		时钟极性：CPOL = 1，在串行同步时钟的空闲状态为高电平
+	*/
+	bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_656_25K,SPI_PHASE_2EDGE,SPI_POLARITY_HIGH);
 }
 /*
 *	函 数 名: bsp_InitSPIBusParam
@@ -110,11 +108,11 @@ void bsp_InitSPIParam(uint32_t _BaudRatePrescaler,uint32_t _CLKPhase,uint32_t _C
 	s_CLKPolarity = _CLKPolarity;
 	
 	/* 设置SPI参数 */
-	hspi.Instance				= SPI1;						/* 指定SPI */
-	hspi.Init.BaudRatePrescaler = SPI_BAUDRATEPRESCALER_256;		/* 设置波特率 */
+	hspi.Instance				= SPIx;						/* 指定SPI */
+	hspi.Init.BaudRatePrescaler = _BaudRatePrescaler;		/* 设置波特率 */
 	hspi.Init.Direction 		= SPI_DIRECTION_2LINES;		/* 全双工 */
-	hspi.Init.CLKPhase 			= SPI_PHASE_2EDGE;				/* 配置时钟相位 */
-	hspi.Init.CLKPolarity 		= SPI_POLARITY_HIGH;				/* 配置时钟极性 */
+	hspi.Init.CLKPhase 			= _CLKPhase;				/* 配置时钟相位 */
+	hspi.Init.CLKPolarity 		= _CLKPolarity;				/* 配置时钟极性 */
 	hspi.Init.DataSize			= SPI_DATASIZE_8BIT;		/* 设置数据宽度 */
 	hspi.Init.FirstBit 			= SPI_FIRSTBIT_MSB;			/* 数据高位在前 */
 	hspi.Init.TIMode			= SPI_TIMODE_DISABLE;		/* 禁止TI模式 */
@@ -315,16 +313,6 @@ void bsp_spiTransfer(void)
 			{
 				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 			}
-		printf("查询方式传输\r\n");
-		for (int i = 0; i < 6; ++i)
-			{
-				printf("0x%X\r\n",g_spiTxBuf[i]);
-			}
-		for (int i = 0;i < 6; ++i)
-			{
-				printf("0x%X\r\n",g_spiRxBuf[i]);
-			}
-
 #endif
 }
 
