@@ -64,7 +64,7 @@ void sf_SetCS(uint8_t _Level)
 	if (_Level == 0)
 	{
 		bsp_SpiBusEnter();	
-		//bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_2, SPI_PHASE_2EDGE, SPI_POLARITY_HIGH);
+		bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_328_125K, SPI_PHASE_2EDGE, SPI_POLARITY_HIGH);
 		SF_CS_0();
 	}
 	else
@@ -155,17 +155,21 @@ void sf_ReadInfo(void)
 				break;
 
 			case W25Q64BV_ID:
-				strcpy(g_tSF.ChipName, "W25Q64");
+				strcpy(g_tSF.ChipName, "W25Q64BV");
 				g_tSF.TotalSize = 8 * 1024 * 1024;	/* 总容量 = 8M */
 				g_tSF.SectorSize = 4 * 1024;		/* 扇区大小 = 4K */
 				break;
 			
 			case N25Q128_ID:
-				strcpy(g_tSF.ChipName, "N25Q128");
+				strcpy(g_tSF.ChipName, "N25Q128FV");
 				g_tSF.TotalSize = 16 * 1024 * 1024;	/* 总容量 = 8M */
 				g_tSF.SectorSize = 4 * 1024;		/* 扇区大小 = 4K */
 				break;			
-
+			case W25Q128FV_ID:
+				strcpy(g_tSF.ChipName,"W25Q128FV");
+				g_tSF.TotalSize = 16 * 1024 * 1024;
+				g_tSF.SectorSize = 4 * 1024;
+				break;
 			default:
 				strcpy(g_tSF.ChipName, "Unknow Flash");
 				g_tSF.TotalSize = 2 * 1024 * 1024;
