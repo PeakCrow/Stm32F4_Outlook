@@ -4,7 +4,7 @@
 #include "stm32f4xx.h"
 #include "stdio.h"
 
-#define DEBUG_SWITCH_EN 0		//0浣跨敤澶栭儴涓插彛1浣跨敤璋冭瘯DEBUG鎵撳嵃
+#define DEBUG_SWITCH_EN 0		//0使用外部打印1使用内部DEBUG打印
 #define UART1_FIFO_EN 	1		//PA9 PA10
 #define UART2_FIFO_EN	1
 #define UART3_FIFO_EN	1

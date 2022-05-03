@@ -43,11 +43,11 @@ SFLASH_T g_tSF;
 static void sf_WriteStatus(uint8_t _ucValue);
 #endif
 
-static void sf_WriteEnable(void);
+void sf_WriteEnable(void);
 static void sf_WaitForWriteEnd(void);
 static uint8_t sf_NeedErase(uint8_t * _ucpOldBuf, uint8_t *_ucpNewBuf, uint16_t _usLen);
 static uint8_t sf_CmpData(uint32_t _uiSrcAddr, uint8_t *_ucpTar, uint32_t _uiSize);
-static uint8_t sf_AutoWriteSector(uint8_t *_ucpSrc, uint32_t _uiWrAddr, uint16_t _usWrLen);
+uint8_t sf_AutoWriteSector(uint8_t *_ucpSrc, uint32_t _uiWrAddr, uint16_t _usWrLen);
 
 static uint8_t s_spiBuf[4*1024];	/* 用于写函数，先读出整个扇区，修改缓冲区后，再整个扇区回写 */
 
@@ -55,7 +55,7 @@ static uint8_t s_spiBuf[4*1024];	/* 用于写函数，先读出整个扇区，修改缓冲区后，再
   * @FunctionName: sf_SetCS
   * @Author:       trx
   * @DateTime:     2022年4月29日 13:13:02 
-  * @Purpose:      串行flash片选控制函数
+  * @Purpose:      串行flash片选控制函数√√√
   * @param:        _Level：0：片选；1：禁止片选
   * @return:       none
 *******************************************************************************/
@@ -64,7 +64,8 @@ void sf_SetCS(uint8_t _Level)
 	if (_Level == 0)
 	{
 		bsp_SpiBusEnter();	
-		bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_328_125K, SPI_PHASE_2EDGE, SPI_POLARITY_HIGH);
+		/* 最高速写flash会出错，所以这里使用次高速 */
+		bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_21M, SPI_PHASE_2EDGE, SPI_POLARITY_HIGH);
 		SF_CS_0();
 	}
 	else
@@ -78,12 +79,12 @@ void sf_SetCS(uint8_t _Level)
 /*
 *********************************************************************************************************
 *	函 数 名: sf_WriteEnable
-*	功能说明: 向器件发送写使能命令
-*	形    参: 无
+*	功能说明: 向器件发送写使能命令√√√
+*	形    参: 无 
 *	返 回 值: 无
 *********************************************************************************************************
 */
-static void sf_WriteEnable(void)
+void sf_WriteEnable(void)
 {
 	sf_SetCS(0);									/* 使能片选 */
 	g_spiLen = 0;
@@ -95,11 +96,10 @@ static void sf_WriteEnable(void)
 *********************************************************************************************************
 *	函 数 名: sf_WaitForWriteEnd
 *	功能说明: 采用循环查询的方式等待器件内部写操作完成
-*	形    参: 无
+*	形    参: 无	√√√
 *	返 回 值: 无
 *********************************************************************************************************
 */
-
 static void sf_WaitForWriteEnd(void)
 {
 	sf_SetCS(0);									/* 使能片选 */
@@ -116,12 +116,14 @@ static void sf_WaitForWriteEnd(void)
 		g_spiLen = 2;
 		bsp_spiTransfer();	
 		sf_SetCS(1);								/* 禁能片选 */
-		
+		/* 发送读状态器指令后,判断接收到字节的第0位是否为0 */
+		/* 0代表该设备已准备好进一步的指示(通过查数据手册得知) */
 		if ((g_spiRxBuf[1] & WIP_FLAG) != SET)		/* 判断状态寄存器的忙标志位 */
 		{
 			break;
 		}		
-		}
+	}
+	//printf("器件内部操作完成\r\n");
 }
 
 
@@ -183,7 +185,7 @@ void sf_ReadInfo(void)
 /*
 *********************************************************************************************************
 *	函 数 名: sf_ReadID
-*	功能说明: 读取器件ID
+*	功能说明: 读取器件制造商ID
 *	形    参:  无
 *	返 回 值: 32bit的器件ID (最高8bit填0，有效ID位数为24bit）
 *********************************************************************************************************
@@ -212,7 +214,7 @@ uint32_t sf_ReadID(void)
 /*
 *********************************************************************************************************
 *	函 数 名: sf_EraseChip
-*	功能说明: 擦除整个芯片
+*	功能说明: 擦除整个芯片√√√
 *	形    参:  无
 *	返 回 值: 无
 *********************************************************************************************************
@@ -225,9 +227,6 @@ void sf_EraseChip(void)
 	sf_SetCS(0);		/* 使能片选 */
 	g_spiLen = 0;
 	g_spiTxBuf[g_spiLen++] = CMD_BE;				/* 发送整片擦除命令 */
-	g_spiTxBuf[g_spiLen++] = 0x00;				/* 发送整片擦除命令 */
-	g_spiTxBuf[g_spiLen++] = 0x00;				/* 发送整片擦除命令 */	
-	g_spiTxBuf[g_spiLen++] = 0x00;				/* 发送整片擦除命令 */
 	bsp_spiTransfer();
 	sf_SetCS(1);									/* 禁能片选 */
 
@@ -265,7 +264,7 @@ void bsp_InitSFlash(void)
   * @FunctionName: sf_NeedErase
   * @Author:       trx
   * @DateTime:     2022年4月25日 13:28:19 
-  * @Purpose:      判断写PAGE之前是否需要擦除
+  * @Purpose:      判断写PAGE之前是否需要擦除√√√
   * @param:        _ucpOldBuf：旧数据
   * @param:        _ucpNewBuf：新数据
   * @param:        _usLen    ：数据个数
@@ -305,7 +304,7 @@ static uint8_t sf_NeedErase(uint8_t * _ucpOldBuf, uint8_t * _ucpNewBuf, uint16_t
   * @FunctionName: sf_CmpData
   * @Author:       trx
   * @DateTime:     2022年4月25日 14:07:40 
-  * @Purpose:      比较flash的数据
+  * @Purpose:      比较flash的数据√√√
   * @param:        _uiSrcAddr：数据缓冲区
   * @param:        _ucpTar     falsh地址
   * @param:        _uiSize     数据个数，不能超出芯片总容量
@@ -344,9 +343,9 @@ static uint8_t sf_CmpData(uint32_t _uiSrcAddr, uint8_t * _ucpTar, uint32_t _uiSi
 			for (j = 0; j < SPI_BUFFER_SIZE; ++j)
 				{
 					if(g_spiRxBuf[j] != *_ucpTar++)
-					{
-						goto NOTEQ;			/* 不相等 */
-					}
+						{
+							goto NOTEQ;			/* 不相等 */
+						}
 				}
 		}
 	rem = _uiSize % SPI_BUFFER_SIZE;			/* 剩余字节 */
@@ -376,7 +375,7 @@ NOTEQ:
   * @FunctionName: sf_ReadBuffer
   * @Author:       trx
   * @DateTime:     2022年4月25日 14:47:32 
-  * @Purpose:      连续读取若干字节，字节个数不能超出芯片数量
+  * @Purpose:      连续读取若干字节，字节个数不能超出芯片数量√√√
   * @param:        _pBuf       数据源缓冲区
   * @param:        _uiReadAddr 首地址
   * @param:        _uiSize     数据个数，不能超出芯片总容量
@@ -399,13 +398,13 @@ void sf_ReadBuffer(uint8_t * _pBuf, uint32_t _uiReadAddr, uint32_t _uiSize)
 	g_spiTxBuf[g_spiLen++] = ((_uiReadAddr & 0xff0000) >> 16);	/* 发送扇区地址的高8bit */
 	g_spiTxBuf[g_spiLen++] = ((_uiReadAddr & 0xff00) >> 8);		/* 发送扇区地址的中8bit */
 	g_spiTxBuf[g_spiLen++] = (_uiReadAddr & 0xff);				/* 发送扇区地址低8bit */
-	bsp_spiTransfer();
+	bsp_spiTransfer();			/* 第一次发送0x03 */
 
 	/* 开始读数据，因为底层DMA缓冲区有限，必须分包读 */
 	for (i = 0; i < _uiSize / SPI_BUFFER_SIZE; ++i)
 		{
 			g_spiLen = SPI_BUFFER_SIZE;							/* 每次读取4k大小的扇区 */
-			bsp_spiTransfer();
+			bsp_spiTransfer();	/* 第二次发送0x03 */
 			/* 从存储区g_spiRxBuf复制SPI_BUFFER_SIZE个字节到_pBuf */
 			/* 返回一个指向_pBuf存储区的指针 */
 			memcpy(_pBuf, g_spiRxBuf,SPI_BUFFER_SIZE);
@@ -425,13 +424,13 @@ void sf_ReadBuffer(uint8_t * _pBuf, uint32_t _uiReadAddr, uint32_t _uiSize)
   * @FunctionName: sf_AutoWriteSector
   * @Author:       trx
   * @DateTime:     2022年4月25日 15:47:44 
-  * @Purpose:      写一个扇区并校验，如果不正确则再重写两次，本函数自动完成
+  * @Purpose:      写一个扇区并校验，如果不正确则再重写两次，本函数自动完成√√√
   * @param:        _ucpSrc     数据源缓冲区
   * @param:        _uiWrAddr   目标区域首地址
   * @param:        _usWrLen    数据个数，不能超过扇区大小
   * @return:       0：错误；1：成功；
 *******************************************************************************/
-static uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_t _usWrLen)
+uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_t _usWrLen)
 {
 	uint16_t i;
 	uint16_t j;				/* 用于延时 */
@@ -445,7 +444,7 @@ static uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_
 			return 1;
 		}
 
-	/* 如果便宜地址超过芯片容量则退出 */
+	/* 如果偏移地址超过芯片容量则退出 */
 	if (_uiWrAddr >= g_tSF.TotalSize)
 		{
 			return 0;
@@ -459,17 +458,17 @@ static uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_
 
 	/* 如果flash中的数据没有变化，则不写flash */
 	sf_ReadBuffer(s_spiBuf,_uiWrAddr,_usWrLen);
-	if (memcpy(s_spiBuf,_ucpSrc,_usWrLen) == 0)
+	if (memcmp(s_spiBuf,_ucpSrc,_usWrLen) == 0)
 		{
 			return 1;
 		}
 
 	/* 判断是否需要先擦除扇区 */
 	/* 如果旧数据修改为新数据，所有位均是 1->0 或者 0->0,则无需擦除，提高flash寿命 */
-	ucNeedErase = 0;
+	ucNeedErase = 0;			/* 0不需要擦除 */
 	if (sf_NeedErase(s_spiBuf,_ucpSrc,_usWrLen))
 		{
-			ucNeedErase = 1;
+			ucNeedErase = 1;	/* 1需要擦除 */
 		}
 
 	uiFirstAddr = _uiWrAddr & (~(g_tSF.SectorSize - 1));
@@ -503,6 +502,7 @@ static uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_
 
 			/* 编程一个扇区 */
 			sf_PageWrite(s_spiBuf,uiFirstAddr,g_tSF.SectorSize);
+			
 			if (sf_CmpData(_uiWrAddr,_ucpSrc,_usWrLen) == 0)
 				{
 					cRet = 1;
@@ -510,14 +510,13 @@ static uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_
 				}
 			else
 			{
-				if (sf_CmpData(_uiWrAddr,_ucpSrc,_usWrLen))
+				if (sf_CmpData(_uiWrAddr,_ucpSrc,_usWrLen) == 0)
 					{
 						cRet = 1;
 						break;
 					}
 				/* 失败后延迟一段时间再重试 */
-				for(j = 0;j < 10000;i++)
-					;
+				for(j = 0;j < 10000;j++);
 			}
 		}
 	return cRet;
@@ -527,7 +526,7 @@ static uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_
   * @FunctionName: sf_WriteBuffer
   * @Author:       trx
   * @DateTime:     2022年4月25日 17:59:58 
-  * @Purpose:      写一个扇区并校验，如果不正确则再重写两次，函数自动完成
+  * @Purpose:      写一个扇区并校验，如果不正确则再重写两次，函数自动完成,一个扇区的大小为4K√√√
   * @param:        _pBuf        数据源缓冲区
   * @param:        _uiWriteAddr 目标区域首地址
   * @param:        _usWriteSize  数据个数，不允许超过芯片容量
@@ -537,8 +536,8 @@ uint8_t sf_WriteBuffer(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint32_t _usWrite
 {
 	uint32_t NumOfPage = 0,NumOfSingle = 0,Addr = 0,count = 0,temp = 0;
 
-	Addr = _uiWriteAddr & g_tSF.SectorSize;			/* 要写的目标页数的地址 */
-	count = g_tSF.SectorSize - Addr;				/* 页数大小减去目标页数的地址 */
+	Addr = _uiWriteAddr % g_tSF.SectorSize;			/* 扇区内的地址 */
+	count = g_tSF.SectorSize - Addr;				/* 从起始地址开始要写几个扇区 */
 	NumOfPage = _usWriteSize / g_tSF.SectorSize;	/* 页数 */
 	NumOfSingle = _usWriteSize % g_tSF.SectorSize;	/* 剩余的字节数 */
 
@@ -634,14 +633,14 @@ uint8_t sf_WriteBuffer(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint32_t _usWrite
   * @FunctionName: sf_PageWrite
   * @Author:       trx
   * @DateTime:     2022年4月25日 17:03:59 
-  * @Purpose:      页编程
+  * @Purpose:      页编程√√√
   * @param:        _pBuf        数据源缓冲区
   * @param:        _uiWriteAddr 目标区域首地址
   * @param:        _usSize       数据个数，页大小的整数倍(256字节的整数倍)
 *******************************************************************************/
 void sf_PageWrite(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint16_t _usSize)
 {
-	uint32_t	i,j;
+	uint32_t i,j;
 	if (g_tSF.ChipID == SST25VF016B_ID)
 		{
 			/* AAI指令要求传入的数据个数是偶数 */
@@ -688,37 +687,37 @@ void sf_PageWrite(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint16_t _usSize)
 			sf_WaitForWriteEnd();
 		}
 	else	/* for MX25L1606E,W25164BV */
-	{
-		for (j = 0; j < _usSize; ++j)
-			{
-				sf_WriteEnable();	/* 发送写使能命令 */
+		{
+			for (j = 0; j < _usSize / 256; ++j)
+				{
+					sf_WriteEnable();	/* 发送写使能命令 */
 
-				sf_SetCS(0);		/* 使能片选 */
-				g_spiLen = 0;
-				g_spiTxBuf[g_spiLen++] = 0x02;								/* 发送AAI命令(地址自动增加编程) */
-				g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff0000) >> 16);
-				g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff00) >> 8);
-				g_spiTxBuf[g_spiLen++] = (_uiWriteAddr & 0xff);
-				for (i = 0; i < 256; ++i)
-					{
-						g_spiTxBuf[g_spiLen++] = (*_pBuf++);			/* 发送数据 */
-					}
-				bsp_spiTransfer();
-				sf_SetCS(1);		/* 禁止片选 */
+					sf_SetCS(0);		/* 使能片选 */
+					g_spiLen = 0;
+					g_spiTxBuf[g_spiLen++] = (0x02);								/* 发送AAI命令(地址自动增加编程) */
+					g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff0000) >> 16);
+					g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff00) >> 8);
+					g_spiTxBuf[g_spiLen++] = (_uiWriteAddr & 0xff);
+					for (i = 0; i < 256; ++i)
+						{
+							g_spiTxBuf[g_spiLen++] = (*_pBuf++);			/* 发送数据 */
+						}
+					bsp_spiTransfer();
+					sf_SetCS(1);		/* 禁止片选 */
 
-				sf_WaitForWriteEnd();/* 等待串行flash内部操作完成 */
-				_uiWriteAddr += 256;
-			}
+					sf_WaitForWriteEnd();/* 等待串行flash内部操作完成 */
+					_uiWriteAddr += 256;
+				}
 
-		/* 进入写保护状态 */
-		sf_SetCS(0);
-		g_spiLen = 0;
-		g_spiTxBuf[g_spiLen++] = (CMD_DISWR);
-		bsp_spiTransfer();
-		sf_SetCS(1);
+			/* 进入写保护状态 */
+			sf_SetCS(0);
+			g_spiLen = 0;
+			g_spiTxBuf[g_spiLen++] = (CMD_DISWR);
+			bsp_spiTransfer();
+			sf_SetCS(1);
 
-		sf_WaitForWriteEnd();		/* 等待串行flash内部操作完成 */
-	}
+			sf_WaitForWriteEnd();		/* 等待串行flash内部操作完成 */
+		}
 }
 
 
@@ -726,7 +725,7 @@ void sf_PageWrite(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint16_t _usSize)
   * @FunctionName: sf_EraseSector
   * @Author:       trx
   * @DateTime:     2022年4月25日 17:21:35 
-  * @Purpose:      擦除指定的扇区
+  * @Purpose:      擦除指定的扇区√√√
   * @param:        _uiSectorAddr      扇区地址
   * @return:       none
 *******************************************************************************/
@@ -738,6 +737,7 @@ void sf_EraseSector(uint32_t _uiSectorAddr)
 	sf_SetCS(0);			/* 使能片选 */
 	g_spiLen = 0;
 	g_spiTxBuf[g_spiLen++] = CMD_SE;
+	/* 在发送擦除指令后,紧接这发送24位的地址 */
 	g_spiTxBuf[g_spiLen++] = ((_uiSectorAddr & 0xf0000) >> 16);
 	g_spiTxBuf[g_spiLen++] = ((_uiSectorAddr & 0xff00) >> 8);
 	g_spiTxBuf[g_spiLen++] = (_uiSectorAddr & 0xff);

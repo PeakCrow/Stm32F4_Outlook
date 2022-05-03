@@ -70,7 +70,7 @@ void bsp_InitSPIBus(void)
 		时钟相位：CPHA = 1，在串行同步时钟的第二个跳变沿(上升或下降)数据被采样
 		时钟极性：CPOL = 1，在串行同步时钟的空闲状态为高电平
 	*/
-	bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_656_25K,SPI_PHASE_2EDGE,SPI_POLARITY_HIGH);
+	bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_328_125K,SPI_PHASE_2EDGE,SPI_POLARITY_HIGH);
 }
 /*
 *	函 数 名: bsp_InitSPIBusParam
