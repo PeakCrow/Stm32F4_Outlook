@@ -3,9 +3,22 @@
 
 #include "stm32f4xx.h"
 #include "stdio.h"
-
-#define DEBUG_SWITCH_EN 0		//0使用外部打印1使用内部DEBUG打印
-#define UART1_FIFO_EN 	1		//PA9 PA10
+/*
+	使用内部debug打印时，会增加32k的sram空间，所以调试的时候可以使用，release版本要去掉此组件
+	去除组件：DEBUG_SWITCH_EN 宏改为0，接着在Manage Run-Time Environment->Compiler->Event Recorder&&STDOUT勾选取消
+				接着在Options for target->Target改为如下配置:
+						  Start			  Size
+			√	IRAM1---0x20000000		 0x20000
+				IRAM2---0x10000000		 0x10000
+	添加组件：DEBUG_SWITCH_EN 宏改为1，接着在Manage Run-Time Environment->Compiler->Event Recorder&&STDOUT勾选使能，
+				接着在Options for target->Target改为如下配置:
+						  Start			  Size
+			√	IRAM1---0x20000000		 0x10000
+				IRAM2---0x20010000		 0x10000	√
+				接着右键Project串口->Compiler右键->Event Recorder->Memory->IRAM2 [0x20010000-0x2001FFFF]
+*/
+#define DEBUG_SWITCH_EN 0		//1使用内部DEBUG打印，0使用串口外设进行打印
+#define UART1_FIFO_EN 	1
 #define UART2_FIFO_EN	0
 #define UART3_FIFO_EN	0
 /* 定义端口号 */
