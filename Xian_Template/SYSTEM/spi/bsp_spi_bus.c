@@ -60,8 +60,8 @@ uint32_t g_spiLen;
 uint8_t g_spi_busy;		/* SPI忙状态，0表示不忙，1表示忙 */
 __IO uint32_t wTransferState = TRANSFER_WAIT;
 
-uint8_t g_spiTxBuf[SPI_BUFFER_SIZE];
-uint8_t g_spiRxBuf[SPI_BUFFER_SIZE];
+uint8_t g_spiTxBuf[SPI_BUFFER_SIZE] = {0};
+uint8_t g_spiRxBuf[SPI_BUFFER_SIZE] = {0};
 
 void bsp_InitSPIBus(void)
 {

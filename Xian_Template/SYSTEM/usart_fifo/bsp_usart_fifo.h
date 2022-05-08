@@ -6,8 +6,8 @@
 
 #define DEBUG_SWITCH_EN 0		//0使用外部打印1使用内部DEBUG打印
 #define UART1_FIFO_EN 	1		//PA9 PA10
-#define UART2_FIFO_EN	1
-#define UART3_FIFO_EN	1
+#define UART2_FIFO_EN	0
+#define UART3_FIFO_EN	0
 /* 定义端口号 */
 typedef enum
 {

@@ -42,8 +42,5 @@ int main(void)
 		bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
 		bsp_I2C_EE_Init();							/* 初始化IIC1总线(包含AT24C02芯片) */
 		EventRecorderInitialize(EventRecordAll, 1U);/* 初始化 EventRecorder 并开启 */
-		
-
-		DemoIicEeprom();
 }
 
