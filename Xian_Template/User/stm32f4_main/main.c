@@ -21,6 +21,7 @@
 #include "bsp_key.h"
 #include "bsp_spi_flash_demo.h"
 #include "bsp_spi_bus.h"
+#include "bsp_iic_bus.h"
 
 /*******************************************************************************
   * @FunctionName: main
@@ -39,7 +40,10 @@ int main(void)
 		bsp_InitKey();
 		bsp_InitSPIBus();							/* SPI总线初始化 */
 		bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
+		bsp_I2C_EE_Init();							/* 初始化IIC1总线(包含AT24C02芯片) */
 		EventRecorderInitialize(EventRecordAll, 1U);/* 初始化 EventRecorder 并开启 */
-		DemoSpiFlash();
+		
+
+		DemoIicEeprom();
 }
 
