@@ -4,13 +4,13 @@
 #include "stm32f4xx.h"
 #include "stdio.h"
 /*
-	使用内部debug打印时，会增加32k的sram空间，所以调试的时候可以使用，release版本要去掉此组件
+	使用内部debug(因为使用的是狂暴模式)打印时，会增加32k的sram空间，所以调试的时候可以使用，release版本要去掉此组件
 	去除组件：DEBUG_SWITCH_EN 宏改为0，接着在Manage Run-Time Environment->Compiler->Event Recorder&&STDOUT勾选取消
 				接着在Options for target->Target改为如下配置:
 						  Start			  Size
 			√	IRAM1---0x20000000		 0x20000
 				IRAM2---0x10000000		 0x10000
-	添加组件：DEBUG_SWITCH_EN 宏改为1，接着在Manage Run-Time Environment->Compiler->Event Recorder&&STDOUT勾选使能，
+	添加组件：DEBUG_SWITCH_EN 宏改为1，接着在Manage Run-Time Environment->Compiler->Event Recorder&&STDOUT(功能选为EVR)勾选使能，
 				接着在Options for target->Target改为如下配置:
 						  Start			  Size
 			√	IRAM1---0x20000000		 0x10000

@@ -44,6 +44,31 @@ APB2 高速时钟最大频率为84MHz
 #define SPIx_DMA_TX_IRQHandler	DMA2_Stream3_IRQHandler
 #define SPIx_DMA_RX_IRQHandler	DMA2_Stream0_IRQHandler
 
+/* 时钟、引脚宏定义 */
+#define SPIx_INK					SPI2
+#define	SPIx_INK_CLK_ENBALE()		__HAL_RCC_SPI2_CLK_ENABLE()
+
+/* PC2 */
+#define	SPIx_INK_MISO_CLK_ENBALE()	__HAL_RCC_GPIOC_CLK_ENABLE()
+#define	SPIx_INK_MISO_GPIO			GPIOC
+#define	SPIx_INK_MISO_PIN			GPIO_PIN_2
+#define	SPIx_INK_MISO_AF			GPIO_AF5_SPI2
+
+/* PC3 */
+#define SPIx_INK_MOSI_CLK_ENABLE()	__HAL_RCC_GPIOC_CLK_ENABLE()
+#define	SPIx_INK_MOSI_GPIO			GPIOC
+#define	SPIx_INK_MOSI_PIN			GPIO_PIN_3
+#define	SPIx_INK_MOSI_AF			GPIO_AF5_SPI2
+
+/* PB13 */
+#define	SPIx_INK_SCK_CLK_ENABLE()	__HAL_RCC_GPIOB_CLK_ENABLE()
+#define	SPIx_INK_SCK_GPIO			GPIOB
+#define	SPIx_INK_SCK_PIN			GPIO_PIN_13
+#define	SPIx_INK_SCK_AF				GPIO_AF5_SPI2
+
+
+
+
 enum{
 	TRANSFER_WAIT = 0,
 	TRANSFER_COMPLETE,
@@ -60,17 +85,19 @@ uint32_t g_spiLen;
 uint8_t g_spi_busy;		/* SPI忙状态，0表示不忙，1表示忙 */
 __IO uint32_t wTransferState = TRANSFER_WAIT;
 
+static SPI_HandleTypeDef ink_spi = {0};
+
 uint8_t g_spiTxBuf[SPI_BUFFER_SIZE] = {0};
 uint8_t g_spiRxBuf[SPI_BUFFER_SIZE] = {0};
 
-void bsp_InitSPIBus(void)
+void bsp_InitSPI1Bus(void)
 {
 	g_spi_busy = 0;
 	/*
 		时钟相位：CPHA = 1，在串行同步时钟的第二个跳变沿(上升或下降)数据被采样
 		时钟极性：CPOL = 1，在串行同步时钟的空闲状态为高电平
 	*/
-	bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_328_125K,SPI_PHASE_2EDGE,SPI_POLARITY_HIGH);
+	bsp_InitSPI1Param(SPI_BAUDRATEPRESCALER_328_125K,SPI_PHASE_2EDGE,SPI_POLARITY_HIGH);
 }
 /*
 *	函 数 名: bsp_InitSPIBusParam
@@ -95,7 +122,7 @@ void bsp_InitSPIBus(void)
 *	返 回 值: none
 *	时间：2022年4月22日17点53分
 */
-void bsp_InitSPIParam(uint32_t _BaudRatePrescaler,uint32_t _CLKPhase,uint32_t _CLKPolarity)
+void bsp_InitSPI1Param(uint32_t _BaudRatePrescaler,uint32_t _CLKPhase,uint32_t _CLKPolarity)
 {
 	/* 提高执行效率，只有在SPI硬件参数发生变化时，才执行HAL_Init */
 	if(s_BaudRatePrescaler == _BaudRatePrescaler && s_CLKPhase == _CLKPhase && s_CLKPolarity == _CLKPolarity)
@@ -149,33 +176,62 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 //	printf("引脚初始化");
 	/* 配置SPI总线GPIO:SCK MOSI MISO */
 	/* 此外还有片选信号 */
-	{
-		GPIO_InitTypeDef	gpio_initstruct;
-		
-		/* SPI1 和 GPIO时钟 */
-		SPIx_SCK_CLK_ENABLE();
-		SPIx_MISO_CLK_ENABLE();
-		SPIx_MOSI_CLK_ENABLE();
-		SPIx_CLK_ENABLE();
-		
-		/* SPI SCK */
-		gpio_initstruct.Pin 		= SPIx_SCK_PIN;
-		gpio_initstruct.Mode		= GPIO_MODE_AF_PP;
-		gpio_initstruct.Pull		= GPIO_PULLUP;
-		gpio_initstruct.Speed		= GPIO_SPEED_FREQ_HIGH;
-		gpio_initstruct.Alternate	= SPIx_SCK_AF;
-		HAL_GPIO_Init(SPIx_SCK_GPIO,&gpio_initstruct);
-		
-		/* SPI MISO */
-		gpio_initstruct.Pin			= SPIx_MISO_PIN;
-		gpio_initstruct.Alternate	= SPIx_MISO_AF;
-		HAL_GPIO_Init(SPIx_MISO_GPIO,&gpio_initstruct);
-		
-		/* SPI MOSI */
-		gpio_initstruct.Pin			= SPIx_MOSI_PIN;
-		gpio_initstruct.Alternate	= SPIx_MOSI_AF;
-		HAL_GPIO_Init(SPIx_MOSI_GPIO,&gpio_initstruct);
-	}
+	if(_hspi == &hspi)
+		{
+			GPIO_InitTypeDef	gpio_initstruct;
+			
+			/* SPI1 和 GPIO时钟 */
+			SPIx_SCK_CLK_ENABLE();
+			SPIx_MISO_CLK_ENABLE();
+			SPIx_MOSI_CLK_ENABLE();
+			SPIx_CLK_ENABLE();
+			
+			/* SPI SCK */
+			gpio_initstruct.Pin 		= SPIx_SCK_PIN;
+			gpio_initstruct.Mode		= GPIO_MODE_AF_PP;
+			gpio_initstruct.Pull		= GPIO_PULLUP;
+			gpio_initstruct.Speed		= GPIO_SPEED_FREQ_HIGH;
+			gpio_initstruct.Alternate	= SPIx_SCK_AF;
+			HAL_GPIO_Init(SPIx_SCK_GPIO,&gpio_initstruct);
+			
+			/* SPI MISO */
+			gpio_initstruct.Pin			= SPIx_MISO_PIN;
+			gpio_initstruct.Alternate	= SPIx_MISO_AF;
+			HAL_GPIO_Init(SPIx_MISO_GPIO,&gpio_initstruct);
+			
+			/* SPI MOSI */
+			gpio_initstruct.Pin			= SPIx_MOSI_PIN;
+			gpio_initstruct.Alternate	= SPIx_MOSI_AF;
+			HAL_GPIO_Init(SPIx_MOSI_GPIO,&gpio_initstruct);
+		}
+	else if(_hspi == &ink_spi)
+		{
+			GPIO_InitTypeDef gpio_initstruct;
+
+			/* SPI2 和 GPIO时钟 */
+			SPIx_INK_SCK_CLK_ENABLE();
+			SPIx_INK_MISO_CLK_ENBALE();
+			SPIx_INK_MOSI_CLK_ENABLE();
+			SPIx_INK_CLK_ENBALE();
+
+			/* SPI SCK */
+			gpio_initstruct.Pin			= SPIx_INK_SCK_PIN;
+			gpio_initstruct.Mode		= GPIO_MODE_AF_PP;
+			gpio_initstruct.Pull		= GPIO_PULLUP;
+			gpio_initstruct.Speed		= GPIO_SPEED_FAST;
+			gpio_initstruct.Alternate	= SPIx_INK_SCK_AF;
+			HAL_GPIO_Init(SPIx_INK_SCK_GPIO,&gpio_initstruct);
+
+			/* SPI MISO */
+			gpio_initstruct.Pin			= SPIx_INK_MISO_PIN;
+			gpio_initstruct.Alternate	= SPIx_INK_MISO_AF;
+			HAL_GPIO_Init(SPIx_INK_MISO_GPIO,&gpio_initstruct);
+			
+			/* SPI MOSI */
+			gpio_initstruct.Pin			= SPIx_INK_MOSI_PIN;
+			gpio_initstruct.Alternate	= SPIx_INK_MOSI_AF;
+			HAL_GPIO_Init(SPIx_INK_MOSI_GPIO,&gpio_initstruct);
+		}
 	
 	/* 配置DMA和NVIC */
 	#ifdef	USE_SPI_DMA
@@ -273,7 +329,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 *	返 回 值: none
 *	时间：2022年4月22日22点11分
 */
-void bsp_spiTransfer(void)
+void bsp_spi1Transfer(void)
 {
 	if(g_spiLen > SPI_BUFFER_SIZE)
 	{
@@ -316,7 +372,7 @@ void bsp_spiTransfer(void)
 #endif
 }
 
-/******** 下面两个回调函数是在HAL_SPI_TransmitReceive_DMA函数中被调用的 *******/
+/******** 下面两个回调函数在HAL_SPI_TransmitReceive_DMA函数中被回调 *******/
 
 /*
 *	函 数 名: HAL_SPI_TxRxCpltCallback
@@ -349,7 +405,7 @@ void HAL_SPI_ErrorCallback(SPI_HandleTypeDef* hspi)
 *	返 回 值: none
 *	时间：2022年4月22日22点27分
 */
-void bsp_SpiBusEnter(void)
+void bsp_Spi1BusEnter(void)
 {
 	g_spi_busy = 1;
 }
@@ -361,7 +417,7 @@ void bsp_SpiBusEnter(void)
 *	返 回 值: none
 *	时间：2022年4月22日22点28分
 */
-void bsp_SpiBusExit(void)
+void bsp_Spi1BusExit(void)
 {
 	g_spi_busy = 0;
 }
@@ -404,4 +460,48 @@ void SPIx_IRQHandler(void)
 {
 	HAL_SPI_IRQHandler(&hspi);
 }
+
 #endif
+
+
+
+void bsp_spi2Transfer(void)
+{
+	
+}
+
+
+void bsp_InitSPI2Param(uint32_t _BaudRatePrescaler, uint32_t _CLKPhase, uint32_t _CLKPolarity)
+{
+	/* 设置SPI参数 */
+	ink_spi.Instance					= SPIx_INK;						/* 指定SPI */
+	ink_spi.Init.BaudRatePrescaler		= _BaudRatePrescaler;			/* 配置速度 */
+	ink_spi.Init.Direction				= SPI_DIRECTION_2LINES;			/* 全双工 */
+	ink_spi.Init.CLKPhase				= _CLKPhase;					/* 配置时钟相位 */
+	ink_spi.Init.CLKPolarity			= _CLKPolarity;					/* 配置时钟极性 */
+	ink_spi.Init.DataSize				= SPI_DATASIZE_8BIT;			/* 配置数据宽度 */
+	ink_spi.Init.FirstBit				= SPI_FIRSTBIT_MSB;				/* 配置数据高位在前 */
+	ink_spi.Init.TIMode					= SPI_TIMODE_DISABLE;			/* 精致TI模式 */
+	ink_spi.Init.CRCCalculation			= SPI_CRCCALCULATION_DISABLE;	/* 禁止CRC校验 */
+	ink_spi.Init.CRCPolynomial			= 7;							/* 禁止CRC后，此配置无效 */
+	ink_spi.Init.NSS					= SPI_NSS_SOFT;					/* 配置使用软件方式管理片选引脚 */
+	ink_spi.Init.Mode					= SPI_MODE_MASTER;				/* 配置spi工作在主控模式 */
+
+	/* 复位SPI */
+	if (HAL_SPI_DeInit(&ink_spi) != HAL_OK)
+		{
+			printf("Wrong parameters value:file %s on line %d\r\n", __FILE__,__LINE__);
+		}
+
+	/* 初始化SPI */
+	if (HAL_SPI_Init(&ink_spi) != HAL_OK)
+		{
+			printf("Wrong parameters value:file %s on line %d\r\n", __FILE__,__LINE__);
+			
+		}
+
+	__HAL_SPI_ENABLE(&ink_spi);
+}
+
+
+

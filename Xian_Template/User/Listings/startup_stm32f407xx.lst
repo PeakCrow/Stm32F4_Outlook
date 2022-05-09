@@ -870,10 +870,12 @@ ARM Macro Assembler    Page 14
               00000000 
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=..\obj\startup_stm32f407xx.d -o..\obj\startup_stm32f407xx.o 
--ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\
-Device\ST\STM32F4xx\Include --predefine="__MICROLIB SETA 1" --predefine="__UVIS
-ION_VERSION SETA 536" --predefine="STM32F407xx SETA 1" --list=.\listings\startu
-p_stm32f407xx.lst ..\Core\startup_stm32f407xx.s
+-I.\RTE\Compiler -I.\RTE\_xian -ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_
+Compiler\1.7.0\Include -ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DF
+P\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__MICROLIB SETA
+ 1" --predefine="__UVISION_VERSION SETA 536" --predefine="_RTE_ SETA 1" --prede
+fine="STM32F407xx SETA 1" --predefine="_RTE_ SETA 1" --list=.\listings\startup_
+stm32f407xx.lst ..\Core\startup_stm32f407xx.s
 
 
 
@@ -1958,4 +1960,4 @@ Symbol: __main
       At line 192 in file ..\Core\startup_stm32f407xx.s
 Comment: __main used once
 2 symbols
-444 symbols in table
+445 symbols in table

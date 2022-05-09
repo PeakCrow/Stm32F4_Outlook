@@ -184,6 +184,11 @@
           <AccSizeX>0</AccSizeX>
         </Mm>
       </MemoryWindow1>
+      <ScvdPack>
+        <Filename>D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\EventRecorder.scvd</Filename>
+        <Type>Keil.ARM_Compiler.1.7.0</Type>
+        <SubType>1</SubType>
+      </ScvdPack>
       <Tracepoint>
         <THDelay>0</THDelay>
       </Tracepoint>
@@ -377,8 +382,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SYSTEM\flash\bsp_spi_flash_demo.c</PathWithFileName>
-      <FilenameWithoutPath>bsp_spi_flash_demo.c</FilenameWithoutPath>
+      <PathWithFileName>..\SYSTEM\iic\bsp_iic_bus.c</PathWithFileName>
+      <FilenameWithoutPath>bsp_iic_bus.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -389,8 +394,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\SYSTEM\iic\bsp_iic_bus.c</PathWithFileName>
-      <FilenameWithoutPath>bsp_iic_bus.c</FilenameWithoutPath>
+      <PathWithFileName>..\SYSTEM\ink_screen\waveshare_inkscreen.c</PathWithFileName>
+      <FilenameWithoutPath>waveshare_inkscreen.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -674,6 +679,14 @@
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
+  </Group>
+
+  <Group>
+    <GroupName>::Compiler</GroupName>
+    <tvExp>1</tvExp>
+    <tvExpOptDlg>0</tvExpOptDlg>
+    <cbSel>0</cbSel>
+    <RteFlg>1</RteFlg>
   </Group>
 
 </ProjectOpt>

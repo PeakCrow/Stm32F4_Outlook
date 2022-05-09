@@ -63,15 +63,15 @@ void sf_SetCS(uint8_t _Level)
 {
 	if (_Level == 0)
 	{
-		bsp_SpiBusEnter();	
+		bsp_Spi1BusEnter();	
 		/* 最高速写flash会出错，所以这里使用次高速 */
-		bsp_InitSPIParam(SPI_BAUDRATEPRESCALER_21M, SPI_PHASE_2EDGE, SPI_POLARITY_HIGH);
+		bsp_InitSPI1Param(SPI_BAUDRATEPRESCALER_21M, SPI_PHASE_2EDGE, SPI_POLARITY_HIGH);
 		SF_CS_0();
 	}
 	else
 	{		
 		SF_CS_1();	
-		bsp_SpiBusExit();		
+		bsp_Spi1BusExit();		
 	}
 }
 
@@ -89,7 +89,7 @@ void sf_WriteEnable(void)
 	sf_SetCS(0);									/* 使能片选 */
 	g_spiLen = 0;
 	g_spiTxBuf[g_spiLen++] = (CMD_WREN);			/* 发送命令 */
-	bsp_spiTransfer();
+	bsp_spi1Transfer();
 	sf_SetCS(1);									/* 禁能片选 */
 }
 /*
@@ -105,7 +105,7 @@ static void sf_WaitForWriteEnd(void)
 	sf_SetCS(0);									/* 使能片选 */
 	g_spiTxBuf[0] = (CMD_RDSR);						/* 发送命令， 读状态寄存器 */
 	g_spiLen = 2;
-	bsp_spiTransfer();	
+	bsp_spi1Transfer();	
 	sf_SetCS(1);									/* 禁能片选 */
 	
 	while(1)
@@ -114,7 +114,7 @@ static void sf_WaitForWriteEnd(void)
 		g_spiTxBuf[0] = (CMD_RDSR);					/* 发送命令， 读状态寄存器 */
 		g_spiTxBuf[1] = 0;							/* 无关数据 */
 		g_spiLen = 2;
-		bsp_spiTransfer();	
+		bsp_spi1Transfer();	
 		sf_SetCS(1);								/* 禁能片选 */
 		/* 发送读状态器指令后,判断接收到字节的第0位是否为0 */
 		/* 0代表该设备已准备好进一步的指示(通过查数据手册得知) */
@@ -199,7 +199,7 @@ uint32_t sf_ReadID(void)
 	g_spiLen = 0;
 	g_spiTxBuf[0] = (CMD_RDID);				/* 发送读ID命令 */
 	g_spiLen = 4;
-	bsp_spiTransfer();
+	bsp_spi1Transfer();
 	
 	id1 = g_spiRxBuf[1];					/* 读ID的第1个字节 */
 	id2 = g_spiRxBuf[2];					/* 读ID的第2个字节 */
@@ -227,7 +227,7 @@ void sf_EraseChip(void)
 	sf_SetCS(0);		/* 使能片选 */
 	g_spiLen = 0;
 	g_spiTxBuf[g_spiLen++] = CMD_BE;				/* 发送整片擦除命令 */
-	bsp_spiTransfer();
+	bsp_spi1Transfer();
 	sf_SetCS(1);									/* 禁能片选 */
 
 	sf_WaitForWriteEnd();							/* 等待串行Flash内部写操作完成 */
@@ -332,13 +332,13 @@ static uint8_t sf_CmpData(uint32_t _uiSrcAddr, uint8_t * _ucpTar, uint32_t _uiSi
 	g_spiTxBuf[g_spiLen++] = ((_uiSrcAddr & 0xff0000) >> 16);
 	g_spiTxBuf[g_spiLen++] = ((_uiSrcAddr & 0xff00) >> 8);
 	g_spiTxBuf[g_spiLen++] = (_uiSrcAddr & 0xff);
-	bsp_spiTransfer();
+	bsp_spi1Transfer();
 
 	/* 开始读数据，应为底层DMA缓冲区有限，必须分包读 */
 	for (i = 0; i < _uiSize / SPI_BUFFER_SIZE; ++i)
 		{
 			g_spiLen = SPI_BUFFER_SIZE;
-			bsp_spiTransfer();
+			bsp_spi1Transfer();
 
 			for (j = 0; j < SPI_BUFFER_SIZE; ++j)
 				{
@@ -352,7 +352,7 @@ static uint8_t sf_CmpData(uint32_t _uiSrcAddr, uint8_t * _ucpTar, uint32_t _uiSi
 	if (rem > 0)
 		{
 			g_spiLen = rem;
-			bsp_spiTransfer();
+			bsp_spi1Transfer();
 
 			for (j = 0; j < rem; ++j)
 				{
@@ -398,13 +398,13 @@ void sf_ReadBuffer(uint8_t * _pBuf, uint32_t _uiReadAddr, uint32_t _uiSize)
 	g_spiTxBuf[g_spiLen++] = ((_uiReadAddr & 0xff0000) >> 16);	/* 发送扇区地址的高8bit */
 	g_spiTxBuf[g_spiLen++] = ((_uiReadAddr & 0xff00) >> 8);		/* 发送扇区地址的中8bit */
 	g_spiTxBuf[g_spiLen++] = (_uiReadAddr & 0xff);				/* 发送扇区地址低8bit */
-	bsp_spiTransfer();			/* 第一次发送0x03 */
+	bsp_spi1Transfer();			/* 第一次发送0x03 */
 
 	/* 开始读数据，因为底层DMA缓冲区有限，必须分包读 */
 	for (i = 0; i < _uiSize / SPI_BUFFER_SIZE; ++i)
 		{
 			g_spiLen = SPI_BUFFER_SIZE;							/* 每次读取4k大小的扇区 */
-			bsp_spiTransfer();	/* 第二次发送0x03 */
+			bsp_spi1Transfer();	/* 第二次发送0x03 */
 			/* 从存储区g_spiRxBuf复制SPI_BUFFER_SIZE个字节到_pBuf */
 			/* 返回一个指向_pBuf存储区的指针 */
 			memcpy(_pBuf, g_spiRxBuf,SPI_BUFFER_SIZE);
@@ -415,7 +415,7 @@ void sf_ReadBuffer(uint8_t * _pBuf, uint32_t _uiReadAddr, uint32_t _uiSize)
 	if (rem > 0)
 		{
 			g_spiLen = rem;
-			bsp_spiTransfer();
+			bsp_spi1Transfer();
 			memcpy(_pBuf,g_spiRxBuf,rem);		/* 将多余的字节再次进行复制 */
 		}
 	sf_SetCS(1);								/* 禁止片选 */
@@ -658,7 +658,7 @@ void sf_PageWrite(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint16_t _usSize)
 			g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff));			/*发送扇区地址低8bit */
 			g_spiTxBuf[g_spiLen++] = (*_pBuf++);						/* 发送第一个数据 */
 			g_spiTxBuf[g_spiLen++] = (*_pBuf++);						/* 发送第2个数据 */
-			bsp_spiTransfer();
+			bsp_spi1Transfer();
 			sf_SetCS(0);			/* 禁止片选 */
 
 			sf_WaitForWriteEnd();	/* 等待串行flash内部写操作完成 */
@@ -672,7 +672,7 @@ void sf_PageWrite(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint16_t _usSize)
 					g_spiTxBuf[g_spiLen++] = (CMD_AAI);
 					g_spiTxBuf[g_spiLen++] = (*_pBuf++);
 					g_spiTxBuf[g_spiLen++] = (*_pBuf++);
-					bsp_spiTransfer();
+					bsp_spi1Transfer();
 					sf_SetCS(1);	/* 禁止片选 */
 					sf_WaitForWriteEnd();/* 等待串行flash内部操作完成 */
 				}
@@ -681,7 +681,7 @@ void sf_PageWrite(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint16_t _usSize)
 			sf_SetCS(0);
 			g_spiLen = 0;
 			g_spiTxBuf[g_spiLen++] = (CMD_DISWR);
-			bsp_spiTransfer();
+			bsp_spi1Transfer();
 			sf_SetCS(1);
 
 			sf_WaitForWriteEnd();
@@ -702,7 +702,7 @@ void sf_PageWrite(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint16_t _usSize)
 						{
 							g_spiTxBuf[g_spiLen++] = (*_pBuf++);			/* 发送数据 */
 						}
-					bsp_spiTransfer();
+					bsp_spi1Transfer();
 					sf_SetCS(1);		/* 禁止片选 */
 
 					sf_WaitForWriteEnd();/* 等待串行flash内部操作完成 */
@@ -713,7 +713,7 @@ void sf_PageWrite(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint16_t _usSize)
 			sf_SetCS(0);
 			g_spiLen = 0;
 			g_spiTxBuf[g_spiLen++] = (CMD_DISWR);
-			bsp_spiTransfer();
+			bsp_spi1Transfer();
 			sf_SetCS(1);
 
 			sf_WaitForWriteEnd();		/* 等待串行flash内部操作完成 */
@@ -741,7 +741,7 @@ void sf_EraseSector(uint32_t _uiSectorAddr)
 	g_spiTxBuf[g_spiLen++] = ((_uiSectorAddr & 0xf0000) >> 16);
 	g_spiTxBuf[g_spiLen++] = ((_uiSectorAddr & 0xff00) >> 8);
 	g_spiTxBuf[g_spiLen++] = (_uiSectorAddr & 0xff);
-	bsp_spiTransfer();
+	bsp_spi1Transfer();
 	sf_SetCS(1);			/* 禁止片选 */
 
 	sf_WaitForWriteEnd();	/* 等待串行flash内部操作完成 */

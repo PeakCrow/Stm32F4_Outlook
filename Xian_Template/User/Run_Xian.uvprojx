@@ -201,7 +201,7 @@
             <NoZi2>0</NoZi2>
             <NoZi3>0</NoZi3>
             <NoZi4>0</NoZi4>
-            <NoZi5>0</NoZi5>
+            <NoZi5>1</NoZi5>
             <Ro1Chk>0</Ro1Chk>
             <Ro2Chk>0</Ro2Chk>
             <Ro3Chk>0</Ro3Chk>
@@ -301,11 +301,11 @@
               <OCR_RVCT9>
                 <Type>0</Type>
                 <StartAddress>0x20000000</StartAddress>
-                <Size>0x20000</Size>
+                <Size>0x10000</Size>
               </OCR_RVCT9>
               <OCR_RVCT10>
                 <Type>0</Type>
-                <StartAddress>0x10000000</StartAddress>
+                <StartAddress>0x20010000</StartAddress>
                 <Size>0x10000</Size>
               </OCR_RVCT10>
             </OnChipMemories>
@@ -339,7 +339,7 @@
               <MiscControls>--diag_suppress=870</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Core;..\Obj;..\User;..\SYSTEM\sys;..\HAL_lib\Inc;..\HAL_lib\STM32F4xx_HAL_Driver\Inc;..\HAL_lib\CMSIS\Include;..\HAL_lib\STM32F4xx_HAL_Driver\Src;.\stm32f4_main;..\SYSTEM\ticktim;..\SYSTEM\usart_fifo;..\SYSTEM\key_fifo;..\SYSTEM\spi;..\SYSTEM\flash;..\SYSTEM\iic</IncludePath>
+              <IncludePath>..\Core;..\Obj;..\User;..\SYSTEM\sys;..\HAL_lib\Inc;..\HAL_lib\STM32F4xx_HAL_Driver\Inc;..\HAL_lib\CMSIS\Include;..\HAL_lib\STM32F4xx_HAL_Driver\Src;.\stm32f4_main;..\SYSTEM\ticktim;..\SYSTEM\usart_fifo;..\SYSTEM\key_fifo;..\SYSTEM\spi;..\SYSTEM\flash;..\SYSTEM\iic;..\SYSTEM\ink_screen</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -439,14 +439,14 @@
               <FilePath>..\SYSTEM\flash\bsp_spi_flash.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_spi_flash_demo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\flash\bsp_spi_flash_demo.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_iic_bus.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\iic\bsp_iic_bus.c</FilePath>
+            </File>
+            <File>
+              <FileName>waveshare_inkscreen.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\waveshare_inkscreen.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -570,19 +570,41 @@
             </File>
           </Files>
         </Group>
+        <Group>
+          <GroupName>::Compiler</GroupName>
+        </Group>
       </Groups>
     </Target>
   </Targets>
 
   <RTE>
     <apis/>
-    <components/>
+    <components>
+      <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="Keil" Cversion="1.5.0" condition="Cortex-M Device">
+        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.7.0"/>
+        <targetInfos>
+          <targetInfo name="xian">
+            <mem>
+              <RVCTZI>5</RVCTZI>
+            </mem>
+          </targetInfo>
+        </targetInfos>
+      </component>
+      <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="I/O" Csub="STDOUT" Cvariant="EVR" Cvendor="Keil" Cversion="1.2.0" condition="ARMCC Cortex-M with EVR">
+        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.7.0"/>
+        <targetInfos>
+          <targetInfo name="xian"/>
+        </targetInfos>
+      </component>
+    </components>
     <files>
       <file attr="config" category="header" name="Config\EventRecorderConf.h" version="1.1.0">
-        <instance index="0" removed="1">RTE\Compiler\EventRecorderConf.h</instance>
+        <instance index="0">RTE\Compiler\EventRecorderConf.h</instance>
         <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="Keil" Cversion="1.5.0" condition="Cortex-M Device"/>
         <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.7.0"/>
-        <targetInfos/>
+        <targetInfos>
+          <targetInfo name="xian"/>
+        </targetInfos>
       </file>
     </files>
   </RTE>

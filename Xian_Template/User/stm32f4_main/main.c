@@ -38,13 +38,13 @@
 *******************************************************************************/
 int main(void)
 {
-	uint8_t ucKeyCode;		/* 按键代码 */
+	uint8_t ucKeyCode;							/* 按键代码 */
 	HAL_Init();                    	 			/* 初始化HAL库 */   
 	Stm32_Clock_Init(336,8,2,7);   				/* 设置时钟,168Mhz */
 	bsp_InitTimer();							/* 初始化滴答定时器 */
 	bsp_InitUart();								/* 初始化串口1外设 */
 	bsp_InitKey();
-	bsp_InitSPIBus();							/* SPI总线初始化 */
+	bsp_InitSPI1Bus();							/* SPI总线初始化 */
 	bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
 	bsp_I2C_EE_Init();							/* 初始化IIC1总线(包含AT24C02芯片) */
 #if	DEBUG_SWITCH_EN == 1
