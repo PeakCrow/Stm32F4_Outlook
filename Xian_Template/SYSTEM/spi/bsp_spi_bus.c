@@ -176,7 +176,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 //	printf("引脚初始化");
 	/* 配置SPI总线GPIO:SCK MOSI MISO */
 	/* 此外还有片选信号 */
-	if(_hspi == &hspi)
+	if(_hspi->Instance == SPIx)
 		{
 			GPIO_InitTypeDef	gpio_initstruct;
 			
@@ -204,7 +204,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 			gpio_initstruct.Alternate	= SPIx_MOSI_AF;
 			HAL_GPIO_Init(SPIx_MOSI_GPIO,&gpio_initstruct);
 		}
-	else if(_hspi == &ink_spi)
+	else if(_hspi->Instance == SPIx_INK)
 		{
 			GPIO_InitTypeDef gpio_initstruct;
 
@@ -463,14 +463,33 @@ void SPIx_IRQHandler(void)
 
 #endif
 
-
-
-void bsp_spi2Transfer(void)
+/*******************************************************************************
+  * @FunctionName: bsp_InitSPI2Bus
+  * @Author:       trx
+  * @DateTime:     2022年5月10日 18:01:58 
+  * @Purpose:      初始化SPI2，作为墨水屏的通讯
+  * @param:        void
+  * @return:       none
+*******************************************************************************/
+void bsp_InitSPI2Bus(void)
 {
-	
+	/*
+		时钟相位：CPHA = 0，在串行同步时钟的第二个跳变沿(上升或下降)数据被采样
+		时钟极性：CPOL = 0，在串行同步时钟的空闲状态为低电平
+	*/
+	bsp_InitSPI2Param(SPI_APB1_BAUDRATEPRESCALER_164_0625K,SPI_PHASE_1EDGE,SPI_POLARITY_LOW);
 }
 
-
+/*******************************************************************************
+  * @FunctionName: bsp_InitSPI2Param
+  * @Author:       trx
+  * @DateTime:     2022年5月10日 18:03:31 
+  * @Purpose:      spi2通讯总线的外设配置
+  * @param:        _BaudRatePrescaler：分频
+  * @param:        _CLKPhase         ：时钟极性
+  * @param:        _CLKPolarity      ：时钟相位
+  * @return:       none
+*******************************************************************************/
 void bsp_InitSPI2Param(uint32_t _BaudRatePrescaler, uint32_t _CLKPhase, uint32_t _CLKPolarity)
 {
 	/* 设置SPI参数 */
@@ -483,7 +502,7 @@ void bsp_InitSPI2Param(uint32_t _BaudRatePrescaler, uint32_t _CLKPhase, uint32_t
 	ink_spi.Init.FirstBit				= SPI_FIRSTBIT_MSB;				/* 配置数据高位在前 */
 	ink_spi.Init.TIMode					= SPI_TIMODE_DISABLE;			/* 精致TI模式 */
 	ink_spi.Init.CRCCalculation			= SPI_CRCCALCULATION_DISABLE;	/* 禁止CRC校验 */
-	ink_spi.Init.CRCPolynomial			= 7;							/* 禁止CRC后，此配置无效 */
+	ink_spi.Init.CRCPolynomial			= 10;							/* 禁止CRC后，此配置无效 */
 	ink_spi.Init.NSS					= SPI_NSS_SOFT;					/* 配置使用软件方式管理片选引脚 */
 	ink_spi.Init.Mode					= SPI_MODE_MASTER;				/* 配置spi工作在主控模式 */
 
@@ -501,6 +520,25 @@ void bsp_InitSPI2Param(uint32_t _BaudRatePrescaler, uint32_t _CLKPhase, uint32_t
 		}
 
 	__HAL_SPI_ENABLE(&ink_spi);
+}
+
+
+/*******************************************************************************
+  * @FunctionName: bsp_spi2Transfer
+  * @Author:       trx
+  * @DateTime:     2022年5月10日 18:02:31 
+  * @Purpose:      spi2数据发送，墨水屏只接收数据，不反馈数据
+  * @param:        _value；准备发送的字节数据
+  * @return:       none
+*******************************************************************************/
+void bsp_spi2Transfer(uint8_t _value)
+{
+	if (HAL_SPI_Transmit(&ink_spi,&_value,1,1000) != HAL_OK)
+		{
+			printf("Wrong parameters valude: file %s on line %d\r\n",__FILE__,__LINE__);
+		}
+	//printf("%d\r\n",HAL_SPI_Transmit(&ink_spi,&_value,1,1000));
+	//printf("%d\r\n",_value);
 }
 
 

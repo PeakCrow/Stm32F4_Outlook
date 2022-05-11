@@ -21,7 +21,7 @@
 #include "bsp_spi_flash_demo.h"
 #include "bsp_spi_bus.h"
 #include "bsp_iic_bus.h"
-
+#include "EPD_Test.h"
 
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"
@@ -46,6 +46,7 @@ int main(void)
 	bsp_InitKey();
 	bsp_InitSPI1Bus();							/* SPI总线初始化 */
 	bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
+	bsp_InitSPI2Bus();
 	bsp_I2C_EE_Init();							/* 初始化IIC1总线(包含AT24C02芯片) */
 #if	DEBUG_SWITCH_EN == 1
 	EventRecorderInitialize(EventRecordAll, 1U);/* 初始化 EventRecorder 并开启 */
@@ -60,6 +61,7 @@ int main(void)
 				{
 					case KEY_0_DOWN:			/* K1键按下(长按超过1s时，连发按下) */
 						printf("K0键按下\r\n");
+						//EPD_2in9b_V3_test();	/* 微雪墨水屏测试例程，进行了移植，并且显示“真缝合怪” 但是占用太高，高达30k的sram，目前看情况开启*/
 						break;
 					case KEY_0_UP:				/* K1键弹起 */
 						printf("K0键弹起\r\n");

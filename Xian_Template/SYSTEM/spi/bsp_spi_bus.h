@@ -44,7 +44,7 @@ uint8_t bsp_SpiBusBusy(void);
 
 void bsp_InitSPI2Bus(void);
 void bsp_InitSPI2Param(uint32_t _BaudRatePrescaler,uint32_t _CLKPhase,uint32_t _CLKPolarity);
-void bsp_spi2Transfer(void);
+void bsp_spi2Transfer(uint8_t _value);
 
 extern uint8_t g_spiTxBuf[SPI_BUFFER_SIZE];
 extern uint8_t g_spiRxBuf[SPI_BUFFER_SIZE];

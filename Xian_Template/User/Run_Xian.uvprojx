@@ -443,11 +443,6 @@
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\iic\bsp_iic_bus.c</FilePath>
             </File>
-            <File>
-              <FileName>waveshare_inkscreen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\waveshare_inkscreen.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -567,6 +562,76 @@
               <FileName>stm32f4xx_hal_i2c_ex.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c_ex.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>INKSCREEN</GroupName>
+          <Files>
+            <File>
+              <FileName>DEV_Config.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\DEV_Config.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_2in9b_V3.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\EPD_2in9b_V3.c</FilePath>
+            </File>
+            <File>
+              <FileName>EPD_2in9b_V3_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\EPD_2in9b_V3_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>font8.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\font8.c</FilePath>
+            </File>
+            <File>
+              <FileName>font12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\font12.c</FilePath>
+            </File>
+            <File>
+              <FileName>font12CN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\font12CN.c</FilePath>
+            </File>
+            <File>
+              <FileName>font16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\font16.c</FilePath>
+            </File>
+            <File>
+              <FileName>font20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\font20.c</FilePath>
+            </File>
+            <File>
+              <FileName>font24.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\font24.c</FilePath>
+            </File>
+            <File>
+              <FileName>font24CN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\font24CN.c</FilePath>
+            </File>
+            <File>
+              <FileName>GUI_Paint.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\GUI_Paint.c</FilePath>
+            </File>
+            <File>
+              <FileName>ImageData.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\ImageData.c</FilePath>
+            </File>
+            <File>
+              <FileName>ImageData2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ink_screen\ImageData2.c</FilePath>
             </File>
           </Files>
         </Group>
