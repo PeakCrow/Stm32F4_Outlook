@@ -9,7 +9,7 @@ static __IO uint8_t g_ucEnableSystickISR = 0;
 /*滴答定时器定时减小定时器任务的周期数值*/
 static void bsp_SoftTimerDec(SOFT_TIM *_tim);
 /*滴答定时器中断服务程序*/
-static void SysTick_ISR(void);
+void SysTick_ISR(void);
 
 /************************************************
 *Function name	:bsp_InitTimer
@@ -149,7 +149,7 @@ static void bsp_SoftTimerDec(SOFT_TIM *_tim)
 *Author			:trx
 *Date			:2022年4月5日22点08分
 *************************************************/
-static void SysTick_ISR(void)
+void SysTick_ISR(void)
 {
 	static uint8_t s_count10ms = 0,s_count50ms = 0;
 	uint8_t i;
@@ -228,6 +228,8 @@ __weak void bsp_RunPer50ms(void)
             the HAL_FLASH_OperationErrorCallback could be implemented in the user file
    */ 	
 }
+
+#if USE_THREADX == 0
 /************************************************
 *Function name	:bsp_DelayUs
 *Description	:us级延迟。 必须在systick定时器启动后才能调用此函数。
@@ -294,6 +296,9 @@ void bsp_DelayMs(uint32_t n)
 		bsp_DelayUs(1000);
 	}
 }
+
+
+
 /**
   * @brief  This function handles SysTick Handler.
   * @param  None
@@ -307,7 +312,7 @@ void SysTick_Handler(void)
 	}
 	SysTick_ISR();					/*需要在中断中不停的调用的中断服务程序*/	
 }
-
+#endif
 
 int32_t bsp_GetRunTime(void)
 {

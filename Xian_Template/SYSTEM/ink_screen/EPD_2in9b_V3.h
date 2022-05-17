@@ -31,6 +31,7 @@
 #ifndef __EPD_2IN9B_V3_H_
 #define __EPD_2IN9B_V3_H_
 
+#include "sys.h"
 #include "DEV_Config.h"
 
 // Display resolution

@@ -3,7 +3,7 @@
 #include "stdint.h"
 #include "stdio.h"
 #include "stm32f4xx_hal.h"
-
+#include "sys.h"
 /*
 	在此定义若干个软件定时器全局变量
 	注意，必须增加__IO 即 volatile，因为这个变量在中断和主程序中同时被访问，有可能造成编译器错误优化。

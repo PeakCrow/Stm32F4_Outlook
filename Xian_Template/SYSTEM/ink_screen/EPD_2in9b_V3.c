@@ -31,6 +31,7 @@
 #include "EPD_2in9b_V3.h"
 #include "Debug.h"
 
+
 /******************************************************************************
 function :	Software reset
 parameter:

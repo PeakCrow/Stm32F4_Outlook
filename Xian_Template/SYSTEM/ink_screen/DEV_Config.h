@@ -52,7 +52,7 @@
 #include <stdint.h>
 #include <stdio.h>
 #include "bsp_spi_bus.h"
-#include "ticktim.h"
+//#include "ticktim.h"
 
 /* BUSY  PA1 */
 #define	INK_BUSY_CLK_ENABLE()		__HAL_RCC_GPIOA_CLK_ENABLE()
@@ -104,12 +104,14 @@
 /**
  * delay x ms
 **/
-#define DEV_Delay_ms(__xms) bsp_DelayMs(__xms);
+//#define DEV_Delay_ms(__xms) bsp_DelayMs(__xms);
+#define DEV_Delay_ms(__xms) tx_thread_sleep(__xms);
 
 void DEV_SPI_WriteByte(UBYTE value);
 
 int DEV_Module_Init(void);
 void DEV_Module_Exit(void);
+
 #endif
 
 

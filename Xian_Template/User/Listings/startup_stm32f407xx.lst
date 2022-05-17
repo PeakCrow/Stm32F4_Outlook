@@ -874,8 +874,9 @@ interwork --depend=..\obj\startup_stm32f407xx.d -o..\obj\startup_stm32f407xx.o
 Compiler\1.7.0\Include -ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4xx_DF
 P\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__MICROLIB SETA
  1" --predefine="__UVISION_VERSION SETA 536" --predefine="_RTE_ SETA 1" --prede
-fine="STM32F407xx SETA 1" --predefine="_RTE_ SETA 1" --list=.\listings\startup_
-stm32f407xx.lst ..\Core\startup_stm32f407xx.s
+fine="STM32F407xx SETA 1" --predefine="_RTE_ SETA 1" --predefine="TX_ENABLE_FPU
+_SUPPORT SETA 1" --list=.\listings\startup_stm32f407xx.lst ..\Core\startup_stm3
+2f407xx.s
 
 
 
@@ -1960,4 +1961,4 @@ Symbol: __main
       At line 192 in file ..\Core\startup_stm32f407xx.s
 Comment: __main used once
 2 symbols
-445 symbols in table
+446 symbols in table
