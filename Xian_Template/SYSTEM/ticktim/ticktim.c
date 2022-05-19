@@ -1,4 +1,4 @@
-#include "ticktim.h"
+#include "sys.h"
 
 /*全局运行时间，单位1ms,最长可以表示 24.85天，如果你的产品连续运行时间超过这个数，则必须考虑溢出问题*/
 __IO int32_t g_iRunTime = 0;
@@ -45,7 +45,9 @@ void bsp_InitTimer(void)
 
     	对于常规的应用，我们一般取定时周期1ms。对于低速CPU或者低功耗应用，可以设置定时周期为 10ms
     */
+#if USE_THREADX	 == 0
 	SysTick_Config(SystemCoreClock / 1000);
+#endif
 	g_ucEnableSystickISR = 1;	//1表示执行systick中断
 	
 }
@@ -297,10 +299,8 @@ void bsp_DelayMs(uint32_t n)
 	}
 }
 
-
-
 /**
-  * @brief  This function handles SysTick Handler.
+  * @brief  This function handles SysTick Handler.底层中断函数
   * @param  None
   * @retval None
   */
@@ -312,6 +312,7 @@ void SysTick_Handler(void)
 	}
 	SysTick_ISR();					/*需要在中断中不停的调用的中断服务程序*/	
 }
+
 #endif
 
 int32_t bsp_GetRunTime(void)

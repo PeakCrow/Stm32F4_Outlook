@@ -14,11 +14,6 @@
 #include "sys.h"
 
 
-#if	DEBUG_SWITCH_EN == 1
-#include "EventRecorder.h"
-#endif
-
-
 /*
 *********************************************************************************************************
 *                                 任务优先级，数值越小优先级越高
@@ -37,10 +32,10 @@
 *                                    任务栈大小，单位字节
 *********************************************************************************************************
 */
-#define  APP_CFG_TASK_START_STK_SIZE                    4096u
-#define  APP_CFG_TASK_MsgPro_STK_SIZE                   4096u
-#define  APP_CFG_TASK_COM_STK_SIZE                      4096u
-#define  APP_CFG_TASK_USER_IF_STK_SIZE                  4096u
+#define  APP_CFG_TASK_START_STK_SIZE                    1024u
+#define  APP_CFG_TASK_MsgPro_STK_SIZE                   1024u
+#define  APP_CFG_TASK_COM_STK_SIZE                      1024u
+#define  APP_CFG_TASK_USER_IF_STK_SIZE                  1024u
 #define  APP_CFG_TASK_IDLE_STK_SIZE                  	1024u
 #define  APP_CFG_TASK_STAT_STK_SIZE                  	1024u
 
@@ -48,7 +43,7 @@
 *********************************************************************************************************
 *                                       静态全局变量
 *********************************************************************************************************
-*/                                                        
+*/
 static  TX_THREAD   AppTaskStartTCB;
 static  uint64_t    AppTaskStartStk[APP_CFG_TASK_START_STK_SIZE/8];
 
@@ -79,7 +74,7 @@ static  void  AppTaskUserIF         (ULONG thread_input);
 static  void  AppTaskCOM			(ULONG thread_input);
 static  void  AppTaskIDLE			(ULONG thread_input);
 static  void  AppTaskStat			(ULONG thread_input);
-static  void  App_Printf (const char *fmt, ...);
+static  void  App_Printf 			(const char *fmt, ...);
 static  void  AppTaskCreate         (void);
 static  void  DispTaskInfo          (void);
 static  void  AppObjCreate          (void);
@@ -263,7 +258,7 @@ static  void  AppTaskStart (ULONG thread_input)
 
     while (1)
 	{  
-		/* 需要周期性处理的程序，对应裸机工程调用的SysTick_ISR */
+		/* 需要周期性处理的程序，对应裸机工程中宏定义调用的SysTick_ISR */
         bsp_ProPer1ms();
         tx_thread_sleep(1);
     }
@@ -291,7 +286,7 @@ static void AppTaskMsgPro(ULONG thread_input)
 		f_b -= 0.00000000002;
 		App_Printf("AppTaskMsg: f_a = %.11f, f_b = %.11f\r\n", f_a, f_b);
         tx_thread_sleep(500);
-	}   
+	}
 }
 
 /*
@@ -353,7 +348,7 @@ static void AppTaskCOM(ULONG thread_input)
 		App_Printf("AppTaskCom: f_a = %.11f, f_b = %.11f\r\n", f_c, f_d);
         bsp_LedToggle(2);
 		bsp_LedToggle(1);
-        tx_thread_sleep(500);
+        tx_thread_sleep(1000);
 	} 			  	 	       											   
 }
 
@@ -448,41 +443,40 @@ static void AppTaskIDLE(ULONG thread_input)
 static  void  AppTaskCreate (void)
 {
 	/**************创建MsgPro任务*********************/
-    tx_thread_create(&AppTaskMsgProTCB,               /* 任务控制块地址 */    
-                       "App Msp Pro",                 /* 任务名 */
-                       AppTaskMsgPro,                  /* 启动任务函数地址 */
-                       0,                             /* 传递给任务的参数 */
+    tx_thread_create(&AppTaskMsgProTCB,               	/* 任务控制块地址 */    
+                       "App Msp Pro",                 	/* 任务名 */
+                       AppTaskMsgPro,                  	/* 启动任务函数地址 */
+                       0,                            	/* 传递给任务的参数 */
                        &AppTaskMsgProStk[0],            /* 堆栈基地址 */
                        APP_CFG_TASK_MsgPro_STK_SIZE,    /* 堆栈空间大小 */  
                        APP_CFG_TASK_MsgPro_PRIO,        /* 任务优先级*/
                        APP_CFG_TASK_MsgPro_PRIO,        /* 任务抢占阀值 */
-                       TX_NO_TIME_SLICE,               /* 不开启时间片 */
-                       TX_AUTO_START);                /* 创建后立即启动 */
-   
+                       TX_NO_TIME_SLICE,               	/* 不开启时间片 */
+                       TX_AUTO_START);                	/* 创建后立即启动 */
 
 	/**************创建USER IF任务*********************/
-    tx_thread_create(&AppTaskUserIFTCB,               /* 任务控制块地址 */      
-                       "App Task UserIF",              /* 任务名 */
-                       AppTaskUserIF,                  /* 启动任务函数地址 */
-                       0,                              /* 传递给任务的参数 */
+    tx_thread_create(&AppTaskUserIFTCB,               	/* 任务控制块地址 */      
+                       "App Task UserIF",              	/* 任务名 */
+                       AppTaskUserIF,                  	/* 启动任务函数地址 */
+                       0,                              	/* 传递给任务的参数 */
                        &AppTaskUserIFStk[0],            /* 堆栈基地址 */
-                       APP_CFG_TASK_USER_IF_STK_SIZE,  /* 堆栈空间大小 */  
-                       APP_CFG_TASK_USER_IF_PRIO,      /* 任务优先级*/
-                       APP_CFG_TASK_USER_IF_PRIO,      /* 任务抢占阀值 */
-                       TX_NO_TIME_SLICE,               /* 不开启时间片 */
-                       TX_AUTO_START);                 /* 创建后立即启动 */
+                       APP_CFG_TASK_USER_IF_STK_SIZE,  	/* 堆栈空间大小 */  
+                       APP_CFG_TASK_USER_IF_PRIO,      	/* 任务优先级*/
+                       APP_CFG_TASK_USER_IF_PRIO,      	/* 任务抢占阀值 */
+                       TX_NO_TIME_SLICE,               	/* 不开启时间片 */
+                       TX_AUTO_START);                 	/* 创建后立即启动 */
 
 	/**************创建COM任务*********************/
-    tx_thread_create(&AppTaskCOMTCB,               /* 任务控制块地址 */    
-                       "App Task COM",              /* 任务名 */
-                       AppTaskCOM,                  /* 启动任务函数地址 */
-                       0,                           /* 传递给任务的参数 */
-                       &AppTaskCOMStk[0],            /* 堆栈基地址 */
-                       APP_CFG_TASK_COM_STK_SIZE,    /* 堆栈空间大小 */  
-                       APP_CFG_TASK_COM_PRIO,        /* 任务优先级*/
-                       APP_CFG_TASK_COM_PRIO,        /* 任务抢占阀值 */
-                       TX_NO_TIME_SLICE,             /* 不开启时间片 */
-                       TX_AUTO_START);               /* 创建后立即启动 */
+    tx_thread_create(&AppTaskCOMTCB,               		/* 任务控制块地址 */    
+                       "App Task COM",              	/* 任务名 */
+                       AppTaskCOM,                  	/* 启动任务函数地址 */
+                       0,                           	/* 传递给任务的参数 */
+                       &AppTaskCOMStk[0],            	/* 堆栈基地址 */
+                       APP_CFG_TASK_COM_STK_SIZE,    	/* 堆栈空间大小 */  
+                       APP_CFG_TASK_COM_PRIO,        	/* 任务优先级*/
+                       APP_CFG_TASK_COM_PRIO,        	/* 任务抢占阀值 */
+                       TX_NO_TIME_SLICE,             	/* 不开启时间片 */
+                       TX_AUTO_START);               	/* 创建后立即启动 */
 }
 
 /*
@@ -553,7 +547,6 @@ static void DispTaskInfo(void)
 	/* 遍历任务控制块列?TCB list)，打印所有的任务的优先级和名?*/
 	while (p_tcb != (TX_THREAD *)0) 
 	{
-		
 		App_Printf("   %2d        %5d      %5d       %5d      %s\r\n", 
                     p_tcb->tx_thread_priority,
                     p_tcb->tx_thread_stack_size,

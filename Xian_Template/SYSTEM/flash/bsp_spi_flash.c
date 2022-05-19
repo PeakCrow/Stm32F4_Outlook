@@ -11,7 +11,7 @@
   * ------------------------
   * - 2022-4-24  trx Created
 *******************************************************************************/
-#include "bsp_spi_flash.h"
+#include "sys.h"
 
 /* 芯片ID 	0x5217   21015 */
 
@@ -39,17 +39,13 @@
 
 SFLASH_T g_tSF;
 
-#if 0
-static void sf_WriteStatus(uint8_t _ucValue);
-#endif
-
 void sf_WriteEnable(void);
 static void sf_WaitForWriteEnd(void);
 static uint8_t sf_NeedErase(uint8_t * _ucpOldBuf, uint8_t *_ucpNewBuf, uint16_t _usLen);
 static uint8_t sf_CmpData(uint32_t _uiSrcAddr, uint8_t *_ucpTar, uint32_t _uiSize);
 uint8_t sf_AutoWriteSector(uint8_t *_ucpSrc, uint32_t _uiWrAddr, uint16_t _usWrLen);
 
-static uint8_t s_spiBuf[4*1024];	/* 用于写函数，先读出整个扇区，修改缓冲区后，再整个扇区回写 */
+//static uint8_t g_spiTxBuf[4*1024];	/* 用于写函数，先读出整个扇区，修改缓冲区后，再整个扇区回写 */
 
 /*******************************************************************************
   * @FunctionName: sf_SetCS
@@ -457,8 +453,8 @@ uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_t _usWr
 		}
 
 	/* 如果flash中的数据没有变化，则不写flash */
-	sf_ReadBuffer(s_spiBuf,_uiWrAddr,_usWrLen);
-	if (memcmp(s_spiBuf,_ucpSrc,_usWrLen) == 0)
+	sf_ReadBuffer(g_spiTxBuf,_uiWrAddr,_usWrLen);
+	if (memcmp(g_spiTxBuf,_ucpSrc,_usWrLen) == 0)
 		{
 			return 1;
 		}
@@ -466,7 +462,7 @@ uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_t _usWr
 	/* 判断是否需要先擦除扇区 */
 	/* 如果旧数据修改为新数据，所有位均是 1->0 或者 0->0,则无需擦除，提高flash寿命 */
 	ucNeedErase = 0;			/* 0不需要擦除 */
-	if (sf_NeedErase(s_spiBuf,_ucpSrc,_usWrLen))
+	if (sf_NeedErase(g_spiTxBuf,_ucpSrc,_usWrLen))
 		{
 			ucNeedErase = 1;	/* 1需要擦除 */
 		}
@@ -477,17 +473,17 @@ uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_t _usWr
 		{
 			for (i = 0; i < g_tSF.SectorSize; ++i)
 				{
-					s_spiBuf[i] = _ucpSrc[i];
+					g_spiTxBuf[i] = _ucpSrc[i];
 				}
 		}
 	else									/* 改写部分数据 */
 	{
 		/* 先将整个扇区的数据读出 */
-		sf_ReadBuffer(s_spiBuf,uiFirstAddr,g_tSF.SectorSize);
+		sf_ReadBuffer(g_spiTxBuf,uiFirstAddr,g_tSF.SectorSize);
 
 		/* 再用新数据覆盖 */
 		i = _uiWrAddr & (g_tSF.SectorSize - 1);
-		memcpy(&s_spiBuf[i],_ucpSrc,_usWrLen);
+		memcpy(&g_spiTxBuf[i],_ucpSrc,_usWrLen);
 	}
 
 	/* 写完之后进行校验，如果不正确则重写，最多3次 */
@@ -501,7 +497,7 @@ uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_t _usWr
 				}
 
 			/* 编程一个扇区 */
-			sf_PageWrite(s_spiBuf,uiFirstAddr,g_tSF.SectorSize);
+			sf_PageWrite(g_spiTxBuf,uiFirstAddr,g_tSF.SectorSize);
 			
 			if (sf_CmpData(_uiWrAddr,_ucpSrc,_usWrLen) == 0)
 				{
