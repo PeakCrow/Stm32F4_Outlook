@@ -37,7 +37,7 @@
 */
 void bsp_InitDWT(void)
 {
-	DEM_CR         |= (unsigned int)DEM_CR_TRCENA;   
+	DEM_CR         |= (unsigned int)DEM_CR_TRCENA;
 	DWT_CYCCNT      = (unsigned int)0u;
 	DWT_CR         |= (unsigned int)DWT_CR_CYCCNTENA;
 }

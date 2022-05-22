@@ -246,9 +246,10 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_InitKey();
 	bsp_InitSPI1Bus();							/* SPI总线初始化 */
 	bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
-	bsp_InitSPI2Bus();
-	bsp_I2C_EE_Init();
-	bsp_InitLed();
+	bsp_InitSPI2Bus();							/* 初始化SPI2总线，用来驱动墨水屏 */
+	bsp_I2C_EE_Init();							/* 初始化IIC总线，并且驱动eeprom芯片 */
+	bsp_InitLed();								/* 初始化板载LED灯 */
+	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
 	
 	/* 创建任务 */
     AppTaskCreate(); 
@@ -315,7 +316,10 @@ static void AppTaskUserIF(ULONG thread_input)
 				case KEY_0_DOWN:			  /* K1键按打印任务执行情况 */
 					 DispTaskInfo();
 					break;
-				
+				case KEY_UP_DOWN:
+					printf("can state : %d ",bsp_Can1_Send_buf(0x1234,8));
+					printf("can发送\r\n");
+					break;
 				default:                     /* 其他的键值不处理 */
 					break;
 			}
@@ -367,16 +371,16 @@ void  OSStatInit (void)
 	
     tx_thread_sleep(2u);        /* 时钟同步 */
 	
-    //__disable_irq();
+    __disable_irq();
     OSIdleCtr    = 0uL;         /* 清空闲计数 */
-	//__enable_irq();
+	__enable_irq();
 	
     tx_thread_sleep(100);       /* 统计100ms内，最大空闲计数 */
 	
-   	//__disable_irq();
+   	__disable_irq();
     OSIdleCtrMax = OSIdleCtr;   /* 保存最大空闲计数 */
     OSStatRdy    = TRUE;
-	//__enable_irq();
+	__enable_irq();
 }
 
 static void AppTaskStat(ULONG thread_input)
@@ -394,16 +398,16 @@ static void AppTaskStat(ULONG thread_input)
         OSCPUUsage = 0u;
     }
 	
-    //__disable_irq();
+    __disable_irq();
     OSIdleCtr = OSIdleCtrMax * 100uL;  /* 设置初始CPU利用率 0% */
-	//__enable_irq();
+	__enable_irq();
 	
     for (;;) 
 	{
-       // __disable_irq();
+        __disable_irq();
         OSIdleCtrRun = OSIdleCtr;    /* 获得100ms内空闲计数 */
         OSIdleCtr    = 0uL;          /* 复位空闲计数 */
-       //	__enable_irq();            /* 计算100ms内的CPU利用率 */
+        __enable_irq();            /* 计算100ms内的CPU利用率 */
         OSCPUUsage   = (100uL - (float)OSIdleCtrRun / OSIdleCtrMax);
         tx_thread_sleep(100);        /* 每100ms统计一次 */
     }
@@ -429,7 +433,7 @@ static void AppTaskIDLE(ULONG thread_input)
 	   TX_DISABLE
        OSIdleCtr++;
 	   TX_RESTORE
-  }			  	 	       											   
+  }
 }
 
 /*
