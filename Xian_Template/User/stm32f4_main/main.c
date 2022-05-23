@@ -302,7 +302,7 @@ static void AppTaskMsgPro(ULONG thread_input)
 static void AppTaskUserIF(ULONG thread_input)
 {
 	uint8_t ucKeyCode;	/* 按键代码 */
-	
+	uint8_t buf[8] = {0x99,0x22,0x33,0x44,0x55,0x66,0x77,0x88};
 	(void)thread_input;
 		  
 	while(1)
@@ -317,7 +317,7 @@ static void AppTaskUserIF(ULONG thread_input)
 					 DispTaskInfo();
 					break;
 				case KEY_UP_DOWN:
-					printf("can state : %d ",bsp_Can1_Send_buf(0x1234,8));
+					printf("can state : %d ",bsp_Can1_Send_buf(0x144234,buf,8));
 					printf("can发送\r\n");
 					break;
 				default:                     /* 其他的键值不处理 */

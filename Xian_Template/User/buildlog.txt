@@ -1,153 +1,20 @@
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'xian'
-compiling stm32f4xx_it.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-stm32f4_main\stm32f4xx_it.c: 0 warnings, 1 error
-compiling system_stm32f4xx.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-stm32f4_main\system_stm32f4xx.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_msp.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-stm32f4_main\stm32f4xx_hal_msp.c: 0 warnings, 1 error
-compiling main.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-stm32f4_main\main.c: 0 warnings, 1 error
 compiling sys.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\sys\sys.c: 0 warnings, 1 error
-compiling ticktim.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\ticktim\ticktim.c: 0 warnings, 1 error
-compiling bsp_usart_fifo.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\usart_fifo\bsp_usart_fifo.c: 0 warnings, 1 error
-compiling bsp_spi_bus.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\spi\bsp_spi_bus.c: 0 warnings, 1 error
-compiling bsp_key.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\key_fifo\bsp_key.c: 0 warnings, 1 error
 compiling bsp_spi_flash.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\flash\bsp_spi_flash.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_timebase_tim.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\ticktim\stm32f4xx_hal_timebase_tim.c: 0 warnings, 1 error
-compiling bsp_iic_bus.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\iic\bsp_iic_bus.c: 0 warnings, 1 error
-compiling bsp_dwt.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\ticktim\bsp_dwt.c: 0 warnings, 1 error
+compiling bsp_key.c...
+compiling bsp_usart_fifo.c...
+compiling ticktim.c...
+compiling main.c...
 compiling bsp_led.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\led\bsp_led.c: 0 warnings, 1 error
-compiling stm32f4xx_hal.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_crc.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_crc.c: 0 warnings, 1 error
+compiling stm32f4xx_hal_timebase_tim.c...
 compiling bsp_can_bus.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\can\bsp_can_bus.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_cortex.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_eth.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_eth.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_dma.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_pwr_ex.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_gpio.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_pwr.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_uart.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_usart.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_usart.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_dma_ex.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_spi.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_rcc.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_rcc_ex.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_i2c.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_can.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\Legacy\stm32f4xx_hal_can.c: 0 warnings, 1 error
-compiling stm32f4xx_hal_i2c_ex.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c_ex.c: 0 warnings, 1 error
-compiling DEV_Config.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\ink_screen\DEV_Config.c: 0 warnings, 1 error
-compiling EPD_2in9b_V3_test.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\ink_screen\EPD_2in9b_V3_test.c: 0 warnings, 1 error
+compiling bsp_dwt.c...
+compiling bsp_iic_bus.c...
 compiling EPD_2in9b_V3.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\ink_screen\EPD_2in9b_V3.c: 0 warnings, 1 error
-compiling GUI_Paint.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-..\SYSTEM\ink_screen\GUI_Paint.c: 0 warnings, 1 error
-compiling EventRecorder.c...
-.\stm32f4_main\stm32f4xx_hal_conf.h(248): error:  #5: cannot open source input file "stm32f4xx_hal_can_legacy.h": No such file or directory
-    #include "stm32f4xx_hal_can_legacy.h"
-D:\Users\TRX\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.7.0\Source\EventRecorder.c: 0 warnings, 1 error
-"..\Obj\Run_Xian.axf" - 37 Error(s), 0 Warning(s).
-Target not created.
-Build Time Elapsed:  00:00:31
+compiling EPD_2in9b_V3_test.c...
+linking...
+Program Size: Code=26760 RO-data=564 RW-data=320 ZI-data=24956  
+FromELF: creating hex file...
+"..\Obj\Run_Xian.axf" - 0 Error(s), 0 Warning(s).
+Build Time Elapsed:  00:00:24

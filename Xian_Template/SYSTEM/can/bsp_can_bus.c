@@ -2,8 +2,8 @@
 
 /* 使用最新的hal库提供的can外设文件 */
 CAN_HandleTypeDef hCAN;
-static CanRxMsgTypeDef        RxMessage;
-static CanTxMsgTypeDef can_tx_msg;
+//static CanRxMsgTypeDef        RxMessage;
+//static CanTxMsgTypeDef can_tx_msg;
 /*******************************************************************************
   * @FunctionName: bsp_InitCan1Bus
   * @Author:       trx
@@ -14,28 +14,27 @@ static CanTxMsgTypeDef can_tx_msg;
 *******************************************************************************/
 void bsp_InitCan1Bus(void)
 {
-	CAN_FilterConfTypeDef  sFilterConfig;
+	CAN_FilterTypeDef  sFilterConfig;
 	
 	/*CAN单元初始化*/
 	hCAN.Instance = CANx_BUS_1;			  /* CAN外设 */
-	hCAN.pTxMsg = &can_tx_msg;
-	hCAN.pRxMsg = &RxMessage;
+//	hCAN.pTxMsg = &can_tx_msg;
+//	hCAN.pRxMsg = &RxMessage;
 	
 	hCAN.Init.Prescaler = 3;		  /* BTR-BRP 波特率分频器  定义了时间单元的时间长度 42/(1+6+7)/3=1Mbps */
 	hCAN.Init.Mode = CAN_MODE_NORMAL; /* 正常工作模式 */
-	hCAN.Init.SJW = CAN_SJW_1TQ;	  /* BTR-SJW 重新同步跳跃宽度 1个时间单元 */
-	hCAN.Init.BS1 = CAN_BS1_6TQ;	  /* BTR-TS1 时间段1 占用了6个时间单元 */
-	hCAN.Init.BS2 = CAN_BS2_7TQ;	  /* BTR-TS1 时间段2 占用了7个时间单元 */
-	hCAN.Init.TTCM = DISABLE;		  /* MCR-TTCM  关闭时间触发通信模式使能 */
-	hCAN.Init.ABOM = ENABLE;		  /* MCR-ABOM  自动离线管理 */
-	hCAN.Init.AWUM = ENABLE;		  /* MCR-AWUM  使用自动唤醒模式 */
-	hCAN.Init.NART = DISABLE;		  /* MCR-NART  禁止报文自动重传 	DISABLE-自动重传 */
-	hCAN.Init.RFLM = DISABLE;		  /* MCR-RFLM  接收FIFO 锁定模式	DISABLE-溢出时新报文会覆盖原有报文 */
-	hCAN.Init.TXFP = DISABLE;		  /* MCR-TXFP  发送FIFO优先级 DISABLE-优先级取决于报文标示符 */
+	hCAN.Init.SyncJumpWidth = CAN_SJW_1TQ;	  /* BTR-SJW 重新同步跳跃宽度 1个时间单元 */
+	hCAN.Init.TimeSeg1 = CAN_BS1_6TQ;	  /* BTR-TS1 时间段1 占用了6个时间单元 */
+	hCAN.Init.TimeSeg2 = CAN_BS2_7TQ;	  /* BTR-TS1 时间段2 占用了7个时间单元 */
+	hCAN.Init.TimeTriggeredMode = DISABLE;		  /* MCR-TTCM  关闭时间触发通信模式使能 */
+	hCAN.Init.AutoBusOff = ENABLE;		  /* MCR-ABOM  自动离线管理 */
+	hCAN.Init.AutoWakeUp = ENABLE;		  /* MCR-AWUM  使用自动唤醒模式 */
+	hCAN.Init.AutoRetransmission = DISABLE;		  /* MCR-NART  禁止报文自动重传 	DISABLE-自动重传 */
+	hCAN.Init.ReceiveFifoLocked = DISABLE;		  /* MCR-RFLM  接收FIFO 锁定模式	DISABLE-溢出时新报文会覆盖原有报文 */
+	hCAN.Init.TransmitFifoPriority = DISABLE;		  /* MCR-TXFP  发送FIFO优先级 DISABLE-优先级取决于报文标示符 */
 	HAL_CAN_Init(&hCAN);
 	
 	/*CAN过滤器初始化*/
-	sFilterConfig.FilterNumber = 0; 				   /* 过滤器组0 */
 	sFilterConfig.FilterMode = CAN_FILTERMODE_IDMASK;  /* 工作在标识符屏蔽位模式 */
 	sFilterConfig.FilterScale = CAN_FILTERSCALE_32BIT; /* 过滤器位宽为单个32位。*/
 	  /* 使能报文标识符过滤器按照标识符的内容进行对比过滤，扩展ID不是如下的旧抛弃掉，是的话，会存入FIFO0 */
@@ -47,10 +46,10 @@ void bsp_InitCan1Bus(void)
 	sFilterConfig.FilterMaskIdLow	   = 0xFFFF;		  /* 过滤器低16位每位必须匹配 */
 	sFilterConfig.FilterFIFOAssignment = 0; 		  /* 过滤器被关联到FIFO 0 */
 	sFilterConfig.FilterActivation = ENABLE;		  /* 使能过滤器 */ 
-	sFilterConfig.BankNumber = 14;
+	sFilterConfig.FilterBank = 14;
 	HAL_CAN_ConfigFilter(&hCAN, &sFilterConfig);
 
-	
+	HAL_CAN_Start(&hCAN);
 }
 
 
@@ -81,9 +80,9 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef * hcan)
 }
 
 
-HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id,uint8_t _dlc)
+HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id,uint8_t _buf[],uint8_t _dlc)
 {
-	uint8_t buf[8] = {0x11,0x22,0x33,0x44,0x55,0x66,0x77,0x88};
+	CAN_TxHeaderTypeDef can_tx_msg;
 	if(IS_CAN_STDID(_id))
 		{
 			can_tx_msg.StdId = _id;			
@@ -97,9 +96,12 @@ HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id,uint8_t _dlc)
 		//return HAL_ERROR;
 	can_tx_msg.DLC = _dlc;
 	can_tx_msg.RTR = CAN_RTR_DATA;			/* 默认都是数据帧 */
-	for(int i = 0;i < 8;i++)
-		can_tx_msg.Data[i] = buf[i];
-	HAL_CAN_Transmit(&hCAN,10);
+	can_tx_msg.TransmitGlobalTime = DISABLE;
+//	for(int i = 0;i < 8;i++)
+//		can_tx_msg.Data[i] = buf[i];
+//	HAL_CAN_Transmit(&hCAN,10);
+	HAL_CAN_AddTxMessage(&hCAN,&can_tx_msg,_buf,(uint32_t*)CAN_TX_MAILBOX0);
+
 		return HAL_OK;
 }
 

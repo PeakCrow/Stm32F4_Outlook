@@ -18,7 +18,7 @@
 #define CANx_RX_IRQn                   CAN1_RX0_IRQn
 
 void bsp_InitCan1Bus(void);
-HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id, uint8_t _dlc);
+HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id,uint8_t _buf[], uint8_t _dlc);
 
 #endif
 
