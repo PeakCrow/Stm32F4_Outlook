@@ -78,7 +78,7 @@ static  void  App_Printf 			(const char *fmt, ...);
 static  void  AppTaskCreate         (void);
 static  void  DispTaskInfo          (void);
 static  void  AppObjCreate          (void);
-static  void  OSStatInit (void);
+static  void  OSStatInit 			(void);
 
 /*
 *******************************************************************************************************
@@ -89,11 +89,11 @@ static  TX_MUTEX   AppPrintfSemp;	/* 用于printf互斥 */
 
 
 /* 统计任务使用 */
-__IO uint8_t   OSStatRdy;        /* 统计任务就绪标志 */
-__IO uint32_t  OSIdleCtr;        /* 空闲任务计数 */
-__IO float     OSCPUUsage;       /* CPU百分比 */
-uint32_t       OSIdleCtrMax;     /* 1秒内最大的空闲计数 */
-uint32_t       OSIdleCtrRun;     /* 1秒内空闲任务当前计数 */
+__IO uint8_t   OSStatRdy;      		/* 统计任务就绪标志 */
+__IO uint32_t  OSIdleCtr;     	    /* 空闲任务计数 */
+__IO float     OSCPUUsage;   	    /* CPU百分比 */
+uint32_t       OSIdleCtrMax; 	    /* 1秒内最大的空闲计数 */
+uint32_t       OSIdleCtrRun; 	    /* 1秒内空闲任务当前计数 */
 
 /*******************************************************************************
   * @FunctionName: main
@@ -163,15 +163,53 @@ int main(void)
 
 void bsp_RunPer10ms()
 {
-	bsp_Key_Scan10ms();
+		bsp_Key_Scan10ms();	/* 轻触按键扫描函数 */
+}
+/*
+*********************************************************************************************************
+*	函 数 名: AppObjCreate
+*	功能说明: 创建任务通讯
+*	形    参 : 无
+*	返 回 值: 无
+*********************************************************************************************************
+*/
+static  void  AppObjCreate (void)
+{
+	 /* 创建互斥信号量 */
+    tx_mutex_create(&AppPrintfSemp,"AppPrintfSemp",TX_NO_INHERIT);
+}
+/*******************************************************************************
+  * @FunctionName: OSStatInit
+  * @Author:       trx
+  * @DateTime:     2022年5月24日23:52:39 
+  * @Purpose:      不知道具体是什么作用
+  * @param:        void               
+  * @return:       none
+*******************************************************************************/
+void  OSStatInit (void)
+{
+	OSStatRdy = FALSE;
+	
+    tx_thread_sleep(2u);        /* 时钟同步 */
+	
+    __disable_irq();
+    OSIdleCtr    = 0uL;         /* 清空闲计数 */
+	__enable_irq();
+	
+    tx_thread_sleep(100);       /* 统计100ms内，最大空闲计数 */
+	
+   	__disable_irq();
+    OSIdleCtrMax = OSIdleCtr;   /* 保存最大空闲计数 */
+    OSStatRdy    = TRUE;
+	__enable_irq();
 }
 
 
 /*
 *********************************************************************************************************
 *	函 数 名: tx_application_define
-*	功能说明: ThreadX专用的任务创建，通信组件创建函数
-*	形    参: first_unused_memory  未使用的地址空间
+*	功能说明: ThreadX专用的任务创建，通信组件创建函数，此函数会在tx_kernel_enter函数中被调用(貌似)
+*	形    参 : first_unused_memory  未使用的地址空间
 *	返 回 值: 无
 *********************************************************************************************************
 */
@@ -217,13 +255,12 @@ void  tx_application_define(void *first_unused_memory)
                        APP_CFG_TASK_IDLE_PRIO,        /* 任务抢占阀值 */
                        TX_NO_TIME_SLICE,             /* 不开启时间片 */
                        TX_AUTO_START);               /* 创建后立即启动 */
-			   
 }
 
 /*
 *********************************************************************************************************
 *	函 数 名: AppTaskStart
-*	功能说明: 启动任务。
+*	功能说明: 启动任务。启动任务中包含有三个子任务
 *	形    参: thread_input 是在创建该任务时传递的形参
 *	返 回 值: 无
 	优 先 级: 2
@@ -242,8 +279,8 @@ static  void  AppTaskStart (ULONG thread_input)
     /* 外设初始化 */
 	bsp_InitDWT();								/* 初始化DWT */
 	bsp_InitTimer();							/* 初始化滴答定时器 */
-	bsp_InitUart();								/* 初始化串口1外设 */
-	bsp_InitKey();
+	bsp_InitUart();								/* 初始化串口1 2 3外设 */
+	bsp_InitKey();								/* 初始化轻触按键 */
 	bsp_InitSPI1Bus();							/* SPI总线初始化 */
 	bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
 	bsp_InitSPI2Bus();							/* 初始化SPI2总线，用来驱动墨水屏 */
@@ -265,124 +302,16 @@ static  void  AppTaskStart (ULONG thread_input)
     }
 }
 
-/*
-*********************************************************************************************************
-*	函 数 名: AppTaskMsgPro
-*	功能说明: 消息处理，这里用作浮点数串口打印
-*	形    参: thread_input 是在创建该任务时传递的形参
-*	返 回 值: 无
-	优 先 级: 3
-*********************************************************************************************************
-*/
-static void AppTaskMsgPro(ULONG thread_input)
-{
-	double f_a = 1.1;
-	double f_b = 2.2345;
-	
-	(void)thread_input;
-		  
-	while(1)
-	{
-		f_a += 0.00000000001;
-		f_b -= 0.00000000002;
-		App_Printf("AppTaskMsg: f_a = %.11f, f_b = %.11f\r\n", f_a, f_b);
-        tx_thread_sleep(500);
-	}
-}
-
-/*
-*********************************************************************************************************
-*	函 数 名: AppTaskUserIF
-*	功能说明: 按键消息处理
-*	形    参: thread_input 创建该任务时传递的形参
-*	返 回 值: 无
-	优 先 级: 4
-*********************************************************************************************************
-*/
-static void AppTaskUserIF(ULONG thread_input)
-{
-	uint8_t ucKeyCode;	/* 按键代码 */
-	uint8_t buf[8] = {0x99,0x22,0x33,0x44,0x55,0x66,0x77,0x88};
-	(void)thread_input;
-		  
-	while(1)
-	{        
-		ucKeyCode = bsp_GetKey();
-		
-		if (ucKeyCode != KEY_NONE)
-		{
-			switch (ucKeyCode)
-			{
-				case KEY_0_DOWN:			  /* K1键按打印任务执行情况 */
-					 DispTaskInfo();
-					break;
-				case KEY_UP_DOWN:
-					printf("can state : %d ",bsp_Can1_Send_buf(0x144234,buf,8));
-					printf("can发送\r\n");
-					break;
-				default:                     /* 其他的键值不处理 */
-					break;
-			}
-		}
-
-        tx_thread_sleep(20);
-	}
-}
-
-/*
-*********************************************************************************************************
-*	函 数 名: AppTaskCom
-*	功能说明: 浮点数串口打印
-*	形    参: thread_input 创建该任务时传递的形参
-*	返 回 值: 无
-	优 先 级: 5
-*********************************************************************************************************
-*/
-static void AppTaskCOM(ULONG thread_input)
-{	
-	double f_c = 1.1;
-	double f_d = 2.2345;
-	
-	(void)thread_input;
-	
-	while(1)
-	{
-		f_c += 0.00000000001;
-		f_d -= 0.00000000002;;
-		App_Printf("AppTaskCom: f_a = %.11f, f_b = %.11f\r\n", f_c, f_d);
-        bsp_LedToggle(2);
-		bsp_LedToggle(1);
-        tx_thread_sleep(1000);
-	} 			  	 	       											   
-}
 
 /*
 *********************************************************************************************************
 *	函 数 名: AppTaskStatistic
 *	功能说明: 统计任务，用于实现CPU利用率的统计。为了测试更加准确，可以开启注释调用的全局中断开关
-*	形    参: thread_input 创建该任务时传递的形参 
+*	形    参 : thread_input 创建该任务时传递的形参 
 *	返 回 值: 无
 *   优 先 级: 30
 *********************************************************************************************************
 */
-void  OSStatInit (void)
-{
-	OSStatRdy = FALSE;
-	
-    tx_thread_sleep(2u);        /* 时钟同步 */
-	
-    __disable_irq();
-    OSIdleCtr    = 0uL;         /* 清空闲计数 */
-	__enable_irq();
-	
-    tx_thread_sleep(100);       /* 统计100ms内，最大空闲计数 */
-	
-   	__disable_irq();
-    OSIdleCtrMax = OSIdleCtr;   /* 保存最大空闲计数 */
-    OSStatRdy    = TRUE;
-	__enable_irq();
-}
-
 static void AppTaskStat(ULONG thread_input)
 {
 	(void)thread_input;
@@ -417,7 +346,7 @@ static void AppTaskStat(ULONG thread_input)
 *********************************************************************************************************
 *	函 数 名: AppTaskIDLE
 *	功能说明: 空闲任务
-*	形    参: thread_input 创建该任务时传递的形参
+*	形    参 : thread_input 创建该任务时传递的形参
 *	返 回 值: 无
 	优 先 级: 31
 *********************************************************************************************************
@@ -436,11 +365,17 @@ static void AppTaskIDLE(ULONG thread_input)
   }
 }
 
+
+/******************************************创建下面是子任务**********************************************/
+/******************************************创建下面是子任务**********************************************/
+/******************************************创建下面是子任务**********************************************/
+
+
 /*
 *********************************************************************************************************
 *	函 数 名: AppTaskCreate
-*	功能说明: 创建应用任务
-*	形    参: 无
+*	功能说明: 创建应用任务，此函数在AppTaskStart函数中被调用
+*	形    参 : 无
 *	返 回 值: 无
 *********************************************************************************************************
 */
@@ -485,23 +420,100 @@ static  void  AppTaskCreate (void)
 
 /*
 *********************************************************************************************************
-*	函 数 名: AppObjCreate
-*	功能说明: 创建任务通讯
-*	形    参: 无
+*	函 数 名: AppTaskMsgPro
+*	功能说明: 消息处理，这里用作浮点数串口打印
+*	形    参 : thread_input 是在创建该任务时传递的形参
 *	返 回 值: 无
+	优 先 级: 3
 *********************************************************************************************************
 */
-static  void  AppObjCreate (void)
+static void AppTaskMsgPro(ULONG thread_input)
 {
-	 /* 创建互斥信号量 */
-    tx_mutex_create(&AppPrintfSemp,"AppPrintfSemp",TX_NO_INHERIT);
+	double f_a = 1.1;
+	double f_b = 2.2345;
+	
+	(void)thread_input;
+		  
+	while(1)
+	{
+		f_a += 0.00000000001;
+		f_b -= 0.00000000002;
+		App_Printf("AppTaskMsg: f_a = %.11f, f_b = %.11f\r\n", f_a, f_b);
+        tx_thread_sleep(500);
+	}
+}
+
+
+/*
+*********************************************************************************************************
+*	函 数 名: AppTaskUserIF
+*	功能说明: 按键消息处理
+*	形    参 : thread_input 创建该任务时传递的形参
+*	返 回 值: 无
+	优 先 级: 4
+*********************************************************************************************************
+*/
+static void AppTaskUserIF(ULONG thread_input)
+{
+	uint8_t ucKeyCode;	/* 按键代码 */
+	uint8_t buf[8] = {0x99,0x22,0x33,0x44,0x55,0x66,0x77,0x88};
+	(void)thread_input;
+		  
+	while(1)
+	{        
+		ucKeyCode = bsp_GetKey();
+		
+		if (ucKeyCode != KEY_NONE)
+		{
+			switch (ucKeyCode)
+			{
+				case KEY_0_DOWN:			  /* K1键按打印任务执行情况 */
+					 DispTaskInfo();
+					break;
+				case KEY_UP_DOWN:
+					printf("can state : %d ",bsp_Can1_Send_buf(0x144234,buf,8));
+					printf("can发送\r\n");
+					break;
+				  default:                     /* 其他的键值不处理 */
+					break;
+			}
+		}
+        tx_thread_sleep(20);
+	}
+}
+
+/*
+*********************************************************************************************************
+*	函 数 名: AppTaskCom
+*	功能说明: 浮点数串口打印
+*	形    参 : thread_input 创建该任务时传递的形参
+*	返 回 值: 无
+	优 先 级: 5
+*********************************************************************************************************
+*/
+static void AppTaskCOM(ULONG thread_input)
+{	
+	double f_c = 1.1;
+	double f_d = 2.2345;
+	
+	(void)thread_input;
+	
+	while(1)
+	{
+		f_c += 0.00000000001;
+		f_d -= 0.00000000002;;
+		App_Printf("AppTaskCom: f_a = %.11f, f_b = %.11f\r\n", f_c, f_d);
+        bsp_LedToggle(2);
+		bsp_LedToggle(1);
+        tx_thread_sleep(1000);
+	} 			  	 	       											   
 }
 
 /*
 *********************************************************************************************************
 *	函 数 名: App_Printf
 *	功能说明: 线程安全的printf方式		  			  
-*	形    参: 同printf的参数。
+*	形    参 : 同printf的参数。
 *             在C中，当无法列出传递函数的所有实参的类型和数目时,可以用省略号指定参数表
 *	返 回 值: 无
 *********************************************************************************************************
@@ -531,7 +543,7 @@ static  void  App_Printf(const char *fmt, ...)
 *********************************************************************************************************
 *	函 数 名: DispTaskInfo
 *	功能说明: 将uCOS-III任务信息通过串口打印出来
-*	形    参：无
+*	形    参 ：无
 *	返 回 值: 无
 *********************************************************************************************************
 */
