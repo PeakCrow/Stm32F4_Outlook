@@ -44,11 +44,18 @@ void bsp_InitCan1Bus(void)
 	sFilterConfig.FilterBank 		  = 14;
 	HAL_CAN_ConfigFilter(&hCAN, &sFilterConfig);
 
-	HAL_CAN_Start(&hCAN);
+	HAL_CAN_Start(&hCAN);								  /* 不调用此函数无法进行can发送 */
 }
 
 
-
+/*******************************************************************************
+  * @FunctionName: HAL_CAN_MspInit
+  * @Author:       trx
+  * @DateTime:     2022年5月25日22:14:29 
+  * @Purpose:      can总线引脚初始化，包含有中断配置
+  * @param:        hcan：can外设句柄(全局变量)
+  * @return:       none
+*******************************************************************************/
 void HAL_CAN_MspInit(CAN_HandleTypeDef * hcan)
 {
 	GPIO_InitTypeDef	gpio_init;
@@ -78,7 +85,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef * hcan)
   * @FunctionName: bsp_Can1_Send_buf
   * @Author:       trx
   * @DateTime:     2022年5月25日 20:58:40 
-  * @Purpose:      can发送函数，支持一次发送3个以上的报文，做了延时处理，不然一次最多只能发送3条
+  * @Purpose:      can发送函数，支持一次发送3个以上的报文，不然一次最多只能发送3条
   * @param:        _id                要发送的报文id
   * @param:        _buf[]             报文的数据
   * @param:        _dlc               报文数据的长度，0-8可选
@@ -101,7 +108,6 @@ HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id,uint8_t _buf[],uint8_t _dlc)
 		{
 			printf("Wrong parameters value: file %s on line %d\r\n",__FILE__,__LINE__);
 		}
-		//return HAL_ERROR;
 	can_tx_msg.DLC = _dlc;
 	can_tx_msg.RTR = CAN_RTR_DATA;			/* 默认都是数据帧 */
 	can_tx_msg.TransmitGlobalTime = DISABLE;
@@ -120,7 +126,14 @@ HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id,uint8_t _buf[],uint8_t _dlc)
 
 }
 
-
+/*******************************************************************************
+  * @FunctionName: HAL_CAN_MspDeInit
+  * @Author:       trx
+  * @DateTime:     2022年5月25日23:55:24 
+  * @Purpose:      can外设非初始化
+  * @param:        hcan：can外设句柄
+  * @return:       none
+*******************************************************************************/
 void HAL_CAN_MspDeInit(CAN_HandleTypeDef* hcan)
 {
 
