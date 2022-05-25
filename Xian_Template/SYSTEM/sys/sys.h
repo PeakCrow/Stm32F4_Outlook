@@ -32,15 +32,15 @@
 #include "bsp_usart_fifo.h"			/* 串口通讯 */
 #include "bsp_key.h"				/* 轻触按键 */
 #include "bsp_spi_flash_demo.h"		/* spi flash 驱动 demo test*/
-#include "bsp_spi_bus.h"			/* spi 总线 */
+#include "bsp_spi_bus.h"			/* spi1 spi2 总线 */
 #include "bsp_iic_bus.h"			/* IIC1总线(包含AT24C02芯片) */
 #include "EPD_Test.h"				/* 墨水屏驱动 */
 #include "bsp_dwt.h"				/* 芯片DWT模块，安富莱教程提供 */
 #include "bsp_led.h"				/* 板载led灯 */
 #include "bsp_spi_flash.h"			/* spi flash驱动 */
-#include "bsp_can_bus.h"
+#include "bsp_can_bus.h"			/* can1 总线 */
 #if	DEBUG_SWITCH_EN == 1
-#include "EventRecorder.h"			/* 内部dedbug调试头文件 */
+#include "EventRecorder.h"			/* 内部dedbug调试组件 */
 #endif
 
 /*

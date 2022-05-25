@@ -120,44 +120,7 @@ int main(void)
     tx_kernel_enter();
 	while (1)
 		{
-//			ucKeyCode = bsp_GetKey();	/* 读取键值, 无键按下时返回 KEY_NONE = 0 */
-//			if (ucKeyCode != KEY_NONE)
-//			{
-//				switch (ucKeyCode)
-//				{
-//					case KEY_0_DOWN:			/* K1键按下(长按超过1s时，连发按下) */
-//						printf("K0键按下\r\n");
-//						//EPD_2in9b_V3_test();	/* 微雪墨水屏测试例程，进行了移植，并且显示“真缝合怪” 但是占用太高，高达30k的sram，目前看情况开启*/
-//						break;
-//					case KEY_0_UP:				/* K1键弹起 */
-//						printf("K0键弹起\r\n");
-//						break;
-//					case KEY_0_LONG:			/* K1键长按(一次) */
-//						printf("K0键长按\r\n");
-//						break;
-//					case KEY_UP_DOWN:			/* Kup键按下(长按超过1s时，连发按下) */
-//						printf("KUP键按下\r\n");
-//						break;
-//					case KEY_UP_UP:				/* Kup键弹起 */
-//						printf("KUP键弹起\r\n");
-//						break;
-//					case KEY_UP_LONG:			/* Kup键长按(一次) */
-//						printf("kup键长按\r\n");
-//						break;					/* 组合按键长按(一次) */
-//					case KEY_MULTI_LONG:
-//						printf("组合键长按\r\n");
-//						break;
-//					case KEY_MULTI_DOWM:		/* 组合按键按下(长按超过1s时，连发按下) */
-//						printf("组合键按下\r\n");
-//						break;
-//					case KEY_MULTI_UP:			/* 组合按键弹起 */
-//						printf("组合按键弹起\r\n");
-//						break;
-//					default:
-//						/* 其它的键值不处理 */
-//						break;
-//				}
-//			}
+			
 		}
 }
 
@@ -471,8 +434,17 @@ static void AppTaskUserIF(ULONG thread_input)
 					 DispTaskInfo();
 					break;
 				case KEY_UP_DOWN:
-					printf("can state : %d ",bsp_Can1_Send_buf(0x144234,buf,8));
-					printf("can发送\r\n");
+					{
+						bsp_Can1_Send_buf(0x144234,buf,8);
+						bsp_Can1_Send_buf(0x144235,buf,8);
+						bsp_Can1_Send_buf(0x144236,buf,8);
+						bsp_Can1_Send_buf(0x144237,buf,8);
+						bsp_Can1_Send_buf(0x144238,buf,8);
+						bsp_Can1_Send_buf(0x144239,buf,8);
+						bsp_Can1_Send_buf(0x144210,buf,8);
+						bsp_Can1_Send_buf(0x144211,buf,8);
+						bsp_Can1_Send_buf(0x144212,buf,8);
+					}
 					break;
 				  default:                     /* 其他的键值不处理 */
 					break;

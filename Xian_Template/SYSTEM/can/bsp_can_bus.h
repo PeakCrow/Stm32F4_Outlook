@@ -15,7 +15,13 @@
 #define		CAN1_RX_GPIO_PORT		GPIOA
 #define		CAN1_RX_PIN				GPIO_PIN_12
 
-#define CANx_RX_IRQn                   CAN1_RX0_IRQn
+#define CANx_RX_IRQn                CAN1_RX0_IRQn
+
+#define	CAN1_BUS_BAUDE_1M			3					/* 使用1mbps的速度时，在发送报文时(不管时小于3条还是大于3条),都会丢失少量报文，谨慎使用 */
+#define	CAN1_BUS_BAUDE_500k			6
+#define	CAN1_BUS_BAUDE_250k			12
+#define	CAN1_BUS_BUUDE_RATE			CAN1_BUS_BAUDE_500k	/* 默认波特率 */
+
 
 void bsp_InitCan1Bus(void);
 HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id,uint8_t _buf[], uint8_t _dlc);
