@@ -98,14 +98,13 @@ uint32_t       OSIdleCtrRun; 	    /* 1秒内空闲任务当前计数 */
 /*******************************************************************************
   * @FunctionName: main
   * @Author:       trx
-  * @DateTime:     2022骞?鏈?5鏃0:45:22 
+  * @DateTime:     2022年4月25日09点28分
   * @Purpose:      
   * @param:        void               
   * @return:
 *******************************************************************************/
 int main(void)
 {
-//	uint8_t ucKeyCode;							/* 按键代码 */
 	HAL_Init();                    	 			/* 初始化HAL库 */   
 	Stm32_Clock_Init(336,8,2,7);   				/* 设置时钟,168Mhz */
 
@@ -145,7 +144,7 @@ static  void  AppObjCreate (void)
   * @FunctionName: OSStatInit
   * @Author:       trx
   * @DateTime:     2022年5月24日23:52:39 
-  * @Purpose:      不知道具体是什么作用
+  * @Purpose:      具体的操作内容
   * @param:        void               
   * @return:       none
 *******************************************************************************/
@@ -251,7 +250,7 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_InitLed();								/* 初始化板载LED灯 */
 	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
 	
-	/* 创建任务 */
+	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate(); 
 
 	/* 创建任务间通信机制 */
@@ -420,8 +419,9 @@ static void AppTaskUserIF(ULONG thread_input)
 {
 	uint8_t ucKeyCode;	/* 按键代码 */
 	uint8_t buf[8] = {0x99,0x22,0x33,0x44,0x55,0x66,0x77,0x88};
+	int i,index;
 	(void)thread_input;
-		  
+
 	while(1)
 	{        
 		ucKeyCode = bsp_GetKey();
@@ -436,15 +436,19 @@ static void AppTaskUserIF(ULONG thread_input)
 				case KEY_UP_DOWN:
 					{
 						bsp_Can1_Send_buf(0x144234,buf,8);
-						bsp_Can1_Send_buf(0x144235,buf,8);
-						bsp_Can1_Send_buf(0x144236,buf,8);
-						bsp_Can1_Send_buf(0x144237,buf,8);
-						bsp_Can1_Send_buf(0x144238,buf,8);
-						bsp_Can1_Send_buf(0x144239,buf,8);
-						bsp_Can1_Send_buf(0x144210,buf,8);
+						bsp_Can1_Send_buf(0x144235,buf,7);
+						bsp_Can1_Send_buf(0x144236,buf,6);
+						bsp_Can1_Send_buf(0x144237,buf,5);
+						bsp_Can1_Send_buf(0x144238,buf,4);
+						bsp_Can1_Send_buf(0x144239,buf,3);
+						bsp_Can1_Send_buf(0x144210,buf,2);
 						bsp_Can1_Send_buf(0x144211,buf,8);
 						bsp_Can1_Send_buf(0x144212,buf,8);
 					}
+				case KEY_UP_UP:
+						index = bsp_Can1_Receive_buf(0x1314,buf);
+						for(i = 0;i < index;i++)
+							App_Printf("%x  ",buf[i]);
 					break;
 				  default:                     /* 其他的键值不处理 */
 					break;
