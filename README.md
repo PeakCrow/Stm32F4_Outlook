@@ -1,7 +1,3 @@
----
-typora-copy-images-to: Xian_Template\doc
----
-
 # Stm32F407zet6Template
 
 #### 介绍
@@ -38,4 +34,4 @@ typora-copy-images-to: Xian_Template\doc
 
 #### 目前使用的PIN
 
-![已配置PIN](E:\stm32F407zet6Template\Xian_Template\doc\已配置PIN.jpg)
+![已配置PIN](..\stm32F407zet6Template\Xian_Template\doc\已配置PIN.jpg)
