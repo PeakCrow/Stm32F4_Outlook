@@ -33,5 +33,4 @@
 - 打开工程，进入main函数，可以看见按键，LED，can发送接收，周期调用，操作系统任务管理，串口打印等例程，其他的例如flashdemo、eepromdemo、墨水屏驱动需要开启宏定义后者自行调用功能函数
 
 #### 目前使用的PIN
-
-![已配置PIN](https://gitee.com/tian-runxian/stm32-f407zet6-template/blob/master/Xian_Template/doc/%E5%B7%B2%E9%85%8D%E7%BD%AEPIN.jpg)
+![输入图片说明](Xian_Template/doc/%E5%B7%B2%E9%85%8D%E7%BD%AEPIN.jpg)
