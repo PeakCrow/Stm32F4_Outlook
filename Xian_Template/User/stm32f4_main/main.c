@@ -249,6 +249,7 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_I2C_EE_Init();							/* 初始化IIC总线，并且驱动eeprom芯片 */
 	bsp_InitLed();								/* 初始化板载LED灯 */
 	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
+	//bsp_SetTIMOutPWM(GPIOA,GPIO_PIN_8,TIM1,1,800000,70);
 	
 	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate(); 
@@ -433,7 +434,7 @@ static void AppTaskUserIF(ULONG thread_input)
 				case KEY_0_DOWN:			  /* K1键按打印任务执行情况 */
 					 DispTaskInfo();
 					break;
-				case KEY_UP_DOWN:
+				case KEY_0_UP:
 					{
 						bsp_Can1_Send_buf(0x144234,buf,8);
 						bsp_Can1_Send_buf(0x144235,buf,7);
@@ -446,7 +447,7 @@ static void AppTaskUserIF(ULONG thread_input)
 						bsp_Can1_Send_buf(0x144212,buf,8);
 					}
 				case KEY_UP_UP:
-						index = bsp_Can1_Receive_buf(0x1314,buf);
+						//index = bsp_Can1_Receive_buf(0x1314,buf);
 						for(i = 0;i < index;i++)
 							App_Printf("%x  ",buf[i]);
 					break;

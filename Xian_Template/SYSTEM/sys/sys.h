@@ -39,6 +39,7 @@
 #include "bsp_led.h"				/* 板载led灯 */
 #include "bsp_spi_flash.h"			/* spi flash驱动 */
 #include "bsp_can_bus.h"			/* can1 总线 */
+#include "bsp_tim_pwm.h"			/* 定时器中断初始化和PWM初始化 */
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug调试组件 */
 #endif
