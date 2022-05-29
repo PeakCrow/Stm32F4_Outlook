@@ -34,4 +34,4 @@
 
 #### 目前使用的PIN
 
-![已配置PIN](..\stm32F407zet6Template\Xian_Template\doc\已配置PIN.jpg)
+![已配置PIN](https://gitee.com/tian-runxian/stm32-f407zet6-template/blob/master/Xian_Template/doc/已配置PIN.jpg)
