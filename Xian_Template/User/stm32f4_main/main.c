@@ -117,10 +117,8 @@ int main(void)
 	
     /* 进入ThreadX内核 */
     tx_kernel_enter();
-	while (1)
-		{
-			
-		}
+	while(1)
+		;
 }
 
 void bsp_RunPer10ms()
@@ -251,17 +249,17 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
 	
 	/* 创建任务，此函数中包含有3个子任务 */
-    AppTaskCreate(); 
+    AppTaskCreate();
 
 	/* 创建任务间通信机制 */
-	AppObjCreate();	
+	AppObjCreate();
 
-    while (1)
-	{  
-		/* 需要周期性处理的程序，对应裸机工程中宏定义调用的SysTick_ISR */
-        bsp_ProPer1ms();
-        tx_thread_sleep(1);
-    }
+	while (1)
+		{
+			/* 需要周期性处理的程序，对应裸机工程调用的SysTick_ISR */
+			bsp_ProPer1ms();
+			tx_thread_sleep(1);
+		}
 }
 
 
@@ -391,16 +389,16 @@ static  void  AppTaskCreate (void)
 */
 static void AppTaskMsgPro(ULONG thread_input)
 {
-	double f_a = 1.1;
-	double f_b = 2.2345;
+//	double f_a = 1.1;
+//	double f_b = 2.2345;
 	
 	(void)thread_input;
 		  
 	while(1)
 	{
-		f_a += 0.00000000001;
-		f_b -= 0.00000000002;
-		App_Printf("AppTaskMsg: f_a = %.11f, f_b = %.11f\r\n", f_a, f_b);
+//		f_a += 0.00000000001;
+//		f_b -= 0.00000000002;
+//		App_Printf("AppTaskMsg: f_a = %.11f, f_b = %.11f\r\n", f_a, f_b);
         tx_thread_sleep(500);
 	}
 }
@@ -418,8 +416,7 @@ static void AppTaskMsgPro(ULONG thread_input)
 static void AppTaskUserIF(ULONG thread_input)
 {
 	uint8_t ucKeyCode;	/* 按键代码 */
-	uint8_t buf[8] = {0x99,0x22,0x33,0x44,0x55,0x66,0x77,0x88};
-	int i,index;
+	UINT OldPriority;
 	(void)thread_input;
 
 	while(1)
@@ -430,25 +427,16 @@ static void AppTaskUserIF(ULONG thread_input)
 		{
 			switch (ucKeyCode)
 			{
-				case KEY_0_DOWN:			  /* K1键按打印任务执行情况 */
+				case KEY_0_UP:			  /* K1键按打印任务执行情况 */
 					 DispTaskInfo();
 					break;
-				case KEY_UP_DOWN:
-					{
-						bsp_Can1_Send_buf(0x144234,buf,8);
-						bsp_Can1_Send_buf(0x144235,buf,7);
-						bsp_Can1_Send_buf(0x144236,buf,6);
-						bsp_Can1_Send_buf(0x144237,buf,5);
-						bsp_Can1_Send_buf(0x144238,buf,4);
-						bsp_Can1_Send_buf(0x144239,buf,3);
-						bsp_Can1_Send_buf(0x144210,buf,2);
-						bsp_Can1_Send_buf(0x144211,buf,8);
-						bsp_Can1_Send_buf(0x144212,buf,8);
-					}
-				case KEY_UP_UP:
-						index = bsp_Can1_Receive_buf(0x1314,buf);
-						for(i = 0;i < index;i++)
-							App_Printf("%x  ",buf[i]);
+				case KEY_UP_DOWN:			/* kup按键按下 */
+					App_Printf("设置任务AppTaskUserIF的优先级为6 \r\n");
+					/* 之前的优先级是4，新优先级将其设置为6 */
+					tx_thread_priority_change(&AppTaskUserIFTCB,6,&OldPriority);
+				case KEY_0_DOWN:			/* k0按键按下 */
+					App_Printf("设置任务AppTaskUserIF的优先级为4 \r\n");
+					tx_thread_priority_change(&AppTaskUserIFTCB,4,&OldPriority);
 					break;
 				  default:                     /* 其他的键值不处理 */
 					break;
@@ -469,16 +457,16 @@ static void AppTaskUserIF(ULONG thread_input)
 */
 static void AppTaskCOM(ULONG thread_input)
 {	
-	double f_c = 1.1;
-	double f_d = 2.2345;
+//	double f_c = 1.1;
+//	double f_d = 2.2345;
 	
 	(void)thread_input;
-	
+	App_Printf("AppTaskCom任务开始执行\r\n");
 	while(1)
 	{
-		f_c += 0.00000000001;
-		f_d -= 0.00000000002;;
-		App_Printf("AppTaskCom: f_a = %.11f, f_b = %.11f\r\n", f_c, f_d);
+//		f_c += 0.00000000001;
+//		f_d -= 0.00000000002;;
+//		App_Printf("AppTaskCom: f_a = %.11f, f_b = %.11f\r\n", f_c, f_d);
         bsp_LedToggle(2);
 		bsp_LedToggle(1);
         tx_thread_sleep(1000);

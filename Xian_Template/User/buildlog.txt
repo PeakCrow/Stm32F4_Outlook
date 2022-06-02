@@ -1,8 +1,8 @@
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'xian'
 compiling main.c...
 linking...
-Program Size: Code=28516 RO-data=564 RW-data=328 ZI-data=24988  
+Program Size: Code=27644 RO-data=564 RW-data=328 ZI-data=24988  
 FromELF: creating hex file...
 "..\Obj\Run_Xian.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:03
