@@ -247,6 +247,7 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_I2C_EE_Init();							/* 初始化IIC总线，并且驱动eeprom芯片 */
 	bsp_InitLed();								/* 初始化板载LED灯 */
 	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
+	//bsp_SetTIMOutPWM(GPIOA,GPIO_PIN_8,TIM1,1,800000,70);
 	
 	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate();

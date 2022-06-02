@@ -2,7 +2,11 @@
 Build target 'xian'
 compiling main.c...
 linking...
+<<<<<<< HEAD
 Program Size: Code=27644 RO-data=564 RW-data=328 ZI-data=24988  
+=======
+Program Size: Code=31672 RO-data=580 RW-data=328 ZI-data=24988  
+>>>>>>> 242ea2e74a94e40673a326ed920199304328cacb
 FromELF: creating hex file...
 "..\Obj\Run_Xian.axf" - 0 Error(s), 0 Warning(s).
 Build Time Elapsed:  00:00:03
