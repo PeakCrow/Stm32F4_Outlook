@@ -1,9 +1,3 @@
 Load "..\\Obj\\Run_Xian.axf" 
-<<<<<<< HEAD
-Internal DLL Error
-Error: Flash Download failed  -  Target DLL has been cancelled
-Flash Load finished at 00:30:41
-=======
 Erase Done.Programming Done.Verify OK.Application running ...
-Flash Load finished at 14:45:35
->>>>>>> 242ea2e74a94e40673a326ed920199304328cacb
+Flash Load finished at 23:42:10

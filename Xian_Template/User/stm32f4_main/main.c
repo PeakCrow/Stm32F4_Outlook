@@ -47,9 +47,6 @@
 static  TX_THREAD   AppTaskStartTCB;
 static  uint64_t    AppTaskStartStk[APP_CFG_TASK_START_STK_SIZE/8];
 
-static  TX_THREAD   AppTaskMsgProTCB;
-static  uint64_t    AppTaskMsgProStk[APP_CFG_TASK_MsgPro_STK_SIZE/8];
-
 static  TX_THREAD   AppTaskCOMTCB;
 static  uint64_t    AppTaskCOMStk[APP_CFG_TASK_COM_STK_SIZE/8];
 
@@ -63,13 +60,13 @@ static  TX_THREAD   AppTaskStatTCB;
 static  uint64_t    AppTaskStatStk[APP_CFG_TASK_STAT_STK_SIZE/8];
 
 
+
 /*
 *********************************************************************************************************
 *                                      函数声明
 *********************************************************************************************************
 */
 static  void  AppTaskStart          (ULONG thread_input);
-static  void  AppTaskMsgPro         (ULONG thread_input);
 static  void  AppTaskUserIF         (ULONG thread_input);
 static  void  AppTaskCOM			(ULONG thread_input);
 static  void  AppTaskIDLE			(ULONG thread_input);
@@ -247,7 +244,6 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_I2C_EE_Init();							/* 初始化IIC总线，并且驱动eeprom芯片 */
 	bsp_InitLed();								/* 初始化板载LED灯 */
 	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
-	//bsp_SetTIMOutPWM(GPIOA,GPIO_PIN_8,TIM1,1,800000,70);
 	
 	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate();
@@ -342,18 +338,6 @@ static void AppTaskIDLE(ULONG thread_input)
 */
 static  void  AppTaskCreate (void)
 {
-	/**************创建MsgPro任务*********************/
-    tx_thread_create(&AppTaskMsgProTCB,               	/* 任务控制块地址 */    
-                       "App Msp Pro",                 	/* 任务名 */
-                       AppTaskMsgPro,                  	/* 启动任务函数地址 */
-                       0,                            	/* 传递给任务的参数 */
-                       &AppTaskMsgProStk[0],            /* 堆栈基地址 */
-                       APP_CFG_TASK_MsgPro_STK_SIZE,    /* 堆栈空间大小 */  
-                       APP_CFG_TASK_MsgPro_PRIO,        /* 任务优先级*/
-                       APP_CFG_TASK_MsgPro_PRIO,        /* 任务抢占阀值 */
-                       TX_NO_TIME_SLICE,               	/* 不开启时间片 */
-                       TX_AUTO_START);                	/* 创建后立即启动 */
-
 	/**************创建USER IF任务*********************/
     tx_thread_create(&AppTaskUserIFTCB,               	/* 任务控制块地址 */      
                        "App Task UserIF",              	/* 任务名 */
@@ -379,30 +363,6 @@ static  void  AppTaskCreate (void)
                        TX_AUTO_START);               	/* 创建后立即启动 */
 }
 
-/*
-*********************************************************************************************************
-*	函 数 名: AppTaskMsgPro
-*	功能说明: 消息处理，这里用作浮点数串口打印
-*	形    参 : thread_input 是在创建该任务时传递的形参
-*	返 回 值: 无
-	优 先 级: 3
-*********************************************************************************************************
-*/
-static void AppTaskMsgPro(ULONG thread_input)
-{
-//	double f_a = 1.1;
-//	double f_b = 2.2345;
-	
-	(void)thread_input;
-		  
-	while(1)
-	{
-//		f_a += 0.00000000001;
-//		f_b -= 0.00000000002;
-//		App_Printf("AppTaskMsg: f_a = %.11f, f_b = %.11f\r\n", f_a, f_b);
-        tx_thread_sleep(500);
-	}
-}
 
 
 /*
@@ -417,8 +377,8 @@ static void AppTaskMsgPro(ULONG thread_input)
 static void AppTaskUserIF(ULONG thread_input)
 {
 	uint8_t ucKeyCode;	/* 按键代码 */
-	UINT OldPriority;
 	(void)thread_input;
+
 
 	while(1)
 	{        
@@ -432,12 +392,12 @@ static void AppTaskUserIF(ULONG thread_input)
 					 DispTaskInfo();
 					break;
 				case KEY_UP_DOWN:			/* kup按键按下 */
-					App_Printf("设置任务AppTaskUserIF的优先级为6 \r\n");
-					/* 之前的优先级是4，新优先级将其设置为6 */
-					tx_thread_priority_change(&AppTaskUserIFTCB,6,&OldPriority);
+					App_Printf("kup按键按下\r\n");					
+					bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_0,TIM3,3,800000,1000);
+					break;
 				case KEY_0_DOWN:			/* k0按键按下 */
-					App_Printf("设置任务AppTaskUserIF的优先级为4 \r\n");
-					tx_thread_priority_change(&AppTaskUserIFTCB,4,&OldPriority);
+					App_Printf("k0按键按下\r\n");
+//					bsp_Ws2812b_color((uint32_t*)pwm_led2);
 					break;
 				  default:                     /* 其他的键值不处理 */
 					break;
