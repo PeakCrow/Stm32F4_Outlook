@@ -80,6 +80,7 @@
 
 
 static DMA_HandleTypeDef hdma_ch3 = {0};
+TIM_HandleTypeDef  g_TimHandle = {0};
 
 /*
 *********************************************************************************************************
@@ -250,6 +251,43 @@ void bsp_ConfigGpioOut(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinX)
 	GPIO_InitStruct.Pin = GPIO_PinX;
 	HAL_GPIO_Init(GPIOx, &GPIO_InitStruct);
 }
+void MX_DMA_Init(void)
+{
+	
+		
+		__HAL_RCC_DMA1_CLK_ENABLE();//开启DMA1时钟
+		__DMA1_CLK_ENABLE();
+		
+		hdma_ch3.Instance 					= DMA1_Stream7;
+		hdma_ch3.Init.Channel 				= DMA_CHANNEL_5;			//通道选择2--
+		hdma_ch3.Init.Direction				= DMA_MEMORY_TO_PERIPH;		//存储器到外设
+		hdma_ch3.Init.PeriphInc 			= DMA_PINC_DISABLE;			//外设非增量模式
+		hdma_ch3.Init.MemInc				= DMA_MINC_ENABLE;			//存储器增量模式
+		hdma_ch3.Init.PeriphDataAlignment 	= DMA_PDATAALIGN_WORD;		//外设数据长度8位
+		hdma_ch3.Init.MemDataAlignment 		= DMA_PDATAALIGN_WORD;		//存储器数据长度8位
+		hdma_ch3.Init.Mode 					= DMA_CIRCULAR;				//外设周期模式可以发送数组内的数据，正常模式只会发送第一个数据
+		hdma_ch3.Init.Priority 				= DMA_PRIORITY_LOW;			//中等优先级
+		hdma_ch3.Init.FIFOMode 				= DMA_FIFOMODE_DISABLE;
+		hdma_ch3.Init.FIFOThreshold 		= DMA_FIFO_THRESHOLD_FULL;
+		hdma_ch3.Init.MemBurst 				= DMA_MBURST_SINGLE;		//存储器单次传输
+		hdma_ch3.Init.PeriphBurst 			= DMA_MBURST_SINGLE;		//外设突发单次传输
+		
+		__HAL_LINKDMA(&g_TimHandle,hdma[TIM_DMA_ID_CC3],hdma_ch3);//将DMA与TIM联系起来	
+		
+//		if(HAL_DMA_DeInit(&hdma_ch3) != HAL_OK)
+//			{
+//				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+//			}
+		if(HAL_DMA_Init((&g_TimHandle)->hdma[TIM_DMA_ID_CC3]) != HAL_OK)//4--
+			{
+				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+			}
+		
+		HAL_NVIC_SetPriority(DMA1_Stream7_IRQn, 0, 0);//6--
+		HAL_NVIC_EnableIRQ(DMA1_Stream7_IRQn);
+
+	
+}
 
 /*
 *********************************************************************************************************
@@ -269,7 +307,7 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 	 uint32_t _ulFreq, uint32_t _ulDutyCycle)
 {
 	static uint32_t pwm_led1[24]  = {30,30,30,30,30,30,30,30, 70,70,70,70,70,70,70,70, 30,30,30,30,30,30,30,30};
-	TIM_HandleTypeDef  TimHandle = {0};
+
 	TIM_OC_InitTypeDef sConfig = {0};	
 	uint16_t usPeriod;
 	uint16_t usPrescaler;
@@ -300,7 +338,7 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 	/* 下面是PWM输出 */
 	
 	bsp_ConfigTimGpio(GPIOx, GPIO_Pin, TIMx);	/* 使能GPIO和TIM时钟，并连接TIM通道到GPIO */
-	
+	MX_DMA_Init();
 	/*-----------------------------------------------------------------------
 		system_stm32f4xx.c 文件中 void SetSysClock(void) 函数对时钟的配置如下：
 
@@ -344,20 +382,37 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 	pulse = (_ulDutyCycle * usPeriod) / 10000;
 
 	
-	HAL_TIM_PWM_DeInit(&TimHandle);
+	HAL_TIM_PWM_DeInit(&g_TimHandle);
     
 	/*  PWM频率 = TIMxCLK / usPrescaler + 1）/usPeriod + 1）*/
-	TimHandle.Instance = TIMx;
-	TimHandle.Init.Prescaler         = usPrescaler;
-	TimHandle.Init.Period            = usPeriod;
-	TimHandle.Init.ClockDivision     = 0;
-	TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
-	TimHandle.Init.RepetitionCounter = 0;
-	TimHandle.Init.AutoReloadPreload = 0;
-	if (HAL_TIM_PWM_Init(&TimHandle) != HAL_OK)
-	{
-		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+	g_TimHandle.Instance = TIMx;
+	g_TimHandle.Init.Prescaler         = usPrescaler;
+	g_TimHandle.Init.Period            = usPeriod;
+	g_TimHandle.Init.ClockDivision     = 0;
+	g_TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+	g_TimHandle.Init.RepetitionCounter = 0;
+	g_TimHandle.Init.AutoReloadPreload = 0;
+	if(TIMx == TIM3)
+	{	
+//		if (HAL_TIM_PWM_DeInit(&TimHandle) != HAL_OK)
+//			{
+//				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+//			}
+		
+		if (HAL_TIM_PWM_Init(&g_TimHandle) != HAL_OK)
+			{
+				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+			}
+		
 	}
+	else
+	{
+		if (HAL_TIM_PWM_Init(&g_TimHandle) != HAL_OK)
+			{
+				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+			}
+	}
+
 
 	/* 配置定时器PWM输出通道 */
 	sConfig.OCMode       = TIM_OCMODE_PWM1;
@@ -369,7 +424,7 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 
 	/* 占空比 */
 	sConfig.Pulse = pulse;
-	if (HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TimChannel[_ucChannel]) != HAL_OK)
+	if (HAL_TIM_PWM_ConfigChannel(&g_TimHandle, &sConfig, TimChannel[_ucChannel]) != HAL_OK)
 	{
 		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 	}
@@ -377,15 +432,15 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 	/* 启动PWM输出 */
 	if(TIMx == TIM3)
 	{
-		if(HAL_TIM_PWM_Start_DMA(&TimHandle,TIM_CHANNEL_3,pwm_led1,sizeof(pwm_led1)/sizeof(pwm_led1[0])) != HAL_OK);//以DMA模式开启PWM生成
+		if(HAL_TIM_PWM_Start_DMA(&g_TimHandle,TimChannel[_ucChannel],pwm_led1,sizeof(pwm_led1)/sizeof(pwm_led1[0])) != HAL_OK)//以DMA模式开启PWM生成
+		//if (HAL_TIM_PWM_Start(&TimHandle, TimChannel[_ucChannel]) != HAL_OK)
 			{
 				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-				printf("state %d \r\n",HAL_TIM_PWM_Start_DMA(&TimHandle,TIM_CHANNEL_3,(uint32_t*)pwm_led1,sizeof(pwm_led1)/sizeof(pwm_led1[0])));
 			}
 	}
 	else
 	{
-		if (HAL_TIM_PWM_Start(&TimHandle, TimChannel[_ucChannel]) != HAL_OK)
+		if (HAL_TIM_PWM_Start(&g_TimHandle, TimChannel[_ucChannel]) != HAL_OK)
 			{
 				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 			}
@@ -405,43 +460,8 @@ void DMA1_Stream7_IRQHandler(void)
   /* USER CODE END DMA1_Channel7_IRQn 1 */
 }
 
-void HAL_TIM_PWM_MspInit(TIM_HandleTypeDef *htim)
-{
-	if(htim->Instance == TIM3)
-	{
-		
-		__HAL_RCC_DMA1_CLK_ENABLE();//开启DMA1时钟
-		__DMA1_CLK_ENABLE();
-		
-		hdma_ch3.Instance 					= DMA1_Stream7;
-		hdma_ch3.Init.Channel 				= DMA_CHANNEL_5;			//通道选择2--
-		hdma_ch3.Init.Direction				= DMA_MEMORY_TO_PERIPH;		//存储器到外设
-		hdma_ch3.Init.PeriphInc 			= DMA_PINC_DISABLE;			//外设非增量模式
-		hdma_ch3.Init.MemInc				= DMA_MINC_ENABLE;			//存储器增量模式
-		hdma_ch3.Init.PeriphDataAlignment 	= DMA_PDATAALIGN_WORD;		//外设数据长度8位
-		hdma_ch3.Init.MemDataAlignment 		= DMA_PDATAALIGN_WORD;		//存储器数据长度8位
-		hdma_ch3.Init.Mode 					= DMA_CIRCULAR;				//外设周期模式
-		hdma_ch3.Init.Priority 				= DMA_PRIORITY_LOW;			//中等优先级
-		hdma_ch3.Init.FIFOMode 				= DMA_FIFOMODE_ENABLE;
-		hdma_ch3.Init.FIFOThreshold 		= DMA_FIFO_THRESHOLD_FULL;
-		hdma_ch3.Init.MemBurst 				= DMA_MBURST_SINGLE;		//存储器单次传输
-		hdma_ch3.Init.PeriphBurst 			= DMA_MBURST_SINGLE;		//外设突发单次传输
-		__HAL_LINKDMA(htim,hdma[TIM_DMA_ID_CC3],hdma_ch3);//将DMA与TIM联系起来
-		
-		if(HAL_DMA_DeInit(&hdma_ch3) != HAL_OK)
-			{
-				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-			}
-		if(HAL_DMA_Init(htim->hdma[TIM_DMA_ID_CC3]) != HAL_OK)//4--
-			{
-				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-			}
-		
-		HAL_NVIC_SetPriority(DMA1_Stream7_IRQn, 0, 0);//6--
-		HAL_NVIC_EnableIRQ(DMA1_Stream7_IRQn);
 
-	}
-}
+
 
 /*
 *********************************************************************************************************

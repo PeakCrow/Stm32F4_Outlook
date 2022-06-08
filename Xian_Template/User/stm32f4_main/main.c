@@ -244,7 +244,7 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_I2C_EE_Init();							/* 初始化IIC总线，并且驱动eeprom芯片 */
 	bsp_InitLed();								/* 初始化板载LED灯 */
 	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
-	
+	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_0,TIM3,3,800000,1000);
 	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate();
 
@@ -379,6 +379,7 @@ static void AppTaskUserIF(ULONG thread_input)
 	uint8_t ucKeyCode;	/* 按键代码 */
 	(void)thread_input;
 
+	static uint32_t pwm_led2[24]  = {70,70,70,70,70,70,70,70, 70,70,70,70,70,70,70,70, 30,30,30,30,30,30,30,30};
 
 	while(1)
 	{        
@@ -392,12 +393,14 @@ static void AppTaskUserIF(ULONG thread_input)
 					 DispTaskInfo();
 					break;
 				case KEY_UP_DOWN:			/* kup按键按下 */
-					App_Printf("kup按键按下\r\n");					
-					bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_0,TIM3,3,800000,1000);
+					App_Printf("kup按键按下\r\n");
+					HAL_TIM_PWM_Stop_DMA(&g_TimHandle,TIM_CHANNEL_3);
+				break;
+				case KEY_UP_UP:
+					HAL_TIM_PWM_Start_DMA(&g_TimHandle,TIM_CHANNEL_3,pwm_led2,sizeof(pwm_led2)/sizeof(pwm_led2[0]));
 					break;
 				case KEY_0_DOWN:			/* k0按键按下 */
 					App_Printf("k0按键按下\r\n");
-//					bsp_Ws2812b_color((uint32_t*)pwm_led2);
 					break;
 				  default:                     /* 其他的键值不处理 */
 					break;
