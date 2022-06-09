@@ -223,7 +223,7 @@ void bsp_ConfigTimGpio(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinX, TIM_TypeDef* TIM
 	bsp_RCC_TIM_Enable(TIMx);
 
 	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-	GPIO_InitStruct.Pull = GPIO_PULLUP;
+	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
 	GPIO_InitStruct.Alternate = bsp_GetAFofTIM(TIMx);
 	GPIO_InitStruct.Pin = GPIO_PinX;
@@ -246,11 +246,17 @@ void bsp_ConfigGpioOut(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinX)
 	bsp_RCC_GPIO_Enable(GPIOx);		/* 使能GPIO时钟 */
 
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_NOPULL;
+	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
 	GPIO_InitStruct.Pin = GPIO_PinX;
 	HAL_GPIO_Init(GPIOx, &GPIO_InitStruct);
 }
+
+void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
+{
+	HAL_TIM_PWM_Stop_DMA(htim, TIM_CHANNEL_3);
+}
+
 void MX_DMA_Init(void)
 {
 	
@@ -263,8 +269,8 @@ void MX_DMA_Init(void)
 		hdma_ch3.Init.Direction				= DMA_MEMORY_TO_PERIPH;		//存储器到外设
 		hdma_ch3.Init.PeriphInc 			= DMA_PINC_DISABLE;			//外设非增量模式
 		hdma_ch3.Init.MemInc				= DMA_MINC_ENABLE;			//存储器增量模式
-		hdma_ch3.Init.PeriphDataAlignment 	= DMA_PDATAALIGN_WORD;		//外设数据长度8位
-		hdma_ch3.Init.MemDataAlignment 		= DMA_PDATAALIGN_WORD;		//存储器数据长度8位
+		hdma_ch3.Init.PeriphDataAlignment 	= DMA_PDATAALIGN_HALFWORD;		//外设数据长度16位
+		hdma_ch3.Init.MemDataAlignment 		= DMA_MDATAALIGN_HALFWORD;		//存储器数据长度16位
 		hdma_ch3.Init.Mode 					= DMA_CIRCULAR;				//外设周期模式可以发送数组内的数据，正常模式只会发送第一个数据
 		hdma_ch3.Init.Priority 				= DMA_PRIORITY_LOW;			//中等优先级
 		hdma_ch3.Init.FIFOMode 				= DMA_FIFOMODE_DISABLE;
@@ -305,8 +311,31 @@ void MX_DMA_Init(void)
 */
 void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx, uint8_t _ucChannel,
 	 uint32_t _ulFreq, uint32_t _ulDutyCycle)
-{
-	static uint32_t pwm_led1[24]  = {30,30,30,30,30,30,30,30, 70,70,70,70,70,70,70,70, 30,30,30,30,30,30,30,30};
+{									//GRB
+	static uint16_t pwm_led4[240 +12 * 24]  = {0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+												0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+												0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+												0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+												0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+												0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+												0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+												0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+												0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+												0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
+										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30,
+										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30,
+										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30,
+										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30,
+										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30,
+										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30,
+										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30,
+										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30,
+										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30,
+										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30,
+										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30,
+										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30
+										};
+
 
 	TIM_OC_InitTypeDef sConfig = {0};	
 	uint16_t usPeriod;
@@ -432,8 +461,7 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 	/* 启动PWM输出 */
 	if(TIMx == TIM3)
 	{
-		if(HAL_TIM_PWM_Start_DMA(&g_TimHandle,TimChannel[_ucChannel],pwm_led1,sizeof(pwm_led1)/sizeof(pwm_led1[0])) != HAL_OK)//以DMA模式开启PWM生成
-		//if (HAL_TIM_PWM_Start(&TimHandle, TimChannel[_ucChannel]) != HAL_OK)
+		if(HAL_TIM_PWM_Start_DMA(&g_TimHandle,TimChannel[_ucChannel],(uint32_t*)pwm_led4,sizeof(pwm_led4)/sizeof(pwm_led4[0])) != HAL_OK)//以DMA模式开启PWM生成
 			{
 				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 			}
@@ -460,6 +488,11 @@ void DMA1_Stream7_IRQHandler(void)
   /* USER CODE END DMA1_Channel7_IRQn 1 */
 }
 
+void TIM3_IRQHandler(void)
+{
+	HAL_TIM_IRQHandler(&g_TimHandle);
+
+}
 
 
 
