@@ -38,3 +38,4 @@
 #### 目前使用的PIN
 
 ![](E:\stm32F407zet6Template\Xian_Template\doc\已配置PIN.png)
+![输入图片说明](Xian_Template/doc/%E5%B7%B2%E9%85%8D%E7%BD%AEPIN.png)
