@@ -79,7 +79,7 @@
 */
 
 
-static DMA_HandleTypeDef hdma_ch3 = {0};
+static DMA_HandleTypeDef hdma_ch1 = {0};
 TIM_HandleTypeDef  g_TimHandle = {0};
 
 /*
@@ -254,7 +254,7 @@ void bsp_ConfigGpioOut(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinX)
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 {
-	HAL_TIM_PWM_Stop_DMA(htim, TIM_CHANNEL_3);
+	HAL_TIM_PWM_Stop_DMA(htim, TIM_CHANNEL_1);
 }
 
 void MX_DMA_Init(void)
@@ -264,36 +264,53 @@ void MX_DMA_Init(void)
 		__HAL_RCC_DMA1_CLK_ENABLE();//开启DMA1时钟
 		__DMA1_CLK_ENABLE();
 		
-		hdma_ch3.Instance 					= DMA1_Stream7;
-		hdma_ch3.Init.Channel 				= DMA_CHANNEL_5;			//通道选择2--
-		hdma_ch3.Init.Direction				= DMA_MEMORY_TO_PERIPH;		//存储器到外设
-		hdma_ch3.Init.PeriphInc 			= DMA_PINC_DISABLE;			//外设非增量模式
-		hdma_ch3.Init.MemInc				= DMA_MINC_ENABLE;			//存储器增量模式
-		hdma_ch3.Init.PeriphDataAlignment 	= DMA_PDATAALIGN_HALFWORD;		//外设数据长度16位
-		hdma_ch3.Init.MemDataAlignment 		= DMA_MDATAALIGN_HALFWORD;		//存储器数据长度16位
-		hdma_ch3.Init.Mode 					= DMA_CIRCULAR;				//外设周期模式可以发送数组内的数据，正常模式只会发送第一个数据
-		hdma_ch3.Init.Priority 				= DMA_PRIORITY_LOW;			//中等优先级
-		hdma_ch3.Init.FIFOMode 				= DMA_FIFOMODE_DISABLE;
-		hdma_ch3.Init.FIFOThreshold 		= DMA_FIFO_THRESHOLD_FULL;
-		hdma_ch3.Init.MemBurst 				= DMA_MBURST_SINGLE;		//存储器单次传输
-		hdma_ch3.Init.PeriphBurst 			= DMA_MBURST_SINGLE;		//外设突发单次传输
+		hdma_ch1.Instance 					= DMA1_Stream4;
+		hdma_ch1.Init.Channel 				= DMA_CHANNEL_5;			//通道选择2--
+		hdma_ch1.Init.Direction				= DMA_MEMORY_TO_PERIPH;		//存储器到外设
+		hdma_ch1.Init.PeriphInc 			= DMA_PINC_DISABLE;			//外设非增量模式
+		hdma_ch1.Init.MemInc				= DMA_MINC_ENABLE;			//存储器增量模式
+		hdma_ch1.Init.PeriphDataAlignment 	= DMA_PDATAALIGN_HALFWORD;		//外设数据长度16位
+		hdma_ch1.Init.MemDataAlignment 		= DMA_MDATAALIGN_HALFWORD;		//存储器数据长度16位
+		hdma_ch1.Init.Mode 					= DMA_CIRCULAR;				//外设周期模式可以发送数组内的数据，正常模式只会发送第一个数据
+		hdma_ch1.Init.Priority 				= DMA_PRIORITY_LOW;			//中等优先级
+		hdma_ch1.Init.FIFOMode 				= DMA_FIFOMODE_DISABLE;
+		hdma_ch1.Init.FIFOThreshold 		= DMA_FIFO_THRESHOLD_FULL;
+		hdma_ch1.Init.MemBurst 				= DMA_MBURST_SINGLE;		//存储器单次传输
+		hdma_ch1.Init.PeriphBurst 			= DMA_MBURST_SINGLE;		//外设突发单次传输
 		
-		__HAL_LINKDMA(&g_TimHandle,hdma[TIM_DMA_ID_CC3],hdma_ch3);//将DMA与TIM联系起来	
+		__HAL_LINKDMA(&g_TimHandle,hdma[TIM_DMA_ID_CC1],hdma_ch1);//将DMA与TIM联系起来	
 		
-//		if(HAL_DMA_DeInit(&hdma_ch3) != HAL_OK)
+//		if(HAL_DMA_DeInit(&hdma_ch1) != HAL_OK)
 //			{
 //				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 //			}
-		if(HAL_DMA_Init((&g_TimHandle)->hdma[TIM_DMA_ID_CC3]) != HAL_OK)//4--
+		if(HAL_DMA_Init((&g_TimHandle)->hdma[TIM_DMA_ID_CC1]) != HAL_OK)//4--
 			{
 				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 			}
 		
-		HAL_NVIC_SetPriority(DMA1_Stream7_IRQn, 0, 0);//6--
-		HAL_NVIC_EnableIRQ(DMA1_Stream7_IRQn);
+		HAL_NVIC_SetPriority(DMA1_Stream4_IRQn, 0, 0);//6--
+		HAL_NVIC_EnableIRQ(DMA1_Stream4_IRQn);
 
 	
 }
+void DMA1_Stream4_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel7_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel7_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_ch1);
+  /* USER CODE BEGIN DMA1_Channel7_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel7_IRQn 1 */
+}
+
+void TIM3_IRQHandler(void)
+{
+	HAL_TIM_IRQHandler(&g_TimHandle);
+
+}
+
 
 /*
 *********************************************************************************************************
@@ -475,26 +492,6 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 	}
 
 }
-
-
-void DMA1_Stream7_IRQHandler(void)
-{
-  /* USER CODE BEGIN DMA1_Channel7_IRQn 0 */
-
-  /* USER CODE END DMA1_Channel7_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_ch3);
-  /* USER CODE BEGIN DMA1_Channel7_IRQn 1 */
-
-  /* USER CODE END DMA1_Channel7_IRQn 1 */
-}
-
-void TIM3_IRQHandler(void)
-{
-	HAL_TIM_IRQHandler(&g_TimHandle);
-
-}
-
-
 
 /*
 *********************************************************************************************************

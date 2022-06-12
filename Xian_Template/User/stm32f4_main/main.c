@@ -244,7 +244,7 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_I2C_EE_Init();							/* 初始化IIC总线，并且驱动eeprom芯片 */
 	bsp_InitLed();								/* 初始化板载LED灯 */
 	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
-	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_0,TIM3,3,800000,1000);
+	bsp_Ws2812b_Init();							/* 初始化ws2812b可调灯效 */
 	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate();
 
@@ -397,7 +397,7 @@ static void AppTaskUserIF(ULONG thread_input)
 						App_Printf("k0按键按下\r\n");
 						//Ws2812b_Gradient_Lamp(Red,Yellow,10);
 						//Ws2812b_Rgb_SetIndexPartColor(5,10,0xff,0xff,0x00);
-						Ws2812b_Run_Water_Lamp(0xff,0x00,0x00,1000,signal_on);
+						Ws2812b_Run_Water_Lamp(0xff,0x00,0x00,1000,gradua_on);
 					break;
 					}
 					case KEY_UP_UP:						

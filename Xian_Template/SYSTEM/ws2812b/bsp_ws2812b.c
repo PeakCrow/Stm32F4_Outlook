@@ -4,6 +4,19 @@
 static uint16_t g_Ws_2812b_lamp_buf[RESET_WORD+24*LED_NUM]={0};
 
 /*******************************************************************************
+  * @FunctionName: bsp_Ws2812b_Init
+  * @Author:       trx
+  * @DateTime:     2022年6月12日 18:45:41 
+  * @Purpose:      可调灯ws2812b初始化
+  * @param:        void               
+  * @return:       none
+*******************************************************************************/
+void bsp_Ws2812b_Init(void)
+{	
+	bsp_SetTIMOutPWM(GPIOA,GPIO_PIN_6,TIM3,1,800000,1000);
+}
+
+/*******************************************************************************
   * @FunctionName: Ws2812b_Set_resetdata
   * @Author:       trx
   * @DateTime:     2022年6月12日 16:45:37 
@@ -33,7 +46,7 @@ void Ws2812b_Set_resetdata(void)
 void Ws2812b_Set_Alloff(void)
 {	
 	Ws2812b_Set_resetdata();
-	HAL_TIM_PWM_Start_DMA(&g_TimHandle,TIM_CHANNEL_3,(uint32_t*)g_Ws_2812b_lamp_buf,sizeof(g_Ws_2812b_lamp_buf)/sizeof(g_Ws_2812b_lamp_buf[0]));
+	HAL_TIM_PWM_Start_DMA(&g_TimHandle,TIM_CHANNEL_1,(uint32_t*)g_Ws_2812b_lamp_buf,sizeof(g_Ws_2812b_lamp_buf)/sizeof(g_Ws_2812b_lamp_buf[0]));
 }
 /*******************************************************************************
   * @FunctionName: Ws2812b_Rgb_SetColor
@@ -63,7 +76,7 @@ void Ws2812b_Rgb_SetColor(uint8_t _R,uint8_t _G,uint8_t _B)
 				g_Ws_2812b_lamp_buf[RESET_WORD+i + j*24]= ( (_B & (1 << (23-i)) )? CODE1 : CODE0 );
 			}
 	}
-	HAL_TIM_PWM_Start_DMA(&g_TimHandle,TIM_CHANNEL_3,(uint32_t*)g_Ws_2812b_lamp_buf,sizeof(g_Ws_2812b_lamp_buf)/sizeof(g_Ws_2812b_lamp_buf[0]));
+	HAL_TIM_PWM_Start_DMA(&g_TimHandle,TIM_CHANNEL_1,(uint32_t*)g_Ws_2812b_lamp_buf,sizeof(g_Ws_2812b_lamp_buf)/sizeof(g_Ws_2812b_lamp_buf[0]));
 }
 /*******************************************************************************
   * @FunctionName: Ws2812b_Rgb_SetIndexColor
@@ -94,7 +107,7 @@ uint8_t Ws2812b_Rgb_SetIndexColor(uint8_t _index,uint8_t _R,uint8_t _G,uint8_t _
 		{
 			g_Ws_2812b_lamp_buf[RESET_WORD+i + (_index-1)*24]= ( (_B & (1 << (23-i)) )? CODE1 : CODE0 );
 		}
-	HAL_TIM_PWM_Start_DMA(&g_TimHandle,TIM_CHANNEL_3,(uint32_t*)g_Ws_2812b_lamp_buf,sizeof(g_Ws_2812b_lamp_buf)/sizeof(g_Ws_2812b_lamp_buf[0]));
+	HAL_TIM_PWM_Start_DMA(&g_TimHandle,TIM_CHANNEL_1,(uint32_t*)g_Ws_2812b_lamp_buf,sizeof(g_Ws_2812b_lamp_buf)/sizeof(g_Ws_2812b_lamp_buf[0]));
 	return 1;
 }
 /*******************************************************************************
@@ -130,7 +143,7 @@ uint8_t Ws2812b_Rgb_SetIndexPartColor(uint8_t _start_index,uint8_t _end_index,ui
 				g_Ws_2812b_lamp_buf[RESET_WORD+i + j*24]= ( (_B & (1 << (23-i)) )? CODE1 : CODE0 );
 			}
 	}	
-	HAL_TIM_PWM_Start_DMA(&g_TimHandle,TIM_CHANNEL_3,(uint32_t*)g_Ws_2812b_lamp_buf,sizeof(g_Ws_2812b_lamp_buf)/sizeof(g_Ws_2812b_lamp_buf[0]));
+	HAL_TIM_PWM_Start_DMA(&g_TimHandle,TIM_CHANNEL_1,(uint32_t*)g_Ws_2812b_lamp_buf,sizeof(g_Ws_2812b_lamp_buf)/sizeof(g_Ws_2812b_lamp_buf[0]));
 	return 1;
 }
 

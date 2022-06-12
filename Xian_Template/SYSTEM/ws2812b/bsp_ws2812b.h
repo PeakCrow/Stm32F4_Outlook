@@ -21,6 +21,7 @@ typedef enum _run_lamp_state
 #define   Red          0x00FF00  	// ºìÉ«
 #define   Green        0xff0000  	// ÂÌÉ«
 #define	  Yellow	   0xffff00		//»ÆÉ«
+void bsp_Ws2812b_Init(void);
 void Ws2812b_Set_resetdata(void);
 void Ws2812b_Set_Alloff(void);
 void Ws2812b_Rgb_SetColor(uint8_t _R,uint8_t _G,uint8_t _B);
