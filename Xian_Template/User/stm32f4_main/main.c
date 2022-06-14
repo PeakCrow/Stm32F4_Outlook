@@ -59,6 +59,8 @@ static  uint64_t    AppTaskIdleStk[APP_CFG_TASK_IDLE_STK_SIZE/8];
 static  TX_THREAD   AppTaskStatTCB;
 static  uint64_t    AppTaskStatStk[APP_CFG_TASK_STAT_STK_SIZE/8];
 
+TX_TIMER AppTimer;
+void TimerCallback(ULONG thread_input);
 
 
 /*
@@ -134,6 +136,14 @@ static  void  AppObjCreate (void)
 {
 	 /* 创建互斥信号量 */
     tx_mutex_create(&AppPrintfSemp,"AppPrintfSemp",TX_NO_INHERIT);
+	 	/* 定时器组 */
+	tx_timer_create(&AppTimer,
+					"App Timer",
+					TimerCallback, 
+					0,                  /* 传递的参数 */
+					500,                /* 设置定时器时间溢出的初始延迟，单位ThreadX系统时间节拍数 */
+					500, 				/* 设置初始延迟后的定时器运行周期，如果设置为0，表示单次定时器,单位ms */
+					TX_AUTO_ACTIVATE);	/* 激活定时器 */
 }
 /*******************************************************************************
   * @FunctionName: OSStatInit
@@ -244,7 +254,9 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_I2C_EE_Init();							/* 初始化IIC总线，并且驱动eeprom芯片 */
 	bsp_InitLed();								/* 初始化板载LED灯 */
 	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
-	bsp_Ws2812b_Init();							/* 初始化ws2812b可调灯效 */
+	bsp_InitWs2812b();							/* 初始化ws2812b可调灯效 */
+	bsp_InitRotationSensor();					/* 初始化轮速传感器 */
+	bsp_SetTIMOutPWM(GPIOF,GPIO_PIN_6,TIM10,1,1000,50000);/* 生成一个1k，50占空比的方波 */
 	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate();
 
@@ -400,7 +412,7 @@ static void AppTaskUserIF(ULONG thread_input)
 						Ws2812b_Run_Water_Lamp(0xff,0x00,0x00,1000,gradua_on);
 					break;
 					}
-					case KEY_UP_UP:						
+					case KEY_UP_UP:
 						Ws2812b_Set_Alloff();
 						break;
 				}
@@ -505,6 +517,10 @@ static void DispTaskInfo(void)
 }
 
 
-
+void TimerCallback(ULONG thread_input)
+{
+	/* 带延迟参数，且设置大于0，都不要在定时组的回调函数里面调用 */
+	App_Printf("%.1f\r\n",Rotation_Sensor_Get(24,0.464,0.5));/* 1000HZ方波下应该121.41m/s */
+}
 
 

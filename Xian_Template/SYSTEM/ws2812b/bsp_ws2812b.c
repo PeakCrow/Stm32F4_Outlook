@@ -4,14 +4,14 @@
 static uint16_t g_Ws_2812b_lamp_buf[RESET_WORD+24*LED_NUM]={0};
 
 /*******************************************************************************
-  * @FunctionName: bsp_Ws2812b_Init
+  * @FunctionName: bsp_InitWs2812b
   * @Author:       trx
   * @DateTime:     2022年6月12日 18:45:41 
   * @Purpose:      可调灯ws2812b初始化
   * @param:        void               
   * @return:       none
 *******************************************************************************/
-void bsp_Ws2812b_Init(void)
+void bsp_InitWs2812b(void)
 {	
 	bsp_SetTIMOutPWM(GPIOA,GPIO_PIN_6,TIM3,1,800000,1000);
 }

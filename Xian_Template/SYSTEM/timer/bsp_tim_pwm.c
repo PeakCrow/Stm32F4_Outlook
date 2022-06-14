@@ -384,7 +384,8 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 	/* 下面是PWM输出 */
 	
 	bsp_ConfigTimGpio(GPIOx, GPIO_Pin, TIMx);	/* 使能GPIO和TIM时钟，并连接TIM通道到GPIO */
-	MX_DMA_Init();
+	if(TIMx == TIM3)
+		MX_DMA_Init();
 	/*-----------------------------------------------------------------------
 		system_stm32f4xx.c 文件中 void SetSysClock(void) 函数对时钟的配置如下：
 
@@ -440,10 +441,6 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 	g_TimHandle.Init.AutoReloadPreload = 0;
 	if(TIMx == TIM3)
 	{	
-//		if (HAL_TIM_PWM_DeInit(&TimHandle) != HAL_OK)
-//			{
-//				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-//			}
 		
 		if (HAL_TIM_PWM_Init(&g_TimHandle) != HAL_OK)
 			{
