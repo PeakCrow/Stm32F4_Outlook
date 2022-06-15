@@ -223,7 +223,7 @@ void bsp_ConfigTimGpio(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinX, TIM_TypeDef* TIM
 	bsp_RCC_TIM_Enable(TIMx);
 
 	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
-	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+	GPIO_InitStruct.Pull = GPIO_PULLUP;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
 	GPIO_InitStruct.Alternate = bsp_GetAFofTIM(TIMx);
 	GPIO_InitStruct.Pin = GPIO_PinX;
@@ -246,7 +246,7 @@ void bsp_ConfigGpioOut(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinX)
 	bsp_RCC_GPIO_Enable(GPIOx);		/* 使能GPIO时钟 */
 
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
-	GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+	GPIO_InitStruct.Pull = GPIO_NOPULL;
 	GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
 	GPIO_InitStruct.Pin = GPIO_PinX;
 	HAL_GPIO_Init(GPIOx, &GPIO_InitStruct);
@@ -254,7 +254,7 @@ void bsp_ConfigGpioOut(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinX)
 
 void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim)
 {
-	HAL_TIM_PWM_Stop_DMA(htim, TIM_CHANNEL_1);
+	HAL_TIM_PWM_Stop_DMA(&g_TimHandle, TIM_CHANNEL_1);
 }
 
 void MX_DMA_Init(void)
@@ -308,7 +308,6 @@ void DMA1_Stream4_IRQHandler(void)
 void TIM3_IRQHandler(void)
 {
 	HAL_TIM_IRQHandler(&g_TimHandle);
-
 }
 
 
@@ -353,7 +352,7 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 										30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30, 30,30,30,30,30,30,30,30
 										};
 
-
+	TIM_HandleTypeDef TimHandle = {0};
 	TIM_OC_InitTypeDef sConfig = {0};	
 	uint16_t usPeriod;
 	uint16_t usPrescaler;
@@ -428,33 +427,47 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 	}
 	pulse = (_ulDutyCycle * usPeriod) / 10000;
 
-	
-	HAL_TIM_PWM_DeInit(&g_TimHandle);
-    
-	/*  PWM频率 = TIMxCLK / usPrescaler + 1）/usPeriod + 1）*/
-	g_TimHandle.Instance = TIMx;
-	g_TimHandle.Init.Prescaler         = usPrescaler;
-	g_TimHandle.Init.Period            = usPeriod;
-	g_TimHandle.Init.ClockDivision     = 0;
-	g_TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
-	g_TimHandle.Init.RepetitionCounter = 0;
-	g_TimHandle.Init.AutoReloadPreload = 0;
 	if(TIMx == TIM3)
-	{	
-		
-		if (HAL_TIM_PWM_Init(&g_TimHandle) != HAL_OK)
-			{
-				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-			}
-		
-	}
+		HAL_TIM_PWM_DeInit(&g_TimHandle);
 	else
-	{
-		if (HAL_TIM_PWM_Init(&g_TimHandle) != HAL_OK)
-			{
-				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-			}
-	}
+		HAL_TIM_PWM_DeInit(&TimHandle);
+    if(TIMx == TIM3)
+		{
+			/*  PWM频率 = TIMxCLK / usPrescaler + 1）/usPeriod + 1）*/
+			g_TimHandle.Instance = TIMx;
+			g_TimHandle.Init.Prescaler         = usPrescaler;
+			g_TimHandle.Init.Period            = usPeriod;
+			g_TimHandle.Init.ClockDivision     = 0;
+			g_TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+			g_TimHandle.Init.RepetitionCounter = 0;
+			g_TimHandle.Init.AutoReloadPreload = 0;
+		}
+	else
+		{	/*  PWM频率 = TIMxCLK / usPrescaler + 1）/usPeriod + 1）*/
+			TimHandle.Instance = TIMx;
+			TimHandle.Init.Prescaler         = usPrescaler;
+			TimHandle.Init.Period            = usPeriod;
+			TimHandle.Init.ClockDivision     = 0;
+			TimHandle.Init.CounterMode       = TIM_COUNTERMODE_UP;
+			TimHandle.Init.RepetitionCounter = 0;
+			TimHandle.Init.AutoReloadPreload = 0;
+		}
+	if(TIMx == TIM3)
+		{	
+			
+			if (HAL_TIM_PWM_Init(&g_TimHandle) != HAL_OK)
+				{
+					printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+				}
+			
+		}
+	else
+		{
+			if (HAL_TIM_PWM_Init(&TimHandle) != HAL_OK)
+				{
+					printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+				}
+		}
 
 
 	/* 配置定时器PWM输出通道 */
@@ -467,28 +480,39 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 
 	/* 占空比 */
 	sConfig.Pulse = pulse;
-	if (HAL_TIM_PWM_ConfigChannel(&g_TimHandle, &sConfig, TimChannel[_ucChannel]) != HAL_OK)
-	{
-		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-	}
+	if(TIMx == TIM3)
+		{
+			if (HAL_TIM_PWM_ConfigChannel(&g_TimHandle, &sConfig, TimChannel[_ucChannel]) != HAL_OK)
+				{
+					printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+				}
+		}
+	else
+		{
+			if (HAL_TIM_PWM_ConfigChannel(&TimHandle, &sConfig, TimChannel[_ucChannel]) != HAL_OK)
+				{
+					printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+				}
+		}
+
 	
 	/* 启动PWM输出 */
 	if(TIMx == TIM3)
-	{
-		if(HAL_TIM_PWM_Start_DMA(&g_TimHandle,TimChannel[_ucChannel],(uint32_t*)pwm_led4,sizeof(pwm_led4)/sizeof(pwm_led4[0])) != HAL_OK)//以DMA模式开启PWM生成
-			{
-				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-			}
-	}
+		{
+			if (HAL_TIM_PWM_Start_DMA(&g_TimHandle,TimChannel[_ucChannel],(uint32_t*)pwm_led4,sizeof(pwm_led4)/sizeof(pwm_led4[0])) != HAL_OK)//以DMA模式开启PWM生成
+				{
+					printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+				}
+		}
 	else
-	{
-		if (HAL_TIM_PWM_Start(&g_TimHandle, TimChannel[_ucChannel]) != HAL_OK)
-			{
-				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-			}
-	}
-
+		{
+			if (HAL_TIM_PWM_Start(&TimHandle, TimChannel[_ucChannel]) != HAL_OK)
+				{
+					printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+				}
+		}
 }
+
 
 /*
 *********************************************************************************************************

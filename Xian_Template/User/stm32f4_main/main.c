@@ -256,7 +256,7 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
 	bsp_InitWs2812b();							/* 初始化ws2812b可调灯效 */
 	bsp_InitRotationSensor();					/* 初始化轮速传感器 */
-	bsp_SetTIMOutPWM(GPIOF,GPIO_PIN_6,TIM10,1,1000,50000);/* 生成一个1k，50占空比的方波 */
+	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* 生成一个1k，50占空比的方波，用来验证脉冲计数 */
 	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate();
 
@@ -431,17 +431,12 @@ static void AppTaskUserIF(ULONG thread_input)
 *********************************************************************************************************
 */
 static void AppTaskCOM(ULONG thread_input)
-{	
-//	double f_c = 1.1;
-//	double f_d = 2.2345;
-	
+{
+
 	(void)thread_input;
 	App_Printf("AppTaskCom任务开始执行\r\n");
 	while(1)
 	{
-//		f_c += 0.00000000001;
-//		f_d -= 0.00000000002;;
-//		App_Printf("AppTaskCom: f_a = %.11f, f_b = %.11f\r\n", f_c, f_d);
         bsp_LedToggle(2);
 		bsp_LedToggle(1);
         tx_thread_sleep(1000);
@@ -520,7 +515,7 @@ static void DispTaskInfo(void)
 void TimerCallback(ULONG thread_input)
 {
 	/* 带延迟参数，且设置大于0，都不要在定时组的回调函数里面调用 */
-	App_Printf("%.1f\r\n",Rotation_Sensor_Get(24,0.464,0.5));/* 1000HZ方波下应该121.41m/s */
+	App_Printf("%.1f\r\n",Rotation_Sensor_Get(24,0.464));/* 1000HZ方波下应该121.41m/s */
 }
 
 
