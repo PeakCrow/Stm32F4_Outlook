@@ -288,7 +288,7 @@ Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=..\obj\tx_thread_stack_build.d -o..\obj\tx_thread_stack_buil
 d.o -I.\RTE\Compiler -I.\RTE\_xian -ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\
 ARM_Compiler\1.7.0\Include -ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F4x
-x_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__MICROLIB 
+x_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__MICROLIB 
 SETA 1" --predefine="__UVISION_VERSION SETA 536" --predefine="_RTE_ SETA 1" --p
 redefine="STM32F407xx SETA 1" --predefine="_RTE_ SETA 1" --predefine="TX_ENABLE
 _FPU_SUPPORT SETA 1" --list=.\listings\tx_thread_stack_build.lst ..\ThreadX\por

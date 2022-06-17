@@ -42,6 +42,7 @@
 #include "bsp_tim_pwm.h"			/* 定时器中断初始化和PWM初始化 */
 #include "bsp_ws2812b.h"			/* ws2812b三色RGB灯 */
 #include "bsp_rotation_sensor.h"	/* 轮速传感器 */
+#include "bsp_spi_ads1256.h"		/* 24位ADC模拟量采集 */
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug调试组件 */
 #endif

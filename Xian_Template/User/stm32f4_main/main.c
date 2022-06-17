@@ -25,7 +25,7 @@
 #define  APP_CFG_TASK_COM_PRIO                            5u
 #define  APP_CFG_TASK_STAT_PRIO                           30u
 #define  APP_CFG_TASK_IDLE_PRIO                           31u
-
+#define  APP_CFG_TASK_READC_PRIO						  6u
 
 /*
 *********************************************************************************************************
@@ -38,6 +38,7 @@
 #define  APP_CFG_TASK_USER_IF_STK_SIZE                  1024u
 #define  APP_CFG_TASK_IDLE_STK_SIZE                  	1024u
 #define  APP_CFG_TASK_STAT_STK_SIZE                  	1024u
+#define  APP_CFG_TASK_READC_STK_SIZE                    1024u
 
 /*
 *********************************************************************************************************
@@ -59,7 +60,22 @@ static  uint64_t    AppTaskIdleStk[APP_CFG_TASK_IDLE_STK_SIZE/8];
 static  TX_THREAD   AppTaskStatTCB;
 static  uint64_t    AppTaskStatStk[APP_CFG_TASK_STAT_STK_SIZE/8];
 
+static  TX_THREAD	AppTaskReadAdcTCB;
+static  uint64_t	AppTaskReadAdcStk[APP_CFG_TASK_READC_STK_SIZE/8];
+
+
+/*
+*********************************************************************************************************
+*                                       软件定时器变量
+*********************************************************************************************************
+*/
 TX_TIMER AppTimer;
+
+/*
+*********************************************************************************************************
+*                                       软件定时器回调函数
+*********************************************************************************************************
+*/
 void TimerCallback(ULONG thread_input);
 
 
@@ -73,6 +89,7 @@ static  void  AppTaskUserIF         (ULONG thread_input);
 static  void  AppTaskCOM			(ULONG thread_input);
 static  void  AppTaskIDLE			(ULONG thread_input);
 static  void  AppTaskStat			(ULONG thread_input);
+static  void  AppTaskREADADC		(ULONG thread_input);
 static  void  App_Printf 			(const char *fmt, ...);
 static  void  AppTaskCreate         (void);
 static  void  DispTaskInfo          (void);
@@ -256,7 +273,8 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
 	bsp_InitWs2812b();							/* 初始化ws2812b可调灯效 */
 	bsp_InitRotationSensor();					/* 初始化轮速传感器 */
-	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* 生成一个1k，50占空比的方波，用来验证脉冲计数 */
+	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* 生成一个1k，50占空比的方波，用来验证脉冲计数 */	
+	bsp_InitADS1256();							/* 初始化配置ADS1256.  PGA=1, DRATE=30KSPS, BUFEN=1, 输入正负5V */
 	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate();
 
@@ -373,8 +391,75 @@ static  void  AppTaskCreate (void)
                        APP_CFG_TASK_COM_PRIO,        	/* 任务抢占阀值 */
                        TX_NO_TIME_SLICE,             	/* 不开启时间片 */
                        TX_AUTO_START);               	/* 创建后立即启动 */
+
+	/**************创建READ ADC任务*********************/
+    tx_thread_create(&AppTaskReadAdcTCB,               		/* 任务控制块地址 */    
+                       "App Task ReadAdc",              	/* 任务名 */
+                       AppTaskREADADC,                  	/* 启动任务函数地址 */
+                       0,                           	/* 传递给任务的参数 */
+                       &AppTaskReadAdcStk[0],            	/* 堆栈基地址 */
+                       APP_CFG_TASK_READC_STK_SIZE,    	/* 堆栈空间大小 */  
+                       APP_CFG_TASK_READC_PRIO,        	/* 任务优先级*/
+                       APP_CFG_TASK_READC_PRIO,        	/* 任务抢占阀值 */
+                       TX_NO_TIME_SLICE,             	/* 不开启时间片 */
+                       TX_AUTO_START);               	/* 创建后立即启动 */
+
 }
 
+
+
+static  void  AppTaskREADADC	(ULONG thread_input)
+{
+	(VOID)thread_input;
+	uint8_t i;
+	int32_t iTemp;
+	float fTemp;
+		/* 打印芯片ID (通过读ID可以判断硬件接口是否正常) , 正常时状态寄存器的高4bit = 3 */
+#if 1
+		{
+			uint8_t id;
+	
+			id = ADS1256_ReadChipID();
+	
+			if (id != 3)
+			{
+				App_Printf("Error, ASD1256 Chip ID = 0x%X\r\n", id);
+			}
+			else
+			{
+				App_Printf("Ok, ASD1256 Chip ID = 0x%X\r\n", id);
+			}
+		}
+#endif
+		
+		ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_30SPS);	/* 配置ADC参数： 增益1:1, 数据输出速率 30Hz */
+	
+		ADS1256_StartScan();	/* 启动中断扫描模式, 轮流采集8个通道的ADC数据. 通过 ADS1256_GetAdc() 函数来读取这些数据 */
+while (1)
+	{
+		/* 打印采集数据 */
+		for (i = 0; i < 8; i++)
+			{
+
+			    /*
+			        计算公式 = 2 * VREF/(PGA * (2^23 - 1)) ，这里VREF是2.5V，PGA = 1
+			        计算实际电压值（近似估算的），如需准确，请进行校准
+			    */
+				iTemp = ((int64_t)g_tADS1256.AdcNow[i] * 2500000) / 4194303; 
+				
+				fTemp = (float)iTemp / 1000000;   
+
+				App_Printf("CH%d=%07d(%fV) ", i, g_tADS1256.AdcNow[i], fTemp);
+
+				if(i == 3)
+					{
+						App_Printf("\r\n");
+					}
+			}
+		App_Printf("\r\n\r\n");
+		tx_thread_sleep(1000);
+	}
+}
 
 
 /*
@@ -395,11 +480,10 @@ static void AppTaskUserIF(ULONG thread_input)
 		ucKeyCode = bsp_GetKey();
 		if (ucKeyCode != KEY_NONE)
 		{
-			
 				switch(ucKeyCode)
 				{
 					case KEY_0_UP: 			  /* K1键按打印任务执行情况 */
-					 	DispTaskInfo();
+					 	//DispTaskInfo();
 					 	break;
 					case KEY_UP_DOWN:			/* kup按键按下 */
 						App_Printf("kup按键按下\r\n");				//红色	
@@ -409,7 +493,7 @@ static void AppTaskUserIF(ULONG thread_input)
 						App_Printf("k0按键按下\r\n");
 						//Ws2812b_Gradient_Lamp(Red,Yellow,10);
 						//Ws2812b_Rgb_SetIndexPartColor(5,10,0xff,0xff,0x00);
-						Ws2812b_Run_Water_Lamp(0xff,0x00,0x00,1000,gradua_on);
+						Ws2812b_Run_Water_Lamp(0xff,0x00,0x00,1000,gradua_on);/* 当按下key0后，会进行12s的延时，才能触发下次的按键输入bug */
 					break;
 					}
 					case KEY_UP_UP:
@@ -515,7 +599,7 @@ static void DispTaskInfo(void)
 void TimerCallback(ULONG thread_input)
 {
 	/* 带延迟参数，且设置大于0，都不要在定时组的回调函数里面调用 */
-	App_Printf("%.1f\r\n",Rotation_Sensor_Get(24,0.464));/* 1000HZ方波下应该121.41m/s */
+	App_Printf("%.1fm/s\r\n",Rotation_Sensor_Get(24,0.464));/* 1000HZ方波下应该121.41m/s */
 }
 
 
