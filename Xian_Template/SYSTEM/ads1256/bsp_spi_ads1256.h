@@ -73,7 +73,7 @@ typedef struct
 	ADS1256_GAIN_E Gain;		/* 增益 */
 	ADS1256_DRATE_E DataRate;	/* 数据输出速率 */
 	int32_t AdcNow[8];			/* 8路ADC采集结果（实时）有符号数 */
-	uint8_t Channel;			/* 当前通道 */	
+	uint8_t Channel;			/* 当前通道 */
 }ADS1256_VAR_T;
 
 void bsp_InitADS1256(void);

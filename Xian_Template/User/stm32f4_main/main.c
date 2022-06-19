@@ -457,7 +457,7 @@ while (1)
 					}
 			}
 		App_Printf("\r\n\r\n");
-		tx_thread_sleep(1000);
+		tx_thread_sleep(100);
 	}
 }
 

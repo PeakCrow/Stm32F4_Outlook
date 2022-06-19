@@ -322,7 +322,8 @@ void ADS1256_CfgADC(ADS1256_GAIN_E _gain, ADS1256_DRATE_E _drate)
 
 			ACAL=1使能自校准功能。当 PGA，BUFEEN, DRATE改变时会启动自校准
 		*/
-		buf[0] = (0 << 3) | (1 << 2) | (1 << 1);
+		//buf[0] = (0 << 3) | (1 << 2) | (1 << 1);		
+		buf[0] = (0 << 3) | (0 << 2) | (1 << 1);
 		//ADS1256_WriteReg(REG_STATUS, (0 << 3) | (1 << 2) | (1 << 1));
 		
 		buf[1] = 0x08;	/* 高四位0表示AINP接 AIN0,  低四位8表示 AINN 固定接 AINCOM */
@@ -360,7 +361,7 @@ void ADS1256_CfgADC(ADS1256_GAIN_E _gain, ADS1256_DRATE_E _drate)
 		/* 因为切换通道和读数据耗时 123uS, 因此扫描中断模式工作时，最大速率 = DRATE_1000SPS */
 		buf[3] = s_tabDataRate[_drate];	// DRATE_10SPS;	/* 选择数据输出速率 */
 		
-		CS_0();	/* SPI片选 = 0 */
+		CS_0();							/* SPI片选 = 0 */
 		ADS1256_Send8Bit(CMD_WREG | 0);	/* 写寄存器的命令, 并发送寄存器地址 */
 		ADS1256_Send8Bit(0x03);			/* 寄存器个数 - 1, 此处3表示写4个寄存器 */
 		
@@ -368,8 +369,7 @@ void ADS1256_CfgADC(ADS1256_GAIN_E _gain, ADS1256_DRATE_E _drate)
 		ADS1256_Send8Bit(buf[1]);	/* 设置输入通道参数 */
 		ADS1256_Send8Bit(buf[2]);	/* 设置ADCON控制寄存器，增益 */
 		ADS1256_Send8Bit(buf[3]);	/* 设置ADC采样率 */
-		
-		CS_1();	/* SPI片选 = 1 */		
+		CS_1();						/* SPI片选 = 1 */		
 	}
 
 	bsp_DelayUS(50);	
