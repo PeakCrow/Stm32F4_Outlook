@@ -323,7 +323,7 @@ void ADS1256_CfgADC(ADS1256_GAIN_E _gain, ADS1256_DRATE_E _drate)
 			ACAL=1使能自校准功能。当 PGA，BUFEEN, DRATE改变时会启动自校准
 		*/
 		//buf[0] = (0 << 3) | (1 << 2) | (1 << 1);		
-		buf[0] = (0 << 3) | (0 << 2) | (1 << 1);
+		buf[0] = (0 << 3) | (1 << 2) | (0 << 1);		/* 关闭BUFFEN位才可以测量5v电压信号 */
 		//ADS1256_WriteReg(REG_STATUS, (0 << 3) | (1 << 2) | (1 << 1));
 		
 		buf[1] = 0x08;	/* 高四位0表示AINP接 AIN0,  低四位8表示 AINN 固定接 AINCOM */

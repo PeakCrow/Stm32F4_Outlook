@@ -437,14 +437,15 @@ static  void  AppTaskREADADC	(ULONG thread_input)
 		ADS1256_StartScan();	/* 启动中断扫描模式, 轮流采集8个通道的ADC数据. 通过 ADS1256_GetAdc() 函数来读取这些数据 */
 while (1)
 	{
+		#if 0
 		/* 打印采集数据 */
 		for (i = 0; i < 8; i++)
 			{
 
-			    /*
-			        计算公式 = 2 * VREF/(PGA * (2^23 - 1)) ，这里VREF是2.5V，PGA = 1
-			        计算实际电压值（近似估算的），如需准确，请进行校准
-			    */
+			    
+			        //计算公式 = 2 * VREF/(PGA * (2^23 - 1)) ，这里VREF是2.5V，PGA = 1
+			        //计算实际电压值（近似估算的），如需准确，请进行校准
+			    
 				iTemp = ((int64_t)g_tADS1256.AdcNow[i] * 2500000) / 4194303; 
 				
 				fTemp = (float)iTemp / 1000000;   
@@ -457,6 +458,14 @@ while (1)
 					}
 			}
 		App_Printf("\r\n\r\n");
+		#else
+		iTemp = ((int64_t)g_tADS1256.AdcNow[5] * 2500000) / 4194303; 
+		
+		fTemp = (float)iTemp / 1000000;   
+		
+		App_Printf("CH%d=%07d(%fV) ", i, g_tADS1256.AdcNow[5], fTemp);
+		App_Printf("\r\n");
+		#endif
 		tx_thread_sleep(100);
 	}
 }
