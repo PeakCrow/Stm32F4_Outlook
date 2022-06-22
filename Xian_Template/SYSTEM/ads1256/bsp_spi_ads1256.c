@@ -80,7 +80,7 @@
 
 	#define DIN_CLK_ENABLE() 	__HAL_RCC_GPIOG_CLK_ENABLE()
 	#define DIN_GPIO			GPIOG
-	#define DIN_PIN				GPIO_PIN_10
+	#define DIN_PIN				GPIO_PIN_11
 	#define DIN_1()				DIN_GPIO->BSRR = DIN_PIN
 	#define DIN_0()				DIN_GPIO->BSRR = ((uint32_t)DIN_PIN << 16U)	
 

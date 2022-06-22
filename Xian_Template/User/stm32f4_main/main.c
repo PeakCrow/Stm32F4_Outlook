@@ -26,6 +26,8 @@
 #define  APP_CFG_TASK_STAT_PRIO                           30u
 #define  APP_CFG_TASK_IDLE_PRIO                           31u
 #define  APP_CFG_TASK_READC_PRIO						  6u
+#define  APP_CFG_TASK_TFTLCD_PRIO						  7u
+
 
 /*
 *********************************************************************************************************
@@ -39,6 +41,8 @@
 #define  APP_CFG_TASK_IDLE_STK_SIZE                  	1024u
 #define  APP_CFG_TASK_STAT_STK_SIZE                  	1024u
 #define  APP_CFG_TASK_READC_STK_SIZE                    1024u
+#define  APP_CFG_TASK_TFTLCD_STK_SIZE                    1024u
+
 
 /*
 *********************************************************************************************************
@@ -62,6 +66,9 @@ static  uint64_t    AppTaskStatStk[APP_CFG_TASK_STAT_STK_SIZE/8];
 
 static  TX_THREAD	AppTaskReadAdcTCB;
 static  uint64_t	AppTaskReadAdcStk[APP_CFG_TASK_READC_STK_SIZE/8];
+
+static  TX_THREAD	AppTaskTFTLCDTCB;
+static  uint64_t	AppTaskTFTLCDStk[APP_CFG_TASK_TFTLCD_STK_SIZE/8];
 
 
 /*
@@ -275,6 +282,7 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_InitRotationSensor();					/* 初始化轮速传感器 */
 	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* 生成一个1k，50占空比的方波，用来验证脉冲计数 */	
 	bsp_InitADS1256();							/* 初始化配置ADS1256.  PGA=1, DRATE=30KSPS, BUFEN=1, 输入正负5V */
+	bsp_Initlcd();								/* 初始化LCD屏幕 */
 	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate();
 
@@ -356,7 +364,27 @@ static void AppTaskIDLE(ULONG thread_input)
 /******************************************创建下面是子任务**********************************************/
 /******************************************创建下面是子任务**********************************************/
 /******************************************创建下面是子任务**********************************************/
+static void AppTaskTFTLCD    (ULONG thread_input)
+{
+	(VOID)thread_input;
+	uint8_t lcd_id[12];				//存放LCD ID字符串
+	
+	App_Printf((char*)lcd_id,"LCD ID:%04X",lcddev.id);
 
+	POINT_COLOR=TFT_RED;
+	LCD_ShowString(30,50,200,16,16,"Explorer STM32F4");	
+	LCD_ShowString(30,70,200,16,16,"TOUCH TEST");	
+	LCD_ShowString(30,90,200,16,16,"ATOM@ALIENTEK");
+	LCD_ShowString(30,110,200,16,16,"2017/4/14");
+
+	while (1)
+		{
+			LCD_Clear(TFT_GREEN);
+			tx_thread_sleep(1000);
+			LCD_Clear(TFT_BLUE);
+			tx_thread_sleep(1000);
+		}
+}
 
 /*
 *********************************************************************************************************
@@ -401,6 +429,18 @@ static  void  AppTaskCreate (void)
                        APP_CFG_TASK_READC_STK_SIZE,    	/* 堆栈空间大小 */  
                        APP_CFG_TASK_READC_PRIO,        	/* 任务优先级*/
                        APP_CFG_TASK_READC_PRIO,        	/* 任务抢占阀值 */
+                       TX_NO_TIME_SLICE,             	/* 不开启时间片 */
+                       TX_AUTO_START);               	/* 创建后立即启动 */
+	
+	/**************创建READ ADC任务*********************/
+    tx_thread_create(&AppTaskTFTLCDTCB,               		/* 任务控制块地址 */    
+                       "App Task TFTLCD",              	/* 任务名 */
+                       AppTaskTFTLCD,                  	/* 启动任务函数地址 */
+                       0,                           	/* 传递给任务的参数 */
+                       &AppTaskTFTLCDStk[0],            	/* 堆栈基地址 */
+                       APP_CFG_TASK_TFTLCD_STK_SIZE,    	/* 堆栈空间大小 */  
+                       APP_CFG_TASK_TFTLCD_PRIO,        	/* 任务优先级*/
+                       APP_CFG_TASK_TFTLCD_PRIO,        	/* 任务抢占阀值 */
                        TX_NO_TIME_SLICE,             	/* 不开启时间片 */
                        TX_AUTO_START);               	/* 创建后立即启动 */
 

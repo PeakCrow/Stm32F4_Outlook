@@ -1,5 +1,5 @@
-#ifndef _SYS_H
-#define _SYS_H
+#ifndef _SYS_H_
+#define _SYS_H_
 
 /*
 *********************************************************************************************************
@@ -43,6 +43,10 @@
 #include "bsp_ws2812b.h"			/* ws2812b三色RGB灯 */
 #include "bsp_rotation_sensor.h"	/* 轮速传感器 */
 #include "bsp_spi_ads1256.h"		/* 24位ADC模拟量采集 */
+
+#include "bsp_font.h"
+#include "bsp_lcd.h"
+
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug调试组件 */
 #endif
@@ -57,40 +61,6 @@ extern void SysTick_ISR(void);		/* 滴答定时器中断外部文件声明 */
 
 #define bsp_ProPer1ms  SysTick_ISR
 
-
-//定义一些常用的数据类型短关键字 
-typedef int32_t  		s32;
-typedef int16_t 		s16;
-typedef int8_t  		s8;
-
-typedef const int32_t	sc32;
-typedef const int16_t	sc16;
-typedef const int8_t	sc8;
-
-typedef __IO int32_t 	vs32;
-typedef __IO int16_t 	vs16;
-typedef __IO int8_t  	vs8;
-
-typedef __I int32_t 	vsc32;
-typedef __I int16_t 	vsc16;
-typedef __I int8_t 		vsc8;
-
-typedef uint32_t  		u32;
-typedef uint16_t 		u16;
-typedef uint8_t  		u8;
-
-typedef const uint32_t 	uc32;
-typedef const uint16_t 	uc16;
-typedef const uint8_t 	uc8;
-
-typedef __IO uint32_t  	vu32;
-typedef __IO uint16_t 	vu16;
-typedef __IO uint8_t  	vu8;
-
-typedef __I uint32_t 	vuc32;
-typedef __I uint16_t 	vuc16;
-typedef __I uint8_t 	vuc8;
-	 
 //位带操作,实现51类似的GPIO控制功能
 //具体实现思想,参考<<CM3权威指南>>第五章(87页~92页).M4同M3类似,只是寄存器地址变了.
 //IO口操作宏定义
@@ -156,6 +126,40 @@ typedef __I uint8_t 	vuc8;
 
 #define PKout(n)   BIT_ADDR(GPIOK_ODR_Addr,n)	//输出 
 #define PKin(n)    BIT_ADDR(GPIOK_IDR_Addr,n)	//输入 
+
+
+//定义一些常用的数据类型短关键字 
+typedef int32_t  s32;
+typedef int16_t s16;
+typedef int8_t  s8;
+
+typedef const int32_t sc32;  
+typedef const int16_t sc16;  
+typedef const int8_t sc8;  
+
+typedef __IO int32_t  vs32;
+typedef __IO int16_t  vs16;
+typedef __IO int8_t   vs8;
+
+typedef __I int32_t vsc32;  
+typedef __I int16_t vsc16; 
+typedef __I int8_t vsc8;   
+
+typedef uint32_t  u32;
+typedef uint16_t u16;
+typedef uint8_t  u8;
+
+typedef const uint32_t uc32;  
+typedef const uint16_t uc16;  
+typedef const uint8_t uc8; 
+
+typedef __IO uint32_t  vu32;
+typedef __IO uint16_t vu16;
+typedef __IO uint8_t  vu8;
+
+typedef __I uint32_t vuc32;  
+typedef __I uint16_t vuc16; 
+typedef __I uint8_t vuc8;
 
 void Stm32_Clock_Init(u32 plln,u32 pllm,u32 pllp,u32 pllq);//时钟系统配置
 /*
