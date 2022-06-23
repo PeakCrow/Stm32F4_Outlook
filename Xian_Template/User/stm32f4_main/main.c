@@ -41,7 +41,7 @@
 #define  APP_CFG_TASK_IDLE_STK_SIZE                  	1024u
 #define  APP_CFG_TASK_STAT_STK_SIZE                  	1024u
 #define  APP_CFG_TASK_READC_STK_SIZE                    1024u
-#define  APP_CFG_TASK_TFTLCD_STK_SIZE                    1024u
+#define  APP_CFG_TASK_TFTLCD_STK_SIZE                   1024u
 
 
 /*
@@ -97,6 +97,7 @@ static  void  AppTaskCOM			(ULONG thread_input);
 static  void  AppTaskIDLE			(ULONG thread_input);
 static  void  AppTaskStat			(ULONG thread_input);
 static  void  AppTaskREADADC		(ULONG thread_input);
+static  void  AppTaskTFTLCD			(ULONG thread_input);
 static  void  App_Printf 			(const char *fmt, ...);
 static  void  AppTaskCreate         (void);
 static  void  DispTaskInfo          (void);
@@ -146,7 +147,7 @@ int main(void)
 
 void bsp_RunPer10ms()
 {
-		bsp_Key_Scan10ms();	/* 轻触按键扫描函数 */
+	bsp_Key_Scan10ms();	/* 轻触按键扫描函数 */
 }
 /*
 *********************************************************************************************************
@@ -364,27 +365,7 @@ static void AppTaskIDLE(ULONG thread_input)
 /******************************************创建下面是子任务**********************************************/
 /******************************************创建下面是子任务**********************************************/
 /******************************************创建下面是子任务**********************************************/
-static void AppTaskTFTLCD    (ULONG thread_input)
-{
-	(VOID)thread_input;
-	uint8_t lcd_id[12];				//存放LCD ID字符串
-	
-	App_Printf((char*)lcd_id,"LCD ID:%04X",lcddev.id);
 
-	POINT_COLOR=TFT_RED;
-	LCD_ShowString(30,50,200,16,16,"Explorer STM32F4");	
-	LCD_ShowString(30,70,200,16,16,"TOUCH TEST");	
-	LCD_ShowString(30,90,200,16,16,"ATOM@ALIENTEK");
-	LCD_ShowString(30,110,200,16,16,"2017/4/14");
-
-	while (1)
-		{
-			LCD_Clear(TFT_GREEN);
-			tx_thread_sleep(1000);
-			LCD_Clear(TFT_BLUE);
-			tx_thread_sleep(1000);
-		}
-}
 
 /*
 *********************************************************************************************************
@@ -446,8 +427,44 @@ static  void  AppTaskCreate (void)
 
 }
 
+/*******************************************************************************
+  * @FunctionName: AppTaskTFTLCD
+  * @Author:       trx
+  * @DateTime:     2022年6月23日21:03:00 
+  * @Purpose:      lcd屏幕测试任务
+  * @param:        thread_input
+  * @return:       none
+*******************************************************************************/
+static void AppTaskTFTLCD    (ULONG thread_input)
+{
+	(VOID)thread_input;
+	uint8_t lcd_id[12];				//存放LCD ID字符串
+	
+	App_Printf((char*)lcd_id,"LCD ID:%04X",lcddev.id);
 
+	POINT_COLOR=TFT_RED;
+	LCD_ShowString(30,50,200,16,16,"Explorer STM32F4");	
+	LCD_ShowString(30,70,200,16,16,"TOUCH TEST");	
+	LCD_ShowString(30,90,200,16,16,"ATOM@ALIENTEK");
+	LCD_ShowString(30,110,200,16,16,"2017/4/14");
 
+	while (1)
+		{
+			LCD_Clear(TFT_GREEN);
+			tx_thread_sleep(1000);
+			LCD_Clear(TFT_BLUE);
+			tx_thread_sleep(1000);
+		}
+}
+
+/*******************************************************************************
+  * @FunctionName: AppTaskREADADC
+  * @Author:       trx
+  * @DateTime:     2022年6月23日21:03:14 
+  * @Purpose:      adc数据读取任务
+  * @param:        thread_input
+  * @return:       none
+*******************************************************************************/
 static  void  AppTaskREADADC	(ULONG thread_input)
 {
 	(VOID)thread_input;
@@ -573,7 +590,7 @@ static void AppTaskCOM(ULONG thread_input)
         bsp_LedToggle(2);
 		bsp_LedToggle(1);
         tx_thread_sleep(1000);
-	} 			  	 	       											   
+	}
 }
 
 /*
@@ -644,7 +661,14 @@ static void DispTaskInfo(void)
 	}
 }
 
-
+/*******************************************************************************
+  * @FunctionName: TimerCallback
+  * @Author:       trx
+  * @DateTime:     2022年6月23日21:04:39 
+  * @Purpose:      轮速数据读取，软件定时器回调函数
+  * @param:        thread_input
+  * @return:       none
+*******************************************************************************/
 void TimerCallback(ULONG thread_input)
 {
 	/* 带延迟参数，且设置大于0，都不要在定时组的回调函数里面调用 */

@@ -1,12 +1,11 @@
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'xian'
 compiling main.c...
-stm32f4_main\main.c(617): warning:  #177-D: function "DispTaskInfo"  was declared but never referenced
+stm32f4_main\main.c(634): warning:  #177-D: function "DispTaskInfo"  was declared but never referenced
   static void DispTaskInfo(void)
 stm32f4_main\main.c: 1 warning, 0 errors
-compiling bsp_spi_ads1256.c...
 linking...
 Program Size: Code=42340 RO-data=18768 RW-data=1396 ZI-data=27656  
 FromELF: creating hex file...
 "..\Obj\Run_Xian.axf" - 0 Error(s), 1 Warning(s).
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:03
