@@ -41,3 +41,5 @@
 
 #### 目前使用的PIN
 ![输入图片说明](Xian_Template/doc/%E5%B7%B2%E9%85%8D%E7%BD%AEPIN.png)
+#### PC端模拟器效果
+![输入图片说明](Xian_Template/doc/PC%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%95%88%E6%9E%9C.png)
