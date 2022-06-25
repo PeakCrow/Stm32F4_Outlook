@@ -1,0 +1,7 @@
+﻿  Monitor.cpp
+D:\stm32F407zet6Template\lvgl_monitor\lv_sim_visual_studio\Monitor.cpp(49,48): warning C4244: “参数”: 从“double”转换到“lv_coord_t”，可能丢失数据
+D:\stm32F407zet6Template\lvgl_monitor\lv_sim_visual_studio\Monitor.cpp(51,49): warning C4244: “参数”: 从“double”转换到“lv_coord_t”，可能丢失数据
+D:\stm32F407zet6Template\lvgl_monitor\lv_sim_visual_studio\Monitor.cpp(109,71): warning C4244: “参数”: 从“double”转换到“int16_t”，可能丢失数据
+D:\stm32F407zet6Template\lvgl_monitor\lv_sim_visual_studio\Monitor.cpp(163,46): warning C4244: “参数”: 从“double”转换到“lv_coord_t”，可能丢失数据
+D:\stm32F407zet6Template\lvgl_monitor\lv_sim_visual_studio\Monitor.cpp(165,47): warning C4244: “参数”: 从“double”转换到“lv_coord_t”，可能丢失数据
+  LVGL.Simulator.vcxproj -> D:\stm32F407zet6Template\lvgl_monitor\lv_sim_visual_studio\Output\Binaries\Debug\x64\LVGL.Simulator.exe
