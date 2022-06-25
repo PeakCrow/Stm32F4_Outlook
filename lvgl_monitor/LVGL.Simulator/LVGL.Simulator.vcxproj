@@ -16,7 +16,7 @@
   <Import Project="Mile.Project.Windows.Legacy\Mile.Project.Cpp.props" />
   <Import Project="freetype.props" />
   <PropertyGroup>
-    <IncludePath>D:\lvgl_monitor\lv_sim_visual_studio;$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
+    <IncludePath>E:\stm32F407zet6Template\lvgl_monitor;D:\lvgl_monitor\lv_sim_visual_studio;$(MSBuildThisFileDirectory);$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>

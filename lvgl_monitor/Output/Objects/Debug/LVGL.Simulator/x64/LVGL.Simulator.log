@@ -1,7 +1,498 @@
-﻿  Monitor.cpp
-D:\stm32F407zet6Template\lvgl_monitor\lv_sim_visual_studio\Monitor.cpp(49,48): warning C4244: “参数”: 从“double”转换到“lv_coord_t”，可能丢失数据
-D:\stm32F407zet6Template\lvgl_monitor\lv_sim_visual_studio\Monitor.cpp(51,49): warning C4244: “参数”: 从“double”转换到“lv_coord_t”，可能丢失数据
-D:\stm32F407zet6Template\lvgl_monitor\lv_sim_visual_studio\Monitor.cpp(109,71): warning C4244: “参数”: 从“double”转换到“int16_t”，可能丢失数据
-D:\stm32F407zet6Template\lvgl_monitor\lv_sim_visual_studio\Monitor.cpp(163,46): warning C4244: “参数”: 从“double”转换到“lv_coord_t”，可能丢失数据
-D:\stm32F407zet6Template\lvgl_monitor\lv_sim_visual_studio\Monitor.cpp(165,47): warning C4244: “参数”: 从“double”转换到“lv_coord_t”，可能丢失数据
-  LVGL.Simulator.vcxproj -> D:\stm32F407zet6Template\lvgl_monitor\lv_sim_visual_studio\Output\Binaries\Debug\x64\LVGL.Simulator.exe
+﻿  GC9A01.c
+  ILI9341.c
+  R61581.c
+  SHARP_MIP.c
+  SSD1963.c
+  ST7565.c
+  UC1610.c
+  drm.c
+  fbdev.c
+  gtkdrv.c
+  AD_touch.c
+  FT5406EE8.c
+  XPT2046.c
+  evdev.c
+  libinput.c
+  xkb.c
+  sdl.c
+  sdl_common.c
+  sdl_gpu.c
+  wayland.c
+  win32drv.c
+  win_drv.c
+  img_benchmark_cogwheel_alpha16.c
+  img_benchmark_cogwheel_argb.c
+  img_benchmark_cogwheel_chroma_keyed.c
+  img_benchmark_cogwheel_indexed16.c
+  img_benchmark_cogwheel_rgb.c
+  lv_font_bechmark_montserrat_12_compr_az.c.c
+  lv_font_bechmark_montserrat_16_compr_az.c.c
+  lv_font_bechmark_montserrat_28_compr_az.c.c
+  lv_demo_benchmark.c
+  lv_demo_keypad_encoder.c
+  img_lv_demo_music_btn_corner_large.c
+  img_lv_demo_music_btn_list_pause.c
+  img_lv_demo_music_btn_list_pause_large.c
+  img_lv_demo_music_btn_list_play.c
+  img_lv_demo_music_btn_list_play_large.c
+  img_lv_demo_music_btn_loop.c
+  img_lv_demo_music_btn_loop_large.c
+  img_lv_demo_music_btn_next.c
+  img_lv_demo_music_btn_next_large.c
+  img_lv_demo_music_btn_pause.c
+  img_lv_demo_music_btn_pause_large.c
+  img_lv_demo_music_btn_play.c
+  img_lv_demo_music_btn_play_large.c
+  img_lv_demo_music_btn_prev.c
+  img_lv_demo_music_btn_prev_large.c
+  img_lv_demo_music_btn_rnd.c
+  img_lv_demo_music_btn_rnd_large.c
+  img_lv_demo_music_corner_left.c
+  img_lv_demo_music_corner_left_large.c
+  img_lv_demo_music_corner_right.c
+  img_lv_demo_music_corner_right_large.c
+  img_lv_demo_music_cover_1.c
+  img_lv_demo_music_cover_1_large.c
+  img_lv_demo_music_cover_2.c
+  img_lv_demo_music_cover_2_large.c
+  img_lv_demo_music_cover_3.c
+  img_lv_demo_music_cover_3_large.c
+  img_lv_demo_music_icon_1.c
+  img_lv_demo_music_icon_1_large.c
+  img_lv_demo_music_icon_2.c
+  img_lv_demo_music_icon_2_large.c
+  img_lv_demo_music_icon_3.c
+  img_lv_demo_music_icon_3_large.c
+  img_lv_demo_music_icon_4.c
+  img_lv_demo_music_icon_4_large.c
+  img_lv_demo_music_list_border.c
+  img_lv_demo_music_list_border_large.c
+  img_lv_demo_music_logo.c
+  img_lv_demo_music_slider_knob.c
+  img_lv_demo_music_slider_knob_large.c
+  img_lv_demo_music_wave_bottom.c
+  img_lv_demo_music_wave_bottom_large.c
+  img_lv_demo_music_wave_top.c
+  img_lv_demo_music_wave_top_large.c
+  lv_demo_music.c
+  lv_demo_music_list.c
+  lv_demo_music_main.c
+  lv_demo_stress.c
+  img_clothes.c
+  img_demo_widgets_avatar.c
+  img_lvgl_logo.c
+  lv_demo_widgets.c
+  lv_example_anim_1.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\demos\music\lv_demo_music_main.c(808,18): warning C4018: “>”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\demos\music\lv_demo_music_main.c(823,23): warning C4018: “>”: 有符号/无符号不匹配
+  lv_example_anim_2.c
+  lv_example_anim_3.c
+  lv_example_anim_timeline_1.c
+  animimg001.c
+  animimg002.c
+  animimg003.c
+  img_emoji_F617.c
+  img_caret_down.c
+  img_cogwheel_alpha16.c
+  img_cogwheel_argb.c
+  img_cogwheel_chroma_keyed.c
+  img_cogwheel_indexed16.c
+  img_cogwheel_rgb.c
+  img_hand.c
+  img_skew_strip.c
+  img_star.c
+  imgbtn_left.c
+  imgbtn_mid.c
+  imgbtn_right.c
+  lv_example_event_1.c
+  lv_example_event_2.c
+  lv_example_event_3.c
+  lv_example_event_4.c
+  lv_example_get_started_1.c
+  lv_example_get_started_2.c
+  lv_example_get_started_3.c
+  lv_example_flex_1.c
+  lv_example_flex_2.c
+  lv_example_flex_3.c
+  lv_example_flex_4.c
+  lv_example_flex_5.c
+  lv_example_flex_6.c
+  lv_example_grid_1.c
+  lv_example_grid_2.c
+  lv_example_grid_3.c
+  lv_example_grid_4.c
+  lv_example_grid_5.c
+  lv_example_grid_6.c
+  lv_example_bmp_1.c
+  lv_example_ffmpeg_1.c
+  lv_example_ffmpeg_2.c
+  lv_example_freetype_1.c
+  img_bulb_gif.c
+  lv_example_gif_1.c
+  img_wink_png.c
+  lv_example_png_1.c
+  lv_example_qrcode_1.c
+  lv_example_rlottie_1.c
+  lv_example_rlottie_2.c
+  lv_example_rlottie_approve.c
+  lv_example_sjpg_1.c
+  lv_example_fragment_1.c
+  lv_example_fragment_2.c
+  lv_example_gridnav_1.c
+  lv_example_gridnav_2.c
+  lv_example_gridnav_3.c
+  lv_example_gridnav_4.c
+  lv_example_imgfont_1.c
+  lv_example_monkey_1.c
+  lv_example_monkey_2.c
+  lv_example_monkey_3.c
+  lv_example_msg_1.c
+  lv_example_msg_2.c
+  lv_example_msg_3.c
+  lv_example_snapshot_1.c
+  lv_example_scroll_1.c
+  lv_example_scroll_2.c
+  lv_example_scroll_3.c
+  lv_example_scroll_4.c
+  lv_example_scroll_5.c
+  lv_example_scroll_6.c
+  lv_example_style_1.c
+  lv_example_style_10.c
+  lv_example_style_11.c
+  lv_example_style_12.c
+  lv_example_style_13.c
+  lv_example_style_14.c
+  lv_example_style_15.c
+  lv_example_style_2.c
+  lv_example_style_3.c
+  lv_example_style_4.c
+  lv_example_style_5.c
+  lv_example_style_6.c
+  lv_example_style_7.c
+  lv_example_style_8.c
+  lv_example_style_9.c
+  lv_example_animimg_1.c
+  lv_example_arc_1.c
+  lv_example_arc_2.c
+  lv_example_bar_1.c
+  lv_example_bar_2.c
+  lv_example_bar_3.c
+  lv_example_bar_4.c
+  lv_example_bar_5.c
+  lv_example_bar_6.c
+  lv_example_btn_1.c
+  lv_example_btn_2.c
+  lv_example_btn_3.c
+  lv_example_btnmatrix_1.c
+  lv_example_btnmatrix_2.c
+  lv_example_btnmatrix_3.c
+  lv_example_calendar_1.c
+  lv_example_canvas_1.c
+  lv_example_canvas_2.c
+  lv_example_chart_1.c
+  lv_example_chart_2.c
+  lv_example_chart_3.c
+  lv_example_chart_4.c
+  lv_example_chart_5.c
+  lv_example_chart_6.c
+  lv_example_chart_7.c
+  lv_example_chart_8.c
+  lv_example_chart_9.c
+  lv_example_checkbox_1.c
+  lv_example_checkbox_2.c
+  lv_example_colorwheel_1.c
+  lv_example_dropdown_1.c
+  lv_example_dropdown_2.c
+  lv_example_dropdown_3.c
+  lv_example_img_1.c
+  lv_example_img_2.c
+  lv_example_img_3.c
+  lv_example_img_4.c
+  lv_example_imgbtn_1.c
+  lv_example_keyboard_1.c
+  lv_example_label_1.c
+  lv_example_label_2.c
+  lv_example_label_3.c
+  lv_example_label_4.c
+  lv_example_label_5.c
+  lv_example_led_1.c
+  lv_example_line_1.c
+  lv_example_list_1.c
+  lv_example_list_2.c
+  lv_example_menu_1.c
+  lv_example_menu_2.c
+  lv_example_menu_3.c
+  lv_example_menu_4.c
+  lv_example_menu_5.c
+  lv_example_meter_1.c
+  lv_example_meter_2.c
+  lv_example_meter_3.c
+  lv_example_meter_4.c
+  lv_example_msgbox_1.c
+  lv_example_obj_1.c
+  lv_example_obj_2.c
+  lv_example_roller_1.c
+  lv_example_roller_2.c
+  lv_example_roller_3.c
+  lv_example_slider_1.c
+  lv_example_slider_2.c
+  lv_example_slider_3.c
+  lv_example_span_1.c
+  lv_example_spinbox_1.c
+  lv_example_spinner_1.c
+  lv_example_switch_1.c
+  lv_example_table_1.c
+  lv_example_table_2.c
+  lv_example_tabview_1.c
+  lv_example_tabview_2.c
+  lv_example_textarea_1.c
+  lv_example_textarea_2.c
+  lv_example_textarea_3.c
+  lv_example_tileview_1.c
+  lv_example_win_1.c
+  lv_disp.c
+  lv_event.c
+  lv_group.c
+  lv_indev.c
+  lv_indev_scroll.c
+  lv_obj.c
+  lv_obj_class.c
+  lv_obj_draw.c
+  lv_obj_pos.c
+  lv_obj_scroll.c
+  lv_obj_style.c
+  lv_obj_style_gen.c
+  lv_obj_tree.c
+  lv_refr.c
+  lv_theme.c
+  lv_gpu_arm2d.c
+  lv_draw.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\core\lv_obj_draw.c(72,95): warning C4244: “=”: 从“lv_coord_t”转换到“uint8_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\core\lv_obj_draw.c(73,95): warning C4244: “=”: 从“lv_coord_t”转换到“uint8_t”，可能丢失数据
+  lv_draw_arc.c
+  lv_draw_img.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\core\lv_obj_style.c(566,1): warning C4244: “初始化”: 从“const uint16_t”转换到“bool”，可能丢失数据
+  lv_draw_label.c
+  lv_draw_line.c
+  lv_draw_mask.c
+  lv_draw_rect.c
+  lv_draw_transform.c
+  lv_draw_triangle.c
+  lv_img_buf.c
+  lv_img_cache.c
+  lv_img_decoder.c
+  lv_gpu_nxp.c
+  lv_draw_pxp_blend.c
+  lv_gpu_nxp_pxp.c
+  lv_gpu_nxp_pxp_osa.c
+  lv_draw_vglite_arc.c
+  lv_draw_vglite_blend.c
+  lv_draw_vglite_rect.c
+  lv_gpu_nxp_vglite.c
+  lv_draw_sdl.c
+  lv_draw_sdl_arc.c
+  lv_draw_sdl_bg.c
+  lv_draw_sdl_composite.c
+  lv_draw_sdl_img.c
+  lv_draw_sdl_label.c
+  lv_draw_sdl_line.c
+  lv_draw_sdl_mask.c
+  lv_draw_sdl_polygon.c
+  lv_draw_sdl_rect.c
+  lv_draw_sdl_stack_blur.c
+  lv_draw_sdl_texture_cache.c
+  lv_draw_sdl_utils.c
+  lv_gpu_stm32_dma2d.c
+  lv_draw_sw.c
+  lv_draw_sw_arc.c
+  lv_draw_sw_blend.c
+  lv_draw_sw_dither.c
+  lv_draw_sw_gradient.c
+  lv_draw_sw_img.c
+  lv_draw_sw_letter.c
+  lv_draw_sw_line.c
+  lv_draw_sw_polygon.c
+  lv_draw_sw_rect.c
+  lv_draw_sw_transform.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\draw\sw\lv_draw_sw_arc.c(176,52): warning C4244: “函数”: 从“lv_coord_t”转换到“uint8_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\draw\sw\lv_draw_sw_arc.c(192,50): warning C4244: “函数”: 从“lv_coord_t”转换到“uint8_t”，可能丢失数据
+  lv_gpu_swm341_dma2d.c
+  lv_flex.c
+  lv_grid.c
+  lv_bmp.c
+  lv_ffmpeg.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\draw\sw\lv_draw_sw_line.c(380,55): warning C4267: “函数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+  lv_freetype.c
+  lv_fs_fatfs.c
+  lv_fs_posix.c
+  lv_fs_stdio.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\draw\sw\lv_draw_sw_rect.c(1025,31): warning C4244: “=”: 从“uint16_t”转换到“lv_opa_t”，可能丢失数据
+  lv_fs_win32.c
+  gifdec.c
+  lv_gif.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\layouts\grid\lv_grid.c(71,57): warning C4244: “return”: 从“lv_coord_t”转换到“uint8_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\layouts\grid\lv_grid.c(75,54): warning C4244: “return”: 从“lv_coord_t”转换到“uint8_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\layouts\grid\lv_grid.c(79,58): warning C4244: “return”: 从“lv_coord_t”转换到“uint8_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\layouts\grid\lv_grid.c(83,55): warning C4244: “return”: 从“lv_coord_t”转换到“uint8_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\layouts\grid\lv_grid.c(87,54): warning C4244: “return”: 从“lv_coord_t”转换到“uint8_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\layouts\grid\lv_grid.c(91,54): warning C4244: “return”: 从“lv_coord_t”转换到“uint8_t”，可能丢失数据
+  lodepng.c
+  lv_png.c
+  lv_qrcode.c
+  lv_rlottie.c
+  lv_sjpg.c
+  tjpgd.c
+  lv_extra.c
+  lv_fragment.c
+  lv_fragment_manager.c
+  lv_gridnav.c
+  lv_imgfont.c
+  lv_monkey.c
+  lv_msg.c
+  lv_snapshot.c
+  lv_theme_basic.c
+  lv_theme_default.c
+  lv_theme_mono.c
+  lv_animimg.c
+  lv_calendar.c
+  lv_calendar_header_arrow.c
+  lv_calendar_header_dropdown.c
+  lv_chart.c
+  lv_colorwheel.c
+  lv_imgbtn.c
+  lv_keyboard.c
+  lv_led.c
+  lv_list.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\calendar\lv_calendar.c(134,33): warning C4018: “<”: 有符号/无符号不匹配
+  lv_menu.c
+  lv_meter.c
+  lv_msgbox.c
+  lv_span.c
+  lv_spinbox.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\colorwheel\lv_colorwheel.c(675,34): warning C4244: “函数”: 从“uint16_t”转换到“uint8_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\colorwheel\lv_colorwheel.c(684,37): warning C4244: “函数”: 从“uint16_t”转换到“uint8_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\imgbtn\lv_imgbtn.c(170,38): warning C4090: “函数”: 不同的“const”限定符
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\imgbtn\lv_imgbtn.c(171,39): warning C4090: “函数”: 不同的“const”限定符
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\imgbtn\lv_imgbtn.c(205,20): warning C4018: “>”: 有符号/无符号不匹配
+  lv_spinner.c
+  lv_tabview.c
+  lv_tileview.c
+  lv_win.c
+  lv_font.c
+  lv_font_dejavu_16_persian_hebrew.c
+  lv_font_fmt_txt.c
+  lv_font_loader.c
+  lv_font_montserrat_10.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\span\lv_span.c(890,68): warning C4267: “=”: 从“size_t”转换到“uint16_t”，可能丢失数据
+  lv_font_montserrat_12.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\spinbox\lv_spinbox.c(111,78): warning C4244: “=”: 从“int64_t”转换到“int32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\spinbox\lv_spinbox.c(112,84): warning C4244: “=”: 从“int64_t”转换到“int32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\spinbox\lv_spinbox.c(166,1): warning C4244: “初始化”: 从“int64_t”转换到“int32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\spinbox\lv_spinbox.c(262,29): warning C4244: “return”: 从“uint16_t”转换到“bool”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\spinbox\lv_spinbox.c(369,81): warning C4244: “=”: 从“int64_t”转换到“int32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\spinbox\lv_spinbox.c(396,60): warning C4267: “函数”: 从“size_t”转换到“int32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\extra\widgets\spinbox\lv_spinbox.c(406,1): warning C4267: “初始化”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\font\lv_font_fmt_txt.c(239,63): warning C4244: “=”: 从“lv_uintptr_t”转换到“uint32_t”，可能丢失数据
+  lv_font_montserrat_12_subpx.c
+  lv_font_montserrat_14.c
+  lv_font_montserrat_16.c
+  lv_font_montserrat_18.c
+  lv_font_montserrat_20.c
+  lv_font_montserrat_22.c
+  lv_font_montserrat_24.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\font\lv_font_loader.c(264,1): warning C4267: “初始化”: 从“size_t”转换到“uint8_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\font\lv_font_loader.c(508,62): warning C4244: “=”: 从“int16_t”转换到“int8_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\font\lv_font_loader.c(509,64): warning C4244: “=”: 从“uint16_t”转换到“int8_t”，可能丢失数据
+  lv_font_montserrat_26.c
+  lv_font_montserrat_28.c
+  lv_font_montserrat_28_compressed.c
+  lv_font_montserrat_30.c
+  lv_font_montserrat_32.c
+  lv_font_montserrat_34.c
+  lv_font_montserrat_36.c
+  lv_font_montserrat_38.c
+  lv_font_montserrat_40.c
+  lv_font_montserrat_42.c
+  lv_font_montserrat_44.c
+  lv_font_montserrat_46.c
+  lv_font_montserrat_48.c
+  lv_font_montserrat_8.c
+  lv_font_simsun_16_cjk.c
+  lv_font_unscii_16.c
+  lv_font_unscii_8.c
+  lv_hal_disp.c
+  lv_hal_indev.c
+  lv_hal_tick.c
+  lv_anim.c
+  lv_anim_timeline.c
+  lv_area.c
+  lv_async.c
+  lv_bidi.c
+  lv_color.c
+  lv_fs.c
+  lv_gc.c
+  lv_ll.c
+  lv_log.c
+  lv_lru.c
+  lv_math.c
+  lv_mem.c
+  lv_printf.c
+  lv_style.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\misc\lv_lru.c(154,61): warning C4267: “函数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\misc\lv_lru.c(159,56): warning C4267: “函数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\misc\lv_lru.c(205,59): warning C4267: “函数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\misc\lv_lru.c(208,54): warning C4267: “函数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\misc\lv_lru.c(229,59): warning C4267: “函数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\misc\lv_lru.c(232,54): warning C4267: “函数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+  lv_style_gen.c
+  lv_timer.c
+  lv_tlsf.c
+  lv_txt.c
+  lv_txt_ap.c
+  lv_arc.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\misc\lv_mem.c(157,25): warning C4267: “+=”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\misc\lv_mem.c(180,41): warning C4267: “-=”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\misc\lv_mem.c(561,33): warning C4267: “+=”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\misc\lv_mem.c(563,44): warning C4267: “=”: 从“size_t”转换到“uint32_t”，可能丢失数据
+  lv_bar.c
+  lv_btn.c
+  lv_btnmatrix.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\misc\lv_style.c(431,76): warning C4018: “<”: 有符号/无符号不匹配
+  lv_canvas.c
+  lv_checkbox.c
+  lv_dropdown.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_arc.c(318,36): warning C4244: “return”: 从“uint16_t”转换到“lv_arc_mode_t”，可能丢失数据
+  lv_img.c
+  lv_label.c
+  lv_line.c
+  lv_roller.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_btnmatrix.c(689,47): warning C4267: “函数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+  lv_slider.c
+  lv_switch.c
+  lv_table.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_canvas.c(191,18): warning C4018: “<”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_canvas.c(196,26): warning C4018: “<”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_canvas.c(198,33): warning C4018: “>=”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_canvas.c(205,29): warning C4018: “>=”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_canvas.c(242,17): warning C4018: “>”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_canvas.c(243,17): warning C4018: “>”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_canvas.c(287,29): warning C4018: “>”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_canvas.c(338,29): warning C4018: “>”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_canvas.c(370,17): warning C4018: “>”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_canvas.c(371,17): warning C4018: “>”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_canvas.c(413,29): warning C4018: “>”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_canvas.c(466,29): warning C4018: “>”: 有符号/无符号不匹配
+  lv_textarea.c
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_dropdown.c(242,48): warning C4267: “函数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_dropdown.c(226,1): warning C4267: “初始化”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_roller.c(123,72): warning C4267: “函数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_roller.c(172,51): warning C4018: “>”: 有符号/无符号不匹配
+E:\stm32F407zet6Template\lvgl_monitor\LVGL.Simulator\lvgl\src\widgets\lv_textarea.c(942,61): warning C4267: “函数”: 从“size_t”转换到“uint32_t”，可能丢失数据
+  Monitor.cpp
+  LVGL.Simulator.cpp
+E:\stm32F407zet6Template\lvgl_monitor\Monitor.cpp(49,48): warning C4244: “参数”: 从“double”转换到“lv_coord_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\Monitor.cpp(51,49): warning C4244: “参数”: 从“double”转换到“lv_coord_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\Monitor.cpp(109,71): warning C4244: “参数”: 从“double”转换到“int16_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\Monitor.cpp(163,46): warning C4244: “参数”: 从“double”转换到“lv_coord_t”，可能丢失数据
+E:\stm32F407zet6Template\lvgl_monitor\Monitor.cpp(165,47): warning C4244: “参数”: 从“double”转换到“lv_coord_t”，可能丢失数据
+  LVGL.Simulator.vcxproj -> E:\stm32F407zet6Template\lvgl_monitor\Output\Binaries\Debug\x64\LVGL.Simulator.exe

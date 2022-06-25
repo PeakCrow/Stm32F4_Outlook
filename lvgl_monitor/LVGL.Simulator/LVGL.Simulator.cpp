@@ -48,7 +48,7 @@ int main()
         return -1;
     }
 
-    lv_win32_add_all_input_devices_to_group(NULL);
+    //lv_win32_add_all_input_devices_to_group(NULL);
 
     /*
      * Demos, benchmarks, and tests.
