@@ -2,7 +2,7 @@
 
 
 
-static I2C_HandleTypeDef	iic_handle;
+I2C_HandleTypeDef	iic_handle;
 
 static void I2C_Mode_Config(void);
 

@@ -1,6 +1,3 @@
-//#include "MLX90614_Driver.h"
-//#include "SysTick_Driver.h"
-//#include "stdint.h"
 #include "sys.h"
 
 
@@ -388,7 +385,12 @@ uint8_t PEC_Calculation(uint8_t pec[])
 float SMBus_ReadTemp(void)
 {   
 	float temp;
-	temp = SMBus_ReadMemory(SA, RAM_ACCESS|RAM_TOBJ1)*0.02-273.15;
+	uint8_t rx_buffer[2];
+	uint8_t buf[1] = {(RAM_ACCESS|RAM_TOBJ1)};
+	I2C_EE_ByteWrite(buf,SA);
+	I2C_EE_BufferRead(rx_buffer,(SA+1),2);
+	temp = (rx_buffer[1] << 8 | rx_buffer[0]) * 0.02 - 273.15;
+	//temp = SMBus_ReadMemory(SA, RAM_ACCESS|RAM_TOBJ1)*0.02-273.15;
 	//temp = SMBus_ReadMemory(0x00, 0x07)*0.02-273.15;
 	return temp;
 }

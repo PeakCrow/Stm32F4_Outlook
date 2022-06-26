@@ -46,6 +46,7 @@
 
 #include "bsp_font.h"
 #include "bsp_lcd.h"
+#include "MLX90614_Driver.h"
 
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug调试组件 */

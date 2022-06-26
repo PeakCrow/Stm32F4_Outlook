@@ -413,7 +413,7 @@ static  void  AppTaskCreate (void)
                        TX_NO_TIME_SLICE,             	/* 不开启时间片 */
                        TX_AUTO_START);               	/* 创建后立即启动 */
 	
-	/**************创建READ ADC任务*********************/
+	/**************创建LCD DISP任务*********************/
     tx_thread_create(&AppTaskTFTLCDTCB,               		/* 任务控制块地址 */    
                        "App Task TFTLCD",              	/* 任务名 */
                        AppTaskTFTLCD,                  	/* 启动任务函数地址 */
@@ -553,6 +553,7 @@ static void AppTaskUserIF(ULONG thread_input)
 					 	break;
 					case KEY_UP_DOWN:			/* kup按键按下 */
 						App_Printf("kup按键按下\r\n");				//红色	
+						App_Printf("温度：%.1f\r\n",SMBus_ReadTemp());
 						break;
 					case KEY_0_DOWN:			/* k0按键按下 */
 					{

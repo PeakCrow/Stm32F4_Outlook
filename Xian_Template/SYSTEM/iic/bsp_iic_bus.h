@@ -18,7 +18,7 @@
 #include	"stdio.h"
 
 #define		I2C_OWN_ADDRESS7		0x0A	/* stm32自身的IIC器件地址 */
-#define		EEP_Firstpage			0x00	/* eeprom芯片数据起始地址 */
+#define		EEP_Firstpage				0x00	/* eeprom芯片数据起始地址 */
 
 /* I2C引脚--PB8		PB9 */
 #define		I2Cx						I2C1
@@ -47,6 +47,7 @@
 
 extern uint8_t		I2Cx_BUFFER_WRITE[I2Cx_MAX_BYTE_NUM];
 extern uint8_t		I2Cx_BUFFER_READ[I2Cx_MAX_BYTE_NUM];
+extern I2C_HandleTypeDef	iic_handle;
 
 
 /* 
