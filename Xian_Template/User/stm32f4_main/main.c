@@ -520,8 +520,8 @@ while (1)
 		
 		fTemp = (float)iTemp / 1000000;   
 		
-		App_Printf("CH%d=%07d(%fV) ", i, g_tADS1256.AdcNow[5], fTemp);
-		App_Printf("\r\n");
+		//App_Printf("CH%d=%07d(%fV) ", i, g_tADS1256.AdcNow[5], fTemp);
+		//App_Printf("\r\n");
 		#endif
 		tx_thread_sleep(100);
 	}
@@ -550,6 +550,7 @@ static void AppTaskUserIF(ULONG thread_input)
 				{
 					case KEY_0_UP: 			  /* K1键按打印任务执行情况 */
 					 	//DispTaskInfo();
+					 	//DemoIicEeprom();
 					 	break;
 					case KEY_UP_DOWN:			/* kup按键按下 */
 						App_Printf("kup按键按下\r\n");				//红色	
@@ -673,7 +674,7 @@ static void DispTaskInfo(void)
 void TimerCallback(ULONG thread_input)
 {
 	/* 带延迟参数，且设置大于0，都不要在定时组的回调函数里面调用 */
-	App_Printf("%.1fm/s\r\n",Rotation_Sensor_Get(24,0.464));/* 1000HZ方波下应该121.41m/s */
+	//App_Printf("%.1fm/s\r\n",Rotation_Sensor_Get(24,0.464));/* 1000HZ方波下应该121.41m/s */
 }
 
 

@@ -244,6 +244,9 @@ void I2C_EE_BufferWrite(uint8_t * pBuffer, uint8_t WriteAddr, uint16_t NumByteTo
 }
 
 #if 0
+uint8_t		I2Cx_BUFFER_WRITE[I2Cx_MAX_BYTE_NUM];
+uint8_t		I2Cx_BUFFER_READ[I2Cx_MAX_BYTE_NUM];
+
 /*******************************************************************************
   * @FunctionName: DemoIicEeprom
   * @Author:       trx
