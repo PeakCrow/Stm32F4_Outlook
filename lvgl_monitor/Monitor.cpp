@@ -1,28 +1,71 @@
 ﻿#include "Monitor.h"
 #include "lvgl/lvgl.h"
+#include <stdio.h>
 
-static lv_obj_t* meter_2;
+static lv_obj_t* Monitor_Speed_Meter;
+
 static void lv_mainstart(void);
+
 #define scr_act_height() lv_obj_get_height(lv_scr_act())
 #define scr_act_width()  lv_obj_get_width(lv_scr_act())
 
+static void Monitor_Main_Style(lv_obj_t* Monitor_Speed_Meter);
+static void Monitor_Main_label(lv_coord_t weight, lv_coord_t height);
 
 void Gui_Monitor_App()
 {
+    uint16_t meter_weight = 0, meter_height = 0;
+    meter_weight = (scr_act_height() * 0.8);
+    meter_height = (scr_act_height() * 0.8);
+    //一定要先创建部件主体
     lv_mainstart();
+    //创建样式
+    Monitor_Main_Style(Monitor_Speed_Meter);
+    //创建速度值标签
+    Monitor_Main_label(meter_height,meter_height);
 }
-
-
-
-/**
- * @brief 仪表1的回调函数
- * @param meter 仪表控件指针
- * @param value 数据
-*/
-static void anim_1_indic_cb(lv_obj_t* meter, int32_t value)
+void Monitor_Main_Style(lv_obj_t * Monitor_Speed_Meter)
 {
-    lv_meter_indicator_t* indic = (lv_meter_indicator_t*)meter->user_data;
-    lv_meter_set_indicator_value(meter, indic, value);
+    lv_style_t style_speed_meter;
+    //创建普通样式
+    //样式初始化
+    lv_style_init(&style_speed_meter);
+    //设置背景--黑色
+    lv_style_set_bg_color(&style_speed_meter, lv_color_hex(0x0000ff));
+    //设置背景透明度--20
+    lv_style_set_bg_opa(&style_speed_meter, 80);
+    //设置字体颜色--黄色
+    lv_style_set_text_color(&style_speed_meter, lv_color_hex(0xffff00));
+    //设置速度盘背景渐变颜色方向--垂直向下
+    lv_style_set_bg_grad_dir(&style_speed_meter, LV_GRAD_DIR_VER);
+    //设置背景梯度起点属性--渐变从0顶部开始
+    lv_style_set_bg_grad_stop(&style_speed_meter, 255);
+    //设置背景梯度颜色属性
+    lv_style_set_bg_grad_color(&style_speed_meter, lv_palette_main(LV_PALETTE_GREEN));
+    //设置边框颜色--蓝色
+    lv_style_set_border_color(&style_speed_meter, lv_palette_main(LV_PALETTE_BLUE));
+    //设置边框的宽度--3
+    lv_style_set_border_width(&style_speed_meter, 3);
+    //设置速度盘的轮廓属性--3
+    lv_style_set_outline_width(&style_speed_meter, 3);
+    //设置轮廓属性的颜色--橙色
+    lv_style_set_outline_color(&style_speed_meter, lv_palette_main(LV_PALETTE_ORANGE));
+    //设置轮廓间隙属性--3
+    lv_style_set_outline_pad(&style_speed_meter, 3);
+
+    //设置速度盘对象的样式
+    lv_obj_add_style(Monitor_Speed_Meter, &style_speed_meter, LV_PART_MAIN);
+}
+void Monitor_Main_label(lv_coord_t weight,lv_coord_t height)
+{
+    lv_obj_t* label_speed_value;
+
+    //设置速度值文本标签
+    label_speed_value = lv_label_create(Monitor_Speed_Meter);
+    //设置文本与颜色
+    lv_label_set_text(label_speed_value, "Km/h");
+    //设置文本对齐方式
+    lv_obj_set_pos(label_speed_value, weight * 0.45, height * 0.7);
 }
 /**
  * @brief 仪表2的回调函数
@@ -31,35 +74,40 @@ static void anim_1_indic_cb(lv_obj_t* meter, int32_t value)
 */
 static void anim_2_indic_cb(lv_meter_indicator_t* indic, int32_t value)
 {
-    lv_meter_set_indicator_end_value(meter_2, indic, value);
+    
+    lv_meter_set_indicator_end_value(Monitor_Speed_Meter, indic, value);
 }
-static void lv_example_meter_2(void)
+static void lv_example_Monitor_Speed_Meter(void)
 {
     const lv_font_t* font;
+
     /* 根据屏幕大小设置字体 */
     if (scr_act_width() <= 320)
         font = &lv_font_montserrat_8;
-    else if (scr_act_width() <= 480)
+    else if (scr_act_width() < 480)
         font = &lv_font_montserrat_10;
     else
-        font = &lv_font_montserrat_14;
+        font = &lv_font_montserrat_24;
+
+
     /* 定义并创建仪表 */
-    meter_2 = lv_meter_create(lv_scr_act());
+    Monitor_Speed_Meter = lv_meter_create(lv_scr_act());
     /* 设置仪表宽度 */
-    lv_obj_set_width(meter_2, scr_act_height() * 0.6);
+    lv_obj_set_width(Monitor_Speed_Meter, scr_act_height() * 0.8);
     /* 设置仪表高度 */
-    lv_obj_set_height(meter_2, scr_act_height() * 0.6);
+    lv_obj_set_height(Monitor_Speed_Meter, scr_act_height() * 0.8);
     /* 设置仪表位置 */
-    lv_obj_center(meter_2);
+    lv_obj_center(Monitor_Speed_Meter);
     /* 设置仪表文字字体 */
-    lv_obj_set_style_text_font(meter_2, font, LV_PART_MAIN);
+    lv_obj_set_style_text_font(Monitor_Speed_Meter, font, LV_PART_MAIN);
     /* 删除仪表指针样式 */
-    lv_obj_remove_style(meter_2, NULL, LV_PART_INDICATOR);
+    //lv_obj_remove_style(Monitor_Speed_Meter, NULL, LV_PART_INDICATOR);
+
     /* 设置仪表刻度 */
     /* 添加刻度 */
-    lv_meter_scale_t* scale = lv_meter_add_scale(meter_2);
+    lv_meter_scale_t* scale = lv_meter_add_scale(Monitor_Speed_Meter);
     /* 设置小刻度 */
-    lv_meter_set_scale_ticks(meter_2,
+    lv_meter_set_scale_ticks(Monitor_Speed_Meter,
                             scale,
                             41,//小刻度的数量
                             2,//小刻度的宽度
@@ -67,7 +115,7 @@ static void lv_example_meter_2(void)
                             lv_palette_main(LV_PALETTE_YELLOW)//小刻度的颜色
                             );
     /* 设置主刻度 */
-    lv_meter_set_scale_major_ticks(meter_2,
+    lv_meter_set_scale_major_ticks(Monitor_Speed_Meter,
                                     scale,
                                     8,//绘画主刻度的步长
                                     4,//主刻度的宽度
@@ -76,38 +124,41 @@ static void lv_example_meter_2(void)
                                     scr_act_height() / 40//刻度与标签之间的间隙
                                     );
     /* 设置仪表的角度和仪表的范围 */
-    lv_meter_set_scale_range(meter_2, scale, 0, 100, 270, 135);
+    lv_meter_set_scale_range(Monitor_Speed_Meter, scale, 0, 100, 270, 135);
     /* 添加指针 */
-    lv_meter_indicator_t * indic = lv_meter_add_needle_line(meter_2,
+    lv_meter_indicator_t * indic = lv_meter_add_needle_line(Monitor_Speed_Meter,
                              scale,
                              3,
                              lv_color_hex3(0xf34),
                              -6
                             );
     /* 设置指针指向的数值 */
-    lv_meter_set_indicator_value(meter_2,
+    lv_meter_set_indicator_value(Monitor_Speed_Meter,
         indic,
         33
     );
     /* 设置指针 */
-    lv_meter_indicator_t* indic1 = lv_meter_add_arc(meter_2,
+    lv_meter_indicator_t* indic1 = lv_meter_add_arc(Monitor_Speed_Meter,
                                                     scale,
                                                     scr_act_height() / 45,
                                                     lv_palette_main(LV_PALETTE_RED),//红
                                                     0
                                                     );
-    lv_meter_indicator_t* indic2 = lv_meter_add_arc(meter_2,
+    lv_meter_indicator_t* indic2 = lv_meter_add_arc(Monitor_Speed_Meter,
                                                     scale,
                                                     scr_act_height() / 45,
                                                     lv_palette_main(LV_PALETTE_GREEN),//绿
                                                     -scr_act_height() / 45
                                                     );
-    lv_meter_indicator_t* indic3 = lv_meter_add_arc(meter_2,
+    lv_meter_indicator_t* indic3 = lv_meter_add_arc(Monitor_Speed_Meter,
                                                     scale,
                                                     scr_act_height() / 45,
                                                     lv_palette_main(LV_PALETTE_BLUE),//蓝
                                                     -scr_act_height() / 22.5
                                                     );
+
+
+   
 
 
     /* 设置指针动画 */
@@ -147,77 +198,9 @@ static void lv_example_meter_2(void)
     lv_anim_start(&a);
 
 }
-static void lv_example_meter_1(void)
-{
-    const lv_font_t* font;
-    /* 根据屏幕大小设置字体 */
-    if (scr_act_width() <= 320)
-        font = &lv_font_montserrat_10;
-    else if (scr_act_width() <= 480)
-        font = &lv_font_montserrat_14;
-    else
-        font = &lv_font_montserrat_16;
-    /* 定义并创建仪表 */
-    lv_obj_t* meter = lv_meter_create(lv_scr_act());
-    /* 设置仪表宽度 */
-    lv_obj_set_width(meter, scr_act_height() * 0.4);
-    /* 设置仪表高度 */
-    lv_obj_set_height(meter, scr_act_height() * 0.4);
-    /* 设置仪表位置 */
-    lv_obj_align(meter, LV_ALIGN_CENTER, -scr_act_width() / 3, 0);
-    /* 设置仪表文字字体 */
-    lv_obj_set_style_text_font(meter, font, LV_PART_MAIN);
-    /* 设置仪表刻度 */
-    /* 定义并添加刻度 */
-    lv_meter_scale_t* scale = lv_meter_add_scale(meter);
-    /* 设置小刻度 */
-    lv_meter_set_scale_ticks(meter, scale, 41, 1,
-                             scr_act_height() / 80,
-                             lv_palette_main(LV_PALETTE_GREY));
 
-    /* 设置主刻度 */
-    lv_meter_set_scale_major_ticks(meter, scale, 8, 1,
-                                    scr_act_height() / 60, lv_color_black(),
-                                    scr_act_height() / 30);
-    /* 设置指针 */
-    lv_meter_indicator_t* indic;
-    indic = lv_meter_add_arc(meter, scale, 2,
-    lv_palette_main(LV_PALETTE_BLUE), 0);
-    lv_meter_set_indicator_start_value(meter, indic, 0);
-    lv_meter_set_indicator_end_value(meter, indic, 20);
-    indic = lv_meter_add_scale_lines(meter, scale,
-    lv_palette_main(LV_PALETTE_BLUE),
-    lv_palette_main(LV_PALETTE_BLUE), false, 0);
-    lv_meter_set_indicator_start_value(meter, indic, 0);
-    lv_meter_set_indicator_end_value(meter, indic, 20);
-    indic = lv_meter_add_arc(meter, scale, 2,
-    lv_palette_main(LV_PALETTE_RED), 0);
-    lv_meter_set_indicator_start_value(meter, indic, 80);
-    lv_meter_set_indicator_end_value(meter, indic, 100);
-    indic = lv_meter_add_scale_lines(meter, scale,
-    lv_palette_main(LV_PALETTE_RED),
-    lv_palette_main(LV_PALETTE_RED), false, 0);
-    lv_meter_set_indicator_start_value(meter, indic, 80);
-    lv_meter_set_indicator_end_value(meter, indic, 100);
-    indic = lv_meter_add_needle_line(meter, scale, 4,
-    lv_palette_main(LV_PALETTE_GREY), -10);
-    lv_obj_set_user_data(meter, indic);
-    /* 设置指针动画 */
-    lv_anim_t a;
-    lv_anim_init(&a);
-    lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)anim_1_indic_cb);
-    lv_anim_set_var(&a, meter);
-    lv_anim_set_values(&a, 0, 100);
-    lv_anim_set_time(&a, 2000);
-    lv_anim_set_repeat_delay(&a, 100);
-    lv_anim_set_playback_time(&a, 500);
-    lv_anim_set_playback_delay(&a, 100);
-    lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
-    lv_anim_start(&a);
-}
 void lv_mainstart(void)
 {
-    lv_example_meter_1();
-    lv_example_meter_2();
+    lv_example_Monitor_Speed_Meter();
     
 }

@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>E:\stm32F407zet6Template\lvgl_monitor\Output\Binaries\Debug\x64\LVGL.Simulator.exe</FullPath>
+      <FullPath>D:\stm32F407zet6Template\lvgl_monitor\Output\Binaries\Debug\x64\LVGL.Simulator.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
