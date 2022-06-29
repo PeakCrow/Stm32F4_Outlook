@@ -284,6 +284,7 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* 生成一个1k，50占空比的方波，用来验证脉冲计数 */	
 	bsp_InitADS1256();							/* 初始化配置ADS1256.  PGA=1, DRATE=30KSPS, BUFEN=1, 输入正负5V */
 	bsp_Initlcd();								/* 初始化LCD屏幕 */
+	tp_dev.init();
 	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate();
 
@@ -426,7 +427,152 @@ static  void  AppTaskCreate (void)
                        TX_AUTO_START);               	/* 创建后立即启动 */
 
 }
-
+////////////////////////////////////////////////////////////////////////////////
+//电容触摸屏专有部分
+//画水平线
+//x0,y0:坐标
+//len:线长度
+//color:颜色
+void gui_draw_hline(uint16_t x0,uint16_t y0,uint16_t len,uint16_t color)
+{
+	if(len==0)
+		return;
+	LCD_Fill(x0,y0,x0+len-1,y0,color);	
+}
+//画实心圆
+//x0,y0:坐标
+//r:半径，这里的半径同样相当于线条的粗细程度
+//color:颜色
+void gui_fill_circle(uint16_t x0,uint16_t y0,uint16_t r,uint16_t color)
+{											  
+	uint32_t i;
+	uint32_t imax = ((uint32_t)r*707)/1000+1;
+	uint32_t sqmax = (uint32_t)r*(uint32_t)r+(uint32_t)r/2;
+	uint32_t x=r;
+	gui_draw_hline(x0-r,y0,2*r,color);
+	for (i=1;i<=imax;i++) 
+	{
+		if ((i*i+x*x)>sqmax)// draw lines from outside  
+		{
+ 			if (x>imax) 
+			{
+				gui_draw_hline (x0-i+1,y0+x,2*(i-1),color);
+				gui_draw_hline (x0-i+1,y0-x,2*(i-1),color);
+			}
+			x--;
+		}
+		// draw lines from inside (center)  
+		gui_draw_hline(x0-x,y0+i,2*x,color);
+		gui_draw_hline(x0-x,y0-i,2*x,color);
+	}
+}  
+//画一条粗线
+//(x1,y1),(x2,y2):线条的起始坐标
+//size：线条的粗细程度
+//color：线条的颜色
+void lcd_draw_bline(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,uint8_t size,uint16_t color)
+{
+	uint16_t t; 
+	int xerr=0,yerr=0,delta_x,delta_y,distance; 
+	int incx,incy,uRow,uCol; 
+	if(x1<size|| x2<size||y1<size|| y2<size)//如果坐标值小于线条的大小，则退出函数，不进行画线
+		return; 
+	delta_x=x2-x1; //计算坐标增量 ，每次触摸的时候会连续读两次的坐标数值
+	delta_y=y2-y1; 
+	uRow=x1; 
+	uCol=y1; 
+	
+	if(delta_x>0)
+		incx=1; //设置单步方向 正方向
+	else if(delta_x==0)//x的坐标差值为0，代表是垂直线
+		incx=0;//垂直线 
+	else 
+		{
+			incx=-1;//负方向
+			delta_x=-delta_x;//插值变为负值
+		} 
+		
+	if(delta_y>0)//进行与x坐标值同样的操作
+		incy=1; //正方向
+	else if(delta_y==0)
+		incy=0;//水平线 
+	else
+	{
+		incy=-1;//负方向
+		delta_y=-delta_y;
+	} 
+	
+	
+	if( delta_x>delta_y)
+		distance=delta_x; //选取基本增量坐标轴 
+	else 
+		distance=delta_y; 
+	for(t=0;t<=distance+1;t++ )//画线输出 
+	{  
+		gui_fill_circle(uRow,uCol,size,color);//画点 
+		xerr+=delta_x ; 
+		yerr+=delta_y ; 
+		if(xerr>distance) 
+		{ 
+			xerr-=distance; 
+			uRow+=incx; 
+		} 
+		if(yerr>distance) 
+		{ 
+			yerr-=distance; 
+			uCol+=incy; 
+		} 
+	}  
+}   
+//清空屏幕并在右上角显示"RST"
+void Load_Drow_Dialog(void)
+{
+	LCD_Clear(TFT_WHITE);//清屏   
+ 	POINT_COLOR=TFT_BLUE;//设置字体为蓝色 
+	LCD_ShowString(lcddev.width-24,0,200,16,16,"RST");//显示清屏区域
+  	POINT_COLOR=TFT_RED;//设置画笔蓝色 
+}
+////////////////////////////////////////////////////////////////////////////////
+//5个触控点的颜色(电容触摸屏用)												 
+const uint16_t POINT_COLOR_TBL[5]={TFT_RED,TFT_GREEN,TFT_BLUE,TFT_BROWN,TFT_GRED};  
+//电容触摸屏测试函数
+void ctp_test(void)
+{
+	uint8_t t=0;
+	uint8_t i=0;	  	    
+ 	uint16_t lastpos[5][2];		//存放临时的坐标数据 
+	while(1)//在while循环中不停的读取tp_dev.x 与 y的坐标，并且进行相应的操作
+	{
+		tp_dev.scan(0);
+		for(t=0;t<5;t++)//这里t循环几次就代表可以同时画几条线,最多只能画5条
+		{
+			if((tp_dev.sta)&(1<<t))
+			{
+                //printf("X坐标:%d,Y坐标:%d\r\n",tp_dev.x[0],tp_dev.y[0]);
+				if(tp_dev.x[t]<lcddev.width&&tp_dev.y[t]<lcddev.height)
+				{
+					if(lastpos[t][0]==0XFFFF)
+					{
+						lastpos[t][0] = tp_dev.x[t];
+						lastpos[t][1] = tp_dev.y[t];
+					}
+                    
+					lcd_draw_bline(lastpos[t][0],lastpos[t][1],tp_dev.x[t],tp_dev.y[t],2,POINT_COLOR_TBL[t]);//画线
+					lastpos[t][0]=tp_dev.x[t];
+					lastpos[t][1]=tp_dev.y[t];
+					if(tp_dev.x[t]>(lcddev.width-24)&&tp_dev.y[t]<20)
+					{
+						Load_Drow_Dialog();//清除
+					}
+				}
+			}else 
+				lastpos[t][0]=0XFFFF;
+		}
+		
+		tx_thread_sleep(5);i++;
+		//if(i%20==0)LED0=!LED0;
+	}	
+}
 /*******************************************************************************
   * @FunctionName: AppTaskTFTLCD
   * @Author:       trx
@@ -447,7 +593,11 @@ static void AppTaskTFTLCD    (ULONG thread_input)
 	LCD_ShowString(30,70,200,16,16,"TOUCH TEST");	
 	LCD_ShowString(30,90,200,16,16,"ATOM@ALIENTEK");
 	LCD_ShowString(30,110,200,16,16,"2017/4/14");
-
+	
+ 	Load_Drow_Dialog();	
+	if(tp_dev.touchtype&0X80)
+		ctp_test();
+	
 	while (1)
 		{
 			LCD_Clear(TFT_GREEN);
@@ -554,7 +704,7 @@ static void AppTaskUserIF(ULONG thread_input)
 					 	break;
 					case KEY_UP_DOWN:			/* kup按键按下 */
 						App_Printf("kup按键按下\r\n");				//红色	
-						App_Printf("温度：%.1f\r\n",SMBus_ReadTemp());
+						//App_Printf("温度：%.1f\r\n",SMBus_ReadTemp());
 						break;
 					case KEY_0_DOWN:			/* k0按键按下 */
 					{

@@ -1,6 +1,6 @@
 #ifndef __GT9147_H_
 #define __GT9147_H_
-#include "sys.h"
+
 //IO操作函数
 #define GT_RST	PCout(13)	//GT9147复位引脚
 #define GT_INT	PBin(1)		//GT9147中断引脚
@@ -24,11 +24,11 @@
 #define GT_TOUCH_AREA_L   0X8154
 #define GT_TOUCH_AREA_H   0X8155//第一个触摸点的触摸面积
 
-u8 GT9147_Send_Cfg(u8 mode);
-u8 GT9147_WR_Reg(u16 reg,u8 *buf,u8 len);
-void GT947_RD_Reg(u16 reg,u8 *buf,u8 len);
-u8 GT9147_Init(void);
-u8 GT9147_Scan(u8 mode);
+uint8_t GT9147_Send_Cfg(uint8_t mode);
+uint8_t GT9147_WR_Reg(uint16_t reg,uint8_t *buf,uint8_t len);
+void GT947_RD_Reg(uint16_t reg,uint8_t *buf,uint8_t len);
+uint8_t GT9147_Init(void);
+uint8_t GT9147_Scan(uint8_t mode);
 #endif
 
 

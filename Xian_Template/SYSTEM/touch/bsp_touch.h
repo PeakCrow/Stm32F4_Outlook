@@ -8,13 +8,13 @@
 //触摸屏控制器
 typedef struct
 {
-	u8 (*init)(void);			//初始化触摸屏控制器
-	u8 (*scan)(u8);				//扫描触摸屏.0,屏幕扫描;1,物理坐标;	 
+	uint8_t (*init)(void);			//初始化触摸屏控制器
+	uint8_t (*scan)(uint8_t);				//扫描触摸屏.0,屏幕扫描;1,物理坐标;	 
 	void (*adjust)(void);		//触摸屏校准 
-	u16 x[CT_MAX_TOUCH]; 		//当前坐标
-	u16 y[CT_MAX_TOUCH];		//电容屏有最多5组坐标,电阻屏则用x[0],y[0]代表:此次扫描时,触屏的坐标,用
+	uint16_t x[CT_MAX_TOUCH]; 		//当前坐标
+	uint16_t y[CT_MAX_TOUCH];		//电容屏有最多5组坐标,电阻屏则用x[0],y[0]代表:此次扫描时,触屏的坐标,用
 								//x[4],y[4]存储第一次按下时的坐标. 
-	u8  sta;					//笔的状态 
+	uint8_t  sta;					//笔的状态 
 								//b7:按下1/松开0; 
 	                            //b6:0,没有按键按下;1,有按键按下. 
 								//b5:保留
@@ -30,7 +30,7 @@ typedef struct
 //b1~6:保留.
 //b7:0,电阻屏
 //   1,电容屏 
-	u8 touchtype;
+	uint8_t touchtype;
 }_m_tp_dev;
 
 extern _m_tp_dev tp_dev;
@@ -42,8 +42,8 @@ extern _m_tp_dev tp_dev;
 #define TCS  		PCout(13)  	//T_CS  片选引脚
 
 //电阻屏/电容屏 共用函数
-u8 TP_Scan(u8 tp);								//扫描
-u8 TP_Init(void);								//初始化
+uint8_t TP_Scan(uint8_t tp);								//扫描
+uint8_t TP_Init(void);								//初始化
 
 #endif
 

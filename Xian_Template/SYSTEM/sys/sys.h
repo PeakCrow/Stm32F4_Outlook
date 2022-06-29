@@ -46,7 +46,9 @@
 
 #include "bsp_font.h"
 #include "bsp_lcd.h"
-#include "MLX90614_Driver.h"
+#include "ctpiic.h"
+#include "gt9147.h"
+#include "bsp_touch.h"
 
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug调试组件 */
@@ -146,23 +148,23 @@ typedef __I int32_t vsc32;
 typedef __I int16_t vsc16; 
 typedef __I int8_t vsc8;   
 
-typedef uint32_t  u32;
-typedef uint16_t u16;
-typedef uint8_t  u8;
+typedef uint32_t  uint32_t;
+typedef uint16_t uint16_t;
+typedef uint8_t  uint8_t;
 
 typedef const uint32_t uc32;  
 typedef const uint16_t uc16;  
 typedef const uint8_t uc8; 
 
-typedef __IO uint32_t  vu32;
-typedef __IO uint16_t vu16;
-typedef __IO uint8_t  vu8;
+typedef __IO uint32_t  vuint32_t;
+typedef __IO uint16_t vuint16_t;
+typedef __IO uint8_t  vuint8_t;
 
 typedef __I uint32_t vuc32;  
 typedef __I uint16_t vuc16; 
 typedef __I uint8_t vuc8;
 
-void Stm32_Clock_Init(u32 plln,u32 pllm,u32 pllp,u32 pllq);//时钟系统配置
+void Stm32_Clock_Init(uint32_t plln,uint32_t pllm,uint32_t pllp,uint32_t pllq);//时钟系统配置
 /*
 *********************************************************************************************************
 *                                           汇编函数，nouseful
@@ -172,7 +174,7 @@ void Stm32_Clock_Init(u32 plln,u32 pllm,u32 pllp,u32 pllq);//时钟系统配置
 void WFI_SET(void);		//执行WFI指令
 void INTX_DISABLE(void);//关闭所有中断
 void INTX_ENABLE(void);	//开启所有中断
-void MSR_MSP(u32 addr);	//设置堆栈地址 
+void MSR_MSP(uint32_t addr);	//设置堆栈地址 
 
 #define  USE_THREADX    1						/* 配置是否使用threadx操作系统 */
 

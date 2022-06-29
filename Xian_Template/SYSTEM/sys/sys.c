@@ -22,7 +22,7 @@
 //     APB1总线时钟=168/4 = 42Mhz
 //     APB2总线时钟=168/2 = 84Mhz
 //返回值:0,成功;1,失败
-void Stm32_Clock_Init(u32 plln,u32 pllm,u32 pllp,u32 pllq)
+void Stm32_Clock_Init(uint32_t plln,uint32_t pllm,uint32_t pllp,uint32_t pllq)
 {
     HAL_StatusTypeDef ret = HAL_OK;
     RCC_OscInitTypeDef RCC_OscInitStructure; 
@@ -98,7 +98,7 @@ __asm void INTX_ENABLE(void)
 }
 //设置栈顶地址
 //addr:栈顶地址
-__asm void MSR_MSP(u32 addr) 
+__asm void MSR_MSP(uint32_t addr) 
 {
 	MSR MSP, r0 			//set Main Stack value
 	BX r14

@@ -16,22 +16,22 @@ _m_tp_dev tp_dev =
 };
 
 //默认为touchtype=0的数据.
-u8 CMD_RDX=0XD0;
-u8 CMD_RDY=0X90;
+uint8_t CMD_RDX=0XD0;
+uint8_t CMD_RDY=0X90;
 
 //SPI写数据
 //向触摸屏IC写入1byte数据    
 //num:要写入的数据
-void TP_Write_Byte(u8 num)    
+void TP_Write_Byte(uint8_t num)    
 {  
-	u8 count=0;   
+	uint8_t count=0;   
 	for(count=0;count<8;count++)  
 	{ 	  
 		if(num&0x80)TDIN=1;  //num为要写入的数据，TDIN为T_SCK引脚 写1
 		else TDIN=0;   //写0
 		num<<=1;    
 		TCLK=0; //时钟引脚进行上升沿变化
-		delay_us(1);
+		bsp_DelayUS(1);
 		TCLK=1;		//上升沿有效	        
 	}		 			    
 } 
@@ -40,25 +40,25 @@ void TP_Write_Byte(u8 num)
 //从触摸屏IC读取adc值
 //CMD:指令
 //返回值:读到的数据	   
-u16 TP_Read_AD(u8 CMD)	  
+uint16_t TP_Read_AD(uint8_t CMD)	  
 { 	 
-	u8 count=0; 	  
-	u16 Num=0; 
+	uint8_t count=0; 	  
+	uint16_t Num=0; 
 	TCLK=0;		//先拉低时钟 	 
 	TDIN=0; 	//拉低数据线
 	TCS=0; 		//选中触摸屏IC
 	TP_Write_Byte(CMD);//发送命令字，想要读取数据，需要先发送想要读取数据的相关命令
-	delay_us(6);//ADS7846的转换时间最长为6us
+	bsp_DelayUS(6);//ADS7846的转换时间最长为6us
 	TCLK=0; //L52中的函数会将TCLK引脚拉高
-	delay_us(1);    	   
+	bsp_DelayUS(1);    	   
 	TCLK=1;		//给1个时钟，清除BUSY
-	delay_us(1);    
+	bsp_DelayUS(1);    
 	TCLK=0; //下降沿	     	    
 	for(count=0;count<16;count++)//读出16位数据,只有高12位有效 
 	{ 				  
 		Num<<=1; 	 
 		TCLK=0;	//下降沿有效  	    	   
-		delay_us(1);    
+		bsp_DelayUS(1);    
  		TCLK=1;
  		if(DOUT)Num++; 		 
 	}  	
@@ -69,7 +69,7 @@ u16 TP_Read_AD(u8 CMD)
 //触摸屏初始化  		    
 //返回值:0,没有进行校准
 //       1,进行过校准
-u8 TP_Init(void)
+uint8_t TP_Init(void)
 {	
 	if(lcddev.id==0X5510)		//电容触摸屏
 	{
@@ -90,12 +90,12 @@ u8 TP_Init(void)
 //返回值:读到的数据
 #define READ_TIMES 5 	//读取次数
 #define LOST_VAL 1	  	//丢弃值
-u16 TP_Read_XOY(u8 xy)
+uint16_t TP_Read_XOY(uint8_t xy)
 {
-	u16 i, j;
-	u16 buf[READ_TIMES];//局部数组变量
-	u16 sum=0;
-	u16 temp;
+	uint16_t i, j;
+	uint16_t buf[READ_TIMES];//局部数组变量
+	uint16_t sum=0;
+	uint16_t temp;
 	for(i=0;i<READ_TIMES;i++)
 		buf[i]=TP_Read_AD(xy);//读取5次数据放到数组中		 		    
 	for(i=0;i<READ_TIMES-1; i++)//排序，丢弃掉(仅仅是)最后一个值
@@ -120,9 +120,9 @@ u16 TP_Read_XOY(u8 xy)
 //最小值不能少于100.
 //x,y:读取到的坐标值
 //返回值:0,失败;1,成功。
-u8 TP_Read_XY(u16 *x,u16 *y)
+uint8_t TP_Read_XY(uint16_t *x,uint16_t *y)
 {
-	u16 xtemp,ytemp;			 	 		  
+	uint16_t xtemp,ytemp;			 	 		  
 	xtemp=TP_Read_XOY(CMD_RDX);//读取x坐标
 	ytemp=TP_Read_XOY(CMD_RDY);//读取y坐标									   
 	//if(xtemp<100||ytemp<100)return 0;//读数失败
@@ -137,11 +137,11 @@ u8 TP_Read_XY(u16 *x,u16 *y)
 //x,y:读取到的坐标值
 //返回值:0,失败;1,成功。
 #define ERR_RANGE 50 //误差范围 
-u8 TP_Read_XY2(u16 *x,u16 *y) 
+uint8_t TP_Read_XY2(uint16_t *x,uint16_t *y) 
 {
-	u16 x1,y1;
- 	u16 x2,y2;
- 	u8 flag;  
+	uint16_t x1,y1;
+ 	uint16_t x2,y2;
+ 	uint8_t flag;  
 	
     flag=TP_Read_XY(&x1,&y1);   
     if(flag==0)//读取失败，退出函数
@@ -168,7 +168,7 @@ u8 TP_Read_XY2(u16 *x,u16 *y)
 //tp:0,屏幕坐标;1,物理坐标(校准等特殊场合用)
 //返回值:当前触屏状态.
 //0,触屏无触摸;1,触屏有触摸
-u8 TP_Scan(u8 tp)
+uint8_t TP_Scan(uint8_t tp)
 {			   
 	if(PEN==0)//PEN == PB1引脚如果产生低电平代表有触摸按下
 	{

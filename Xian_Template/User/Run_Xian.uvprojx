@@ -499,9 +499,19 @@
               <FilePath>..\SYSTEM\lcd\bsp_font.c</FilePath>
             </File>
             <File>
-              <FileName>MLX90614_Driver.C</FileName>
+              <FileName>bsp_touch.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\mlx90614\MLX90614_Driver.C</FilePath>
+              <FilePath>..\SYSTEM\touch\bsp_touch.c</FilePath>
+            </File>
+            <File>
+              <FileName>ctpiic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\touch\ctpiic.c</FilePath>
+            </File>
+            <File>
+              <FileName>gt9147.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\touch\gt9147.c</FilePath>
             </File>
           </Files>
         </Group>

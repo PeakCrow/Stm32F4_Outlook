@@ -1,11 +1,10 @@
-#include "ctpiic.h"
-#include "delay.h"
+#include "sys.h"
 
 
 //控制IIC速度的延时
 void CT_Delay(void)
 {
-	delay_us(2);//IIC通讯的时许间隔要求
+	bsp_DelayUS(2);//IIC通讯的时许间隔要求
 }
 
 //电容触摸芯片IIC接口初始化
@@ -36,7 +35,7 @@ void CT_IIC_Start(void)
 	CT_SDA_OUT();//sda线设置为输出方向
 	CT_IIC_SDA = 1;//拉高数据线	SDA由高电平向低电平跳变	
 	CT_IIC_SCL = 1;//拉高时钟线
-	delay_us(30);//延时30us
+	bsp_DelayUS(30);//延时30us
 	CT_IIC_SDA = 0;//拉低数据线
 	CT_Delay();
 	CT_IIC_SCL = 0;//只有时钟线的信号为低电平期间，数据线上的高低电平状态才允许变化
@@ -47,7 +46,7 @@ void CT_IIC_Stop(void)
 {
 	CT_SDA_OUT();//sda线输出
 	CT_IIC_SCL = 1;
-	delay_us(30);
+	bsp_DelayUS(30);
 	CT_IIC_SDA = 0;//SDA由低电平向高电平跳变
 	CT_Delay();
 	CT_IIC_SDA = 1;
@@ -55,9 +54,9 @@ void CT_IIC_Stop(void)
 //主机等待应答信号到来
 //返回值：1，接收非应答；
 //		  0，接收应答成功；
-u8 CT_IIC_Wait_Ack(void)
+uint8_t CT_IIC_Wait_Ack(void)
 {
-	u8 ucErrTime = 0;
+	uint8_t ucErrTime = 0;
 	CT_SDA_IN();//SDA设置为输入，用来接收应答信号，主机释放对SDA数据线的控制，由从机控制SDA线
 	CT_IIC_SDA = 1;
 	CT_IIC_SCL = 1;//主机scl信号产生高电平，代表此时sda数据线有效
@@ -105,9 +104,9 @@ void CT_IIC_NAck(void)
 
 //IIC发送一个字节
 //只发送一个字节，可以不用接收应答/非应答信号
-void CT_IIC_Send_Byte(u8 txd)
+void CT_IIC_Send_Byte(uint8_t txd)
 {
-	u8 t;
+	uint8_t t;
 	CT_SDA_OUT();//sda数据线配置为输出模式
 	CT_IIC_SCL = 0;//拉低时钟线，sda数据线无效，进行高低电平(数据)的切换
 	CT_Delay();
@@ -122,11 +121,11 @@ void CT_IIC_Send_Byte(u8 txd)
 	}
 }
 //读一个字节，ack=1时，发送ack，ack= 0，发送nack
-u8 CT_IIC_Read_Byte(u8 ack)
+uint8_t CT_IIC_Read_Byte(uint8_t ack)
 {
-	u8 i,receive = 0;
+	uint8_t i,receive = 0;
 	CT_SDA_IN();//SDA数据线设置为输入
-	delay_us(30);
+	bsp_DelayUS(30);
 	for(i = 0;i < 8;i++)
 	{
 		CT_IIC_SCL = 0;//scl时钟线拉低，此时sda数据线信号无效，进行高低电平(数据)的切换

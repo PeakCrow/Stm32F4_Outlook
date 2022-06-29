@@ -4,8 +4,8 @@
 SRAM_HandleTypeDef TFTSRAM_Handler;//SRAM句柄(用于控制LCD)
 
 //LCD的画笔颜色和背景色
-u32 POINT_COLOR = 0xff000000;//画笔颜色
-u32 BACK_COLOR = 0xffffffff;//背景色
+uint32_t POINT_COLOR = 0xff000000;//画笔颜色
+uint32_t BACK_COLOR = 0xffffffff;//背景色
 
 
 _lcd_dev lcddev;//管理LCD的重要参数
@@ -114,7 +114,7 @@ void LCD_DrawPoint(uint16_t x,uint16_t y)
 //读取个某点的颜色值	 
 //x,y:坐标
 //返回值:此点的颜色
-u32 LCD_ReadPoint(u32 x,u32 y)
+uint32_t LCD_ReadPoint(uint32_t x,uint32_t y)
 {
 	uint16_t r = 0,g = 0,b = 0;
 	if(x >= lcddev.width || y >= lcddev.height)
@@ -745,10 +745,10 @@ void LCD_Scan_Dir(uint8_t dir)
 	
 }
 
-void LCD_Clear(u32 color)
+void LCD_Clear(uint32_t color)
 {
-	u32 index = 0;
-	u32 totalpoint = lcddev.width;
+	uint32_t index = 0;
+	uint32_t totalpoint = lcddev.width;
 	totalpoint *= lcddev.height;//得到总点数
 	LCD_SetCursor(0x00,0x0000);//设置光标位置
 	LCD_WriteRAM_Prepare();//开始写入GRAM
@@ -867,7 +867,7 @@ void LCD_ShowString(uint16_t x,uint16_t y,uint16_t width,uint16_t height,uint8_t
 //快速画点
 //x,y:坐标
 //color:颜色
-void LCD_Fast_DrawPoint(uint16_t x,uint16_t y,u32 color)
+void LCD_Fast_DrawPoint(uint16_t x,uint16_t y,uint32_t color)
 {	   
 	if(lcddev.id==0X9341||lcddev.id==0X5310)
 	{
@@ -897,7 +897,7 @@ void LCD_Fast_DrawPoint(uint16_t x,uint16_t y,u32 color)
 //在指定区域内填充单个颜色
 //(sx,sy),(ex,ey):填充矩形对角坐标,区域大小为:(ex-sx+1)*(ey-sy+1)   
 //color:要填充的颜色
-void LCD_Fill(uint16_t sx,uint16_t sy,uint16_t ex,uint16_t ey,u32 color)
+void LCD_Fill(uint16_t sx,uint16_t sy,uint16_t ex,uint16_t ey,uint32_t color)
 {          
 	uint16_t i,j;
 	uint16_t xlen=0; 

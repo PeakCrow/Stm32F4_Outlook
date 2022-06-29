@@ -1,10 +1,5 @@
-#include "gt9147.h"
-#include "touch.h"
-#include "ctpiic.h"
-#include "usart.h"
-#include "delay.h" 
-#include "string.h" 
-#include "lcd.h" 
+#include "sys.h" 
+
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
 //ALIENTEK STM32F407开发板
@@ -21,7 +16,7 @@
 //GT9147配置参数表
 //第一个字节为版本号(0X60),必须保证新的版本号大于等于GT9147内部
 //flash原有版本号,才会更新配置.
-const u8 GT9147_CFG_TBL[]=
+const uint8_t GT9147_CFG_TBL[]=
 { 
 	0X60,0XE0,0X01,0X20,0X03,0X05,0X35,0X00,0X02,0X08,
 	0X1E,0X08,0X50,0X3C,0X0F,0X05,0X00,0X00,0XFF,0X67,
@@ -46,15 +41,15 @@ const u8 GT9147_CFG_TBL[]=
 //发送GT9147配置参数
 //mode:0,参数不保存到flash
 //     1,参数保存到flash
-u8 GT9147_Send_Cfg(u8 mode)
+uint8_t GT9147_Send_Cfg(uint8_t mode)
 {
-	u8 buf[2];
-	u8 i=0;
+	uint8_t buf[2];
+	uint8_t i=0;
 	buf[0]=0;
 	buf[1]=mode;	//是否写入到GT9147 FLASH?  即是否掉电保存
 	for(i=0;i<sizeof(GT9147_CFG_TBL);i++)buf[0]+=GT9147_CFG_TBL[i];//计算校验和
     buf[0]=(~buf[0])+1;
-	GT9147_WR_Reg(GT_CFGS_REG,(u8*)GT9147_CFG_TBL,sizeof(GT9147_CFG_TBL));//发送寄存器配置
+	GT9147_WR_Reg(GT_CFGS_REG,(uint8_t*)GT9147_CFG_TBL,sizeof(GT9147_CFG_TBL));//发送寄存器配置
 	GT9147_WR_Reg(GT_CHECK_REG,buf,2);//写入校验和,和配置更新标记
 	return 0;
 } 
@@ -63,10 +58,10 @@ u8 GT9147_Send_Cfg(u8 mode)
 //buf:数据缓缓存区
 //len:写数据长度
 //返回值:0,成功;1,失败.
-u8 GT9147_WR_Reg(u16 reg,u8 *buf,u8 len)
+uint8_t GT9147_WR_Reg(uint16_t reg,uint8_t *buf,uint8_t len)
 {
-	u8 i;
-	u8 ret=0;
+	uint8_t i;
+	uint8_t ret=0;
 	CT_IIC_Start();	//使用IIC总线发送开始信号
  	CT_IIC_Send_Byte(GT_CMD_WR);   	//发送写命令 	 
 	CT_IIC_Wait_Ack();//等待应答
@@ -87,9 +82,9 @@ u8 GT9147_WR_Reg(u16 reg,u8 *buf,u8 len)
 //reg:起始寄存器地址
 //buf:数据缓缓存区
 //len:读数据长度			  
-void GT9147_RD_Reg(u16 reg,u8 *buf,u8 len)
+void GT9147_RD_Reg(uint16_t reg,uint8_t *buf,uint8_t len)
 {
-	u8 i; 
+	uint8_t i; 
  	CT_IIC_Start();	
  	CT_IIC_Send_Byte(GT_CMD_WR);   //发送写命令 	 
 	CT_IIC_Wait_Ack();
@@ -108,9 +103,9 @@ void GT9147_RD_Reg(u16 reg,u8 *buf,u8 len)
 } 
 //初始化GT9147触摸屏
 //返回值:0,初始化成功;1,初始化失败 
-u8 GT9147_Init(void)
+uint8_t GT9147_Init(void)
 {
-	u8 temp[5]; 
+	uint8_t temp[5]; 
 	GPIO_InitTypeDef GPIO_Initure;
 	
 	__HAL_RCC_GPIOB_CLK_ENABLE();			//开启GPIOB时钟
@@ -130,9 +125,9 @@ u8 GT9147_Init(void)
 	
 	CT_IIC_Init();      	//初始化电容屏的I2C总线  
 	GT_RST=0;				//复位
-	delay_ms(10);
+	bsp_DelayMS(10);
  	GT_RST=1;				//释放复位		    
-	delay_ms(10); 
+	bsp_DelayMS(10); 
 		
 	GPIO_Initure.Pin=GPIO_PIN_1;           	//PB1设置为上拉输入
     GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;  //输出模式
@@ -140,7 +135,7 @@ u8 GT9147_Init(void)
     GPIO_Initure.Speed=GPIO_SPEED_HIGH;     //高速
     HAL_GPIO_Init(GPIOB,&GPIO_Initure);     //初始化
 	
-	delay_ms(100);  
+	bsp_DelayMS(100);  
 	GT9147_RD_Reg(GT_PID_REG,temp,4);//读取产品ID
 	temp[4]=0;
 	printf("CTP ID2:%s\r\n",temp);	//打印ID
@@ -154,27 +149,27 @@ u8 GT9147_Init(void)
 			printf("Default Ver:%d\r\n",temp[0]);
 			GT9147_Send_Cfg(1);//更新并保存配置
 		}
-		delay_ms(10);
+		bsp_DelayMS(10);
 		temp[0]=0X00;	 
 		GT9147_WR_Reg(GT_CTRL_REG,temp,1);//结束复位   
 		return 0;
 	} 
 	return 0;
 }
-const u16 GT9147_TPX_TBL[5]={GT_TP1_REG,GT_TP2_REG,GT_TP3_REG,GT_TP4_REG,GT_TP5_REG};
+const uint16_t GT9147_TPX_TBL[5]={GT_TP1_REG,GT_TP2_REG,GT_TP3_REG,GT_TP4_REG,GT_TP5_REG};
 //扫描触摸屏(采用查询方式)
 //mode:0,正常扫描.
 //返回值:当前触屏状态.
 //0,触屏无触摸;1,触屏有触摸
-u8 GT9147_Scan(u8 mode)
+uint8_t GT9147_Scan(uint8_t mode)
 {
-	u8 buf[4];
-	u8 i=0;
-	u8 res=0;
-	u8 temp;
-	u8 tempsta;
-	u8 temp_area1,temp_area2,temp_area3;
- 	static u8 t=0;//控制查询间隔,从而降低CPU占用率   
+	uint8_t buf[4];
+	uint8_t i=0;
+	uint8_t res=0;
+	uint8_t temp;
+	uint8_t tempsta;
+	uint8_t temp_area1,temp_area2,temp_area3;
+ 	static uint8_t t=0;//控制查询间隔,从而降低CPU占用率   
 	t++;
 	if((t%10)==0||t<10)//空闲时,每进入10次CTP_Scan函数才检测1次,从而节省CPU使用率
 	{
@@ -199,12 +194,12 @@ u8 GT9147_Scan(u8 mode)
 
 					if(tp_dev.touchtype&0X01)//横屏
 					{
-						tp_dev.y[i]=((u16)buf[1]<<8)+buf[0];
-						tp_dev.x[i]=800-(((u16)buf[3]<<8)+buf[2]);
+						tp_dev.y[i]=((uint16_t)buf[1]<<8)+buf[0];
+						tp_dev.x[i]=800-(((uint16_t)buf[3]<<8)+buf[2]);
 					}else
 					{
-						tp_dev.x[i]=((u16)buf[1]<<8)+buf[0];
-						tp_dev.y[i]=((u16)buf[3]<<8)+buf[2];
+						tp_dev.x[i]=((uint16_t)buf[1]<<8)+buf[0];
+						tp_dev.y[i]=((uint16_t)buf[3]<<8)+buf[2];
 					}  
 					printf("x[%d]:%d,y[%d]:%d,area:%d\r\n",i,tp_dev.x[i],i,tp_dev.y[i],temp_area3);
 					
