@@ -282,9 +282,9 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_InitWs2812b();							/* 初始化ws2812b可调灯效 */
 	bsp_InitRotationSensor();					/* 初始化轮速传感器 */
 	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* 生成一个1k，50占空比的方波，用来验证脉冲计数 */	
-	bsp_InitADS1256();							/* 初始化配置ADS1256.  PGA=1, DRATE=30KSPS, BUFEN=1, 输入正负5V */
-	bsp_Initlcd();								/* 初始化LCD屏幕 */
-	tp_dev.init();
+	//bsp_InitADS1256();							/* 初始化配置ADS1256.  PGA=1, DRATE=30KSPS, BUFEN=1, 输入正负5V */
+	//bsp_Initlcd();								/* 初始化LCD屏幕 */
+	//tp_dev.init();
 	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate();
 
@@ -595,8 +595,8 @@ static void AppTaskTFTLCD    (ULONG thread_input)
 	LCD_ShowString(30,110,200,16,16,"2017/4/14");
 	
  	Load_Drow_Dialog();	
-	if(tp_dev.touchtype&0X80)
-		ctp_test();
+	//if(tp_dev.touchtype&0X80)
+		//ctp_test();
 	
 	while (1)
 		{
@@ -678,6 +678,36 @@ while (1)
 }
 
 
+uint32_t I2C_EE_ByteWrite1(uint8_t * pBuffer, uint8_t WriteAddr)
+{
+	HAL_StatusTypeDef	status = HAL_OK;
+
+	status = HAL_I2C_Mem_Write(&iic_handle,(0x00<<1),(uint16_t)WriteAddr,I2C_MEMADD_SIZE_8BIT,pBuffer,1,100);
+
+	/* 检查通讯状态 */
+	if (status != HAL_OK)
+		{
+			/* 执行用户定义的超时回调函数 */
+		}
+	while (HAL_I2C_GetState(&iic_handle) != HAL_I2C_STATE_READY)
+		{
+			
+		}
+
+	/* 检查eeprom芯片是否准备好对于下一个新的操作 */
+	while(HAL_I2C_IsDeviceReady(&iic_handle,0x00,I2Cx_TIMEOUT_MAX,I2Cx_TIMEOUT_MAX) == HAL_TIMEOUT)
+		{
+			
+		}
+	/* 等待数据传输结束 */
+	while(HAL_I2C_GetState(&iic_handle) != HAL_I2C_STATE_READY)
+		{
+			
+		}
+	
+	return status;
+}
+
 /*
 *********************************************************************************************************
 *	函 数 名: AppTaskUserIF
@@ -691,6 +721,9 @@ static void AppTaskUserIF(ULONG thread_input)
 {
 	uint8_t ucKeyCode;	/* 按键代码 */
 	(void)thread_input;
+	uint8_t buf1[1] = {0x07},buf2[4];
+	uint16_t tmp = 0x00;
+	tmp <<= 1;
 	while(1)
 	{        
 		ucKeyCode = bsp_GetKey();
@@ -699,8 +732,12 @@ static void AppTaskUserIF(ULONG thread_input)
 				switch(ucKeyCode)
 				{
 					case KEY_0_UP: 			  /* K1键按打印任务执行情况 */
+						App_Printf("k0按键弹起\r\n");
 					 	//DispTaskInfo();
-					 	//DemoIicEeprom();
+					 	//HAL_I2C_Master_Transmit(&iic_handle,0x00,buf1,2,100);
+					I2C_EE_ByteWrite1(buf1,0x00);
+					
+					//I2C_EE_BufferRead(buf2,tmp+1,3);
 					 	break;
 					case KEY_UP_DOWN:			/* kup按键按下 */
 						App_Printf("kup按键按下\r\n");				//红色	
@@ -709,13 +746,12 @@ static void AppTaskUserIF(ULONG thread_input)
 					case KEY_0_DOWN:			/* k0按键按下 */
 					{
 						App_Printf("k0按键按下\r\n");
-						//Ws2812b_Gradient_Lamp(Red,Yellow,10);
-						//Ws2812b_Rgb_SetIndexPartColor(5,10,0xff,0xff,0x00);
-						Ws2812b_Run_Water_Lamp(0xff,0x00,0x00,1000,gradua_on);/* 当按下key0后，会进行12s的延时，才能触发下次的按键输入bug */
+						//Ws2812b_Run_Water_Lamp(0xff,0x00,0x00,1000,gradua_on);/* 当按下key0后，会进行12s的延时，才能触发下次的按键输入bug */
 					break;
 					}
 					case KEY_UP_UP:
-						Ws2812b_Set_Alloff();
+						App_Printf("kup按键弹起");
+						//Ws2812b_Set_Alloff();
 						break;
 				}
 		}
