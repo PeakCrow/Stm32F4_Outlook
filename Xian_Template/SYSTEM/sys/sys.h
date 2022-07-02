@@ -43,6 +43,7 @@
 #include "bsp_ws2812b.h"			/* ws2812b三色RGB灯 */
 #include "bsp_rotation_sensor.h"	/* 轮速传感器 */
 #include "bsp_spi_ads1256.h"		/* 24位ADC模拟量采集 */
+#include "bsp_mlx90614.h"
 
 #include "bsp_font.h"
 #include "bsp_lcd.h"

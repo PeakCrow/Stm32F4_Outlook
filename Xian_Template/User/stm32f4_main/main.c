@@ -618,7 +618,7 @@ static void AppTaskTFTLCD    (ULONG thread_input)
 static  void  AppTaskREADADC	(ULONG thread_input)
 {
 	(VOID)thread_input;
-	uint8_t i;
+//	uint8_t i;
 	int32_t iTemp;
 	float fTemp;
 		/* 打印芯片ID (通过读ID可以判断硬件接口是否正常) , 正常时状态寄存器的高4bit = 3 */
@@ -678,36 +678,6 @@ while (1)
 }
 
 
-uint32_t I2C_EE_ByteWrite1(uint8_t * pBuffer, uint8_t WriteAddr)
-{
-	HAL_StatusTypeDef	status = HAL_OK;
-
-	status = HAL_I2C_Mem_Write(&iic_handle,(0x00<<1),(uint16_t)WriteAddr,I2C_MEMADD_SIZE_8BIT,pBuffer,1,100);
-
-	/* 检查通讯状态 */
-	if (status != HAL_OK)
-		{
-			/* 执行用户定义的超时回调函数 */
-		}
-	while (HAL_I2C_GetState(&iic_handle) != HAL_I2C_STATE_READY)
-		{
-			
-		}
-
-	/* 检查eeprom芯片是否准备好对于下一个新的操作 */
-	while(HAL_I2C_IsDeviceReady(&iic_handle,0x00,I2Cx_TIMEOUT_MAX,I2Cx_TIMEOUT_MAX) == HAL_TIMEOUT)
-		{
-			
-		}
-	/* 等待数据传输结束 */
-	while(HAL_I2C_GetState(&iic_handle) != HAL_I2C_STATE_READY)
-		{
-			
-		}
-	
-	return status;
-}
-
 /*
 *********************************************************************************************************
 *	函 数 名: AppTaskUserIF
@@ -721,9 +691,8 @@ static void AppTaskUserIF(ULONG thread_input)
 {
 	uint8_t ucKeyCode;	/* 按键代码 */
 	(void)thread_input;
-	uint8_t buf1[1] = {0x07},buf2[4];
-	uint16_t tmp = 0x00;
-	tmp <<= 1;
+	
+	float temp;
 	while(1)
 	{        
 		ucKeyCode = bsp_GetKey();
@@ -735,13 +704,12 @@ static void AppTaskUserIF(ULONG thread_input)
 						App_Printf("k0按键弹起\r\n");
 					 	//DispTaskInfo();
 					 	//HAL_I2C_Master_Transmit(&iic_handle,0x00,buf1,2,100);
-					I2C_EE_ByteWrite1(buf1,0x00);
-					
 					//I2C_EE_BufferRead(buf2,tmp+1,3);
 					 	break;
 					case KEY_UP_DOWN:			/* kup按键按下 */
 						App_Printf("kup按键按下\r\n");				//红色	
-						//App_Printf("温度：%.1f\r\n",SMBus_ReadTemp());
+						temp = bsp_MLX90614_ReadTemp();
+						App_Printf("%.1f\r\n",temp);
 						break;
 					case KEY_0_DOWN:			/* k0按键按下 */
 					{

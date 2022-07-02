@@ -28,7 +28,7 @@ static void I2C_Mode_Config(void)
 	iic_handle.Instance					= I2Cx;
 
 	iic_handle.Init.AddressingMode		= I2C_ADDRESSINGMODE_7BIT;
-	iic_handle.Init.ClockSpeed			= 400000;
+	iic_handle.Init.ClockSpeed			= 60000;
 	iic_handle.Init.DualAddressMode		= I2C_DUALADDRESS_DISABLE;
 	iic_handle.Init.DutyCycle			= I2C_DUTYCYCLE_2;
 	iic_handle.Init.GeneralCallMode		= I2C_GENERALCALL_DISABLE;
