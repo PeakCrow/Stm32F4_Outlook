@@ -40,6 +40,6 @@
 - (此状态会随着驱动的更新不断更新)。
 
 #### 目前使用的PIN
-![输入图片说明](Xian_Template/doc/%E5%B7%B2%E9%85%8D%E7%BD%AEPIN.png)
+![输入图片说明](Xian_Template/Doc/%E5%B7%B2%E9%85%8D%E7%BD%AEPIN.png)
 ####  **LVGL模拟器效果** 
-![输入图片说明](Xian_Template/doc/PC%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%95%88%E6%9E%9C.png)
+![输入图片说明](Xian_Template/Doc/PC%E6%A8%A1%E6%8B%9F%E5%99%A8%E6%95%88%E6%9E%9C.png)
