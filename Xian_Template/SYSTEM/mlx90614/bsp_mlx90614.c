@@ -67,11 +67,14 @@
 *******************************************************************************/
 float bsp_MLX90614_ReadTemp(void)
 {
-	float temp;
-	 uint8_t buf1[1] = {RAM_TOBJ1},buf_read[3];
-	 bsp_Mlx90614_Write(buf1,SA);
-	 bsp_Mlx90614_ReadBuf(buf_read,RAM_TOBJ1,3);
-
+	float temp = 0;
+	uint8_t buf1[1] = {RAM_TOBJ1},buf_read[3];
+	if(bsp_Mlx90614_Write(buf1,SA) != HAL_OK)
+		{
+			printf("红外传感器安装错误\r\n");
+			return temp;
+		}
+	bsp_Mlx90614_ReadBuf(buf_read,RAM_TOBJ1,3);
 	temp = (buf_read[1] << 8 | buf_read[0]) * 0.02 - 273.15;
 	return temp;
 }

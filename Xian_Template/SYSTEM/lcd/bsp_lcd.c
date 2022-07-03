@@ -909,3 +909,5 @@ void LCD_Fill(uint16_t sx,uint16_t sy,uint16_t ex,uint16_t ey,uint32_t color)
 		for(j=0;j<xlen;j++)LCD->LCD_RAM=color;	//œ‘ æ—’…´ 	    
 	}  
 }  
+
+

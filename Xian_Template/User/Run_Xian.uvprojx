@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>STM32F407ZGTx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.12.0</PackID>
-          <PackURL>http://www.keil.com/pack</PackURL>
+          <PackID>Keil.STM32F4xx_DFP.2.16.0</PackID>
+          <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x10000000,0x00010000) IROM(0x08000000,0x00100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -502,16 +502,6 @@
               <FileName>bsp_touch.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\touch\bsp_touch.c</FilePath>
-            </File>
-            <File>
-              <FileName>ctpiic.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\touch\ctpiic.c</FilePath>
-            </File>
-            <File>
-              <FileName>gt9147.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\touch\gt9147.c</FilePath>
             </File>
             <File>
               <FileName>bsp_mlx90614.c</FileName>
@@ -1750,8 +1740,8 @@
     <files>
       <file attr="config" category="header" name="Config\EventRecorderConf.h" version="1.1.0">
         <instance index="0">RTE\Compiler\EventRecorderConf.h</instance>
-        <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="Keil" Cversion="1.4.0" condition="Cortex-M Device"/>
-        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.6.3"/>
+        <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="Keil" Cversion="1.5.0" condition="Cortex-M Device"/>
+        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.7.0"/>
         <targetInfos>
           <targetInfo name="xian"/>
         </targetInfos>

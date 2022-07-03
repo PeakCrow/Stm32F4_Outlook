@@ -43,13 +43,10 @@
 #include "bsp_ws2812b.h"			/* ws2812b三色RGB灯 */
 #include "bsp_rotation_sensor.h"	/* 轮速传感器 */
 #include "bsp_spi_ads1256.h"		/* 24位ADC模拟量采集 */
-#include "bsp_mlx90614.h"
-
-#include "bsp_font.h"
-#include "bsp_lcd.h"
-#include "ctpiic.h"
-#include "gt9147.h"
-#include "bsp_touch.h"
+#include "bsp_mlx90614.h"			/* mlx90614红外温度传感器初始化 */
+#include "bsp_font.h"				/* 屏幕显示的字体C库文件 */
+#include "bsp_lcd.h"				/* 屏幕显示驱动 */
+#include "bsp_touch.h"				/* 电容屏触摸驱动,包含有触摸画板例程 */
 
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug调试组件 */

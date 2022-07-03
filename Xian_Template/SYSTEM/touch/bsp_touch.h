@@ -45,5 +45,68 @@ extern _m_tp_dev tp_dev;
 uint8_t TP_Scan(uint8_t tp);								//扫描
 uint8_t TP_Init(void);								//初始化
 
+
+
+/************************************************IIC通讯****************************************/
+
+
+//IO方向设置	将寄存器中的第(2*11)位和下一位置0		寄存器的第(2*11)位置0
+#define CT_SDA_IN() {GPIOF->MODER&=~(3<<(2*11));GPIOF->MODER|=0<<2*11;}//PF11输入模式
+#define CT_SDA_OUT() {GPIOF->MODER&=~(3<<(2*11));GPIOF->MODER|=1<<2*11;}//PF11输出模式
+//IO操作函数
+#define CT_IIC_SCL	PBout(0)	//SCL-PB0引脚输出高低电平
+#define CT_IIC_SDA	PFout(11)	//SDA-PF11引脚输出高低电平
+#define CT_READ_SDA	PFin(11)	//输入SDA-PF11输入高低电平
+
+//IIC所有操作函数
+void CT_IIC_Init(void);//初始化IIC的IO口
+void CT_IIC_Start(void);//发送IIC开始信号
+void CT_IIC_Stop(void);//发送IIC停止信号
+void CT_IIC_Send_Byte(uint8_t txd);//IIC发送一个字节
+uint8_t CT_IIC_Read_Byte(uint8_t ack);//IIC读取一个字节
+uint8_t CT_IIC_Wait_Ack(void);//IIC等待ACK信号
+void CT_IIC_Ack(void);//IIC发送ACK信号
+void CT_IIC_NAck(void);//IIC不发送ACK信号
+
+
+/************************************************GT9147驱动****************************************/
+
+//IO操作函数
+#define GT_RST	PCout(13)	//GT9147复位引脚
+#define GT_INT	PBin(1)		//GT9147中断引脚
+
+//I2C读写命令
+#define	GT_CMD_WR	0X28	//写命令
+#define GT_CMD_RD	0X29	//读命令
+
+//GT9147部分寄存器定义
+#define GT_CTRL_REG		0X8040	//GT9147控制寄存器
+#define GT_CFGS_REG		0X8047	//GT9147配置起始地址寄存器
+#define GT_CHECK_REG	0X80FF	//GT9147校验和寄存器
+#define GT_PID_REG		0X8140	//GT9147产品ID寄存器
+
+#define GT_GSTID_REG	0X814E	//GT9147当前检测到的触摸情况
+#define GT_TP1_REG		0X8150	//第一个触摸点数据地址
+#define GT_TP2_REG		0X8158	//第二个触摸点数据地址
+#define GT_TP3_REG		0X8160	//第三个触摸点数据地址
+#define GT_TP4_REG 		0X8168	//第四个触摸点数据地址
+#define GT_TP5_REG		0X8170	//第五个触摸点数据地址
+#define GT_TOUCH_AREA_L   0X8154
+#define GT_TOUCH_AREA_H   0X8155//第一个触摸点的触摸面积
+
+uint8_t GT9147_Send_Cfg(uint8_t mode);
+uint8_t GT9147_WR_Reg(uint16_t reg,uint8_t *buf,uint8_t len);
+void GT947_RD_Reg(uint16_t reg,uint8_t *buf,uint8_t len);
+uint8_t GT9147_Init(void);
+uint8_t GT9147_Scan(uint8_t mode);
+
+
+/*******************************电容屏画板功能测试*************************************************/
+void gui_draw_hline(uint16_t x0,uint16_t y0,uint16_t len,uint16_t color);
+void gui_fill_circle(uint16_t x0,uint16_t y0,uint16_t r,uint16_t color);
+void lcd_draw_bline(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2,uint8_t size,uint16_t color);
+void Load_Drow_Dialog(void);
+void ctp_test(void);
+
 #endif
 
