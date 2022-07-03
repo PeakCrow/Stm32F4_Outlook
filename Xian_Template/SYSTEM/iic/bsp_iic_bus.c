@@ -28,7 +28,7 @@ static void I2C_Mode_Config(void)
 	iic_handle.Instance					= I2Cx;
 
 	iic_handle.Init.AddressingMode		= I2C_ADDRESSINGMODE_7BIT;
-	iic_handle.Init.ClockSpeed			= 60000;
+	iic_handle.Init.ClockSpeed			= 60000;/* 默认eeprom速度是400k */
 	iic_handle.Init.DualAddressMode		= I2C_DUALADDRESS_DISABLE;
 	iic_handle.Init.DutyCycle			= I2C_DUTYCYCLE_2;
 	iic_handle.Init.GeneralCallMode		= I2C_GENERALCALL_DISABLE;
@@ -243,7 +243,7 @@ void I2C_EE_BufferWrite(uint8_t * pBuffer, uint8_t WriteAddr, uint16_t NumByteTo
 	}
 }
 
-#if 0
+#if 1
 uint8_t		I2Cx_BUFFER_WRITE[I2Cx_MAX_BYTE_NUM];
 uint8_t		I2Cx_BUFFER_READ[I2Cx_MAX_BYTE_NUM];
 

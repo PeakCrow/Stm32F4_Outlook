@@ -703,13 +703,12 @@ static void AppTaskUserIF(ULONG thread_input)
 					case KEY_0_UP: 			  /* K1键按打印任务执行情况 */
 						App_Printf("k0按键弹起\r\n");
 					 	//DispTaskInfo();
-					 	//HAL_I2C_Master_Transmit(&iic_handle,0x00,buf1,2,100);
-					//I2C_EE_BufferRead(buf2,tmp+1,3);
 					 	break;
 					case KEY_UP_DOWN:			/* kup按键按下 */
 						App_Printf("kup按键按下\r\n");				//红色	
 						temp = bsp_MLX90614_ReadTemp();
 						App_Printf("%.1f\r\n",temp);
+						//DemoIicEeprom();
 						break;
 					case KEY_0_DOWN:			/* k0按键按下 */
 					{
