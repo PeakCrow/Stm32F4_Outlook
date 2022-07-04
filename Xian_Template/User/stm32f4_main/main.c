@@ -555,7 +555,7 @@ static void AppTaskUserIF(ULONG thread_input)
 					 	break;
 					case KEY_UP_DOWN:			/* kup按键按下 */
 						App_Printf("kup按键按下\r\n");				//红色	
-						App_Printf("%.1f\r\n",bsp_MLX90614_ReadTemp(););
+						App_Printf("%.1f\r\n",bsp_MLX90614_ReadTemp());
 						//DemoIicEeprom();
 						break;
 					case KEY_0_DOWN:			/* k0按键按下 */
@@ -567,6 +567,7 @@ static void AppTaskUserIF(ULONG thread_input)
 					case KEY_UP_UP:
 						App_Printf("kup按键弹起");
 						//Ws2812b_Set_Alloff();
+						SD_Test();		/* SD卡测试例程 */
 						break;
 				}
 		}
@@ -634,6 +635,7 @@ static  void  App_Printf(const char *fmt, ...)
 *	返 回 值: 无
 *********************************************************************************************************
 */
+
 static void DispTaskInfo(void)
 {
 	TX_THREAD      *p_tcb;	        /* 定义一个任务控制块指针 */

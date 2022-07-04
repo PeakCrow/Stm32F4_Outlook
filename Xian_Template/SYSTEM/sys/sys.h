@@ -48,6 +48,11 @@
 #include "bsp_lcd.h"				/* 屏幕显示驱动 */
 #include "bsp_touch.h"				/* 电容屏触摸驱动,包含有触摸画板例程 */
 
+
+#include "bsp_sdio_sd.h"
+#include "sdio_test.h"
+
+
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug调试组件 */
 #endif
