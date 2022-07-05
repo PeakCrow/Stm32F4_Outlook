@@ -32,16 +32,16 @@ APB2 高速时钟最大频率为84MHz
 
 /* DMA2 */
 #define SPIx_TX_DMA_CHANNEL		DMA_CHANNEL_3
-#define SPIx_TX_DMA_STREAM		DMA2_Stream3
+#define SPIx_TX_DMA_STREAM		DMA2_Stream5
 #define SPIx_RX_DMA_CHANNEL		DMA_CHANNEL_3
 #define SPIx_RX_DMA_STREAM		DMA2_Stream0
 
 /* 中断 */
 #define SPIx_IRQn				SPI1_IRQn
 #define SPIx_IRQHandler			SPI1_IRQHandler
-#define SPIx_DMA_TX_IRQn		DMA2_Stream3_IRQn
+#define SPIx_DMA_TX_IRQn		DMA2_Stream5_IRQn
 #define SPIx_DMA_RX_IRQn		DMA2_Stream0_IRQn
-#define SPIx_DMA_TX_IRQHandler	DMA2_Stream3_IRQHandler
+#define SPIx_DMA_TX_IRQHandler	DMA2_Stream5_IRQHandler
 #define SPIx_DMA_RX_IRQHandler	DMA2_Stream0_IRQHandler
 
 /* 时钟、引脚宏定义 */

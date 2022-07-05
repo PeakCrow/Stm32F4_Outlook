@@ -434,6 +434,28 @@ void BSP_SD_GetCardInfo(HAL_SD_CardInfoTypeDef *CardInfo)
   HAL_SD_GetCardInfo(&uSdHandle, CardInfo);
 }
 
+
+void SDMMC1_IRQHandler(void)
+{
+  HAL_SD_IRQHandler(&uSdHandle);
+}
+
+/**
+* @brief This function handles DMA2 stream3 global interrupt.
+*/
+void DMA2_Stream3_IRQHandler(void)
+{
+  HAL_DMA_IRQHandler(uSdHandle.hdmarx);
+}
+
+/**
+* @brief This function handles DMA2 stream6 global interrupt.
+*/
+void DMA2_Stream6_IRQHandler(void)
+{
+	HAL_DMA_IRQHandler(uSdHandle.hdmatx); 
+}
+
 /**
   * @brief SD Abort callbacks
   * @param hsd: SD handle
