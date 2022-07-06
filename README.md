@@ -11,10 +11,10 @@
 | Core    | M4内核的启动文件                                             |
 | Doc     | 文档数据、教程资料                 |
 | HAL_lib | ST提供的底层文件，HAL库                                      |
-| Obj     | keil5编译产生的文件                                          |
-| SYSTEM  | 包含有除main.c外的所有应用文件                               |
-| ThreadX | threadx操作系统的源文件                                      |
-| User    | 主要有main.c文件和编译信息的txt文件(txt文件主要是配合SI编辑器使用) |
+| Obj     | keil5编译产生的目标文件                                          |
+| SYSTEM  | 包含有除main.c外的外设驱动文件                               |
+| ThreadX | ThreadX操作系统的源文件                                      |
+| User    | main.c文件和编译信息的txt文件(txt文件配合SI编辑器使用) |
 
 #### 实现功能
 
