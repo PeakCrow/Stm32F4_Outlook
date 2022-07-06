@@ -1,10 +1,10 @@
-/**
+﻿/**
  * @file lv_port_fs_templ.c
  *
  */
 
 /*Copy this file as "lv_port_fs.c" and set this value to "1" to enable content*/
-#if 0
+#if 1
 
 /*********************
  *      INCLUDES
@@ -24,7 +24,7 @@
  *  STATIC PROTOTYPES
  **********************/
 static void fs_init(void);
-
+bool fs_ready(lv_fs_drv_t* drv);
 static void * fs_open(lv_fs_drv_t * drv, const char * path, lv_fs_mode_t mode);
 static lv_fs_res_t fs_close(lv_fs_drv_t * drv, void * file_p);
 static lv_fs_res_t fs_read(lv_fs_drv_t * drv, void * file_p, void * buf, uint32_t btr, uint32_t * br);
@@ -70,12 +70,14 @@ void lv_port_fs_init(void)
 
     /*Set up fields...*/
     fs_drv.letter = 'P';
+    fs_drv.ready_cb = fs_ready;
     fs_drv.open_cb = fs_open;
     fs_drv.close_cb = fs_close;
     fs_drv.read_cb = fs_read;
     fs_drv.write_cb = fs_write;
     fs_drv.seek_cb = fs_seek;
     fs_drv.tell_cb = fs_tell;
+    fs_drv.user_data = NULL;
 
     fs_drv.dir_close_cb = fs_dir_close;
     fs_drv.dir_open_cb = fs_dir_open;
@@ -96,6 +98,11 @@ static void fs_init(void)
     /*You code here*/
 }
 
+bool fs_ready(lv_fs_drv_t* drv)
+{
+    (void)drv;
+    return true;
+}
 /**
  * Open a file
  * @param drv       pointer to a driver where this function belongs
@@ -105,24 +112,27 @@ static void fs_init(void)
  */
 static void * fs_open(lv_fs_drv_t * drv, const char * path, lv_fs_mode_t mode)
 {
+    (void)drv;
     lv_fs_res_t res = LV_FS_RES_NOT_IMP;
 
-    void * f = NULL;
+    const char * f = "";
 
     if(mode == LV_FS_MODE_WR) {
         /*Open a file for write*/
-        f = ...         /*Add your code here*/
+        f = "wb";         /*Add your code here*/
     }
     else if(mode == LV_FS_MODE_RD) {
         /*Open a file for read*/
-        f = ...         /*Add your code here*/
+        f = "rb";         /*Add your code here*/
     }
     else if(mode == (LV_FS_MODE_WR | LV_FS_MODE_RD)) {
         /*Open a file for read and write*/
-        f = ...         /*Add your code here*/
+        f = "a+";         /*Add your code here*/
     }
+    char buf[256];
+    sprintf(buf, "./%s", path);
 
-    return f;
+    return fopen(buf, f);
 }
 
 /**
@@ -133,11 +143,12 @@ static void * fs_open(lv_fs_drv_t * drv, const char * path, lv_fs_mode_t mode)
  */
 static lv_fs_res_t fs_close(lv_fs_drv_t * drv, void * file_p)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+    (void)drv;
+    //lv_fs_res_t res = LV_FS_RES_NOT_IMP;
 
     /*Add your code here*/
 
-    return res;
+    return fclose(file_p);
 }
 
 /**
@@ -151,10 +162,11 @@ static lv_fs_res_t fs_close(lv_fs_drv_t * drv, void * file_p)
  */
 static lv_fs_res_t fs_read(lv_fs_drv_t * drv, void * file_p, void * buf, uint32_t btr, uint32_t * br)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+    (void)drv;
+    lv_fs_res_t res = LV_FS_RES_OK;
 
     /*Add your code here*/
-
+    *br = (uint32_t)fread(buf, 1, btr, file_p);
     return res;
 }
 
@@ -169,10 +181,11 @@ static lv_fs_res_t fs_read(lv_fs_drv_t * drv, void * file_p, void * buf, uint32_
  */
 static lv_fs_res_t fs_write(lv_fs_drv_t * drv, void * file_p, const void * buf, uint32_t btw, uint32_t * bw)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+    (void)drv;
+    lv_fs_res_t res = LV_FS_RES_OK;
 
     /*Add your code here*/
-
+    *bw = (uint32_t)fwrite(buf, 1, btw, file_p);
     return res;
 }
 
@@ -186,11 +199,12 @@ static lv_fs_res_t fs_write(lv_fs_drv_t * drv, void * file_p, const void * buf, 
  */
 static lv_fs_res_t fs_seek(lv_fs_drv_t * drv, void * file_p, uint32_t pos, lv_fs_whence_t whence)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+    (void)drv;
+    //lv_fs_res_t res = LV_FS_RES_NOT_IMP;
 
     /*Add your code here*/
 
-    return res;
+    return fseek(file_p,pos,whence);
 }
 /**
  * Give the position of the read write pointer
@@ -201,10 +215,11 @@ static lv_fs_res_t fs_seek(lv_fs_drv_t * drv, void * file_p, uint32_t pos, lv_fs
  */
 static lv_fs_res_t fs_tell(lv_fs_drv_t * drv, void * file_p, uint32_t * pos_p)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+    (void)drv;
+    lv_fs_res_t res = LV_FS_RES_OK;
 
     /*Add your code here*/
-
+    *pos_p = ftell(file_p);
     return res;
 }
 
@@ -218,7 +233,7 @@ static void * fs_dir_open(lv_fs_drv_t * drv, const char * path)
 {
     void * dir = NULL;
     /*Add your code here*/
-    dir = ...           /*Add your code here*/
+    //dir = ...           /*Add your code here*/
           return dir;
 }
 

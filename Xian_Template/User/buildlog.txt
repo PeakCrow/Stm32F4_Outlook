@@ -1,13 +1,8 @@
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'xian'
-compiling main.c...
-stm32f4_main\main.c(484): warning:  #550-D: variable "fTemp"  was set but never used
-  	float fTemp;
-stm32f4_main\main.c(649): warning:  #177-D: function "DispTaskInfo"  was declared but never referenced
-  static void DispTaskInfo(void)
-stm32f4_main\main.c: 2 warnings, 0 errors
+compiling sd_diskio.c...
 linking...
-Program Size: Code=65706 RO-data=194354 RW-data=1544 ZI-data=30092  
+Program Size: Code=65358 RO-data=194354 RW-data=1544 ZI-data=30092  
 FromELF: creating hex file...
-"..\Obj\Run_Xian.axf" - 0 Error(s), 2 Warning(s).
-Build Time Elapsed:  00:00:05
+"..\Obj\Run_Xian.axf" - 0 Error(s), 0 Warning(s).
+Build Time Elapsed:  00:00:03

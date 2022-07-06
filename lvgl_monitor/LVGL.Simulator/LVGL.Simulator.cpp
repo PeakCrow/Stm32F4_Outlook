@@ -25,7 +25,7 @@
 #include "lvgl/examples/lv_examples.h"
 #include "lvgl/demos/lv_demos.h"
 #include "lv_drivers/win32drv/win32drv.h"
-
+#include "lvgl/examples/porting/lv_port_fs_template.h"
 #if _MSC_VER >= 1200
 // Restore compilation warnings.
 #pragma warning(pop)
@@ -37,7 +37,7 @@
 int main()
 {
     lv_init();
-
+    lv_port_fs_init();
     if (!lv_win32_init(
         GetModuleHandleW(NULL),
         SW_SHOW,

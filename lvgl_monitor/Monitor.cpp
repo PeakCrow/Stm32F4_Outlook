@@ -11,18 +11,26 @@ static void lv_mainstart(void);
 
 static void Monitor_Main_Style(lv_obj_t* Monitor_Speed_Meter);
 static void Monitor_Main_label(lv_coord_t weight, lv_coord_t height);
-
+lv_obj_t* obj;
 void Gui_Monitor_App()
 {
+    
     uint16_t meter_weight = 0, meter_height = 0;
     meter_weight = (scr_act_height() * 0.8);
     meter_height = (scr_act_height() * 0.8);
+    obj = lv_img_create(lv_scr_act());
+    lv_img_set_src(obj, "P:images\\btn\\btn_mode_manual_p.bin");
+    lv_obj_center(obj);
     //一定要先创建部件主体
-    lv_mainstart();
+    //lv_mainstart();
     //创建样式
-    Monitor_Main_Style(Monitor_Speed_Meter);
+    //Monitor_Main_Style(Monitor_Speed_Meter);
     //创建速度值标签
-    Monitor_Main_label(meter_height,meter_height);
+    //Monitor_Main_label(meter_height,meter_height);
+
+
+
+
 }
 void Monitor_Main_Style(lv_obj_t * Monitor_Speed_Meter)
 {
