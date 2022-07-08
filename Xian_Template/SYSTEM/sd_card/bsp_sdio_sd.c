@@ -98,7 +98,10 @@
   * @{
   */
 SD_HandleTypeDef uSdHandle;
-
+//发送标志位
+volatile uint8_t TX_Flag=0;
+//接受标志位
+volatile uint8_t RX_Flag=0; 
 /**
   * @}
   */ 
@@ -348,7 +351,7 @@ __weak void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   HAL_GPIO_Init(GPIOD, &GPIO_Init_Structure);
 
   /* NVIC configuration for SDIO interrupts */
-  HAL_NVIC_SetPriority(SDIO_IRQn, 5, 0);
+  HAL_NVIC_SetPriority(SDIO_IRQn, 6, 0);
   HAL_NVIC_EnableIRQ(SDIO_IRQn);
     
   /* Configure DMA Rx parameters */
@@ -402,11 +405,11 @@ __weak void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
   HAL_DMA_Init(&dmaTxHandle); 
   
   /* NVIC configuration for DMA transfer complete interrupt */
-  HAL_NVIC_SetPriority(SD_DMAx_Rx_IRQn, 6, 0);
+  HAL_NVIC_SetPriority(SD_DMAx_Rx_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(SD_DMAx_Rx_IRQn);
   
   /* NVIC configuration for DMA transfer complete interrupt */
-  HAL_NVIC_SetPriority(SD_DMAx_Tx_IRQn, 6, 0);
+  HAL_NVIC_SetPriority(SD_DMAx_Tx_IRQn, 1, 0);
   HAL_NVIC_EnableIRQ(SD_DMAx_Tx_IRQn);
 }
 
@@ -434,28 +437,6 @@ void BSP_SD_GetCardInfo(HAL_SD_CardInfoTypeDef *CardInfo)
   HAL_SD_GetCardInfo(&uSdHandle, CardInfo);
 }
 
-
-void SDMMC1_IRQHandler(void)
-{
-  HAL_SD_IRQHandler(&uSdHandle);
-}
-
-/**
-* @brief This function handles DMA2 stream3 global interrupt.
-*/
-void DMA2_Stream3_IRQHandler(void)
-{
-  HAL_DMA_IRQHandler(uSdHandle.hdmarx);
-}
-
-/**
-* @brief This function handles DMA2 stream6 global interrupt.
-*/
-void DMA2_Stream6_IRQHandler(void)
-{
-	HAL_DMA_IRQHandler(uSdHandle.hdmatx); 
-}
-
 /**
   * @brief SD Abort callbacks
   * @param hsd: SD handle
@@ -473,6 +454,7 @@ void HAL_SD_AbortCallback(SD_HandleTypeDef *hsd)
   */
 void HAL_SD_TxCpltCallback(SD_HandleTypeDef *hsd)
 {
+  TX_Flag=1; //标记写完成 
   BSP_SD_WriteCpltCallback();
 }
 
@@ -483,6 +465,7 @@ void HAL_SD_TxCpltCallback(SD_HandleTypeDef *hsd)
   */
 void HAL_SD_RxCpltCallback(SD_HandleTypeDef *hsd)
 {
+  RX_Flag=1;
   BSP_SD_ReadCpltCallback();
 }
 

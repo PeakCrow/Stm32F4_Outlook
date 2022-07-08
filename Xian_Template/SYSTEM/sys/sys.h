@@ -50,7 +50,7 @@
 #include "bsp_sdio_sd.h"			/* SD¿¨µ×²ãÇý¶¯ */
 #include "ff.h"						/* FatFs includes component */
 #include "ff_gen_drv.h"				/* FatFs includes component */
-#include "sd_diskio.h"				/* FatFs includes component */
+//#include "sd_diskio.h"				/* FatFs includes component */
 
 
 
