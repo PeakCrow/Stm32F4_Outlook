@@ -43,7 +43,7 @@
 #endif 
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx.h"
+//#include "stm32f4xx_hal.h"
 
 /** @addtogroup BSP
   * @{
@@ -89,16 +89,7 @@
 #define SD_NOT_PRESENT           ((uint8_t)0x00)
 
 #define SD_DATATIMEOUT           ((uint32_t)100000000)
- 
-//等待时间
-#define SD_TIMEOUT             ((uint32_t)0x00100000U)
-//块的大小（以字节为单位）
-#define BLOCK_SIZE            512 
-//块的数目
-#define NUMBER_OF_BLOCKS      50
-//块的数据大小
-#define MULTI_BUFFER_SIZE    (BLOCK_SIZE * NUMBER_OF_BLOCKS)
-
+    
 /* DMA definitions for SD DMA transfer */
 #define __DMAx_TxRx_CLK_ENABLE            __HAL_RCC_DMA2_CLK_ENABLE
 #define SD_DMAx_Tx_CHANNEL                DMA_CHANNEL_4
@@ -110,7 +101,7 @@
 #define BSP_SD_IRQHandler                 SDIO_IRQHandler
 #define BSP_SD_DMA_Tx_IRQHandler          DMA2_Stream6_IRQHandler   
 #define BSP_SD_DMA_Rx_IRQHandler          DMA2_Stream3_IRQHandler 
-//#define SD_DetectIRQHandler()             HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8)
+#define SD_DetectIRQHandler()             HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_8)
 /**
   * @}
   */

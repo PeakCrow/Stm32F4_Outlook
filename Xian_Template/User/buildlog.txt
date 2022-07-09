@@ -1,13 +1,13 @@
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'xian'
-compiling sd_diskio.c...
-..\SYSTEM\fatfs\drivers\sd_diskio.c(134): error:  #20: identifier "BLOCK_SIZE" is undefined
-  			DWORD scratch[BLOCK_SIZE / 4];
-..\SYSTEM\fatfs\drivers\sd_diskio.c(147): error:  #20: identifier "BLOCK_SIZE" is undefined
-  	if(BSP_SD_ReadBlocks_DMA((uint32_t*)buff,(uint64_t)(sector * BLOCK_SIZE),BLOCK_SIZE,count) != MSD_OK)
-..\SYSTEM\fatfs\drivers\sd_diskio.c(147): error:  #140: too many arguments in function call
-  	if(BSP_SD_ReadBlocks_DMA((uint32_t*)buff,(uint64_t)(sector * BLOCK_SIZE),BLOCK_SIZE,count) != MSD_OK)
-..\SYSTEM\fatfs\drivers\sd_diskio.c: 0 warnings, 3 errors
-"..\Obj\Run_Xian.axf" - 3 Error(s), 0 Warning(s).
-Target not created.
-Build Time Elapsed:  00:00:03
+compiling main.c...
+stm32f4_main\main.c(510): warning:  #550-D: variable "fTemp"  was set but never used
+  	float fTemp;
+stm32f4_main\main.c(676): warning:  #177-D: function "DispTaskInfo"  was declared but never referenced
+  static void DispTaskInfo(void)
+stm32f4_main\main.c: 2 warnings, 0 errors
+linking...
+Program Size: Code=66338 RO-data=194354 RW-data=1544 ZI-data=45148  
+FromELF: creating hex file...
+"..\Obj\Run_Xian.axf" - 0 Error(s), 2 Warning(s).
+Build Time Elapsed:  00:00:05

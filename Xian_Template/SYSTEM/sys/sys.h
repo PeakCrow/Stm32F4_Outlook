@@ -20,7 +20,8 @@
 */
 #include "tx_api.h"
 #include "tx_timer.h"
-
+#include "tx_api.h"
+#include "fx_api.h"
 
 /*
 *********************************************************************************************************
@@ -48,9 +49,7 @@
 #include "bsp_lcd.h"				/* ÆÁÄ»ÏÔÊ¾Çý¶¯ */
 #include "bsp_touch.h"				/* µçÈÝÆÁ´¥ÃþÇý¶¯,°üº¬ÓÐ´¥Ãþ»­°åÀý³Ì */
 #include "bsp_sdio_sd.h"			/* SD¿¨µ×²ãÇý¶¯ */
-#include "ff.h"						/* FatFs includes component */
-#include "ff_gen_drv.h"				/* FatFs includes component */
-//#include "sd_diskio.h"				/* FatFs includes component */
+
 
 
 
