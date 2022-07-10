@@ -202,6 +202,11 @@ uint8_t TP_Scan(uint8_t tp)
 }
 
 
+void bsp_InitLcdTouch()
+{
+	tp_dev.init();
+}
+
 /*********************************IIC通讯******************************************/
 //控制IIC速度的延时
 void CT_Delay(void)
@@ -717,7 +722,7 @@ void ctp_test(void)
 				lastpos[t][0]=0XFFFF;
 		}
 		
-		tx_thread_sleep(5);i++;
+		tx_thread_sleep(10);i++;
 		//if(i%20==0)LED0=!LED0;
 	}	
 }

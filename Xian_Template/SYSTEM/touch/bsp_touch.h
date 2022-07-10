@@ -44,7 +44,7 @@ extern _m_tp_dev tp_dev;
 //电阻屏/电容屏 共用函数
 uint8_t TP_Scan(uint8_t tp);								//扫描
 uint8_t TP_Init(void);								//初始化
-
+void bsp_InitLcdTouch(void);
 
 
 /************************************************IIC通讯****************************************/
