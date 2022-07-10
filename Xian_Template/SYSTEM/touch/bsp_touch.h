@@ -40,7 +40,10 @@ extern _m_tp_dev tp_dev;
 #define TDIN 		PFout(11)  	//T_MOSI
 #define TCLK 		PBout(0)  	//T_SCK
 #define TCS  		PCout(13)  	//T_CS  片选引脚
-
+/* 中断引脚 */
+#define TP_INT_EXTI_IRQ                 EXTI1_IRQn
+/* 中断服务函数 */
+#define TP_IRQHandler                   EXTI1_IRQHandler
 //电阻屏/电容屏 共用函数
 uint8_t TP_Scan(uint8_t tp);								//扫描
 uint8_t TP_Init(void);								//初始化

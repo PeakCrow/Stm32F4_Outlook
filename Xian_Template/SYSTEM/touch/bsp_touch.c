@@ -450,8 +450,8 @@ uint8_t GT9147_Init(void)
     __HAL_RCC_GPIOC_CLK_ENABLE();			//开启GPIOC时钟
 	
     //PB1
-    GPIO_Initure.Pin=GPIO_PIN_1;           	//PB1设置为上拉输入
-    GPIO_Initure.Mode=GPIO_MODE_INPUT;      //输入
+    //GPIO_Initure.Pin=GPIO_PIN_1;           	//PB1设置为上拉输入
+    //GPIO_Initure.Mode=GPIO_MODE_INPUT;      //输入
     GPIO_Initure.Pull=GPIO_PULLUP;          //上拉
     GPIO_Initure.Speed=GPIO_SPEED_HIGH;     //高速
     HAL_GPIO_Init(GPIOB,&GPIO_Initure);     //初始化
@@ -468,11 +468,16 @@ uint8_t GT9147_Init(void)
 	bsp_DelayMS(10); 
 		
 	GPIO_Initure.Pin=GPIO_PIN_1;           	//PB1设置为上拉输入
-    GPIO_Initure.Mode=GPIO_MODE_OUTPUT_PP;  //输出模式
+    GPIO_Initure.Mode=GPIO_MODE_IT_FALLING;  //输出模式
     GPIO_Initure.Pull=GPIO_NOPULL;          //无上下拉
     GPIO_Initure.Speed=GPIO_SPEED_HIGH;     //高速
     HAL_GPIO_Init(GPIOB,&GPIO_Initure);     //初始化
-	
+
+	/* 配置 EXTI 中断源 、配置中断优先级*/
+	HAL_NVIC_SetPriority(TP_INT_EXTI_IRQ , 1, 1);
+    /* 使能中断 */
+	HAL_NVIC_EnableIRQ(TP_INT_EXTI_IRQ );
+  
 	bsp_DelayMS(100);  
 	GT9147_RD_Reg(GT_PID_REG,temp,4);//读取产品ID
 	temp[4]=0;
@@ -575,7 +580,21 @@ uint8_t GT9147_Scan(uint8_t mode)
 	return res;
 }
 
-
+/******************************************************************************/
+/*                 STM32F4xx Peripherals Interrupt Handlers                   */
+/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
+/*  available peripheral interrupt handler's name please refer to the startup */
+/*  file (startup_stm32f429_439xx.s).                         */
+/******************************************************************************/
+void TP_IRQHandler(void)
+{
+	if(__HAL_GPIO_EXTI_GET_IT(GPIO_PIN_1) != RESET) //确保是否产生了EXTI Line中断
+	{
+		//LED2_TOGGLE;
+		tp_dev.scan(0);
+		__HAL_GPIO_EXTI_CLEAR_IT(GPIO_PIN_1);       //清除中断标志位
+	}  
+}
 
 
 
@@ -696,7 +715,7 @@ void ctp_test(void)
  	uint16_t lastpos[5][2];		//存放临时的坐标数据 
 	while(1)//在while循环中不停的读取tp_dev.x 与 y的坐标，并且进行相应的操作
 	{
-		tp_dev.scan(0);
+		//tp_dev.scan(0);
 		for(t=0;t<5;t++)//这里t循环几次就代表可以同时画几条线,最多只能画5条
 		{
 			if((tp_dev.sta)&(1<<t))
