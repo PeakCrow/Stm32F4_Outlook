@@ -50,7 +50,10 @@
 #include "bsp_touch.h"				/* µçÈÝÆÁ´¥ÃþÇý¶¯,°üº¬ÓÐ´¥Ãþ»­°åÀý³Ì */
 #include "bsp_sdio_sd.h"			/* SD¿¨µ×²ãÇý¶¯ */
 
-
+#include "lvgl.h"
+#include "lv_port_disp_template.h"
+#include "lv_port_indev_template.h"
+#include "lvgl_demo.h"
 
 
 #if	DEBUG_SWITCH_EN == 1
