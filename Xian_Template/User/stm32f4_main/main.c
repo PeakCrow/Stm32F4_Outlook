@@ -284,8 +284,8 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_InitRotationSensor();					/* 初始化轮速传感器 */
 	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* 生成一个1k，50占空比的方波，用来验证脉冲计数 */	
 	bsp_InitADS1256();							/* 初始化配置ADS1256.  PGA=1, DRATE=30KSPS, BUFEN=1, 输入正负5V */
-	//bsp_Initlcd();								/* 初始化LCD屏幕 */
-	//bsp_InitLcdTouch();							/* 初始化屏幕触摸驱动 */
+	bsp_Initlcd();								/* 初始化LCD屏幕 */
+	bsp_InitLcdTouch();							/* 初始化屏幕触摸驱动 */
 	//lv_init();
 	//lv_port_disp_init();
 	//lv_port_indev_init();
@@ -471,15 +471,19 @@ static void AppTaskTFTLCD    (ULONG thread_input)
 	
 	App_Printf((char*)lcd_id,"LCD ID:%04X",lcddev.id);
 	
- 	//Load_Drow_Dialog();	
-	//if(tp_dev.touchtype&0X80)
-		//ctp_test();
-	//lvgl_demo();	/* 运行lvgl例程 */
+	#if 0
+	lvgl_demo();	/* 运行lvgl例程 */
 	while(1)
 	{
-		//lv_timer_handler();
+		lv_timer_handler();
 		tx_thread_sleep(5);
 	}
+	#else
+ 	Load_Drow_Dialog();	
+	if(tp_dev.touchtype&0X80)
+		ctp_test();
+	#endif
+
 }
 
 /*******************************************************************************
