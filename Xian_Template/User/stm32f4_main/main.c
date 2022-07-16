@@ -13,6 +13,9 @@
 *******************************************************************************/
 #include "sys.h"
 
+#define TRC_BUF_SIZE (500*32)                 /* Buffer size 500 events */
+#define TRC_MAX_OBJ_COUNT (40)         /* Max number of ThreadX objects */
+UCHAR myBuf[TRC_BUF_SIZE];
 
 /*
 *********************************************************************************************************
@@ -40,8 +43,8 @@
 #define  APP_CFG_TASK_IDLE_STK_SIZE                  	1024u
 #define  APP_CFG_TASK_STAT_STK_SIZE                  	1024u
 #define  APP_CFG_TASK_READC_STK_SIZE                    1024u
-#define  APP_CFG_TASK_TFTLCD_STK_SIZE                   4096u
-#define  APP_CFG_TASK_MsgPro_STK_SIZE                   4096u
+#define  APP_CFG_TASK_TFTLCD_STK_SIZE                   1024u
+#define  APP_CFG_TASK_MsgPro_STK_SIZE                   1024u
 /*
 *********************************************************************************************************
 *                                       静态全局变量
@@ -298,8 +301,11 @@ static  void  AppTaskStart (ULONG thread_input)
 
 	while (1)
 		{
+43			tx_trace_enable(&myBuf,TRC_BUF_SIZE,TRC_MAX_OBJ_COUNT);
 			/* 需要周期性处理的程序，对应裸机工程调用的SysTick_ISR */
 			bsp_ProPer1ms();
+			/* lvgl的1ms心跳 */
+			//lv_tick_inc(1);
 			tx_thread_sleep(1);
 		}
 }
@@ -431,16 +437,16 @@ static  void  AppTaskCreate (void)
                        TX_NO_TIME_SLICE,             	/* 不开启时间片 */
                        TX_AUTO_START);               	/* 创建后立即启动 */
 	/**************创建MsgPro任务*********************/
-    tx_thread_create(&AppTaskMsgProTCB,               /* 任务控制块地址 */    
-                       "App Msp Pro",                 /* 任务名 */
-                       AppTaskMsgPro,                  /* 启动任务函数地址 */
-                       0,                             /* 传递给任务的参数 */
-                       &AppTaskMsgProStk[0],            /* 堆栈基地址 */
-                       APP_CFG_TASK_MsgPro_STK_SIZE,    /* 堆栈空间大小 */  
-                       APP_CFG_TASK_MsgPro_PRIO,        /* 任务优先级*/
-                       APP_CFG_TASK_MsgPro_PRIO,        /* 任务抢占阀值 */
-                       TX_NO_TIME_SLICE,               /* 不开启时间片 */
-                       TX_AUTO_START);                /* 创建后立即启动 */
+//    tx_thread_create(&AppTaskMsgProTCB,               /* 任务控制块地址 */    
+//                       "App Msp Pro",                 /* 任务名 */
+//                       AppTaskMsgPro,                  /* 启动任务函数地址 */
+//                       0,                             /* 传递给任务的参数 */
+//                       &AppTaskMsgProStk[0],            /* 堆栈基地址 */
+//                       APP_CFG_TASK_MsgPro_STK_SIZE,    /* 堆栈空间大小 */  
+//                       APP_CFG_TASK_MsgPro_PRIO,        /* 任务优先级*/
+//                       APP_CFG_TASK_MsgPro_PRIO,        /* 任务抢占阀值 */
+//                       TX_NO_TIME_SLICE,               /* 不开启时间片 */
+//                       TX_AUTO_START);                /* 创建后立即启动 */
 }
 extern void DemoFileX(void);
 static void AppTaskMsgPro(ULONG thread_input)

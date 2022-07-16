@@ -512,7 +512,7 @@ uint8_t GT9147_Scan(uint8_t mode)
 	uint8_t temp;
 	uint8_t tempsta;
 	uint8_t temp_area1,temp_area2,temp_area3;
- 	static uint8_t t=0;//控制查询间隔,从而降低CPU占用率   
+	static uint8_t t=0;//控制查询间隔,从而降低CPU占用率   
 	t++;
 	if((t%10)==0||t<10)//空闲时,每进入10次CTP_Scan函数才检测1次,从而节省CPU使用率
 	{
@@ -563,7 +563,8 @@ uint8_t GT9147_Scan(uint8_t mode)
 					mode=0X80;		
 					tp_dev.sta=tempsta;	//恢复tp_dev.sta
 				}
-			}else t=0;					//触发一次,则会最少连续监测10次,从而提高命中率
+			}
+			else t=0;					//触发一次,则会最少连续监测10次,从而提高命中率
 		}
 	}
 	if((mode&0X8F)==0X80)//无触摸点按下

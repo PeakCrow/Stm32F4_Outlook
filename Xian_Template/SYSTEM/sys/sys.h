@@ -35,7 +35,7 @@
 #include "bsp_spi_flash_demo.h"		/* spi flash 驱动 demo test*/
 #include "bsp_spi_bus.h"			/* spi1 spi2 总线 */
 #include "bsp_iic_bus.h"			/* IIC1总线(包含AT24C02芯片) */
-#include "EPD_Test.h"				/* 墨水屏驱动 */
+//#include "EPD_Test.h"				/* 墨水屏驱动 */
 #include "bsp_dwt.h"				/* 芯片DWT模块，安富莱教程提供 */
 #include "bsp_led.h"				/* 板载led灯 */
 #include "bsp_spi_flash.h"			/* spi flash驱动 */
@@ -49,6 +49,7 @@
 #include "bsp_lcd.h"				/* 屏幕显示驱动 */
 #include "bsp_touch.h"				/* 电容屏触摸驱动,包含有触摸画板例程 */
 #include "bsp_sdio_sd.h"			/* SD卡底层驱动 */
+
 
 #include "lvgl.h"
 #include "lv_port_disp_template.h"
@@ -65,6 +66,16 @@
 *                                          变量和函数
 *********************************************************************************************************
 */
+
+#define DISABLE   0
+#define ENABLE    1
+#define DISABLED  0
+#define ENABLED   1
+#define OFF       0
+#define ON        1
+#define FALSE     0
+#define TRUE      1
+
 /* 方便RTOS里面使用 */
 extern void SysTick_ISR(void);		/* 滴答定时器中断外部文件声明 */
 
@@ -273,7 +284,7 @@ void MSR_MSP(uint32_t addr);	//设置堆栈地址
 
 
 /* 使能事件Trace，会稍微增加点代码 */
-//#define TX_ENABLE_EVENT_TRACE
+#define TX_ENABLE_EVENT_TRACE
 
 
 /* 使能BLOCK_POOL信息获取 */

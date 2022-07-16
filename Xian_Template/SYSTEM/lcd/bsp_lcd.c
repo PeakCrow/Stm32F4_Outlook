@@ -649,9 +649,9 @@ void bsp_Initlcd(void)
 		FSMC_Bank1E->BWTR[6] |= 3 << 0;//地址建立时间为3个HCLK = 18ns
 		FSMC_Bank1E->BWTR[6] |= 2 << 8;//数据保存时间(DATAST)为6ns * 3个HCLK = 18ns
 	}
-	LCD_Display_Dir(0);//默认为竖屏
+	LCD_Display_Dir(1);//默认为横屏
 	LCD_LED = 1;//点亮背光
-	LCD_Clear(WHITE);
+	LCD_Clear(TFT_WHITE);
 }
 //设置LCD显示方向
 //dir:0,竖屏；1,横屏
@@ -813,6 +813,7 @@ void LCD_Color_Fill(uint16_t sx,uint16_t sy,uint16_t ex,uint16_t ey,uint16_t *co
 //num:要显示的字符:" "--->"~"
 //size:字体大小 12/16/24/32
 //mode:叠加方式(1)还是非叠加方式(0)
+#if 1
 void LCD_ShowChar(uint16_t x,uint16_t y,uint8_t num,uint8_t size,uint8_t mode)
 {  							  
     uint8_t temp,t1,t;
@@ -843,6 +844,7 @@ void LCD_ShowChar(uint16_t x,uint16_t y,uint8_t num,uint8_t size,uint8_t mode)
 		}  	 
 	}  	    	   	 	  
 }   
+#endif
 
 //显示字符串
 //x,y:起点坐标
