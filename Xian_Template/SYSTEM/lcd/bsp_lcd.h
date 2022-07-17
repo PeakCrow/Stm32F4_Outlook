@@ -61,10 +61,10 @@ void LCD_ShowString(uint16_t x,uint16_t y,uint16_t width,uint16_t height,uint8_t
 
 #define U2D_L2R  4 		//从上到下,从左到右
 #define U2D_R2L  5 		//从上到下,从右到左
-#define D2U_L2R  6 		//从下到上,从左到右
+#define D2U_L2R  6 		//从下到上,从左到右 √
 #define D2U_R2L  7		//从下到上,从右到左	 
 
-#define DFT_SCAN_DIR  L2R_U2D  //默认的扫描方向
+#define DFT_SCAN_DIR  D2U_L2R  //默认的扫描方向
 
 //画笔颜色
 #define TFT_WHITE         	 0xFFFF

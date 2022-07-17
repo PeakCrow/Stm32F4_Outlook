@@ -447,7 +447,11 @@ static void AppTaskMsgPro(ULONG thread_input)
 
 	while(1)
 	{
+		#if 0
         DemoFileX();
+		#else
+		tx_thread_sleep(10);
+		#endif
 	}   
 }
 

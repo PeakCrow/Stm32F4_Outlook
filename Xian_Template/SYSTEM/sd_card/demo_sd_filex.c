@@ -72,9 +72,8 @@ void DemoFileX(void)
 	//bsp_StartAutoTimer(0, 500);	
 
 	while (1)
-	{
-        tx_thread_sleep(10);
-        
+	{  
+        tx_thread_sleep(10);		
 		/* 判断定时器超时时间 */
 //		if (bsp_CheckTimer(0))	
 //		{            
