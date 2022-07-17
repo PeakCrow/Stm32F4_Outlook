@@ -13,6 +13,9 @@
 *******************************************************************************/
 #include "sys.h"
 
+//#define TRC_BUF_SIZE (500*32)                 /* Buffer size 500 events */
+//#define TRC_MAX_OBJ_COUNT (40)         /* Max number of ThreadX objects */
+//UCHAR myBuf[TRC_BUF_SIZE];
 
 /*
 *********************************************************************************************************
@@ -41,7 +44,7 @@
 #define  APP_CFG_TASK_STAT_STK_SIZE                  	1024u
 #define  APP_CFG_TASK_READC_STK_SIZE                    1024u
 #define  APP_CFG_TASK_TFTLCD_STK_SIZE                   1024u
-#define  APP_CFG_TASK_MsgPro_STK_SIZE                   4096u
+#define  APP_CFG_TASK_MsgPro_STK_SIZE                   1024u
 /*
 *********************************************************************************************************
 *                                       静态全局变量
@@ -286,7 +289,9 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_InitADS1256();							/* 初始化配置ADS1256.  PGA=1, DRATE=30KSPS, BUFEN=1, 输入正负5V */
 	bsp_Initlcd();								/* 初始化LCD屏幕 */
 	bsp_InitLcdTouch();							/* 初始化屏幕触摸驱动 */
-
+	//lv_init();
+	//lv_port_disp_init();
+	//lv_port_indev_init();
 	
 	/* 创建任务，此函数中包含有3个子任务 */
     AppTaskCreate();
@@ -296,8 +301,11 @@ static  void  AppTaskStart (ULONG thread_input)
 
 	while (1)
 		{
+//			tx_trace_enable(&myBuf,TRC_BUF_SIZE,TRC_MAX_OBJ_COUNT);
 			/* 需要周期性处理的程序，对应裸机工程调用的SysTick_ISR */
 			bsp_ProPer1ms();
+			/* lvgl的1ms心跳 */
+			//lv_tick_inc(1);
 			tx_thread_sleep(1);
 		}
 }
@@ -473,9 +481,19 @@ static void AppTaskTFTLCD    (ULONG thread_input)
 	
 	App_Printf((char*)lcd_id,"LCD ID:%04X",lcddev.id);
 	
+	#if 0
+	lvgl_demo();	/* 运行lvgl例程 */
+	while(1)
+	{
+		lv_timer_handler();
+		tx_thread_sleep(5);
+	}
+	#else
  	Load_Drow_Dialog();	
 	if(tp_dev.touchtype&0X80)
 		ctp_test();
+	#endif
+
 }
 
 /*******************************************************************************

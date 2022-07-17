@@ -51,6 +51,10 @@
 #include "bsp_sdio_sd.h"			/* SD卡底层驱动 */
 
 
+#include "lvgl.h"
+#include "lv_port_disp_template.h"
+#include "lv_port_indev_template.h"
+#include "lvgl_demo.h"
 
 
 #if	DEBUG_SWITCH_EN == 1
@@ -62,6 +66,16 @@
 *                                          变量和函数
 *********************************************************************************************************
 */
+
+#define DISABLE   0
+#define ENABLE    1
+#define DISABLED  0
+#define ENABLED   1
+#define OFF       0
+#define ON        1
+#define FALSE     0
+#define TRUE      1
+
 /* 方便RTOS里面使用 */
 extern void SysTick_ISR(void);		/* 滴答定时器中断外部文件声明 */
 
