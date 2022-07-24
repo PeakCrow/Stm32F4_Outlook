@@ -48,7 +48,8 @@ void LCD_Draw_Circle(uint16_t x0,uint16_t y0,uint8_t r);
 void LCD_DrawPoint(uint16_t x,uint16_t y);	
 void LCD_Color_Fill(uint16_t,uint16_t,uint16_t,uint16_t,uint16_t*);
 void LCD_Fill(uint16_t sx,uint16_t sy,uint16_t ex,uint16_t ey,uint32_t color);		   				//填充单色
-
+void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t width, uint16_t height);
+	
 void LCD_Fast_DrawPoint(uint16_t x,uint16_t y,uint32_t color);	
 void LCD_ShowChar(uint16_t x,uint16_t y,uint8_t num,uint8_t size,uint8_t mode);						//显示一个字符
 void LCD_ShowString(uint16_t x,uint16_t y,uint16_t width,uint16_t height,uint8_t size,uint8_t *p);		//显示一个字符串,12/16字体

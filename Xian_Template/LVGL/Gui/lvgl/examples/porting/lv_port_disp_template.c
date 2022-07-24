@@ -54,7 +54,26 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 /**********************
  *   GLOBAL FUNCTIONS
  **********************/
+/**
+ * @brief       LCD加速绘制函数
+ * @param       (sx,sy),(ex,ey):填充矩形对角坐标,区域大小为:(ex - sx + 1) * (ey - sy + 1)
+ * @param       color:要填充的颜色
+ * @retval      无
+ */
+void lcd_draw_fast_rgb_color(int16_t sx, int16_t sy,int16_t ex, int16_t ey, uint16_t *color)
+{
+    uint16_t w = ex-sx+1;
+    uint16_t h = ey-sy+1;
 
+    LCD_Set_Window(sx, sy, w, h);
+    uint32_t draw_size = w * h;
+    LCD_WriteRAM_Prepare();
+
+    for(uint32_t i = 0; i < draw_size; i++)
+    {
+        LCD_WR_DATA(color[i]);
+    }
+}
 void lv_port_disp_init(void)
 {
     /*-------------------------
@@ -148,21 +167,21 @@ static void disp_init(void)
 	//LCD_Display_Dir(1);		/* 设置横屏 */
 }
 
-volatile bool disp_flush_enabled = true;
+//volatile bool disp_flush_enabled = true;
 
-/* Enable updating the screen (the flushing process) when disp_flush() is called by LVGL
- */
-void disp_enable_update(void)
-{
-    disp_flush_enabled = true;
-}
+///* Enable updating the screen (the flushing process) when disp_flush() is called by LVGL
+// */
+//void disp_enable_update(void)
+//{
+//    disp_flush_enabled = true;
+//}
 
-/* Disable updating the screen (the flushing process) when disp_flush() is called by LVGL
- */
-void disp_disable_update(void)
-{
-    disp_flush_enabled = false;
-}
+///* Disable updating the screen (the flushing process) when disp_flush() is called by LVGL
+// */
+//void disp_disable_update(void)
+//{
+//    disp_flush_enabled = false;
+//}
 
 /*Flush the content of the internal buffer the specific area on the display
  *You can use DMA or any hardware acceleration to do this operation in the background but
@@ -183,7 +202,8 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 //        }
 //    }
 
-	LCD_Color_Fill(area->x1,area->y1,area->x2,area->y2,(uint16_t *)color_p);
+//	LCD_Color_Fill(area->x1,area->y1,area->x2,area->y2,(uint16_t *)color_p);
+	lcd_draw_fast_rgb_color(area->x1,area->y1,area->x2,area->y2,(uint16_t*)color_p);
     /*IMPORTANT!!!
      *Inform the graphics library that you are ready with the flushing*/
     lv_disp_flush_ready(disp_drv);

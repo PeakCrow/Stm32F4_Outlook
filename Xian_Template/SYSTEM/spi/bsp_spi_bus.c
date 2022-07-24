@@ -252,7 +252,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 		hdma_tx.Init.MemInc					= DMA_MINC_ENABLE;			/* 存储器地址自增使能 */
 		hdma_tx.Init.PeriphDataAlignment	= DMA_PDATAALIGN_BYTE;		/* 外设地址传输位宽选择字节，即8bit */
 		hdma_tx.Init.MemDataAlignment		= DMA_NORMAL;				/* 正常模式 */
-		hdma_tx.Init.Priority				= DMA_PRIORITY_HIGH;			/* 优先级低 */
+		hdma_tx.Init.Priority				= DMA_PRIORITY_LOW;			/* 优先级低 */
 		
 		/* 复位DMA */
 		if(HAL_DMA_DeInit(&hdma_tx) != HAL_OK)

@@ -519,11 +519,6 @@
               <FilePath>..\SYSTEM\sd_card\bsp_sdio_sd.c</FilePath>
             </File>
             <File>
-              <FileName>demo_sd_filex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\sd_card\demo_sd_filex.c</FilePath>
-            </File>
-            <File>
               <FileName>lvgl_demo.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\LVGL\Gui_App\Gui_Demo\lvgl_demo.c</FilePath>

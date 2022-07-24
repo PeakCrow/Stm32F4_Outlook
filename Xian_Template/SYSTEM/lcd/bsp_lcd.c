@@ -911,5 +911,39 @@ void LCD_Fill(uint16_t sx,uint16_t sy,uint16_t ex,uint16_t ey,uint32_t color)
 		for(j=0;j<xlen;j++)LCD->LCD_RAM=color;	//显示颜色 	    
 	}  
 }  
+/**
+ * @brief       设置窗口(对RGB屏无效), 并自动设置画点坐标到窗口左上角(sx,sy).
+ * @param       sx,sy:窗口起始坐标(左上角)
+ * @param       width,height:窗口宽度和高度,必须大于0!!
+ *   @note      窗体大小:width*height.
+ *
+ * @retval      无
+ */
+void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t width, uint16_t height)
+{
+    uint16_t twidth, theight;
+    twidth = sx + width - 1;
+    theight = sy + height - 1;
+
+    {
+        LCD_WR_REG(lcddev.setxcmd);
+        LCD_WR_DATA(sx >> 8);
+        LCD_WR_REG(lcddev.setxcmd + 1);
+        LCD_WR_DATA(sx & 0xFF);
+        LCD_WR_REG(lcddev.setxcmd + 2);
+        LCD_WR_DATA(twidth >> 8);
+        LCD_WR_REG(lcddev.setxcmd + 3);
+        LCD_WR_DATA(twidth & 0xFF);
+        LCD_WR_REG(lcddev.setycmd);
+        LCD_WR_DATA(sy >> 8);
+        LCD_WR_REG(lcddev.setycmd + 1);
+        LCD_WR_DATA(sy & 0xFF);
+        LCD_WR_REG(lcddev.setycmd + 2);
+        LCD_WR_DATA(theight >> 8);
+        LCD_WR_REG(lcddev.setycmd + 3);
+        LCD_WR_DATA(theight & 0xFF);
+    }
+
+}
 
 

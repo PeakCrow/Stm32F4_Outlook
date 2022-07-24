@@ -23,13 +23,13 @@
 *********************************************************************************************************
 */
 #define  APP_CFG_TASK_START_PRIO                          2u
-#define  APP_CFG_TASK_MsgPro_PRIO                         3u
+#define  APP_CFG_TASK_MsgPro_PRIO                         7u
 #define  APP_CFG_TASK_USER_IF_PRIO                        4u
 #define  APP_CFG_TASK_COM_PRIO                            5u
 #define  APP_CFG_TASK_STAT_PRIO                           30u
 #define  APP_CFG_TASK_IDLE_PRIO                           31u
 #define  APP_CFG_TASK_READC_PRIO						  6u
-#define  APP_CFG_TASK_TFTLCD_PRIO						  7u
+#define  APP_CFG_TASK_TFTLCD_PRIO						  3u
 
 
 /*
@@ -113,8 +113,8 @@ static  void  OSStatInit 			(void);
 *                               变量
 *******************************************************************************************************
 */
-static  TX_MUTEX   AppPrintfSemp;	/* 用于printf互斥 */
-
+static TX_MUTEX   AppPrintfSemp;	/* 用于printf互斥 */
+static TX_MUTEX   AppLvglSemp;		/* 用于lvgl线程安全 */
 
 /* 统计任务使用 */
 __IO uint8_t   OSStatRdy;      		/* 统计任务就绪标志 */
@@ -165,6 +165,8 @@ static  void  AppObjCreate (void)
 {
 	 /* 创建互斥信号量 */
     tx_mutex_create(&AppPrintfSemp,"AppPrintfSemp",TX_NO_INHERIT);
+	tx_mutex_create(&AppLvglSemp,"AppLvglSemp",TX_NO_INHERIT);
+	
 	 	/* 定时器组 */
 	tx_timer_create(&AppTimer,
 					"App Timer",
@@ -273,39 +275,63 @@ static  void  AppTaskStart (ULONG thread_input)
     HAL_ResumeTick();
 	
     /* 外设初始化 */
+	#if 1
 	bsp_InitDWT();								/* 初始化DWT */
 	bsp_InitTimer();							/* 初始化滴答定时器 */
 	bsp_InitUart();								/* 初始化串口1 2 3外设 */
+	#endif
+	#if 1
 	bsp_InitKey();								/* 初始化轻触按键 */
-	bsp_InitSPI1Bus();							/* SPI总线初始化 */
-	bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
+	#endif
+	#if 1
 	bsp_InitSPI2Bus();							/* 初始化SPI2总线，用来驱动墨水屏 */
+	#endif
+	#if 1
 	bsp_I2C_EE_Init();							/* 初始化IIC总线，并且驱动eeprom芯片 */
+	#endif
+	#if 1
 	bsp_InitLed();								/* 初始化板载LED灯 */
+	#endif
+	#if 1
 	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
-	bsp_InitWs2812b();							/* 初始化ws2812b可调灯效 */
+	#endif
+	#if 1
 	bsp_InitRotationSensor();					/* 初始化轮速传感器 */
-	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* 生成一个1k，50占空比的方波，用来验证脉冲计数 */	
+	#endif
+	#if 1
 	bsp_InitADS1256();							/* 初始化配置ADS1256.  PGA=1, DRATE=30KSPS, BUFEN=1, 输入正负5V */
+	#endif
+	#if 1
 	bsp_Initlcd();								/* 初始化LCD屏幕 */
 	bsp_InitLcdTouch();							/* 初始化屏幕触摸驱动 */
-	//lv_init();
-	//lv_port_disp_init();
-	//lv_port_indev_init();
-	
-	/* 创建任务，此函数中包含有3个子任务 */
-    AppTaskCreate();
-
+	#endif
+	#if 0
+	lv_init();
+	lv_port_disp_init();
+	lv_port_indev_init();
+	#endif
+	#if 0
+	bsp_InitWs2812b();							/* 初始化ws2812b可调灯效 */
+	#endif
+	#if 0
+	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* 生成一个1k，50占空比的方波，用来验证脉冲计数 */
+	#endif	
+	#if 0
+	bsp_InitSPI1Bus();							/* SPI总线初始化 */
+	bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
+	#endif
+		
 	/* 创建任务间通信机制 */
 	AppObjCreate();
+
+	/* 创建任务，此函数中包含有3个子任务 */
+    AppTaskCreate();
 
 	while (1)
 		{
 //			tx_trace_enable(&myBuf,TRC_BUF_SIZE,TRC_MAX_OBJ_COUNT);
 			/* 需要周期性处理的程序，对应裸机工程调用的SysTick_ISR */
 			bsp_ProPer1ms();
-			/* lvgl的1ms心跳 */
-			//lv_tick_inc(1);
 			tx_thread_sleep(1);
 		}
 }
@@ -458,7 +484,10 @@ static void AppTaskMsgPro(ULONG thread_input)
 		#if 0
         DemoFileX();
 		#else
-		tx_thread_sleep(10);
+//		tx_mutex_get(&AppLvglSemp, TX_NO_WAIT);
+//		lvgl_demo();	/* 运行lvgl例程 */
+//		tx_mutex_put(&AppLvglSemp);
+		tx_thread_sleep(1000);
 		#endif
 	}   
 }
@@ -482,10 +511,14 @@ static void AppTaskTFTLCD    (ULONG thread_input)
 	App_Printf((char*)lcd_id,"LCD ID:%04X",lcddev.id);
 	
 	#if 0
-	lvgl_demo();	/* 运行lvgl例程 */
+	//tx_mutex_get(&AppLvglSemp, TX_WAIT_FOREVER);
+	lvgl_demo();	/* 运行lvgl例程 */                                                                    /* 设置标签位置 */
+	//tx_mutex_put(&AppLvglSemp);
 	while(1)
 	{
+		//tx_mutex_get(&AppLvglSemp, TX_WAIT_FOREVER);
 		lv_timer_handler();
+		//tx_mutex_put(&AppLvglSemp);
 		tx_thread_sleep(5);
 	}
 	#else
