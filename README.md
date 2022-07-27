@@ -10,11 +10,13 @@
 | ------- | ------------------------------------------------------------ |
 | Core    | M4内核的启动文件                                             |
 | Doc     | 文档数据、教程资料                 |
+| FileX   | 实现FileX文件系统挂载SD卡|
 | HAL_lib | ST提供的底层文件，HAL库                                      |
 | Obj     | keil5编译产生的目标文件                                          |
 | SYSTEM  | 包含有除main.c外的外设驱动文件                               |
 | ThreadX | ThreadX操作系统的源文件                                      |
 | User    | main.c文件和编译信息的txt文件(txt文件配合SI编辑器使用) |
+| xian.si4project    | si编辑器项目 |
 
 #### 实现功能
 
