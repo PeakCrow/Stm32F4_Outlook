@@ -275,51 +275,23 @@ static  void  AppTaskStart (ULONG thread_input)
     HAL_ResumeTick();
 	
     /* 外设初始化 */
-	#if 1
 	bsp_InitDWT();								/* 初始化DWT */
 	bsp_InitTimer();							/* 初始化滴答定时器 */
 	bsp_InitUart();								/* 初始化串口1 2 3外设 */
-	#endif
-	#if 1
 	bsp_InitKey();								/* 初始化轻触按键 */
-	#endif
-	#if 1
 	bsp_InitSPI2Bus();							/* 初始化SPI2总线，用来驱动墨水屏 */
-	#endif
-	#if 1
 	bsp_I2C_EE_Init();							/* 初始化IIC总线，并且驱动eeprom芯片 */
-	#endif
-	#if 1
 	bsp_InitLed();								/* 初始化板载LED灯 */
-	#endif
-	#if 1
 	bsp_InitCan1Bus();							/* 初始化CAN1 总线 */
-	#endif
-	#if 1
 	bsp_InitRotationSensor();					/* 初始化轮速传感器 */
-	#endif
-	#if 1
 	bsp_InitADS1256();							/* 初始化配置ADS1256.  PGA=1, DRATE=30KSPS, BUFEN=1, 输入正负5V */
-	#endif
-	#if 1
 	bsp_Initlcd();								/* 初始化LCD屏幕 */
 	bsp_InitLcdTouch();							/* 初始化屏幕触摸驱动 */
-	#endif
-	#if 0
-	lv_init();
-	lv_port_disp_init();
-	lv_port_indev_init();
-	#endif
-	#if 0
 	bsp_InitWs2812b();							/* 初始化ws2812b可调灯效 */
-	#endif
-	#if 0
 	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* 生成一个1k，50占空比的方波，用来验证脉冲计数 */
-	#endif	
-	#if 0
 	bsp_InitSPI1Bus();							/* SPI总线初始化 */
 	bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
-	#endif
+
 		
 	/* 创建任务间通信机制 */
 	AppObjCreate();
@@ -329,7 +301,7 @@ static  void  AppTaskStart (ULONG thread_input)
 
 	while (1)
 		{
-//			tx_trace_enable(&myBuf,TRC_BUF_SIZE,TRC_MAX_OBJ_COUNT);
+//		tx_trace_enable(&myBuf,TRC_BUF_SIZE,TRC_MAX_OBJ_COUNT);
 			/* 需要周期性处理的程序，对应裸机工程调用的SysTick_ISR */
 			bsp_ProPer1ms();
 			tx_thread_sleep(1);
@@ -482,11 +454,11 @@ static void AppTaskMsgPro(ULONG thread_input)
 	while(1)
 	{
 		#if 0
-        DemoFileX();
+    DemoFileX();
 		#else
-//		tx_mutex_get(&AppLvglSemp, TX_NO_WAIT);
-//		lvgl_demo();	/* 运行lvgl例程 */
-//		tx_mutex_put(&AppLvglSemp);
+//	tx_mutex_get(&AppLvglSemp, TX_NO_WAIT);
+//	lvgl_demo();	/* 运行lvgl例程 */
+//	tx_mutex_put(&AppLvglSemp);
 		tx_thread_sleep(1000);
 		#endif
 	}   
