@@ -1,0 +1,193 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;/******************************************************
+                       ********************/
+    2 00000000         ;/*                                                     
+                                          */
+    3 00000000         ;/*       Copyright (c) Microsoft Corporation. All right
+                       s reserved.        */
+    4 00000000         ;/*                                                     
+                                          */
+    5 00000000         ;/*       This software is licensed under the Microsoft 
+                       Software License   */
+    6 00000000         ;/*       Terms for Microsoft Azure RTOS. Full text of t
+                       he license can be  */
+    7 00000000         ;/*       found in the LICENSE file at https://aka.ms/Az
+                       ureRTOS_EULA       */
+    8 00000000         ;/*       and in the root directory of this software.   
+                                          */
+    9 00000000         ;/*                                                     
+                                          */
+   10 00000000         ;/******************************************************
+                       ********************/
+   11 00000000         ;
+   12 00000000         ;
+   13 00000000         ;/******************************************************
+                       ********************/
+   14 00000000         ;/******************************************************
+                       ********************/
+   15 00000000         ;/**                                                    
+                                          */
+   16 00000000         ;/** ThreadX Component                                  
+                                          */
+   17 00000000         ;/**                                                    
+                                          */
+   18 00000000         ;/**   Thread                                           
+                                          */
+   19 00000000         ;/**                                                    
+                                          */
+   20 00000000         ;/******************************************************
+                       ********************/
+   21 00000000         ;/******************************************************
+                       ********************/
+   22 00000000         ;
+   23 00000000         ;
+   24 00000000                 AREA             ||.text||, CODE, READONLY
+   25 00000000         ;/******************************************************
+                       ********************/
+   26 00000000         ;/*                                                     
+                                          */
+   27 00000000         ;/*  FUNCTION                                           
+                           RELEASE        */
+   28 00000000         ;/*                                                     
+                                          */
+   29 00000000         ;/*    _tx_thread_interrupt_disable                     
+                        Cortex-M4/AC5     */
+   30 00000000         ;/*                                                     
+                             6.0.2        */
+   31 00000000         ;/*  AUTHOR                                             
+                                          */
+   32 00000000         ;/*                                                     
+                                          */
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   33 00000000         ;/*    William E. Lamie, Microsoft Corporation.         
+                                          */
+   34 00000000         ;/*                                                     
+                                          */
+   35 00000000         ;/*  DESCRIPTION                                        
+                                          */
+   36 00000000         ;/*                                                     
+                                          */
+   37 00000000         ;/*    This function is responsible for disabling interr
+                       upts and returning */
+   38 00000000         ;/*    the previous interrupt lockout posture.          
+                                          */
+   39 00000000         ;/*                                                     
+                                          */
+   40 00000000         ;/*  INPUT                                              
+                                          */
+   41 00000000         ;/*                                                     
+                                          */
+   42 00000000         ;/*    old_posture                           Old interru
+                       pt lockout posture */
+   43 00000000         ;/*                                                     
+                                          */
+   44 00000000         ;/*  OUTPUT                                             
+                                          */
+   45 00000000         ;/*                                                     
+                                          */
+   46 00000000         ;/*    None                                             
+                                          */
+   47 00000000         ;/*                                                     
+                                          */
+   48 00000000         ;/*  CALLS                                              
+                                          */
+   49 00000000         ;/*                                                     
+                                          */
+   50 00000000         ;/*    None                                             
+                                          */
+   51 00000000         ;/*                                                     
+                                          */
+   52 00000000         ;/*  CALLED BY                                          
+                                          */
+   53 00000000         ;/*                                                     
+                                          */
+   54 00000000         ;/*    Application Code                                 
+                                          */
+   55 00000000         ;/*                                                     
+                                          */
+   56 00000000         ;/*  RELEASE HISTORY                                    
+                                          */
+   57 00000000         ;/*                                                     
+                                          */
+   58 00000000         ;/*    DATE              NAME                      DESCR
+                       IPTION             */
+   59 00000000         ;/*                                                     
+                                          */
+   60 00000000         ;/*  06-30-2020     William E. Lamie         Initial Ver
+                       sion 6.0.1         */
+   61 00000000         ;/*  08-14-2020     Scott Larson             Modified co
+                       mment(s), clean up */
+   62 00000000         ;/*                                            whitespac
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+                       e, resulting       */
+   63 00000000         ;/*                                            in versio
+                       n 6.0.2            */
+   64 00000000         ;/*                                                     
+                                          */
+   65 00000000         ;/******************************************************
+                       ********************/
+   66 00000000         ;UINT   _tx_thread_interrupt_disable(UINT new_posture)
+   67 00000000         ;{
+   68 00000000                 EXPORT           _tx_thread_interrupt_disable
+   69 00000000         _tx_thread_interrupt_disable
+   70 00000000         ;
+   71 00000000         ;    /* Return current interrupt lockout posture.  */
+   72 00000000         ;
+   73 00000000 F3EF 8010       MRS              r0, PRIMASK
+   74 00000004 B672            CPSID            i
+   75 00000006 4770            BX               lr
+   76 00000008         ;
+   77 00000008         ;}
+   78 00000008                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=..\obj\tx_thread_interrupt_disable.d -o..\obj\tx_thread_inte
+rrupt_disable.o -I.\RTE\Compiler -I.\RTE\_xian -IE:\Users\Administrator\AppData
+\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\Include -IE:\Users\Administrator\AppDa
+ta\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.12.0\Drivers\CMSIS\Device\ST\STM32F4xx\
+Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 536
+" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --predefine="_RTE
+_ SETA 1" --predefine="TX_ENABLE_FPU_SUPPORT SETA 1" --list=.\listings\tx_threa
+d_interrupt_disable.lst ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_interrupt_
+disable.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+_tx_thread_interrupt_disable 00000000
+
+Symbol: _tx_thread_interrupt_disable
+   Definitions
+      At line 69 in file ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_interrupt
+_disable.s
+   Uses
+      At line 68 in file ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_interrupt
+_disable.s
+Comment: _tx_thread_interrupt_disable used once
+|.text| 00000000
+
+Symbol: |.text|
+   Definitions
+      At line 24 in file ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_interrupt
+_disable.s
+   Uses
+      None
+Comment: |.text| unused
+2 symbols
+338 symbols in table
