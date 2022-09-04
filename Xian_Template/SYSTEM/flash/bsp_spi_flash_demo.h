@@ -8,6 +8,5 @@
 #include "bsp_usart_fifo.h"
 
 void DemoSpiFlash(void);
-void sfReadTest(void);
 #endif
 

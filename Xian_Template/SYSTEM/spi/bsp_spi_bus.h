@@ -30,8 +30,8 @@
 #define	SPI_APB1_BAUDRATEPRESCALER_328_125K		SPI_BAUDRATEPRESCALER_128
 #define	SPI_APB1_BAUDRATEPRESCALER_164_0625K	SPI_BAUDRATEPRESCALER_256	/* 默认波特率 */
 
-//#define USE_SPI_DMA		/* DMA方式 */
-#define USE_SPI_INT		/* 中断方式 */
+#define USE_SPI_DMA		/* DMA方式 */
+//#define USE_SPI_INT		/* 中断方式 */
 //#define USE_SPI_POLL		/* 查询方式 */
 
 void bsp_InitSPI1Bus(void);

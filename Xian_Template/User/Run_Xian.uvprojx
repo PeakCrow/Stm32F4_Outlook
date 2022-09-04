@@ -16,8 +16,8 @@
         <TargetCommonOption>
           <Device>STM32F407ZGTx</Device>
           <Vendor>STMicroelectronics</Vendor>
-          <PackID>Keil.STM32F4xx_DFP.2.12.0</PackID>
-          <PackURL>http://www.keil.com/pack</PackURL>
+          <PackID>Keil.STM32F4xx_DFP.2.16.0</PackID>
+          <PackURL>http://www.keil.com/pack/</PackURL>
           <Cpu>IRAM(0x20000000,0x00020000) IRAM2(0x10000000,0x00010000) IROM(0x08000000,0x00100000) CPUTYPE("Cortex-M4") FPU2 CLOCK(12000000) ELITTLE</Cpu>
           <FlashUtilSpec></FlashUtilSpec>
           <StartupFile></StartupFile>
@@ -260,8 +260,8 @@
               </XRAM>
               <OCR_RVCT1>
                 <Type>1</Type>
-                <StartAddress>0x0</StartAddress>
-                <Size>0x0</Size>
+                <StartAddress>0xc0000000</StartAddress>
+                <Size>0x800000</Size>
               </OCR_RVCT1>
               <OCR_RVCT2>
                 <Type>1</Type>
@@ -373,7 +373,7 @@
             <ScatterFile>..\Obj\Run_Xian.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
-            <Misc></Misc>
+            <Misc>--keep=gb2312.o</Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>
           </LDads>
@@ -449,6 +449,11 @@
               <FilePath>..\SYSTEM\flash\bsp_spi_flash.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_spi_flash_demo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\flash\bsp_spi_flash_demo.c</FilePath>
+            </File>
+            <File>
               <FileName>bsp_iic_bus.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\iic\bsp_iic_bus.c</FilePath>
@@ -517,26 +522,6 @@
               <FileName>bsp_sdio_sd.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\sd_card\bsp_sdio_sd.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_spi_flash_demo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\flash\bsp_spi_flash_demo.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_sram.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\sram\bsp_sram.c</FilePath>
-            </File>
-            <File>
-              <FileName>XMRAM.lib</FileName>
-              <FileType>4</FileType>
-              <FilePath>..\SYSTEM\XMRAM\XMRAM.lib</FilePath>
-            </File>
-            <File>
-              <FileName>malloc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\MALLOC\malloc.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -3791,6 +3776,67 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>LVGL/Fonts</GroupName>
+          <Files>
+            <File>
+              <FileName>gb2312.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\fonts\gb2312.c</FilePath>
+              <FileOption>
+                <CommonProperty>
+                  <UseCPPCompiler>2</UseCPPCompiler>
+                  <RVCTCodeConst>1</RVCTCodeConst>
+                  <RVCTZI>0</RVCTZI>
+                  <RVCTOtherData>0</RVCTOtherData>
+                  <ModuleSelection>0</ModuleSelection>
+                  <IncludeInBuild>2</IncludeInBuild>
+                  <AlwaysBuild>2</AlwaysBuild>
+                  <GenerateAssemblyFile>2</GenerateAssemblyFile>
+                  <AssembleAssemblyFile>2</AssembleAssemblyFile>
+                  <PublicsOnly>2</PublicsOnly>
+                  <StopOnExitCode>11</StopOnExitCode>
+                  <CustomArgument></CustomArgument>
+                  <IncludeLibraryModules></IncludeLibraryModules>
+                  <ComprImg>1</ComprImg>
+                </CommonProperty>
+                <FileArmAds>
+                  <Cads>
+                    <interw>2</interw>
+                    <Optim>0</Optim>
+                    <oTime>2</oTime>
+                    <SplitLS>2</SplitLS>
+                    <OneElfS>2</OneElfS>
+                    <Strict>2</Strict>
+                    <EnumInt>2</EnumInt>
+                    <PlainCh>2</PlainCh>
+                    <Ropi>2</Ropi>
+                    <Rwpi>2</Rwpi>
+                    <wLevel>0</wLevel>
+                    <uThumb>2</uThumb>
+                    <uSurpInc>2</uSurpInc>
+                    <uC99>2</uC99>
+                    <uGnu>2</uGnu>
+                    <useXO>2</useXO>
+                    <v6Lang>0</v6Lang>
+                    <v6LangP>0</v6LangP>
+                    <vShortEn>2</vShortEn>
+                    <vShortWch>2</vShortWch>
+                    <v6Lto>2</v6Lto>
+                    <v6WtE>2</v6WtE>
+                    <v6Rtti>2</v6Rtti>
+                    <VariousControls>
+                      <MiscControls></MiscControls>
+                      <Define></Define>
+                      <Undefine></Undefine>
+                      <IncludePath></IncludePath>
+                    </VariousControls>
+                  </Cads>
+                </FileArmAds>
+              </FileOption>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::Compiler</GroupName>
         </Group>
       </Groups>
@@ -3820,8 +3866,8 @@
     <files>
       <file attr="config" category="header" name="Config\EventRecorderConf.h" version="1.1.0">
         <instance index="0">RTE\Compiler\EventRecorderConf.h</instance>
-        <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="Keil" Cversion="1.4.0" condition="Cortex-M Device"/>
-        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.6.3"/>
+        <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="Keil" Cversion="1.5.0" condition="Cortex-M Device"/>
+        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.7.0"/>
         <targetInfos>
           <targetInfo name="xian"/>
         </targetInfos>

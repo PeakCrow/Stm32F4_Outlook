@@ -288,10 +288,10 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_InitSPI1Bus();							/* SPI1总线初始化 */
 	bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
 	
-	bsp_InitSram();								/* 初始化外部SRAM */ 	
-	my_mem_init(SRAMIN);			/* 初始化内部内存池 */
-	my_mem_init(SRAMEX);			/* 初始化外部内存池 */
-	my_mem_init(SRAMCCM);			/* 初始化CCM内存池 */
+//	bsp_InitSram();								/* 初始化外部SRAM */ 	
+//	my_mem_init(SRAMIN);			/* 初始化内部内存池 */
+//	my_mem_init(SRAMEX);			/* 初始化外部内存池 */
+//	my_mem_init(SRAMCCM);			/* 初始化CCM内存池 */
 	
 	lv_init(); 									/* lvgl 系统初始化 */
 	lv_port_disp_init(); 						/* lvgl 显示接口初始化,放在 lv_init()的后面 */
@@ -460,7 +460,8 @@ static void AppTaskMsgPro(ULONG thread_input)
 		#if 0
 		DemoFileX();
 		#else
-		tx_thread_sleep(1);
+		DemoSpiFlash();
+		tx_thread_sleep(10);
 		#endif
 	}   
 }
@@ -590,7 +591,8 @@ static void AppTaskUserIF(ULONG thread_input)
 				switch(ucKeyCode)
 				{
 					case KEY_0_UP: 			  /* K1键按打印任务执行情况 */
-						App_Printf("k0按键弹起\r\n");					 	
+						App_Printf("k0按键弹起\r\n");
+						//sfReadTest();
 					 	break;
 					case KEY_UP_DOWN:			/* kup按键按下 */
 						App_Printf("kup按键按下\r\n");				//红色	

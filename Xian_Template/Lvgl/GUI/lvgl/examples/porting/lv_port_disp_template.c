@@ -97,7 +97,7 @@ void lv_port_disp_init(void)
 
     /* Example for 1) */
 		static lv_disp_draw_buf_t draw_buf_dsc_1;
-		#if 1
+		#if 0
 		/* 设置缓冲区的大小为屏幕的全尺寸大小 */
 		void * buf_1 = mymalloc(SRAMEX, MY_DISP_HOR_RES * MY_DISP_VER_RES);
 		/* 初始化显示缓冲区 */
