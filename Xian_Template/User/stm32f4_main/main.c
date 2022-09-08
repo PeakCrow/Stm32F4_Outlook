@@ -483,9 +483,46 @@ static void AppTaskTFTLCD    (ULONG thread_input)
 	uint8_t lcd_id[12];				//存放LCD ID字符串
 	
 	App_Printf((char*)lcd_id,"LCD ID:%04X",lcddev.id);
-	//LCD_Clear(TFT_BLUE);
-	//tx_thread_sleep(3000);
-	#if 1
+    FONT_T tFont12;			/* 定义一个字体结构体变量，用于设置字体参数 */
+	FONT_T tFont16;			
+    FONT_T tFont24;			
+	FONT_T tFont32;	
+    /* 设置字体参数 */
+	{
+		tFont12.FontCode = FC_ST_12;	    /* 字体代码 16点阵 */
+		tFont12.FrontColor = CL_WHITE;		/* 字体颜色 */
+		tFont12.BackColor = CL_BLUE;	    /* 文字背景颜色 */
+		tFont12.Space = 0;					/* 文字间距，单位 = 像素 */
+	}
+    
+    /* 设置字体参数 */
+	{
+		tFont16.FontCode = FC_ST_16;	    /* 字体代码 16点阵 */
+		tFont16.FrontColor = CL_WHITE;		/* 字体颜色 */
+		tFont16.BackColor = CL_BLUE;	    /* 文字背景颜色 */
+		tFont16.Space = 0;					/* 文字间距，单位 = 像素 */
+	}
+    
+    /* 设置字体参数 */
+	{
+		tFont24.FontCode = FC_ST_24;	    /* 字体代码 24点阵 */
+		tFont24.FrontColor = CL_WHITE;		/* 字体颜色 */
+		tFont24.BackColor = CL_BLUE;	    /* 文字背景颜色 */
+		tFont24.Space = 0;					/* 文字间距，单位 = 像素 */
+	}
+    
+    /* 设置字体参数 */
+	{
+		tFont32.FontCode = FC_ST_32;	    /* 字体代码 32点阵 */
+		tFont32.FrontColor = CL_WHITE;		/* 字体颜色 */
+		tFont32.BackColor = CL_BLUE;	    /* 文字背景颜色 */
+		tFont32.Space = 0;					/* 文字间距，单位 = 像素 */
+	}
+	LCD_DispStr(5, 3, "安富莱电子ABCabc，12点阵", &tFont12); 
+	LCD_DispStr(5, 3+12+3, "安富莱电子ABCabc，16点阵", &tFont16); 
+	LCD_DispStr(5, 3+12+16+6, "安富莱电子ABCabc，24点阵", &tFont24); 
+	LCD_DispStr(5, 3+12+16+24+9, "安富莱电子ABCabc，32点阵", &tFont32); 
+	#if 0
 	lvgl_demo();	/* 运行lvgl例程 */
 	while(1)
 	{
@@ -493,7 +530,7 @@ static void AppTaskTFTLCD    (ULONG thread_input)
 		tx_thread_sleep(5);
 	}
 	#else
- 	Load_Drow_Dialog();	
+ 	//Load_Drow_Dialog();	
 	if(tp_dev.touchtype&0X80)
 		ctp_test();
 	#endif

@@ -46,6 +46,7 @@
 #include "bsp_spi_bus.h"				/* spi1 spi2 总线 */
 #include "bsp_iic_bus.h"				/* IIC1总线(包含AT24C02芯片) */
 #include "EPD_Test.h"						/* 墨水屏驱动 */
+#include "bsp_font.h"
 #include "bsp_dwt.h"						/* 芯片DWT模块，安富莱教程提供 */
 #include "bsp_led.h"						/* 板载led灯 */
 #include "bsp_spi_flash.h"			/* spi flash驱动 */
@@ -61,6 +62,7 @@
 #include "bsp_sdio_sd.h"				/* SD卡底层驱动 */	 
 #include "bsp_sram.h"						/* 板载外部SRAM底层驱动 */
 #include "XMRAM.h"							/* 板载外部SRAM厂商提供 */
+#include "bsp_font_flash.h"
 //#include "malloc.h"
 
 #if	DEBUG_SWITCH_EN == 1
