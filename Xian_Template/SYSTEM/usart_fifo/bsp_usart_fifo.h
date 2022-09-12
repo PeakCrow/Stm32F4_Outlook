@@ -4,24 +4,24 @@
 #include "stm32f4xx.h"
 #include "stdio.h"
 /*
-	Ê¹ÓÃÄÚ²¿debug(ÒòÎªÊ¹ÓÃµÄÊÇ¿ñ±©Ä£Ê½)´òÓ¡Ê±£¬»áÔö¼Ó32kµÄsram¿Õ¼ä£¬ËùÒÔµ÷ÊÔµÄÊ±ºò¿ÉÒÔÊ¹ÓÃ£¬release°æ±¾ÒªÈ¥µô´Ë×é¼ş
-	È¥³ı×é¼ş£ºDEBUG_SWITCH_EN ºê¸ÄÎª0£¬½Ó×ÅÔÚManage Run-Time Environment->Compiler->Event Recorder&&STDOUT¹´Ñ¡È¡Ïû
-				½Ó×ÅÔÚOptions for target->Target¸ÄÎªÈçÏÂÅäÖÃ:
+	ä½¿ç”¨å†…éƒ¨debug(å› ä¸ºä½¿ç”¨çš„æ˜¯ç‹‚æš´æ¨¡å¼)æ‰“å°æ—¶ï¼Œä¼šå¢åŠ 32kçš„sramç©ºé—´ï¼Œæ‰€ä»¥è°ƒè¯•çš„æ—¶å€™å¯ä»¥ä½¿ç”¨ï¼Œreleaseç‰ˆæœ¬è¦å»æ‰æ­¤ç»„ä»¶
+	å»é™¤ç»„ä»¶ï¼šDEBUG_SWITCH_EN å®æ”¹ä¸º0ï¼Œæ¥ç€åœ¨Manage Run-Time Environment->Compiler->Event Recorder&&STDOUTå‹¾é€‰å–æ¶ˆ
+				æ¥ç€åœ¨Options for target->Targetæ”¹ä¸ºå¦‚ä¸‹é…ç½®:
 						  Start			  Size
-			¡Ì	IRAM1---0x20000000		 0x20000
+			âˆš	IRAM1---0x20000000		 0x20000
 				IRAM2---0x10000000		 0x10000
-	Ìí¼Ó×é¼ş£ºDEBUG_SWITCH_EN ºê¸ÄÎª1£¬½Ó×ÅÔÚManage Run-Time Environment->Compiler->Event Recorder&&STDOUT(¹¦ÄÜÑ¡ÎªEVR)¹´Ñ¡Ê¹ÄÜ£¬
-				½Ó×ÅÔÚOptions for target->Target¸ÄÎªÈçÏÂÅäÖÃ:
+	æ·»åŠ ç»„ä»¶ï¼šDEBUG_SWITCH_EN å®æ”¹ä¸º1ï¼Œæ¥ç€åœ¨Manage Run-Time Environment->Compiler->Event Recorder&&STDOUT(åŠŸèƒ½é€‰ä¸ºEVR)å‹¾é€‰ä½¿èƒ½ï¼Œ
+				æ¥ç€åœ¨Options for target->Targetæ”¹ä¸ºå¦‚ä¸‹é…ç½®:
 						  Start			  Size
-			¡Ì	IRAM1---0x20000000		 0x10000
-				IRAM2---0x20010000		 0x10000	¡Ì
-				½Ó×ÅÓÒ¼üProject´®¿Ú->CompilerÓÒ¼ü->Event Recorder->Memory->IRAM2 [0x20010000-0x2001FFFF]
+			âˆš	IRAM1---0x20000000		 0x10000
+				IRAM2---0x20010000		 0x10000	âˆš
+				æ¥ç€å³é”®Projectä¸²å£->Compilerå³é”®->Event Recorder->Memory->IRAM2 [0x20010000-0x2001FFFF]
 */
-#define DEBUG_SWITCH_EN 0		//1Ê¹ÓÃÄÚ²¿DEBUG´òÓ¡£¬0Ê¹ÓÃ´®¿ÚÍâÉè½øĞĞ´òÓ¡
+#define DEBUG_SWITCH_EN 0		//1ä½¿ç”¨å†…éƒ¨DEBUGæ‰“å°ï¼Œ0ä½¿ç”¨ä¸²å£å¤–è®¾è¿›è¡Œæ‰“å°
 #define UART1_FIFO_EN 	1
 #define UART2_FIFO_EN	0
 #define UART3_FIFO_EN	0
-/* ¶¨Òå¶Ë¿ÚºÅ */
+/* å®šä¹‰ç«¯å£å· */
 typedef enum
 {
 	COM1 = 0,
@@ -29,7 +29,7 @@ typedef enum
 	COM3 = 2,	/* USART3 */
 }COM_PORT_E;
 
-/* ¶¨Òå´®¿Ú²¨ÌØÂÊºÍFIFO»º³åÇøµÄ´óĞ¡£¬·ÖÎª·¢ËÍ»º³åÇøºÍ½ÓÊÕ»º³åÇø£¬Ö§³ÖÈ«Ë«¹¤ */
+/* å®šä¹‰ä¸²å£æ³¢ç‰¹ç‡å’ŒFIFOç¼“å†²åŒºçš„å¤§å°ï¼Œåˆ†ä¸ºå‘é€ç¼“å†²åŒºå’Œæ¥æ”¶ç¼“å†²åŒºï¼Œæ”¯æŒå…¨åŒå·¥ */
 #if UART1_FIFO_EN == 1
 	#define UART1_BAUD 			115200
 	#define UART1_TX_BUF_SIZE	1*1024
@@ -46,26 +46,26 @@ typedef enum
 	#define UART3_TX_BUF_SIZE	1*1024
 	#define UART3_RX_BUF_SIZE	1*1024
 #endif
-/* ´®¿ÚÉè±¸½á¹¹Ìå */
+/* ä¸²å£è®¾å¤‡ç»“æ„ä½“ */
 typedef struct
 {
-	USART_TypeDef *uart;	/* STM32ÄÚ²¿´®¿ÚÉè±¸Ö¸Õë */
-	uint8_t *pTxBuf;		/* ·¢ËÍ»º³åÇø */
-	uint8_t *pRxBuf;		/* ½ÓÊÕ»º³åÇø */
-	uint16_t usTxBufSize;	/* ·¢ËÍ»º³åÇø´óĞ¡ */
-	uint16_t usRxBufSize;	/* ½ÓÊÕ»º³åÇø´óĞ¡ */
-	__IO uint16_t usTxWrite;/* ·¢ËÍ»º³åÇøĞ´Ö¸Õë */
-	__IO uint16_t usTxRead;	/* ·¢ËÍ»º³åÇø¶ÁÖ¸Õë */
-	__IO uint16_t usTxCount;/* µÈ´ı·¢ËÍµÄÊı¾İ¸öÊı */
+	USART_TypeDef *uart;	/* STM32å†…éƒ¨ä¸²å£è®¾å¤‡æŒ‡é’ˆ */
+	uint8_t *pTxBuf;		/* å‘é€ç¼“å†²åŒº */
+	uint8_t *pRxBuf;		/* æ¥æ”¶ç¼“å†²åŒº */
+	uint16_t usTxBufSize;	/* å‘é€ç¼“å†²åŒºå¤§å° */
+	uint16_t usRxBufSize;	/* æ¥æ”¶ç¼“å†²åŒºå¤§å° */
+	__IO uint16_t usTxWrite;/* å‘é€ç¼“å†²åŒºå†™æŒ‡é’ˆ */
+	__IO uint16_t usTxRead;	/* å‘é€ç¼“å†²åŒºè¯»æŒ‡é’ˆ */
+	__IO uint16_t usTxCount;/* ç­‰å¾…å‘é€çš„æ•°æ®ä¸ªæ•° */
 	
-	__IO uint16_t usRxWrite;/* ½ÓÊÕ»º³åÇøĞ´Ö¸Õë */
-	__IO uint16_t usRxRead;	/* ½ÓÊÕ»º³åÇø¶ÁÖ¸Õë */
-	__IO uint16_t usRxCount;/* »¹Î´¶ÁÈ¡µÄĞÂÊı¾İ¸öÊı */
+	__IO uint16_t usRxWrite;/* æ¥æ”¶ç¼“å†²åŒºå†™æŒ‡é’ˆ */
+	__IO uint16_t usRxRead;	/* æ¥æ”¶ç¼“å†²åŒºè¯»æŒ‡é’ˆ */
+	__IO uint16_t usRxCount;/* è¿˜æœªè¯»å–çš„æ–°æ•°æ®ä¸ªæ•° */
 	
-	void (*SendBefor)(void);/* ¿ªÊ¼·¢ËÍÖ®Ç°µÄ»Øµ÷Ö¸Õëº¯Êı(Ö÷ÒªÓÃÓÚRS485ÇĞ»»µ½·¢ËÍÄ£Ê½) */
-	void (*SendOver)(void);	/* ·¢ËÍÍê±ÏµÄ»Øµ÷º¯Êı(Ö÷ÒªÓÃÓÚRS485½«·¢ËÍÄ£Ê½ÇĞ»»Îª½ÓÊÕÄ£Ê½) */
-	void (*ReciveNew)(uint8_t _byte);	/* ´®¿ÚÊÕµ½Êı¾İµÄ»Øµ÷º¯ÊıÖ¸Õë */
-	uint8_t Sending;		/* ÕıÔÚ·¢ËÍÖĞ */
+	void (*SendBefor)(void);/* å¼€å§‹å‘é€ä¹‹å‰çš„å›è°ƒæŒ‡é’ˆå‡½æ•°(ä¸»è¦ç”¨äºRS485åˆ‡æ¢åˆ°å‘é€æ¨¡å¼) */
+	void (*SendOver)(void);	/* å‘é€å®Œæ¯•çš„å›è°ƒå‡½æ•°(ä¸»è¦ç”¨äºRS485å°†å‘é€æ¨¡å¼åˆ‡æ¢ä¸ºæ¥æ”¶æ¨¡å¼) */
+	void (*ReciveNew)(uint8_t _byte);	/* ä¸²å£æ”¶åˆ°æ•°æ®çš„å›è°ƒå‡½æ•°æŒ‡é’ˆ */
+	uint8_t Sending;		/* æ­£åœ¨å‘é€ä¸­ */
 }UART_T;
 
 void bsp_InitUart(void);

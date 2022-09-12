@@ -336,7 +336,7 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls>--diag_suppress=188 --diag_suppress=68 --diag_suppress=111 --diag_suppress=188 --diag_suppress=223 --diag_suppress=546 --diag_suppress=1295</MiscControls>
+              <MiscControls>--diag_suppress=188 --diag_suppress=68 --diag_suppress=111 --diag_suppress=188 --diag_suppress=223 --diag_suppress=546 --diag_suppress=1295 --diag_suppress=870</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,USE_FULL_LL_DRIVER,TX_ENABLE_FPU_SUPPORT,TX_ENABLE_STACK_CHECKING</Define>
               <Undefine></Undefine>
               <IncludePath>..\Core;..\Obj;..\User;..\SYSTEM\sys;..\HAL_lib\Inc;..\HAL_lib\STM32F4xx_HAL_Driver\Inc;..\HAL_lib\CMSIS\Include;..\HAL_lib\STM32F4xx_HAL_Driver\Src;.\stm32f4_main;..\SYSTEM\ticktim;..\SYSTEM\usart_fifo;..\SYSTEM\key_fifo;..\SYSTEM\spi;..\SYSTEM\flash;..\SYSTEM\iic;..\SYSTEM\ink_screen;..\ThreadX\ports\cortex_m4\ac5\inc;..\ThreadX\common\inc;..\SYSTEM\led;..\SYSTEM\can;..\SYSTEM\timer;..\SYSTEM\ws2812b;..\SYSTEM\rotation;..\SYSTEM\ads1256;..\SYSTEM\lcd;..\SYSTEM\touch;..\SYSTEM\sram;..\SYSTEM\mlx90614;..\SYSTEM\sd_card;..\FileX\common\inc;..\FileX\ports\cortex_m4\gnu\inc;..\Lvgl\GUI\lvgl;..\Lvgl\GUI\lvgl\src;..\Lvgl\GUI\lvgl\examples\porting;..\Lvgl\GUI_APP;..\SYSTEM\MALLOC;..\SYSTEM\sram;..\SYSTEM\XMRAM;..\SYSTEM\fonts</IncludePath>
@@ -373,7 +373,7 @@
             <ScatterFile>..\Obj\Run_Xian.sct</ScatterFile>
             <IncludeLibs></IncludeLibs>
             <IncludeLibsPath></IncludeLibsPath>
-            <Misc>--keep=gb2312.o</Misc>
+            <Misc>--keep=myFont36.o</Misc>
             <LinkerInputFile></LinkerInputFile>
             <DisabledWarnings></DisabledWarnings>
           </LDads>
@@ -3779,9 +3779,14 @@
           <GroupName>LVGL/Fonts</GroupName>
           <Files>
             <File>
-              <FileName>gb2312.c</FileName>
+              <FileName>myFont.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\gb2312.c</FilePath>
+              <FilePath>..\SYSTEM\fonts\myFont.c</FilePath>
+            </File>
+            <File>
+              <FileName>myFont36.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\fonts\myFont36.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -3833,66 +3838,6 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
-            </File>
-            <File>
-              <FileName>bsp_font_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\bsp_font_flash.c</FilePath>
-            </File>
-            <File>
-              <FileName>ra8875_asc_width.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\ra8875_asc_width.c</FilePath>
-            </File>
-            <File>
-              <FileName>asc12.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\asc12.c</FilePath>
-            </File>
-            <File>
-              <FileName>asc16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\asc16.c</FilePath>
-            </File>
-            <File>
-              <FileName>asc24.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\asc24.c</FilePath>
-            </File>
-            <File>
-              <FileName>asc32.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\asc32.c</FilePath>
-            </File>
-            <File>
-              <FileName>asc62x40.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\asc62x40.c</FilePath>
-            </File>
-            <File>
-              <FileName>asc96x40.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\asc96x40.c</FilePath>
-            </File>
-            <File>
-              <FileName>hz12.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\hz12.c</FilePath>
-            </File>
-            <File>
-              <FileName>hz16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\hz16.c</FilePath>
-            </File>
-            <File>
-              <FileName>hz24.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\hz24.c</FilePath>
-            </File>
-            <File>
-              <FileName>hz32.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\hz32.c</FilePath>
             </File>
           </Files>
         </Group>

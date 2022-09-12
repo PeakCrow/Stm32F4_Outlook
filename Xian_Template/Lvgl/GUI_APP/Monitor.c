@@ -29,9 +29,13 @@ void lv_example_get_started_1(void)
     lv_label_set_text(label, "Button");                     /*Set the labels text*/
     lv_obj_center(label);
 }
-
+//LV_FONT_DECLARE(myFont);
 void lvgl_demo()
 {
-	lv_example_get_started_1();
+	//lv_example_get_started_1();
+	lv_obj_t* label = lv_label_create(lv_scr_act());
+	lv_obj_set_style_text_font(label,&myFont,LV_STATE_DEFAULT);
+	lv_obj_center(label);
+	lv_label_set_text(label,"LS_Racing车队,仪表制作,田润显!");
 }
 

@@ -19,7 +19,7 @@
 
 /*
 *********************************************************************************************************
-*                                 ÈÎÎñÓÅÏÈ¼¶£¬ÊýÖµÔ½Ð¡ÓÅÏÈ¼¶Ô½¸ß
+*                                 ä»»åŠ¡ä¼˜å…ˆçº§ï¼Œæ•°å€¼è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜
 *********************************************************************************************************
 */
 #define  APP_CFG_TASK_START_PRIO                          2u
@@ -34,7 +34,7 @@
 
 /*
 *********************************************************************************************************
-*                                    ÈÎÎñÕ»´óÐ¡£¬µ¥Î»×Ö½Ú
+*                                    ä»»åŠ¡æ ˆå¤§å°ï¼Œå•ä½å­—èŠ‚
 *********************************************************************************************************
 */
 #define  APP_CFG_TASK_START_STK_SIZE                    1024u
@@ -47,7 +47,7 @@
 #define  APP_CFG_TASK_MsgPro_STK_SIZE                   1024u
 /*
 *********************************************************************************************************
-*                                       ¾²Ì¬È«¾Ö±äÁ¿
+*                                       é™æ€å…¨å±€å˜é‡
 *********************************************************************************************************
 */
 static  TX_THREAD   AppTaskStartTCB;
@@ -76,14 +76,14 @@ static  uint64_t    AppTaskMsgProStk[APP_CFG_TASK_MsgPro_STK_SIZE/8];
 
 /*
 *********************************************************************************************************
-*                                       Èí¼þ¶¨Ê±Æ÷±äÁ¿
+*                                       è½¯ä»¶å®šæ—¶å™¨å˜é‡
 *********************************************************************************************************
 */
 TX_TIMER AppTimer;
 
 /*
 *********************************************************************************************************
-*                                       Èí¼þ¶¨Ê±Æ÷»Øµ÷º¯Êý
+*                                       è½¯ä»¶å®šæ—¶å™¨å›žè°ƒå‡½æ•°
 *********************************************************************************************************
 */
 void TimerCallback(ULONG thread_input);
@@ -91,7 +91,7 @@ void TimerCallback(ULONG thread_input);
 
 /*
 *********************************************************************************************************
-*                                      º¯ÊýÉùÃ÷
+*                                      å‡½æ•°å£°æ˜Ž
 *********************************************************************************************************
 */
 static  void  AppTaskStart          (ULONG thread_input);
@@ -110,39 +110,39 @@ static  void  OSStatInit 			(void);
 
 /*
 *******************************************************************************************************
-*                               ±äÁ¿
+*                               å˜é‡
 *******************************************************************************************************
 */
-static TX_MUTEX   AppPrintfSemp;	/* ÓÃÓÚprintf»¥³â */
+static TX_MUTEX   AppPrintfSemp;	/* ç”¨äºŽprintfäº’æ–¥ */
 
-/* Í³¼ÆÈÎÎñÊ¹ÓÃ */
-__IO uint8_t   OSStatRdy;      		/* Í³¼ÆÈÎÎñ¾ÍÐ÷±êÖ¾ */
-__IO uint32_t  OSIdleCtr;     	    /* ¿ÕÏÐÈÎÎñ¼ÆÊý */
-__IO float     OSCPUUsage;   	    /* CPU°Ù·Ö±È */
-uint32_t       OSIdleCtrMax; 	    /* 1ÃëÄÚ×î´óµÄ¿ÕÏÐ¼ÆÊý */
-uint32_t       OSIdleCtrRun; 	    /* 1ÃëÄÚ¿ÕÏÐÈÎÎñµ±Ç°¼ÆÊý */
+/* ç»Ÿè®¡ä»»åŠ¡ä½¿ç”¨ */
+__IO uint8_t   OSStatRdy;      		/* ç»Ÿè®¡ä»»åŠ¡å°±ç»ªæ ‡å¿— */
+__IO uint32_t  OSIdleCtr;     	    /* ç©ºé—²ä»»åŠ¡è®¡æ•° */
+__IO float     OSCPUUsage;   	    /* CPUç™¾åˆ†æ¯” */
+uint32_t       OSIdleCtrMax; 	    /* 1ç§’å†…æœ€å¤§çš„ç©ºé—²è®¡æ•° */
+uint32_t       OSIdleCtrRun; 	    /* 1ç§’å†…ç©ºé—²ä»»åŠ¡å½“å‰è®¡æ•° */
 
 /*******************************************************************************
   * @FunctionName: main
   * @Author:       trx
-  * @DateTime:     2022Äê4ÔÂ25ÈÕ09µã28·Ö
+  * @DateTime:     2022å¹´4æœˆ25æ—¥09ç‚¹28åˆ†
   * @Purpose:      
   * @param:        void               
   * @return:
 *******************************************************************************/
 int main(void)
 {
-	HAL_Init();                    	 			/* ³õÊ¼»¯HAL¿â */   
-	Stm32_Clock_Init(336,8,2,7);   				/* ÉèÖÃÊ±ÖÓ,168Mhz */
+	HAL_Init();                    	 			/* åˆå§‹åŒ–HALåº“ */   
+	Stm32_Clock_Init(336,8,2,7);   				/* è®¾ç½®æ—¶é’Ÿ,168Mhz */
 
 #if	DEBUG_SWITCH_EN == 1
-	EventRecorderInitialize(EventRecordAll, 1U);/* ³õÊ¼»¯ EventRecorder ²¢¿ªÆô */
+	EventRecorderInitialize(EventRecordAll, 1U);/* åˆå§‹åŒ– EventRecorder å¹¶å¼€å¯ */
 #endif
 
-	/* ÄÚºË¿ªÆôÇ°¹Ø±ÕHALµÄÊ±¼ä»ù×¼ */
+	/* å†…æ ¸å¼€å¯å‰å…³é—­HALçš„æ—¶é—´åŸºå‡† */
 	HAL_SuspendTick();
 	
-    /* ½øÈëThreadXÄÚºË */
+    /* è¿›å…¥ThreadXå†…æ ¸ */
     tx_kernel_enter();
 	while(1)
 		;
@@ -150,35 +150,35 @@ int main(void)
 
 void bsp_RunPer10ms()
 {
-	bsp_Key_Scan10ms();	/* Çá´¥°´¼üÉ¨Ãèº¯Êý */
+	bsp_Key_Scan10ms();	/* è½»è§¦æŒ‰é”®æ‰«æå‡½æ•° */
 }
 /*
 *********************************************************************************************************
-*	º¯ Êý Ãû: AppObjCreate
-*	¹¦ÄÜËµÃ÷: ´´½¨ÈÎÎñÍ¨Ñ¶
-*	ÐÎ    ²Î : ÎÞ
-*	·µ »Ø Öµ: ÎÞ
+*	å‡½ æ•° å: AppObjCreate
+*	åŠŸèƒ½è¯´æ˜Ž: åˆ›å»ºä»»åŠ¡é€šè®¯
+*	å½¢    å‚ : æ— 
+*	è¿” å›ž å€¼: æ— 
 *********************************************************************************************************
 */
 static  void  AppObjCreate (void)
 {
-	 /* ´´½¨»¥³âÐÅºÅÁ¿ */
+	 /* åˆ›å»ºäº’æ–¥ä¿¡å·é‡ */
     tx_mutex_create(&AppPrintfSemp,"AppPrintfSemp",TX_NO_INHERIT);
 	
-	 	/* ¶¨Ê±Æ÷×é */
+	 	/* å®šæ—¶å™¨ç»„ */
 	tx_timer_create(&AppTimer,
 					"App Timer",
 					TimerCallback, 
-					0,                  /* ´«µÝµÄ²ÎÊý */
-					500,                /* ÉèÖÃ¶¨Ê±Æ÷Ê±¼äÒç³öµÄ³õÊ¼ÑÓ³Ù£¬µ¥Î»ThreadXÏµÍ³Ê±¼ä½ÚÅÄÊý */
-					500, 				/* ÉèÖÃ³õÊ¼ÑÓ³ÙºóµÄ¶¨Ê±Æ÷ÔËÐÐÖÜÆÚ£¬Èç¹ûÉèÖÃÎª0£¬±íÊ¾µ¥´Î¶¨Ê±Æ÷,µ¥Î»ms */
-					TX_AUTO_ACTIVATE);	/* ¼¤»î¶¨Ê±Æ÷ */
+					0,                  /* ä¼ é€’çš„å‚æ•° */
+					500,                /* è®¾ç½®å®šæ—¶å™¨æ—¶é—´æº¢å‡ºçš„åˆå§‹å»¶è¿Ÿï¼Œå•ä½ThreadXç³»ç»Ÿæ—¶é—´èŠ‚æ‹æ•° */
+					500, 				/* è®¾ç½®åˆå§‹å»¶è¿ŸåŽçš„å®šæ—¶å™¨è¿è¡Œå‘¨æœŸï¼Œå¦‚æžœè®¾ç½®ä¸º0ï¼Œè¡¨ç¤ºå•æ¬¡å®šæ—¶å™¨,å•ä½ms */
+					TX_AUTO_ACTIVATE);	/* æ¿€æ´»å®šæ—¶å™¨ */
 }
 /*******************************************************************************
   * @FunctionName: OSStatInit
   * @Author:       trx
-  * @DateTime:     2022Äê5ÔÂ24ÈÕ23:52:39 
-  * @Purpose:      ¾ßÌåµÄ²Ù×÷ÄÚÈÝ
+  * @DateTime:     2022å¹´5æœˆ24æ—¥23:52:39 
+  * @Purpose:      å…·ä½“çš„æ“ä½œå†…å®¹
   * @param:        void               
   * @return:       none
 *******************************************************************************/
@@ -186,16 +186,16 @@ void  OSStatInit (void)
 {
 	OSStatRdy = FALSE;
 	
-    tx_thread_sleep(2u);        /* Ê±ÖÓÍ¬²½ */
+    tx_thread_sleep(2u);        /* æ—¶é’ŸåŒæ­¥ */
 	
     __disable_irq();
-    OSIdleCtr    = 0uL;         /* Çå¿ÕÏÐ¼ÆÊý */
+    OSIdleCtr    = 0uL;         /* æ¸…ç©ºé—²è®¡æ•° */
 	__enable_irq();
 	
-    tx_thread_sleep(100);       /* Í³¼Æ100msÄÚ£¬×î´ó¿ÕÏÐ¼ÆÊý */
+    tx_thread_sleep(100);       /* ç»Ÿè®¡100mså†…ï¼Œæœ€å¤§ç©ºé—²è®¡æ•° */
 	
    	__disable_irq();
-    OSIdleCtrMax = OSIdleCtr;   /* ±£´æ×î´ó¿ÕÏÐ¼ÆÊý */
+    OSIdleCtrMax = OSIdleCtr;   /* ä¿å­˜æœ€å¤§ç©ºé—²è®¡æ•° */
     OSStatRdy    = TRUE;
 	__enable_irq();
 }
@@ -203,110 +203,110 @@ void  OSStatInit (void)
 
 /*
 *********************************************************************************************************
-*	º¯ Êý Ãû: tx_application_define
-*	¹¦ÄÜËµÃ÷: ThreadX×¨ÓÃµÄÈÎÎñ´´½¨£¬Í¨ÐÅ×é¼þ´´½¨º¯Êý£¬´Ëº¯Êý»áÔÚtx_kernel_enterº¯ÊýÖÐ±»µ÷ÓÃ(Ã²ËÆ)
-*	ÐÎ    ²Î : first_unused_memory  Î´Ê¹ÓÃµÄµØÖ·¿Õ¼ä
-*	·µ »Ø Öµ: ÎÞ
+*	å‡½ æ•° å: tx_application_define
+*	åŠŸèƒ½è¯´æ˜Ž: ThreadXä¸“ç”¨çš„ä»»åŠ¡åˆ›å»ºï¼Œé€šä¿¡ç»„ä»¶åˆ›å»ºå‡½æ•°ï¼Œæ­¤å‡½æ•°ä¼šåœ¨tx_kernel_enterå‡½æ•°ä¸­è¢«è°ƒç”¨(è²Œä¼¼)
+*	å½¢    å‚ : first_unused_memory  æœªä½¿ç”¨çš„åœ°å€ç©ºé—´
+*	è¿” å›ž å€¼: æ— 
 *********************************************************************************************************
 */
 void  tx_application_define(void *first_unused_memory)
 {
 	/*
-	   Èç¹ûÊµÏÖÈÎÎñCPUÀûÓÃÂÊÍ³¼ÆµÄ»°£¬´Ëº¯Êý½öÓÃÓÚÊµÏÖÆô¶¯ÈÎÎñ£¬Í³¼ÆÈÎÎñºÍ¿ÕÏÐÈÎÎñ£¬ÆäËüÈÎÎñÔÚº¯Êý
-	   AppTaskCreateÀïÃæ´´½¨¡£
+	   å¦‚æžœå®žçŽ°ä»»åŠ¡CPUåˆ©ç”¨çŽ‡ç»Ÿè®¡çš„è¯ï¼Œæ­¤å‡½æ•°ä»…ç”¨äºŽå®žçŽ°å¯åŠ¨ä»»åŠ¡ï¼Œç»Ÿè®¡ä»»åŠ¡å’Œç©ºé—²ä»»åŠ¡ï¼Œå…¶å®ƒä»»åŠ¡åœ¨å‡½æ•°
+	   AppTaskCreateé‡Œé¢åˆ›å»ºã€‚
 	*/
-	/**************´´½¨Æô¶¯ÈÎÎñ*********************/
-    tx_thread_create(&AppTaskStartTCB,              /* ÈÎÎñ¿ØÖÆ¿éµØÖ· */   
-                       "App Task Start",              /* ÈÎÎñÃû */
-                       AppTaskStart,                  /* Æô¶¯ÈÎÎñº¯ÊýµØÖ· */
-                       0,                             /* ´«µÝ¸øÈÎÎñµÄ²ÎÊý */
-                       &AppTaskStartStk[0],            /* ¶ÑÕ»»ùµØÖ· */
-                       APP_CFG_TASK_START_STK_SIZE,    /* ¶ÑÕ»¿Õ¼ä´óÐ¡ */  
-                       APP_CFG_TASK_START_PRIO,        /* ÈÎÎñÓÅÏÈ¼¶*/
-                       APP_CFG_TASK_START_PRIO,        /* ÈÎÎñÇÀÕ¼·§Öµ */
-                       TX_NO_TIME_SLICE,               /* ²»¿ªÆôÊ±¼äÆ¬ */
-                       TX_AUTO_START);                 /* ´´½¨ºóÁ¢¼´Æô¶¯ */
+	/**************åˆ›å»ºå¯åŠ¨ä»»åŠ¡*********************/
+    tx_thread_create(&AppTaskStartTCB,              /* ä»»åŠ¡æŽ§åˆ¶å—åœ°å€ */   
+                       "App Task Start",              /* ä»»åŠ¡å */
+                       AppTaskStart,                  /* å¯åŠ¨ä»»åŠ¡å‡½æ•°åœ°å€ */
+                       0,                             /* ä¼ é€’ç»™ä»»åŠ¡çš„å‚æ•° */
+                       &AppTaskStartStk[0],            /* å †æ ˆåŸºåœ°å€ */
+                       APP_CFG_TASK_START_STK_SIZE,    /* å †æ ˆç©ºé—´å¤§å° */  
+                       APP_CFG_TASK_START_PRIO,        /* ä»»åŠ¡ä¼˜å…ˆçº§*/
+                       APP_CFG_TASK_START_PRIO,        /* ä»»åŠ¡æŠ¢å é˜€å€¼ */
+                       TX_NO_TIME_SLICE,               /* ä¸å¼€å¯æ—¶é—´ç‰‡ */
+                       TX_AUTO_START);                 /* åˆ›å»ºåŽç«‹å³å¯åŠ¨ */
    	   
-	/**************´´½¨Í³¼ÆÈÎÎñ*********************/
-    tx_thread_create(&AppTaskStatTCB,               /* ÈÎÎñ¿ØÖÆ¿éµØÖ· */    
-                       "App Task STAT",              /* ÈÎÎñÃû */
-                       AppTaskStat,                  /* Æô¶¯ÈÎÎñº¯ÊýµØÖ· */
-                       0,                           /* ´«µÝ¸øÈÎÎñµÄ²ÎÊý */
-                       &AppTaskStatStk[0],           /* ¶ÑÕ»»ùµØÖ· */
-                       APP_CFG_TASK_STAT_STK_SIZE,    /* ¶ÑÕ»¿Õ¼ä´óÐ¡ */  
-                       APP_CFG_TASK_STAT_PRIO,        /* ÈÎÎñÓÅÏÈ¼¶*/
-                       APP_CFG_TASK_STAT_PRIO,        /* ÈÎÎñÇÀÕ¼·§Öµ */
-                       TX_NO_TIME_SLICE,             /* ²»¿ªÆôÊ±¼äÆ¬ */
-                       TX_AUTO_START);               /* ´´½¨ºóÁ¢¼´Æô¶¯ */
+	/**************åˆ›å»ºç»Ÿè®¡ä»»åŠ¡*********************/
+    tx_thread_create(&AppTaskStatTCB,               /* ä»»åŠ¡æŽ§åˆ¶å—åœ°å€ */    
+                       "App Task STAT",              /* ä»»åŠ¡å */
+                       AppTaskStat,                  /* å¯åŠ¨ä»»åŠ¡å‡½æ•°åœ°å€ */
+                       0,                           /* ä¼ é€’ç»™ä»»åŠ¡çš„å‚æ•° */
+                       &AppTaskStatStk[0],           /* å †æ ˆåŸºåœ°å€ */
+                       APP_CFG_TASK_STAT_STK_SIZE,    /* å †æ ˆç©ºé—´å¤§å° */  
+                       APP_CFG_TASK_STAT_PRIO,        /* ä»»åŠ¡ä¼˜å…ˆçº§*/
+                       APP_CFG_TASK_STAT_PRIO,        /* ä»»åŠ¡æŠ¢å é˜€å€¼ */
+                       TX_NO_TIME_SLICE,             /* ä¸å¼€å¯æ—¶é—´ç‰‡ */
+                       TX_AUTO_START);               /* åˆ›å»ºåŽç«‹å³å¯åŠ¨ */
 					   
 				   
-	/**************´´½¨¿ÕÏÐÈÎÎñ*********************/
-    tx_thread_create(&AppTaskIdleTCB,               /* ÈÎÎñ¿ØÖÆ¿éµØÖ· */    
-                       "App Task IDLE",              /* ÈÎÎñÃû */
-                       AppTaskIDLE,                  /* Æô¶¯ÈÎÎñº¯ÊýµØÖ· */
-                       0,                           /* ´«µÝ¸øÈÎÎñµÄ²ÎÊý */
-                       &AppTaskIdleStk[0],           /* ¶ÑÕ»»ùµØÖ· */
-                       APP_CFG_TASK_IDLE_STK_SIZE,    /* ¶ÑÕ»¿Õ¼ä´óÐ¡ */  
-                       APP_CFG_TASK_IDLE_PRIO,        /* ÈÎÎñÓÅÏÈ¼¶*/
-                       APP_CFG_TASK_IDLE_PRIO,        /* ÈÎÎñÇÀÕ¼·§Öµ */
-                       TX_NO_TIME_SLICE,             /* ²»¿ªÆôÊ±¼äÆ¬ */
-                       TX_AUTO_START);               /* ´´½¨ºóÁ¢¼´Æô¶¯ */
+	/**************åˆ›å»ºç©ºé—²ä»»åŠ¡*********************/
+    tx_thread_create(&AppTaskIdleTCB,               /* ä»»åŠ¡æŽ§åˆ¶å—åœ°å€ */    
+                       "App Task IDLE",              /* ä»»åŠ¡å */
+                       AppTaskIDLE,                  /* å¯åŠ¨ä»»åŠ¡å‡½æ•°åœ°å€ */
+                       0,                           /* ä¼ é€’ç»™ä»»åŠ¡çš„å‚æ•° */
+                       &AppTaskIdleStk[0],           /* å †æ ˆåŸºåœ°å€ */
+                       APP_CFG_TASK_IDLE_STK_SIZE,    /* å †æ ˆç©ºé—´å¤§å° */  
+                       APP_CFG_TASK_IDLE_PRIO,        /* ä»»åŠ¡ä¼˜å…ˆçº§*/
+                       APP_CFG_TASK_IDLE_PRIO,        /* ä»»åŠ¡æŠ¢å é˜€å€¼ */
+                       TX_NO_TIME_SLICE,             /* ä¸å¼€å¯æ—¶é—´ç‰‡ */
+                       TX_AUTO_START);               /* åˆ›å»ºåŽç«‹å³å¯åŠ¨ */
 }
 
 /*
 *********************************************************************************************************
-*	º¯ Êý Ãû: AppTaskStart
-*	¹¦ÄÜËµÃ÷: Æô¶¯ÈÎÎñ¡£Æô¶¯ÈÎÎñÖÐ°üº¬ÓÐÈý¸ö×ÓÈÎÎñ
-*	ÐÎ    ²Î: thread_input ÊÇÔÚ´´½¨¸ÃÈÎÎñÊ±´«µÝµÄÐÎ²Î
-*	·µ »Ø Öµ: ÎÞ
-	ÓÅ ÏÈ ¼¶: 2
+*	å‡½ æ•° å: AppTaskStart
+*	åŠŸèƒ½è¯´æ˜Ž: å¯åŠ¨ä»»åŠ¡ã€‚å¯åŠ¨ä»»åŠ¡ä¸­åŒ…å«æœ‰ä¸‰ä¸ªå­ä»»åŠ¡
+*	å½¢    å‚: thread_input æ˜¯åœ¨åˆ›å»ºè¯¥ä»»åŠ¡æ—¶ä¼ é€’çš„å½¢å‚
+*	è¿” å›ž å€¼: æ— 
+	ä¼˜ å…ˆ çº§: 2
 *********************************************************************************************************
 */
 static  void  AppTaskStart (ULONG thread_input)
 {
 	(void)thread_input;
 
-	/* ÓÅÏÈÖ´ÐÐÈÎÎñÍ³¼Æ */
+	/* ä¼˜å…ˆæ‰§è¡Œä»»åŠ¡ç»Ÿè®¡ */
 	OSStatInit();
 
-	/* ÄÚºË¿ªÆôºó£¬»Ö¸´HALÀïµÄÊ±¼ä»ù×¼ */
+	/* å†…æ ¸å¼€å¯åŽï¼Œæ¢å¤HALé‡Œçš„æ—¶é—´åŸºå‡† */
     HAL_ResumeTick();
 	
-    /* ÍâÉè³õÊ¼»¯ */
-	bsp_InitDWT();								/* ³õÊ¼»¯DWT */
-	bsp_InitTimer();							/* ³õÊ¼»¯µÎ´ð¶¨Ê±Æ÷ */
-	bsp_InitUart();								/* ³õÊ¼»¯´®¿Ú1 2 3ÍâÉè */
-	bsp_InitKey();								/* ³õÊ¼»¯Çá´¥°´¼ü */
-	bsp_InitSPI2Bus();							/* ³õÊ¼»¯SPI2×ÜÏß£¬ÓÃÀ´Çý¶¯Ä«Ë®ÆÁ */
-	bsp_I2C_EE_Init();							/* ³õÊ¼»¯IIC×ÜÏß£¬²¢ÇÒÇý¶¯eepromÐ¾Æ¬ */
-	bsp_InitLed();								/* ³õÊ¼»¯°åÔØLEDµÆ */
-	bsp_InitCan1Bus();							/* ³õÊ¼»¯CAN1 ×ÜÏß */
-	bsp_InitRotationSensor();					/* ³õÊ¼»¯ÂÖËÙ´«¸ÐÆ÷ */
-	bsp_InitADS1256();							/* ³õÊ¼»¯ÅäÖÃADS1256.  PGA=1, DRATE=30KSPS, BUFEN=1, ÊäÈëÕý¸º5V */
-	bsp_InitWs2812b();							/* ³õÊ¼»¯ws2812b¿Éµ÷µÆÐ§ */
-	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* Éú³ÉÒ»¸ö1k£¬50Õ¼¿Õ±ÈµÄ·½²¨£¬ÓÃÀ´ÑéÖ¤Âö³å¼ÆÊý */
-	bsp_InitSPI1Bus();							/* SPI1×ÜÏß³õÊ¼»¯ */
-	bsp_InitSFlash();							/* ³õÊ¼»¯SPI FLASHÐ¾Æ¬ */
+    /* å¤–è®¾åˆå§‹åŒ– */
+	bsp_InitDWT();								/* åˆå§‹åŒ–DWT */
+	bsp_InitTimer();							/* åˆå§‹åŒ–æ»´ç­”å®šæ—¶å™¨ */
+	bsp_InitUart();								/* åˆå§‹åŒ–ä¸²å£1 2 3å¤–è®¾ */
+	bsp_InitKey();								/* åˆå§‹åŒ–è½»è§¦æŒ‰é”® */
+	bsp_InitSPI2Bus();							/* åˆå§‹åŒ–SPI2æ€»çº¿ï¼Œç”¨æ¥é©±åŠ¨å¢¨æ°´å± */
+	bsp_I2C_EE_Init();							/* åˆå§‹åŒ–IICæ€»çº¿ï¼Œå¹¶ä¸”é©±åŠ¨eepromèŠ¯ç‰‡ */
+	bsp_InitLed();								/* åˆå§‹åŒ–æ¿è½½LEDç¯ */
+	bsp_InitCan1Bus();							/* åˆå§‹åŒ–CAN1 æ€»çº¿ */
+	bsp_InitRotationSensor();					/* åˆå§‹åŒ–è½®é€Ÿä¼ æ„Ÿå™¨ */
+	bsp_InitADS1256();							/* åˆå§‹åŒ–é…ç½®ADS1256.  PGA=1, DRATE=30KSPS, BUFEN=1, è¾“å…¥æ­£è´Ÿ5V */
+	bsp_InitWs2812b();							/* åˆå§‹åŒ–ws2812bå¯è°ƒç¯æ•ˆ */
+	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* ç”Ÿæˆä¸€ä¸ª1kï¼Œ50å ç©ºæ¯”çš„æ–¹æ³¢ï¼Œç”¨æ¥éªŒè¯è„‰å†²è®¡æ•° */
+	bsp_InitSPI1Bus();							/* SPI1æ€»çº¿åˆå§‹åŒ– */
+	bsp_InitSFlash();							/* åˆå§‹åŒ–SPI FLASHèŠ¯ç‰‡ */
 	
-//	bsp_InitSram();								/* ³õÊ¼»¯Íâ²¿SRAM */ 	
-//	my_mem_init(SRAMIN);			/* ³õÊ¼»¯ÄÚ²¿ÄÚ´æ³Ø */
-//	my_mem_init(SRAMEX);			/* ³õÊ¼»¯Íâ²¿ÄÚ´æ³Ø */
-//	my_mem_init(SRAMCCM);			/* ³õÊ¼»¯CCMÄÚ´æ³Ø */
+//	bsp_InitSram();								/* åˆå§‹åŒ–å¤–éƒ¨SRAM */ 	
+//	my_mem_init(SRAMIN);			/* åˆå§‹åŒ–å†…éƒ¨å†…å­˜æ±  */
+//	my_mem_init(SRAMEX);			/* åˆå§‹åŒ–å¤–éƒ¨å†…å­˜æ±  */
+//	my_mem_init(SRAMCCM);			/* åˆå§‹åŒ–CCMå†…å­˜æ±  */
 	
-	lv_init(); 									/* lvgl ÏµÍ³³õÊ¼»¯ */
-	lv_port_disp_init(); 						/* lvgl ÏÔÊ¾½Ó¿Ú³õÊ¼»¯,·ÅÔÚ lv_init()µÄºóÃæ */
-	lv_port_indev_init(); 						/* lvgl ÊäÈë½Ó¿Ú³õÊ¼»¯,·ÅÔÚ lv_init()µÄºóÃæ */
+	lv_init(); 									/* lvgl ç³»ç»Ÿåˆå§‹åŒ– */
+	lv_port_disp_init(); 						/* lvgl æ˜¾ç¤ºæŽ¥å£åˆå§‹åŒ–,æ”¾åœ¨ lv_init()çš„åŽé¢ */
+	lv_port_indev_init(); 						/* lvgl è¾“å…¥æŽ¥å£åˆå§‹åŒ–,æ”¾åœ¨ lv_init()çš„åŽé¢ */
 		
-	/* ´´½¨ÈÎÎñ¼äÍ¨ÐÅ»úÖÆ */
+	/* åˆ›å»ºä»»åŠ¡é—´é€šä¿¡æœºåˆ¶ */
 	AppObjCreate();
 
-	/* ´´½¨ÈÎÎñ£¬´Ëº¯ÊýÖÐ°üº¬ÓÐ3¸ö×ÓÈÎÎñ */
+	/* åˆ›å»ºä»»åŠ¡ï¼Œæ­¤å‡½æ•°ä¸­åŒ…å«æœ‰3ä¸ªå­ä»»åŠ¡ */
     AppTaskCreate();
 
 	while (1)
 		{
 //			tx_trace_enable(&myBuf,TRC_BUF_SIZE,TRC_MAX_OBJ_COUNT);
-			/* ÐèÒªÖÜÆÚÐÔ´¦ÀíµÄ³ÌÐò£¬¶ÔÓ¦Âã»ú¹¤³Ìµ÷ÓÃµÄSysTick_ISR */
+			/* éœ€è¦å‘¨æœŸæ€§å¤„ç†çš„ç¨‹åºï¼Œå¯¹åº”è£¸æœºå·¥ç¨‹è°ƒç”¨çš„SysTick_ISR */
 			bsp_ProPer1ms();
 			tx_thread_sleep(1);
 		}
@@ -315,11 +315,11 @@ static  void  AppTaskStart (ULONG thread_input)
 
 /*
 *********************************************************************************************************
-*	º¯ Êý Ãû: AppTaskStatistic
-*	¹¦ÄÜËµÃ÷: Í³¼ÆÈÎÎñ£¬ÓÃÓÚÊµÏÖCPUÀûÓÃÂÊµÄÍ³¼Æ¡£ÎªÁË²âÊÔ¸ü¼Ó×¼È·£¬¿ÉÒÔ¿ªÆô×¢ÊÍµ÷ÓÃµÄÈ«¾ÖÖÐ¶Ï¿ª¹Ø
-*	ÐÎ    ²Î : thread_input ´´½¨¸ÃÈÎÎñÊ±´«µÝµÄÐÎ²Î 
-*	·µ »Ø Öµ: ÎÞ
-*   ÓÅ ÏÈ ¼¶: 30
+*	å‡½ æ•° å: AppTaskStatistic
+*	åŠŸèƒ½è¯´æ˜Ž: ç»Ÿè®¡ä»»åŠ¡ï¼Œç”¨äºŽå®žçŽ°CPUåˆ©ç”¨çŽ‡çš„ç»Ÿè®¡ã€‚ä¸ºäº†æµ‹è¯•æ›´åŠ å‡†ç¡®ï¼Œå¯ä»¥å¼€å¯æ³¨é‡Šè°ƒç”¨çš„å…¨å±€ä¸­æ–­å¼€å…³
+*	å½¢    å‚ : thread_input åˆ›å»ºè¯¥ä»»åŠ¡æ—¶ä¼ é€’çš„å½¢å‚ 
+*	è¿” å›ž å€¼: æ— 
+*   ä¼˜ å…ˆ çº§: 30
 *********************************************************************************************************
 */
 static void AppTaskStat(ULONG thread_input)
@@ -328,7 +328,7 @@ static void AppTaskStat(ULONG thread_input)
 
     while (OSStatRdy == FALSE) 
 	{
-        tx_thread_sleep(200);     /* µÈ´ýÍ³¼ÆÈÎÎñ¾ÍÐ÷ */
+        tx_thread_sleep(200);     /* ç­‰å¾…ç»Ÿè®¡ä»»åŠ¡å°±ç»ª */
     }
 
     OSIdleCtrMax /= 100uL;
@@ -338,27 +338,27 @@ static void AppTaskStat(ULONG thread_input)
     }
 	
     __disable_irq();
-    OSIdleCtr = OSIdleCtrMax * 100uL;  /* ÉèÖÃ³õÊ¼CPUÀûÓÃÂÊ 0% */
+    OSIdleCtr = OSIdleCtrMax * 100uL;  /* è®¾ç½®åˆå§‹CPUåˆ©ç”¨çŽ‡ 0% */
 	__enable_irq();
 	
     for (;;) 
 	{
         __disable_irq();
-        OSIdleCtrRun = OSIdleCtr;    /* »ñµÃ100msÄÚ¿ÕÏÐ¼ÆÊý */
-        OSIdleCtr    = 0uL;          /* ¸´Î»¿ÕÏÐ¼ÆÊý */
-        __enable_irq();            /* ¼ÆËã100msÄÚµÄCPUÀûÓÃÂÊ */
+        OSIdleCtrRun = OSIdleCtr;    /* èŽ·å¾—100mså†…ç©ºé—²è®¡æ•° */
+        OSIdleCtr    = 0uL;          /* å¤ä½ç©ºé—²è®¡æ•° */
+        __enable_irq();            /* è®¡ç®—100mså†…çš„CPUåˆ©ç”¨çŽ‡ */
         OSCPUUsage   = (100uL - (float)OSIdleCtrRun / OSIdleCtrMax);
-        tx_thread_sleep(100);        /* Ã¿100msÍ³¼ÆÒ»´Î */
+        tx_thread_sleep(100);        /* æ¯100msç»Ÿè®¡ä¸€æ¬¡ */
     }
 }
 
 /*
 *********************************************************************************************************
-*	º¯ Êý Ãû: AppTaskIDLE
-*	¹¦ÄÜËµÃ÷: ¿ÕÏÐÈÎÎñ
-*	ÐÎ    ²Î : thread_input ´´½¨¸ÃÈÎÎñÊ±´«µÝµÄÐÎ²Î
-*	·µ »Ø Öµ: ÎÞ
-	ÓÅ ÏÈ ¼¶: 31
+*	å‡½ æ•° å: AppTaskIDLE
+*	åŠŸèƒ½è¯´æ˜Ž: ç©ºé—²ä»»åŠ¡
+*	å½¢    å‚ : thread_input åˆ›å»ºè¯¥ä»»åŠ¡æ—¶ä¼ é€’çš„å½¢å‚
+*	è¿” å›ž å€¼: æ— 
+	ä¼˜ å…ˆ çº§: 31
 *********************************************************************************************************
 */
 static void AppTaskIDLE(ULONG thread_input)
@@ -376,79 +376,79 @@ static void AppTaskIDLE(ULONG thread_input)
 }
 
 
-/******************************************´´½¨ÏÂÃæÊÇ×ÓÈÎÎñ**********************************************/
-/******************************************´´½¨ÏÂÃæÊÇ×ÓÈÎÎñ**********************************************/
-/******************************************´´½¨ÏÂÃæÊÇ×ÓÈÎÎñ**********************************************/
+/******************************************åˆ›å»ºä¸‹é¢æ˜¯å­ä»»åŠ¡**********************************************/
+/******************************************åˆ›å»ºä¸‹é¢æ˜¯å­ä»»åŠ¡**********************************************/
+/******************************************åˆ›å»ºä¸‹é¢æ˜¯å­ä»»åŠ¡**********************************************/
 
 
 /*
 *********************************************************************************************************
-*	º¯ Êý Ãû: AppTaskCreate
-*	¹¦ÄÜËµÃ÷: ´´½¨Ó¦ÓÃÈÎÎñ£¬´Ëº¯ÊýÔÚAppTaskStartº¯ÊýÖÐ±»µ÷ÓÃ
-*	ÐÎ    ²Î : ÎÞ
-*	·µ »Ø Öµ: ÎÞ
+*	å‡½ æ•° å: AppTaskCreate
+*	åŠŸèƒ½è¯´æ˜Ž: åˆ›å»ºåº”ç”¨ä»»åŠ¡ï¼Œæ­¤å‡½æ•°åœ¨AppTaskStartå‡½æ•°ä¸­è¢«è°ƒç”¨
+*	å½¢    å‚ : æ— 
+*	è¿” å›ž å€¼: æ— 
 *********************************************************************************************************
 */
 static  void  AppTaskCreate (void)
 {
-	/**************´´½¨USER IFÈÎÎñ*********************/
-    tx_thread_create(&AppTaskUserIFTCB,               	/* ÈÎÎñ¿ØÖÆ¿éµØÖ· */      
-                       "App Task UserIF",              	/* ÈÎÎñÃû */
-                       AppTaskUserIF,                  	/* Æô¶¯ÈÎÎñº¯ÊýµØÖ· */
-                       0,                              	/* ´«µÝ¸øÈÎÎñµÄ²ÎÊý */
-                       &AppTaskUserIFStk[0],            /* ¶ÑÕ»»ùµØÖ· */
-                       APP_CFG_TASK_USER_IF_STK_SIZE,  	/* ¶ÑÕ»¿Õ¼ä´óÐ¡ */  
-                       APP_CFG_TASK_USER_IF_PRIO,      	/* ÈÎÎñÓÅÏÈ¼¶*/
-                       APP_CFG_TASK_USER_IF_PRIO,      	/* ÈÎÎñÇÀÕ¼·§Öµ */
-                       TX_NO_TIME_SLICE,               	/* ²»¿ªÆôÊ±¼äÆ¬ */
-                       TX_AUTO_START);                 	/* ´´½¨ºóÁ¢¼´Æô¶¯ */
+	/**************åˆ›å»ºUSER IFä»»åŠ¡*********************/
+    tx_thread_create(&AppTaskUserIFTCB,               	/* ä»»åŠ¡æŽ§åˆ¶å—åœ°å€ */      
+                       "App Task UserIF",              	/* ä»»åŠ¡å */
+                       AppTaskUserIF,                  	/* å¯åŠ¨ä»»åŠ¡å‡½æ•°åœ°å€ */
+                       0,                              	/* ä¼ é€’ç»™ä»»åŠ¡çš„å‚æ•° */
+                       &AppTaskUserIFStk[0],            /* å †æ ˆåŸºåœ°å€ */
+                       APP_CFG_TASK_USER_IF_STK_SIZE,  	/* å †æ ˆç©ºé—´å¤§å° */  
+                       APP_CFG_TASK_USER_IF_PRIO,      	/* ä»»åŠ¡ä¼˜å…ˆçº§*/
+                       APP_CFG_TASK_USER_IF_PRIO,      	/* ä»»åŠ¡æŠ¢å é˜€å€¼ */
+                       TX_NO_TIME_SLICE,               	/* ä¸å¼€å¯æ—¶é—´ç‰‡ */
+                       TX_AUTO_START);                 	/* åˆ›å»ºåŽç«‹å³å¯åŠ¨ */
 
-	/**************´´½¨COMÈÎÎñ*********************/
-    tx_thread_create(&AppTaskCOMTCB,               		/* ÈÎÎñ¿ØÖÆ¿éµØÖ· */    
-                       "App Task COM",              	/* ÈÎÎñÃû */
-                       AppTaskCOM,                  	/* Æô¶¯ÈÎÎñº¯ÊýµØÖ· */
-                       0,                           	/* ´«µÝ¸øÈÎÎñµÄ²ÎÊý */
-                       &AppTaskCOMStk[0],            	/* ¶ÑÕ»»ùµØÖ· */
-                       APP_CFG_TASK_COM_STK_SIZE,    	/* ¶ÑÕ»¿Õ¼ä´óÐ¡ */  
-                       APP_CFG_TASK_COM_PRIO,        	/* ÈÎÎñÓÅÏÈ¼¶*/
-                       APP_CFG_TASK_COM_PRIO,        	/* ÈÎÎñÇÀÕ¼·§Öµ */
-                       TX_NO_TIME_SLICE,             	/* ²»¿ªÆôÊ±¼äÆ¬ */
-                       TX_AUTO_START);               	/* ´´½¨ºóÁ¢¼´Æô¶¯ */
+	/**************åˆ›å»ºCOMä»»åŠ¡*********************/
+    tx_thread_create(&AppTaskCOMTCB,               		/* ä»»åŠ¡æŽ§åˆ¶å—åœ°å€ */    
+                       "App Task COM",              	/* ä»»åŠ¡å */
+                       AppTaskCOM,                  	/* å¯åŠ¨ä»»åŠ¡å‡½æ•°åœ°å€ */
+                       0,                           	/* ä¼ é€’ç»™ä»»åŠ¡çš„å‚æ•° */
+                       &AppTaskCOMStk[0],            	/* å †æ ˆåŸºåœ°å€ */
+                       APP_CFG_TASK_COM_STK_SIZE,    	/* å †æ ˆç©ºé—´å¤§å° */  
+                       APP_CFG_TASK_COM_PRIO,        	/* ä»»åŠ¡ä¼˜å…ˆçº§*/
+                       APP_CFG_TASK_COM_PRIO,        	/* ä»»åŠ¡æŠ¢å é˜€å€¼ */
+                       TX_NO_TIME_SLICE,             	/* ä¸å¼€å¯æ—¶é—´ç‰‡ */
+                       TX_AUTO_START);               	/* åˆ›å»ºåŽç«‹å³å¯åŠ¨ */
 
-	/**************´´½¨READ ADCÈÎÎñ*********************/
-    tx_thread_create(&AppTaskReadAdcTCB,               		/* ÈÎÎñ¿ØÖÆ¿éµØÖ· */    
-                       "App Task ReadAdc",              	/* ÈÎÎñÃû */
-                       AppTaskREADADC,                  	/* Æô¶¯ÈÎÎñº¯ÊýµØÖ· */
-                       0,                           	/* ´«µÝ¸øÈÎÎñµÄ²ÎÊý */
-                       &AppTaskReadAdcStk[0],            	/* ¶ÑÕ»»ùµØÖ· */
-                       APP_CFG_TASK_READC_STK_SIZE,    	/* ¶ÑÕ»¿Õ¼ä´óÐ¡ */  
-                       APP_CFG_TASK_READC_PRIO,        	/* ÈÎÎñÓÅÏÈ¼¶*/
-                       APP_CFG_TASK_READC_PRIO,        	/* ÈÎÎñÇÀÕ¼·§Öµ */
-                       TX_NO_TIME_SLICE,             	/* ²»¿ªÆôÊ±¼äÆ¬ */
-                       TX_AUTO_START);               	/* ´´½¨ºóÁ¢¼´Æô¶¯ */
+	/**************åˆ›å»ºREAD ADCä»»åŠ¡*********************/
+    tx_thread_create(&AppTaskReadAdcTCB,               		/* ä»»åŠ¡æŽ§åˆ¶å—åœ°å€ */    
+                       "App Task ReadAdc",              	/* ä»»åŠ¡å */
+                       AppTaskREADADC,                  	/* å¯åŠ¨ä»»åŠ¡å‡½æ•°åœ°å€ */
+                       0,                           	/* ä¼ é€’ç»™ä»»åŠ¡çš„å‚æ•° */
+                       &AppTaskReadAdcStk[0],            	/* å †æ ˆåŸºåœ°å€ */
+                       APP_CFG_TASK_READC_STK_SIZE,    	/* å †æ ˆç©ºé—´å¤§å° */  
+                       APP_CFG_TASK_READC_PRIO,        	/* ä»»åŠ¡ä¼˜å…ˆçº§*/
+                       APP_CFG_TASK_READC_PRIO,        	/* ä»»åŠ¡æŠ¢å é˜€å€¼ */
+                       TX_NO_TIME_SLICE,             	/* ä¸å¼€å¯æ—¶é—´ç‰‡ */
+                       TX_AUTO_START);               	/* åˆ›å»ºåŽç«‹å³å¯åŠ¨ */
 	
-	/**************´´½¨LCD DISPÈÎÎñ*********************/
-    tx_thread_create(&AppTaskTFTLCDTCB,               		/* ÈÎÎñ¿ØÖÆ¿éµØÖ· */    
-                       "App Task TFTLCD",              	/* ÈÎÎñÃû */
-                       AppTaskTFTLCD,                  	/* Æô¶¯ÈÎÎñº¯ÊýµØÖ· */
-                       0,                           	/* ´«µÝ¸øÈÎÎñµÄ²ÎÊý */
-                       &AppTaskTFTLCDStk[0],            	/* ¶ÑÕ»»ùµØÖ· */
-                       APP_CFG_TASK_TFTLCD_STK_SIZE,    	/* ¶ÑÕ»¿Õ¼ä´óÐ¡ */  
-                       APP_CFG_TASK_TFTLCD_PRIO,        	/* ÈÎÎñÓÅÏÈ¼¶*/
-                       APP_CFG_TASK_TFTLCD_PRIO,        	/* ÈÎÎñÇÀÕ¼·§Öµ */
-                       TX_NO_TIME_SLICE,             	/* ²»¿ªÆôÊ±¼äÆ¬ */
-                       TX_AUTO_START);               	/* ´´½¨ºóÁ¢¼´Æô¶¯ */
-	/**************´´½¨MsgProÈÎÎñ*********************/
-    tx_thread_create(&AppTaskMsgProTCB,               /* ÈÎÎñ¿ØÖÆ¿éµØÖ· */    
-                       "App Msp Pro",                 /* ÈÎÎñÃû */
-                       AppTaskMsgPro,                  /* Æô¶¯ÈÎÎñº¯ÊýµØÖ· */
-                       0,                             /* ´«µÝ¸øÈÎÎñµÄ²ÎÊý */
-                       &AppTaskMsgProStk[0],            /* ¶ÑÕ»»ùµØÖ· */
-                       APP_CFG_TASK_MsgPro_STK_SIZE,    /* ¶ÑÕ»¿Õ¼ä´óÐ¡ */  
-                       APP_CFG_TASK_MsgPro_PRIO,        /* ÈÎÎñÓÅÏÈ¼¶*/
-                       APP_CFG_TASK_MsgPro_PRIO,        /* ÈÎÎñÇÀÕ¼·§Öµ */
-                       TX_NO_TIME_SLICE,               /* ²»¿ªÆôÊ±¼äÆ¬ */
-                       TX_AUTO_START);                /* ´´½¨ºóÁ¢¼´Æô¶¯ */
+	/**************åˆ›å»ºLCD DISPä»»åŠ¡*********************/
+    tx_thread_create(&AppTaskTFTLCDTCB,               		/* ä»»åŠ¡æŽ§åˆ¶å—åœ°å€ */    
+                       "App Task TFTLCD",              	/* ä»»åŠ¡å */
+                       AppTaskTFTLCD,                  	/* å¯åŠ¨ä»»åŠ¡å‡½æ•°åœ°å€ */
+                       0,                           	/* ä¼ é€’ç»™ä»»åŠ¡çš„å‚æ•° */
+                       &AppTaskTFTLCDStk[0],            	/* å †æ ˆåŸºåœ°å€ */
+                       APP_CFG_TASK_TFTLCD_STK_SIZE,    	/* å †æ ˆç©ºé—´å¤§å° */  
+                       APP_CFG_TASK_TFTLCD_PRIO,        	/* ä»»åŠ¡ä¼˜å…ˆçº§*/
+                       APP_CFG_TASK_TFTLCD_PRIO,        	/* ä»»åŠ¡æŠ¢å é˜€å€¼ */
+                       TX_NO_TIME_SLICE,             	/* ä¸å¼€å¯æ—¶é—´ç‰‡ */
+                       TX_AUTO_START);               	/* åˆ›å»ºåŽç«‹å³å¯åŠ¨ */
+	/**************åˆ›å»ºMsgProä»»åŠ¡*********************/
+    tx_thread_create(&AppTaskMsgProTCB,               /* ä»»åŠ¡æŽ§åˆ¶å—åœ°å€ */    
+                       "App Msp Pro",                 /* ä»»åŠ¡å */
+                       AppTaskMsgPro,                  /* å¯åŠ¨ä»»åŠ¡å‡½æ•°åœ°å€ */
+                       0,                             /* ä¼ é€’ç»™ä»»åŠ¡çš„å‚æ•° */
+                       &AppTaskMsgProStk[0],            /* å †æ ˆåŸºåœ°å€ */
+                       APP_CFG_TASK_MsgPro_STK_SIZE,    /* å †æ ˆç©ºé—´å¤§å° */  
+                       APP_CFG_TASK_MsgPro_PRIO,        /* ä»»åŠ¡ä¼˜å…ˆçº§*/
+                       APP_CFG_TASK_MsgPro_PRIO,        /* ä»»åŠ¡æŠ¢å é˜€å€¼ */
+                       TX_NO_TIME_SLICE,               /* ä¸å¼€å¯æ—¶é—´ç‰‡ */
+                       TX_AUTO_START);                /* åˆ›å»ºåŽç«‹å³å¯åŠ¨ */
 }
 extern void DemoFileX(void);
 static void AppTaskMsgPro(ULONG thread_input)
@@ -472,58 +472,20 @@ static void AppTaskMsgPro(ULONG thread_input)
 /*******************************************************************************
   * @FunctionName: AppTaskTFTLCD
   * @Author:       trx
-  * @DateTime:     2022Äê6ÔÂ23ÈÕ21:03:00 
-  * @Purpose:      lcdÆÁÄ»²âÊÔÈÎÎñ
+  * @DateTime:     2022å¹´6æœˆ23æ—¥21:03:00 
+  * @Purpose:      lcdå±å¹•æµ‹è¯•ä»»åŠ¡
   * @param:        thread_input
   * @return:       none
 *******************************************************************************/
 static void AppTaskTFTLCD    (ULONG thread_input)
 {
 	(VOID)thread_input;
-	uint8_t lcd_id[12];				//´æ·ÅLCD ID×Ö·û´®
+	uint8_t lcd_id[12];				/* å­˜æ”¾LCD IDå­—ç¬¦ä¸² */
 	
 	App_Printf((char*)lcd_id,"LCD ID:%04X",lcddev.id);
-    FONT_T tFont12;			/* ¶¨ÒåÒ»¸ö×ÖÌå½á¹¹Ìå±äÁ¿£¬ÓÃÓÚÉèÖÃ×ÖÌå²ÎÊý */
-	FONT_T tFont16;			
-    FONT_T tFont24;			
-	FONT_T tFont32;	
-    /* ÉèÖÃ×ÖÌå²ÎÊý */
-	{
-		tFont12.FontCode = FC_ST_12;	    /* ×ÖÌå´úÂë 16µãÕó */
-		tFont12.FrontColor = CL_WHITE;		/* ×ÖÌåÑÕÉ« */
-		tFont12.BackColor = CL_BLUE;	    /* ÎÄ×Ö±³¾°ÑÕÉ« */
-		tFont12.Space = 0;					/* ÎÄ×Ö¼ä¾à£¬µ¥Î» = ÏñËØ */
-	}
-    
-    /* ÉèÖÃ×ÖÌå²ÎÊý */
-	{
-		tFont16.FontCode = FC_ST_16;	    /* ×ÖÌå´úÂë 16µãÕó */
-		tFont16.FrontColor = CL_WHITE;		/* ×ÖÌåÑÕÉ« */
-		tFont16.BackColor = CL_BLUE;	    /* ÎÄ×Ö±³¾°ÑÕÉ« */
-		tFont16.Space = 0;					/* ÎÄ×Ö¼ä¾à£¬µ¥Î» = ÏñËØ */
-	}
-    
-    /* ÉèÖÃ×ÖÌå²ÎÊý */
-	{
-		tFont24.FontCode = FC_ST_24;	    /* ×ÖÌå´úÂë 24µãÕó */
-		tFont24.FrontColor = CL_WHITE;		/* ×ÖÌåÑÕÉ« */
-		tFont24.BackColor = CL_BLUE;	    /* ÎÄ×Ö±³¾°ÑÕÉ« */
-		tFont24.Space = 0;					/* ÎÄ×Ö¼ä¾à£¬µ¥Î» = ÏñËØ */
-	}
-    
-    /* ÉèÖÃ×ÖÌå²ÎÊý */
-	{
-		tFont32.FontCode = FC_ST_32;	    /* ×ÖÌå´úÂë 32µãÕó */
-		tFont32.FrontColor = CL_WHITE;		/* ×ÖÌåÑÕÉ« */
-		tFont32.BackColor = CL_BLUE;	    /* ÎÄ×Ö±³¾°ÑÕÉ« */
-		tFont32.Space = 0;					/* ÎÄ×Ö¼ä¾à£¬µ¥Î» = ÏñËØ */
-	}
-	LCD_DispStr(5, 3, "°²¸»À³µç×ÓABCabc£¬12µãÕó", &tFont12); 
-	LCD_DispStr(5, 3+12+3, "°²¸»À³µç×ÓABCabc£¬16µãÕó", &tFont16); 
-	LCD_DispStr(5, 3+12+16+6, "°²¸»À³µç×ÓABCabc£¬24µãÕó", &tFont24); 
-	LCD_DispStr(5, 3+12+16+24+9, "°²¸»À³µç×ÓABCabc£¬32µãÕó", &tFont32); 
-	#if 0
-	lvgl_demo();	/* ÔËÐÐlvglÀý³Ì */
+ 
+	#if 1
+	lvgl_demo();	/* è¿è¡Œlvglä¾‹ç¨‹ */
 	while(1)
 	{
 		lv_timer_handler();
@@ -539,8 +501,8 @@ static void AppTaskTFTLCD    (ULONG thread_input)
 /*******************************************************************************
   * @FunctionName: AppTaskREADADC
   * @Author:       trx
-  * @DateTime:     2022Äê6ÔÂ23ÈÕ21:03:14 
-  * @Purpose:      adcÊý¾Ý¶ÁÈ¡ÈÎÎñ
+  * @DateTime:     2022å¹´6æœˆ23æ—¥21:03:14 
+  * @Purpose:      adcæ•°æ®è¯»å–ä»»åŠ¡
   * @param:        thread_input
   * @return:       none
 *******************************************************************************/
@@ -550,7 +512,7 @@ static  void  AppTaskREADADC	(ULONG thread_input)
 //	uint8_t i;
 //	int32_t iTemp;
 //	float fTemp;
-		/* ´òÓ¡Ð¾Æ¬ID (Í¨¹ý¶ÁID¿ÉÒÔÅÐ¶ÏÓ²¼þ½Ó¿ÚÊÇ·ñÕý³£) , Õý³£Ê±×´Ì¬¼Ä´æÆ÷µÄ¸ß4bit = 3 */
+		/* æ‰“å°èŠ¯ç‰‡ID (é€šè¿‡è¯»IDå¯ä»¥åˆ¤æ–­ç¡¬ä»¶æŽ¥å£æ˜¯å¦æ­£å¸¸) , æ­£å¸¸æ—¶çŠ¶æ€å¯„å­˜å™¨çš„é«˜4bit = 3 */
 #if 0
 		{
 			uint8_t id;
@@ -568,19 +530,19 @@ static  void  AppTaskREADADC	(ULONG thread_input)
 		}
 #endif
 		
-		ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_30SPS);	/* ÅäÖÃADC²ÎÊý£º ÔöÒæ1:1, Êý¾ÝÊä³öËÙÂÊ 30Hz */
+		ADS1256_CfgADC(ADS1256_GAIN_1, ADS1256_30SPS);	/* é…ç½®ADCå‚æ•°ï¼š å¢žç›Š1:1, æ•°æ®è¾“å‡ºé€ŸçŽ‡ 30Hz */
 	
-		ADS1256_StartScan();	/* Æô¶¯ÖÐ¶ÏÉ¨ÃèÄ£Ê½, ÂÖÁ÷²É¼¯8¸öÍ¨µÀµÄADCÊý¾Ý. Í¨¹ý ADS1256_GetAdc() º¯ÊýÀ´¶ÁÈ¡ÕâÐ©Êý¾Ý */
+		ADS1256_StartScan();	/* å¯åŠ¨ä¸­æ–­æ‰«ææ¨¡å¼, è½®æµé‡‡é›†8ä¸ªé€šé“çš„ADCæ•°æ®. é€šè¿‡ ADS1256_GetAdc() å‡½æ•°æ¥è¯»å–è¿™äº›æ•°æ® */
 while (1)
 	{
 		#if 0
-		/* ´òÓ¡²É¼¯Êý¾Ý */
+		/* æ‰“å°é‡‡é›†æ•°æ® */
 		for (i = 0; i < 8; i++)
 			{
 
 			    
-			        //¼ÆËã¹«Ê½ = 2 * VREF/(PGA * (2^23 - 1)) £¬ÕâÀïVREFÊÇ2.5V£¬PGA = 1
-			        //¼ÆËãÊµ¼ÊµçÑ¹Öµ£¨½üËÆ¹ÀËãµÄ£©£¬ÈçÐè×¼È·£¬Çë½øÐÐÐ£×¼
+			    //è®¡ç®—å…¬å¼ = 2 * VREF/(PGA * (2^23 - 1)) ï¼Œè¿™é‡ŒVREFæ˜¯2.5Vï¼ŒPGA = 1
+			    //è®¡ç®—å®žé™…ç”µåŽ‹å€¼ï¼ˆè¿‘ä¼¼ä¼°ç®—çš„ï¼‰ï¼Œå¦‚éœ€å‡†ç¡®ï¼Œè¯·è¿›è¡Œæ ¡å‡†
 			    
 				iTemp = ((int64_t)g_tADS1256.AdcNow[i] * 2500000) / 4194303; 
 				
@@ -609,16 +571,16 @@ while (1)
 
 /*
 *********************************************************************************************************
-*	º¯ Êý Ãû: AppTaskUserIF
-*	¹¦ÄÜËµÃ÷: °´¼üÏûÏ¢´¦Àí
-*	ÐÎ    ²Î : thread_input ´´½¨¸ÃÈÎÎñÊ±´«µÝµÄÐÎ²Î
-*	·µ »Ø Öµ: ÎÞ
-	ÓÅ ÏÈ ¼¶: 4
+*	å‡½ æ•° å: AppTaskUserIF
+*	åŠŸèƒ½è¯´æ˜Ž: æŒ‰é”®æ¶ˆæ¯å¤„ç†
+*	å½¢    å‚ : thread_input åˆ›å»ºè¯¥ä»»åŠ¡æ—¶ä¼ é€’çš„å½¢å‚
+*	è¿” å›ž å€¼: æ— 
+	ä¼˜ å…ˆ çº§: 4
 *********************************************************************************************************
 */
 static void AppTaskUserIF(ULONG thread_input)
 {
-	uint8_t ucKeyCode;	/* °´¼ü´úÂë */
+	uint8_t ucKeyCode;	/* æŒ‰é”®ä»£ç  */
 	(void)thread_input;
 	while(1)
 	{        
@@ -627,27 +589,27 @@ static void AppTaskUserIF(ULONG thread_input)
 		{
 				switch(ucKeyCode)
 				{
-					case KEY_0_UP: 			  /* K1¼ü°´´òÓ¡ÈÎÎñÖ´ÐÐÇé¿ö */
-						App_Printf("k0°´¼üµ¯Æð\r\n");
+					case KEY_0_UP: 			  /* K1é”®æŒ‰æ‰“å°ä»»åŠ¡æ‰§è¡Œæƒ…å†µ */
+						App_Printf("k0æŒ‰é”®å¼¹èµ·\r\n");
 						//sfReadTest();
 					 	break;
-					case KEY_UP_DOWN:			/* kup°´¼ü°´ÏÂ */
-						App_Printf("kup°´¼ü°´ÏÂ\r\n");				//ºìÉ«	
+					case KEY_UP_DOWN:			/* kupæŒ‰é”®æŒ‰ä¸‹ */
+						App_Printf("kupæŒ‰é”®æŒ‰ä¸‹\r\n");				//çº¢è‰²	
 						//sfReadTest();
 						//App_Printf("%.1f\r\n",bsp_MLX90614_ReadTemp());
 						//DemoIicEeprom();
 						DispTaskInfo();
 						break;
-					case KEY_0_DOWN:			/* k0°´¼ü°´ÏÂ */
+					case KEY_0_DOWN:			/* k0æŒ‰é”®æŒ‰ä¸‹ */
 					{
-						App_Printf("k0°´¼ü°´ÏÂ\r\n");
-						//Ws2812b_Run_Water_Lamp(0xff,0x00,0x00,1000,gradua_on);/* µ±°´ÏÂkey0ºó£¬»á½øÐÐ12sµÄÑÓÊ±£¬²ÅÄÜ´¥·¢ÏÂ´ÎµÄ°´¼üÊäÈëbug */
+						App_Printf("k0æŒ‰é”®æŒ‰ä¸‹\r\n");
+						//Ws2812b_Run_Water_Lamp(0xff,0x00,0x00,1000,gradua_on);/* å½“æŒ‰ä¸‹key0åŽï¼Œä¼šè¿›è¡Œ12sçš„å»¶æ—¶ï¼Œæ‰èƒ½è§¦å‘ä¸‹æ¬¡çš„æŒ‰é”®è¾“å…¥bug */
 					break;
 					}
 					case KEY_UP_UP:
-						App_Printf("kup°´¼üµ¯Æð");
+						App_Printf("kupæŒ‰é”®å¼¹èµ·");
 						//Ws2812b_Set_Alloff();
-						//SD_Test();		/* SD¿¨²âÊÔÀý³Ì */
+						//SD_Test();		/* SDå¡æµ‹è¯•ä¾‹ç¨‹ */
 						break;
 				}
 		}
@@ -657,18 +619,18 @@ static void AppTaskUserIF(ULONG thread_input)
 
 /*
 *********************************************************************************************************
-*	º¯ Êý Ãû: AppTaskCom
-*	¹¦ÄÜËµÃ÷: ¸¡µãÊý´®¿Ú´òÓ¡
-*	ÐÎ    ²Î : thread_input ´´½¨¸ÃÈÎÎñÊ±´«µÝµÄÐÎ²Î
-*	·µ »Ø Öµ: ÎÞ
-	ÓÅ ÏÈ ¼¶: 5
+*	å‡½ æ•° å: AppTaskCom
+*	åŠŸèƒ½è¯´æ˜Ž: æµ®ç‚¹æ•°ä¸²å£æ‰“å°
+*	å½¢    å‚ : thread_input åˆ›å»ºè¯¥ä»»åŠ¡æ—¶ä¼ é€’çš„å½¢å‚
+*	è¿” å›ž å€¼: æ— 
+	ä¼˜ å…ˆ çº§: 5
 *********************************************************************************************************
 */
 static void AppTaskCOM(ULONG thread_input)
 {
 
 	(void)thread_input;
-	App_Printf("AppTaskComÈÎÎñ¿ªÊ¼Ö´ÐÐ\r\n");
+	App_Printf("AppTaskComä»»åŠ¡å¼€å§‹è¿è¡Œ\r\n");
 	
 	while(1)
 	{
@@ -680,16 +642,16 @@ static void AppTaskCOM(ULONG thread_input)
 
 /*
 *********************************************************************************************************
-*	º¯ Êý Ãû: App_Printf
-*	¹¦ÄÜËµÃ÷: Ïß³Ì°²È«µÄprintf·½Ê½		  			  
-*	ÐÎ    ²Î : Í¬printfµÄ²ÎÊý¡£
-*             ÔÚCÖÐ£¬µ±ÎÞ·¨ÁÐ³ö´«µÝº¯ÊýµÄËùÓÐÊµ²ÎµÄÀàÐÍºÍÊýÄ¿Ê±,¿ÉÒÔÓÃÊ¡ÂÔºÅÖ¸¶¨²ÎÊý±í
-*	·µ »Ø Öµ: ÎÞ
+*	å‡½ æ•° å: App_Printf
+*	åŠŸèƒ½è¯´æ˜Ž: çº¿ç¨‹å®‰å…¨çš„printfæ–¹å¼		  			  
+*	å½¢    å‚ : åŒprintfçš„å‚æ•°ã€‚
+*             åœ¨Cä¸­ï¼Œå½“æ— æ³•åˆ—å‡ºä¼ é€’å‡½æ•°çš„æ‰€æœ‰å®žå‚çš„ç±»åž‹å’Œæ•°ç›®æ—¶,å¯ä»¥ç”¨çœç•¥å·æŒ‡å®šå‚æ•°è¡¨
+*	è¿” å›ž å€¼: æ— 
 *********************************************************************************************************
 */
 static  void  App_Printf(const char *fmt, ...)
 {
-    char  buf_str[200 + 1]; /* ÌØ±ð×¢Òâ£¬Èç¹ûprintfµÄ±äÁ¿½Ï¶à£¬×¢Òâ´Ë¾Ö²¿±äÁ¿µÄ´óÐ¡ÊÇ·ñ¹»ÓÃ */
+    char  buf_str[200 + 1];/* ç‰¹åˆ«æ³¨æ„ï¼Œå¦‚æžœprintfçš„å˜é‡è¾ƒå¤šï¼Œæ³¨æ„æ­¤å±€éƒ¨å˜é‡çš„å¤§å°æ˜¯å¦å¤Ÿç”¨ */
     va_list   v_args;
 
 
@@ -700,7 +662,7 @@ static  void  App_Printf(const char *fmt, ...)
                                   v_args);
     va_end(v_args);
 
-	/* »¥³â²Ù×÷ */
+	/* äº’æ–¥æ“ä½œ */
     tx_mutex_get(&AppPrintfSemp, TX_WAIT_FOREVER);
 
     printf("%s", buf_str);
@@ -710,27 +672,27 @@ static  void  App_Printf(const char *fmt, ...)
 
 /*
 *********************************************************************************************************
-*	º¯ Êý Ãû: DispTaskInfo
-*	¹¦ÄÜËµÃ÷: ½«uCOS-IIIÈÎÎñÐÅÏ¢Í¨¹ý´®¿Ú´òÓ¡³öÀ´
-*	ÐÎ    ²Î £ºÎÞ
-*	·µ »Ø Öµ: ÎÞ
+*	å‡½ æ•° å: DispTaskInfo
+*	åŠŸèƒ½è¯´æ˜Ž: å°†uCOS-IIIä»»åŠ¡ä¿¡æ¯é€šè¿‡ä¸²å£æ‰“å°å‡ºæ¥
+*	å½¢    å‚ ï¼šæ— 
+*	è¿” å›ž å€¼: æ— 
 *********************************************************************************************************
 */
 
 static void DispTaskInfo(void)
 {
-	TX_THREAD      *p_tcb;	        /* ¶¨ÒåÒ»¸öÈÎÎñ¿ØÖÆ¿éÖ¸Õë */
+	TX_THREAD      *p_tcb;	        /* å®šä¹‰ä¸€ä¸ªä»»åŠ¡æŽ§åˆ¶å—æŒ‡é’ˆ */
 
     p_tcb = &AppTaskStartTCB;
 	
-	/* ´òÓ¡±êÌâ */
+	/* æ‰“å°æ ‡é¢˜ */
 	App_Printf("===============================================================\r\n");
 	App_Printf("OS CPU Usage = %5.2f%%\r\n", OSCPUUsage);
 	App_Printf("===============================================================\r\n");
-	App_Printf(" ÈÎÎñÓÅÏÈ¼¶ ÈÎÎñÕ»´óÐ¡ µ±Ç°Ê¹ÓÃÕ»  ×î´óÕ»Ê¹ÓÃ   ÈÎÎñÃû\r\n");
+	App_Printf(" ä»»åŠ¡ä¼˜å…ˆçº§ ä»»åŠ¡æ ˆå¤§å° å½“å‰ä½¿ç”¨æ ˆ  æœ€å¤§æ ˆä½¿ç”¨   ä»»åŠ¡å\r\n");
 	App_Printf("   Prio     StackSize   CurStack    MaxStack   Taskname\r\n");
 
-	/* ±éÀúÈÎÎñ¿ØÖÆ¿éÁÐ?TCB list)£¬´òÓ¡ËùÓÐµÄÈÎÎñµÄÓÅÏÈ¼¶ºÍÃû?*/
+	/* éåŽ†ä»»åŠ¡æŽ§åˆ¶å—åˆ—?TCB list)ï¼Œæ‰“å°æ‰€æœ‰çš„ä»»åŠ¡çš„ä¼˜å…ˆçº§å’Œå?*/
 	while (p_tcb != (TX_THREAD *)0) 
 	{
 		App_Printf("   %2d        %5d      %5d       %5d      %s\r\n", 
@@ -750,16 +712,15 @@ static void DispTaskInfo(void)
 /*******************************************************************************
   * @FunctionName: TimerCallback
   * @Author:       trx
-  * @DateTime:     2022Äê6ÔÂ23ÈÕ21:04:39 
-  * @Purpose:      ÂÖËÙÊý¾Ý¶ÁÈ¡£¬Èí¼þ¶¨Ê±Æ÷»Øµ÷º¯Êý
+  * @DateTime:     2022å¹´6æœˆ23æ—¥21:04:39 
+  * @Purpose:      è½®é€Ÿæ•°æ®è¯»å–ï¼Œè½¯ä»¶å®šæ—¶å™¨å›žè°ƒå‡½æ•°
   * @param:        thread_input
   * @return:       none
 *******************************************************************************/
 void TimerCallback(ULONG thread_input)
 {
-	/* ´øÑÓ³Ù²ÎÊý£¬ÇÒÉèÖÃ´óÓÚ0£¬¶¼²»ÒªÔÚ¶¨Ê±×éµÄ»Øµ÷º¯ÊýÀïÃæµ÷ÓÃ */
-	//App_Printf("%.1fm/s\r\n",Rotation_Sensor_Get(24,0.464));/* 1000HZ·½²¨ÏÂÓ¦¸Ã121.41m/s */
+	/* å¸¦å»¶è¿Ÿå‚æ•°ï¼Œä¸”è®¾ç½®å¤§äºŽ0ï¼Œéƒ½ä¸è¦åœ¨å®šæ—¶ç»„çš„å›žè°ƒå‡½æ•°é‡Œé¢è°ƒç”¨ */
+	//App_Printf("%.1fm/s\r\n",Rotation_Sensor_Get(24,0.464));/* 1000HZæ–¹æ³¢ä¸‹åº”è¯¥121.41m/s */
 }
-
 
 

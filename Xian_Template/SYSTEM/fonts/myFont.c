@@ -2,9 +2,9 @@
 *---------------------------------------------------------------
 *                        Lvgl Font Tool                         
 *                                                               
-* 注:使用unicode编码                                              
-* 注:本字体文件由Lvgl Font Tool V0.4 生成                          
-* 作者:阿里(qq:617622104)                                         
+* �?使用unicode编码                                              
+* �?本字体文件由Lvgl Font Tool V0.4 生成                          
+* 作�?阿里(qq:617622104)                                         
 *---------------------------------------------------------------
 */
 
@@ -38,13 +38,13 @@ static x_header_t __g_xbf_hd = {
 };
 
 
-static uint8_t __g_font_buf[189];//如bin文件存在SPI FLASH可使用此buff
+static uint8_t __g_font_buf[1152];//如bin文件存在SPI FLASH可使用此buff
 
 
 static uint8_t *__user_font_getdata(int offset, int size){
     //如字模保存在SPI FLASH, SPIFLASH_Read(__g_font_buf,offset,size);
-    //如字模已加载到SDRAM,直接返回偏移地址即可如:return (uint8_t*)(sdram_fontddr+offset);
-	sf_ReadBuffer(__g_font_buf, 0x00+offset,size);
+    sf_ReadBuffer(__g_font_buf,offset,size);
+    //如字模已加载到SDRAM,直接返回偏移地址即可，return (uint8_t*)(sdram_fontddr+offset);
     return __g_font_buf;
 }
 
@@ -84,13 +84,13 @@ static bool __user_font_get_glyph_dsc(const lv_font_t * font, lv_font_glyph_dsc_
 }
 
 
-//微软雅黑,Regular,12
-//字模高度：21
+//楷体,Regular,36
+//字模高度�?8
 //XBF字体,外部bin文件
-lv_font_t myFont = {
+const lv_font_t myFont = {
     .get_glyph_bitmap = __user_font_get_bitmap,
     .get_glyph_dsc = __user_font_get_glyph_dsc,
-    .line_height = 21,
+    .line_height = 48,
     .base_line = 0,
 };
 

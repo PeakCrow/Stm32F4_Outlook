@@ -1,15 +1,15 @@
 /*
 *********************************************************************************************************
 *
-*	Ä£¿éÃû³Æ : HAL¿âÊ±»ù
-*	ÎÄ¼şÃû³Æ : stm32f4xx_hal_timbase_tim.c
-*	°æ    ±¾ : V1.0
-*	Ëµ    Ã÷ : ÓÃÓÚÎªHAL¿âÌá¹©Ê±¼ä»ù×¼
-*	ĞŞ¸Ä¼ÇÂ¼ :
-*		°æ±¾ºÅ  ÈÕÆÚ         ×÷Õß       ËµÃ÷
-*		V1.0    2018-07-29  Eric2013   ÕıÊ½·¢²¼
+*	æ¨¡å—åç§° : HALåº“æ—¶åŸº
+*	æ–‡ä»¶åç§° : stm32f4xx_hal_timbase_tim.c
+*	ç‰ˆ    æœ¬ : V1.0
+*	è¯´    æ˜ : ç”¨äºä¸ºHALåº“æä¾›æ—¶é—´åŸºå‡†
+*	ä¿®æ”¹è®°å½• :
+*		ç‰ˆæœ¬å·  æ—¥æœŸ         ä½œè€…       è¯´æ˜
+*		V1.0    2018-07-29  Eric2013   æ­£å¼å‘å¸ƒ
 *
-*	Copyright (C), 2018-2030, °²¸»À³µç×Ó www.armfly.com
+*	Copyright (C), 2018-2030, å®‰å¯Œè±ç”µå­ www.armfly.com
 *
 *********************************************************************************************************
 */
@@ -19,17 +19,17 @@
 #include "tx_thread.h"
 
 
-/* ²ÉÓÃTIM7·½°¸»òÕßRTX5ÄÚºËÊ±ÖÓ·½°¸ */
+/* é‡‡ç”¨TIM7æ–¹æ¡ˆæˆ–è€…RTX5å†…æ ¸æ—¶é’Ÿæ–¹æ¡ˆ */
 #if 0
 
 TIM_HandleTypeDef   TimHandle = {0};
 	
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: System_Init
-*	¹¦ÄÜËµÃ÷: ÎªHAL¿âÅäÖÃ1msµÄÊ±¼ä»ù×¼£¬´Ëº¯Êı»á±»HAL_InitºÍHAL_RCC_ClockConfigµ÷ÓÃ
-*	ĞÎ    ²Î£ºTickPriority  ¶¨Ê±Æ÷ÓÅÏÈ¼¶
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: System_Init
+*	åŠŸèƒ½è¯´æ˜: ä¸ºHALåº“é…ç½®1msçš„æ—¶é—´åŸºå‡†ï¼Œæ­¤å‡½æ•°ä¼šè¢«HAL_Initå’ŒHAL_RCC_ClockConfigè°ƒç”¨
+*	å½¢    å‚ï¼šTickPriority  å®šæ—¶å™¨ä¼˜å…ˆçº§
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 HAL_StatusTypeDef HAL_InitTick (uint32_t TickPriority)
@@ -41,18 +41,18 @@ HAL_StatusTypeDef HAL_InitTick (uint32_t TickPriority)
 	uint32_t              pFLatency;
 
 	
-	/* ¸´Î»¶¨Ê±Æ÷7 */
+	/* å¤ä½å®šæ—¶å™¨7 */
 	TimHandle.Instance = TIM7;
 	if(HAL_TIM_Base_DeInit(&TimHandle) != HAL_OK)
 	{
 		Error_Handler(__FILE__, __LINE__);
 	}
 	
-	/* ÉèÖÃTIM7µÄÖĞ¶ÏÓÅÏÈ¼¶²¢Ê¹ÄÜ */
+	/* è®¾ç½®TIM7çš„ä¸­æ–­ä¼˜å…ˆçº§å¹¶ä½¿èƒ½ */
 	HAL_NVIC_SetPriority(TIM7_IRQn, 5 ,0U);
 	HAL_NVIC_EnableIRQ(TIM7_IRQn);
 
-	/* Ê¹ÄÜTIM7Ê±ÖÓ */
+	/* ä½¿èƒ½TIM7æ—¶é’Ÿ */
 	__HAL_RCC_TIM7_CLK_ENABLE();
 
 	/*-----------------------------------------------------------------------
@@ -65,22 +65,22 @@ HAL_StatusTypeDef HAL_InitTick (uint32_t TickPriority)
         D2 APB2 Prescaler         = 2 (APB2 Clock  100MHz)
         D3 APB4 Prescaler         = 2 (APB4 Clock  100MHz)
 
-        ÒòÎªAPB1 prescaler != 1, ËùÒÔ APB1ÉÏµÄTIMxCLK = APB1 x 2 = 200MHz;
-        ÒòÎªAPB2 prescaler != 1, ËùÒÔ APB2ÉÏµÄTIMxCLK = APB2 x 2 = 200MHz;
-        APB4ÉÏÃæµÄTIMxCLKÃ»ÓĞ·ÖÆµ£¬ËùÒÔ¾ÍÊÇ100MHz;
+        å› ä¸ºAPB1 prescaler != 1, æ‰€ä»¥ APB1ä¸Šçš„TIMxCLK = APB1 x 2 = 200MHz;
+        å› ä¸ºAPB2 prescaler != 1, æ‰€ä»¥ APB2ä¸Šçš„TIMxCLK = APB2 x 2 = 200MHz;
+        APB4ä¸Šé¢çš„TIMxCLKæ²¡æœ‰åˆ†é¢‘ï¼Œæ‰€ä»¥å°±æ˜¯100MHz;
 
-        APB1 ¶¨Ê±Æ÷ÓĞ TIM2, TIM3 ,TIM4, TIM5, TIM6, TIM7, TIM12, TIM13, TIM14£¬LPTIM1
-        APB2 ¶¨Ê±Æ÷ÓĞ TIM1, TIM8 , TIM15, TIM16£¬TIM17
+        APB1 å®šæ—¶å™¨æœ‰ TIM2, TIM3 ,TIM4, TIM5, TIM6, TIM7, TIM12, TIM13, TIM14ï¼ŒLPTIM1
+        APB2 å®šæ—¶å™¨æœ‰ TIM1, TIM8 , TIM15, TIM16ï¼ŒTIM17
 
-        APB4 ¶¨Ê±Æ÷ÓĞ LPTIM2£¬LPTIM3£¬LPTIM4£¬LPTIM5
+        APB4 å®šæ—¶å™¨æœ‰ LPTIM2ï¼ŒLPTIM3ï¼ŒLPTIM4ï¼ŒLPTIM5
 	----------------------------------------------------------------------- */
-	/* »ñÈ¡Ê±ÖÓÅäÖÃ */
+	/* è·å–æ—¶é’Ÿé…ç½® */
 	HAL_RCC_GetClockConfig(&clkconfig, &pFLatency);
 
-	/* »ñÈ¡APB1Ê±ÖÓ */
+	/* è·å–APB1æ—¶é’Ÿ */
 	uwAPB1Prescaler = clkconfig.APB1CLKDivider;
 
-	/* »ñµÃTIM7Ê±ÖÓ */
+	/* è·å¾—TIM7æ—¶é’Ÿ */
 	if (uwAPB1Prescaler == RCC_HCLK_DIV1) 
 	{
 		uwTimclock = HAL_RCC_GetPCLK1Freq();
@@ -90,7 +90,7 @@ HAL_StatusTypeDef HAL_InitTick (uint32_t TickPriority)
 		uwTimclock = 2*HAL_RCC_GetPCLK1Freq();
 	}
 
-	/* TIM7·ÖÆµµ½1MHz */
+	/* TIM7åˆ†é¢‘åˆ°1MHz */
 	uwPrescalerValue = (uint32_t) ((uwTimclock / 1000000U) - 1U);
 
 	/* TIM7CLK = uwTimclock / (Period + 1) / (Prescaler + 1) = 1KHz */
@@ -100,20 +100,20 @@ HAL_StatusTypeDef HAL_InitTick (uint32_t TickPriority)
 	TimHandle.Init.CounterMode = TIM_COUNTERMODE_UP;
 	if(HAL_TIM_Base_Init(&TimHandle) == HAL_OK)
 	{
-		/* Æô¶¯TIM7 */
+		/* å¯åŠ¨TIM7 */
 		return HAL_TIM_Base_Start_IT(&TimHandle);
 	}
 
-	/* ·µ»Ø´íÎó */
+	/* è¿”å›é”™è¯¯ */
 	return HAL_ERROR;
 }
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: HAL_SuspendTick
-*	¹¦ÄÜËµÃ÷: ¹Ø±ÕTIM7
-*	ĞÎ    ²Î: ÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: HAL_SuspendTick
+*	åŠŸèƒ½è¯´æ˜: å…³é—­TIM7
+*	å½¢    å‚: æ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 void HAL_SuspendTick(void)
@@ -123,10 +123,10 @@ void HAL_SuspendTick(void)
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: HAL_ResumeTick
-*	¹¦ÄÜËµÃ÷: Ê¹ÄÜTIM7
-*	ĞÎ    ²Î: ÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: HAL_ResumeTick
+*	åŠŸèƒ½è¯´æ˜: ä½¿èƒ½TIM7
+*	å½¢    å‚: æ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 void HAL_ResumeTick(void)
@@ -136,10 +136,10 @@ void HAL_ResumeTick(void)
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: TIM7_IRQHandler
-*	¹¦ÄÜËµÃ÷: TIM7¶¨Ê±Æ÷ÖĞ¶Ï·şÎñ³ÌĞò
-*	ĞÎ    ²Î: ÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: TIM7_IRQHandler
+*	åŠŸèƒ½è¯´æ˜: TIM7å®šæ—¶å™¨ä¸­æ–­æœåŠ¡ç¨‹åº
+*	å½¢    å‚: æ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 extern void _tx_execution_isr_exit(void);
@@ -156,11 +156,11 @@ void TIM7_IRQHandler(void)
 #else
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: HAL_Delay
-*	¹¦ÄÜËµÃ÷: ÖØ¶¨ÏòºÁÃëÑÓ³Ùº¯Êı¡£Ìæ»»HALÖĞµÄº¯Êı¡£ÒòÎªHALÖĞµÄÈ±Ê¡º¯ÊıÒÀÀµÓÚSystickÖĞ¶Ï£¬Èç¹ûÔÚUSB¡¢SD¿¨
-*             ÖĞ¶ÏÖĞÓĞÑÓ³Ùº¯Êı£¬Ôò»áËøËÀ¡£Ò²¿ÉÒÔÍ¨¹ıº¯ÊıHAL_NVIC_SetPriorityÌáÉıSystickÖĞ¶Ï
-*	ĞÎ    ²Î: ÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: HAL_Delay
+*	åŠŸèƒ½è¯´æ˜: é‡å®šå‘æ¯«ç§’å»¶è¿Ÿå‡½æ•°ã€‚æ›¿æ¢HALä¸­çš„å‡½æ•°ã€‚å› ä¸ºHALä¸­çš„ç¼ºçœå‡½æ•°ä¾èµ–äºSystickä¸­æ–­ï¼Œå¦‚æœåœ¨USBã€SDå¡
+*             ä¸­æ–­ä¸­æœ‰å»¶è¿Ÿå‡½æ•°ï¼Œåˆ™ä¼šé”æ­»ã€‚ä¹Ÿå¯ä»¥é€šè¿‡å‡½æ•°HAL_NVIC_SetPriorityæå‡Systickä¸­æ–­
+*	å½¢    å‚: æ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 void HAL_Delay(uint32_t Delay)
@@ -183,7 +183,7 @@ uint32_t HAL_GetTick (void)
                 return ((uint32_t)_tx_time_get());
         }
 
-        /* Èç¹ûThreadX»¹Ã»ÓĞÔËĞĞ£¬²ÉÓÃÏÂÃæ·½Ê½ */
+        /* å¦‚æœThreadXè¿˜æ²¡æœ‰è¿è¡Œï¼Œé‡‡ç”¨ä¸‹é¢æ–¹å¼ */
         for (i = (SystemCoreClock >> 14U); i > 0U; i--)
         {
                 __NOP(); __NOP(); __NOP(); __NOP(); __NOP(); __NOP();
@@ -194,4 +194,4 @@ uint32_t HAL_GetTick (void)
 }
 #endif
 
-/***************************** °²¸»À³µç×Ó www.armfly.com (END OF FILE) *********************************/
+/***************************** å®‰å¯Œè±ç”µå­ www.armfly.com (END OF FILE) *********************************/

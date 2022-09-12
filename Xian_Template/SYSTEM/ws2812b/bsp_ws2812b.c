@@ -6,8 +6,8 @@ static uint16_t g_Ws_2812b_lamp_buf[RESET_WORD+24*LED_NUM]={0};
 /*******************************************************************************
   * @FunctionName: bsp_InitWs2812b
   * @Author:       trx
-  * @DateTime:     2022Äê6ÔÂ12ÈÕ 18:45:41 
-  * @Purpose:      ¿Éµ÷µÆws2812b³õÊ¼»¯
+  * @DateTime:     2022å¹´6æœˆ12æ—¥ 18:45:41 
+  * @Purpose:      å¯è°ƒç¯ws2812båˆå§‹åŒ–
   * @param:        void               
   * @return:       none
 *******************************************************************************/
@@ -19,8 +19,8 @@ void bsp_InitWs2812b(void)
 /*******************************************************************************
   * @FunctionName: Ws2812b_Set_resetdata
   * @Author:       trx
-  * @DateTime:     2022Äê6ÔÂ12ÈÕ 16:45:37 
-  * @Purpose:      ½«¿Éµ÷ledµÆµÄ¸´Î»Êı¾İÌî³ä½øÈ¥
+  * @DateTime:     2022å¹´6æœˆ12æ—¥ 16:45:37 
+  * @Purpose:      å°†å¯è°ƒledç¯çš„å¤ä½æ•°æ®å¡«å……è¿›å»
   * @param:        void
   * @return:       none
 *******************************************************************************/
@@ -38,8 +38,8 @@ void Ws2812b_Set_resetdata(void)
 /*******************************************************************************
   * @FunctionName: Ws2812b_Set_Alloff
   * @Author:       trx
-  * @DateTime:     2022Äê6ÔÂ12ÈÕ 17:17:09 
-  * @Purpose:      ½«ËùÓĞµÄ¿Éµ÷µÆ¹Ø±Õ
+  * @DateTime:     2022å¹´6æœˆ12æ—¥ 17:17:09 
+  * @Purpose:      å°†æ‰€æœ‰çš„å¯è°ƒç¯å…³é—­
   * @param:        void               
   * @return:       none
 *******************************************************************************/
@@ -51,11 +51,11 @@ void Ws2812b_Set_Alloff(void)
 /*******************************************************************************
   * @FunctionName: Ws2812b_Rgb_SetColor
   * @Author:       trx
-  * @DateTime:     2022Äê6ÔÂ12ÈÕ 16:47:24 
-  * @Purpose:      ½«³ıÁË¸´Î»Êı¾İÍâµÄËùÓĞµÆ¹âµÄÊı¾İ¶¼ÅäÖÃÎªÄ³¸öÑÕÉ«
-  * @param:        _R£ºÈıÔ­É«ÖĞµÄºìÉ«
-  * @param:        _G£ºÈıÔ­É«ÖĞµÄÂÌÉ«
-  * @param:        _B£ºÈıÔ­É«ÖĞµÄÀ¶É«
+  * @DateTime:     2022å¹´6æœˆ12æ—¥ 16:47:24 
+  * @Purpose:      å°†é™¤äº†å¤ä½æ•°æ®å¤–çš„æ‰€æœ‰ç¯å…‰çš„æ•°æ®éƒ½é…ç½®ä¸ºæŸä¸ªé¢œè‰²
+  * @param:        _Rï¼šä¸‰åŸè‰²ä¸­çš„çº¢è‰²
+  * @param:        _Gï¼šä¸‰åŸè‰²ä¸­çš„ç»¿è‰²
+  * @param:        _Bï¼šä¸‰åŸè‰²ä¸­çš„è“è‰²
   * @return:       none
 *******************************************************************************/
 void Ws2812b_Rgb_SetColor(uint8_t _R,uint8_t _G,uint8_t _B)
@@ -81,13 +81,13 @@ void Ws2812b_Rgb_SetColor(uint8_t _R,uint8_t _G,uint8_t _B)
 /*******************************************************************************
   * @FunctionName: Ws2812b_Rgb_SetIndexColor
   * @Author:       trx
-  * @DateTime:     2022Äê6ÔÂ12ÈÕ 17:18:52 
-  * @Purpose:      µãÁÁµÚ_index¸öµÆ£¬ÑÕÉ«¿ÉÒÔÖ¸¶¨
-  * @param:        _index£ºÒªµãÁÁµÄµÆµÄĞòºÅ
-  * @param:        _R£ºÈıÔ­É«ÖĞµÄºìÉ«
-  * @param:        _G£ºÈıÔ­É«ÖĞµÄÂÌÉ«
-  * @param:        _B£ºÈıÔ­É«ÖĞµÄÀ¶É«
-  * @return:       0£º¿Éµ÷µÆµÄË÷ÒıºÅ³¬ÏŞ£»1£ºÎ´³¬ÏŞ
+  * @DateTime:     2022å¹´6æœˆ12æ—¥ 17:18:52 
+  * @Purpose:      ç‚¹äº®ç¬¬_indexä¸ªç¯ï¼Œé¢œè‰²å¯ä»¥æŒ‡å®š
+  * @param:        _indexï¼šè¦ç‚¹äº®çš„ç¯çš„åºå·
+  * @param:        _Rï¼šä¸‰åŸè‰²ä¸­çš„çº¢è‰²
+  * @param:        _Gï¼šä¸‰åŸè‰²ä¸­çš„ç»¿è‰²
+  * @param:        _Bï¼šä¸‰åŸè‰²ä¸­çš„è“è‰²
+  * @return:       0ï¼šå¯è°ƒç¯çš„ç´¢å¼•å·è¶…é™ï¼›1ï¼šæœªè¶…é™
 *******************************************************************************/
 uint8_t Ws2812b_Rgb_SetIndexColor(uint8_t _index,uint8_t _R,uint8_t _G,uint8_t _B)
 {
@@ -113,14 +113,14 @@ uint8_t Ws2812b_Rgb_SetIndexColor(uint8_t _index,uint8_t _R,uint8_t _G,uint8_t _
 /*******************************************************************************
   * @FunctionName: Ws2812b_Rgb_SetIndexPartColor
   * @Author:       trx
-  * @DateTime:     2022Äê6ÔÂ12ÈÕ 17:31:51 
-  * @Purpose:      µãÁÁÒ»¶ÎµÆ£¬²¢ÇÒ¿ÉÒÔÖ¸¶¨ÑÕÉ«
-  * @param:        _start_index£ºÒ»¶ÎµÆµÄÆğÊ¼ĞòºÅ
-  * @param:        _end_index£ºÒ»¶ÎµÆµÄÄ©Î²ĞòºÅ
-  * @param:        _R£ºÈıÔ­É«ÖĞµÄºìÉ«
-  * @param:        _G£ºÈıÔ­É«ÖĞµÄÂÌÉ«
-  * @param:        _B£ºÈıÔ­É«ÖĞµÄÀ¶É«
-  * @return:       0£º¿Éµ÷µÆµÄË÷ÒıºÅ³¬ÏŞ£»1£ºÎ´³¬ÏŞ
+  * @DateTime:     2022å¹´6æœˆ12æ—¥ 17:31:51 
+  * @Purpose:      ç‚¹äº®ä¸€æ®µç¯ï¼Œå¹¶ä¸”å¯ä»¥æŒ‡å®šé¢œè‰²
+  * @param:        _start_indexï¼šä¸€æ®µç¯çš„èµ·å§‹åºå·
+  * @param:        _end_indexï¼šä¸€æ®µç¯çš„æœ«å°¾åºå·
+  * @param:        _Rï¼šä¸‰åŸè‰²ä¸­çš„çº¢è‰²
+  * @param:        _Gï¼šä¸‰åŸè‰²ä¸­çš„ç»¿è‰²
+  * @param:        _Bï¼šä¸‰åŸè‰²ä¸­çš„è“è‰²
+  * @return:       0ï¼šå¯è°ƒç¯çš„ç´¢å¼•å·è¶…é™ï¼›1ï¼šæœªè¶…é™
 *******************************************************************************/
 uint8_t Ws2812b_Rgb_SetIndexPartColor(uint8_t _start_index,uint8_t _end_index,uint8_t _R,uint8_t _G,uint8_t _B)
 {
@@ -151,24 +151,24 @@ uint8_t Ws2812b_Rgb_SetIndexPartColor(uint8_t _start_index,uint8_t _end_index,ui
 /*******************************************************************************
   * @FunctionName: Ws2812b_Gradient_Lamp
   * @Author:       trx
-  * @DateTime:     2022Äê6ÔÂ12ÈÕ 16:49:00 
-  * @Purpose:      ½¥±äÉ«Ğ§¹û
-  * @param:        _color0£º½¥±äÉ«¹ı³ÌµÄÆğÊ¼ÑÕÉ«
-  * @param:        _color1£º½¥±äÉ«¹ı³ÌµÄ½áÊøÑÕÉ«
-  * @param:        _speed£º½¥±äÉ«¹ı³ÌÖĞµÄÃ¿¸öÑÕÉ«µÄÇĞ»»Ê±¼ä
+  * @DateTime:     2022å¹´6æœˆ12æ—¥ 16:49:00 
+  * @Purpose:      æ¸å˜è‰²æ•ˆæœ
+  * @param:        _color0ï¼šæ¸å˜è‰²è¿‡ç¨‹çš„èµ·å§‹é¢œè‰²
+  * @param:        _color1ï¼šæ¸å˜è‰²è¿‡ç¨‹çš„ç»“æŸé¢œè‰²
+  * @param:        _speedï¼šæ¸å˜è‰²è¿‡ç¨‹ä¸­çš„æ¯ä¸ªé¢œè‰²çš„åˆ‡æ¢æ—¶é—´
   * @return:       none
 *******************************************************************************/
 void Ws2812b_Gradient_Lamp(unsigned long _color0, unsigned long _color1,uint16_t _speed)
 {
-	unsigned char Red0, Green0, Blue0;  // ÆğÊ¼ÈıÔ­É«
-	uint8_t 	  Red1, Green1, Blue1;  // ½á¹ûÈıÔ­É«
-	int			  RedMinus, GreenMinus, BlueMinus;	// ÑÕÉ«²î£¨color1 - color0£©
-	unsigned char NStep; 							// ĞèÒª¼¸²½
-	float		  RedStep, GreenStep, BlueStep;		// ¸÷É«²½½øÖµ
+	unsigned char Red0, Green0, Blue0;  // èµ·å§‹ä¸‰åŸè‰²
+	uint8_t 	  Red1, Green1, Blue1;  // ç»“æœä¸‰åŸè‰²
+	int			  RedMinus, GreenMinus, BlueMinus;	// é¢œè‰²å·®ï¼ˆcolor1 - color0ï¼‰
+	unsigned char NStep; 							// éœ€è¦å‡ æ­¥
+	float		  RedStep, GreenStep, BlueStep;		// å„è‰²æ­¥è¿›å€¼
 	unsigned char i;
 
 	Ws2812b_Set_resetdata();
-	// ÂÌ ºì À¶ ÈıÔ­É«·Ö½â
+	// ç»¿ çº¢ è“ ä¸‰åŸè‰²åˆ†è§£
 	Red0   = _color0>>8;
 	Green0 = _color0>>16;
 	Blue0  = _color0;
@@ -177,21 +177,21 @@ void Ws2812b_Gradient_Lamp(unsigned long _color0, unsigned long _color1,uint16_t
 	Green1 = _color1>>16;
 	Blue1  = _color1;
 	
-	// ¼ÆËãĞèÒª¶àÉÙ²½£¨È¡²îÖµµÄ×î´óÖµ£©
+	// è®¡ç®—éœ€è¦å¤šå°‘æ­¥ï¼ˆå–å·®å€¼çš„æœ€å¤§å€¼ï¼‰
 	RedMinus   = Red1 - Red0; 
 	GreenMinus = Green1 - Green0; 
 	BlueMinus  = Blue1 - Blue0;
 	
-	//ÅĞ¶ÏÁ½¸ö¾ø¶ÔÖµ´óĞ¡¡£¡£a>bÎªÕæ£¬Ôò=a£»·ñÔò=b
+	//åˆ¤æ–­ä¸¤ä¸ªç»å¯¹å€¼å¤§å°ã€‚ã€‚a>bä¸ºçœŸï¼Œåˆ™=aï¼›å¦åˆ™=b
 	NStep = ( abs(RedMinus) > abs(GreenMinus) ) ? abs(RedMinus):abs(GreenMinus); 
 	NStep = ( NStep > abs(BlueMinus) ) ? NStep:abs(BlueMinus);
 	
-	// ¼ÆËã³ö¸÷É«²½½øÖµ
+	// è®¡ç®—å‡ºå„è‰²æ­¥è¿›å€¼
 	RedStep   = (float)RedMinus   / NStep;
 	GreenStep = (float)GreenMinus / NStep;
 	BlueStep  = (float)BlueMinus  / NStep;
 	
-	// ½¥±ä¿ªÊ¼
+	// æ¸å˜å¼€å§‹
 	for(i=0; i<NStep; i++)
 	{
 		Red1   = Red0   + (int)(RedStep   * i);
@@ -207,13 +207,13 @@ void Ws2812b_Gradient_Lamp(unsigned long _color0, unsigned long _color1,uint16_t
 /*******************************************************************************
   * @FunctionName: Ws2812b_Run_Water_Lamp
   * @Author:       trx
-  * @DateTime:     2022Äê6ÔÂ12ÈÕ 18:08:01 
-  * @Purpose:      Á÷Ë®µÆµÆĞ§£¬ÒÀ´ÎµãÁÁ£¬µ«ÊÇµãÁÁ¹ıµÄ»áÏ¨Ãğ
-  * @param:        _R£ºÈıÔ­É«ÖĞµÄºìÉ«
-  * @param:        _G£ºÈıÔ­É«ÖĞµÄÂÌÉ«
-  * @param:        _B£ºÈıÔ­É«ÖĞµÄÀ¶É«
-  * @param:        _speed£ºÒÀ´ÎµãÁÁµÄÊ±¼ä¼ä¸ô
-  * @param:        _flag£ºÁ÷Ë®µÆµãÁÁĞ§¹ûÑ¡Ôñ
+  * @DateTime:     2022å¹´6æœˆ12æ—¥ 18:08:01 
+  * @Purpose:      æµæ°´ç¯ç¯æ•ˆï¼Œä¾æ¬¡ç‚¹äº®ï¼Œä½†æ˜¯ç‚¹äº®è¿‡çš„ä¼šç†„ç­
+  * @param:        _Rï¼šä¸‰åŸè‰²ä¸­çš„çº¢è‰²
+  * @param:        _Gï¼šä¸‰åŸè‰²ä¸­çš„ç»¿è‰²
+  * @param:        _Bï¼šä¸‰åŸè‰²ä¸­çš„è“è‰²
+  * @param:        _speedï¼šä¾æ¬¡ç‚¹äº®çš„æ—¶é—´é—´éš”
+  * @param:        _flagï¼šæµæ°´ç¯ç‚¹äº®æ•ˆæœé€‰æ‹©
   * @return:       none
 *******************************************************************************/
 void Ws2812b_Run_Water_Lamp(uint8_t _R,uint8_t _G,uint8_t _B,uint16_t _speed,run_lamp_state _flag)

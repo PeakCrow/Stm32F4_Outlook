@@ -3,7 +3,7 @@
 
 
 
-#define SA            0x00 //Slave address µ¥¸öMLX90614Ê±µØÖ·Îª0x00,¶à¸öÊ±µØÖ·Ä¬ÈÏÎª0x5a
+#define SA            0x00 //Slave address å•ä¸ªMLX90614æ—¶åœ°å€ä¸º0x00,å¤šä¸ªæ—¶åœ°å€é»˜è®¤ä¸º0x5a
 #define EEPROM_ACCESS 0x20 //EEPROM access command
 #define RAM_TOBJ1     0x07 //To1 address in the eeprom
 

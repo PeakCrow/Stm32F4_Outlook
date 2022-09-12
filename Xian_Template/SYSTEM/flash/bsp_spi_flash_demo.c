@@ -2,8 +2,8 @@
 
 #include "bsp_spi_flash_demo.h"
 
-#define TEST_ADDR	0	/* ¶ÁĞ´²âÊÔµØÖ· */
-#define	TEST_SIZE	4096/* ¶ÁĞ´²âÊÔÊı¾İ´óĞ¡ */
+#define TEST_ADDR	0	/* è¯»å†™æµ‹è¯•åœ°å€ */
+#define	TEST_SIZE	4096/* è¯»å†™æµ‹è¯•æ•°æ®å¤§å° */
 
 
 
@@ -22,8 +22,8 @@ static uint8_t buf[TEST_SIZE];
 /*******************************************************************************
   * @FunctionName: sfReadTest
   * @Author:       trx
-  * @DateTime:     2022Äê4ÔÂ25ÈÕ21:57:20 
-  * @Purpose:      ²âÊÔ´®ĞĞflash¶ÁÈ¡ËÙ¶È£¬¶ÁÈ¡Õû¸ö´®ĞĞflashµÄÊı¾İ£¬×îºó´òÓ¡½á¹û
+  * @DateTime:     2022å¹´4æœˆ25æ—¥21:57:20 
+  * @Purpose:      æµ‹è¯•ä¸²è¡Œflashè¯»å–é€Ÿåº¦ï¼Œè¯»å–æ•´ä¸ªä¸²è¡Œflashçš„æ•°æ®ï¼Œæœ€åæ‰“å°ç»“æœ
   * @param:        void
   * @return:       none
 *******************************************************************************/
@@ -32,35 +32,35 @@ void sfReadTest(void)
 	uint16_t i;
 	int32_t iTime1,iTime2;
 
-	/* ÆğÊ¼µØÖ· = 0£¬Êı¾İ³¤¶ÈÎª256 */
-	iTime1 = bsp_GetRunTime();		/* ¼ÇÏÂ¿ªÊ¼Ê±¼ä */
+	/* èµ·å§‹åœ°å€ = 0ï¼Œæ•°æ®é•¿åº¦ä¸º256 */
+	iTime1 = bsp_GetRunTime();		/* è®°ä¸‹å¼€å§‹æ—¶é—´ */
 	sf_ReadBuffer(buf,TEST_ADDR,TEST_SIZE);
-	iTime2 = bsp_GetRunTime();		/* ¼ÇÏÂ½áÊøÊ±¼ä */
-	printf("¶Á´®ĞĞflash³É¹¦£¬Êı¾İÈçÏÂ£º\r\n");
+	iTime2 = bsp_GetRunTime();		/* è®°ä¸‹ç»“æŸæ—¶é—´ */
+	printf("è¯»ä¸²è¡ŒflashæˆåŠŸï¼Œæ•°æ®å¦‚ä¸‹ï¼š\r\n");
 
-	/* ´òÓ¡Êı¾İ */
+	/* æ‰“å°æ•°æ® */
 
 	for (i = 0; i < TEST_SIZE; ++i)
 		{
 			if ((i > 0) && (i % 16) == 0)
 				{
-					printf(" - \r\n");	/* Ã¿ĞĞÏÔÊ¾16×Ö½ÚÊı¾İ */
+					printf(" - \r\n");	/* æ¯è¡Œæ˜¾ç¤º16å­—èŠ‚æ•°æ® */
 					if((i > 0) && (i % 256) == 0)
-						printf("\r\n");	/* Ã¿¸öpage½øĞĞ»»ĞĞ£¬Ò»¸öÉÈÇøÓĞ16¸öpage */
+						printf("\r\n");	/* æ¯ä¸ªpageè¿›è¡Œæ¢è¡Œï¼Œä¸€ä¸ªæ‰‡åŒºæœ‰16ä¸ªpage */
 				}
 			printf(" %02x",buf[i]);
 		}
 
-	/* ´òÓ¡¶ÁÈ¡ËÙ¶È */
+	/* æ‰“å°è¯»å–é€Ÿåº¦ */
 	printf(" - \r\n");
-	printf("Êı¾İ³¤¶È:%d×Ö½Ú£¬¶ÁÈ¡ºÄÊ±:%dms,¶ÁÈ¡ËÙ¶È:%d Bytes/s\r\n",TEST_SIZE,iTime2 - iTime1,(TEST_SIZE * 1000) / (iTime2 - iTime1));
+	printf("æ•°æ®é•¿åº¦:%då­—èŠ‚ï¼Œè¯»å–è€—æ—¶:%dms,è¯»å–é€Ÿåº¦:%d Bytes/s\r\n",TEST_SIZE,iTime2 - iTime1,(TEST_SIZE * 1000) / (iTime2 - iTime1));
 }
 
 /*******************************************************************************
   * @FunctionName: sfWriteTest
   * @Author:       trx
-  * @DateTime:     2022Äê4ÔÂ25ÈÕ22:15:30 
-  * @Purpose:      xĞ´´®ĞĞflash²âÊÔ
+  * @DateTime:     2022å¹´4æœˆ25æ—¥22:15:30 
+  * @Purpose:      xå†™ä¸²è¡Œflashæµ‹è¯•
   * @param:        void
   * @return:       none
 *******************************************************************************/
@@ -69,36 +69,36 @@ static void sfWriteTest(void)
 	uint16_t i;
 	int32_t iTime1,iTime2;
 
-	/* Ìî³ä²âÊÔ»º³åÇø */
+	/* å¡«å……æµ‹è¯•ç¼“å†²åŒº */
 	for (i = 0; i < TEST_SIZE; ++i)
 		{
 			buf[i] = i;
 		}
 	sf_EraseSector(TEST_ADDR);
-	/* Ğ´eeprom£¬ÆğÊ¼µØÖ· = 0£¬Êı¾İ³¤¶ÈÎª256 */
-	iTime1 = bsp_GetRunTime();	/* ¼ÇÏÂ¿ªÊ¼Ê±¼ä */
+	/* å†™eepromï¼Œèµ·å§‹åœ°å€ = 0ï¼Œæ•°æ®é•¿åº¦ä¸º256 */
+	iTime1 = bsp_GetRunTime();	/* è®°ä¸‹å¼€å§‹æ—¶é—´ */
 	if (sf_WriteBuffer(buf,TEST_ADDR,TEST_SIZE) == 0)
 		{
-			printf("Ğ´´®ĞĞflash³ö´í£¡\r\n");
+			printf("å†™ä¸²è¡Œflashå‡ºé”™ï¼\r\n");
 			return ;
 		}
 	else
 		{
-			iTime2 = bsp_GetRunTime();/* ¼ÇÏÂ½áÊøÊ±¼ä */
-			printf("Ğ´´®ĞĞflash³É¹¦£¡\r\n");
+			iTime2 = bsp_GetRunTime();/* è®°ä¸‹ç»“æŸæ—¶é—´ */
+			printf("å†™ä¸²è¡ŒflashæˆåŠŸï¼\r\n");
 		}
 
-	/* ´òÓ¡¶ÁÈ¡ËÙ¶È */
-	printf("Êı¾İ³¤¶È£º%d×Ö½Ú£¬Ğ´ºÄÊ±£º%dms£¬Ğ´ËÙ¶È£º%dB/s\r\n",TEST_SIZE,iTime2 - iTime1,(TEST_SIZE * 1000) / (iTime2 - iTime1));
+	/* æ‰“å°è¯»å–é€Ÿåº¦ */
+	printf("æ•°æ®é•¿åº¦ï¼š%då­—èŠ‚ï¼Œå†™è€—æ—¶ï¼š%dmsï¼Œå†™é€Ÿåº¦ï¼š%dB/s\r\n",TEST_SIZE,iTime2 - iTime1,(TEST_SIZE * 1000) / (iTime2 - iTime1));
 }
 
 
 /*******************************************************************************
   * @FunctionName: sfWriteAll
   * @Author:       trx
-  * @DateTime:     2022Äê4ÔÂ25ÈÕ22:17:03 
-  * @Purpose:      Ğ´´®ĞĞflashÈ«²¿Êı¾İ
-  * @param:        _ch£ºÊı¾İÄÚÈİ
+  * @DateTime:     2022å¹´4æœˆ25æ—¥22:17:03 
+  * @Purpose:      å†™ä¸²è¡Œflashå…¨éƒ¨æ•°æ®
+  * @param:        _chï¼šæ•°æ®å†…å®¹
   * @return:       none
 *******************************************************************************/
 void sfWriteAll(uint8_t _ch)
@@ -106,21 +106,21 @@ void sfWriteAll(uint8_t _ch)
 	uint16_t i;
 	int32_t iTime1,iTime2;
 
-	/* Ìî³ä²âÊÔ»º³åÇø */
+	/* å¡«å……æµ‹è¯•ç¼“å†²åŒº */
 
 	for (i = 0; i < TEST_SIZE; ++i)
 		{
 			buf[i] = _ch;
 		}
 
-	/* Ğ´eeprom£¬ÆğÊ¼µØÖ· = 0£¬Êı¾İ³¤¶ÈÎª256 */
-	iTime1 = bsp_GetRunTime();		/* ¼ÇÏÂ¿ªÊ¼Ê±¼ä */
-	/* 16M×Ö½Ú£¬2048¸öÉÈÇø */
+	/* å†™eepromï¼Œèµ·å§‹åœ°å€ = 0ï¼Œæ•°æ®é•¿åº¦ä¸º256 */
+	iTime1 = bsp_GetRunTime();		/* è®°ä¸‹å¼€å§‹æ—¶é—´ */
+	/* 16Må­—èŠ‚ï¼Œ2048ä¸ªæ‰‡åŒº */
 	for (i = 0; i < g_tSF.TotalSize / g_tSF.SectorSize / 2; ++i)
 		{
 			if(sf_WriteBuffer(buf,i * g_tSF.SectorSize,g_tSF.SectorSize) == 0)
 				{
-					printf("Ğ´´®ĞĞflash³ö´í£¡\r\n");
+					printf("å†™ä¸²è¡Œflashå‡ºé”™ï¼\r\n");
 					return;
 				}
 			printf("i: %d,	%d",i,g_tSF.TotalSize / g_tSF.SectorSize / 2);
@@ -129,16 +129,16 @@ void sfWriteAll(uint8_t _ch)
 					printf("\r\n");
 				}
 		}
-	iTime2 = bsp_GetRunTime();		/* ¼ÇÏÂ½áÊøÊ±¼ä */
+	iTime2 = bsp_GetRunTime();		/* è®°ä¸‹ç»“æŸæ—¶é—´ */
 
-	/* ´òÓ¡¶ÁÈ¡ËÙ¶È */
-	printf("Êı¾İ³¤¶È£º%dK×Ö½Ú£¬Ğ´ºÄÊ±£º%dms,Ğ´ËÙ¶È£º%dB/s\r\n",g_tSF.TotalSize / 1024,iTime2 - iTime1,(g_tSF.TotalSize * 1000) / (iTime2 - iTime1));
+	/* æ‰“å°è¯»å–é€Ÿåº¦ */
+	printf("æ•°æ®é•¿åº¦ï¼š%dKå­—èŠ‚ï¼Œå†™è€—æ—¶ï¼š%dms,å†™é€Ÿåº¦ï¼š%dB/s\r\n",g_tSF.TotalSize / 1024,iTime2 - iTime1,(g_tSF.TotalSize * 1000) / (iTime2 - iTime1));
 }
 /*******************************************************************************
   * @FunctionName: sfErase
   * @Author:       trx
-  * @DateTime:     2022Äê4ÔÂ25ÈÕ22:31:35 
-  * @Purpose:      ²Á³ı´®ĞĞflash²âÊÔ
+  * @DateTime:     2022å¹´4æœˆ25æ—¥22:31:35 
+  * @Purpose:      æ“¦é™¤ä¸²è¡Œflashæµ‹è¯•
   * @param:        void
   * @return:       none
 *******************************************************************************/
@@ -146,38 +146,38 @@ void sfErase(void)
 {
 	int32_t iTime1,iTime2;
 
-	iTime1 = bsp_GetRunTime();	/* ¼ÇÏÂ¿ªÊ¼Ê±¼ä */
+	iTime1 = bsp_GetRunTime();	/* è®°ä¸‹å¼€å§‹æ—¶é—´ */
 	sf_EraseChip();
-	iTime2 = bsp_GetRunTime();	/* ¼ÇÏÂ½áÊøÊ±¼ä */
+	iTime2 = bsp_GetRunTime();	/* è®°ä¸‹ç»“æŸæ—¶é—´ */
 
-	/* ´òÓ¡²Á³ıËÙ¶È */
-	printf("²Á³ı´®ĞĞflashÍê³É£¡ºÄÊ±£º%dms\r\n",iTime2 - iTime1);
+	/* æ‰“å°æ“¦é™¤é€Ÿåº¦ */
+	printf("æ“¦é™¤ä¸²è¡Œflashå®Œæˆï¼è€—æ—¶ï¼š%dms\r\n",iTime2 - iTime1);
 	return;
 }
 
 /*******************************************************************************
   * @FunctionName: sfViewData
   * @Author:       trx
-  * @DateTime:     2022Äê4ÔÂ25ÈÕ22:35:53 
-  * @Purpose:      ¶ÁÈ¡´®ĞĞflashÊı¾İ²¢ÏÔÊ¾£¬Ã¿´ÎÏÔÊ¾1KµÄÄÚÈİ
-  * @param:        _uiAddr:´®ĞĞflash¶ÁÈ¡Êı¾İµØÖ·
+  * @DateTime:     2022å¹´4æœˆ25æ—¥22:35:53 
+  * @Purpose:      è¯»å–ä¸²è¡Œflashæ•°æ®å¹¶æ˜¾ç¤ºï¼Œæ¯æ¬¡æ˜¾ç¤º1Kçš„å†…å®¹
+  * @param:        _uiAddr:ä¸²è¡Œflashè¯»å–æ•°æ®åœ°å€
   * @return:       none
 *******************************************************************************/
 void sfViewData(uint32_t _uiAddr)
 {
 	uint16_t i;
 
-	sf_ReadBuffer(buf,_uiAddr,1024);	/* ¶ÁÊı¾İ */
-	printf("µØÖ·£º0x%08X; Êı¾İ³¤¶È = 1024\r\n",_uiAddr);
+	sf_ReadBuffer(buf,_uiAddr,1024);	/* è¯»æ•°æ® */
+	printf("åœ°å€ï¼š0x%08X; æ•°æ®é•¿åº¦ = 1024\r\n",_uiAddr);
 
-	/* ´òÓ¡Êı¾İ */
+	/* æ‰“å°æ•°æ® */
 	for (i = 0; i < 1024; ++i)
 		{
 			printf(" %02X",buf[i]);
 
 			if ((i & 31) == 31)
 				{
-					printf("\r\n");		/* Ã¿ĞĞÏÔÊ¾16×Ö½ÚÊı¾İ */
+					printf("\r\n");		/* æ¯è¡Œæ˜¾ç¤º16å­—èŠ‚æ•°æ® */
 				}
 			else if((i & 31) == 15)
 				{
@@ -192,17 +192,17 @@ void sfTestReadSpeed(void)
 	int32_t iTime1, iTime2;
 	uint32_t uiAddr;
 
-	/* ÆğÊ¼µØÖ· = 0£¬ Êı¾İ³¤¶ÈÎª 256 */
-	iTime1 = bsp_GetRunTime();	/* ¼ÇÏÂ¿ªÊ¼Ê±¼ä */
+	/* èµ·å§‹åœ°å€ = 0ï¼Œ æ•°æ®é•¿åº¦ä¸º 256 */
+	iTime1 = bsp_GetRunTime();	/* è®°ä¸‹å¼€å§‹æ—¶é—´ */
 	uiAddr = 0;
 	for (i = 0; i < g_tSF.TotalSize / TEST_SIZE; i++, uiAddr += TEST_SIZE)
 	{
 		sf_ReadBuffer(buf, uiAddr, TEST_SIZE);
 	}
-	iTime2 = bsp_GetRunTime();	/* ¼ÇÏÂ½áÊøÊ±¼ä */
+	iTime2 = bsp_GetRunTime();	/* è®°ä¸‹ç»“æŸæ—¶é—´ */
 
-	/* ´òÓ¡¶ÁËÙ¶È */
-	printf("Êı¾İ³¤¶È: %d×Ö½Ú, ¶ÁºÄÊ±: %dms, ¶ÁËÙ¶È: %lld Bytes/s\r\n", g_tSF.TotalSize, iTime2 - iTime1, (uint64_t)g_tSF.TotalSize * 1000 / (iTime2 - iTime1));
+	/* æ‰“å°è¯»é€Ÿåº¦ */
+	printf("æ•°æ®é•¿åº¦: %då­—èŠ‚, è¯»è€—æ—¶: %dms, è¯»é€Ÿåº¦: %lld Bytes/s\r\n", g_tSF.TotalSize, iTime2 - iTime1, (uint64_t)g_tSF.TotalSize * 1000 / (iTime2 - iTime1));
 }
 
 
@@ -210,21 +210,21 @@ void sfTestReadSpeed(void)
 static void sfDispMenu(void)
 {
 	printf("\r\n*******************************************\r\n");
-	printf("ÇëÑ¡Ôñ²Ù×÷ÃüÁî:\r\n");
-	printf("¡¾1 - ¶Á´®ĞĞFlash, µØÖ·:0x%X,³¤¶È:%d×Ö½Ú¡¿\r\n", TEST_ADDR, TEST_SIZE);
-	printf("¡¾2 - Ğ´´®ĞĞFlash, µØÖ·:0x%X,³¤¶È:%d×Ö½Ú¡¿\r\n", TEST_ADDR, TEST_SIZE);
-	printf("¡¾3 - ²Á³ıÕû¸ö´®ĞĞFlash¡¿\r\n");
-	printf("¡¾4 - Ğ´Õû¸ö´®ĞĞFlash, È«0x55¡¿\r\n");
-	printf("¡¾5 - ¶ÁÕû¸ö´®ĞĞFlash, ²âÊÔ¶ÁËÙ¶È¡¿\r\n");
-	printf("¡¾Z - ¶ÁÈ¡Ç°1K£¬µØÖ·×Ô¶¯¼õÉÙ¡¿\r\n");
-	printf("¡¾X - ¶ÁÈ¡ºó1K£¬µØÖ·×Ô¶¯Ôö¼Ó¡¿\r\n");
-	printf("ÆäËûÈÎÒâ¼ü - ÏÔÊ¾ÃüÁîÌáÊ¾\r\n");
+	printf("è¯·é€‰æ‹©æ“ä½œå‘½ä»¤:\r\n");
+	printf("ã€1 - è¯»ä¸²è¡ŒFlash, åœ°å€:0x%X,é•¿åº¦:%då­—èŠ‚ã€‘\r\n", TEST_ADDR, TEST_SIZE);
+	printf("ã€2 - å†™ä¸²è¡ŒFlash, åœ°å€:0x%X,é•¿åº¦:%då­—èŠ‚ã€‘\r\n", TEST_ADDR, TEST_SIZE);
+	printf("ã€3 - æ“¦é™¤æ•´ä¸ªä¸²è¡ŒFlashã€‘\r\n");
+	printf("ã€4 - å†™æ•´ä¸ªä¸²è¡ŒFlash, å…¨0x55ã€‘\r\n");
+	printf("ã€5 - è¯»æ•´ä¸ªä¸²è¡ŒFlash, æµ‹è¯•è¯»é€Ÿåº¦ã€‘\r\n");
+	printf("ã€Z - è¯»å–å‰1Kï¼Œåœ°å€è‡ªåŠ¨å‡å°‘ã€‘\r\n");
+	printf("ã€X - è¯»å–å1Kï¼Œåœ°å€è‡ªåŠ¨å¢åŠ ã€‘\r\n");
+	printf("å…¶ä»–ä»»æ„é”® - æ˜¾ç¤ºå‘½ä»¤æç¤º\r\n");
 	printf("\r\n");
 }
 /*******************************************************************************
   * @FunctionName: DemoSpiFlash
   * @Author:       trx
-  * @DateTime:     2022å¹?æœ?6æ—?1:24:26 
+  * @DateTime:     2022éª?éˆ?6éƒ?1:24:26 
   * @Purpose:      
   * @param:        void               
   * @return:       none
@@ -233,71 +233,71 @@ void DemoSpiFlash(void)
 {
 	uint8_t cmd;
 	uint32_t uiReadPageNo = 0;
-	/* ¼ì²â´®ĞĞFlash OK */
-	printf("¼ì²âµ½´®ĞĞFlash£¬ID= %08X,ĞÍºÅ£º%s \r\n", g_tSF.ChipID , g_tSF.ChipName);
-	printf("    ÈİÁ¿ : %dM×Ö½Ú, ÉÈÇøÈİÁ¿: %d×Ö½Ú\r\n", g_tSF.TotalSize/(1024*1024), g_tSF.SectorSize);
+	/* æ£€æµ‹ä¸²è¡ŒFlash OK */
+	printf("æ£€æµ‹åˆ°ä¸²è¡ŒFlashï¼ŒID= %08X,å‹å·ï¼š%s \r\n", g_tSF.ChipID , g_tSF.ChipName);
+	printf("    å®¹é‡ : %dMå­—èŠ‚, æ‰‡åŒºå®¹é‡: %då­—èŠ‚\r\n", g_tSF.TotalSize/(1024*1024), g_tSF.SectorSize);
 
-	sfDispMenu();		/* ´òÓ¡ÃüÁîÌáÊ¾ */
+	sfDispMenu();		/* æ‰“å°å‘½ä»¤æç¤º */
 
 	while(1)
 	{
-		if (comGetChar(COM1,&cmd))	/* ´Ó´®¿Ú¶ÁÈëÒ»¸ö×Ö·û(·Ç×èÈû·½Ê½) */
+		if (comGetChar(COM1,&cmd))	/* ä»ä¸²å£è¯»å…¥ä¸€ä¸ªå­—ç¬¦(éé˜»å¡æ–¹å¼) */
 		{
 			switch (cmd)
 			{
 				case '1':
-					printf("\r\n¡¾1 - ¶Á´®ĞĞFlash, µØÖ·:0x%X,³¤¶È:%d×Ö½Ú¡¿\r\n", TEST_ADDR, TEST_SIZE);
-					sfReadTest();	/* ¶Á´®ĞĞFlashÊı¾İ£¬²¢´òÓ¡³öÀ´Êı¾İÄÚÈİ */
+					printf("\r\nã€1 - è¯»ä¸²è¡ŒFlash, åœ°å€:0x%X,é•¿åº¦:%då­—èŠ‚ã€‘\r\n", TEST_ADDR, TEST_SIZE);
+					sfReadTest();	/* è¯»ä¸²è¡ŒFlashæ•°æ®ï¼Œå¹¶æ‰“å°å‡ºæ¥æ•°æ®å†…å®¹ */
 					break;
 
 				case '2':
-					printf("\r\n¡¾2 - ²Á³ıÖ¸¶¨ÉÈÇø, µØÖ·:0x%X,³¤¶È:%d×Ö½Ú¡¿\r\n", TEST_ADDR, TEST_SIZE);
+					printf("\r\nã€2 - æ“¦é™¤æŒ‡å®šæ‰‡åŒº, åœ°å€:0x%X,é•¿åº¦:%då­—èŠ‚ã€‘\r\n", TEST_ADDR, TEST_SIZE);
 					sfWriteTest();
 					break;
 				case '3':
-					printf("\r\n¡¾3 - ²Á³ıÕû¸ö´®ĞĞFlash¡¿\r\n");
-					printf("Õû¸öFlash²Á³ıÍê±Ï´ó¸ÅĞèÒª20Ãë×óÓÒ£¬ÇëÄÍĞÄµÈ´ı");
-					sfErase();		/* ²Á³ı´®ĞĞFlashÊı¾İ£¬Êµ¼ÊÉÏ¾ÍÊÇĞ´ÈëÈ«0xFF */
+					printf("\r\nã€3 - æ“¦é™¤æ•´ä¸ªä¸²è¡ŒFlashã€‘\r\n");
+					printf("æ•´ä¸ªFlashæ“¦é™¤å®Œæ¯•å¤§æ¦‚éœ€è¦20ç§’å·¦å³ï¼Œè¯·è€å¿ƒç­‰å¾…");
+					sfErase();		/* æ“¦é™¤ä¸²è¡ŒFlashæ•°æ®ï¼Œå®é™…ä¸Šå°±æ˜¯å†™å…¥å…¨0xFF */
 					break;
 
 				case '4':
-					printf("\r\n¡¾4 - Ğ´Õû¸ö´®ĞĞFlash, È«0x55¡¿\r\n");
-					printf("Õû¸öFlashĞ´ÈëÍê±Ï´ó¸ÅĞèÒª20Ãë×óÓÒ£¬ÇëÄÍĞÄµÈ´ı");
-					sfWriteAll(0x55);/* ²Á³ı´®ĞĞFlashÊı¾İ£¬Êµ¼ÊÉÏ¾ÍÊÇĞ´ÈëÈ«0xFF */
+					printf("\r\nã€4 - å†™æ•´ä¸ªä¸²è¡ŒFlash, å…¨0x55ã€‘\r\n");
+					printf("æ•´ä¸ªFlashå†™å…¥å®Œæ¯•å¤§æ¦‚éœ€è¦20ç§’å·¦å³ï¼Œè¯·è€å¿ƒç­‰å¾…");
+					sfWriteAll(0x55);/* æ“¦é™¤ä¸²è¡ŒFlashæ•°æ®ï¼Œå®é™…ä¸Šå°±æ˜¯å†™å…¥å…¨0xFF */
 					break;
 
 				case '5':
-					printf("\r\n¡¾5 - ¶ÁÕû¸ö´®ĞĞFlash, %dM×Ö½Ú¡¿\r\n", g_tSF.TotalSize/(1024*1024));
-					sfTestReadSpeed(); /* ¶ÁÕû¸ö´®ĞĞFlashÊı¾İ£¬²âÊÔËÙ¶È */
+					printf("\r\nã€5 - è¯»æ•´ä¸ªä¸²è¡ŒFlash, %dMå­—èŠ‚ã€‘\r\n", g_tSF.TotalSize/(1024*1024));
+					sfTestReadSpeed(); /* è¯»æ•´ä¸ªä¸²è¡ŒFlashæ•°æ®ï¼Œæµ‹è¯•é€Ÿåº¦ */
 					break;
 
 				case 'z':
-				case 'Z': /* ¶ÁÈ¡Ç°1K */
+				case 'Z': /* è¯»å–å‰1K */
 					if (uiReadPageNo > 0)
 					{
 						uiReadPageNo--;
 					}
 					else
 					{
-						printf("ÒÑ¾­ÊÇ×îÇ°\r\n");
+						printf("å·²ç»æ˜¯æœ€å‰\r\n");
 					}
 					sfViewData(uiReadPageNo * 1024);
 					break;
 
 				case 'x':
-				case 'X': /* ¶ÁÈ¡ºó1K */
+				case 'X': /* è¯»å–å1K */
 					if (uiReadPageNo < g_tSF.TotalSize / 1024 - 1)
 					{
 						uiReadPageNo++;
 					}
 					else
 					{
-						printf("ÒÑ¾­ÊÇ×îºó\r\n");
+						printf("å·²ç»æ˜¯æœ€å\r\n");
 					}
 					sfViewData(uiReadPageNo * 1024);
 					break;
 				default:
-					sfDispMenu();	/* ÎŞĞ§ÃüÁî£¬ÖØĞÂ´òÓ¡ÃüÁîÌáÊ¾ */
+					sfDispMenu();	/* æ— æ•ˆå‘½ä»¤ï¼Œé‡æ–°æ‰“å°å‘½ä»¤æç¤º */
 					break;
 
 			}
