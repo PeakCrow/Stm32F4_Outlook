@@ -1,4 +1,4 @@
-# Stm32F407zet6Template
+# Ls_Monitor
 
 #### 介绍
 本项目属于(个人)车载设备，硬件使用正点原子STM32F407核心板,配合一块底板,软件使用各种教程进行缝合.
@@ -47,5 +47,4 @@
 ![输入图片说明](Xian_Template/Doc/TFT%20Simulator.gif)
 
 #### TFT板卡效果
-
-![TFT Board](E:\Ls_Monitor\Xian_Template\Doc\TFT Board.jpg)
+![输入图片说明](Xian_Template/Doc/TFT%20Board.jpg)
