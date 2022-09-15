@@ -22,7 +22,6 @@
 #include "tx_api.h"
 #include "tx_timer.h"
 #include "tx_api.h"
-#include "fx_api.h"
 
 /*
 *********************************************************************************************************
@@ -60,10 +59,7 @@
 #include "bsp_lcd.h"						/* 屏幕显示驱动 */
 #include "bsp_touch.h"					/* 电容屏触摸驱动,包含有触摸画板例程 */
 #include "bsp_sdio_sd.h"				/* SD卡底层驱动 */	 
-#include "bsp_sram.h"						/* 板载外部SRAM底层驱动 */
-#include "XMRAM.h"							/* 板载外部SRAM厂商提供 */
-//#include "bsp_font_flash.h"
-//#include "malloc.h"
+
 
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug调试组件 */

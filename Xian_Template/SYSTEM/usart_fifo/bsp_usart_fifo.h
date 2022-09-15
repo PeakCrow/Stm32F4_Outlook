@@ -38,13 +38,13 @@ typedef enum
 #if UART2_FIFO_EN == 1
 	#define UART2_BAUD			9600
 	#define UART2_TX_BUF_SIZE	10
-	#define UART2_RX_BUF_SIZE	2*1024
+	#define UART2_RX_BUF_SIZE	1*1024
 #endif
 
 #if UART3_FIFO_EN == 1
 	#define UART3_BAUD			9600
-	#define UART3_TX_BUF_SIZE	1*1024
-	#define UART3_RX_BUF_SIZE	1*1024
+	#define UART3_TX_BUF_SIZE	1*521
+	#define UART3_RX_BUF_SIZE	1*512
 #endif
 /* 串口设备结构体 */
 typedef struct

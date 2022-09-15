@@ -1,35 +1,35 @@
 /*
 *********************************************************************************************************
 *
-*	Ä£¿éÃû³Æ : SD¿¨FatÎÄ¼şÏµÍ³ºÍSD¿¨Ä£ÄâÑİÊ¾Ä£¿é¡£
-*	ÎÄ¼şÃû³Æ : demo_sd_filex.c
-*	°æ    ±¾ : V1.0
-*	Ëµ    Ã÷ : ÑİÊ¾ÈçºÎ´´½¨ÎÄ¼ş¡¢¶ÁÈ¡ÎÄ¼ş¡¢´´½¨Ä¿Â¼ºÍÉ¾³ıÎÄ¼ş
-*			   ²¢²âÊÔÁËÎÄ¼ş¶ÁĞ´ËÙ¶È.Ö§³ÖÒÔÏÂ6¸ö¹¦ÄÜ£¬ÓÃ»§Í¨¹ıµçÄÔ¶Ë´®¿ÚÈí¼ş·¢ËÍÊı×Ö¸ø¿ª·¢°å¼´¿É:
-*              1 - ÏÔÊ¾¸ùÄ¿Â¼ÏÂµÄÎÄ¼şÁĞ±í
-*              2 - ´´½¨Ò»¸öĞÂÎÄ¼şarmfly.txt
-*              3 - ¶Áarmfly.txtÎÄ¼şµÄÄÚÈİ
-*              4 - ´´½¨Ä¿Â¼
-*              5 - É¾³ıÎÄ¼şºÍÄ¿Â¼
-*              6 - ¶ÁĞ´ÎÄ¼şËÙ¶È²âÊÔ
+*	æ¨¡å—åç§° : SDå¡Fatæ–‡ä»¶ç³»ç»Ÿå’ŒSDå¡æ¨¡æ‹Ÿæ¼”ç¤ºæ¨¡å—ã€‚
+*	æ–‡ä»¶åç§° : demo_sd_filex.c
+*	ç‰ˆ    æœ¬ : V1.0
+*	è¯´    æ˜ : æ¼”ç¤ºå¦‚ä½•åˆ›å»ºæ–‡ä»¶ã€è¯»å–æ–‡ä»¶ã€åˆ›å»ºç›®å½•å’Œåˆ é™¤æ–‡ä»¶
+*			   å¹¶æµ‹è¯•äº†æ–‡ä»¶è¯»å†™é€Ÿåº¦.æ”¯æŒä»¥ä¸‹6ä¸ªåŠŸèƒ½ï¼Œç”¨æˆ·é€šè¿‡ç”µè„‘ç«¯ä¸²å£è½¯ä»¶å‘é€æ•°å­—ç»™å¼€å‘æ¿å³å¯:
+*              1 - æ˜¾ç¤ºæ ¹ç›®å½•ä¸‹çš„æ–‡ä»¶åˆ—è¡¨
+*              2 - åˆ›å»ºä¸€ä¸ªæ–°æ–‡ä»¶armfly.csv
+*              3 - è¯»armfly.csvæ–‡ä»¶çš„å†…å®¹
+*              4 - åˆ›å»ºç›®å½•
+*              5 - åˆ é™¤æ–‡ä»¶å’Œç›®å½•
+*              6 - è¯»å†™æ–‡ä»¶é€Ÿåº¦æµ‹è¯•
 *
-*              ÁíÍâ×¢Òâ£¬SD¿¨Ä£ÄâUÅÌÊÇÓÃµÄMicroUSB½Ó¿Ú¡£
-*	ĞŞ¸Ä¼ÇÂ¼ :
-*		°æ±¾ºÅ   ÈÕÆÚ         ×÷Õß        ËµÃ÷
-*		V1.0    2021-01-30   Eric2013    ÕıÊ½·¢²¼
+*              å¦å¤–æ³¨æ„ï¼ŒSDå¡æ¨¡æ‹ŸUç›˜æ˜¯ç”¨çš„MicroUSBæ¥å£ã€‚
+*	ä¿®æ”¹è®°å½• :
+*		ç‰ˆæœ¬å·   æ—¥æœŸ         ä½œè€…        è¯´æ˜
+*		V1.0    2021-01-30   Eric2013    æ­£å¼å‘å¸ƒ
 *
-*	Copyright (C), 2021-2030, °²¸»À³µç×Ó www.armfly.com
+*	Copyright (C), 2021-2030, å®‰å¯Œè±ç”µå­ www.armfly.com
 *
 *********************************************************************************************************
 */
 #include "sys.h"
 
 
-/* ÓÃÓÚ²âÊÔ¶ÁĞ´ËÙ¶È */
-#define TEST_FILE_LEN			(2*1024*1024)	/* ÓÃÓÚ²âÊÔµÄÎÄ¼ş³¤¶È */
-#define BUF_SIZE				(32*1024)		/* Ã¿´Î¶ÁĞ´SD¿¨µÄ×î´óÊı¾İ³¤¶È */
+/* ç”¨äºæµ‹è¯•è¯»å†™é€Ÿåº¦ */
+#define TEST_FILE_LEN			(2*1024*1024)	/* ç”¨äºæµ‹è¯•çš„æ–‡ä»¶é•¿åº¦ */
+#define BUF_SIZE				(32*1024)		/* æ¯æ¬¡è¯»å†™SDå¡çš„æœ€å¤§æ•°æ®é•¿åº¦ */
 
-/* ½öÔÊĞí±¾ÎÄ¼şÄÚµ÷ÓÃµÄº¯ÊıÉùÃ÷ */
+/* ä»…å…è®¸æœ¬æ–‡ä»¶å†…è°ƒç”¨çš„å‡½æ•°å£°æ˜ */
 static void DispMenu(void);
 static void ViewRootDir(void);
 static void CreateNewFile(void);
@@ -38,13 +38,13 @@ static void CreateDir(void);
 static void DeleteDirFile(void);
 static void WriteFileTest(void);
 
-/* ¸øFileX¿ªµÄ¶¯Ì¬ÄÚ´æ */
+/* ç»™FileXå¼€çš„åŠ¨æ€å†…å­˜ */
 uint32_t media_memory[8*1024];  
 char FsReadBuf[1024];
 char FsWriteBuf[1024] = {"ThreadX FileX Write Demo \r\n www.armfly.com \r\n"};
 uint8_t g_TestBuf[BUF_SIZE];
 
-/* FileXÏà¹Ø±äÁ¿ */
+/* FileXç›¸å…³å˜é‡ */
 FX_MEDIA     sdio_disk; 
 FX_FILE      fx_file;
 CHAR entry_name[FX_MAX_LONG_NAME_LEN];
@@ -52,68 +52,68 @@ extern VOID  fx_stm32_sd_driver(FX_MEDIA *media_ptr);
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: DemoFatFS
-*	¹¦ÄÜËµÃ÷: FatFSÎÄ¼şÏµÍ³ÑİÊ¾Ö÷³ÌĞò
-*	ĞÎ    ²Î: ÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: DemoFatFS
+*	åŠŸèƒ½è¯´æ˜: FatFSæ–‡ä»¶ç³»ç»Ÿæ¼”ç¤ºä¸»ç¨‹åº
+*	å½¢    å‚: æ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 void DemoFileX(void)
 {
 	uint8_t cmd;
 
-	/* ´òÓ¡ÃüÁîÁĞ±í£¬ÓÃ»§¿ÉÒÔÍ¨¹ı´®¿Ú²Ù×÷Ö¸Áî */
+	/* æ‰“å°å‘½ä»¤åˆ—è¡¨ï¼Œç”¨æˆ·å¯ä»¥é€šè¿‡ä¸²å£æ“ä½œæŒ‡ä»¤ */
 	DispMenu();
     
-    /* ³õÊ¼»¯ */
+    /* åˆå§‹åŒ– */
     fx_system_initialize();
 
-    /* Æô¶¯1¸ö500msµÄ×Ô¶¯ÖØ×°µÄ¶¨Ê±Æ÷ */	
+    /* å¯åŠ¨1ä¸ª500msçš„è‡ªåŠ¨é‡è£…çš„å®šæ—¶å™¨ */	
 	//bsp_StartAutoTimer(0, 500);	
 
 	while (1)
 	{  
         tx_thread_sleep(10);		
-		/* ÅĞ¶Ï¶¨Ê±Æ÷³¬Ê±Ê±¼ä */
+		/* åˆ¤æ–­å®šæ—¶å™¨è¶…æ—¶æ—¶é—´ */
 //		if (bsp_CheckTimer(0))	
 //		{            
-//			/* Ã¿¸ô500ms ½øÀ´Ò»´Î */  
+//			/* æ¯éš”500ms è¿›æ¥ä¸€æ¬¡ */  
 //			bsp_LedToggle(2);
 //		}
 
-		if (comGetChar(COM1, &cmd))	/* ´Ó´®¿Ú¶ÁÈëÒ»¸ö×Ö·û(·Ç×èÈû·½Ê½) */
+		if (comGetChar(COM1, &cmd))	/* ä»ä¸²å£è¯»å…¥ä¸€ä¸ªå­—ç¬¦(éé˜»å¡æ–¹å¼) */
 		{
 			printf("\r\n");
 			switch (cmd)
 			{
 				case '1':
-					printf("¡¾1 - ViewRootDir¡¿\r\n");
-					ViewRootDir();		/* ÏÔÊ¾SD¿¨¸ùÄ¿Â¼ÏÂµÄÎÄ¼şÃû */
+					printf("ã€1 - ViewRootDirã€‘\r\n");
+					ViewRootDir();		/* æ˜¾ç¤ºSDå¡æ ¹ç›®å½•ä¸‹çš„æ–‡ä»¶å */
 					break;
 
 				case '2':
-					printf("¡¾2 - CreateNewFile¡¿\r\n");
-					CreateNewFile();	/* ´´½¨Ò»¸öĞÂÎÄ¼ş,Ğ´ÈëÒ»¸ö×Ö·û´® */
+					printf("ã€2 - CreateNewFileã€‘\r\n");
+					CreateNewFile();	/* åˆ›å»ºä¸€ä¸ªæ–°æ–‡ä»¶,å†™å…¥ä¸€ä¸ªå­—ç¬¦ä¸² */
 					break;
 
 				case '3':
-					printf("¡¾3 - ReadFileData¡¿\r\n");
-					ReadFileData();		/* ¶ÁÈ¡¸ùÄ¿Â¼ÏÂarmfly.txtµÄÄÚÈİ */
+					printf("ã€3 - ReadFileDataã€‘\r\n");
+					ReadFileData();		/* è¯»å–æ ¹ç›®å½•ä¸‹armfly.csvçš„å†…å®¹ */
 					break;
 
 				case '4':
-					printf("¡¾4 - CreateDir¡¿\r\n");
-					CreateDir();		/* ´´½¨Ä¿Â¼ */
+					printf("ã€4 - CreateDirã€‘\r\n");
+					CreateDir();		/* åˆ›å»ºç›®å½• */
 					break;
 
 				case '5':
-					printf("¡¾5 - DeleteDirFile¡¿\r\n");
-					DeleteDirFile();	/* É¾³ıÄ¿Â¼ºÍÎÄ¼ş */
+					printf("ã€5 - DeleteDirFileã€‘\r\n");
+					DeleteDirFile();	/* åˆ é™¤ç›®å½•å’Œæ–‡ä»¶ */
 					break;
 
 				case '6':
-					printf("¡¾6 - TestSpeed¡¿\r\n");
-					WriteFileTest();	/* ËÙ¶È²âÊÔ */
+					printf("ã€6 - TestSpeedã€‘\r\n");
+					WriteFileTest();	/* é€Ÿåº¦æµ‹è¯• */
 					break;
 				
 				default:
@@ -126,30 +126,30 @@ void DemoFileX(void)
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: DispMenu
-*	¹¦ÄÜËµÃ÷: ÏÔÊ¾²Ù×÷ÌáÊ¾²Ëµ¥
-*	ĞÎ    ²Î£ºÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: DispMenu
+*	åŠŸèƒ½è¯´æ˜: æ˜¾ç¤ºæ“ä½œæç¤ºèœå•
+*	å½¢    å‚ï¼šæ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 static void DispMenu(void)
 {
 	printf("\r\n------------------------------------------------\r\n");
-	printf("ÇëÑ¡Ôñ²Ù×÷ÃüÁî£¬´ò¿ªSD¿¨Ä£ÄâUÅÌ²Ù×÷ÆÚ¼ä²»Ö§³ÖÔÙµ÷ÓÃÃüÁî1-6:\r\n");
-	printf("1 - ÏÔÊ¾¸ùÄ¿Â¼ÏÂµÄÎÄ¼şÁĞ±í\r\n");
-	printf("2 - ´´½¨Ò»¸öĞÂÎÄ¼şarmfly.txt\r\n");
-	printf("3 - ¶Áarmfly.txtÎÄ¼şµÄÄÚÈİ\r\n");
-	printf("4 - ´´½¨Ä¿Â¼\r\n");
-	printf("5 - É¾³ıÎÄ¼şºÍÄ¿Â¼\r\n");
-	printf("6 - ¶ÁĞ´ÎÄ¼şËÙ¶È²âÊÔ\r\n");
+	printf("è¯·é€‰æ‹©æ“ä½œå‘½ä»¤ï¼Œæ‰“å¼€SDå¡æ¨¡æ‹ŸUç›˜æ“ä½œæœŸé—´ä¸æ”¯æŒå†è°ƒç”¨å‘½ä»¤1-6:\r\n");
+	printf("1 - æ˜¾ç¤ºæ ¹ç›®å½•ä¸‹çš„æ–‡ä»¶åˆ—è¡¨\r\n");
+	printf("2 - åˆ›å»ºä¸€ä¸ªæ–°æ–‡ä»¶armfly.csv\r\n");
+	printf("3 - è¯»armfly.csvæ–‡ä»¶çš„å†…å®¹\r\n");
+	printf("4 - åˆ›å»ºç›®å½•\r\n");
+	printf("5 - åˆ é™¤æ–‡ä»¶å’Œç›®å½•\r\n");
+	printf("6 - è¯»å†™æ–‡ä»¶é€Ÿåº¦æµ‹è¯•\r\n");
 }
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: ViewRootDir
-*	¹¦ÄÜËµÃ÷: ÏÔÊ¾SD¿¨¸ùÄ¿Â¼ÏÂµÄÎÄ¼şÃû
-*	ĞÎ    ²Î£ºÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: ViewRootDir
+*	åŠŸèƒ½è¯´æ˜: æ˜¾ç¤ºSDå¡æ ¹ç›®å½•ä¸‹çš„æ–‡ä»¶å
+*	å½¢    å‚ï¼šæ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 extern SD_HandleTypeDef uSdHandle;
@@ -168,20 +168,20 @@ static void ViewRootDir(void)
     ULONG64 available_bytes;
 	
     
-    /* ¹ÒÔØSD¿¨ */
+    /* æŒ‚è½½SDå¡ */
     status =  fx_media_open(&sdio_disk, "STM32_SDIO_DISK", fx_stm32_sd_driver, 0, media_memory, sizeof(media_memory));
 
     if (status != FX_SUCCESS)
     {
-        printf("¹ÒÔØÎÄ¼şÏµÍ³Ê§°Ü -- %d\r\n", status);
+        printf("æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿå¤±è´¥ -- %d\r\n", status);
         return;
     }
     
     
-    printf("ÊôĞÔ        |  ÎÄ¼ş´óĞ¡ | ¶ÌÎÄ¼şÃû | ³¤ÎÄ¼şÃû\r\n");
+    printf("å±æ€§        |  æ–‡ä»¶å¤§å° | çŸ­æ–‡ä»¶å | é•¿æ–‡ä»¶å\r\n");
 	for (cnt = 0; ;cnt++)
 	{
-        /* ¶ÁÈ¡Ä¿Â¼Ïî£¬Ë÷Òı»á×Ô¶¯ÏÂÒÆ */
+        /* è¯»å–ç›®å½•é¡¹ï¼Œç´¢å¼•ä¼šè‡ªåŠ¨ä¸‹ç§» */
         status = fx_directory_next_full_entry_find(&sdio_disk,
                                                     entry_name, 
                                                     &attributes, 
@@ -199,46 +199,46 @@ static void ViewRootDir(void)
 			continue;
 		}
 
-		/* ÅĞ¶ÏÊÇÎÄ¼ş»¹ÊÇ×ÓÄ¿Â¼ */
+		/* åˆ¤æ–­æ˜¯æ–‡ä»¶è¿˜æ˜¯å­ç›®å½• */
 		if (attributes & FX_DIRECTORY)
 		{
-			printf("Ä¿Â¼  ");
+			printf("ç›®å½•  ");
 		}
 		else
 		{
-			printf("ÎÄ¼ş  ");
+			printf("æ–‡ä»¶  ");
 		}
 
-		/* ´òÓ¡ÎÄ¼ş´óĞ¡, ×î´ó4G */
+		/* æ‰“å°æ–‡ä»¶å¤§å°, æœ€å¤§4G */
 		printf(" %10d", (int)size);
 
 
-		printf("  %s\r\n", (char *)entry_name);	/* ³¤ÎÄ¼şÃû */
+		printf("  %s\r\n", (char *)entry_name);	/* é•¿æ–‡ä»¶å */
 	}
     
-    /* SD¿¨Ê£ÓàÈİÁ¿´óĞ¡ */
+    /* SDå¡å‰©ä½™å®¹é‡å¤§å° */
     status = fx_media_extended_space_available(&sdio_disk, &available_bytes);    
 
     if (status == FX_SUCCESS)
     {
-        printf("SD¿¨Ê£ÓàÈİÁ¿´óĞ¡ -- %lldMB\r\n", available_bytes/1024/1024);
+        printf("SDå¡å‰©ä½™å®¹é‡å¤§å° -- %lldMB\r\n", available_bytes/1024/1024);
     }
     
-    /* Ğ¶ÔØSD¿¨ */
+    /* å¸è½½SDå¡ */
     status =  fx_media_close(&sdio_disk);
 
     if (status != FX_SUCCESS)
     {
-        printf("Ğ¶ÔØÎÄ¼şÏµÍ³Ğ¶ÔØÊ§°Ü -- %d\r\n", status);
+        printf("å¸è½½æ–‡ä»¶ç³»ç»Ÿå¸è½½å¤±è´¥ -- %d\r\n", status);
     }
 }
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: CreateNewFile
-*	¹¦ÄÜËµÃ÷: ÔÚSD¿¨´´½¨Ò»¸öĞÂÎÄ¼ş£¬ÎÄ¼şÄÚÈİÌîĞ´¡°www.armfly.com¡±
-*	ĞÎ    ²Î£ºÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: CreateNewFile
+*	åŠŸèƒ½è¯´æ˜: åœ¨SDå¡åˆ›å»ºä¸€ä¸ªæ–°æ–‡ä»¶ï¼Œæ–‡ä»¶å†…å®¹å¡«å†™â€œwww.armfly.comâ€
+*	å½¢    å‚ï¼šæ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 static void CreateNewFile(void)
@@ -246,89 +246,89 @@ static void CreateNewFile(void)
     UINT status;
 
     
-    /* ¹ÒÔØSD¿¨ */
+    /* æŒ‚è½½SDå¡ */
     status =  fx_media_open(&sdio_disk, "STM32_SDIO_DISK", fx_stm32_sd_driver, 0, media_memory, sizeof(media_memory));
 
     if (status != FX_SUCCESS)
     {
-        printf("¹ÒÔØÎÄ¼şÏµÍ³Ê§°Ü -- %d\r\n", status);
+        printf("æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿå¤±è´¥ -- %d\r\n", status);
         return;
     }
     
-    /* ´´½¨ÎÄ¼ş */
-    status =  fx_file_create(&sdio_disk, "armfly.txt");
+    /* åˆ›å»ºæ–‡ä»¶ */
+    status =  fx_file_create(&sdio_disk, "armfly.csv");
 
-    /* ¼ì²â×´Ì¬ */
+    /* æ£€æµ‹çŠ¶æ€ */
     if (status != FX_SUCCESS)
     {
-        /* Ê§°ÜµÄ»°£¬¿ÉÒÔ¿¼ÂÇ¶ş´Î´´½¨ */
+        /* å¤±è´¥çš„è¯ï¼Œå¯ä»¥è€ƒè™‘äºŒæ¬¡åˆ›å»º */
         if (status != FX_ALREADY_CREATED)
         {
-            printf("´´½¨ÎÄ¼şÊ§°Ü\r\n");
+            printf("åˆ›å»ºæ–‡ä»¶å¤±è´¥\r\n");
         }
     }
     
-    /* ´ò¿ªÎÄ¼ş  */
-    status =  fx_file_open(&sdio_disk, &fx_file, "armfly.txt", FX_OPEN_FOR_WRITE);
+    /* æ‰“å¼€æ–‡ä»¶  */
+    status =  fx_file_open(&sdio_disk, &fx_file, "armfly.csv", FX_OPEN_FOR_WRITE);
 
     if (status != FX_SUCCESS)
     {
-        printf("´ò¿ªÎÄ¼şÊ§°Ü\r\n");
+        printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥\r\n");
     }
     
-    /* ÉèÖÃµ½ÆğÊ¼Î»ÖÃ¶ÁÈ¡  */
+    /* è®¾ç½®åˆ°èµ·å§‹ä½ç½®è¯»å–  */
     status =  fx_file_seek(&fx_file, 0);
 
     if (status != FX_SUCCESS)
     {
-        printf("ÉèÖÃ¶ÁÈ¡Î»ÖÃÊ§°Ü\r\n");       
+        printf("è®¾ç½®è¯»å–ä½ç½®å¤±è´¥\r\n");       
     }
 
 
-    /* Ğ´Èë×Ö·û´®µ½ÎÄ¼ş  */
+    /* å†™å…¥å­—ç¬¦ä¸²åˆ°æ–‡ä»¶  */
     status =  fx_file_write(&fx_file, FsWriteBuf, strlen(FsWriteBuf));
 
     if (status == FX_SUCCESS)
     {
-        printf("armfly.txt ÎÄ¼şĞ´Èë³É¹¦\r\n");        
+        printf("armfly.csv æ–‡ä»¶å†™å…¥æˆåŠŸ\r\n");        
     }
     else
     {
-        printf("armfly.txt ÎÄ¼şĞ´ÈëÊ§°Ü %d\r\n", status); 
+        printf("armfly.csv æ–‡ä»¶å†™å…¥å¤±è´¥ %d\r\n", status); 
     }
 
-    /* ¹Ø±ÕÎÄ¼ş  */
+    /* å…³é—­æ–‡ä»¶  */
     status =  fx_file_close(&fx_file);
 
     /* Check the file close status.  */
     if (status != FX_SUCCESS)
     {
-        printf("¹Ø±ÕÎÄ¼şÊ§°Ü\r\n");    
+        printf("å…³é—­æ–‡ä»¶å¤±è´¥\r\n");    
     }
 
-    /* ±£Ö¤ÎÄ¼şĞ´ÈëÈ«²¿ÉúĞ§ */
+    /* ä¿è¯æ–‡ä»¶å†™å…¥å…¨éƒ¨ç”Ÿæ•ˆ */
     status = fx_media_flush(&sdio_disk);
 
     if (status != FX_SUCCESS)
     {
-        printf("flushÊ§°Ü\r\n");   
+        printf("flushå¤±è´¥\r\n");   
     }
     
-     /* Ğ¶ÔØSD¿¨ */
+     /* å¸è½½SDå¡ */
     status =  fx_media_close(&sdio_disk);
 
     if (status != FX_SUCCESS)
     {
-        printf("Ğ¶ÔØÎÄ¼şÏµÍ³Ğ¶ÔØÊ§°Ü -- %d\r\n", status);
+        printf("å¸è½½æ–‡ä»¶ç³»ç»Ÿå¸è½½å¤±è´¥ -- %d\r\n", status);
     }   
 }
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: ReadFileData
-*	¹¦ÄÜËµÃ÷: ¶ÁÈ¡ÎÄ¼şarmfly.txtÇ°128¸ö×Ö·û£¬²¢´òÓ¡µ½´®¿Ú
-*	ĞÎ    ²Î£ºÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: ReadFileData
+*	åŠŸèƒ½è¯´æ˜: è¯»å–æ–‡ä»¶armfly.csvå‰128ä¸ªå­—ç¬¦ï¼Œå¹¶æ‰“å°åˆ°ä¸²å£
+*	å½¢    å‚ï¼šæ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 static void ReadFileData(void)
@@ -337,30 +337,30 @@ static void ReadFileData(void)
     ULONG bw;
 	
     
-    /* ¹ÒÔØSD¿¨ */
+    /* æŒ‚è½½SDå¡ */
     status =  fx_media_open(&sdio_disk, "STM32_SDIO_DISK", fx_stm32_sd_driver, 0, media_memory, sizeof(media_memory));
 
     if (status != FX_SUCCESS)
     {
-        printf("¹ÒÔØÎÄ¼şÏµÍ³Ê§°Ü -- %d\r\n", status);
+        printf("æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿå¤±è´¥ -- %d\r\n", status);
         return;
     }
     
 
-    /* ´ò¿ªÎÄ¼ş  */
-    status =  fx_file_open(&sdio_disk, &fx_file, "armfly.txt", FX_OPEN_FOR_READ);
+    /* æ‰“å¼€æ–‡ä»¶  */
+    status =  fx_file_open(&sdio_disk, &fx_file, "armfly.csv", FX_OPEN_FOR_READ);
 
     if (status != FX_SUCCESS)
     {
-        printf("´ò¿ªÎÄ¼şÊ§°Ü\r\n");
+        printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥\r\n");
     } 
 
-    /* ÉèÖÃµ½ÆğÊ¼Î»ÖÃ¶ÁÈ¡  */
+    /* è®¾ç½®åˆ°èµ·å§‹ä½ç½®è¯»å–  */
     status =  fx_file_seek(&fx_file, 0);
 
     if (status != FX_SUCCESS)
     {
-        printf("ÉèÖÃ¶ÁÈ¡Î»ÖÃÊ§°Ü\r\n");       
+        printf("è®¾ç½®è¯»å–ä½ç½®å¤±è´¥\r\n");       
     }
 
     /*  */
@@ -370,32 +370,32 @@ static void ReadFileData(void)
 
     if ((status != FX_SUCCESS))
     {
-        printf("¶ÁÈ¡Ê§°Ü\r\n");     
+        printf("è¯»å–å¤±è´¥\r\n");     
     }    
     
-    /* ¹Ø±ÕÎÄ¼ş  */
+    /* å…³é—­æ–‡ä»¶  */
     status =  fx_file_close(&fx_file);
 
     if (status != FX_SUCCESS)
     {
-        printf("¹Ø±ÕÎÄ¼şÊ§°Ü\r\n");    
+        printf("å…³é—­æ–‡ä»¶å¤±è´¥\r\n");    
     }
     
-     /* Ğ¶ÔØSD¿¨ */
+     /* å¸è½½SDå¡ */
     status =  fx_media_close(&sdio_disk);
 
     if (status != FX_SUCCESS)
     {
-        printf("Ğ¶ÔØÎÄ¼şÏµÍ³Ğ¶ÔØÊ§°Ü -- %d\r\n", status);
+        printf("å¸è½½æ–‡ä»¶ç³»ç»Ÿå¸è½½å¤±è´¥ -- %d\r\n", status);
     }   
 }
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: CreateDir
-*	¹¦ÄÜËµÃ÷: ÔÚSD¿¨¸ùÄ¿Â¼´´½¨Dir1ºÍDir2Ä¿Â¼£¬ÔÚDir1Ä¿Â¼ÏÂ´´½¨×ÓÄ¿Â¼Dir1_1
-*	ĞÎ    ²Î£ºÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: CreateDir
+*	åŠŸèƒ½è¯´æ˜: åœ¨SDå¡æ ¹ç›®å½•åˆ›å»ºDir1å’ŒDir2ç›®å½•ï¼Œåœ¨Dir1ç›®å½•ä¸‹åˆ›å»ºå­ç›®å½•Dir1_1
+*	å½¢    å‚ï¼šæ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 static void CreateDir(void)
@@ -403,89 +403,89 @@ static void CreateDir(void)
     UINT status;
 	
     
-    /* ¹ÒÔØSD¿¨ */
+    /* æŒ‚è½½SDå¡ */
     status =  fx_media_open(&sdio_disk, "STM32_SDIO_DISK", fx_stm32_sd_driver, 0, media_memory, sizeof(media_memory));
 
     if (status != FX_SUCCESS)
     {
-        printf("¹ÒÔØÎÄ¼şÏµÍ³Ê§°Ü -- %d\r\n", status);
+        printf("æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿå¤±è´¥ -- %d\r\n", status);
         return;
     } 
 
-    /* ´´½¨Ä¿Â¼/Dir1 */
+    /* åˆ›å»ºç›®å½•/Dir1 */
     status = fx_directory_create(&sdio_disk, "Dir1");
     
     if (status == FX_SUCCESS)
     {
-        printf("ÎÄ¼ş¼ĞDir1´´½¨³É¹¦\r\n");
+        printf("æ–‡ä»¶å¤¹Dir1åˆ›å»ºæˆåŠŸ\r\n");
     } 
 	else if (status == FX_ALREADY_CREATED)
 	{
-		printf("Dir1 Ä¿Â¼ÒÑ¾­´æÔÚ(%d)\r\n", status);
+		printf("Dir1 ç›®å½•å·²ç»å­˜åœ¨(%d)\r\n", status);
 	}
 	else
 	{
-		printf("fx_directory_create Dir1 Ê§°Ü (%d)\r\n", status);
+		printf("fx_directory_create Dir1 å¤±è´¥ (%d)\r\n", status);
 		return;
 	}  
     
-	/* ´´½¨Ä¿Â¼/Dir2 */
+	/* åˆ›å»ºç›®å½•/Dir2 */
     status = fx_directory_create(&sdio_disk, "Dir2");
     
     if (status == FX_SUCCESS)
     {
-        printf("ÎÄ¼ş¼ĞDir2´´½¨³É¹¦\r\n");
+        printf("æ–‡ä»¶å¤¹Dir2åˆ›å»ºæˆåŠŸ\r\n");
     } 
 	else if (status == FX_ALREADY_CREATED)
 	{
-		printf("Dir2 Ä¿Â¼ÒÑ¾­´æÔÚ(%d)\r\n", status);
+		printf("Dir2 ç›®å½•å·²ç»å­˜åœ¨(%d)\r\n", status);
 	}
 	else
 	{
-		printf("fx_directory_create Dir2 Ê§°Ü (%d)\r\n", status);
+		printf("fx_directory_create Dir2 å¤±è´¥ (%d)\r\n", status);
 		return;
 	}     
 
-	/* ´´½¨×ÓÄ¿Â¼ /Dir1/Dir1_1	   ×¢Òâ£º´´½¨×ÓÄ¿Â¼Dir1_1Ê±£¬±ØĞëÏÈ´´½¨ºÃDir1 £¿ */    
+	/* åˆ›å»ºå­ç›®å½• /Dir1/Dir1_1	   æ³¨æ„ï¼šåˆ›å»ºå­ç›®å½•Dir1_1æ—¶ï¼Œå¿…é¡»å…ˆåˆ›å»ºå¥½Dir1 ï¼Ÿ */    
     status = fx_directory_create(&sdio_disk, "Dir1/Dir1_1");
     
     if (status == FX_SUCCESS)
     {
-        printf("ÎÄ¼ş¼ĞDir1/Dir1_1´´½¨³É¹¦\r\n");
+        printf("æ–‡ä»¶å¤¹Dir1/Dir1_1åˆ›å»ºæˆåŠŸ\r\n");
     } 
 	else if (status == FX_ALREADY_CREATED)
 	{
-		printf("Dir1/Dir1_1 Ä¿Â¼ÒÑ¾­´æÔÚ(%d)\r\n", status);
+		printf("Dir1/Dir1_1 ç›®å½•å·²ç»å­˜åœ¨(%d)\r\n", status);
 	}
 	else
 	{
-		printf("fx_directory_create Dir1/Dir1_1 Ê§°Ü (%d)\r\n", status);
+		printf("fx_directory_create Dir1/Dir1_1 å¤±è´¥ (%d)\r\n", status);
 		return;
 	}  
     
-    /* ±£Ö¤ÎÄ¼şĞ´ÈëÈ«²¿ÉúĞ§ */
+    /* ä¿è¯æ–‡ä»¶å†™å…¥å…¨éƒ¨ç”Ÿæ•ˆ */
     status = fx_media_flush(&sdio_disk);
 
     if (status != FX_SUCCESS)
     {
-        printf("flushÊ§°Ü\r\n");   
+        printf("flushå¤±è´¥\r\n");   
     }
     
-     /* Ğ¶ÔØSD¿¨ */
+     /* å¸è½½SDå¡ */
     status =  fx_media_close(&sdio_disk);
 
     if (status != FX_SUCCESS)
     {
-        printf("Ğ¶ÔØÎÄ¼şÏµÍ³Ğ¶ÔØÊ§°Ü -- %d\r\n", status);
+        printf("å¸è½½æ–‡ä»¶ç³»ç»Ÿå¸è½½å¤±è´¥ -- %d\r\n", status);
     }  
 }
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: DeleteDirFile
-*	¹¦ÄÜËµÃ÷: É¾³ıSD¿¨¸ùÄ¿Â¼ÏÂµÄ armfly.txt ÎÄ¼şºÍ Dir1£¬Dir2 Ä¿Â¼
-*	ĞÎ    ²Î£ºÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: DeleteDirFile
+*	åŠŸèƒ½è¯´æ˜: åˆ é™¤SDå¡æ ¹ç›®å½•ä¸‹çš„ armfly.csv æ–‡ä»¶å’Œ Dir1ï¼ŒDir2 ç›®å½•
+*	å½¢    å‚ï¼šæ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 static void DeleteDirFile(void)
@@ -495,132 +495,132 @@ static void DeleteDirFile(void)
     char path[50];
     
     
-    /* ¹ÒÔØSD¿¨ */
+    /* æŒ‚è½½SDå¡ */
     status =  fx_media_open(&sdio_disk, "STM32_SDIO_DISK", fx_stm32_sd_driver, 0, media_memory, sizeof(media_memory));
 
     if (status != FX_SUCCESS)
     {
-        printf("¹ÒÔØÎÄ¼şÏµÍ³Ê§°Ü -- %d\r\n", status);
+        printf("æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿå¤±è´¥ -- %d\r\n", status);
         return;
     }
 
-    /* É¾³ıÄ¿Â¼/Dir1 ¡¾ÒòÎª»¹´æÔÚÄ¿Â¼·Ç¿Õ£¨´æÔÚ×ÓÄ¿Â¼)£¬ËùÒÔÕâ´ÎÉ¾³ı»áÊ§°Ü¡¿*/
+    /* åˆ é™¤ç›®å½•/Dir1 ã€å› ä¸ºè¿˜å­˜åœ¨ç›®å½•éç©ºï¼ˆå­˜åœ¨å­ç›®å½•)ï¼Œæ‰€ä»¥è¿™æ¬¡åˆ é™¤ä¼šå¤±è´¥ã€‘*/
     status = fx_directory_delete(&sdio_disk, "Dir1");
     
     if (status == FX_SUCCESS)
 	{
-		printf("É¾³ıÄ¿Â¼Dir1³É¹¦\r\n");
+		printf("åˆ é™¤ç›®å½•Dir1æˆåŠŸ\r\n");
 	}
 	else if (status == FX_NOT_FOUND)
 	{
-		printf("Ã»ÓĞ·¢ÏÖÎÄ¼ş»òÄ¿Â¼ :%s\r\n", "/Dir1");
+		printf("æ²¡æœ‰å‘ç°æ–‡ä»¶æˆ–ç›®å½• :%s\r\n", "/Dir1");
 	}
 	else
 	{
-		printf("É¾³ıDir1Ê§°Ü(´íÎó´úÂë = %d) ÎÄ¼şÖ»¶Á»òÄ¿Â¼·Ç¿Õ\r\n", status);
+		printf("åˆ é™¤Dir1å¤±è´¥(é”™è¯¯ä»£ç  = %d) æ–‡ä»¶åªè¯»æˆ–ç›®å½•éç©º\r\n", status);
 	}
     
     
- 	/* ÏÈÉ¾³ıÄ¿Â¼/Dir1/Dir1_1 */  
+ 	/* å…ˆåˆ é™¤ç›®å½•/Dir1/Dir1_1 */  
     status = fx_directory_delete(&sdio_disk, "Dir1/Dir1_1");
     
     if (status == FX_SUCCESS)
 	{
-		printf("É¾³ıÄ¿Â¼Dir1/Dir1_1³É¹¦\r\n");
+		printf("åˆ é™¤ç›®å½•Dir1/Dir1_1æˆåŠŸ\r\n");
 	}
 	else if (status == FX_NOT_FOUND)
 	{
-		printf("Ã»ÓĞ·¢ÏÖÎÄ¼ş»òÄ¿Â¼ :%s\r\n", "Dir1/Dir1_1");
+		printf("æ²¡æœ‰å‘ç°æ–‡ä»¶æˆ–ç›®å½• :%s\r\n", "Dir1/Dir1_1");
 	}
 	else
 	{
-		printf("É¾³ıDir1/Dir1_1Ê§°Ü(´íÎó´úÂë = %d) ÎÄ¼şÖ»¶Á»òÄ¿Â¼·Ç¿Õ\r\n", status);
+		printf("åˆ é™¤Dir1/Dir1_1å¤±è´¥(é”™è¯¯ä»£ç  = %d) æ–‡ä»¶åªè¯»æˆ–ç›®å½•éç©º\r\n", status);
 	}    
     
-    /* É¾³ıÄ¿Â¼/Dir1*/  
+    /* åˆ é™¤ç›®å½•/Dir1*/  
     status = fx_directory_delete(&sdio_disk, "Dir1");
     
     if (status == FX_SUCCESS)
 	{
-		printf("É¾³ıÄ¿Â¼Dir1³É¹¦\r\n");
+		printf("åˆ é™¤ç›®å½•Dir1æˆåŠŸ\r\n");
 	}
 	else if (status == FX_NOT_FOUND)
 	{
-		printf("Ã»ÓĞ·¢ÏÖÎÄ¼ş»òÄ¿Â¼ :%s\r\n", "Dir1");
+		printf("æ²¡æœ‰å‘ç°æ–‡ä»¶æˆ–ç›®å½• :%s\r\n", "Dir1");
 	}
 	else
 	{
-		printf("É¾³ıDir1Ê§°Ü(´íÎó´úÂë = %d) ÎÄ¼şÖ»¶Á»òÄ¿Â¼·Ç¿Õ\r\n", status);
+		printf("åˆ é™¤Dir1å¤±è´¥(é”™è¯¯ä»£ç  = %d) æ–‡ä»¶åªè¯»æˆ–ç›®å½•éç©º\r\n", status);
 	}   
 
-    /* É¾³ıÄ¿Â¼/Dir2*/  
+    /* åˆ é™¤ç›®å½•/Dir2*/  
     status = fx_directory_delete(&sdio_disk, "Dir2");
     
     if (status == FX_SUCCESS)
 	{
-		printf("É¾³ıÄ¿Â¼Dir2³É¹¦\r\n");
+		printf("åˆ é™¤ç›®å½•Dir2æˆåŠŸ\r\n");
 	}
 	else if (status == FX_NOT_FOUND)
 	{
-		printf("Ã»ÓĞ·¢ÏÖÎÄ¼ş»òÄ¿Â¼ :%s\r\n", "Dir2");
+		printf("æ²¡æœ‰å‘ç°æ–‡ä»¶æˆ–ç›®å½• :%s\r\n", "Dir2");
 	}
 	else
 	{
-		printf("É¾³ıDir2Ê§°Ü(´íÎó´úÂë = %d) ÎÄ¼şÖ»¶Á»òÄ¿Â¼·Ç¿Õ\r\n", status);
+		printf("åˆ é™¤Dir2å¤±è´¥(é”™è¯¯ä»£ç  = %d) æ–‡ä»¶åªè¯»æˆ–ç›®å½•éç©º\r\n", status);
 	}   
 
-	/* É¾³ıÎÄ¼ş armfly.txt */
-    status = fx_file_delete(&sdio_disk, "armfly.txt");
+	/* åˆ é™¤æ–‡ä»¶ armfly.csv */
+    status = fx_file_delete(&sdio_disk, "armfly.csv");
     
     if (status == FX_SUCCESS)
 	{
-		printf("É¾³ıÄ¿Â¼armfly.txt³É¹¦\r\n");
+		printf("åˆ é™¤ç›®å½•armfly.csvæˆåŠŸ\r\n");
 	}
 	else if (status == FX_NOT_FOUND)
 	{
-		printf("Ã»ÓĞ·¢ÏÖÎÄ¼ş»òÄ¿Â¼ :%s\r\n", "armfly.txt");
+		printf("æ²¡æœ‰å‘ç°æ–‡ä»¶æˆ–ç›®å½• :%s\r\n", "armfly.csv");
 	}
 	else
 	{
-		printf("É¾³ıarmfly.txtÊ§°Ü(´íÎó´úÂë = %d) ÎÄ¼şÖ»¶Á»òÄ¿Â¼·Ç¿Õ\r\n", status);
+		printf("åˆ é™¤armfly.csvå¤±è´¥(é”™è¯¯ä»£ç  = %d) æ–‡ä»¶åªè¯»æˆ–ç›®å½•éç©º\r\n", status);
 	}   
 
-	/* É¾³ıÎÄ¼ş speed1.txt */
+	/* åˆ é™¤æ–‡ä»¶ speed1.txt */
 	for (i = 0; i < 20; i++)
 	{
-		sprintf(path, "Speed%02d.txt", i);/* Ã¿Ğ´1´Î£¬ĞòºÅµİÔö */	
+		sprintf(path, "Speed%02d.txt", i);/* æ¯å†™1æ¬¡ï¼Œåºå·é€’å¢ */	
         
         status = fx_file_delete(&sdio_disk, path);
     
         if (status == FX_SUCCESS)
         {
-            printf("É¾³ıÎÄ¼ş%s³É¹¦\r\n", path);
+            printf("åˆ é™¤æ–‡ä»¶%sæˆåŠŸ\r\n", path);
         }
         else if (status == FX_NOT_FOUND)
         {
-            printf("Ã»ÓĞ·¢ÏÖÎÄ¼ş:%s\r\n", path);
+            printf("æ²¡æœ‰å‘ç°æ–‡ä»¶:%s\r\n", path);
         }
         else
         {
-            printf("É¾³ı%sÎÄ¼şÊ§°Ü(´íÎó´úÂë = %d) ÎÄ¼şÖ»¶Á»òÄ¿Â¼·Ç¿Õ\r\n", path, status);
+            printf("åˆ é™¤%sæ–‡ä»¶å¤±è´¥(é”™è¯¯ä»£ç  = %d) æ–‡ä»¶åªè¯»æˆ–ç›®å½•éç©º\r\n", path, status);
         }   
 	}
 
-     /* Ğ¶ÔØSD¿¨ */
+     /* å¸è½½SDå¡ */
     status =  fx_media_close(&sdio_disk);
 
     if (status != FX_SUCCESS)
     {
-        printf("Ğ¶ÔØÎÄ¼şÏµÍ³Ğ¶ÔØÊ§°Ü -- %d\r\n", status);
+        printf("å¸è½½æ–‡ä»¶ç³»ç»Ÿå¸è½½å¤±è´¥ -- %d\r\n", status);
     }  
 }
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: WriteFileTest
-*	¹¦ÄÜËµÃ÷: ²âÊÔÎÄ¼ş¶ÁĞ´ËÙ¶È
-*	ĞÎ    ²Î£ºÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: WriteFileTest
+*	åŠŸèƒ½è¯´æ˜: æµ‹è¯•æ–‡ä»¶è¯»å†™é€Ÿåº¦
+*	å½¢    å‚ï¼šæ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 static void WriteFileTest(void)
@@ -641,54 +641,54 @@ static void WriteFileTest(void)
 	}
 	
     
-    /* ¹ÒÔØSD¿¨ */
+    /* æŒ‚è½½SDå¡ */
     status =  fx_media_open(&sdio_disk, "STM32_SDIO_DISK", fx_stm32_sd_driver, 0, media_memory, sizeof(media_memory));
 
     if (status != FX_SUCCESS)
     {
-        printf("¹ÒÔØÎÄ¼şÏµÍ³Ê§°Ü -- %d\r\n", status);
+        printf("æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿå¤±è´¥ -- %d\r\n", status);
         return;
     }
     
-    /* ´ò¿ªÎÄ¼ş */
-	sprintf(path, "Speed%02d.txt", s_ucTestSn++); /* Ã¿Ğ´1´Î£¬ĞòºÅµİÔö */	
+    /* æ‰“å¼€æ–‡ä»¶ */
+	sprintf(path, "Speed%02d.txt", s_ucTestSn++); /* æ¯å†™1æ¬¡ï¼Œåºå·é€’å¢ */	
     
-    /* Ğ´Ò»´®Êı¾İ */
-	printf("¿ªÊ¼Ğ´ÎÄ¼ş%s %dKB ...\r\n", path, TEST_FILE_LEN / 1024);
+    /* å†™ä¸€ä¸²æ•°æ® */
+	printf("å¼€å§‹å†™æ–‡ä»¶%s %dKB ...\r\n", path, TEST_FILE_LEN / 1024);
     
-    /* ´´½¨ÎÄ¼ş */
+    /* åˆ›å»ºæ–‡ä»¶ */
     status =  fx_file_create(&sdio_disk, path);
 
-    /* ¼ì²â×´Ì¬ */
+    /* æ£€æµ‹çŠ¶æ€ */
     if (status != FX_SUCCESS)
     {
-        /* Ê§°ÜµÄ»°£¬¿ÉÒÔ¿¼ÂÇ¶ş´Î´´½¨ */
+        /* å¤±è´¥çš„è¯ï¼Œå¯ä»¥è€ƒè™‘äºŒæ¬¡åˆ›å»º */
         if (status != FX_ALREADY_CREATED)
         {
-            printf("´´½¨ÎÄ¼şÊ§°Ü\r\n");
+            printf("åˆ›å»ºæ–‡ä»¶å¤±è´¥\r\n");
         }
     }
     
-    /* ´ò¿ªÎÄ¼ş  */
+    /* æ‰“å¼€æ–‡ä»¶  */
     status =  fx_file_open(&sdio_disk, &fx_file, path, FX_OPEN_FOR_WRITE);
 
     if (status != FX_SUCCESS)
     {
-        printf("´ò¿ªÎÄ¼şÊ§°Ü\r\n");
+        printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥\r\n");
     }
     
-    /* ÉèÖÃµ½ÆğÊ¼Î»ÖÃ¶ÁÈ¡  */
+    /* è®¾ç½®åˆ°èµ·å§‹ä½ç½®è¯»å–  */
     status =  fx_file_seek(&fx_file, 0);
 
     if (status != FX_SUCCESS)
     {
-        printf("ÉèÖÃ¶ÁÈ¡Î»ÖÃÊ§°Ü\r\n");       
+        printf("è®¾ç½®è¯»å–ä½ç½®å¤±è´¥\r\n");       
     }
     
-    runtime1 = bsp_GetRunTime();	/* ¶ÁÈ¡ÏµÍ³ÔËĞĞÊ±¼ä */
+    runtime1 = bsp_GetRunTime();	/* è¯»å–ç³»ç»Ÿè¿è¡Œæ—¶é—´ */
     for (i = 0; i < TEST_FILE_LEN / BUF_SIZE; i++)
 	{
-        /* Ğ´Èë×Ö·û´®µ½ÎÄ¼ş  */
+        /* å†™å…¥å­—ç¬¦ä¸²åˆ°æ–‡ä»¶  */
         status =  fx_file_write(&fx_file, g_TestBuf, sizeof(g_TestBuf));
 
         if (status == FX_SUCCESS)
@@ -701,63 +701,63 @@ static void WriteFileTest(void)
         else
         {
             err = 1;
-			printf("%sÎÄ¼şĞ´Ê§°Ü\r\n", path);
+			printf("%sæ–‡ä»¶å†™å¤±è´¥\r\n", path);
 			break; 
         }
 	}
-	runtime2 = bsp_GetRunTime();	/* ¶ÁÈ¡ÏµÍ³ÔËĞĞÊ±¼ä */
+	runtime2 = bsp_GetRunTime();	/* è¯»å–ç³»ç»Ÿè¿è¡Œæ—¶é—´ */
 	
 	if (err == 0)
 	{
 		timelen = (runtime2 - runtime1);
-		printf("\r\n  Ğ´ºÄÊ± : %dms   Æ½¾ùĞ´ËÙ¶È : %dB/S (%dKB/S)\r\n",
+		printf("\r\n  å†™è€—æ—¶ : %dms   å¹³å‡å†™é€Ÿåº¦ : %dB/S (%dKB/S)\r\n",
                 timelen,
                 (TEST_FILE_LEN * 1000) / timelen,
                 ((TEST_FILE_LEN / 1024) * 1000) / timelen);
 	}
 
-    /* ¹Ø±ÕÎÄ¼ş  */
+    /* å…³é—­æ–‡ä»¶  */
     status =  fx_file_close(&fx_file);
 
     /* Check the file close status.  */
     if (status != FX_SUCCESS)
     {
-        printf("¹Ø±ÕÎÄ¼şÊ§°Ü\r\n");    
+        printf("å…³é—­æ–‡ä»¶å¤±è´¥\r\n");    
     }
 
-    /* ±£Ö¤ÎÄ¼şĞ´ÈëÈ«²¿ÉúĞ§ */
+    /* ä¿è¯æ–‡ä»¶å†™å…¥å…¨éƒ¨ç”Ÿæ•ˆ */
     status = fx_media_flush(&sdio_disk);
     
     /* Check the file close status.  */
     if (status != FX_SUCCESS)
     {
-        printf("fx_media_flushÊ§°Ü\r\n");    
+        printf("fx_media_flushå¤±è´¥\r\n");    
     }
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    /* ¿ªÊ¼¶ÁÎÄ¼ş²âÊÔ */
-	printf("¿ªÊ¼¶ÁÎÄ¼ş %dKB ...\r\n", TEST_FILE_LEN / 1024);
+    /* å¼€å§‹è¯»æ–‡ä»¶æµ‹è¯• */
+	printf("å¼€å§‹è¯»æ–‡ä»¶ %dKB ...\r\n", TEST_FILE_LEN / 1024);
     
-      /* ´ò¿ªÎÄ¼ş  */
+      /* æ‰“å¼€æ–‡ä»¶  */
     status =  fx_file_open(&sdio_disk, &fx_file, path, FX_OPEN_FOR_READ);
 
     if (status != FX_SUCCESS)
     {
-        printf("´ò¿ªÎÄ¼şÊ§°Ü\r\n");
+        printf("æ‰“å¼€æ–‡ä»¶å¤±è´¥\r\n");
     }
     
-    /* ÉèÖÃµ½ÆğÊ¼Î»ÖÃ¶ÁÈ¡  */
+    /* è®¾ç½®åˆ°èµ·å§‹ä½ç½®è¯»å–  */
     status =  fx_file_seek(&fx_file, 0);
 
     if (status != FX_SUCCESS)
     {
-        printf("ÉèÖÃ¶ÁÈ¡Î»ÖÃÊ§°Ü\r\n");       
+        printf("è®¾ç½®è¯»å–ä½ç½®å¤±è´¥\r\n");       
     }
     
-    runtime1 = bsp_GetRunTime();	/* ¶ÁÈ¡ÏµÍ³ÔËĞĞÊ±¼ä */
+    runtime1 = bsp_GetRunTime();	/* è¯»å–ç³»ç»Ÿè¿è¡Œæ—¶é—´ */
     for (i = 0; i < TEST_FILE_LEN / BUF_SIZE; i++)
 	{
-        /* Ğ´Èë×Ö·û´®µ½ÎÄ¼ş  */
+        /* å†™å…¥å­—ç¬¦ä¸²åˆ°æ–‡ä»¶  */
         
         status =  fx_file_read(&fx_file, g_TestBuf, sizeof(g_TestBuf), &bw);
         if (status == FX_SUCCESS)
@@ -767,13 +767,13 @@ static void WriteFileTest(void)
 				printf(".");
 			}
 
-			/* ±È½ÏĞ´ÈëµÄÊı¾İÊÇ·ñÕıÈ·£¬´ËÓï¾ä»áµ¼ÖÂ¶Á¿¨ËÙ¶È½á¹û½µµÍµ½ 3.5MBytes/S */
+			/* æ¯”è¾ƒå†™å…¥çš„æ•°æ®æ˜¯å¦æ­£ç¡®ï¼Œæ­¤è¯­å¥ä¼šå¯¼è‡´è¯»å¡é€Ÿåº¦ç»“æœé™ä½åˆ° 3.5MBytes/S */
 			for (k = 0; k < sizeof(g_TestBuf); k++)
 			{
 				if (g_TestBuf[k] != (k / 512) + '0')
 				{
 				  	err = 1;
-					printf("Speed1.txt ÎÄ¼ş¶Á³É¹¦£¬µ«ÊÇÊı¾İ³ö´í\r\n");
+					printf("Speed1.txt æ–‡ä»¶è¯»æˆåŠŸï¼Œä½†æ˜¯æ•°æ®å‡ºé”™\r\n");
 					break;
 				}
 			}
@@ -785,27 +785,27 @@ static void WriteFileTest(void)
         else
         {
            	err = 1;
-			printf("Speed1.txt ÎÄ¼ş¶ÁÊ§°Ü\r\n");
+			printf("Speed1.txt æ–‡ä»¶è¯»å¤±è´¥\r\n");
 			break; 
         }
 	}
-	runtime2 = bsp_GetRunTime();	/* ¶ÁÈ¡ÏµÍ³ÔËĞĞÊ±¼ä */
+	runtime2 = bsp_GetRunTime();	/* è¯»å–ç³»ç»Ÿè¿è¡Œæ—¶é—´ */
 
 	if (err == 0)
 	{
 		timelen = (runtime2 - runtime1);
-		printf("\r\n  ¶ÁºÄÊ± : %dms   Æ½¾ù¶ÁËÙ¶È : %dB/S (%dKB/S)\r\n", timelen,
+		printf("\r\n  è¯»è€—æ—¶ : %dms   å¹³å‡è¯»é€Ÿåº¦ : %dB/S (%dKB/S)\r\n", timelen,
 			(TEST_FILE_LEN * 1000) / timelen, ((TEST_FILE_LEN / 1024) * 1000) / timelen);
 	}
     
-     /* Ğ¶ÔØSD¿¨ */
+     /* å¸è½½SDå¡ */
     status =  fx_media_close(&sdio_disk);
 
     if (status != FX_SUCCESS)
     {
-        printf("Ğ¶ÔØÎÄ¼şÏµÍ³Ğ¶ÔØÊ§°Ü -- %d\r\n", status);
+        printf("å¸è½½æ–‡ä»¶ç³»ç»Ÿå¸è½½å¤±è´¥ -- %d\r\n", status);
     }  
 
 }
 
-/***************************** °²¸»À³µç×Ó www.armfly.com (END OF FILE) *********************************/
+/***************************** å®‰å¯Œè±ç”µå­ www.armfly.com (END OF FILE) *********************************/

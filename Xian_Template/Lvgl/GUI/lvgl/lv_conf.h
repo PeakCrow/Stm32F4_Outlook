@@ -65,7 +65,7 @@
 #if LV_MEM_CUSTOM == 0
     /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
 	/*可用于’lv_mem_alloc()'分配的内存大小，以字节为单位，大于等于2Kb*/
-    #define LV_MEM_SIZE (64U * 1024U)          /*[bytes]*/
+    #define LV_MEM_SIZE (62U * 1024U)          /*[bytes]*/
 
     /*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/
 	/*设置内存池的地址，而不是将其分配为普通数组，也可以在外部sram中.*/
@@ -260,7 +260,7 @@
 
 /*Enable the log module*/
 /* 使能日志模型 */
-#define LV_USE_LOG 0
+#define LV_USE_LOG 1
 #if LV_USE_LOG
 
     /*How important log should be added:--应添加的日志的重要性
@@ -270,12 +270,12 @@
     *LV_LOG_LEVEL_ERROR       Only critical issue, when the system may fail--系统可能出现故障时的唯一关键问题
     *LV_LOG_LEVEL_USER        Only logs added by the user--仅用户添加的日志
     *LV_LOG_LEVEL_NONE        Do not log anything--不记录任何内容*/
-    #define LV_LOG_LEVEL LV_LOG_LEVEL_WARN
+    #define LV_LOG_LEVEL LV_LOG_LEVEL_INFO
 
     /*1: Print the log with 'printf';打印日志使用printf
     *0: User need to register a callback with `lv_log_register_print_cb()`*/
 	/* 用户需要注册回调函数： lv_log_register_print_cb() */
-    #define LV_LOG_PRINTF 0
+    #define LV_LOG_PRINTF 1
 
     /*Enable/disable LV_LOG_TRACE in modules that produces a huge number of logs*/
 	/* 在产生大量日志的模块中启用/禁用LV_LOG_TRACE */
@@ -459,7 +459,9 @@
  /*可以选择在此处声明自定义字体
  *你也可以使用这些字体作为默认字体，他们将在全局可用
  *E.g. #define LV_FONT_CUSTOM_DECLARE   LV_FONT_DECLARE(my_font_1) LV_FONT_DECLARE(my_font_2)*/
-#define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(myFont)
+#define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(myFont36) \
+																LV_FONT_DECLARE(myFont20)
+															   
 
 /*Always set a default font*/
 /*始终设置默认字体*/
@@ -502,7 +504,7 @@
  * - LV_TXT_ENC_UTF8
  * - LV_TXT_ENC_ASCII
  */
-#define LV_TXT_ENC LV_TXT_ENC_UTF8
+#define LV_TXT_ENC 		LV_TXT_ENC_UTF8
 
 /*Can break (wrap) texts on these chars*/
 /*可以在这些字符上断开(换行)文本*/

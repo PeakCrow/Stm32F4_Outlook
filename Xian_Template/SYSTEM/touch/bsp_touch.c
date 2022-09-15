@@ -450,8 +450,8 @@ uint8_t GT9147_Init(void)
     __HAL_RCC_GPIOC_CLK_ENABLE();			//开启GPIOC时钟
 	
     //PB1
-    //GPIO_Initure.Pin=GPIO_PIN_1;           	//PB1设置为上拉输入
-    //GPIO_Initure.Mode=GPIO_MODE_INPUT;      //输入
+    GPIO_Initure.Pin=GPIO_PIN_1;           	//PB1设置为上拉输入
+    GPIO_Initure.Mode=GPIO_MODE_INPUT;      //输入
     GPIO_Initure.Pull=GPIO_PULLUP;          //上拉
     GPIO_Initure.Speed=GPIO_SPEED_HIGH;     //高速
     HAL_GPIO_Init(GPIOB,&GPIO_Initure);     //初始化
@@ -544,7 +544,7 @@ uint8_t GT9147_Scan(uint8_t mode)
 						tp_dev.x[i]=((uint16_t)buf[1]<<8)+buf[0];
 						tp_dev.y[i]=((uint16_t)buf[3]<<8)+buf[2];
 					}  
-					printf("x[%d]:%d,y[%d]:%d,area:%d\r\n",i,tp_dev.x[i],i,tp_dev.y[i],temp_area3);
+					//printf("x[%d]:%d,y[%d]:%d,area:%d\r\n",i,tp_dev.x[i],i,tp_dev.y[i],temp_area3);
 					
 				}			
 			} 

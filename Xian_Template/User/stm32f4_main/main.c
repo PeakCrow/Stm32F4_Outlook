@@ -12,10 +12,7 @@
   * - 2022-4-25  TRX Created
 *******************************************************************************/
 #include "sys.h"
-#include "malloc.h"
-//#define TRC_BUF_SIZE (500*32)                 /* Buffer size 500 events */
-//#define TRC_MAX_OBJ_COUNT (40)         /* Max number of ThreadX objects */
-//UCHAR myBuf[TRC_BUF_SIZE];
+
 
 /*
 *********************************************************************************************************
@@ -288,11 +285,6 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_InitSPI1Bus();							/* SPI1总线初始化 */
 	bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
 	
-//	bsp_InitSram();								/* 初始化外部SRAM */ 	
-//	my_mem_init(SRAMIN);			/* 初始化内部内存池 */
-//	my_mem_init(SRAMEX);			/* 初始化外部内存池 */
-//	my_mem_init(SRAMCCM);			/* 初始化CCM内存池 */
-	
 	lv_init(); 									/* lvgl 系统初始化 */
 	lv_port_disp_init(); 						/* lvgl 显示接口初始化,放在 lv_init()的后面 */
 	lv_port_indev_init(); 						/* lvgl 输入接口初始化,放在 lv_init()的后面 */
@@ -460,7 +452,7 @@ static void AppTaskMsgPro(ULONG thread_input)
 		#if 0
 		DemoFileX();
 		#else
-		DemoSpiFlash();
+		//DemoSpiFlash();
 		tx_thread_sleep(10);
 		#endif
 	}   

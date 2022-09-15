@@ -12,7 +12,7 @@
 #include "lv_port_disp_template.h"
 #include "../../lvgl.h"
 #include "sys.h"
-#include "malloc.h"
+
 /*********************
  *      DEFINES
  *********************/

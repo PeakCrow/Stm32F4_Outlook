@@ -1,10 +1,6 @@
 #ifndef _BSP_SPI_FLASH_H
 #define _BSP_SPI_FLASH_H
 
-#include "stm32f407xx.h"
-#include "bsp_spi_bus.h"
-#include "stdlib.h"
-#include "string.h"
 #include "sys.h"
 
 #define SF_MAX_PAGE_SIZE    (4 * 1024)
