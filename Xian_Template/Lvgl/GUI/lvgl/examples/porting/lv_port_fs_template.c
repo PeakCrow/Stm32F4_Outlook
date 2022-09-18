@@ -4,7 +4,7 @@
  */
 
  /*Copy this file as "lv_port_fs.c" and set this value to "1" to enable content*/
-#if 1
+#if 0
 
 /*********************
  *      INCLUDES
@@ -12,6 +12,8 @@
 #include "lv_port_fs_template.h"
 #include "../../lvgl.h"
 #include "sys.h"
+#include "ff.h" 
+
 
 /*********************
  *      DEFINES
@@ -20,13 +22,15 @@
 /**********************
  *      TYPEDEFS
  **********************/
-
+typedef FIL file_t;		// °ÑFILÀàÐÍ¶¨Òå³Éfile_t
+typedef DIR dir_t; 		// °ÑDIRÀàÐÍ¶¨Òå³Édir_t
+typedef  FIL * Fatfs_file_t;
 /**********************
  *  STATIC PROTOTYPES
  **********************/
 static void fs_init(void);
 
-static void * fs_open(lv_fs_drv_t * drv, char * path, lv_fs_mode_t mode);
+static lv_fs_res_t fs_open (lv_fs_drv_t * drv, void * file_p, const char * path, lv_fs_mode_t mode);
 static lv_fs_res_t fs_close(lv_fs_drv_t * drv, void * file_p);
 static lv_fs_res_t fs_read(lv_fs_drv_t * drv, void * file_p, void * buf, uint32_t btr, uint32_t * br);
 static lv_fs_res_t fs_write(lv_fs_drv_t * drv, void * file_p, void * buf, uint32_t btw, uint32_t * bw);
@@ -45,12 +49,7 @@ static lv_fs_res_t fs_dir_close(lv_fs_drv_t * drv, void * rddir_p);
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
-/* ç»™FileXå¼€çš„åŠ¨æ€å†…å­˜ */
-uint32_t media_memory[8*1024];  
-/* FileXç›¸å…³å˜é‡ */
-FX_MEDIA     sdio_disk; 
-FX_FILE      fx_file;
-CHAR entry_name[FX_MAX_LONG_NAME_LEN];
+
 /**********************
  *      MACROS
  **********************/
@@ -58,7 +57,7 @@ CHAR entry_name[FX_MAX_LONG_NAME_LEN];
 /**********************
  *   GLOBAL FUNCTIONS
  **********************/
-extern VOID  fx_stm32_sd_driver(FX_MEDIA *media_ptr);
+
 
 
 void lv_port_fs_init(void)
@@ -77,7 +76,7 @@ void lv_port_fs_init(void)
     lv_fs_drv_init(&fs_drv);
 
     /*Set up fields...*/
-    fs_drv.letter = 'P';
+    fs_drv.letter = 'F';
     fs_drv.open_cb = fs_open;
     fs_drv.close_cb = fs_close;
     fs_drv.read_cb = fs_read;
@@ -100,10 +99,26 @@ void lv_port_fs_init(void)
 static void fs_init(void)
 {
     /*E.g. for FatFS initialize the SD card and FatFS itself*/
-	/* åˆå§‹åŒ–filexæ–‡ä»¶ç³»ç»Ÿ */
-	fx_system_initialize();
-	/* æŒ‚è½½SDå¡ */
-	fx_media_open(&sdio_disk, "STM32_SDIO_DISK", fx_stm32_sd_driver, 0, media_memory, sizeof(media_memory));;
+    /* ÕâÀïÊÇÎÄ¼þÏµÍ³ºÍÄã´æ´¢Éè±¸³õÊ¼»¯µÄµØ·½£¬ÄãËùÓÐµÄÉè±¸×îºÃ±ðÔÚ±ðµÄµØ·½³õÊ¼»¯ÁË */
+	SD_Init();
+	/* µ½ÕâÀï¶¼»á½øÐÐ³õÊ¼»¯ºÍ¹ÒÔØ */
+//    FATFS * fs = (FATFS*)lv_mem_alloc(sizeof(FATFS));
+//	FRESULT fres = FR_NOT_READY;
+
+	/* ÄãÉè±¸µÄ³õÊ¼»¯ */
+	exfuns_init();
+	f_mount(fs[0],"0:",1); 					//¹ÒÔØSD¿¨ 
+//	/* ¹ÒÔØÉè±¸ */
+//  	if (fres != FR_OK) {
+//  		/* ÕâÀïµÄÇý¶¯ºÅÎÒÖ±½ÓÊ¹ÓÃ×Ö·û´®¡°SD:¡±£¬ÔÚffconf.hÎÄ¼þÖÐµÄFF_VOLUME_STRS¶¨Òå */
+//    	fres = f_mount(fs, "0:", 1);
+//    	if (fres != FR_OK) {
+//      		printf("SD Card mounted error. (%d)\n", fres );
+//    	} else
+//	    	printf("SD Card mounted successfully.\n\n");
+//  	}
+
+//	lv_mem_free(fs);
     /*You code here*/
 }
 
@@ -114,29 +129,34 @@ static void fs_init(void)
  * @param mode      read: FS_MODE_RD, write: FS_MODE_WR, both: FS_MODE_RD | FS_MODE_WR
  * @return          a file descriptor or NULL on error
  */
-static void * fs_open(lv_fs_drv_t * drv, char * path, lv_fs_mode_t mode)
+static lv_fs_res_t fs_open (lv_fs_drv_t * drv, void * file_p, const char * path, lv_fs_mode_t mode)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+    (void) drv; /*Unused*/
+	lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+    BYTE flags = 0;
 
-    void * f = NULL;
+    if(mode == LV_FS_MODE_WR) flags = FA_WRITE;
+    else if(mode == LV_FS_MODE_RD) flags = FA_READ;
+    else if(mode == (LV_FS_MODE_WR | LV_FS_MODE_RD)) flags = FA_READ|FA_WRITE;
 
-    if(mode == LV_FS_MODE_WR)
-    {
-        /*Open a file for write*/
-       fx_file_open(&sdio_disk, &fx_file, path, FX_OPEN_FOR_WRITE);         /*Add your code here*/
-    }
-    else if(mode == LV_FS_MODE_RD)
-    {
-        /*Open a file for read*/
-       fx_file_open(&sdio_disk, &fx_file, path, FX_OPEN_FOR_READ);        /*Add your code here*/
-    }
-    else if(mode == (LV_FS_MODE_WR | LV_FS_MODE_RD))
-    {
-        /*Open a file for read and write*/
-       fx_file_open(&sdio_disk, &fx_file, path, FX_OPEN_FOR_READ_FAST);        /*Add your code here*/
+    /*Make the path relative to the current directory (the projects root folder)*/
+    char buf[256];
+    sprintf(buf, "0:/%s", path);
+	res = f_open(file,  buf, flags);
+	if(res != FR_OK) return LV_FS_RES_UNKNOWN;
+    else {
+       // fseek(f, 0, SEEK_SET);
+
+        /* 'file_p' is pointer to a file descriptor and
+         * we need to store our file descriptor here*/
+       // FIL* fp = file_p;        /*Just avoid the confusing casings*/
+		Fatfs_file_t * fp = file_p;        /*Just avoid the confusing casings*/
+        *fp = file;
     }
 
-    return f;
+    return LV_FS_RES_OK;
+
+	
 }
 
 /**
@@ -147,14 +167,11 @@ static void * fs_open(lv_fs_drv_t * drv, char * path, lv_fs_mode_t mode)
  */
 static lv_fs_res_t fs_close(lv_fs_drv_t * drv, void * file_p)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+	(void) drv; /*Unused*/
 
-    /*Add your code here*/
-	if(fx_file_close(&fx_file) == FX_SUCCESS)
-		res = LV_FS_RES_OK;
-	else
-		res = LV_FS_RES_FS_ERR;
-    return res;
+    Fatfs_file_t * fp = file_p;        /*Just avoid the confusing casings*/
+    f_close(*fp);
+    return LV_FS_RES_OK;
 }
 
 /**
@@ -168,14 +185,11 @@ static lv_fs_res_t fs_close(lv_fs_drv_t * drv, void * file_p)
  */
 static lv_fs_res_t fs_read(lv_fs_drv_t * drv, void * file_p, void * buf, uint32_t btr, uint32_t * br)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+	(void) drv; /*Unused*/
 
-    /*Add your code here*/
-	if(fx_file_read(&fx_file, buf, btr, br) == FX_SUCCESS)
-		res = LV_FS_RES_OK;
-	else
-		res = LV_FS_RES_FS_ERR;		
-    return res;
+    Fatfs_file_t * fp = file_p;        /*Just avoid the confusing casings*/
+	f_read(*fp,buf,btr,br);
+    return LV_FS_RES_OK;
 }
 
 /**
@@ -191,11 +205,8 @@ static lv_fs_res_t fs_write(lv_fs_drv_t * drv, void * file_p, void * buf, uint32
 {
     lv_fs_res_t res = LV_FS_RES_NOT_IMP;
 
-    /*Add your code here*/
-	if(fx_file_write(&fx_file, buf, *bw)	 == FX_SUCCESS)
-		res = LV_FS_RES_OK;
-	else
-		res = LV_FS_RES_FS_ERR;			
+    /* Add your code here*/
+	//res = f_write((FIL *) file_p, buf,  btw, bw);
     return res;
 }
 
@@ -209,14 +220,11 @@ static lv_fs_res_t fs_write(lv_fs_drv_t * drv, void * file_p, void * buf, uint32
  */
 static lv_fs_res_t fs_seek(lv_fs_drv_t * drv, void * file_p, uint32_t pos, lv_fs_whence_t whence)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+	(void) drv; /*Unused*/
 
-    /*Add your code here*/
-	if(fx_file_seek(&fx_file, pos) == FX_SUCCESS)
-		res = LV_FS_RES_OK;
-	else
-		res = LV_FS_RES_FS_ERR;
-    return res;
+    Fatfs_file_t * fp = file_p;        /*Just avoid the confusing casings*/
+	f_lseek(*fp, (DWORD)pos);
+    return LV_FS_RES_OK;
 }
 /**
  * Give the position of the read write pointer
@@ -227,11 +235,10 @@ static lv_fs_res_t fs_seek(lv_fs_drv_t * drv, void * file_p, uint32_t pos, lv_fs
  */
 static lv_fs_res_t fs_tell(lv_fs_drv_t * drv, void * file_p, uint32_t * pos_p)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-
-    /*Add your code here*/
-	res = LV_FS_RES_OK;
-    return res;
+	 (void) drv; /*Unused*/
+    Fatfs_file_t * fp = file_p;        /*Just avoid the confusing casings*/
+    *pos_p = (*fp)->fptr;
+    return LV_FS_RES_OK;
 }
 
 /**
@@ -242,11 +249,15 @@ static lv_fs_res_t fs_tell(lv_fs_drv_t * drv, void * file_p, uint32_t * pos_p)
  */
 static void * fs_dir_open(lv_fs_drv_t * drv, char *path)
 {
-    void * dir = NULL;
-    /*Add your code here*/
-    fx_directory_create(&sdio_disk,path);       /*Add your code here*/
-		
-    return dir;
+    DIR * d = lv_mem_alloc(sizeof(DIR));
+    if(d == NULL) return NULL;
+
+    FRESULT res = f_opendir(d, path);
+    if(res != FR_OK) {
+        lv_mem_free(d);
+        d = NULL;
+    }
+    return d;
 }
 
 /**
@@ -259,14 +270,23 @@ static void * fs_dir_open(lv_fs_drv_t * drv, char *path)
  */
 static lv_fs_res_t fs_dir_read(lv_fs_drv_t * drv, void * rddir_p, char *fn)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-	UINT available_bytes;
-    /*Add your code here*/
-	if(fx_directory_attributes_read(&sdio_disk,fn,&available_bytes) == FX_SUCCESS)
-		res = LV_FS_RES_OK;
-	else
-		res = LV_FS_RES_FS_ERR;		
-    return res;
+	FRESULT res;
+	FILINFO fno;
+	fn[0] = '\0';
+
+    do {
+    	res = f_readdir(rddir_p, &fno);
+    	if(res != FR_OK) return LV_FS_RES_UNKNOWN;
+
+		if(fno.fattrib & AM_DIR) {
+			fn[0] = '/';
+			strcpy(&fn[1], fno.fname);
+		}
+		else strcpy(fn, fno.fname);
+
+    } while(strcmp(fn, "/.") == 0 || strcmp(fn, "/..") == 0);
+
+    return LV_FS_RES_OK;
 }
 
 /**
@@ -277,14 +297,9 @@ static lv_fs_res_t fs_dir_read(lv_fs_drv_t * drv, void * rddir_p, char *fn)
  */
 static lv_fs_res_t fs_dir_close(lv_fs_drv_t * drv, void * rddir_p)
 {
-    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-//	UINT available_bytes;
-    /*Add your code here*/
-//	if(fx_directory_attributes_read(&sdio_disk,fn,&available_bytes) == FX_SUCCESS)
-//		res = LV_FS_RES_OK;
-//	else
-		res = LV_FS_RES_FS_ERR;
-    return res;
+	f_closedir(rddir_p);
+    lv_mem_free(rddir_p);
+    return LV_FS_RES_OK;
 }
 
 #else /*Enable this file at the top*/

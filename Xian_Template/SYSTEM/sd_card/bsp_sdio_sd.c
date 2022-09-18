@@ -1,16 +1,16 @@
 /*
 *********************************************************************************************************
 *
-*	æ¨¡å—åç§° : SDå¡é©±åŠ¨æ¨¡å—
-*	æ–‡ä»¶åç§° : bsp_sdio_sd.c
-*	ç‰ˆ    æœ¬ : V1.0
-*	è¯´    æ˜ : SDå¡åº•å±‚é©±åŠ¨ã€‚æ ¹æ®STçš„é©±åŠ¨æ–‡ä»¶ä¿®æ”¹ã€‚
+*	Ä£¿éÃû³Æ : SD¿¨Çı¶¯Ä£¿é
+*	ÎÄ¼şÃû³Æ : bsp_sdio_sd.c
+*	°æ    ±¾ : V1.0
+*	Ëµ    Ã÷ : SD¿¨µ×²ãÇı¶¯¡£¸ù¾İSTµÄÇı¶¯ÎÄ¼şĞŞ¸Ä¡£
 *
-*	ä¿®æ”¹è®°å½• :
-*		ç‰ˆæœ¬å·  æ—¥æœŸ        ä½œè€…     è¯´æ˜
-*		V1.0    2018-09-08  armfly  æ­£å¼å‘å¸ƒ
+*	ĞŞ¸Ä¼ÇÂ¼ :
+*		°æ±¾ºÅ  ÈÕÆÚ        ×÷Õß     ËµÃ÷
+*		V1.0    2018-09-08  armfly  ÕıÊ½·¢²¼
 *
-*	Copyright (C), 2018-2030, å®‰å¯Œè±ç”µå­ www.armfly.com
+*	Copyright (C), 2018-2030, °²¸»À³µç×Ó www.armfly.com
 *
 *********************************************************************************************************
 */
@@ -96,8 +96,8 @@
 ------------------------------------------------------------------------------*/ 
 
 /* Includes ------------------------------------------------------------------*/
-//#include "bsp_sdio_sd.h"
-#include "sys.h"
+#include "bsp_sdio_sd.h"
+
 /** @addtogroup BSP
   * @{
   */
@@ -175,32 +175,6 @@ uint8_t BSP_SD_Init(void)
   }
   
   return  SD_state;
-}
-
-/**
-  * @brief  DeInitializes the SD card device.
-  * @retval SD status
-  */
-uint8_t BSP_SD_DeInit(void)
-{
-  uint8_t sd_state = MSD_OK;
-
-  uSdHandle.Instance = SDIO;
-
-  /* Set back Mfx pin to INPUT mode in case it was in exti */
-  //UseExtiModeDetection = 0;
-
-  /* HAL SD deinitialization */
-  if(HAL_SD_DeInit(&uSdHandle) != HAL_OK)
-  {
-    sd_state = MSD_ERROR;
-  }
-
-  /* Msp SD deinitialization */
-  uSdHandle.Instance = SDIO;
-  BSP_SD_MspDeInit(&uSdHandle, NULL);
-
-  return  sd_state;
 }
 
 /**
@@ -460,29 +434,6 @@ __weak void BSP_SD_MspInit(SD_HandleTypeDef *hsd, void *Params)
 }
 
 /**
-  * @brief  DeInitializes the SD MSP.
-  * @param  hsd: SD handle
-  * @param  Params: Pointer to void   
-  * @retval None
-  */
-__weak void BSP_SD_MspDeInit(SD_HandleTypeDef *hsd, void *Params)
-{
-    /* Disable NVIC for SDIO interrupts */
-    HAL_NVIC_DisableIRQ(SDIO_IRQn);
-    HAL_NVIC_DisableIRQ(SD_DMAx_Rx_IRQn);
-    HAL_NVIC_DisableIRQ(SD_DMAx_Tx_IRQn);
-
-    /* DeInit GPIO pins can be done in the application
-       (by surcharging this __weak function) */
-
-    /* Disable SDMMC1 clock */
-     __HAL_RCC_SDIO_CLK_DISABLE();
-
-    /* GPIO pins clock and DMA clocks can be shut down in the application
-       by surcharging this __weak function */
-}
-
-/**
   * @brief  Gets the current SD card data status.
   * @retval Data transfer state.
   *          This value can be one of the following values:
@@ -565,26 +516,26 @@ __weak void BSP_SD_ReadCpltCallback(void)
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: SDIO_IRQHandler
-*	åŠŸèƒ½è¯´æ˜: SDIOä¸­æ–­
-*	å½¢    å‚:  æ— 
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: SDIO_IRQHandler
+*	¹¦ÄÜËµÃ÷: SDIOÖĞ¶Ï
+*	ĞÎ    ²Î:  ÎŞ
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
-//void SDIO_IRQHandler(void)
-//{
-//	HAL_SD_IRQHandler(&uSdHandle);
-//}
+void SDIO_IRQHandler(void)
+{
+	HAL_SD_IRQHandler(&uSdHandle);
+}
 
-//void DMA2_Stream6_IRQHandler(void)
-//{
-//    HAL_DMA_IRQHandler(uSdHandle.hdmatx);
-//}
+void DMA2_Stream6_IRQHandler(void)
+{
+    HAL_DMA_IRQHandler(uSdHandle.hdmatx);
+}
 
-//void DMA2_Stream3_IRQHandler(void)
-//{
-//    HAL_DMA_IRQHandler(uSdHandle.hdmarx);
-//}
+void DMA2_Stream3_IRQHandler(void)
+{
+    HAL_DMA_IRQHandler(uSdHandle.hdmarx);
+}
 /**
   * @}
   */ 

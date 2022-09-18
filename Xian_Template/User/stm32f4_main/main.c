@@ -285,10 +285,12 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_InitSPI1Bus();							/* SPI1总线初始化 */
 	bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
 	
+	
 	lv_init(); 									/* lvgl 系统初始化 */
+	
 	lv_port_disp_init(); 						/* lvgl 显示接口初始化,放在 lv_init()的后面 */
 	lv_port_indev_init(); 						/* lvgl 输入接口初始化,放在 lv_init()的后面 */
-		
+	//lv_port_fs_init();          // 文件系统设备初始化	
 	/* 创建任务间通信机制 */
 	AppObjCreate();
 
@@ -442,15 +444,16 @@ static  void  AppTaskCreate (void)
                        TX_NO_TIME_SLICE,               /* 不开启时间片 */
                        TX_AUTO_START);                /* 创建后立即启动 */
 }
-extern void DemoFileX(void);
+extern void DemoFatFS(void);
 static void AppTaskMsgPro(ULONG thread_input)
 {
 	(void)thread_input;
 
 	while(1)
 	{
-		#if 0
-		DemoFileX();
+		#if 1
+		DemoFatFS();
+		tx_thread_sleep(10);
 		#else
 		//DemoSpiFlash();
 		tx_thread_sleep(10);

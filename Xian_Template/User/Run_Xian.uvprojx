@@ -339,7 +339,7 @@
               <MiscControls>--diag_suppress=188 --diag_suppress=68 --diag_suppress=111 --diag_suppress=188 --diag_suppress=223 --diag_suppress=546 --diag_suppress=1295 --diag_suppress=870</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,USE_FULL_LL_DRIVER,TX_ENABLE_FPU_SUPPORT,TX_ENABLE_STACK_CHECKING</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Core;..\Obj;..\User;..\SYSTEM\sys;..\HAL_lib\Inc;..\HAL_lib\STM32F4xx_HAL_Driver\Inc;..\HAL_lib\CMSIS\Include;..\HAL_lib\STM32F4xx_HAL_Driver\Src;.\stm32f4_main;..\SYSTEM\ticktim;..\SYSTEM\usart_fifo;..\SYSTEM\key_fifo;..\SYSTEM\spi;..\SYSTEM\flash;..\SYSTEM\iic;..\SYSTEM\ink_screen;..\ThreadX\ports\cortex_m4\ac5\inc;..\ThreadX\common\inc;..\SYSTEM\led;..\SYSTEM\can;..\SYSTEM\timer;..\SYSTEM\ws2812b;..\SYSTEM\rotation;..\SYSTEM\ads1256;..\SYSTEM\lcd;..\SYSTEM\touch;..\SYSTEM\sram;..\SYSTEM\mlx90614;..\SYSTEM\sd_card;..\Lvgl\GUI\lvgl;..\Lvgl\GUI\lvgl\src;..\Lvgl\GUI\lvgl\examples\porting;..\Lvgl\GUI_APP;..\SYSTEM\fonts</IncludePath>
+              <IncludePath>..\Core;..\Obj;..\User;..\SYSTEM\sys;..\HAL_lib\Inc;..\HAL_lib\STM32F4xx_HAL_Driver\Inc;..\HAL_lib\CMSIS\Include;..\HAL_lib\STM32F4xx_HAL_Driver\Src;.\stm32f4_main;..\SYSTEM\ticktim;..\SYSTEM\usart_fifo;..\SYSTEM\key_fifo;..\SYSTEM\spi;..\SYSTEM\flash;..\SYSTEM\iic;..\SYSTEM\ink_screen;..\ThreadX\ports\cortex_m4\ac5\inc;..\ThreadX\common\inc;..\SYSTEM\led;..\SYSTEM\can;..\SYSTEM\timer;..\SYSTEM\ws2812b;..\SYSTEM\rotation;..\SYSTEM\ads1256;..\SYSTEM\lcd;..\SYSTEM\touch;..\SYSTEM\sram;..\SYSTEM\mlx90614;..\SYSTEM\sd_card;..\Lvgl\GUI\lvgl;..\Lvgl\GUI\lvgl\src;..\Lvgl\GUI\lvgl\examples\porting;..\Lvgl\GUI_APP;..\SYSTEM\fonts;..\FatFs\src;..\FatFs\doc;..\FatFs\src\drivers</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -424,24 +424,9 @@
               <FilePath>..\SYSTEM\ticktim\ticktim.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_usart_fifo.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\usart_fifo\bsp_usart_fifo.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_key.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\key_fifo\bsp_key.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_spi_bus.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\spi\bsp_spi_bus.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_spi_flash.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\flash\bsp_spi_flash.c</FilePath>
             </File>
             <File>
               <FileName>bsp_iic_bus.c</FileName>
@@ -449,9 +434,9 @@
               <FilePath>..\SYSTEM\iic\bsp_iic_bus.c</FilePath>
             </File>
             <File>
-              <FileName>stm32f4xx_hal_timebase_tim.c</FileName>
+              <FileName>bsp_led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ticktim\stm32f4xx_hal_timebase_tim.c</FilePath>
+              <FilePath>..\SYSTEM\led\bsp_led.c</FilePath>
             </File>
             <File>
               <FileName>bsp_dwt.c</FileName>
@@ -459,9 +444,29 @@
               <FilePath>..\SYSTEM\ticktim\bsp_dwt.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_led.c</FileName>
+              <FileName>bsp_lcd.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\led\bsp_led.c</FilePath>
+              <FilePath>..\SYSTEM\lcd\bsp_lcd.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_touch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\touch\bsp_touch.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_spi_flash.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\flash\bsp_spi_flash.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_spi_bus.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\spi\bsp_spi_bus.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_sdio_sd.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\sd_card\bsp_sdio_sd.c</FilePath>
             </File>
             <File>
               <FileName>bsp_can_bus.c</FileName>
@@ -479,24 +484,9 @@
               <FilePath>..\SYSTEM\ws2812b\bsp_ws2812b.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_rotation_sensor.c</FileName>
+              <FileName>bsp_usart_fifo.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\rotation\bsp_rotation_sensor.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_spi_ads1256.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ads1256\bsp_spi_ads1256.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_lcd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\lcd\bsp_lcd.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_touch.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\touch\bsp_touch.c</FilePath>
+              <FilePath>..\SYSTEM\usart_fifo\bsp_usart_fifo.c</FilePath>
             </File>
             <File>
               <FileName>bsp_mlx90614.c</FileName>
@@ -504,9 +494,19 @@
               <FilePath>..\SYSTEM\mlx90614\bsp_mlx90614.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_sdio_sd.c</FileName>
+              <FileName>bsp_spi_ads1256.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\sd_card\bsp_sdio_sd.c</FilePath>
+              <FilePath>..\SYSTEM\ads1256\bsp_spi_ads1256.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_rotation_sensor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\rotation\bsp_rotation_sensor.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_hal_timebase_tim.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\ticktim\stm32f4xx_hal_timebase_tim.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2548,6 +2548,11 @@
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI\lvgl\examples\porting\lv_port_indev_template.c</FilePath>
             </File>
+            <File>
+              <FileName>lv_port_fs_template.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\examples\porting\lv_port_fs_template.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -2684,6 +2689,46 @@
                   </Cads>
                 </FileArmAds>
               </FileOption>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>FatFs</GroupName>
+          <Files>
+            <File>
+              <FileName>ff.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FatFs\src\ff.c</FilePath>
+            </File>
+            <File>
+              <FileName>diskio.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FatFs\src\diskio.c</FilePath>
+            </File>
+            <File>
+              <FileName>cc936.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FatFs\src\option\cc936.c</FilePath>
+            </File>
+            <File>
+              <FileName>syscall.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FatFs\src\option\syscall.c</FilePath>
+            </File>
+            <File>
+              <FileName>ff_gen_drv.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FatFs\src\ff_gen_drv.c</FilePath>
+            </File>
+            <File>
+              <FileName>sd_diskio_dma.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FatFs\src\drivers\sd_diskio_dma.c</FilePath>
+            </File>
+            <File>
+              <FileName>demo_sd_fatfs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\sd_card\demo_sd_fatfs.c</FilePath>
             </File>
           </Files>
         </Group>

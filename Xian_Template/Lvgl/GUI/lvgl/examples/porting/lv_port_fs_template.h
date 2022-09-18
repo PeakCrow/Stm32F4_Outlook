@@ -4,7 +4,7 @@
  */
 
  /*Copy this file as "lv_port_fs.h" and set this value to "1" to enable content*/
-#if 1
+#if 0
 
 #ifndef LV_PORT_FS_TEMPL_H
 #define LV_PORT_FS_TEMPL_H

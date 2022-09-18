@@ -58,7 +58,7 @@
 #include "bsp_font.h"						/* 屏幕显示的字体C库文件 */
 #include "bsp_lcd.h"						/* 屏幕显示驱动 */
 #include "bsp_touch.h"					/* 电容屏触摸驱动,包含有触摸画板例程 */
-#include "bsp_sdio_sd.h"				/* SD卡底层驱动 */	 
+//#include "bsp_sdio_sd.h"				/* SD卡底层驱动 */	 
 
 
 #if	DEBUG_SWITCH_EN == 1
