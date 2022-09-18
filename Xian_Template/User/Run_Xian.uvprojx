@@ -2549,9 +2549,9 @@
               <FilePath>..\Lvgl\GUI\lvgl\examples\porting\lv_port_indev_template.c</FilePath>
             </File>
             <File>
-              <FileName>lv_port_fs_template.c</FileName>
+              <FileName>lv_fs_fatfs.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\examples\porting\lv_port_fs_template.c</FilePath>
+              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\fsdrv\lv_fs_fatfs.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2724,11 +2724,6 @@
               <FileName>sd_diskio_dma.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FatFs\src\drivers\sd_diskio_dma.c</FilePath>
-            </File>
-            <File>
-              <FileName>demo_sd_fatfs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\sd_card\demo_sd_fatfs.c</FilePath>
             </File>
           </Files>
         </Group>

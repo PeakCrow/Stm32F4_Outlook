@@ -287,10 +287,9 @@ static  void  AppTaskStart (ULONG thread_input)
 	
 	
 	lv_init(); 									/* lvgl 系统初始化 */
-	
 	lv_port_disp_init(); 						/* lvgl 显示接口初始化,放在 lv_init()的后面 */
 	lv_port_indev_init(); 						/* lvgl 输入接口初始化,放在 lv_init()的后面 */
-	//lv_port_fs_init();          // 文件系统设备初始化	
+
 	/* 创建任务间通信机制 */
 	AppObjCreate();
 
@@ -451,7 +450,7 @@ static void AppTaskMsgPro(ULONG thread_input)
 
 	while(1)
 	{
-		#if 1
+		#if 0
 		DemoFatFS();
 		tx_thread_sleep(10);
 		#else

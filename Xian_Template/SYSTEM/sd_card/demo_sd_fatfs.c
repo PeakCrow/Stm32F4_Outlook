@@ -186,6 +186,7 @@ static void ViewRootDir(void)
 	
  	/* 挂载文件系统 */
 	result = f_mount(&fs, DiskPath, 0);	/* Mount a logical drive */
+	printf("SD盘符：%s\r\n",DiskPath);
 	if (result != FR_OK)
 	{
 		printf("挂载文件系统失败 (%s)\r\n", FR_Table[result]);
@@ -193,6 +194,7 @@ static void ViewRootDir(void)
 
 	/* 打开根文件夹 */
 	result = f_opendir(&DirInf, DiskPath); /* 如果不带参数，则从当前目录开始 */
+	printf("SD盘符：%s\r\n",DiskPath);
 	if (result != FR_OK)
 	{
 		printf("打开根目录失败  (%s)\r\n", FR_Table[result]);

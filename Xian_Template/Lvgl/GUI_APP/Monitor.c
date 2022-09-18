@@ -29,7 +29,9 @@ void lv_example_get_started_1(void)
     lv_label_set_text(label, "Button");                     /*Set the labels text*/
     lv_obj_center(label);
 }
-//LV_IMG_DECLARE(excemple);
+
+//dm_motor.bin
+//motor_png.png
 void lvgl_demo()
 {
 //	lv_example_get_started_1();
@@ -44,7 +46,8 @@ void lvgl_demo()
 	lv_label_set_text(label2,"Ls_Racing车队,车载仪表,田润显,上海海能汽车电子有限公司,20号宋体!");
 	
 	lv_obj_t * img = lv_img_create(lv_scr_act());
-	lv_obj_set_pos(img,20,20);
-	lv_img_set_src(img,"F:/dm_motor.bin");
+	//lv_obj_center(img);
+	lv_obj_set_pos(img,100,300);
+	lv_img_set_src(img,"0:/PICTURE/dm_motor.bin");
 }
 
