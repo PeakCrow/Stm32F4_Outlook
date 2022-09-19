@@ -65,7 +65,7 @@
 #if LV_MEM_CUSTOM == 0
     /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
 	/*可用于’lv_mem_alloc()'分配的内存大小，以字节为单位，大于等于2Kb*/
-    #define LV_MEM_SIZE (45U * 1024U)          /*[bytes]*/
+    #define LV_MEM_SIZE (80U * 1024U)          /*[bytes]*/
 
     /*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/
 	/*设置内存池的地址，而不是将其分配为普通数组，也可以在外部sram中.*/
@@ -92,7 +92,7 @@
 
 /*Use the standard `memcpy` and `memset` instead of LVGL's own functions. (Might or might not be faster).*/
 /*使用标准的 `memcpy` and `memset` ，而不是LVGL自己的功能(可能更快，也可能不会更快).*/
-#define LV_MEMCPY_MEMSET_STD 0
+#define LV_MEMCPY_MEMSET_STD 1
 
 /*====================
    HAL SETTINGS--HAL设置
@@ -315,7 +315,7 @@
 
 /*1: Show CPU usage and FPS count*/
 /*1: 显示CPU使用率和FPS计数*/
-#define LV_USE_PERF_MONITOR 0
+#define LV_USE_PERF_MONITOR 1
 #if LV_USE_PERF_MONITOR
     #define LV_USE_PERF_MONITOR_POS LV_ALIGN_BOTTOM_RIGHT
 #endif

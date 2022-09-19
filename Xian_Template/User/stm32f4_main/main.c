@@ -40,7 +40,7 @@
 #define  APP_CFG_TASK_IDLE_STK_SIZE                  	1024u
 #define  APP_CFG_TASK_STAT_STK_SIZE                  	1024u
 #define  APP_CFG_TASK_READC_STK_SIZE                    1024u
-#define  APP_CFG_TASK_TFTLCD_STK_SIZE                   2048u
+#define  APP_CFG_TASK_TFTLCD_STK_SIZE                   2*2048u
 #define  APP_CFG_TASK_MsgPro_STK_SIZE                   1024u
 /*
 *********************************************************************************************************

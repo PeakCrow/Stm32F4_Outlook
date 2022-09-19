@@ -37,13 +37,15 @@ void lvgl_demo()
 //	lv_example_get_started_1();
 	lv_obj_t* label = lv_label_create(lv_scr_act());
 	lv_obj_set_style_text_font(label,&myFont36,LV_STATE_DEFAULT);
-	lv_obj_center(label);
-	lv_label_set_text(label,"Ls_Racing车队,车载仪表,田润显,上海海能汽车电子有限公司,36号宋体!");
+	lv_obj_set_pos(label,20,170);
+	lv_label_set_text(label,"Ls_Racing车队,车载仪表,田润显,\n\
+										上海海能汽车电子有限公司,36号宋体!");
 	lv_obj_t* label2 = lv_label_create(lv_scr_act());
 	lv_obj_set_style_text_font(label2,&myFont20,LV_STATE_DEFAULT);
-	lv_obj_set_pos(label2,0,150);
+	lv_obj_set_pos(label2,20,120);
 	//lv_obj_align_to(label2,label,LV_ALIGN_TOP_MID,0,150);
-	lv_label_set_text(label2,"Ls_Racing车队,车载仪表,田润显,上海海能汽车电子有限公司,20号宋体!");
+	lv_label_set_text(label2,"Ls_Racing车队,车载仪表,田润显,\n\
+											上海海能汽车电子有限公司,20号宋体!");
 	
 	lv_obj_t * img = lv_img_create(lv_scr_act());
 	//lv_obj_center(img);
