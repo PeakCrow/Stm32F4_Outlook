@@ -213,6 +213,10 @@ static void lv_example_Monitor_Speed_Meter(void)
     Monitor_Main_Style(Monitor_Speed_Meter);
     //创建速度值标签
     Monitor_Main_label((short)(scr_act_height() * 0.8),(short)(scr_act_height() * 0.8));
+    lv_obj_t * img = lv_img_create(lv_scr_act());
+    //lv_obj_center(img);
+    lv_obj_set_pos(img,100,300);
+    lv_img_set_src(img,"D:/Ls_Monitor/LVGL_Monitor/images/wudilogo.png");
 }
 
 static void Monitor_Back_cb(lv_obj_t* obj,lv_event_t event)
