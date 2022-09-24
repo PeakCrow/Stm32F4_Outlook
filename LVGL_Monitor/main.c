@@ -1,4 +1,4 @@
-
+﻿
 /**
  * @file main
  *
@@ -96,6 +96,8 @@ int main(int argc, char **argv)
 //  lv_demo_stress();
 //  lv_demo_music();
  // lv_example_menu_3();
+//  lv_example_slider_3();
+ // lv_example_img_3();
   Gui_Monitor_App();
   while(1) {
       /* Periodically call the lv_task handler.

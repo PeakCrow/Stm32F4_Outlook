@@ -92,7 +92,7 @@
 
 /*Use the standard `memcpy` and `memset` instead of LVGL's own functions. (Might or might not be faster).*/
 /*使用标准的 `memcpy` and `memset` ，而不是LVGL自己的功能(可能更快，也可能不会更快).*/
-#define LV_MEMCPY_MEMSET_STD 1
+#define LV_MEMCPY_MEMSET_STD 0
 
 /*====================
    HAL SETTINGS--HAL设置
@@ -260,7 +260,7 @@
 
 /*Enable the log module*/
 /* 使能日志模型 */
-#define LV_USE_LOG 1
+#define LV_USE_LOG 0
 #if LV_USE_LOG
 
     /*How important log should be added:--应添加的日志的重要性
@@ -419,8 +419,8 @@
  *https://fonts.google.com/specimen/Montserrat*/
 /*Montserrat 字体，ASCII范围和一些符号使用bpp = 4
  *https://fonts.google.com/specimen/Montserrat*/
-#define LV_FONT_MONTSERRAT_8  0
-#define LV_FONT_MONTSERRAT_10 0
+#define LV_FONT_MONTSERRAT_8  1
+#define LV_FONT_MONTSERRAT_10 1
 #define LV_FONT_MONTSERRAT_12 1
 #define LV_FONT_MONTSERRAT_14 1
 #define LV_FONT_MONTSERRAT_16 1

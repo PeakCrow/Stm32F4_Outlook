@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file lv_conf.h
  * Configuration file for v8.2.0
  */
@@ -572,7 +572,7 @@
 /*API for fopen, fread, etc*/
 #define LV_USE_FS_STDIO 1
 #if LV_USE_FS_STDIO
-    #define LV_FS_STDIO_LETTER 'D'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
+    #define LV_FS_STDIO_LETTER 'E'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
     #define LV_FS_STDIO_PATH ""         /*Set the working directory. File/directory paths will be appended to it.*/
     #define LV_FS_STDIO_CACHE_SIZE  2*512   /*>0 to cache this number of bytes in lv_fs_read()*/
 #endif
