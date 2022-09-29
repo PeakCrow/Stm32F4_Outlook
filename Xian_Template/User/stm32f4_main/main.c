@@ -99,7 +99,7 @@ static  void  AppTaskStat			(ULONG thread_input);
 static  void  AppTaskREADADC		(ULONG thread_input);
 static  void  AppTaskTFTLCD			(ULONG thread_input);
 static  void  AppTaskMsgPro         (ULONG thread_input);
-static  void  App_Printf 			(const char *fmt, ...);
+  void  App_Printf 			(const char *fmt, ...);
 static  void  AppTaskCreate         (void);
 static  void  DispTaskInfo          (void);
 static  void  AppObjCreate          (void);
@@ -111,6 +111,7 @@ static  void  OSStatInit 			(void);
 *******************************************************************************************************
 */
 static TX_MUTEX   AppPrintfSemp;	/* 用于printf互斥 */
+static TX_MUTEX   LCDSemp;	/* 用于printf互斥 */
 
 /* 统计任务使用 */
 __IO uint8_t   OSStatRdy;      		/* 统计任务就绪标志 */
@@ -479,14 +480,19 @@ static void AppTaskTFTLCD    (ULONG thread_input)
 	App_Printf((char*)lcd_id,"LCD ID:%04X",lcddev.id);
  
 	#if 1
+	tx_mutex_get(&LCDSemp, TX_WAIT_FOREVER);
 	lvgl_demo();	/* 运行lvgl例程 */
+	tx_mutex_put(&LCDSemp);
 	while(1)
 	{
-		lv_timer_handler();
-		tx_thread_sleep(5);
+		tx_mutex_get(&LCDSemp, TX_WAIT_FOREVER);
+ 		lv_timer_handler();
+		tx_mutex_put(&LCDSemp);
+		tx_thread_sleep(10);
 	}
+	
 	#else
- 	//Load_Drow_Dialog();	
+ 	//Load_Drow_Dialog();
 	if(tp_dev.touchtype&0X80)
 		ctp_test();
 	#endif
@@ -643,7 +649,7 @@ static void AppTaskCOM(ULONG thread_input)
 *	返 回 值: 无
 *********************************************************************************************************
 */
-static  void  App_Printf(const char *fmt, ...)
+void  App_Printf(const char *fmt, ...)
 {
     char  buf_str[200 + 1];/* 特别注意，如果printf的变量较多，注意此局部变量的大小是否够用 */
     va_list   v_args;

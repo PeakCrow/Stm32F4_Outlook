@@ -156,13 +156,14 @@ ARM Macro Assembler    Page 3
    78 00000008                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=..\out_obj\tx_thread_interrupt_disable.d -o..\out_obj\tx_thr
-ead_interrupt_disable.o -I.\RTE\Compiler -I.\RTE\_xian -ID:\Users\TRX\AppData\L
-ocal\Arm\Packs\Keil\ARM_Compiler\1.7.0\Include -ID:\Users\TRX\AppData\Local\Arm
-\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --pr
-edefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 536" --predefin
-e="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --predefine="_RTE_ SETA 1" --
-predefine="TX_ENABLE_FPU_SUPPORT SETA 1" --list=.\listings\tx_thread_interrupt_
-disable.lst ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_interrupt_disable.s
+ead_interrupt_disable.o -I.\RTE\Compiler -I.\RTE\_xian -IE:\Users\Administrator
+\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\Include -IE:\Users\Administrat
+or\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\ST
+M32F4xx\Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION 
+SETA 536" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --predefi
+ne="_RTE_ SETA 1" --predefine="TX_ENABLE_FPU_SUPPORT SETA 1" --list=.\listings\
+tx_thread_interrupt_disable.lst ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_in
+terrupt_disable.s
 
 
 

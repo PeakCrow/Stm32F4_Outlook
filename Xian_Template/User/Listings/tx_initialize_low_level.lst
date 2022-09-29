@@ -353,13 +353,14 @@ _NOTIFY
   214 00000078                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=..\out_obj\tx_initialize_low_level.d -o..\out_obj\tx_initial
-ize_low_level.o -I.\RTE\Compiler -I.\RTE\_xian -ID:\Users\TRX\AppData\Local\Arm
-\Packs\Keil\ARM_Compiler\1.7.0\Include -ID:\Users\TRX\AppData\Local\Arm\Packs\K
-eil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine=
-"__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 536" --predefine="_RTE_
- SETA 1" --predefine="STM32F407xx SETA 1" --predefine="_RTE_ SETA 1" --predefin
-e="TX_ENABLE_FPU_SUPPORT SETA 1" --list=.\listings\tx_initialize_low_level.lst 
-..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initialize_low_level.s
+ize_low_level.o -I.\RTE\Compiler -I.\RTE\_xian -IE:\Users\Administrator\AppData
+\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\Include -IE:\Users\Administrator\AppDa
+ta\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\
+Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 536
+" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --predefine="_RTE
+_ SETA 1" --predefine="TX_ENABLE_FPU_SUPPORT SETA 1" --list=.\listings\tx_initi
+alize_low_level.lst ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initialize_
+low_level.s
 
 
 

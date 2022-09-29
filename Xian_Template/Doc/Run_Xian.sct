@@ -18,7 +18,7 @@ LR_IROM1 0x08000000 0x00100000  {    ; load region size_region
   CCM_SRAM 0x10000000 0x00010000 {
   lv_port_disp_template.o (+RW +ZI)
   startup_stm32f407xx.o (+RW +ZI)
-  myfont36.o (+RW +ZI)
+  ;myfont36.o (+RW +ZI)
   }
 }
 ;36号宋体的外部falsh存储，size:6mb start addr:0

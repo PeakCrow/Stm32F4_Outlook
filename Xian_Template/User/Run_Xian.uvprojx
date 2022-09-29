@@ -211,7 +211,7 @@
             <Ra2Chk>0</Ra2Chk>
             <Ra3Chk>0</Ra3Chk>
             <Im1Chk>1</Im1Chk>
-            <Im2Chk>0</Im2Chk>
+            <Im2Chk>1</Im2Chk>
             <OnChipMemories>
               <Ocm1>
                 <Type>0</Type>
@@ -339,7 +339,7 @@
               <MiscControls>--diag_suppress=188 --diag_suppress=68 --diag_suppress=111 --diag_suppress=188 --diag_suppress=223 --diag_suppress=546 --diag_suppress=1295 --diag_suppress=870</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,USE_FULL_LL_DRIVER,TX_ENABLE_FPU_SUPPORT,TX_ENABLE_STACK_CHECKING</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Core;..\Obj;..\User;..\SYSTEM\sys;..\HAL_lib\Inc;..\HAL_lib\STM32F4xx_HAL_Driver\Inc;..\HAL_lib\CMSIS\Include;..\HAL_lib\STM32F4xx_HAL_Driver\Src;.\stm32f4_main;..\SYSTEM\ticktim;..\SYSTEM\usart_fifo;..\SYSTEM\key_fifo;..\SYSTEM\spi;..\SYSTEM\flash;..\SYSTEM\iic;..\SYSTEM\ink_screen;..\ThreadX\ports\cortex_m4\ac5\inc;..\ThreadX\common\inc;..\SYSTEM\led;..\SYSTEM\can;..\SYSTEM\timer;..\SYSTEM\ws2812b;..\SYSTEM\rotation;..\SYSTEM\ads1256;..\SYSTEM\lcd;..\SYSTEM\touch;..\SYSTEM\sram;..\SYSTEM\mlx90614;..\SYSTEM\sd_card;..\Lvgl\GUI\lvgl;..\Lvgl\GUI\lvgl\src;..\Lvgl\GUI\lvgl\examples\porting;..\Lvgl\GUI_APP;..\SYSTEM\fonts;..\FatFs\src;..\FatFs\doc;..\FatFs\src\drivers</IncludePath>
+              <IncludePath>..\Core;..\Obj;..\User;..\SYSTEM\sys;..\HAL_lib\Inc;..\HAL_lib\STM32F4xx_HAL_Driver\Inc;..\HAL_lib\CMSIS\Include;..\HAL_lib\STM32F4xx_HAL_Driver\Src;.\stm32f4_main;..\SYSTEM\ticktim;..\SYSTEM\usart_fifo;..\SYSTEM\key_fifo;..\SYSTEM\spi;..\SYSTEM\flash;..\SYSTEM\iic;..\SYSTEM\ink_screen;..\ThreadX\ports\cortex_m4\ac5\inc;..\ThreadX\common\inc;..\SYSTEM\led;..\SYSTEM\can;..\SYSTEM\timer;..\SYSTEM\ws2812b;..\SYSTEM\rotation;..\SYSTEM\ads1256;..\SYSTEM\lcd;..\SYSTEM\touch;..\SYSTEM\sram;..\SYSTEM\mlx90614;..\SYSTEM\sd_card;..\Lvgl\GUI\lvgl;..\Lvgl\GUI\lvgl\src;..\Lvgl\GUI\lvgl\examples\porting;..\Lvgl\GUI_APP;..\SYSTEM\fonts;..\FatFs\src;..\FatFs\doc;..\FatFs\src\drivers;..\Lvgl\GUI\lvgl\src\misc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1723,6 +1723,96 @@
               <FileType>1</FileType>
               <FilePath>..\ThreadX\common\src\txe_timer_info_get.c</FilePath>
             </File>
+            <File>
+              <FileName>lv_draw_sdl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_arc.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_arc.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_bg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_bg.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_composite.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_composite.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_img.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_img.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_label.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_label.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_layer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_layer.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_line.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_line.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_mask.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_mask.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_polygon.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_polygon.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_rect.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_rect.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_stack_blur.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_stack_blur.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_texture_cache.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_texture_cache.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_sdl_utils.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_utils.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>LVGL/Ports</GroupName>
+          <Files>
+            <File>
+              <FileName>lv_fs_fatfs.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\fsdrv\lv_fs_fatfs.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_port_disp_template.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\examples\porting\lv_port_disp_template.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_port_indev_template.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\examples\porting\lv_port_indev_template.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1824,6 +1914,11 @@
               <FilePath>..\Lvgl\GUI\lvgl\src\draw\lv_draw_label.c</FilePath>
             </File>
             <File>
+              <FileName>lv_draw_layer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\lv_draw_layer.c</FilePath>
+            </File>
+            <File>
               <FileName>lv_draw_line.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI\lvgl\src\draw\lv_draw_line.c</FilePath>
@@ -1837,6 +1932,11 @@
               <FileName>lv_draw_rect.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI\lvgl\src\draw\lv_draw_rect.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_draw_transform.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\lv_draw_transform.c</FilePath>
             </File>
             <File>
               <FileName>lv_draw_triangle.c</FileName>
@@ -1889,6 +1989,11 @@
               <FilePath>..\Lvgl\GUI\lvgl\src\draw\sw\lv_draw_sw_img.c</FilePath>
             </File>
             <File>
+              <FileName>lv_draw_sw_layer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sw\lv_draw_sw_layer.c</FilePath>
+            </File>
+            <File>
               <FileName>lv_draw_sw_letter.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI\lvgl\src\draw\sw\lv_draw_sw_letter.c</FilePath>
@@ -1909,9 +2014,9 @@
               <FilePath>..\Lvgl\GUI\lvgl\src\draw\sw\lv_draw_sw_rect.c</FilePath>
             </File>
             <File>
-              <FileName>lv_extra.c</FileName>
+              <FileName>lv_draw_sw_transform.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\lv_extra.c</FilePath>
+              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sw\lv_draw_sw_transform.c</FilePath>
             </File>
             <File>
               <FileName>lv_flex.c</FileName>
@@ -1922,81 +2027,6 @@
               <FileName>lv_grid.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI\lvgl\src\extra\layouts\grid\lv_grid.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_bmp.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\bmp\lv_bmp.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_ffmpeg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\ffmpeg\lv_ffmpeg.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_freetype.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\freetype\lv_freetype.c</FilePath>
-            </File>
-            <File>
-              <FileName>gifdec.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\gif\gifdec.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_gif.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\gif\lv_gif.c</FilePath>
-            </File>
-            <File>
-              <FileName>lodepng.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\png\lodepng.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_png.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\png\lv_png.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_qrcode.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\qrcode\lv_qrcode.c</FilePath>
-            </File>
-            <File>
-              <FileName>qrcodegen.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\qrcode\qrcodegen.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_rlottie.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\rlottie\lv_rlottie.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_sjpg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\sjpg\lv_sjpg.c</FilePath>
-            </File>
-            <File>
-              <FileName>tjpgd.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\sjpg\tjpgd.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_gridnav.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\others\gridnav\lv_gridnav.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_monkey.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\others\monkey\lv_monkey.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_snapshot.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\others\snapshot\lv_snapshot.c</FilePath>
             </File>
             <File>
               <FileName>lv_theme_basic.c</FileName>
@@ -2012,6 +2042,11 @@
               <FileName>lv_theme_mono.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI\lvgl\src\extra\themes\mono\lv_theme_mono.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_extra.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\extra\lv_extra.c</FilePath>
             </File>
             <File>
               <FileName>lv_animimg.c</FileName>
@@ -2107,6 +2142,46 @@
               <FileName>lv_win.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI\lvgl\src\extra\widgets\win\lv_win.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_snapshot.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\extra\others\snapshot\lv_snapshot.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_msg.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\extra\others\msg\lv_msg.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_monkey.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\extra\others\monkey\lv_monkey.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_imgfont.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\extra\others\imgfont\lv_imgfont.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_ime_pinyin.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\extra\others\ime\lv_ime_pinyin.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_gridnav.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\extra\others\gridnav\lv_gridnav.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_fragment.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\extra\others\fragment\lv_fragment.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_fragment_manager.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\extra\others\fragment\lv_fragment_manager.c</FilePath>
             </File>
             <File>
               <FileName>lv_font.c</FileName>
@@ -2259,76 +2334,6 @@
               <FilePath>..\Lvgl\GUI\lvgl\src\font\lv_font_unscii_16.c</FilePath>
             </File>
             <File>
-              <FileName>lv_gpu_stm32_dma2d.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\stm32_dma2d\lv_gpu_stm32_dma2d.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl_arc.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_arc.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl_bg.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_bg.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl_composite.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_composite.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl_img.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_img.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl_label.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_label.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl_line.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_line.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl_mask.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_mask.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl_polygon.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_polygon.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl_rect.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_rect.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl_stack_blur.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_stack_blur.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl_texture_cache.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_texture_cache.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_draw_sdl_utils.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\draw\sdl\lv_draw_sdl_utils.c</FilePath>
-            </File>
-            <File>
               <FileName>lv_hal_disp.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI\lvgl\src\hal\lv_hal_disp.c</FilePath>
@@ -2424,11 +2429,6 @@
               <FilePath>..\Lvgl\GUI\lvgl\src\misc\lv_style_gen.c</FilePath>
             </File>
             <File>
-              <FileName>lv_templ.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\misc\lv_templ.c</FilePath>
-            </File>
-            <File>
               <FileName>lv_timer.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI\lvgl\src\misc\lv_timer.c</FilePath>
@@ -2452,6 +2452,11 @@
               <FileName>lv_utils.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI\lvgl\src\misc\lv_utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>lv_img.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI\lvgl\src\widgets\lv_img.c</FilePath>
             </File>
             <File>
               <FileName>lv_arc.c</FileName>
@@ -2489,11 +2494,6 @@
               <FilePath>..\Lvgl\GUI\lvgl\src\widgets\lv_dropdown.c</FilePath>
             </File>
             <File>
-              <FileName>lv_img.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\widgets\lv_img.c</FilePath>
-            </File>
-            <File>
               <FileName>lv_label.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI\lvgl\src\widgets\lv_label.c</FilePath>
@@ -2502,11 +2502,6 @@
               <FileName>lv_line.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI\lvgl\src\widgets\lv_line.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_objx_templ.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\widgets\lv_objx_templ.c</FilePath>
             </File>
             <File>
               <FileName>lv_roller.c</FileName>
@@ -2536,26 +2531,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>LVGL/Porting</GroupName>
-          <Files>
-            <File>
-              <FileName>lv_port_disp_template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\examples\porting\lv_port_disp_template.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_port_indev_template.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\examples\porting\lv_port_indev_template.c</FilePath>
-            </File>
-            <File>
-              <FileName>lv_fs_fatfs.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI\lvgl\src\extra\libs\fsdrv\lv_fs_fatfs.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>LVGL/UI</GroupName>
           <Files>
             <File>
@@ -2579,9 +2554,9 @@
               <FilePath>..\SYSTEM\fonts\myFont36.c</FilePath>
             </File>
             <File>
-              <FileName>myFont36buf.c</FileName>
+              <FileName>myFont20buf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\myFont36buf.c</FilePath>
+              <FilePath>..\SYSTEM\fonts\myFont20buf.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -2635,9 +2610,9 @@
               </FileOption>
             </File>
             <File>
-              <FileName>myFont20buf.c</FileName>
+              <FileName>myFont36buf.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\fonts\myFont20buf.c</FilePath>
+              <FilePath>..\SYSTEM\fonts\myFont36buf.c</FilePath>
               <FileOption>
                 <CommonProperty>
                   <UseCPPCompiler>2</UseCPPCompiler>
@@ -2753,8 +2728,8 @@
     <files>
       <file attr="config" category="header" name="Config\EventRecorderConf.h" version="1.1.0">
         <instance index="0">RTE\Compiler\EventRecorderConf.h</instance>
-        <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="Keil" Cversion="1.5.0" condition="Cortex-M Device"/>
-        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.7.0"/>
+        <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="Keil" Cversion="1.4.0" condition="Cortex-M Device"/>
+        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.6.3"/>
         <targetInfos>
           <targetInfo name="xian"/>
         </targetInfos>

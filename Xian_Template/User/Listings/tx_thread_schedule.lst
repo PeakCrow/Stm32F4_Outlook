@@ -488,13 +488,13 @@ ARM Macro Assembler    Page 8
   291 000000D4                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=..\out_obj\tx_thread_schedule.d -o..\out_obj\tx_thread_sched
-ule.o -I.\RTE\Compiler -I.\RTE\_xian -ID:\Users\TRX\AppData\Local\Arm\Packs\Kei
-l\ARM_Compiler\1.7.0\Include -ID:\Users\TRX\AppData\Local\Arm\Packs\Keil\STM32F
-4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="__MICROLI
-B SETA 1" --predefine="__UVISION_VERSION SETA 536" --predefine="_RTE_ SETA 1" -
--predefine="STM32F407xx SETA 1" --predefine="_RTE_ SETA 1" --predefine="TX_ENAB
-LE_FPU_SUPPORT SETA 1" --list=.\listings\tx_thread_schedule.lst ..\ThreadX\port
-s\cortex_m4\ac5\src\tx_thread_schedule.s
+ule.o -I.\RTE\Compiler -I.\RTE\_xian -IE:\Users\Administrator\AppData\Local\Arm
+\Packs\Keil\ARM_Compiler\1.6.3\Include -IE:\Users\Administrator\AppData\Local\A
+rm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --
+predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 536" --predef
+ine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --predefine="_RTE_ SETA 1" 
+--predefine="TX_ENABLE_FPU_SUPPORT SETA 1" --list=.\listings\tx_thread_schedule
+.lst ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_schedule.s
 
 
 
