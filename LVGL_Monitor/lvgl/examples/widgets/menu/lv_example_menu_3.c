@@ -13,6 +13,7 @@ void lv_example_menu_3(void)
     lv_obj_t * back_btn_label = lv_label_create(back_btn);
     lv_label_set_text(back_btn_label, "Back");
 
+
     lv_obj_t * cont;
     lv_obj_t * label;
 
@@ -28,6 +29,7 @@ void lv_example_menu_3(void)
     cont = lv_menu_cont_create(sub_2_page);
     label = lv_label_create(cont);
     lv_label_set_text(label, "Hello, I am hiding here");
+    lv_menu_set_mode_header(menu,LV_MENU_HEADER_BOTTOM_FIXED);
 
     lv_obj_t * sub_3_page = lv_menu_page_create(menu, "Page 3");
 

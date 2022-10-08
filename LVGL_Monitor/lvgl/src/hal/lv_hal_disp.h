@@ -170,7 +170,7 @@ typedef struct _lv_disp_t {
     struct _lv_obj_t * top_layer;   /**< @see lv_disp_get_layer_top*/
     struct _lv_obj_t * sys_layer;   /**< @see lv_disp_get_layer_sys*/
     uint32_t screen_cnt;
-uint8_t del_prev  :
+    uint8_t del_prev  :
     1;          /**< 1: Automatically delete the previous screen when the screen load animation is ready*/
 
     lv_opa_t bg_opa;                /**<Opacity of the background color or wallpaper*/

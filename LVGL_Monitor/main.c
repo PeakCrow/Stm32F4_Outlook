@@ -18,6 +18,7 @@
 #include "lv_drivers/sdl/sdl.h"
 #include "monitor.h"
 #include "lvgl/examples/porting/lv_port_fs_template.h"
+#include "DEMO/Page.h"
 /*********************
  *      DEFINES
  *********************/
@@ -99,6 +100,9 @@ int main(int argc, char **argv)
 //  lv_example_slider_3();
  // lv_example_img_3();
   Gui_Monitor_App();
+//  lv_example_menu_3();
+//  lv_demo_keypad_encoder();
+//    PageManagerInit();
   while(1) {
       /* Periodically call the lv_task handler.
        * It could be done in a timer interrupt or an OS task too.*/

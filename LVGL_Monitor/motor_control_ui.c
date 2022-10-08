@@ -1,19 +1,21 @@
 ﻿#include "motor_control_ui.h"
 #include "monitor.h"
 #include <stdio.h>
+#include "lv_drv_conf.h"
 
-//LV_IMG_DECLARE(motor_control)
 
 static void Imgbtn_MC_cb(lv_event_t * e);
 static lv_style_t s_style_common;
 static lv_obj_t* Imgbtn_MC;
+
+
 
 void Motor_Control_UI(lv_obj_t *parent)
 {
     /* 定义并创建图像按钮 */
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"E:/Ls_Monitor/LVGL_Monitor/images/pack.png",NULL);//pack.png  motor_control.png
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"E:/Ls_Monitor/LVGL_Monitor/images/pack.png",NULL);
     /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,150,150);
     /* 设置按钮位置 */
@@ -43,11 +45,10 @@ void Motor_Control_UI(lv_obj_t *parent)
 static void Imgbtn_MC_cb(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t * page1;
     if(code == LV_EVENT_PRESSED)
     {
-        lv_img_set_zoom(Imgbtn_MC,192);
-        //lv_img_set_offset_y(Imgbtn_MC,20);
-        printf("Imgbtn_MC is pressed!\n");
+        App_Common_Init(page1,"Motor_Control");
     }
     else if(code == LV_EVENT_RELEASED)
         printf("Imgbtn_MC is released!\n");

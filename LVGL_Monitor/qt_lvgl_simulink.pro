@@ -4,6 +4,13 @@ CONFIG -= app_bundle
 CONFIG -= qt
 LIBS += -L$$PWD/lib/ -lmingw32 -lSDL2main -lSDL2
 SOURCES += \
+        DEMO/Page.c \
+        DEMO/PageMain.c \
+        DEMO/PageManager.c \
+        DEMO/PageMonth.c \
+        DEMO/PagePop.c \
+        DEMO/img.c \
+        DEMO/img1.c \
         images/motor_control.c \
         lv_drivers/display/GC9A01.c \
         lv_drivers/display/ILI9341.c \
@@ -445,9 +452,12 @@ SOURCES += \
         main.c \
         monitor.c \
         motor_control_ui.c \
-        mouse_cursor_icon.c
+        mouse_cursor_icon.c \
+        singlelinklist.c
 
 HEADERS += \
+    DEMO/Page.h \
+    DEMO/PageManager.h \
     SDL2/SDL.h \
     SDL2/SDL_assert.h \
     SDL2/SDL_atomic.h \
@@ -744,7 +754,8 @@ HEADERS += \
     lvgl/tests/unity/unity_internals.h \
     lvgl/tests/unity/unity_support.h \
     monitor.h \
-    motor_control_ui.h
+    motor_control_ui.h \
+    singlelinklist.h
 
 DISTFILES += \
 

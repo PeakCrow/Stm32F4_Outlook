@@ -11353,9 +11353,9 @@ Image Symbol Table
     ..\\SYSTEM\\touch\\bsp_touch.c           0x00000000   Number         0  bsp_touch.o ABSOLUTE
     ..\\SYSTEM\\usart_fifo\\bsp_usart_fifo.c 0x00000000   Number         0  bsp_usart_fifo.o ABSOLUTE
     ..\\SYSTEM\\ws2812b\\bsp_ws2812b.c       0x00000000   Number         0  bsp_ws2812b.o ABSOLUTE
-    E:\Users\Administrator\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\Source\EventRecorder.c 0x00000000   Number         0  eventrecorder.o ABSOLUTE
-    E:\Users\Administrator\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\Source\retarget_io.c 0x00000000   Number         0  retarget_io.o ABSOLUTE
-    E:\\Users\\Administrator\\AppData\\Local\\Arm\\Packs\\Keil\\ARM_Compiler\\1.6.3\\Source\\EventRecorder.c 0x00000000   Number         0  eventrecorder.o ABSOLUTE
+    C:\Users\Administrator\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\Source\EventRecorder.c 0x00000000   Number         0  eventrecorder.o ABSOLUTE
+    C:\Users\Administrator\AppData\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\Source\retarget_io.c 0x00000000   Number         0  retarget_io.o ABSOLUTE
+    C:\\Users\\Administrator\\AppData\\Local\\Arm\\Packs\\Keil\\ARM_Compiler\\1.6.3\\Source\\EventRecorder.c 0x00000000   Number         0  eventrecorder.o ABSOLUTE
     cdrcmple.s                               0x00000000   Number         0  cdrcmple.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
     handlers.s                               0x00000000   Number         0  handlers.o ABSOLUTE
