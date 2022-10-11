@@ -45,11 +45,7 @@ void Motor_Control_UI(lv_obj_t *parent)
 static void Imgbtn_MC_cb(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
-    lv_obj_t * page1;
-    if(code == LV_EVENT_PRESSED)
-    {
-        App_Common_Init(page1,"Motor_Control");
-    }
-    else if(code == LV_EVENT_RELEASED)
-        printf("Imgbtn_MC is released!\n");
+
+    if(code == LV_EVENT_RELEASED)
+         App_Common_Init("Motor_Control");
 }

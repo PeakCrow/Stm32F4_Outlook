@@ -211,20 +211,22 @@ static void lv_example_Monitor_Speed_Meter(void)
     Monitor_Main_label((short)(scr_act_height() * 0.8),(short)(scr_act_height() * 0.8));
 }
 
-lv_obj_t* App_Common_Init(lv_obj_t*parent,const char *title)
+lv_obj_t* App_Common_Init(const char *title)
 {
-    lv_theme_t  *App_btn_back_Style;
-    lv_obj_t * App_btn_Back;
-    lv_obj_t * App_Title;
+    lv_theme_t  *App_btn_back_Style = NULL;
+    lv_obj_t * App_btn_Back = NULL;
+    lv_obj_t * App_Title = NULL;
+    lv_obj_t * parent = NULL;
+
     /* 初始化默认主题 */
     App_btn_back_Style = lv_theme_default_init(NULL,lv_palette_main(LV_PALETTE_LIGHT_BLUE),lv_palette_main(LV_PALETTE_CYAN),LV_THEME_DEFAULT_DARK,&lv_font_montserrat_32);
     /* 创建返回按钮 */
     parent = lv_obj_create(lv_scr_act());
     lv_obj_set_size(parent,SDL_HOR_RES,SDL_VER_RES);
-    App_btn_Back = lv_btn_create(parent);
+    App_btn_Back = lv_imgbtn_create(parent);
     lv_theme_apply(App_btn_Back);
-    lv_obj_set_size(App_btn_Back,(lv_coord_t)(lv_obj_get_width(parent)*0.1),(lv_coord_t)(lv_obj_get_height(parent)*0.1));
-
+    lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,NULL,"E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png",NULL);
+    lv_obj_set_size(App_btn_Back,40,40);
     lv_obj_align_to(App_btn_Back,parent,LV_ALIGN_BOTTOM_MID,0,0);
     lv_obj_add_event_cb(App_btn_Back,App_btn_Back_Cb,LV_EVENT_ALL,parent);
     /* 创建标题文本 */
@@ -232,6 +234,8 @@ lv_obj_t* App_Common_Init(lv_obj_t*parent,const char *title)
     lv_theme_apply(App_Title);
     lv_label_set_text(App_Title,title);
     lv_obj_align_to(App_Title,parent,LV_ALIGN_TOP_MID,0,0);
+    /* 创建返回按钮文本 */
+
     return parent;
 }
 

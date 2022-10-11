@@ -5,6 +5,6 @@
 
 void Gui_Monitor_App(void);
 /* 每个按钮打开的页面公用的初始化函数 */
-lv_obj_t* App_Common_Init(lv_obj_t*parent,const char *title);
+lv_obj_t* App_Common_Init(const char *title);
 
 #endif // MONITOR_H

@@ -100,6 +100,7 @@ int main(int argc, char **argv)
 //  lv_example_slider_3();
  // lv_example_img_3();
   Gui_Monitor_App();
+//  lv_example_anim_2();
 //  lv_example_menu_3();
 //  lv_demo_keypad_encoder();
 //    PageManagerInit();
