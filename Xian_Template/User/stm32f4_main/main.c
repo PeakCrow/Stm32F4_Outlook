@@ -481,7 +481,7 @@ static void AppTaskTFTLCD    (ULONG thread_input)
  
 	#if 1
 	tx_mutex_get(&LCDSemp, TX_WAIT_FOREVER);
-	lvgl_demo();	/* 运行lvgl例程 */
+	Gui_Monitor_App();	/* 运行lvgl例程 */
 	tx_mutex_put(&LCDSemp);
 	while(1)
 	{

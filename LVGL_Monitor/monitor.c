@@ -1,9 +1,18 @@
 ﻿#include "monitor.h"
 #include "lvgl/lvgl.h"
 #include <stdio.h>
-#include "motor_control_ui.h"
 #include "lvgl/demos/lv_demos.h"
 #include "lv_drv_conf.h"
+
+#include "widght_ui/motor_control_ui.h"
+#include "widght_ui/about_phone_ui.h"
+#include "widght_ui/set_up.h"
+#include "widght_ui/vehicle_status.h"
+#include "widght_ui/battery_box.h"
+#include "widght_ui/sensor_ui.h"
+#include "widght_ui/adjust_pedal.h"
+#include "widght_ui/cool_control.h"
+
 
 static lv_obj_t* Monitor_Speed_Meter;
 //static lv_obj_t *image;
@@ -23,16 +32,17 @@ void Gui_Monitor_App()
     uint16_t meter_height = 0;
     meter_height = ((unsigned short)(scr_act_height() * 0.8));
 
+    Motor_Control_Ui(lv_scr_act());
+    About_Phone_Ui(lv_scr_act());
+    Set_Up_Ui(lv_scr_act());
+    Vehicle_Status_Ui(lv_scr_act());
+    Adjust_Pedal_Ui(lv_scr_act());
+    Cool_Control_Ui(lv_scr_act());
+    Battery_Box_Ui(lv_scr_act());
+    Sensor_Ui(lv_scr_act());
     /* 创建速度盘 */
+    /* 暂时将仪表盘放在最下面，以此来屏蔽其他部件 */
     lv_example_Monitor_Speed_Meter();
-
-//    /* 使用C数组加载图片 */
-//    image = lv_img_create(lv_scr_act());
-//    lv_img_set_src(image,&motor_control);
-//    lv_obj_align(image,LV_ALIGN_TOP_RIGHT,0,0);
-//    printf("gitee test\n");
-    //lv_obj_t * obj = lv_obj_get_parent(Monitor_Speed_Meter);
-    Motor_Control_UI(lv_scr_act());
 }
 void Monitor_Main_Style(lv_obj_t * Monitor_Speed_Meter)
 {
@@ -41,7 +51,7 @@ void Monitor_Main_Style(lv_obj_t * Monitor_Speed_Meter)
     //样式初始化
     lv_style_init(&style_speed_meter);
     //设置背景--黑色
-    lv_style_set_bg_color(&style_speed_meter, lv_color_hex(0x0000ff));
+    //lv_style_set_bg_color(&style_speed_meter, lv_color_hex(0x000000));
     //设置背景透明度--20
     lv_style_set_bg_opa(&style_speed_meter, 80);
     //设置字体颜色--黄色
@@ -213,19 +223,17 @@ static void lv_example_Monitor_Speed_Meter(void)
 
 lv_obj_t* App_Common_Init(const char *title)
 {
-    lv_theme_t  *App_btn_back_Style = NULL;
     lv_obj_t * App_btn_Back = NULL;
     lv_obj_t * App_Title = NULL;
     lv_obj_t * parent = NULL;
+    //const char btn_source[] = "E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png";
 
-    /* 初始化默认主题 */
-    App_btn_back_Style = lv_theme_default_init(NULL,lv_palette_main(LV_PALETTE_LIGHT_BLUE),lv_palette_main(LV_PALETTE_CYAN),LV_THEME_DEFAULT_DARK,&lv_font_montserrat_32);
     /* 创建返回按钮 */
     parent = lv_obj_create(lv_scr_act());
     lv_obj_set_size(parent,SDL_HOR_RES,SDL_VER_RES);
     App_btn_Back = lv_imgbtn_create(parent);
-    lv_theme_apply(App_btn_Back);
-    lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,NULL,"E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png",NULL);
+
+    lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png","E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png","E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png");
     lv_obj_set_size(App_btn_Back,40,40);
     lv_obj_align_to(App_btn_Back,parent,LV_ALIGN_BOTTOM_MID,0,0);
     lv_obj_add_event_cb(App_btn_Back,App_btn_Back_Cb,LV_EVENT_ALL,parent);
@@ -244,7 +252,7 @@ static void App_btn_Back_Cb(lv_event_t* e)
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t* parent = lv_event_get_user_data(e);
     switch ((uint8_t)code) {
-        case LV_EVENT_PRESSED:
+        case LV_EVENT_RELEASED:
             {
                 lv_obj_del(parent);
             }

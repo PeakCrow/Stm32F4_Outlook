@@ -11,7 +11,6 @@ SOURCES += \
         DEMO/PagePop.c \
         DEMO/img.c \
         DEMO/img1.c \
-        images/motor_control.c \
         lv_drivers/display/GC9A01.c \
         lv_drivers/display/ILI9341.c \
         lv_drivers/display/R61581.c \
@@ -451,9 +450,16 @@ SOURCES += \
         lvgl/tests/unity/unity_support.c \
         main.c \
         monitor.c \
-        motor_control_ui.c \
         mouse_cursor_icon.c \
-        singlelinklist.c
+        singlelinklist.c \
+        widght_ui/about_phone_ui.c \
+        widght_ui/adjust_pedal.c \
+        widght_ui/battery_box.c \
+        widght_ui/cool_control.c \
+        widght_ui/motor_control_ui.c \
+        widght_ui/sensor_ui.c \
+        widght_ui/set_up.c \
+        widght_ui/vehicle_status.c
 
 HEADERS += \
     DEMO/Page.h \
@@ -755,7 +761,15 @@ HEADERS += \
     lvgl/tests/unity/unity_support.h \
     monitor.h \
     motor_control_ui.h \
-    singlelinklist.h
+    singlelinklist.h \
+    widght_ui/about_phone_ui.h \
+    widght_ui/adjust_pedal.h \
+    widght_ui/battery_box.h \
+    widght_ui/cool_control.h \
+    widght_ui/motor_control_ui.h \
+    widght_ui/sensor_ui.h \
+    widght_ui/set_up.h \
+    widght_ui/vehicle_status.h
 
 DISTFILES += \
 

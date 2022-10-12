@@ -1,34 +1,15 @@
-#include "Monitor.h"
-extern   void  App_Printf 			(const char *fmt, ...);
-static void btn_event_cb(lv_event_t * e)
-{
-    lv_event_code_t code = lv_event_get_code(e);
-    lv_obj_t * btn = lv_event_get_target(e);
-    if(code == LV_EVENT_CLICKED) {
-        static uint8_t cnt = 0;
-        cnt++;
+#include "monitor.h"
 
-        /*Get the first child of the button which is the label and change its text*/
-        lv_obj_t * label = lv_obj_get_child(btn, 0);
-        lv_label_set_text_fmt(label, "Button: %d", cnt);
-    }
-}
+#include "widght_ui/motor_control_ui.h"
+#include "widght_ui/about_phone_ui.h"
+#include "widght_ui/set_up.h"
+#include "widght_ui/vehicle_status.h"
+#include "widght_ui/battery_box.h"
+#include "widght_ui/sensor_ui.h"
+#include "widght_ui/adjust_pedal.h"
+#include "widght_ui/cool_control.h"
 
-/**
- * Create a button with a label and react on click event.
- */
-void lv_example_get_started_1(void)
-{
-    lv_obj_t * btn = lv_btn_create(lv_scr_act());     /*Add a button the current screen*/
-    //lv_obj_set_pos(btn, 10, 10);                            /*Set its position*/
-	lv_obj_set_align(btn,LV_ALIGN_CENTER);
-    lv_obj_set_size(btn, 120, 50);                          /*Set its size*/
-    lv_obj_add_event_cb(btn, btn_event_cb, LV_EVENT_ALL, NULL);           /*Assign a callback to the button*/
 
-    lv_obj_t * label = lv_label_create(btn);          /*Add a label to the button*/
-    lv_label_set_text(label, "Button");                     /*Set the labels text*/
-    lv_obj_center(label);
-}
 static lv_obj_t* Monitor_Speed_Meter;
 //static lv_obj_t *image;
 static void lv_example_Monitor_Speed_Meter(void);
@@ -38,9 +19,8 @@ static void lv_example_Monitor_Speed_Meter(void);
 
 static void Monitor_Main_Style(lv_obj_t* Monitor_Speed_Meter);
 static void Monitor_Main_label(lv_coord_t weight, lv_coord_t height);
+static void App_btn_Back_Cb(lv_event_t* e);
 
-
-//LV_IMG_DECLARE(motor_control)
 
 void Gui_Monitor_App()
 {
@@ -48,15 +28,17 @@ void Gui_Monitor_App()
     uint16_t meter_height = 0;
     meter_height = ((unsigned short)(scr_act_height() * 0.8));
 
+    Motor_Control_Ui(lv_scr_act());
+    About_Phone_Ui(lv_scr_act());
+    Set_Up_Ui(lv_scr_act());
+    Vehicle_Status_Ui(lv_scr_act());
+    Adjust_Pedal_Ui(lv_scr_act());
+    Cool_Control_Ui(lv_scr_act());
+    Battery_Box_Ui(lv_scr_act());
+    Sensor_Ui(lv_scr_act());
     /* 创建速度盘 */
+    /* 暂时将仪表盘放在最下面，以此来屏蔽其他部件 */
     lv_example_Monitor_Speed_Meter();
-
-//    /* 使用C数组加载图片 */
-//    image = lv_img_create(lv_scr_act());
-//    lv_img_set_src(image,&motor_control);
-//    lv_obj_align(image,LV_ALIGN_TOP_RIGHT,0,0);
-//    printf("gitee test\n");
-//    Motor_Control_UI(lv_scr_act());
 }
 void Monitor_Main_Style(lv_obj_t * Monitor_Speed_Meter)
 {
@@ -65,7 +47,7 @@ void Monitor_Main_Style(lv_obj_t * Monitor_Speed_Meter)
     //样式初始化
     lv_style_init(&style_speed_meter);
     //设置背景--黑色
-    lv_style_set_bg_color(&style_speed_meter, lv_color_hex(0x0000ff));
+    //lv_style_set_bg_color(&style_speed_meter, lv_color_hex(0x000000));
     //设置背景透明度--20
     lv_style_set_bg_opa(&style_speed_meter, 80);
     //设置字体颜色--黄色
@@ -121,7 +103,6 @@ static void lv_example_Monitor_Speed_Meter(void)
         font = &lv_font_montserrat_10;
     else
         font = &lv_font_montserrat_24;
-
 
     /* 定义并创建仪表 */
     Monitor_Speed_Meter = lv_meter_create(lv_scr_act());
@@ -231,86 +212,49 @@ static void lv_example_Monitor_Speed_Meter(void)
     lv_anim_start(&a);
 
     //创建样式
-//    Monitor_Main_Style(Monitor_Speed_Meter);
+    //Monitor_Main_Style(Monitor_Speed_Meter);
     //创建速度值标签
-//    Monitor_Main_label((short)(scr_act_height() * 0.8),(short)(scr_act_height() * 0.8));
-//    lv_obj_t * img = lv_img_create(lv_scr_act());
-//    //lv_obj_center(img);
-//    lv_obj_set_pos(img,60,300);
-//    lv_img_set_src(img,"E:/Ls_Monitor/LVGL_Monitor/images/pack.png");
+    //Monitor_Main_label((short)(scr_act_height() * 0.8),(short)(scr_act_height() * 0.8));
 }
-//dm_motor.bin
-//motor_png.png
-static void Imgbtn_MC_cb(lv_event_t * e);
-static lv_style_t s_style_common;
-//static lv_obj_t* Imgbtn_MC;
 
-void Motor_Control_UI(lv_obj_t *parent)
+lv_obj_t* App_Common_Init(const char *title)
 {
-/*Create a transition animation on width transformation and recolor.*/
-    static lv_style_prop_t tr_prop[] = {LV_STYLE_TRANSFORM_WIDTH, LV_STYLE_IMG_RECOLOR_OPA, 0};
-    static lv_style_transition_dsc_t tr;
-    lv_style_transition_dsc_init(&tr, tr_prop, lv_anim_path_linear, 200, 0, NULL);
+    lv_obj_t * App_btn_Back = NULL;
+    lv_obj_t * App_Title = NULL;
+    lv_obj_t * parent = NULL;
+    //const char btn_source[] = "E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png";
 
-    static lv_style_t style_def;
-    lv_style_init(&style_def);
-    lv_style_set_text_color(&style_def, lv_color_white());
-    lv_style_set_transition(&style_def, &tr);
+    /* 创建返回按钮 */
+    parent = lv_obj_create(lv_scr_act());
+    lv_obj_set_size(parent,800,480);
+    App_btn_Back = lv_imgbtn_create(parent);
 
-    /*Darken the button when pressed and make it wider*/
-    static lv_style_t style_pr;
-    lv_style_init(&style_pr);
-    lv_style_set_img_recolor_opa(&style_pr, LV_OPA_30);
-    lv_style_set_img_recolor(&style_pr, lv_color_black());
-    lv_style_set_transform_width(&style_pr, 20);
+    lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin");
+    lv_obj_set_size(App_btn_Back,40,40);
+    lv_obj_align_to(App_btn_Back,parent,LV_ALIGN_BOTTOM_MID,0,0);
+    lv_obj_add_event_cb(App_btn_Back,App_btn_Back_Cb,LV_EVENT_ALL,parent);
+    /* 创建标题文本 */
+    App_Title = lv_label_create(parent);
+    lv_theme_apply(App_Title);
+	lv_obj_set_style_text_font(App_Title,&myFont36,LV_STATE_DEFAULT);
+    lv_label_set_text(App_Title,title);
+    lv_obj_align_to(App_Title,parent,LV_ALIGN_TOP_MID,0,0);
+    /* 创建返回按钮文本 */
 
-    /*Create an image button*/
-    lv_obj_t * imgbtn1 = lv_imgbtn_create(lv_scr_act());
-    lv_imgbtn_set_src(imgbtn1, LV_IMGBTN_STATE_RELEASED, "0:/PICTURE/anniu.bin", "0:/PICTURE/anniu.bin", "0:/PICTURE/anniu.bin");
-    lv_obj_add_style(imgbtn1, &style_def, 0);
-    lv_obj_add_style(imgbtn1, &style_pr, LV_STATE_PRESSED);
-
-    //lv_obj_align(imgbtn1, LV_ALIGN_CENTER, 0, 0);
-	lv_obj_set_pos(imgbtn1,50,280);
-
-    /*Create a label on the image button*/
-    lv_obj_t * label = lv_label_create(imgbtn1);
-    lv_label_set_text(label, "Button");
-    lv_obj_align(label, LV_ALIGN_CENTER, 0, -4);
-    /* 设置按钮回调 */
-    lv_obj_add_event_cb(imgbtn1,Imgbtn_MC_cb,LV_EVENT_ALL,NULL);
+    return parent;
 }
-static void Imgbtn_MC_cb(lv_event_t * e)
+
+static void App_btn_Back_Cb(lv_event_t* e)
 {
     lv_event_code_t code = lv_event_get_code(e);
-    if(code == LV_EVENT_PRESSED)
-    {
-        //lv_img_set_zoom(Imgbtn_MC,192);
-        //lv_img_set_offset_y(Imgbtn_MC,20);
-        App_Printf("Imgbtn_MC is pressed!\n");
+    lv_obj_t* parent = lv_event_get_user_data(e);
+    switch ((uint8_t)code) {
+        case LV_EVENT_RELEASED:
+            {
+                lv_obj_del(parent);
+            }
+            break;
     }
-    else if(code == LV_EVENT_RELEASED)
-        App_Printf("Imgbtn_MC is released!\n");
 }
-void lvgl_demo()
-{
-//	lv_example_get_started_1();
-//	lv_obj_t* label = lv_label_create(lv_scr_act());
-//	lv_obj_set_style_text_font(label,&myFont36,LV_STATE_DEFAULT);
-//	lv_obj_set_pos(label,20,170);
-//	lv_label_set_text(label,"Ls_Racing车队,车载仪表,田润显,\n\
-//										上海海能汽车电子有限公司,36号宋体!");
-//	lv_obj_t* label2 = lv_label_create(lv_scr_act());
-//	lv_obj_set_style_text_font(label2,&myFont20,LV_STATE_DEFAULT);
-//	lv_obj_set_pos(label2,20,120);
-//	//lv_obj_align_to(label2,label,LV_ALIGN_TOP_MID,0,150);
-//	lv_label_set_text(label2,"Ls_Racing车队,车载仪表,田润显,\n\
-//											上海海能汽车电子有限公司,20号宋体!");
-	Gui_Monitor_App();
-	Motor_Control_UI(lv_scr_act());
-//	lv_obj_t * img = lv_img_create(lv_scr_act());
-//	//lv_obj_center(img);
-//	lv_obj_set_pos(img,50,280);
-//	lv_img_set_src(img,"0:/PICTURE/dm_motor.bin");
-}
+
 

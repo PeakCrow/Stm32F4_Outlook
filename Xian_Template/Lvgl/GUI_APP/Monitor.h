@@ -1,12 +1,11 @@
-#ifndef _MONITOR_H_
-#define _MONITOR_H_
+#ifndef MONITOR_H
+#define MONITOR_H
 
+#include "lvgl.h"
 #include "sys.h"
 
-
-void lvgl_demo(void);
 void Gui_Monitor_App(void);
+/* 每个按钮打开的页面公用的初始化函数 */
+lv_obj_t* App_Common_Init(const char *title);
 
-
-#endif
-
+#endif // MONITOR_H
