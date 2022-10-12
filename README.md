@@ -49,5 +49,4 @@
 ![输入图片说明](Xian_Template/Doc/TFT%20Simulator.gif)
 
 #### TFT板卡效果
-
-![TFT Board](E:\Ls_Monitor\Xian_Template\Doc\TFT Board.gif)
+![输入图片说明](Xian_Template/Doc/TFT%20Board.gif)
