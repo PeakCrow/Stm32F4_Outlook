@@ -6,7 +6,7 @@
 
 static void Imgbtn_MC_cb(lv_event_t * e);
 static lv_style_t s_style_common;
-
+static void Adjust_Pedal_In_Ui(lv_obj_t* parent);
 
 
 
@@ -49,5 +49,36 @@ static void Imgbtn_MC_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
 
     if(code == LV_EVENT_RELEASED)
-         App_Common_Init("Adjust_Pedal");
+        Adjust_Pedal_In_Ui(App_Common_Init("Adjust_Pedal"));
+}
+static const char* map[] = {"qianjian","houtui","jilu weizhi",""};
+static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
+{
+
+    lv_obj_t* _table = lv_tabview_create(parent,LV_DIR_RIGHT,100);
+    lv_obj_set_size(_table,lv_obj_get_width(parent)-50,lv_obj_get_height(parent)-100);
+    lv_obj_t*first_tab =  lv_tabview_add_tab(_table,"first driver1");
+    lv_obj_t*second_tab = lv_tabview_add_tab(_table,"second driver2");
+    lv_obj_t*third_tab = lv_tabview_add_tab(_table,"third driver3");
+
+
+    lv_obj_t* _btnmatrix_first = lv_btnmatrix_create(first_tab);
+    lv_obj_set_size(_btnmatrix_first,600,200);
+    lv_btnmatrix_set_map(_btnmatrix_first,map);
+    lv_btnmatrix_set_one_checked(_btnmatrix_first,true);
+    lv_btnmatrix_set_btn_ctrl_all(_btnmatrix_first,LV_BTNMATRIX_CTRL_CHECKABLE);
+
+    lv_obj_t* _btnmatrix_second = lv_btnmatrix_create(second_tab);
+    lv_obj_set_size(_btnmatrix_second,600,200);
+    lv_btnmatrix_set_map(_btnmatrix_second,map);
+    lv_btnmatrix_set_one_checked(_btnmatrix_second,true);
+    lv_btnmatrix_set_btn_ctrl_all(_btnmatrix_second,LV_BTNMATRIX_CTRL_CHECKABLE);
+
+    lv_obj_t* _btnmatrix_third = lv_btnmatrix_create(third_tab);
+    lv_obj_set_size(_btnmatrix_third,600,200);
+    lv_btnmatrix_set_map(_btnmatrix_third,map);
+    lv_btnmatrix_set_one_checked(_btnmatrix_third,true);
+    lv_btnmatrix_set_btn_ctrl_all(_btnmatrix_third,LV_BTNMATRIX_CTRL_CHECKABLE);
+
+
 }
