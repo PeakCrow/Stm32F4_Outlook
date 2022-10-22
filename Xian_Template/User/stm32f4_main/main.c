@@ -628,15 +628,19 @@ static void AppTaskUserIF(ULONG thread_input)
 */
 static void AppTaskCOM(ULONG thread_input)
 {
-
 	(void)thread_input;
 	App_Printf("AppTaskCom任务开始运行\r\n");
+	uint8_t  stop_motor[] = {0xe0,0xf7};
+	uint8_t Forward_rotation[] = {0xe0,0xf6,0x7e};
 	
 	while(1)
 	{
         bsp_LedToggle(2);
 		bsp_LedToggle(1);
+		comSendBuf(COM3,Forward_rotation,3);
         tx_thread_sleep(1000);
+		comSendBuf(COM3,stop_motor,2);
+		tx_thread_sleep(2000);
 	}
 }
 

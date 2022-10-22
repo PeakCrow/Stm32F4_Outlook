@@ -19,8 +19,8 @@
 */
 #define DEBUG_SWITCH_EN 0		//1使用内部DEBUG打印，0使用串口外设进行打印
 #define UART1_FIFO_EN 	1
-#define UART2_FIFO_EN	0
-#define UART3_FIFO_EN	0
+#define UART2_FIFO_EN		1
+#define UART3_FIFO_EN		1
 /* 定义端口号 */
 typedef enum
 {
@@ -36,15 +36,15 @@ typedef enum
 	#define UART1_RX_BUF_SIZE	1*1024
 #endif
 #if UART2_FIFO_EN == 1
-	#define UART2_BAUD			9600
-	#define UART2_TX_BUF_SIZE	10
+	#define UART2_BAUD			115200
+	#define UART2_TX_BUF_SIZE	1*1024
 	#define UART2_RX_BUF_SIZE	1*1024
 #endif
 
 #if UART3_FIFO_EN == 1
-	#define UART3_BAUD			9600
-	#define UART3_TX_BUF_SIZE	1*521
-	#define UART3_RX_BUF_SIZE	1*512
+	#define UART3_BAUD			115200
+	#define UART3_TX_BUF_SIZE	1*1024
+	#define UART3_RX_BUF_SIZE	1*1024
 #endif
 /* 串口设备结构体 */
 typedef struct
