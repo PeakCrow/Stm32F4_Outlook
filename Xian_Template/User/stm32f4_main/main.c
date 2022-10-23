@@ -448,7 +448,8 @@ extern void DemoFatFS(void);
 static void AppTaskMsgPro(ULONG thread_input)
 {
 	(void)thread_input;
-
+	uint8_t Postition[] = {0xe0,0x36};
+	uint8_t Pos[6] = {0};
 	while(1)
 	{
 		#if 0
@@ -456,7 +457,15 @@ static void AppTaskMsgPro(ULONG thread_input)
 		tx_thread_sleep(10);
 		#else
 		//DemoSpiFlash();
-		tx_thread_sleep(10);
+		comSendBuf(COM3,Postition,2);
+		for(int i = 0;i < 6;i++)
+			comGetChar(COM3,&Pos[i]);
+		for(int i = 0;i < 6;i++)
+			App_Printf("%d ",Pos[i]);
+		App_Printf("\r\n");
+		if(Pos[0] == 0xe0 && Pos[1] == 0x01)
+			App_Printf("Pos:%d\r\n",((Pos[2]<<24) + (Pos[3]<<16) + (Pos[4] << 8) + Pos[5]) );		
+		tx_thread_sleep(1000);
 		#endif
 	}   
 }
@@ -630,17 +639,18 @@ static void AppTaskCOM(ULONG thread_input)
 {
 	(void)thread_input;
 	App_Printf("AppTaskCom任务开始运行\r\n");
-	uint8_t  stop_motor[] = {0xe0,0xf7};
-	uint8_t Forward_rotation[] = {0xe0,0xf6,0x7e};
-	
+	uint8_t stop_motor[] = {0xe0,0xf7};
+	uint8_t Forward_rotation[] = {0xe0,0xf6,0xda};
+
 	while(1)
 	{
         bsp_LedToggle(2);
 		bsp_LedToggle(1);
+		
 		comSendBuf(COM3,Forward_rotation,3);
-        tx_thread_sleep(1000);
-		comSendBuf(COM3,stop_motor,2);
-		tx_thread_sleep(2000);
+//		tx_thread_sleep(2000);
+//		comSendBuf(COM3,stop_motor,2);
+		tx_thread_sleep(1000);
 	}
 }
 
