@@ -60,6 +60,7 @@
 #include "bsp_touch.h"					/* 电容屏触摸驱动,包含有触摸画板例程 */
 #include "bsp_sdio_sd.h"				/* SD卡底层驱动 */	 
 
+extern void  App_Printf 			(const char *fmt, ...);
 
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug调试组件 */

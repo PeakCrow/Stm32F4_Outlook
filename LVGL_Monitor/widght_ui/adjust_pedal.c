@@ -7,7 +7,8 @@
 static void Imgbtn_MC_cb(lv_event_t * e);
 static lv_style_t s_style_common;
 static void Adjust_Pedal_In_Ui(lv_obj_t* parent);
-static void Padel_Control_cb(lv_event_t* e);
+static void Forward_Btn_Cb(lv_event_t* e);
+static void Reverse_Btn_Cb(lv_event_t* e);
 
 
 void Adjust_Pedal_Ui(lv_obj_t *parent)
@@ -54,21 +55,46 @@ static void Imgbtn_MC_cb(lv_event_t * e)
 
 static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
 {
-    lv_obj_t * pedal_arc = lv_arc_create(parent);
-    lv_obj_set_size(pedal_arc,lv_pct(60),lv_pct(60));
-    lv_arc_set_range(pedal_arc,0,100);
-    lv_arc_set_value(pedal_arc,50);
-    lv_obj_align_to(pedal_arc,NULL,LV_ALIGN_CENTER,100,0);
-    lv_arc_set_mode(pedal_arc,LV_ARC_MODE_SYMMETRICAL);
-    lv_obj_add_event_cb(pedal_arc,Padel_Control_cb,LV_EVENT_ALL,NULL);
+    lv_obj_t * forward_btn;
+    lv_obj_t * reverse_btn;
+    lv_obj_t * for_label;
+    lv_obj_t * rev_label;
 
+    forward_btn = lv_btn_create(parent);
+    lv_obj_set_size(forward_btn,160,100);
+    lv_obj_align_to(forward_btn,parent,LV_ALIGN_CENTER,-150,0);
+    for_label = lv_label_create(parent);
+    lv_label_set_text(for_label,"FORWARD");
+    lv_obj_set_style_text_font(for_label,&lv_font_montserrat_14,LV_PART_MAIN);
+    lv_obj_align_to(for_label,forward_btn,LV_ALIGN_CENTER,0,0);
+    lv_obj_add_event_cb(forward_btn,Forward_Btn_Cb,LV_EVENT_ALL,NULL);
+
+    reverse_btn = lv_btn_create(parent);
+    lv_obj_set_size(reverse_btn,160,100);
+    lv_obj_align_to(reverse_btn,parent,LV_ALIGN_CENTER,150,0);
+    rev_label = lv_label_create(parent);
+    lv_label_set_text(rev_label,"REVERSE");
+    lv_obj_set_style_text_font(rev_label,&lv_font_montserrat_14,LV_PART_MAIN);
+    lv_obj_align_to(rev_label,reverse_btn,LV_ALIGN_CENTER,0,0);
+    lv_obj_add_event_cb(reverse_btn,Reverse_Btn_Cb,LV_EVENT_ALL,NULL);
 }
-static void Padel_Control_cb(lv_event_t* e)
+
+static void Forward_Btn_Cb(lv_event_t* e)
 {
     lv_event_code_t code = lv_event_get_code(e);
-    lv_obj_t * obj = lv_event_get_current_target(e);
-    if(code == LV_EVENT_PRESSING){
-        printf("value changed already--");
-        printf("%d\n",lv_arc_get_value(obj));
-    }
+
+    if(code == LV_EVENT_PRESSED)
+        printf("1--qianjian\n");
+    else if(code == LV_EVENT_RELEASED)
+        printf("1--houtui\n");
+
+}
+static void Reverse_Btn_Cb(lv_event_t* e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+
+    if(code == LV_EVENT_PRESSED)
+        printf("2--qianjian\n");
+    else if(code == LV_EVENT_RELEASED)
+        printf("2--houtui\n");
 }

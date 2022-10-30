@@ -5,7 +5,9 @@
 
 static void Imgbtn_MC_cb(lv_event_t * e);
 static lv_style_t s_style_common;
-
+static void Adjust_Pedal_In_Ui(lv_obj_t* parent);
+static void Forward_Btn_Cb(lv_event_t* e);
+static void Reverse_Btn_Cb(lv_event_t* e);
 
 
 
@@ -48,5 +50,67 @@ static void Imgbtn_MC_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
 
     if(code == LV_EVENT_RELEASED)
-         App_Common_Init(" adjust_pedal ");
+        Adjust_Pedal_In_Ui(App_Common_Init(" Adjust_Pedal "));
 }
+static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
+{
+    lv_obj_t * forward_btn;
+    lv_obj_t * reverse_btn;
+    lv_obj_t * for_label;
+    lv_obj_t * rev_label;
+
+    forward_btn = lv_btn_create(parent);
+    lv_obj_set_size(forward_btn,160,100);
+    lv_obj_align_to(forward_btn,parent,LV_ALIGN_CENTER,-150,0);
+    for_label = lv_label_create(parent);
+    lv_label_set_text(for_label,"FORWARD");
+    lv_obj_set_style_text_font(for_label,&lv_font_montserrat_14,LV_PART_MAIN);
+    lv_obj_align_to(for_label,forward_btn,LV_ALIGN_CENTER,0,0);
+    lv_obj_add_event_cb(forward_btn,Forward_Btn_Cb,LV_EVENT_ALL,NULL);
+
+    reverse_btn = lv_btn_create(parent);
+    lv_obj_set_size(reverse_btn,160,100);
+    lv_obj_align_to(reverse_btn,parent,LV_ALIGN_CENTER,150,0);
+    rev_label = lv_label_create(parent);
+    lv_label_set_text(rev_label,"REVERSE");
+    lv_obj_set_style_text_font(rev_label,&lv_font_montserrat_14,LV_PART_MAIN);
+    lv_obj_align_to(rev_label,reverse_btn,LV_ALIGN_CENTER,0,0);
+    lv_obj_add_event_cb(reverse_btn,Reverse_Btn_Cb,LV_EVENT_ALL,NULL);
+}
+
+
+static void Forward_Btn_Cb(lv_event_t* e)
+{
+	uint8_t stop_motor[] = {0xe0,0xf7};
+	uint8_t Forward_rotation[] = {0xe0,0xf6,0x7e};/* 电机以127档速度正转 */
+	
+	
+    lv_event_code_t code = lv_event_get_code(e);
+
+    if(code == LV_EVENT_PRESSED){
+        App_Printf("正转\n");
+		comSendBuf(COM3,Forward_rotation,3);
+	}
+    else if(code == LV_EVENT_RELEASED){
+        App_Printf("停止\n");
+		comSendBuf(COM3,stop_motor,2);
+	}
+
+}
+static void Reverse_Btn_Cb(lv_event_t* e)
+{
+	uint8_t stop_motor[] = {0xe0,0xf7};
+	uint8_t Forward_rotation[] = {0xe0,0xf6,0xfe};/* 电机以127档速度反转 */
+    lv_event_code_t code = lv_event_get_code(e);
+
+    if(code == LV_EVENT_PRESSED){
+        App_Printf("反转\n");
+		comSendBuf(COM3,Forward_rotation,3);
+	}
+    else if(code == LV_EVENT_RELEASED){
+        App_Printf("停止\n");
+		comSendBuf(COM3,stop_motor,2);
+	}
+}
+
+
