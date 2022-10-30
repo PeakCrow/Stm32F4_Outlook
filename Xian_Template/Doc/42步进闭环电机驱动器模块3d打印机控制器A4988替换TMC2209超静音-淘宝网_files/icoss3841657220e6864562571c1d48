@@ -1,0 +1,188 @@
+var desc='<p style="margin-bottom: 15.0px;"><span style="color: #ff0000;font-family: simhei;font-size: 24.0px;font-style: normal;font-weight: 400;letter-spacing: normal;orphans: 2;text-align: center;text-indent: 0.0px;text-transform: none;white-space: normal;widows: 2;word-spacing: 0.0px;background-color: #ffffff;display: inline;float: none;">&nbsp; &nbsp; 螺丝长度有：38mm、40mm、45mm、50mm、55mm、60mm，默认发40mm，需要其他长度的螺丝请备注留言。</span></p>\
+\
+<p style="margin-bottom: 18.0px;"><span style="color: #ff0000;font-family: simhei;font-size: 24.0px;font-style: normal;font-weight: 400;letter-spacing: normal;orphans: 2;text-align: center;text-indent: 0.0px;text-transform: none;white-space: normal;widows: 2;word-spacing: 0.0px;background-color: #ffffff;display: inline;float: none;">&nbsp; &nbsp;&nbsp;</span><span style="color: #ff0000;font-family: simhei;font-size: 24.0px;font-style: normal;font-weight: 400;letter-spacing: normal;orphans: 2;text-align: center;text-indent: 0.0px;text-transform: none;white-space: normal;widows: 2;word-spacing: 0.0px;display: inline;float: none;"><span style="background-color: #ffff00;">模块使用说明书、外壳文件、stm32和arduino控制例程</span><span><span style="background-color: #ffff00;">下载链接：</span></span></span> <span style="margin-bottom: 18.0px;"><span style="color: #ff0000;display: inline;float: none;font-family: simhei;font-size: 24.0px;font-style: normal;font-weight: 400;letter-spacing: normal;orphans: 2;text-align: center;text-indent: 0.0px;text-transform: none;white-space: normal;widows: 2;word-spacing: 0.0px;"><span style="background-color: #ffff00;">https://ziyoufeixiang.lanzoui.com/iqNZNrv4kyb 密码:6688 </span></span></span></p>\
+\
+<p style="margin-bottom: 15.0px;"><span style="color: #000000;"><span style="font-family: simhei;font-size: 24.0px;font-style: normal;font-weight: 400;letter-spacing: normal;orphans: 2;text-align: center;text-indent: 0.0px;text-transform: none;white-space: normal;widows: 2;word-spacing: 0.0px;background-color: #ffffff;display: inline;float: none;">&nbsp; &nbsp; </span></span><span style="font-family: simhei;"><span style="font-size: 22.0px;"><a href="https://item.taobao.com/item.htm?ft=t&id=627594890703"><span style="color: #000000;"><span style="background-color: #ffa500;">如需单独购买电机，点我</span></span></a></span></span><img align="absmiddle" src="https://img.alicdn.com/imgextra/i2/2091539669/O1CN01NP66rk2LISFw5MzXV_!!2091539669.jpg" style="max-width: 750.0px;width: 750.0px;height: 387.0px;"></p>\
+\
+<p><span style="font-family: microsoft yahei;"><strong><span style="font-size: 32.0px;"><span>&nbsp;<span style="color: #000000;">&nbsp; 软件功能：</span></span></span></strong></span></p>\
+\
+<table border="2" bordercolor="#000" style="margin: 15.0px auto;border-collapse: collapse;text-indent: 20.0px;letter-spacing: 3.0px;margin-bottom: 25.0px;" width="740">\
+	\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">1.板载工业级高精度16384线磁编码器。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">2.FOC矢量控制，力矩、速度、位置三环控制。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">3.支持开环、矢量闭环、串口控制三种控制模式随意切换。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">4.可设置内部256细分插补功能，超静音、超低震动。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">5.支持1~256任意细分，奇数细分（如89细分）也可以。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">6.支持串口直接控制、读取位置和状态、设置系统参数。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">7.屏幕一键设置系统参数，自动保存，可以完全摆脱上位机。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">8.修改参数后自动保存、立即生效，可以随时修改。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">9.上电自检，自动识别一些参数，自动判断一些错误情况并提示。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">10.非工业套餐（不带光耦）支持共阳、共阴信号输入。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">11.非工业套餐（不带光耦）支持PLC的24V信号直接输入。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">12.工业套餐（带光耦隔离）支持双电源供电，安全性强。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">13.支持0.9&deg;和1.8&deg;任意长度的42步进电机。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">14.可设置堵转保护功能。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">15.可设置在7S内无任何按键操作自动熄屏功能。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">16.提供螺钉式、卡扣式两种外壳文件可自行打印。</span></span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="750"><span style="color: #000000;"><span style="font-size: 20.0px;"><span style="font-family: microsoft yahei;">17.提供详细的使用说明书、stm32和arduino控制例程。</span></span></span></td>\
+		</tr>\
+	\
+</table>\
+\
+<p><span style="font-family: microsoft yahei;"><strong><span style="font-size: 32.0px;"><span>&nbsp;<span style="color: #000000;">&nbsp; 额定参数：</span></span></span></strong></span></p>\
+\
+<table border="2" bordercolor="#000" style="margin: 15.0px auto;border-collapse: collapse;text-indent: 20.0px;letter-spacing: 1.5px;margin-bottom: 25.0px;" width="740">\
+	\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="180"><span style="font-family: microsoft yahei;">主控</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">高性能32位ARM处理器</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td width="180"><span style="font-family: microsoft yahei;">驱动</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">8个MOS管组成双H桥驱动</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="205"><span style="font-family: microsoft yahei;">传感器</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">工业级16384线磁编码器</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td width="205"><span style="font-family: microsoft yahei;">供电电压</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">7-28V</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="205"><span style="font-family: microsoft yahei;">电流挡位</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">0-3000ma</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td width="205"><span style="font-family: microsoft yahei;">细分支持</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">1~256任意细分</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 15.5px;background-color: #ededed;">\
+			<td colspan="2" style="color: red;text-indent: 0;" width="205"><span style="font-size: 14.8px;"><span style="font-family: microsoft yahei;">（常规细分1、2、4、8、16、32、64、128、256可以在屏幕上设置，其他细分用串口发命令设置）</span></span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="205"><span style="font-family: microsoft yahei;">闭环反馈频率</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">力矩环20KHz，速度环10KHz，位置环10KHz</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td width="205"><span style="font-family: microsoft yahei;">最高速度</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">3D打印约150-180mm/s，写字机约145-162字/分钟</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="205"><span style="font-family: microsoft yahei;">控制精度</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">小于0.08&deg;</span></td>\
+		</tr>\
+	\
+</table>\
+\
+<p><span style="font-family: microsoft yahei;"><strong><span style="font-size: 32.0px;"><span>&nbsp;<span style="color: #000000;">&nbsp; 外壳文件：</span></span></span></strong></span></p>\
+\
+<p><img align="absmiddle" src="https://img.alicdn.com/imgextra/i2/2091539669/O1CN01jLzkIm2LISG0P4Kci_!!2091539669.jpg" style="max-width: 750.0px;width: 750.0px;height: 331.0px;"></p>\
+\
+<p>&nbsp;</p>\
+\
+<p><span style="font-family: microsoft yahei;"><strong><span style="font-size: 32.0px;"><span>&nbsp;<span style="color: #000000;">&nbsp; 电机尺寸：</span></span></span></strong></span></p>\
+\
+<p><img align="absmiddle" src="https://img.alicdn.com/imgextra/i4/2091539669/O1CN01aQvXD22LISDigOQwI_!!2091539669.jpg" style="max-width: 750.0px;"></p>\
+\
+<p style="text-align: center;"><span style="color: #ff0000;"><strong><span style="font-family: simhei;"><span style="font-size: 18.0px;">(安装闭环模块后比原来高13mm，再加上外壳厚度3mm，总共高出16mm左右)</span></span></strong></span></p>\
+\
+<p style="margin: 25.0px 0 15.0px 0;"><span style="font-family: microsoft yahei;"><strong><span style="font-size: 32.0px;"><span>&nbsp;<span style="color: #000000;">&nbsp; PCBA安装：</span></span></span></strong></span></p>\
+\
+<p><img align="absmiddle" src="https://img.alicdn.com/imgextra/i1/2091539669/O1CN018OYwMk2LISFqompgb_!!2091539669.jpg" style="max-width: 750.0px;width: 750.0px;height: 1175.0px;"><img align="absmiddle" src="https://img.alicdn.com/imgextra/i3/2091539669/O1CN01BfBagf2LISFsQpSVT_!!2091539669.jpg" style="max-width: 750.0px;width: 750.0px;height: 1175.0px;"></p>\
+\
+<p><span style="font-family: microsoft yahei;"><strong><span style="font-size: 32.0px;"><span>&nbsp;<span style="color: #000000;">&nbsp; 菜单说明：</span></span></span></strong></span></p>\
+\
+<p><img align="absmiddle" src="https://img.alicdn.com/imgextra/i1/2091539669/O1CN01ZvpQqm2LISFqol1Qj_!!2091539669.jpg" style="max-width: 750.0px;width: 750.0px;height: 462.0px;"></p>\
+\
+<table border="2" bordercolor="#000" style="border-collapse: collapse;text-indent: 20.0px;letter-spacing: 1.5px;margin-bottom: 15.0px;margin-bottom: 40.0px;margin: 0 auto;" width="740">\
+	\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td width="150"><span style="font-family: microsoft yahei;">Cal</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">编码器校准</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td><span style="font-family: microsoft yahei;">MotType</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">电机类型选择（0.9&deg;/1.8&deg;）</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td><span style="font-family: microsoft yahei;">Mode</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">开环、矢量闭环、串口控制三种模式选择</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td><span style="font-family: microsoft yahei;">Ma</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">电流挡位选择</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td><span style="font-family: microsoft yahei;">MStep</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">设置细分步数（默认16细分）</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td><span style="font-family: microsoft yahei;">En</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">设置En使能引脚的有效电平</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td><span style="font-family: microsoft yahei;">Dir</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">设置电机转动的正方向</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td><span style="font-family: microsoft yahei;">AutoSDD</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">设置自动熄屏功能</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td><span style="font-family: microsoft yahei;">Protect</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">设置堵转保护功能</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td><span style="font-family: microsoft yahei;">MPlyer</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">设置256细分插补功能</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td><span style="font-family: microsoft yahei;">UartBaud</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">设置串口</span><span style="font-family: microsoft yahei;">通讯</span><span style="font-family: microsoft yahei;">波特率</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;background-color: #ededed;">\
+			<td><span style="font-family: microsoft yahei;">UartAddr</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">设置串口地址（支持多机通讯）</span></td>\
+		</tr>\
+		<tr style="text-align: left;height: 45.0px;font-size: 18.0px;">\
+			<td><span style="font-family: microsoft yahei;">Exit</span></td>\
+			<td width="570"><span style="font-family: microsoft yahei;">退出参数设置菜单</span></td>\
+		</tr>\
+	\
+</table>\
+\
+<p><img align="absmiddle" src="https://img.alicdn.com/imgextra/i1/2091539669/O1CN01mlaSHk2LISEGxyCuJ_!!2091539669.jpg" style="max-width: 750.0px;"></p>';
