@@ -46,7 +46,8 @@
 #### 占用PIN脚
 ![输入图片说明](Xian_Template/Doc/%E5%B7%B2%E9%85%8D%E7%BD%AEPIN.png)
 ####  **LVGL模拟器效果** 
-![输入图片说明](Xian_Template/Doc/TFT%20Simulator.gif)
-
+![输入图片说明](Xian_Template/Doc/GIF/TFT%20Simulator.gif)
+####  **LVGL模拟器可调踏板效果** 
+![输入图片说明](Xian_Template/Doc/GIF/TFT%20Simulator%20Adjust%20Pedal.gif)
 #### TFT板卡效果
-![输入图片说明](Xian_Template/Doc/TFT%20Board.gif)
+![输入图片说明](Xian_Template/Doc/GIF/TFT%20Board.gif)
