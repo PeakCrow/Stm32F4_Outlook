@@ -51,3 +51,5 @@
 ![输入图片说明](Xian_Template/Doc/GIF/TFT%20Simulator%20Adjust%20Pedal.gif)
 #### TFT板卡效果
 ![输入图片说明](Xian_Template/Doc/GIF/TFT%20Board.gif)
+#### TFT板卡可调踏板效果
+![输入图片说明](Xian_Template/Doc/GIF/TFT%20Board%20Adjust%20Pedal.gif)
