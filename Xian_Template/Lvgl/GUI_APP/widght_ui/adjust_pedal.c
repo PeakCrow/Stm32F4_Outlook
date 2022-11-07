@@ -4,17 +4,22 @@
 
 
 static void Imgbtn_MC_cb(lv_event_t * e);
-static lv_style_t s_style_common;
 static void Adjust_Pedal_In_Ui(lv_obj_t* parent);
 static void Forward_Btn_Cb(lv_event_t* e);
 static void Reverse_Btn_Cb(lv_event_t* e);
 static void sw_event_cb(lv_event_t * e);
+static void pos_label_event_cb(lv_event_t *e);
 static lv_obj_t * forward_btn;
 static lv_obj_t * reverse_btn;
 
 
+
+
+
 void Adjust_Pedal_Ui(lv_obj_t *parent)
 {
+	static lv_style_t s_style_common;	
+	
     /* 定义并创建图像按钮 */
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
@@ -59,6 +64,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_t * for_label;
     lv_obj_t * rev_label;
     lv_obj_t * sw_label;
+	lv_obj_t * pos_label;
 	
     /* 样式配置 */
     /*Properties to transition*/
@@ -89,6 +95,29 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_style_set_text_letter_space(&style_pr, 20);
     lv_style_set_transition(&style_pr, &transition_dsc_pr);
 
+   /*Set only the properties that should be different*/
+    /*Set only the properties that should be different*/
+    static lv_style_t style_warning;
+    lv_style_init(&style_warning);
+    lv_style_set_bg_color(&style_warning, lv_palette_main(LV_PALETTE_YELLOW));
+    lv_style_set_border_color(&style_warning, lv_palette_darken(LV_PALETTE_YELLOW, 3));
+    lv_style_set_text_color(&style_warning, lv_palette_darken(LV_PALETTE_YELLOW, 4));
+    lv_style_set_border_width(&style_warning, 2);
+    lv_style_set_radius(&style_warning, 10);
+    lv_style_set_shadow_width(&style_warning, 10);
+    lv_style_set_shadow_ofs_y(&style_warning, 5);
+    lv_style_set_shadow_opa(&style_warning, LV_OPA_50);
+    lv_style_set_width(&style_warning, 170);
+    lv_style_set_height(&style_warning,LV_SIZE_CONTENT);
+	
+	/* 电机实时位置标签 */
+	pos_label = lv_label_create(parent);
+	lv_obj_align_to(pos_label,sw_label,LV_ALIGN_OUT_BOTTOM_MID,-50,100);
+	lv_obj_align(pos_label,LV_ALIGN_CENTER,0,0);
+	lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%d",9999);	
+	lv_obj_add_style(pos_label,&style_warning,0);
+	lv_obj_add_event_cb(pos_label,pos_label_event_cb,LV_EVENT_ALL,pos_label);
+		
     /* 正转按钮 */
     forward_btn = lv_btn_create(parent);
     lv_obj_set_size(forward_btn,160,100);
@@ -98,7 +127,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_set_style_bg_color(forward_btn,lv_palette_main(LV_PALETTE_YELLOW),LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(for_label,&lv_font_montserrat_14,LV_PART_MAIN);
     lv_obj_align_to(for_label,forward_btn,LV_ALIGN_CENTER,0,0);
-    lv_obj_add_event_cb(forward_btn,Forward_Btn_Cb,LV_EVENT_ALL,NULL);
+    lv_obj_add_event_cb(forward_btn,Forward_Btn_Cb,LV_EVENT_ALL,pos_label);
     lv_obj_add_style(forward_btn,&style_pr,LV_STATE_PRESSED);
     lv_obj_add_style(forward_btn,&style_def,0);
 
@@ -111,16 +140,38 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_set_style_bg_color(reverse_btn,lv_palette_main(LV_PALETTE_GREEN),LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(rev_label,&lv_font_montserrat_14,LV_PART_MAIN);
     lv_obj_align_to(rev_label,reverse_btn,LV_ALIGN_CENTER,0,0);
-    lv_obj_add_event_cb(reverse_btn,Reverse_Btn_Cb,LV_EVENT_ALL,NULL);
+    lv_obj_add_event_cb(reverse_btn,Reverse_Btn_Cb,LV_EVENT_ALL,pos_label);
     lv_obj_add_style(reverse_btn,&style_pr,LV_STATE_PRESSED);
-    lv_obj_add_style(reverse_btn,&style_def,0);
+    lv_obj_add_style(reverse_btn,&style_def,0);	
+	
+	/* 正反转屏蔽按钮 */
     lv_obj_t * sw = lv_switch_create(parent);
     lv_obj_set_pos(sw,680,40);
-    lv_obj_add_state(sw, LV_STATE_CHECKED);//LV_STATE_CHECKED
+    lv_obj_add_state(sw, LV_STATE_CHECKED);
     sw_label = lv_label_create(parent);
     lv_obj_align_to(sw_label,sw,LV_ALIGN_OUT_BOTTOM_MID,-25,0);
     lv_label_set_text(sw_label,"Adjust On");
     lv_obj_add_event_cb(sw, sw_event_cb, LV_EVENT_VALUE_CHANGED, sw_label);
+}
+static void pos_label_event_cb(lv_event_t *e)
+{
+	lv_event_code_t code = lv_event_get_code(e);	
+	lv_obj_t * pos_label = lv_event_get_user_data(e);
+	
+	/* 读取闭环电机的实时位置，也就是电机自上电/使能起所转过的角度 */
+	uint8_t Postition[] = {0xe0,0x36};
+	uint8_t Pos[6] = {0};
+	int32_t PosQueue;
+	
+	if(code == LV_EVENT_PRESSING){		
+		comSendBuf(COM3,Postition,2);
+		for(int i = 0;i < 6;i++)
+			comGetChar(COM3,&Pos[i]);
+		if(Pos[0] == 0xe0)
+		PosQueue = ((Pos[1]<<24) + (Pos[2]<<16) + (Pos[3] << 8) + Pos[4]);
+		/* 更新标签文本值 */
+		lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%d",PosQueue);
+	}
 }
 
 static void sw_event_cb(lv_event_t * e)
@@ -143,15 +194,17 @@ static void Forward_Btn_Cb(lv_event_t* e)
 	uint8_t stop_motor[] = {0xe0,0xf7};
 	uint8_t Forward_rotation[] = {0xe0,0xf6,0x7e};/* 电机以127档速度正转 */
     lv_event_code_t code = lv_event_get_code(e);
-
-    if(code == LV_EVENT_PRESSED){
-        App_Printf("正转\n");
+	lv_obj_t * pos_label = lv_event_get_user_data(e);
+	
+    if(code == LV_EVENT_PRESSED){        
 		comSendBuf(COM3,Forward_rotation,3);
 	}
     else if(code == LV_EVENT_RELEASED){
-        App_Printf("停止\n");
-		comSendBuf(COM3,stop_motor,2);
+		comSendBuf(COM3,stop_motor,2);	
 	}
+	else if(code == LV_EVENT_PRESSING){
+		lv_event_send(pos_label,LV_EVENT_PRESSING,NULL);
+	}	
 
 }
 static void Reverse_Btn_Cb(lv_event_t* e)
@@ -159,14 +212,16 @@ static void Reverse_Btn_Cb(lv_event_t* e)
 	uint8_t stop_motor[] = {0xe0,0xf7};
 	uint8_t Forward_rotation[] = {0xe0,0xf6,0xfe};/* 电机以127档速度反转 */
     lv_event_code_t code = lv_event_get_code(e);
-
+	lv_obj_t * pos_label = lv_event_get_user_data(e);
+	
     if(code == LV_EVENT_PRESSED){
-        App_Printf("反转\n");
-		comSendBuf(COM3,Forward_rotation,3);
+		comSendBuf(COM3,Forward_rotation,3);		
 	}
     else if(code == LV_EVENT_RELEASED){
-        App_Printf("停止\n");
 		comSendBuf(COM3,stop_motor,2);
+	}
+	else if(code == LV_EVENT_PRESSING){
+		lv_event_send(pos_label,LV_EVENT_PRESSING,NULL);
 	}
 }
 

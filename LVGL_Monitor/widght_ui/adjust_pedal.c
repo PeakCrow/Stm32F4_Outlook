@@ -10,6 +10,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent);
 static void Forward_Btn_Cb(lv_event_t* e);
 static void Reverse_Btn_Cb(lv_event_t* e);
 static void sw_event_cb(lv_event_t * e);
+static void pos_label_event_cb(lv_event_t *e);
 static lv_obj_t * forward_btn;
 static lv_obj_t * reverse_btn;
 
@@ -61,6 +62,8 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_t * for_label;
     lv_obj_t * rev_label;
     lv_obj_t * sw_label;
+    lv_obj_t * pos_label;
+
     /* 样式配置 */
     /*Properties to transition*/
     static lv_style_prop_t props[] = {
@@ -90,6 +93,28 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_style_set_text_letter_space(&style_pr, 20);
     lv_style_set_transition(&style_pr, &transition_dsc_pr);
 
+    /*Set only the properties that should be different*/
+    static lv_style_t style_warning;
+    lv_style_init(&style_warning);
+    lv_style_set_bg_color(&style_warning, lv_palette_main(LV_PALETTE_YELLOW));
+    lv_style_set_border_color(&style_warning, lv_palette_darken(LV_PALETTE_YELLOW, 3));
+    lv_style_set_text_color(&style_warning, lv_palette_darken(LV_PALETTE_YELLOW, 4));
+    lv_style_set_border_width(&style_warning, 2);
+    lv_style_set_radius(&style_warning, 10);
+    lv_style_set_shadow_width(&style_warning, 10);
+    lv_style_set_shadow_ofs_y(&style_warning, 5);
+    lv_style_set_shadow_opa(&style_warning, LV_OPA_50);
+    lv_style_set_width(&style_warning, 170);
+    lv_style_set_height(&style_warning,LV_SIZE_CONTENT);
+
+    /* 电机实时位置标签 */
+    pos_label = lv_label_create(parent);
+    lv_obj_align_to(pos_label,parent,LV_ALIGN_OUT_BOTTOM_MID,-50,100);
+    lv_obj_align(pos_label,LV_ALIGN_CENTER,0,0);
+    lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%d",9999);
+    lv_obj_add_event_cb(pos_label,pos_label_event_cb,LV_EVENT_ALL,pos_label);
+    lv_obj_add_style(pos_label,&style_warning,0);
+
     /* 正转按钮 */
     forward_btn = lv_btn_create(parent);
     lv_obj_set_size(forward_btn,160,100);
@@ -99,7 +124,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_set_style_bg_color(forward_btn,lv_palette_main(LV_PALETTE_YELLOW),LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(for_label,&lv_font_montserrat_14,LV_PART_MAIN);
     lv_obj_align_to(for_label,forward_btn,LV_ALIGN_CENTER,0,0);
-    lv_obj_add_event_cb(forward_btn,Forward_Btn_Cb,LV_EVENT_ALL,NULL);
+    lv_obj_add_event_cb(forward_btn,Forward_Btn_Cb,LV_EVENT_ALL,pos_label);
     lv_obj_add_style(forward_btn,&style_pr,LV_STATE_PRESSED);
     lv_obj_add_style(forward_btn,&style_def,0);
 
@@ -112,7 +137,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_set_style_bg_color(reverse_btn,lv_palette_main(LV_PALETTE_GREEN),LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(rev_label,&lv_font_montserrat_14,LV_PART_MAIN);
     lv_obj_align_to(rev_label,reverse_btn,LV_ALIGN_CENTER,0,0);
-    lv_obj_add_event_cb(reverse_btn,Reverse_Btn_Cb,LV_EVENT_ALL,NULL);
+    lv_obj_add_event_cb(reverse_btn,Reverse_Btn_Cb,LV_EVENT_ALL,pos_label);
     lv_obj_add_style(reverse_btn,&style_pr,LV_STATE_PRESSED);
     lv_obj_add_style(reverse_btn,&style_def,0);
 
@@ -124,6 +149,19 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_label_set_text(sw_label,"Adjust On");
     lv_obj_add_event_cb(sw, sw_event_cb, LV_EVENT_VALUE_CHANGED, sw_label);
 }
+
+static void pos_label_event_cb(lv_event_t *e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t * pos_label = lv_event_get_user_data(e);
+    static double i = 9999;
+
+    if(code == LV_EVENT_PRESSING){
+        i += 0.11;
+        lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%.2f",i);
+    }
+}
+
 static void sw_event_cb(lv_event_t * e)
 {
     lv_obj_t * sw = lv_event_get_target(e);
@@ -143,20 +181,28 @@ static void sw_event_cb(lv_event_t * e)
 static void Forward_Btn_Cb(lv_event_t* e)
 {
     lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t * pos_label = lv_event_get_user_data(e);
 
     if(code == LV_EVENT_PRESSED)
         printf("1--qianjian\n");
     else if(code == LV_EVENT_RELEASED)
         printf("1--houtui\n");
+    else if(code == LV_EVENT_PRESSING){
+        lv_event_send(pos_label,LV_EVENT_PRESSING,NULL);
+    }
 
 }
 /* 反转按钮回调函数 */
 static void Reverse_Btn_Cb(lv_event_t* e)
 {
     lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t * pos_label = lv_event_get_user_data(e);
 
     if(code == LV_EVENT_PRESSED)
         printf("2--qianjian\n");
     else if(code == LV_EVENT_RELEASED)
         printf("2--houtui\n");
+    else if(code == LV_EVENT_PRESSING){
+        lv_event_send(pos_label,LV_EVENT_PRESSING,NULL);
+    }
 }

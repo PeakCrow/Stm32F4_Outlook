@@ -111,7 +111,9 @@ static  void  OSStatInit 			(void);
 *******************************************************************************************************
 */
 static TX_MUTEX   AppPrintfSemp;	/* 用于printf互斥 */
-static TX_MUTEX   LCDSemp;	/* 用于printf互斥 */
+TX_MUTEX   LCDSemp;			/* 用于LVGL互斥 */
+TX_EVENT_FLAGS_GROUP  EventGroup; /* 事件标志组 */
+
 
 /* 统计任务使用 */
 __IO uint8_t   OSStatRdy;      		/* 统计任务就绪标志 */
@@ -160,10 +162,10 @@ void bsp_RunPer10ms()
 */
 static  void  AppObjCreate (void)
 {
-	 /* 创建互斥信号量 */
+	/* 创建互斥信号量 */
     tx_mutex_create(&AppPrintfSemp,"AppPrintfSemp",TX_NO_INHERIT);
 	
-	 	/* 定时器组 */
+	/* 定时器组 */
 	tx_timer_create(&AppTimer,
 					"App Timer",
 					TimerCallback, 
@@ -171,6 +173,9 @@ static  void  AppObjCreate (void)
 					500,                /* 设置定时器时间溢出的初始延迟，单位ThreadX系统时间节拍数 */
 					500, 				/* 设置初始延迟后的定时器运行周期，如果设置为0，表示单次定时器,单位ms */
 					TX_AUTO_ACTIVATE);	/* 激活定时器 */
+	
+	/* 创建事件标志组 */
+	tx_event_flags_create(&EventGroup, "EventGroupName");
 }
 /*******************************************************************************
   * @FunctionName: OSStatInit
@@ -291,10 +296,10 @@ static  void  AppTaskStart (ULONG thread_input)
 	lv_port_disp_init(); 						/* lvgl 显示接口初始化,放在 lv_init()的后面 */
 	lv_port_indev_init(); 						/* lvgl 输入接口初始化,放在 lv_init()的后面 */
 
-	/* 创建任务间通信机制 */
+	/* 创建任务间通信机制,主要是各种任务间通讯函数 */
 	AppObjCreate();
 
-	/* 创建任务，此函数中包含有3个子任务 */
+	/* 创建任务，此函数中包含子任务-线程任务 */
     AppTaskCreate();
 
 	while (1)
@@ -448,10 +453,12 @@ extern void DemoFatFS(void);
 static void AppTaskMsgPro(ULONG thread_input)
 {
 	(void)thread_input;
+	/* 读取闭环电机的实时位置，也就是电机自上电/使能起所转过的角度 */
 	uint8_t Postition[] = {0xe0,0x36};
 	uint8_t Pos[6] = {0};
+	int32_t PosQueue;
 	while(1)
-	{
+	{	
 		#if 0
 		DemoFatFS();
 		tx_thread_sleep(10);
@@ -460,12 +467,10 @@ static void AppTaskMsgPro(ULONG thread_input)
 		comSendBuf(COM3,Postition,2);
 		for(int i = 0;i < 6;i++)
 			comGetChar(COM3,&Pos[i]);
-		for(int i = 0;i < 6;i++)
-			App_Printf("%d ",Pos[i]);
-		App_Printf("\r\n");
 		if(Pos[0] == 0xe0)
-			App_Printf("Pos:%d\r\n",((Pos[1]<<24) + (Pos[2]<<16) + (Pos[3] << 8) + Pos[4]) );		
-		tx_thread_sleep(1000);
+		PosQueue = ((Pos[1]<<24) + (Pos[2]<<16) + (Pos[3] << 8) + Pos[4]);
+		
+		tx_thread_sleep(500);
 		#endif
 	}   
 }
@@ -497,7 +502,7 @@ static void AppTaskTFTLCD    (ULONG thread_input)
 		tx_mutex_get(&LCDSemp, TX_WAIT_FOREVER);
  		lv_timer_handler();
 		tx_mutex_put(&LCDSemp);
-		tx_thread_sleep(10);
+		tx_thread_sleep(5);
 	}
 	
 	#else
