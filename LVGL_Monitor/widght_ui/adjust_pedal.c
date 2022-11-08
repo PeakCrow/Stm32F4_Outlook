@@ -63,7 +63,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_t * rev_label;
     lv_obj_t * sw_label;
     lv_obj_t * pos_label;
-
+    printf("%+d",(-10 - (5)));
     /* 样式配置 */
     /*Properties to transition*/
     static lv_style_prop_t props[] = {
@@ -154,9 +154,9 @@ static void pos_label_event_cb(lv_event_t *e)
 {
     lv_event_code_t code = lv_event_get_code(e);
     lv_obj_t * pos_label = lv_event_get_user_data(e);
-    static double i = 9999;
+    static double i = -99999;
 
-    if(code == LV_EVENT_PRESSING){
+    if(code == LV_EVENT_PRESSING){        
         i += 0.11;
         lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%.2f",i);
     }

@@ -11,6 +11,7 @@ static void sw_event_cb(lv_event_t * e);
 static void pos_label_event_cb(lv_event_t *e);
 static lv_obj_t * forward_btn;
 static lv_obj_t * reverse_btn;
+static double NumberConuts = 0;
 
 
 
@@ -107,14 +108,14 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_style_set_shadow_width(&style_warning, 10);
     lv_style_set_shadow_ofs_y(&style_warning, 5);
     lv_style_set_shadow_opa(&style_warning, LV_OPA_50);
-    lv_style_set_width(&style_warning, 170);
+    lv_style_set_width(&style_warning, 250);
     lv_style_set_height(&style_warning,LV_SIZE_CONTENT);
 	
 	/* 电机实时位置标签 */
 	pos_label = lv_label_create(parent);
 	lv_obj_align_to(pos_label,sw_label,LV_ALIGN_OUT_BOTTOM_MID,-50,100);
 	lv_obj_align(pos_label,LV_ALIGN_CENTER,0,0);
-	lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%d",9999);	
+	lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%.2f",NumberConuts);	
 	lv_obj_add_style(pos_label,&style_warning,0);
 	lv_obj_add_event_cb(pos_label,pos_label_event_cb,LV_EVENT_ALL,pos_label);
 		
@@ -125,7 +126,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     for_label = lv_label_create(parent);
     lv_label_set_text(for_label,"FORWARD");
     lv_obj_set_style_bg_color(forward_btn,lv_palette_main(LV_PALETTE_YELLOW),LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(for_label,&lv_font_montserrat_14,LV_PART_MAIN);
+    lv_obj_set_style_text_font(for_label,&lv_font_montserrat_24,LV_PART_MAIN);
     lv_obj_align_to(for_label,forward_btn,LV_ALIGN_CENTER,0,0);
     lv_obj_add_event_cb(forward_btn,Forward_Btn_Cb,LV_EVENT_ALL,pos_label);
     lv_obj_add_style(forward_btn,&style_pr,LV_STATE_PRESSED);
@@ -138,7 +139,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     rev_label = lv_label_create(parent);
     lv_label_set_text(rev_label,"REVERSE");
     lv_obj_set_style_bg_color(reverse_btn,lv_palette_main(LV_PALETTE_GREEN),LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(rev_label,&lv_font_montserrat_14,LV_PART_MAIN);
+    lv_obj_set_style_text_font(rev_label,&lv_font_montserrat_24,LV_PART_MAIN);
     lv_obj_align_to(rev_label,reverse_btn,LV_ALIGN_CENTER,0,0);
     lv_obj_add_event_cb(reverse_btn,Reverse_Btn_Cb,LV_EVENT_ALL,pos_label);
     lv_obj_add_style(reverse_btn,&style_pr,LV_STATE_PRESSED);
@@ -146,7 +147,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
 	
 	/* 正反转屏蔽按钮 */
     lv_obj_t * sw = lv_switch_create(parent);
-    lv_obj_set_pos(sw,680,40);
+    lv_obj_set_pos(sw,650,40);
     lv_obj_add_state(sw, LV_STATE_CHECKED);
     sw_label = lv_label_create(parent);
     lv_obj_align_to(sw_label,sw,LV_ALIGN_OUT_BOTTOM_MID,-25,0);
@@ -161,16 +162,22 @@ static void pos_label_event_cb(lv_event_t *e)
 	/* 读取闭环电机的实时位置，也就是电机自上电/使能起所转过的角度 */
 	uint8_t Postition[] = {0xe0,0x36};
 	uint8_t Pos[6] = {0};
-	int32_t PosQueue;
+	static int32_t PosQueue = 0;	
+	static int32_t old_pos = 0;
 	
-	if(code == LV_EVENT_PRESSING){		
+	if(code == LV_EVENT_PRESSING ){		
 		comSendBuf(COM3,Postition,2);
 		for(int i = 0;i < 6;i++)
-			comGetChar(COM3,&Pos[i]);
+			comGetChar(COM3,&Pos[i]);		
 		if(Pos[0] == 0xe0)
-		PosQueue = ((Pos[1]<<24) + (Pos[2]<<16) + (Pos[3] << 8) + Pos[4]);
-		/* 更新标签文本值 */
-		lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%d",PosQueue);
+			PosQueue = ((Pos[1]<<24) | (Pos[2]<<16) | (Pos[3] << 8) | Pos[4]);
+		if(  (  abs(PosQueue - old_pos)   < 65535)  ){
+			/* 更新标签文本值 */			
+			NumberConuts = PosQueue / 65535.00;
+			lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%.2f",NumberConuts);
+		}
+		/* 记录上一次的数据 */
+		old_pos = PosQueue;
 	}
 }
 
