@@ -161,24 +161,24 @@ static void pos_label_event_cb(lv_event_t *e)
 	
 	/* 读取闭环电机的实时位置，也就是电机自上电/使能起所转过的角度 */
 	uint8_t Postition[] = {0xe0,0x36};
-	uint8_t Pos[6] = {0};
+	static uint8_t Pos[5] = {0};
 	static int32_t PosQueue = 0;	
-	static int32_t old_pos = 0;
 	
 	if(code == LV_EVENT_PRESSING ){		
 		comSendBuf(COM3,Postition,2);
-		for(int i = 0;i < 6;i++)
+		for(int i = 0;i < 5;i++)
 			comGetChar(COM3,&Pos[i]);		
 		if(Pos[0] == 0xe0)
 			PosQueue = ((Pos[1]<<24) | (Pos[2]<<16) | (Pos[3] << 8) | Pos[4]);
-		if(  (  abs(PosQueue - old_pos)   < 65535)  ){
-			/* 更新标签文本值 */			
-			NumberConuts = PosQueue / 65535.00;
-			lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%.2f",NumberConuts);
-		}
-		/* 记录上一次的数据 */
-		old_pos = PosQueue;
-	}
+
+		/* 更新标签文本值 */			
+		NumberConuts = PosQueue / 65535.00;
+		lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%.2f",NumberConuts);
+
+	}else if(code == LV_EVENT_RELEASED){
+		App_Printf("%d ",PosQueue);
+        App_I2C_EE_BufferWrite(Pos,0x00,5);
+    }
 }
 
 static void sw_event_cb(lv_event_t * e)
@@ -208,7 +208,8 @@ static void Forward_Btn_Cb(lv_event_t* e)
 	}
     else if(code == LV_EVENT_RELEASED){
 		comSendBuf(COM3,stop_motor,2);	
-	}
+        lv_event_send(pos_label,LV_EVENT_RELEASED,NULL);
+    }
 	else if(code == LV_EVENT_PRESSING){
 		lv_event_send(pos_label,LV_EVENT_PRESSING,NULL);
 	}	
@@ -225,8 +226,9 @@ static void Reverse_Btn_Cb(lv_event_t* e)
 		comSendBuf(COM3,Forward_rotation,3);		
 	}
     else if(code == LV_EVENT_RELEASED){
-		comSendBuf(COM3,stop_motor,2);
-	}
+		comSendBuf(COM3,stop_motor,2);	
+        lv_event_send(pos_label,LV_EVENT_RELEASED,NULL);
+    }
 	else if(code == LV_EVENT_PRESSING){
 		lv_event_send(pos_label,LV_EVENT_PRESSING,NULL);
 	}

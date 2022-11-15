@@ -70,12 +70,8 @@ extern I2C_HandleTypeDef	iic_handle;
 void bsp_I2C_EE_Init(void);
 void I2C_EE_BufferWrite(uint8_t* pBuffer, uint8_t WriteAddr,uint16_t NumByteToWrite);
 uint32_t I2C_EE_ByteWrite(uint8_t* pBuffer,uint8_t WriteAddr);
-uint32_t I2C_EE_PageWrite(uint8_t* pBuffer,uint8_t WriteAddr,uint8_t NumByteToWrite);
 uint32_t I2C_EE_BufferRead(uint8_t* pBuffer,uint8_t ReadAdder,uint16_t NumByteToRead);
 void I2C_EE_BufferWrite(uint8_t * pBuffer,uint8_t WriteAddr,uint16_t NumByteToWrite);
-
-
-
 void DemoIicEeprom(void);
 
 

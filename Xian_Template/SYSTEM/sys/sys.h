@@ -63,6 +63,8 @@
 /***********************************ThreadX操作系统组件属性外部声名*************************************************************/
 extern void  App_Printf 			(const char *fmt, ...);
 extern TX_EVENT_FLAGS_GROUP  EventGroup; /* 事件标志组 */
+extern void    App_I2C_EE_ByteWrite(uint8_t * pBuffer, uint8_t WriteAddr);
+
 
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug调试组件 */
