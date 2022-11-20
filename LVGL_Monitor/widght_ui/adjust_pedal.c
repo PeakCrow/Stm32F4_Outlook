@@ -65,8 +65,11 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_t * rev_label;
     lv_obj_t * sw_label;
     lv_obj_t * pos_label;
+<<<<<<< HEAD
     lv_obj_t * sw;
     lv_obj_t * cont;
+=======
+>>>>>>> 07fc6a0bc99938368aff3b96bf8f0b7e0a94f81e
 
     /* 样式配置 */
     /*Properties to transition*/
@@ -198,6 +201,9 @@ static void pos_label_event_cb(lv_event_t *e)
         i += 0.11;
         lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%.2f",i);
     }
+    else if(code == LV_EVENT_RELEASED){
+        printf("zhenfananniuanxia\n");
+    }
 }
 
 static void sw_event_cb(lv_event_t * e)
@@ -223,8 +229,10 @@ static void Forward_Btn_Cb(lv_event_t* e)
 
     if(code == LV_EVENT_PRESSED)
         printf("1--qianjian\n");
-    else if(code == LV_EVENT_RELEASED)
+    else if(code == LV_EVENT_RELEASED){
         printf("1--houtui\n");
+        lv_event_send(pos_label,LV_EVENT_RELEASED,NULL);
+    }
     else if(code == LV_EVENT_PRESSING){
         lv_event_send(pos_label,LV_EVENT_PRESSING,NULL);
     }
@@ -238,8 +246,10 @@ static void Reverse_Btn_Cb(lv_event_t* e)
 
     if(code == LV_EVENT_PRESSED)
         printf("2--qianjian\n");
-    else if(code == LV_EVENT_RELEASED)
+    else if(code == LV_EVENT_RELEASED){
         printf("2--houtui\n");
+        lv_event_send(pos_label,LV_EVENT_RELEASED,NULL);
+    }
     else if(code == LV_EVENT_PRESSING){
         lv_event_send(pos_label,LV_EVENT_PRESSING,NULL);
     }

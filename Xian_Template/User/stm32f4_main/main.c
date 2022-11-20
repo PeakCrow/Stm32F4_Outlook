@@ -77,7 +77,10 @@ static  uint64_t    AppTaskMsgProStk[APP_CFG_TASK_MsgPro_STK_SIZE/8];
 *********************************************************************************************************
 */
 TX_TIMER AppTimer;
-
+TX_MUTEX AppPrintfSemp;	/* 用于printf互斥 */
+TX_MUTEX LCDSemp;		/* 用于LVGL互斥 */
+TX_MUTEX App_PowerDownSave;	/* 用于掉电保存 */  
+TX_EVENT_FLAGS_GROUP  EventGroup; /* 事件标志组 */
 /*
 *********************************************************************************************************
 *                                       软件定时器回调函数
@@ -98,24 +101,18 @@ static  void  AppTaskIDLE			(ULONG thread_input);
 static  void  AppTaskStat			(ULONG thread_input);
 static  void  AppTaskREADADC		(ULONG thread_input);
 static  void  AppTaskTFTLCD			(ULONG thread_input);
-static  void  AppTaskMsgPro         (ULONG thread_input);
-  void  App_Printf 			(const char *fmt, ...);
+static  void  AppTaskMsgPro         (ULONG thread_input);  
 static  void  AppTaskCreate         (void);
 static  void  DispTaskInfo          (void);
 static  void  AppObjCreate          (void);
 static  void  OSStatInit 			(void);
-
+void  	App_Printf 			(const char *fmt, ...);
+void    App_I2C_EE_BufferWrite(uint8_t* pBuffer, uint8_t WriteAddr,uint16_t NumByteToWrite);
 /*
 *******************************************************************************************************
 *                               变量
 *******************************************************************************************************
 */
-static TX_MUTEX   AppPrintfSemp;	/* 用于printf互斥 */
-TX_MUTEX   LCDSemp;			/* 用于LVGL互斥 */
-TX_EVENT_FLAGS_GROUP  EventGroup; /* 事件标志组 */
-
-
-/* 统计任务使用 */
 __IO uint8_t   OSStatRdy;      		/* 统计任务就绪标志 */
 __IO uint32_t  OSIdleCtr;     	    /* 空闲任务计数 */
 __IO float     OSCPUUsage;   	    /* CPU百分比 */
@@ -453,10 +450,6 @@ extern void DemoFatFS(void);
 static void AppTaskMsgPro(ULONG thread_input)
 {
 	(void)thread_input;
-	/* 读取闭环电机的实时位置，也就是电机自上电/使能起所转过的角度 */
-	uint8_t Postition[] = {0xe0,0x36};
-	uint8_t Pos[6] = {0};
-	int32_t PosQueue;
 	while(1)
 	{	
 		#if 0
@@ -464,11 +457,6 @@ static void AppTaskMsgPro(ULONG thread_input)
 		tx_thread_sleep(10);
 		#else
 		//DemoSpiFlash();
-		comSendBuf(COM3,Postition,2);
-		for(int i = 0;i < 6;i++)
-			comGetChar(COM3,&Pos[i]);
-		if(Pos[0] == 0xe0)
-		PosQueue = ((Pos[1]<<24) + (Pos[2]<<16) + (Pos[3] << 8) + Pos[4]);
 		
 		tx_thread_sleep(500);
 		#endif
@@ -596,6 +584,8 @@ static void AppTaskUserIF(ULONG thread_input)
 {
 	uint8_t ucKeyCode;	/* 按键代码 */
 	(void)thread_input;
+	uint8_t buf[5] ={0};
+	uint32_t pos = 0;
 	while(1)
 	{        
 		ucKeyCode = bsp_GetKey();
@@ -604,26 +594,20 @@ static void AppTaskUserIF(ULONG thread_input)
 				switch(ucKeyCode)
 				{
 					case KEY_0_UP: 			  /* K1键按打印任务执行情况 */
-						App_Printf("k0按键弹起\r\n");
-						//sfReadTest();
+						App_Printf("k0按键弹起\r\n");						
 					 	break;
 					case KEY_UP_DOWN:			/* kup按键按下 */
 						App_Printf("kup按键按下\r\n");				//红色	
-						//sfReadTest();
-						//App_Printf("%.1f\r\n",bsp_MLX90614_ReadTemp());
-						//DemoIicEeprom();
-						DispTaskInfo();
 						break;
 					case KEY_0_DOWN:			/* k0按键按下 */
 					{
-						App_Printf("k0按键按下\r\n");
-						//Ws2812b_Run_Water_Lamp(0xff,0x00,0x00,1000,gradua_on);/* 当按下key0后，会进行12s的延时，才能触发下次的按键输入bug */
+						App_Printf("k0按键按下\r\n");						
 					break;
 					}
 					case KEY_UP_UP:
-						App_Printf("kup按键弹起");
-						//Ws2812b_Set_Alloff();
-						//SD_Test();		/* SD卡测试例程 */
+						I2C_EE_BufferRead(buf,0x00,5);
+						pos = ((buf[1]<<24) | (buf[2]<<16) | (buf[3] << 8) | buf[4]);
+						App_Printf("kup按键弹起,%d ",pos);
 						break;
 				}
 		}
@@ -681,6 +665,16 @@ void  App_Printf(const char *fmt, ...)
     printf("%s", buf_str);
 
     tx_mutex_put(&AppPrintfSemp);
+}
+
+void    App_I2C_EE_BufferWrite(uint8_t* pBuffer, uint8_t WriteAddr,uint16_t NumByteToWrite)
+{
+	/* 互斥操作 */
+    tx_mutex_get(&App_PowerDownSave, TX_WAIT_FOREVER);
+
+    I2C_EE_BufferWrite(pBuffer,WriteAddr,NumByteToWrite);
+
+    tx_mutex_put(&App_PowerDownSave);	
 }
 
 /*
