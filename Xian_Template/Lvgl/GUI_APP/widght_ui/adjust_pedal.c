@@ -9,8 +9,11 @@ static void Forward_Btn_Cb(lv_event_t* e);
 static void Reverse_Btn_Cb(lv_event_t* e);
 static void sw_event_cb(lv_event_t * e);
 static void pos_label_event_cb(lv_event_t *e);
+static void scroll_event_cb(lv_event_t * e);
+static void driver_selection_cb(lv_event_t * e);
 static lv_obj_t * forward_btn;
 static lv_obj_t * reverse_btn;
+
 static double NumberConuts = 0;
 
 
@@ -65,7 +68,10 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_t * for_label;
     lv_obj_t * rev_label;
     lv_obj_t * sw_label;
-	lv_obj_t * pos_label;
+    lv_obj_t * pos_label;
+    lv_obj_t * sw;
+    lv_obj_t * cont;
+
 	
     /* 样式配置 */
     /*Properties to transition*/
@@ -146,13 +152,46 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_add_style(reverse_btn,&style_def,0);	
 	
 	/* 正反转屏蔽按钮 */
-    lv_obj_t * sw = lv_switch_create(parent);
+    sw = lv_switch_create(parent);
     lv_obj_set_pos(sw,650,40);
     lv_obj_add_state(sw, LV_STATE_CHECKED);
     sw_label = lv_label_create(parent);
     lv_obj_align_to(sw_label,sw,LV_ALIGN_OUT_BOTTOM_MID,-25,0);
     lv_label_set_text(sw_label,"Adjust On");
     lv_obj_add_event_cb(sw, sw_event_cb, LV_EVENT_VALUE_CHANGED, sw_label);
+
+    /* 车手滚轮 */
+    cont = lv_obj_create(parent);
+    lv_obj_set_size(cont, 150, 150);
+    lv_obj_set_pos(cont,480,210);
+    lv_obj_set_flex_flow(cont, LV_FLEX_FLOW_COLUMN);
+    lv_obj_add_event_cb(cont, scroll_event_cb, LV_EVENT_SCROLL, NULL);
+    lv_obj_set_style_radius(cont, LV_RADIUS_CIRCLE, 0);
+    lv_obj_set_style_clip_corner(cont, true, 0);
+    lv_obj_set_scroll_dir(cont, LV_DIR_VER);
+    lv_obj_set_scroll_snap_y(cont, LV_SCROLL_SNAP_CENTER);
+    lv_obj_set_scrollbar_mode(cont, LV_SCROLLBAR_MODE_OFF);
+
+    uint8_t i;
+    for(i = 1; i < 5; i++) {
+        lv_obj_t * btn = lv_btn_create(cont);
+        lv_obj_set_width(btn, lv_pct(100));
+
+        lv_obj_t * label = lv_label_create(btn);
+        lv_label_set_text_fmt(label, "driver %"LV_PRIu32, i);
+
+        /* 聚焦状态 */
+        lv_obj_set_style_width(btn,120,LV_STATE_FOCUSED);
+        lv_obj_set_style_bg_color(btn,lv_palette_main(LV_PALETTE_RED),LV_STATE_FOCUSED);
+        lv_obj_set_style_bg_color(btn,lv_palette_main(LV_PALETTE_BROWN),LV_STATE_DEFAULT);
+        lv_obj_add_event_cb(btn,driver_selection_cb,LV_EVENT_ALL,label);
+    }
+    /*Update the buttons position manually for first*/
+    /* 首先手动更新按钮位置 */
+    lv_event_send(cont, LV_EVENT_SCROLL, NULL);
+    /*Be sure the fist button is in the middle*/
+    /* 确保第一个按钮在中间 */
+    lv_obj_scroll_to_view(lv_obj_get_child(cont, 0), LV_ANIM_OFF);	
 }
 static void pos_label_event_cb(lv_event_t *e)
 {
@@ -230,6 +269,74 @@ static void Reverse_Btn_Cb(lv_event_t* e)
 	else if(code == LV_EVENT_PRESSING){
 		lv_event_send(pos_label,LV_EVENT_PRESSING,NULL);
 	}
+}
+
+
+/* 车手滚轮回调函数 */
+static void scroll_event_cb(lv_event_t * e)
+{
+    lv_obj_t * cont = lv_event_get_target(e);
+
+    lv_area_t cont_a;
+    lv_obj_get_coords(cont, &cont_a);
+    lv_coord_t cont_y_center = cont_a.y1 + lv_area_get_height(&cont_a) / 2;
+
+    lv_coord_t r = lv_obj_get_height(cont) * 7 / 10;
+    uint32_t i;
+    uint32_t child_cnt = lv_obj_get_child_cnt(cont);
+
+
+    for(i = 0; i < child_cnt; i++) {
+        lv_obj_t * child = lv_obj_get_child(cont, (int32_t)i);
+        lv_area_t child_a;
+        lv_obj_get_coords(child, &child_a);
+
+        lv_coord_t child_y_center = child_a.y1 + lv_area_get_height(&child_a) / 2;
+
+        lv_coord_t diff_y = child_y_center - cont_y_center;
+        diff_y = LV_ABS(diff_y);
+
+        /*Get the x of diff_y on a circle.*/
+        lv_coord_t x;
+        /*If diff_y is out of the circle use the last point of the circle (the radius)*/
+        if(diff_y >= r) {
+            x = r;
+        }
+        else {
+            /*Use Pythagoras theorem to get x from radius and y*/
+            uint32_t x_sqr = (uint32_t)(r * r - diff_y * diff_y);
+            lv_sqrt_res_t res;
+            lv_sqrt(x_sqr, &res, 0x8000);   /*Use lvgl's built in sqrt root function*/
+            x = r - res.i;
+        }
+
+        /*Translate the item by the calculated X coordinate*/
+        lv_obj_set_style_translate_x(child, x, 0);
+
+        /*Use some opacity with larger translations*/
+        lv_opa_t opa = (lv_opa_t)lv_map(x, 0, r, LV_OPA_TRANSP, LV_OPA_COVER);
+        lv_obj_set_style_opa(child, LV_OPA_COVER - opa, 0);
+    }
+}
+
+/* 车手具体按钮回调函数 */
+static void driver_selection_cb(lv_event_t * e)
+{
+    char label_buf[10] = {0};
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t * label = lv_event_get_user_data(e);
+    strcpy(label_buf,lv_label_get_text(label));
+
+    if(code == LV_EVENT_PRESSED){
+        if(memcmp(label_buf,"driver 1",8) == 0)
+            printf("cheshou_1\n");
+        else if(memcmp(label_buf,"driver 2",8) == 0)
+            printf("cheshou_2\n");
+        else if(memcmp(label_buf,"driver 3",8) == 0)
+            printf("cheshou_3\n");
+        else if(memcmp(label_buf,"driver 4",8) == 0)
+            printf("cheshou_4\n");
+    }
 }
 
 
