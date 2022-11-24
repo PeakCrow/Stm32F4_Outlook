@@ -3,18 +3,27 @@
 #include <stdio.h>
 #include "lv_drv_conf.h"
 
-
-static void Imgbtn_MC_cb(lv_event_t * e);
+/**********************样式变量必须做为全局变量******************************/
 static lv_style_t s_style_common;
+static lv_style_t style_radio;
+static lv_style_t style_radio_chk;
+/************************************************************************/
+
+/*************************回调函数*****************************************/
+static void Imgbtn_MC_cb(lv_event_t * e);
 static void Adjust_Pedal_In_Ui(lv_obj_t* parent);
 static void Forward_Btn_Cb(lv_event_t* e);
 static void Reverse_Btn_Cb(lv_event_t* e);
 static void sw_event_cb(lv_event_t * e);
 static void pos_label_event_cb(lv_event_t *e);
-static void scroll_event_cb(lv_event_t * e);
-static void driver_selection_cb(lv_event_t * e);
+static void radio_event_handler(lv_event_t * e);
+/************************************************************************/
+
+/***********************全局对象-obj***************************************/
+static uint32_t active_index_2 = 0;
 static lv_obj_t * forward_btn;
 static lv_obj_t * reverse_btn;
+/************************************************************************/
 
 
 void Adjust_Pedal_Ui(lv_obj_t *parent)
@@ -66,7 +75,8 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_t * sw_label;
     lv_obj_t * pos_label;
     lv_obj_t * sw;
-    lv_obj_t * cont;
+
+    char buf[32];
 
 
     /* 样式配置 */
@@ -155,38 +165,33 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_label_set_text(sw_label,"Adjust On");
     lv_obj_add_event_cb(sw, sw_event_cb, LV_EVENT_VALUE_CHANGED, sw_label);
 
-    /* 车手滚轮 */
-    cont = lv_obj_create(parent);
-    lv_obj_set_size(cont, 150, 150);
-    lv_obj_set_pos(cont,480,210);
-    lv_obj_set_flex_flow(cont, LV_FLEX_FLOW_COLUMN);
-    lv_obj_add_event_cb(cont, scroll_event_cb, LV_EVENT_SCROLL, NULL);
-    lv_obj_set_style_radius(cont, LV_RADIUS_CIRCLE, 0);
-    lv_obj_set_style_clip_corner(cont, true, 0);
-    lv_obj_set_scroll_dir(cont, LV_DIR_VER);
-    lv_obj_set_scroll_snap_y(cont, LV_SCROLL_SNAP_CENTER);
-    lv_obj_set_scrollbar_mode(cont, LV_SCROLLBAR_MODE_OFF);
+    /* 车手选择 */
+    lv_style_init(&style_radio);
+    lv_style_set_radius(&style_radio, LV_RADIUS_CIRCLE);
 
-    uint8_t i;
-    for(i = 1; i < 5; i++) {
-        lv_obj_t * btn = lv_btn_create(cont);
-        lv_obj_set_width(btn, lv_pct(100));
+    lv_style_init(&style_radio_chk);
+    lv_style_set_bg_img_src(&style_radio_chk, NULL);
+    lv_style_set_bg_color(&style_radio_chk,lv_palette_main(LV_PALETTE_RED));
 
-        lv_obj_t * label = lv_label_create(btn);
-        lv_label_set_text_fmt(label, "driver %"LV_PRIu32, i);
+    lv_obj_t * cont2 = lv_obj_create(parent);
+    lv_obj_set_flex_flow(cont2, LV_FLEX_FLOW_COLUMN);
+    lv_obj_set_size(cont2, 150, 200);
+    lv_obj_set_pos(cont2,600,200);
+    lv_obj_add_event_cb(cont2, radio_event_handler, LV_EVENT_CLICKED, &active_index_2);
 
-        /* 聚焦状态 */
-        lv_obj_set_style_width(btn,120,LV_STATE_FOCUSED);
-        lv_obj_set_style_bg_color(btn,lv_palette_main(LV_PALETTE_RED),LV_STATE_FOCUSED);
-        lv_obj_set_style_bg_color(btn,lv_palette_main(LV_PALETTE_BROWN),LV_STATE_DEFAULT);
-        lv_obj_add_event_cb(btn,driver_selection_cb,LV_EVENT_ALL,label);
+    for(uint8_t i = 0; i < 3; i++) {
+        lv_snprintf(buf, sizeof(buf), "Driver %d", (int)i + 1);
+
+        lv_obj_t * obj = lv_checkbox_create(cont2);
+        lv_checkbox_set_text(obj, buf);
+        lv_obj_add_flag(obj, LV_OBJ_FLAG_EVENT_BUBBLE);
+        lv_obj_add_style(obj, &style_radio, LV_PART_INDICATOR);
+        lv_obj_add_style(obj, &style_radio_chk, LV_PART_INDICATOR | LV_STATE_CHECKED);
+
     }
-    /*Update the buttons position manually for first*/
-    /* 首先手动更新按钮位置 */
-    lv_event_send(cont, LV_EVENT_SCROLL, NULL);
-    /*Be sure the fist button is in the middle*/
-    /* 确保第一个按钮在中间 */
-    lv_obj_scroll_to_view(lv_obj_get_child(cont, 0), LV_ANIM_OFF);
+
+    /*Make the first checkbox checked*/
+    lv_obj_add_state(lv_obj_get_child(cont2, 0), LV_STATE_CHECKED);
 }
 
 static void pos_label_event_cb(lv_event_t *e)
@@ -253,69 +258,20 @@ static void Reverse_Btn_Cb(lv_event_t* e)
     }
 }
 
-/* 车手滚轮回调函数 */
-static void scroll_event_cb(lv_event_t * e)
+static void radio_event_handler(lv_event_t * e)
 {
-    lv_obj_t * cont = lv_event_get_target(e);
+    uint32_t * active_id = lv_event_get_user_data(e);
+    lv_obj_t * cont = lv_event_get_current_target(e);
+    lv_obj_t * act_cb = lv_event_get_target(e);
+    lv_obj_t * old_cb = lv_obj_get_child(cont, *active_id);
 
-    lv_area_t cont_a;
-    lv_obj_get_coords(cont, &cont_a);
-    lv_coord_t cont_y_center = cont_a.y1 + lv_area_get_height(&cont_a) / 2;
+    /*Do nothing if the container was clicked*/
+    if(act_cb == cont) return;
 
-    lv_coord_t r = lv_obj_get_height(cont) * 7 / 10;
-    uint32_t i;
-    uint32_t child_cnt = lv_obj_get_child_cnt(cont);
+    lv_obj_clear_state(old_cb, LV_STATE_CHECKED);   /*Uncheck the previous radio button*/
+    lv_obj_add_state(act_cb, LV_STATE_CHECKED);     /*Uncheck the current radio button*/
 
+    *active_id = lv_obj_get_index(act_cb);
 
-    for(i = 0; i < child_cnt; i++) {
-        lv_obj_t * child = lv_obj_get_child(cont, (int32_t)i);
-        lv_area_t child_a;
-        lv_obj_get_coords(child, &child_a);
-
-        lv_coord_t child_y_center = child_a.y1 + lv_area_get_height(&child_a) / 2;
-
-        lv_coord_t diff_y = child_y_center - cont_y_center;
-        diff_y = LV_ABS(diff_y);
-
-        /*Get the x of diff_y on a circle.*/
-        lv_coord_t x;
-        /*If diff_y is out of the circle use the last point of the circle (the radius)*/
-        if(diff_y >= r) {
-            x = r;
-        }
-        else {
-            /*Use Pythagoras theorem to get x from radius and y*/
-            uint32_t x_sqr = (uint32_t)(r * r - diff_y * diff_y);
-            lv_sqrt_res_t res;
-            lv_sqrt(x_sqr, &res, 0x8000);   /*Use lvgl's built in sqrt root function*/
-            x = r - res.i;
-        }
-
-        /*Translate the item by the calculated X coordinate*/
-        lv_obj_set_style_translate_x(child, x, 0);
-
-        /*Use some opacity with larger translations*/
-        lv_opa_t opa = (lv_opa_t)lv_map(x, 0, r, LV_OPA_TRANSP, LV_OPA_COVER);
-        lv_obj_set_style_opa(child, LV_OPA_COVER - opa, 0);
-    }
-}
-
-/* 车手具体按钮回调函数 */
-static void driver_selection_cb(lv_event_t * e)
-{
-    char label_buf[10] = {0};
-    lv_event_code_t code = lv_event_get_code(e);
-    lv_obj_t * label = lv_event_get_user_data(e);
-    strcpy(label_buf,lv_label_get_text(label));
-
-    if(code == LV_EVENT_PRESSED){
-        if(memcmp(label_buf,"driver 1",8) == 0)
-            printf("cheshou_1\n");
-        else if(memcmp(label_buf,"driver 2",8) == 0)
-            printf("cheshou_2\n");
-        else if(memcmp(label_buf,"driver 3",8) == 0)
-            printf("cheshou_3\n");
-        else if(memcmp(label_buf,"driver 4",8) == 0)
-            printf("cheshou_4\n");
-    }
+    LV_LOG_USER("Selected radio buttons: %d",  (int)active_index_2);
 }
