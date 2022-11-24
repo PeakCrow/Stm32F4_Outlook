@@ -1,1 +1,5 @@
 SAVE Estm32F407zet6TemplateXian_TemplateDocTraceX_Data.trx 0x20000548,0x2000043c8
+
+MDK5编译：e:;cd E:\Ls_Monitor\Xian_Template\User;D:\Keil_v5\UV4\UV4.exe -b -j0 "Run_Xian.uvprojx" -o buildlog.txt;echo build completely system time:;time /t;type buildlog.txt;
+MDK5重新编译：e:;cd E:\Ls_Monitor\Xian_Template\User;D:\Keil_v5\UV4\UV4.exe -r -j0 "Run_Xian.uvprojx" -o rebuildlog.txt;echo rebuild completely system time:;time /t;type rebuildlog.txt;
+MDK5下载：e:;cd E:\Ls_Monitor\Xian_Template\User;D:\Keil_v5\UV4\UV4.exe -f -j0 "Run_Xian.uvprojx" -o loadlog.txt;type loadlog.txt;
