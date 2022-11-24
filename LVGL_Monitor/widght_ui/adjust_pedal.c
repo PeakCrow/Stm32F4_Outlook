@@ -65,11 +65,9 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_t * rev_label;
     lv_obj_t * sw_label;
     lv_obj_t * pos_label;
-<<<<<<< HEAD
     lv_obj_t * sw;
     lv_obj_t * cont;
-=======
->>>>>>> 07fc6a0bc99938368aff3b96bf8f0b7e0a94f81e
+
 
     /* 样式配置 */
     /*Properties to transition*/
