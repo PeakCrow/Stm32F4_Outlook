@@ -17,8 +17,8 @@
 				IRAM2---0x20010000		 0x10000	√
 				接着右键Project串口->Compiler右键->Event Recorder->Memory->IRAM2 [0x20010000-0x2001FFFF]
 */
-#define DEBUG_SWITCH_EN 0		//1使用内部DEBUG打印，0使用串口外设进行打印
-#define UART1_FIFO_EN 	1
+#define DEBUG_SWITCH_EN 	0//1使用内部DEBUG打印，0使用串口外设进行打印
+#define UART1_FIFO_EN 		1
 #define UART2_FIFO_EN		1
 #define UART3_FIFO_EN		1
 /* 定义端口号 */

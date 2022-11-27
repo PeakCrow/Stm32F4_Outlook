@@ -3,17 +3,17 @@
 
 
 /* 串口1的GPIO PA9 PA10 接口 */
-#define USART1_CLK_ENABLE()			__HAL_RCC_USART1_CLK_ENABLE()
+#define USART1_CLK_ENABLE()			    __HAL_RCC_USART1_CLK_ENABLE()
 
-#define USART1_TX_GPIO_CLK_ENABLE()	__HAL_RCC_GPIOA_CLK_ENABLE()
-#define USART1_TX_GPIO_PORT			GPIOA
-#define USART1_TX_PIN				GPIO_PIN_9
-#define USART1_TX_AF				GPIO_AF7_USART1
+#define USART1_TX_GPIO_CLK_ENABLE()     __HAL_RCC_GPIOA_CLK_ENABLE()
+#define USART1_TX_GPIO_PORT			    GPIOA
+#define USART1_TX_PIN				    GPIO_PIN_9
+#define USART1_TX_AF				    GPIO_AF7_USART1
 
-#define USART1_RX_GPIO_CLK_ENABLE()	__HAL_RCC_GPIOA_CLK_ENABLE()
-#define USART1_RX_GPIO_PORT			GPIOA
-#define USART1_RX_PIN				GPIO_PIN_10
-#define USART1_RX_AF				GPIO_AF7_USART1
+#define USART1_RX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
+#define USART1_RX_GPIO_PORT			     GPIOA
+#define USART1_RX_PIN				     GPIO_PIN_10
+#define USART1_RX_AF				     GPIO_AF7_USART1
 /* 串口2的GPIO --- PA2 PA3  GPS (只用RX。 TX被以太网占用） */
 #define USART2_CLK_ENABLE()              __HAL_RCC_USART2_CLK_ENABLE()
 
@@ -45,6 +45,7 @@
 	static uint8_t g_TxBuff1[UART1_TX_BUF_SIZE];	/* 发送缓冲区 */
 	static uint8_t g_RxBuff1[UART1_RX_BUF_SIZE];	/* 接收缓冲区 */
 #endif
+
 #if UART2_FIFO_EN == 1
 	static UART_T g_tUart2;
 	static uint8_t g_TxBuf2[UART2_TX_BUF_SIZE];		/* 发送缓冲区 */
@@ -56,6 +57,7 @@
 	static uint8_t g_TxBuf3[UART3_TX_BUF_SIZE];		/* 发送缓冲区 */
 	static uint8_t g_RxBuf3[UART3_RX_BUF_SIZE];		/* 接收缓冲区 */
 #endif
+
 static void UartVarInit(void);
 static void InitHardUart(void);
 static void UartSend(UART_T *_pUart,uint8_t *_ucaBuf,uint16_t _usLen);
@@ -357,7 +359,7 @@ static void UartIRQ(UART_T *_pUart)
 		{
 			_pUart->usRxWrite = 0;
 		}
-		/*  */
+		/* 每接收一次数据，FIFO加1 */
 		if(_pUart->usRxCount < _pUart->usRxBufSize)
 		{
 			_pUart->usRxCount++;
