@@ -81,6 +81,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_t * record_label;
     lv_obj_t * zero_button;
     lv_obj_t * zero_label;
+
     char buf[12];
 
 
@@ -220,6 +221,26 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_add_style(zero_button,&style_def,0);
     lv_obj_set_style_bg_color(zero_button,lv_palette_main(LV_PALETTE_BROWN),LV_STATE_DEFAULT);
     lv_obj_add_event_cb(zero_button,Zero_Btn_Cb,LV_EVENT_CLICKED,NULL);
+
+    /* 车手位置label显示 */
+    lv_style_t style_shadow;
+    lv_style_init(&style_shadow);
+    lv_style_set_text_opa(&style_shadow,LV_OPA_30);
+    lv_style_set_text_color(&style_shadow,lv_color_black());
+
+    for(uint8_t i = 0;i < 3;i++){
+        lv_obj_t * shadow_label = lv_label_create(parent);
+        lv_obj_add_style(shadow_label,&style_shadow,0);
+        lv_obj_t * driverpos_label = lv_label_create(parent);
+        lv_obj_set_style_text_font(driverpos_label,&lv_font_montserrat_24,LV_PART_MAIN);
+        lv_label_set_text_fmt(driverpos_label,"Driver %d Pos %d ",i+1,50 + (i+1) * 10);
+        lv_obj_add_style(driverpos_label,&style_shadow,0);
+        lv_obj_align_to(driverpos_label,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(i+1)*40);
+        lv_label_set_text(shadow_label,lv_label_get_text(driverpos_label));
+        lv_obj_set_style_text_font(shadow_label,&lv_font_montserrat_24,LV_PART_MAIN);
+        lv_obj_align_to(shadow_label,driverpos_label,LV_ALIGN_TOP_LEFT,2,2);
+    }
+
 }
 /* 电机位置label显示回调函数 */
 static void Pos_Label_Cb(lv_event_t *e)
