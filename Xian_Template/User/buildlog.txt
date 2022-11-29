@@ -1,8 +1,8 @@
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'D:\Keil_v5\ARM\ARMCC\Bin'
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'xian'
 compiling adjust_pedal.c...
 linking...
-Program Size: Code=263696 RO-data=9609384 RW-data=2420 ZI-data=157016  
+Program Size: Code=267588 RO-data=9609228 RW-data=2456 ZI-data=157044  
 FromELF: creating hex file...
 "..\Out_Obj\Run_Xian.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:10
+Build Time Elapsed:  00:00:07

@@ -77,10 +77,10 @@ static  uint64_t    AppTaskMsgProStk[APP_CFG_TASK_MsgPro_STK_SIZE/8];
 *********************************************************************************************************
 */
 TX_TIMER AppTimer;
-TX_MUTEX AppPrintfSemp;	/* 用于printf互斥 */
-TX_MUTEX LCDSemp;		/* 用于LVGL互斥 */
-TX_MUTEX App_PowerDownSave;	/* 用于掉电保存 */  
-TX_EVENT_FLAGS_GROUP  EventGroup; /* 事件标志组 */
+TX_MUTEX AppPrintfSemp;				/* 用于printf互斥 */
+TX_MUTEX AppLCDSemp;				/* 用于LVGL互斥 */
+TX_MUTEX App_PowerDownSave;			/* 用于掉电保存 */  
+TX_EVENT_FLAGS_GROUP  EventGroup; 	/* 事件标志组 */
 /*
 *********************************************************************************************************
 *                                       软件定时器回调函数
@@ -161,6 +161,7 @@ static  void  AppObjCreate (void)
 {
 	/* 创建互斥信号量 */
     tx_mutex_create(&AppPrintfSemp,"AppPrintfSemp",TX_NO_INHERIT);
+	tx_mutex_create(&AppLCDSemp,"AppLCDSemp",TX_NO_INHERIT);
 	
 	/* 定时器组 */
 	tx_timer_create(&AppTimer,
@@ -482,14 +483,14 @@ static void AppTaskTFTLCD    (ULONG thread_input)
 	App_Printf((char*)lcd_id,"LCD ID:%04X",lcddev.id);
  
 	#if 1
-	tx_mutex_get(&LCDSemp, TX_WAIT_FOREVER);
+	tx_mutex_get(&AppLCDSemp, TX_WAIT_FOREVER);
 	Gui_Monitor_App();	/* 运行lvgl例程 */
-	tx_mutex_put(&LCDSemp);
+	tx_mutex_put(&AppLCDSemp);
 	while(1)
 	{
-		tx_mutex_get(&LCDSemp, TX_WAIT_FOREVER);
+		tx_mutex_get(&AppLCDSemp, TX_WAIT_FOREVER);
  		lv_timer_handler();
-		tx_mutex_put(&LCDSemp);
+		tx_mutex_put(&AppLCDSemp);
 		tx_thread_sleep(5);
 	}
 	
@@ -584,8 +585,8 @@ static void AppTaskUserIF(ULONG thread_input)
 {
 	uint8_t ucKeyCode;	/* 按键代码 */
 	(void)thread_input;
-	uint8_t buf[5] ={0};
-	uint32_t pos = 0;
+	uint16_t pos = 0;
+	uint8_t buf[2] = {0};
 	while(1)
 	{        
 		ucKeyCode = bsp_GetKey();
@@ -605,9 +606,11 @@ static void AppTaskUserIF(ULONG thread_input)
 					break;
 					}
 					case KEY_UP_UP:
-						I2C_EE_BufferRead(buf,0x00,5);
-						pos = ((buf[1]<<24) | (buf[2]<<16) | (buf[3] << 8) | buf[4]);
-						App_Printf("kup按键弹起,%d ",pos);
+						//I2C_EE_BufferRead(&pos1,0x05,1);
+						//I2C_EE_BufferRead(&pos2,0x06,1);
+						I2C_EE_BufferRead(buf,0x05,2);
+						pos = buf[0] * 100 + buf[1];
+						App_Printf("kup按键弹起,pos %d  \r\n",pos);
 						break;
 				}
 		}

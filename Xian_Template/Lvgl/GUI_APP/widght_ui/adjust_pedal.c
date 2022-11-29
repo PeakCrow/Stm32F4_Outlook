@@ -2,23 +2,37 @@
 #include "monitor.h"
 
 
+#define Drive_Pos_Size 2
 
+/**********************样式变量必须做为全局变量**************************/
+//static lv_style_t s_style_common;
+static lv_style_t style_radio;
+static lv_style_t style_radio_chk;
+/************************************************************************/
+
+/*************************回调函数***************************************/
 static void Imgbtn_MC_cb(lv_event_t * e);
 static void Adjust_Pedal_In_Ui(lv_obj_t* parent);
 static void Forward_Btn_Cb(lv_event_t* e);
 static void Reverse_Btn_Cb(lv_event_t* e);
-static void sw_event_cb(lv_event_t * e);
-static void pos_label_event_cb(lv_event_t *e);
-static void scroll_event_cb(lv_event_t * e);
-static void driver_selection_cb(lv_event_t * e);
+static void Shild_Sw_Cb(lv_event_t * e);
+static void Pos_Label_Cb(lv_event_t *e);
+static void Radio_Btn_Cb(lv_event_t * e);
+static void Record_Btn_Cb(lv_event_t *e);
+static void Zero_Btn_Cb(lv_event_t * e);
+static void Driverpos1_Label_Cb(lv_event_t * e);
+static void Driverpos2_Label_Cb(lv_event_t * e);
+static void Driverpos3_Label_Cb(lv_event_t * e);
+/************************************************************************/
+
+/***********************全局对象-obj*************************************/
 static lv_obj_t * forward_btn;
 static lv_obj_t * reverse_btn;
-
 static double NumberConuts = 0;
+static uint32_t active_index_2 = 0;/* 车手选择是不是也要做到掉电保存里面？ */
+static lv_obj_t * driverpos_label1,*driverpos_label2,*driverpos_label3;	
 
-
-
-
+/************************************************************************/
 
 void Adjust_Pedal_Ui(lv_obj_t *parent)
 {
@@ -69,8 +83,15 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_t * rev_label;
     lv_obj_t * sw_label;
     lv_obj_t * pos_label;
-    lv_obj_t * sw;
-    lv_obj_t * cont;
+    lv_obj_t * shild_switch;
+    lv_obj_t * record_button;
+    lv_obj_t * record_label;
+    lv_obj_t * zero_button;
+    lv_obj_t * zero_label;	
+    char buf[12];
+	lv_obj_t * shadow_label1,*shadow_label2,*shadow_label3;
+	uint8_t pos_buf[2] = {0};
+
 
 	
     /* 样式配置 */
@@ -123,7 +144,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
 	lv_obj_align(pos_label,LV_ALIGN_CENTER,0,0);
 	lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%.2f",NumberConuts);	
 	lv_obj_add_style(pos_label,&style_warning,0);
-	lv_obj_add_event_cb(pos_label,pos_label_event_cb,LV_EVENT_ALL,pos_label);
+	lv_obj_add_event_cb(pos_label,Pos_Label_Cb,LV_EVENT_ALL,pos_label);
 		
     /* 正转按钮 */
     forward_btn = lv_btn_create(parent);
@@ -152,48 +173,123 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_add_style(reverse_btn,&style_def,0);	
 	
 	/* 正反转屏蔽按钮 */
-    sw = lv_switch_create(parent);
-    lv_obj_set_pos(sw,650,40);
-    lv_obj_add_state(sw, LV_STATE_CHECKED);
+    shild_switch = lv_switch_create(parent);
+    lv_obj_set_pos(shild_switch,650,40);
+    lv_obj_add_state(shild_switch, LV_STATE_CHECKED);
     sw_label = lv_label_create(parent);
-    lv_obj_align_to(sw_label,sw,LV_ALIGN_OUT_BOTTOM_MID,-25,0);
+    lv_obj_align_to(sw_label,shild_switch,LV_ALIGN_OUT_BOTTOM_MID,-25,0);
     lv_label_set_text(sw_label,"Adjust On");
-    lv_obj_add_event_cb(sw, sw_event_cb, LV_EVENT_VALUE_CHANGED, sw_label);
+    lv_obj_add_event_cb(shild_switch, Shild_Sw_Cb, LV_EVENT_VALUE_CHANGED, sw_label);
 
-    /* 车手滚轮 */
-    cont = lv_obj_create(parent);
-    lv_obj_set_size(cont, 150, 150);
-    lv_obj_set_pos(cont,480,210);
-    lv_obj_set_flex_flow(cont, LV_FLEX_FLOW_COLUMN);
-    lv_obj_add_event_cb(cont, scroll_event_cb, LV_EVENT_SCROLL, NULL);
-    lv_obj_set_style_radius(cont, LV_RADIUS_CIRCLE, 0);
-    lv_obj_set_style_clip_corner(cont, true, 0);
-    lv_obj_set_scroll_dir(cont, LV_DIR_VER);
-    lv_obj_set_scroll_snap_y(cont, LV_SCROLL_SNAP_CENTER);
-    lv_obj_set_scrollbar_mode(cont, LV_SCROLLBAR_MODE_OFF);
+    /* 车手选择列表 */
+    lv_style_init(&style_radio);
+    lv_style_set_radius(&style_radio, LV_RADIUS_CIRCLE);
 
-    uint8_t i;
-    for(i = 1; i < 5; i++) {
-        lv_obj_t * btn = lv_btn_create(cont);
-        lv_obj_set_width(btn, lv_pct(100));
+    lv_style_init(&style_radio_chk);
+    lv_style_set_bg_img_src(&style_radio_chk, NULL);
+    lv_style_set_bg_color(&style_radio_chk,lv_palette_main(LV_PALETTE_RED));
 
-        lv_obj_t * label = lv_label_create(btn);
-        lv_label_set_text_fmt(label, "driver %"LV_PRIu32, i);
+    lv_obj_t *cont2 = lv_obj_create(parent);
+    lv_obj_set_flex_flow(cont2, LV_FLEX_FLOW_COLUMN);
+    lv_obj_set_size(cont2, 200, 200);
+    lv_obj_set_pos(cont2,550,200);
+    lv_obj_add_event_cb(cont2, Radio_Btn_Cb, LV_EVENT_CLICKED, &active_index_2);
 
-        /* 聚焦状态 */
-        lv_obj_set_style_width(btn,120,LV_STATE_FOCUSED);
-        lv_obj_set_style_bg_color(btn,lv_palette_main(LV_PALETTE_RED),LV_STATE_FOCUSED);
-        lv_obj_set_style_bg_color(btn,lv_palette_main(LV_PALETTE_BROWN),LV_STATE_DEFAULT);
-        lv_obj_add_event_cb(btn,driver_selection_cb,LV_EVENT_ALL,label);
+    for(uint8_t i = 0; i < 3; i++) {
+        lv_snprintf(buf, sizeof(buf), "Driver %d", (int)i + 1);
+
+        lv_obj_t * obj = lv_checkbox_create(cont2);
+        lv_checkbox_set_text(obj, buf);
+        lv_obj_add_flag(obj, LV_OBJ_FLAG_EVENT_BUBBLE);
+        lv_obj_add_style(obj, &style_radio, LV_PART_INDICATOR);
+        lv_obj_add_style(obj, &style_radio_chk, LV_PART_INDICATOR | LV_STATE_CHECKED);
+
     }
-    /*Update the buttons position manually for first*/
-    /* 首先手动更新按钮位置 */
-    lv_event_send(cont, LV_EVENT_SCROLL, NULL);
-    /*Be sure the fist button is in the middle*/
-    /* 确保第一个按钮在中间 */
-    lv_obj_scroll_to_view(lv_obj_get_child(cont, 0), LV_ANIM_OFF);	
+    /* 每次点击页面进来都是上一次的车手选择 */
+    lv_obj_add_state(lv_obj_get_child(cont2,(int32_t)active_index_2), LV_STATE_CHECKED);
+
+    /* 车手位置更新记录按钮 */
+    record_button = lv_btn_create(parent);
+    lv_obj_set_size(record_button,lv_pct(20),lv_pct(15));
+    lv_obj_align_to(record_button,pos_label,LV_ALIGN_OUT_LEFT_MID,-100,20);
+    record_label = lv_label_create(parent);
+    lv_label_set_text(record_label,"RECORD");
+    lv_obj_align_to(record_label,record_button,LV_ALIGN_CENTER,0,0);
+    lv_obj_add_style(record_button,&style_pr,LV_STATE_PRESSED);
+    lv_obj_add_style(record_button,&style_def,0);
+    lv_obj_set_style_bg_color(record_button,lv_palette_main(LV_PALETTE_RED),LV_STATE_DEFAULT);
+    lv_obj_add_event_cb(record_button,Record_Btn_Cb,LV_EVENT_CLICKED,&active_index_2);
+
+    /* 踏板0位置标定按钮 */
+    zero_button = lv_btn_create(parent);
+    lv_obj_set_size(zero_button,lv_pct(20),lv_pct(15));
+    lv_obj_align_to(zero_button,record_button,LV_ALIGN_OUT_BOTTOM_MID,0,50);
+    zero_label = lv_label_create(parent);
+    lv_label_set_text(zero_label,"ZERO");
+    lv_obj_align_to(zero_label,zero_button,LV_ALIGN_CENTER,0,0);
+    lv_obj_add_style(zero_button,&style_pr,LV_STATE_PRESSED);
+    lv_obj_add_style(zero_button,&style_def,0);
+    lv_obj_set_style_bg_color(zero_button,lv_palette_main(LV_PALETTE_BROWN),LV_STATE_DEFAULT);
+    lv_obj_add_event_cb(zero_button,Zero_Btn_Cb,LV_EVENT_CLICKED,NULL);
+
+    /* 车手位置label显示 */
+    lv_style_t style_shadow;
+    lv_style_init(&style_shadow);
+    lv_style_set_text_opa(&style_shadow,LV_OPA_30);
+    lv_style_set_text_color(&style_shadow,lv_color_black());
+	
+    driverpos_label1 = lv_label_create(parent);
+    lv_obj_set_style_text_font(driverpos_label1,&lv_font_montserrat_24,LV_PART_MAIN);
+	I2C_EE_BufferRead(pos_buf,0x05,2);
+    lv_label_set_text_fmt(driverpos_label1,"Driver %d Pos %d.%d ",0+1,pos_buf[0],pos_buf[1]);
+    lv_obj_add_style(driverpos_label1,&style_shadow,0);
+    lv_obj_align_to(driverpos_label1,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(0+1)*40);	
+	//lv_obj_add_event_cb(driverpos_label1,Driverpos_Label_Cb,LV_EVENT_RELEASED,&NumberConuts);
+
+    driverpos_label2 = lv_label_create(parent);
+    lv_obj_set_style_text_font(driverpos_label2,&lv_font_montserrat_24,LV_PART_MAIN);
+	I2C_EE_BufferRead(pos_buf,0x05+1*Drive_Pos_Size,2);	
+    lv_label_set_text_fmt(driverpos_label2,"Driver %d Pos %d.%d ",1+1,pos_buf[0],pos_buf[1]);
+    lv_obj_add_style(driverpos_label2,&style_shadow,0);
+    lv_obj_align_to(driverpos_label2,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(1+1)*40);		
+	//lv_obj_add_event_cb(driverpos_label2,Driverpos_Label_Cb,LV_EVENT_RELEASED,&NumberConuts);
+
+    driverpos_label3 = lv_label_create(parent);
+    lv_obj_set_style_text_font(driverpos_label3,&lv_font_montserrat_24,LV_PART_MAIN);
+	I2C_EE_BufferRead(pos_buf,0x05+2*Drive_Pos_Size,2);	
+    lv_label_set_text_fmt(driverpos_label3,"Driver %d Pos %d.%d ",2+1,pos_buf[0],pos_buf[1]);
+    lv_obj_add_style(driverpos_label3,&style_shadow,0);
+    lv_obj_align_to(driverpos_label3,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(2+1)*40);	
+	//lv_obj_add_event_cb(driverpos_label3,Driverpos_Label_Cb,LV_EVENT_RELEASED,&NumberConuts);
+
+	/* 阴影效果实现 */
+    {
+	    shadow_label1 = lv_label_create(parent);
+	    lv_obj_add_style(shadow_label1,&style_shadow,0);		
+	    lv_label_set_text(shadow_label1,lv_label_get_text(driverpos_label1));
+	    lv_obj_set_style_text_font(shadow_label1,&lv_font_montserrat_24,LV_PART_MAIN);
+	    lv_obj_align_to(shadow_label1,driverpos_label1,LV_ALIGN_TOP_LEFT,2,2);
+
+	    shadow_label2 = lv_label_create(parent);
+	    lv_obj_add_style(shadow_label2,&style_shadow,0);		
+	    lv_label_set_text(shadow_label2,lv_label_get_text(driverpos_label2));
+	    lv_obj_set_style_text_font(shadow_label2,&lv_font_montserrat_24,LV_PART_MAIN);
+	    lv_obj_align_to(shadow_label2,driverpos_label2,LV_ALIGN_TOP_LEFT,2,2);
+		
+	    shadow_label3 = lv_label_create(parent);	
+	    lv_obj_add_style(shadow_label3,&style_shadow,0);		
+	    lv_label_set_text(shadow_label3,lv_label_get_text(driverpos_label3));
+	    lv_obj_set_style_text_font(shadow_label3,&lv_font_montserrat_24,LV_PART_MAIN);
+	    lv_obj_align_to(shadow_label3,driverpos_label3,LV_ALIGN_TOP_LEFT,2,2);	
+		
+		lv_obj_add_event_cb(driverpos_label1,Driverpos1_Label_Cb,LV_EVENT_RELEASED,shadow_label1);
+		lv_obj_add_event_cb(driverpos_label2,Driverpos2_Label_Cb,LV_EVENT_RELEASED,shadow_label2);
+		lv_obj_add_event_cb(driverpos_label3,Driverpos3_Label_Cb,LV_EVENT_RELEASED,shadow_label3);
+	}
+	
 }
-static void pos_label_event_cb(lv_event_t *e)
+/* 电机位置label显示回调函数 */
+static void Pos_Label_Cb(lv_event_t *e)
 {
 	lv_event_code_t code = lv_event_get_code(e);	
 	lv_obj_t * pos_label = lv_event_get_user_data(e);
@@ -212,15 +308,15 @@ static void pos_label_event_cb(lv_event_t *e)
 
 		/* 更新标签文本值 */			
 		NumberConuts = PosQueue / 65535.00;
-		lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%.2f",NumberConuts);
+		lv_label_set_text_fmt(pos_label,"  Pedal_Pos : %.2f",NumberConuts);
 
 	}else if(code == LV_EVENT_RELEASED){
 		App_Printf("%d ",PosQueue);
         App_I2C_EE_BufferWrite(Pos,0x00,5);
     }
 }
-
-static void sw_event_cb(lv_event_t * e)
+/* 屏蔽按钮回调函数 */
+static void Shild_Sw_Cb(lv_event_t * e)
 {
     lv_obj_t * sw = lv_event_get_target(e);
     lv_obj_t * sw_label = lv_event_get_user_data(e);
@@ -235,6 +331,7 @@ static void sw_event_cb(lv_event_t * e)
         lv_obj_clear_flag(forward_btn,LV_OBJ_FLAG_CLICKABLE);
     }
 }
+/* 正转按钮回调函数 */
 static void Forward_Btn_Cb(lv_event_t* e)
 {
 	uint8_t stop_motor[] = {0xe0,0xf7};
@@ -254,6 +351,7 @@ static void Forward_Btn_Cb(lv_event_t* e)
 	}	
 
 }
+/* 反转按钮回调函数 */
 static void Reverse_Btn_Cb(lv_event_t* e)
 {
 	uint8_t stop_motor[] = {0xe0,0xf7};
@@ -274,71 +372,80 @@ static void Reverse_Btn_Cb(lv_event_t* e)
 }
 
 
-/* 车手滚轮回调函数 */
-static void scroll_event_cb(lv_event_t * e)
+/* 车手选择回调函数 */
+static void Radio_Btn_Cb(lv_event_t * e)
 {
-    lv_obj_t * cont = lv_event_get_target(e);
+    uint32_t * active_id = lv_event_get_user_data(e);
+    lv_obj_t * cont = lv_event_get_current_target(e);
+    lv_obj_t * act_cb = lv_event_get_target(e);
+    lv_obj_t * old_cb = lv_obj_get_child(cont, (int32_t)*active_id);
 
-    lv_area_t cont_a;
-    lv_obj_get_coords(cont, &cont_a);
-    lv_coord_t cont_y_center = cont_a.y1 + lv_area_get_height(&cont_a) / 2;
+    /*Do nothing if the container was clicked*/
+    if(act_cb == cont) return;
 
-    lv_coord_t r = lv_obj_get_height(cont) * 7 / 10;
-    uint32_t i;
-    uint32_t child_cnt = lv_obj_get_child_cnt(cont);
+    /*Uncheck the previous radio button*/
+    lv_obj_clear_state(old_cb, LV_STATE_CHECKED);
+    /*Uncheck the current radio button*/
+    lv_obj_add_state(act_cb, LV_STATE_CHECKED);
 
+    *active_id = lv_obj_get_index(act_cb);
 
-    for(i = 0; i < child_cnt; i++) {
-        lv_obj_t * child = lv_obj_get_child(cont, (int32_t)i);
-        lv_area_t child_a;
-        lv_obj_get_coords(child, &child_a);
-
-        lv_coord_t child_y_center = child_a.y1 + lv_area_get_height(&child_a) / 2;
-
-        lv_coord_t diff_y = child_y_center - cont_y_center;
-        diff_y = LV_ABS(diff_y);
-
-        /*Get the x of diff_y on a circle.*/
-        lv_coord_t x;
-        /*If diff_y is out of the circle use the last point of the circle (the radius)*/
-        if(diff_y >= r) {
-            x = r;
-        }
-        else {
-            /*Use Pythagoras theorem to get x from radius and y*/
-            uint32_t x_sqr = (uint32_t)(r * r - diff_y * diff_y);
-            lv_sqrt_res_t res;
-            lv_sqrt(x_sqr, &res, 0x8000);   /*Use lvgl's built in sqrt root function*/
-            x = r - res.i;
-        }
-
-        /*Translate the item by the calculated X coordinate*/
-        lv_obj_set_style_translate_x(child, x, 0);
-
-        /*Use some opacity with larger translations*/
-        lv_opa_t opa = (lv_opa_t)lv_map(x, 0, r, LV_OPA_TRANSP, LV_OPA_COVER);
-        lv_obj_set_style_opa(child, LV_OPA_COVER - opa, 0);
-    }
+    printf("select radio buttons:%d \n",(int)active_index_2+1);
+}
+/* 车手位置记录更新按钮 */
+static void Record_Btn_Cb(lv_event_t *e)
+{
+    (void)e;	
+	/* 将.2f浮点数扩大100倍 */
+	uint16_t driver_pos = NumberConuts * 100;
+	uint8_t pos[] = {(driver_pos / 100),(driver_pos % 100)};
+	if((active_index_2+1) == 1){
+		App_I2C_EE_BufferWrite(pos,0x05,2);	
+		lv_event_send(driverpos_label1,LV_EVENT_RELEASED,NULL);
+	}
+	else if((active_index_2+1) == 2){
+		App_I2C_EE_BufferWrite(pos,0x05+1*Drive_Pos_Size,2);
+		lv_event_send(driverpos_label2,LV_EVENT_RELEASED,NULL);
+	}
+	else if((active_index_2+1) == 3){
+		App_I2C_EE_BufferWrite(pos,0x05+2*Drive_Pos_Size,2);
+		lv_event_send(driverpos_label3,LV_EVENT_RELEASED,NULL);
+	}
+}
+/* 踏板0位置标定 */
+static void Zero_Btn_Cb(lv_event_t * e)
+{
+    (void)e;
+    App_Printf("Driver 0 Pos is Cal\n");
+}
+/* 车手位置label显示 */
+static void Driverpos1_Label_Cb(lv_event_t * e)
+{
+	(void)e;
+	lv_obj_t * act_cb = lv_event_get_user_data(e);
+	if((active_index_2+1) == 1){
+		lv_label_set_text_fmt(driverpos_label1,"Driver %d Pos %.2f ",1,NumberConuts);
+		lv_label_set_text(act_cb,lv_label_get_text(driverpos_label1));
+	}
+}
+static void Driverpos2_Label_Cb(lv_event_t * e)
+{
+	(void)e;
+	lv_obj_t * act_cb = lv_event_get_user_data(e);
+	if((active_index_2+1) == 2){
+		lv_label_set_text_fmt(driverpos_label2,"Driver %d Pos %.2f ",1,NumberConuts);
+		lv_label_set_text(act_cb,lv_label_get_text(driverpos_label2));
+	}
+}
+static void Driverpos3_Label_Cb(lv_event_t * e)
+{
+	(void)e;
+	lv_obj_t * act_cb = lv_event_get_user_data(e);
+	if((active_index_2+1) == 3){
+		lv_label_set_text_fmt(driverpos_label3,"Driver %d Pos %.2f ",1,NumberConuts);
+		lv_label_set_text(act_cb,lv_label_get_text(driverpos_label3));
+	}
 }
 
-/* 车手具体按钮回调函数 */
-static void driver_selection_cb(lv_event_t * e)
-{
-    char label_buf[10] = {0};
-    lv_event_code_t code = lv_event_get_code(e);
-    lv_obj_t * label = lv_event_get_user_data(e);
-    strcpy(label_buf,lv_label_get_text(label));
-
-    if(code == LV_EVENT_PRESSED){
-        if(memcmp(label_buf,"driver 1",8) == 0)
-            printf("cheshou_1\n");
-        else if(memcmp(label_buf,"driver 2",8) == 0)
-            printf("cheshou_2\n");
-        else if(memcmp(label_buf,"driver 3",8) == 0)
-            printf("cheshou_3\n");
-        else if(memcmp(label_buf,"driver 4",8) == 0)
-            printf("cheshou_4\n");
-    }
-}
 
 
