@@ -286,8 +286,13 @@ ARM Macro Assembler    Page 5
   145 00000040                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=..\out_obj\tx_thread_stack_build.d -o..\out_obj\tx_thread_st
+<<<<<<< HEAD
 ack_build.o -I.\RTE\Compiler -I.\RTE\_xian -IE:\Users\Administrator\AppData\Loc
 al\Arm\Packs\Keil\ARM_Compiler\1.6.3\Include -IE:\Users\Administrator\AppData\L
+=======
+ack_build.o -I.\RTE\Compiler -I.\RTE\_xian -IC:\Users\Administrator\AppData\Loc
+al\Arm\Packs\Keil\ARM_Compiler\1.6.3\Include -IC:\Users\Administrator\AppData\L
+>>>>>>> 9ea10fb1b7c6b15b259f2915f5b7166688621f2f
 ocal\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\Incl
 ude --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 536" --
 predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --predefine="_RTE_ SE
