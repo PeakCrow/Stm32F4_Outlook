@@ -232,8 +232,11 @@ lv_obj_t* App_Common_Init(const char *title)
     parent = lv_obj_create(lv_scr_act());
     lv_obj_set_size(parent,SDL_HOR_RES,SDL_VER_RES);
     App_btn_Back = lv_imgbtn_create(parent);
-
+#if enviroment_select == 0
+    lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"D:/Ls_Monitor_Lower/LVGL_Monitor/images/app_btn.png","D:/Ls_Monitor_Lower/LVGL_Monitor/images/app_btn.png","D:/Ls_Monitor_Lower/LVGL_Monitor/images/app_btn.png");
+#else
     lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png","E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png","E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png");
+#endif
     lv_obj_set_size(App_btn_Back,40,40);
     lv_obj_align_to(App_btn_Back,parent,LV_ALIGN_BOTTOM_MID,0,0);
     lv_obj_add_event_cb(App_btn_Back,App_btn_Back_Cb,LV_EVENT_ALL,parent);
