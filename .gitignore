@@ -1,0 +1,35 @@
+# Build and Release Folders
+bin-debug/
+bin-release/
+[Oo]bj/
+[Bb]in/
+build-qt_lvgl_simulink-Desktop_Qt_5_13_0_MinGW_64_bit-Debug/
+build-untitled-Desktop_Qt_5_13_0_MinGW_64_bit-Debug/
+Out_Obj/
+/Xian_Template/Obj/
+/xian.si4project
+xian.si4project/
+Run_Xian.uvguix.Administrator
+DebugConfig/
+!LVGL_Monitor/lvgl/examples/widgets/obj
+# Other files and folders
+*.o
+/Untitled Project.si4project/
+.settings
+*.json
+*.dbgconf
+Run_Xian.uvguix.TRX
+Run_Xian.uvoptix
+# Executables
+*.swf
+*.air
+*.ipa
+*.apk
+*.axf
+# Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
+# should NOT be excluded as they contain compiler settings and other important
+# information for Eclipse / Flash Builder.
+debug_and_release
+qt_lvgl_simulink.pro.user
+Run_Xian.uvoptx
+Run_Xian.uvguix.Administrator

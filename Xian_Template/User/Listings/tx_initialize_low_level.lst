@@ -1,0 +1,593 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;/******************************************************
+                       ********************/
+    2 00000000         ;/*                                                     
+                                          */
+    3 00000000         ;/*       Copyright (c) Microsoft Corporation. All right
+                       s reserved.        */
+    4 00000000         ;/*                                                     
+                                          */
+    5 00000000         ;/*       This software is licensed under the Microsoft 
+                       Software License   */
+    6 00000000         ;/*       Terms for Microsoft Azure RTOS. Full text of t
+                       he license can be  */
+    7 00000000         ;/*       found in the LICENSE file at https://aka.ms/Az
+                       ureRTOS_EULA       */
+    8 00000000         ;/*       and in the root directory of this software.   
+                                          */
+    9 00000000         ;/*                                                     
+                                          */
+   10 00000000         ;/******************************************************
+                       ********************/
+   11 00000000         ;
+   12 00000000         ;
+   13 00000000         ;/******************************************************
+                       ********************/
+   14 00000000         ;/******************************************************
+                       ********************/
+   15 00000000         ;/**                                                    
+                                          */
+   16 00000000         ;/** ThreadX Component                                  
+                                          */
+   17 00000000         ;/**                                                    
+                                          */
+   18 00000000         ;/**   Initialize                                       
+                                          */
+   19 00000000         ;/**                                                    
+                                          */
+   20 00000000         ;/******************************************************
+                       ********************/
+   21 00000000         ;/******************************************************
+                       ********************/
+   22 00000000         ;
+   23 00000000         ;#define TX_SOURCE_CODE
+   24 00000000         ;
+   25 00000000         ;
+   26 00000000         ;/* Include necessary system files.  */
+   27 00000000         ;
+   28 00000000         ;#include "tx_api.h"
+   29 00000000         ;#include "tx_initialize.h"
+   30 00000000         ;#include "tx_thread.h"
+   31 00000000         ;#include "tx_timer.h"
+   32 00000000         ;
+   33 00000000         ;
+   34 00000000                 IMPORT           _tx_thread_system_stack_ptr
+   35 00000000                 IMPORT           _tx_initialize_unused_memory
+   36 00000000                 IMPORT           _tx_thread_context_save
+   37 00000000                 IMPORT           _tx_thread_context_restore
+   38 00000000                 IMPORT           _tx_timer_interrupt
+   39 00000000                 IMPORT           __main
+   40 00000000                 IMPORT           __Vectors
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   41 00000000                 IMPORT           __initial_sp
+   42 00000000         
+   43 00000000                 IF               :DEF:TX_ENABLE_EXECUTION_CHANGE
+_NOTIFY
+   46                          ENDIF
+   47 00000000         ;
+   48 00000000         ;
+   49 00000000 0A037A00 
+                       SYSTEM_CLOCK
+                               EQU              168000000
+   50 00000000 0002903F 
+                       SYSTICK_CYCLES
+                               EQU              ((SYSTEM_CLOCK / 1000) -1)
+   51 00000000         ;
+   52 00000000         ;     
+   53 00000000         ;
+   54 00000000         ;
+   55 00000000                 AREA             ||.text||, CODE, READONLY
+   56 00000000                 PRESERVE8
+   57 00000000         
+   58 00000000         ;/******************************************************
+                       ********************/
+   59 00000000         ;/*                                                     
+                                          */
+   60 00000000         ;/*  FUNCTION                                           
+                           RELEASE        */
+   61 00000000         ;/*                                                     
+                                          */
+   62 00000000         ;/*    _tx_initialize_low_level                         
+                        Cortex-M7/AC5     */
+   63 00000000         ;/*                                                     
+                             6.0.1        */
+   64 00000000         ;/*  AUTHOR                                             
+                                          */
+   65 00000000         ;/*                                                     
+                                          */
+   66 00000000         ;/*    William E. Lamie, Microsoft Corporation          
+                                          */
+   67 00000000         ;/*                                                     
+                                          */
+   68 00000000         ;/*  DESCRIPTION                                        
+                                          */
+   69 00000000         ;/*                                                     
+                                          */
+   70 00000000         ;/*    This function is responsible for any low-level pr
+                       ocessor            */
+   71 00000000         ;/*    initialization, including setting up interrupt ve
+                       ctors, setting     */
+   72 00000000         ;/*    up a periodic timer interrupt source, saving the 
+                       system stack       */
+   73 00000000         ;/*    pointer for use in ISR processing later, and find
+                       ing the first      */
+   74 00000000         ;/*    available RAM memory address for tx_application_d
+                       efine.             */
+   75 00000000         ;/*                                                     
+                                          */
+   76 00000000         ;/*  INPUT                                              
+                                          */
+   77 00000000         ;/*                                                     
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+                                          */
+   78 00000000         ;/*    None                                             
+                                          */
+   79 00000000         ;/*                                                     
+                                          */
+   80 00000000         ;/*  OUTPUT                                             
+                                          */
+   81 00000000         ;/*                                                     
+                                          */
+   82 00000000         ;/*    None                                             
+                                          */
+   83 00000000         ;/*                                                     
+                                          */
+   84 00000000         ;/*  CALLS                                              
+                                          */
+   85 00000000         ;/*                                                     
+                                          */
+   86 00000000         ;/*    None                                             
+                                          */
+   87 00000000         ;/*                                                     
+                                          */
+   88 00000000         ;/*  CALLED BY                                          
+                                          */
+   89 00000000         ;/*                                                     
+                                          */
+   90 00000000         ;/*    _tx_initialize_kernel_enter           ThreadX ent
+                       ry function        */
+   91 00000000         ;/*                                                     
+                                          */
+   92 00000000         ;/*  RELEASE HISTORY                                    
+                                          */
+   93 00000000         ;/*                                                     
+                                          */
+   94 00000000         ;/*    DATE              NAME                      DESCR
+                       IPTION             */
+   95 00000000         ;/*                                                     
+                                          */
+   96 00000000         ;/*  06-30-2020     William E. Lamie         Initial Ver
+                       sion 6.0.1         */
+   97 00000000         ;/*                                                     
+                                          */
+   98 00000000         ;/******************************************************
+                       ********************/
+   99 00000000         ;VOID   _tx_initialize_low_level(VOID)
+  100 00000000         ;{
+  101 00000000                 EXPORT           _tx_initialize_low_level
+  102 00000000         _tx_initialize_low_level
+  103 00000000         ;
+  104 00000000         ;    /* Disable interrupts during ThreadX initialization
+                       .  */
+  105 00000000         ;
+  106 00000000 B672            CPSID            i
+  107 00000002         ;
+  108 00000002         ;    /* Set base of available memory to end of non-initi
+                       alised RAM area.  */
+  109 00000002         ;     
+  110 00000002 4817            LDR              r0, =_tx_initialize_unused_memo
+ry 
+                                                            ; Build address of 
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+                                                            unused memory point
+                                                            er
+  111 00000004 4917            LDR              r1, =__initial_sp ; Build first
+                                                             free address
+  112 00000006 F101 0104       ADD              r1, r1, #4  ; 
+  113 0000000A 6001            STR              r1, [r0]    ; Setup first unuse
+                                                            d memory pointer
+  114 0000000C         ;
+  115 0000000C         ;    /* Setup Vector Table Offset Register.  */
+  116 0000000C         ;    
+  117 0000000C F04F 20E0       MOV              r0, #0xE000E000 ; Build address
+                                                             of NVIC registers
+  118 00000010 4915            LDR              r1, =__Vectors ; Pickup address
+                                                             of vector table
+  119 00000012 F8C0 1D08       STR              r1, [r0, #0xD08] ; Set vector t
+                                                            able address   
+  120 00000016         ;
+  121 00000016         ;    /* Enable the cycle count register.  */
+  122 00000016         ;
+  123 00000016         ;    LDR     r0, =0xE0001000                         ; B
+                       uild address of DWT register
+  124 00000016         ;    LDR     r1, [r0]                                ; P
+                       ickup the current value
+  125 00000016         ;    ORR     r1, r1, #1                              ; S
+                       et the CYCCNTENA bit
+  126 00000016         ;    STR     r1, [r0]                                ; E
+                       nable the cycle count register 
+  127 00000016         ;
+  128 00000016         ;    /* Set system stack pointer from vector value.  */
+  129 00000016         ;
+  130 00000016 4815            LDR              r0, =_tx_thread_system_stack_pt
+r 
+                                                            ; Build address of 
+                                                            system stack pointe
+                                                            r
+  131 00000018 4913            LDR              r1, =__Vectors ; Pickup address
+                                                             of vector table
+  132 0000001A 6809            LDR              r1, [r1]    ; Pickup reset stac
+                                                            k pointer
+  133 0000001C 6001            STR              r1, [r0]    ; Save system stack
+                                                             pointer
+  134 0000001E         ;
+  135 0000001E         ;    /* Configure SysTick.  */
+  136 0000001E         ;
+  137 0000001E F04F 20E0       MOV              r0, #0xE000E000 ; Build address
+                                                             of NVIC registers
+  138 00000022 4913            LDR              r1, =SYSTICK_CYCLES
+  139 00000024 6141            STR              r1, [r0, #0x14] ; Setup SysTick
+                                                             Reload Value
+  140 00000026 F04F 0107       MOV              r1, #0x7    ; Build SysTick Con
+                                                            trol Enable Value
+  141 0000002A 6101            STR              r1, [r0, #0x10] ; Setup SysTick
+                                                             Control
+  142 0000002C         ;
+  143 0000002C         ;    /* Configure handler priorities.  */
+  144 0000002C         ;
+  145 0000002C F04F 0100       LDR              r1, =0x00000000 ; Rsrv, UsgF, B
+                                                            usF, MemM
+  146 00000030 F8C0 1D18       STR              r1, [r0, #0xD18] ; Setup System
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+                                                             Handlers 4-7 Prior
+                                                            ity Registers
+  147 00000034         
+  148 00000034 F04F 417F       LDR              r1, =0xFF000000 ; SVCl, Rsrv, R
+                                                            srv, Rsrv
+  149 00000038 F8C0 1D1C       STR              r1, [r0, #0xD1C] ; Setup System
+                                                             Handlers 8-11 Prio
+                                                            rity Registers
+  150 0000003C         ; Note: SVC must be lowest priority, which is 0xFF
+  151 0000003C         
+  152 0000003C 490D            LDR              r1, =0x40FF0000 ; SysT, PnSV, R
+                                                            srv, DbgM
+  153 0000003E F8C0 1D20       STR              r1, [r0, #0xD20] ; Setup System
+                                                             Handlers 12-15 Pri
+                                                            ority Registers
+  154 00000042         ; Note: PnSV must be lowest priority, which is 0xFF
+  155 00000042         ;
+  156 00000042         ;    /* Return to caller.  */
+  157 00000042         ;    
+  158 00000042 4770            BX               lr
+  159 00000044         ;}     
+  160 00000044         ;
+  161 00000044         ;
+  162 00000044         ;/* Define shells for each of the unused vectors.  */
+  163 00000044         ;
+  164 00000044                 EXPORT           __tx_BadHandler
+  165 00000044         __tx_BadHandler
+  166 00000044 E7FE            B                __tx_BadHandler
+  167 00000046         
+  168 00000046                 EXPORT           __tx_SVCallHandler
+  169 00000046         __tx_SVCallHandler
+  170 00000046 E7FE            B                __tx_SVCallHandler
+  171 00000048         
+  172 00000048                 EXPORT           __tx_IntHandler
+  173 00000048         __tx_IntHandler
+  174 00000048         ; VOID InterruptHandler (VOID)
+  175 00000048         ; {
+  176 00000048         
+  177 00000048 B501            PUSH             {r0, lr}
+  178 0000004A         ;    /* Do interrupt handler work here */
+  179 0000004A         ;    /* .... */
+  180 0000004A E8BD 4001       POP              {r0, lr}
+  181 0000004E 4770            BX               LR
+  182 00000050         ; }
+  183 00000050         
+  184 00000050                 EXPORT           __tx_SysTickHandler
+  185 00000050                 EXPORT           SysTick_Handler
+  186 00000050         __tx_SysTickHandler
+  187 00000050         SysTick_Handler
+  188 00000050         ; VOID TimerInterruptHandler (VOID)
+  189 00000050         ; {
+  190 00000050         ;
+  191 00000050 B501            PUSH             {r0, lr}
+  192 00000052         
+  193 00000052                 IF               :DEF:TX_ENABLE_EXECUTION_CHANGE
+_NOTIFY
+  195                          ENDIF
+  196 00000052 F7FF FFFE       BL               _tx_timer_interrupt
+  197 00000056                 IF               :DEF:TX_ENABLE_EXECUTION_CHANGE
+
+
+
+ARM Macro Assembler    Page 6 
+
+
+_NOTIFY
+  199                          ENDIF
+  200 00000056 E8BD 4001       POP              {r0, lr}
+  201 0000005A 4770            BX               LR
+  202 0000005C         ; }
+  203 0000005C         
+  204 0000005C                 EXPORT           __tx_NMIHandler
+  205 0000005C         __tx_NMIHandler
+  206 0000005C E7FE            B                __tx_NMIHandler
+  207 0000005E         
+  208 0000005E                 EXPORT           __tx_DBGHandler
+  209 0000005E         __tx_DBGHandler
+  210 0000005E E7FE            B                __tx_DBGHandler
+  211 00000060         
+  212 00000060                 ALIGN
+  213 00000060 00000000 
+              00000000 
+              00000000 
+              00000000 
+              0002903F 
+              40FF0000         LTORG
+  214 00000078                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=..\out_obj\tx_initialize_low_level.d -o..\out_obj\tx_initial
+ize_low_level.o -I.\RTE\Compiler -I.\RTE\_xian -IE:\Users\Administrator\AppData
+\Local\Arm\Packs\Keil\ARM_Compiler\1.6.3\Include -IE:\Users\Administrator\AppDa
+ta\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\
+Include --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 536
+" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --predefine="_RTE
+_ SETA 1" --predefine="TX_ENABLE_FPU_SUPPORT SETA 1" --list=.\listings\tx_initi
+alize_low_level.lst ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initialize_
+low_level.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+SysTick_Handler 00000050
+
+Symbol: SysTick_Handler
+   Definitions
+      At line 187 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+   Uses
+      At line 185 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+Comment: SysTick_Handler used once
+__tx_BadHandler 00000044
+
+Symbol: __tx_BadHandler
+   Definitions
+      At line 165 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+   Uses
+      At line 164 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+      At line 166 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+
+__tx_DBGHandler 0000005E
+
+Symbol: __tx_DBGHandler
+   Definitions
+      At line 209 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+   Uses
+      At line 208 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+      At line 210 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+
+__tx_IntHandler 00000048
+
+Symbol: __tx_IntHandler
+   Definitions
+      At line 173 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+   Uses
+      At line 172 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+Comment: __tx_IntHandler used once
+__tx_NMIHandler 0000005C
+
+Symbol: __tx_NMIHandler
+   Definitions
+      At line 205 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+   Uses
+      At line 204 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+      At line 206 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+
+__tx_SVCallHandler 00000046
+
+Symbol: __tx_SVCallHandler
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+Relocatable symbols
+
+   Definitions
+      At line 169 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+   Uses
+      At line 168 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+      At line 170 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+
+__tx_SysTickHandler 00000050
+
+Symbol: __tx_SysTickHandler
+   Definitions
+      At line 186 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+   Uses
+      At line 184 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+Comment: __tx_SysTickHandler used once
+_tx_initialize_low_level 00000000
+
+Symbol: _tx_initialize_low_level
+   Definitions
+      At line 102 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+   Uses
+      At line 101 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+Comment: _tx_initialize_low_level used once
+|.text| 00000000
+
+Symbol: |.text|
+   Definitions
+      At line 55 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initia
+lize_low_level.s
+   Uses
+      None
+Comment: |.text| unused
+9 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Absolute symbols
+
+SYSTEM_CLOCK 0A037A00
+
+Symbol: SYSTEM_CLOCK
+   Definitions
+      At line 49 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initia
+lize_low_level.s
+   Uses
+      At line 50 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initia
+lize_low_level.s
+Comment: SYSTEM_CLOCK used once
+SYSTICK_CYCLES 0002903F
+
+Symbol: SYSTICK_CYCLES
+   Definitions
+      At line 50 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initia
+lize_low_level.s
+   Uses
+      At line 138 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+Comment: SYSTICK_CYCLES used once
+2 symbols
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+External symbols
+
+__Vectors 00000000
+
+Symbol: __Vectors
+   Definitions
+      At line 40 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initia
+lize_low_level.s
+   Uses
+      At line 118 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+      At line 131 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+
+__initial_sp 00000000
+
+Symbol: __initial_sp
+   Definitions
+      At line 41 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initia
+lize_low_level.s
+   Uses
+      At line 111 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+Comment: __initial_sp used once
+__main 00000000
+
+Symbol: __main
+   Definitions
+      At line 39 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initia
+lize_low_level.s
+   Uses
+      None
+Comment: __main unused
+_tx_initialize_unused_memory 00000000
+
+Symbol: _tx_initialize_unused_memory
+   Definitions
+      At line 35 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initia
+lize_low_level.s
+   Uses
+      At line 110 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+Comment: _tx_initialize_unused_memory used once
+_tx_thread_context_restore 00000000
+
+Symbol: _tx_thread_context_restore
+   Definitions
+      At line 37 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initia
+lize_low_level.s
+   Uses
+      None
+Comment: _tx_thread_context_restore unused
+_tx_thread_context_save 00000000
+
+Symbol: _tx_thread_context_save
+   Definitions
+      At line 36 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initia
+lize_low_level.s
+   Uses
+      None
+Comment: _tx_thread_context_save unused
+
+
+
+ARM Macro Assembler    Page 2 Alphabetic symbol ordering
+External symbols
+
+_tx_thread_system_stack_ptr 00000000
+
+Symbol: _tx_thread_system_stack_ptr
+   Definitions
+      At line 34 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initia
+lize_low_level.s
+   Uses
+      At line 130 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+Comment: _tx_thread_system_stack_ptr used once
+_tx_timer_interrupt 00000000
+
+Symbol: _tx_timer_interrupt
+   Definitions
+      At line 38 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initia
+lize_low_level.s
+   Uses
+      At line 196 in file ..\ThreadX\ports\cortex_m4\ac5\example_build\tx_initi
+alize_low_level.s
+Comment: _tx_timer_interrupt used once
+8 symbols
+363 symbols in table

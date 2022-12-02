@@ -1,0 +1,208 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;/******************************************************
+                       ********************/
+    2 00000000         ;/*                                                     
+                                          */
+    3 00000000         ;/*       Copyright (c) Microsoft Corporation. All right
+                       s reserved.        */
+    4 00000000         ;/*                                                     
+                                          */
+    5 00000000         ;/*       This software is licensed under the Microsoft 
+                       Software License   */
+    6 00000000         ;/*       Terms for Microsoft Azure RTOS. Full text of t
+                       he license can be  */
+    7 00000000         ;/*       found in the LICENSE file at https://aka.ms/Az
+                       ureRTOS_EULA       */
+    8 00000000         ;/*       and in the root directory of this software.   
+                                          */
+    9 00000000         ;/*                                                     
+                                          */
+   10 00000000         ;/******************************************************
+                       ********************/
+   11 00000000         ;
+   12 00000000         ;
+   13 00000000         ;/******************************************************
+                       ********************/
+   14 00000000         ;/******************************************************
+                       ********************/
+   15 00000000         ;/**                                                    
+                                          */
+   16 00000000         ;/** ThreadX Component                                  
+                                          */
+   17 00000000         ;/**                                                    
+                                          */
+   18 00000000         ;/**   Thread                                           
+                                          */
+   19 00000000         ;/**                                                    
+                                          */
+   20 00000000         ;/******************************************************
+                       ********************/
+   21 00000000         ;/******************************************************
+                       ********************/
+   22 00000000         ;
+   23 00000000         ;
+   24 00000000                 IF               :DEF:TX_ENABLE_EXECUTION_CHANGE
+_NOTIFY
+   26                          ENDIF
+   27 00000000         ;
+   28 00000000         ;
+   29 00000000                 AREA             ||.text||, CODE, READONLY
+   30 00000000                 PRESERVE8
+   31 00000000         ;/******************************************************
+                       ********************/
+   32 00000000         ;/*                                                     
+                                          */
+   33 00000000         ;/*  FUNCTION                                           
+                           RELEASE        */
+   34 00000000         ;/*                                                     
+                                          */
+   35 00000000         ;/*    _tx_thread_context_save                          
+                        Cortex-M4/AC5     */
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+   36 00000000         ;/*                                                     
+                             6.0.2        */
+   37 00000000         ;/*  AUTHOR                                             
+                                          */
+   38 00000000         ;/*                                                     
+                                          */
+   39 00000000         ;/*    William E. Lamie, Microsoft Corporation          
+                                          */
+   40 00000000         ;/*                                                     
+                                          */
+   41 00000000         ;/*  DESCRIPTION                                        
+                                          */
+   42 00000000         ;/*                                                     
+                                          */
+   43 00000000         ;/*    This function is only needed for legacy applicati
+                       ons and it should  */
+   44 00000000         ;/*    not be called in any new development on a Cortex-
+                       M.                 */
+   45 00000000         ;/*    This function saves the context of an executing t
+                       hread in the       */
+   46 00000000         ;/*    beginning of interrupt processing.  The function 
+                       also ensures that  */
+   47 00000000         ;/*    the system stack is used upon return to the calli
+                       ng ISR.            */
+   48 00000000         ;/*                                                     
+                                          */
+   49 00000000         ;/*  INPUT                                              
+                                          */
+   50 00000000         ;/*                                                     
+                                          */
+   51 00000000         ;/*    None                                             
+                                          */
+   52 00000000         ;/*                                                     
+                                          */
+   53 00000000         ;/*  OUTPUT                                             
+                                          */
+   54 00000000         ;/*                                                     
+                                          */
+   55 00000000         ;/*    None                                             
+                                          */
+   56 00000000         ;/*                                                     
+                                          */
+   57 00000000         ;/*  CALLS                                              
+                                          */
+   58 00000000         ;/*                                                     
+                                          */
+   59 00000000         ;/*    None                                             
+                                          */
+   60 00000000         ;/*                                                     
+                                          */
+   61 00000000         ;/*  CALLED BY                                          
+                                          */
+   62 00000000         ;/*                                                     
+                                          */
+   63 00000000         ;/*    ISRs                                             
+                                          */
+   64 00000000         ;/*                                                     
+                                          */
+   65 00000000         ;/*  RELEASE HISTORY                                    
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+                                          */
+   66 00000000         ;/*                                                     
+                                          */
+   67 00000000         ;/*    DATE              NAME                      DESCR
+                       IPTION             */
+   68 00000000         ;/*                                                     
+                                          */
+   69 00000000         ;/*  06-30-2020     William E. Lamie         Initial Ver
+                       sion 6.0.1         */
+   70 00000000         ;/*  08-14-2020     Scott Larson             Modified co
+                       mment(s), clean up */
+   71 00000000         ;/*                                            whitespac
+                       e, resulting       */
+   72 00000000         ;/*                                            in versio
+                       n 6.0.2            */
+   73 00000000         ;/*                                                     
+                                          */
+   74 00000000         ;/******************************************************
+                       ********************/
+   75 00000000         ;VOID   _tx_thread_context_save(VOID)
+   76 00000000         ;{
+   77 00000000                 EXPORT           _tx_thread_context_save
+   78 00000000         _tx_thread_context_save
+   79 00000000                 IF               :DEF:TX_ENABLE_EXECUTION_CHANGE
+_NOTIFY
+   86                          ENDIF
+   87 00000000         ;
+   88 00000000         ;    /* Return to interrupt processing.  */
+   89 00000000         ;
+   90 00000000 4770            BX               lr          ; Return to interru
+                                                            pt processing calle
+                                                            r
+   91 00000002         ;}
+   92 00000002 00 00           ALIGN
+   93 00000004                 LTORG
+   94 00000004                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=..\out_obj\tx_thread_context_save.d -o..\out_obj\tx_thread_c
+ontext_save.o -I.\RTE\Compiler -I.\RTE\_xian -IE:\Users\Administrator\AppData\L
+ocal\Arm\Packs\Keil\ARM_Compiler\1.6.3\Include -IE:\Users\Administrator\AppData
+\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.16.0\Drivers\CMSIS\Device\ST\STM32F4xx\In
+clude --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SETA 536" 
+--predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --predefine="_RTE_ 
+SETA 1" --predefine="TX_ENABLE_FPU_SUPPORT SETA 1" --list=.\listings\tx_thread_
+context_save.lst ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_context_save.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+_tx_thread_context_save 00000000
+
+Symbol: _tx_thread_context_save
+   Definitions
+      At line 78 in file ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_context_s
+ave.s
+   Uses
+      At line 77 in file ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_context_s
+ave.s
+Comment: _tx_thread_context_save used once
+|.text| 00000000
+
+Symbol: |.text|
+   Definitions
+      At line 29 in file ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_context_s
+ave.s
+   Uses
+      None
+Comment: |.text| unused
+2 symbols
+342 symbols in table
