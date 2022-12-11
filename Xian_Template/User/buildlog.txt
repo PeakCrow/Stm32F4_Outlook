@@ -1,15 +1,9 @@
-<<<<<<< HEAD
+Build started: Project: Run_Xian
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
-Build target 'xian'
-"..\Out_Obj\Run_Xian.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:02
-=======
-*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'xian'
 compiling adjust_pedal.c...
 linking...
-Program Size: Code=267588 RO-data=9609228 RW-data=2456 ZI-data=157044  
-FromELF: creating hex file...
-"..\Out_Obj\Run_Xian.axf" - 0 Error(s), 0 Warning(s).
-Build Time Elapsed:  00:00:07
->>>>>>> 9ea10fb1b7c6b15b259f2915f5b7166688621f2f
+ÿProgram Size: Code=271156 RO-data=9609380 RW-data=2452 ZI-data=157048  
+þFromELF: creating hex file...
+ÿþ"..\Out_Obj\Run_Xian.axf" - 0 Error(s), 0 Warning(s).
+Build Time Elapsed:  00:00:08

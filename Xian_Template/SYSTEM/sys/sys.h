@@ -58,13 +58,19 @@
 #include "bsp_font.h"						/* 屏幕显示的字体C库文件 */
 #include "bsp_lcd.h"						/* 屏幕显示驱动 */
 #include "bsp_touch.h"					/* 电容屏触摸驱动,包含有触摸画板例程 */
-#include "bsp_sdio_sd.h"				/* SD卡底层驱动 */	 
+#include "bsp_sdio_sd.h"				/* SD卡底层驱动 */	
+#include "adjust_pedal.h"
 
 /***********************************ThreadX操作系统组件属性外部声名*************************************************************/
 extern void  App_Printf 			(const char *fmt, ...);
 extern TX_EVENT_FLAGS_GROUP  EventGroup; /* 事件标志组 */
 extern void    App_I2C_EE_ByteWrite(uint8_t * pBuffer, uint8_t WriteAddr);
-
+extern TX_EVENT_FLAGS_GROUP  EventGroup; 	/* 事件标志组 */
+#define DRIVER1_POS (1<<0)
+#define	DRIVER2_POS (1<<1)
+#define DRIVER3_POS (1<<2)
+#define DRIVER_POS_ALL (DRIVER1_POS | DRIVER2_POS | DRIVER3_POS)
+extern uint8_t App_ComGetChar(COM_PORT_E _usPort,uint8_t *_pByte);
 
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug调试组件 */

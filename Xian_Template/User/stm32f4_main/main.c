@@ -19,14 +19,14 @@
 *                                 任务优先级，数值越小优先级越高
 *********************************************************************************************************
 */
-#define  APP_CFG_TASK_START_PRIO                          2u
-#define  APP_CFG_TASK_MsgPro_PRIO                         7u
+#define  APP_CFG_TASK_START_PRIO                          7u
+#define  APP_CFG_TASK_MsgPro_PRIO                         3u
 #define  APP_CFG_TASK_USER_IF_PRIO                        4u
 #define  APP_CFG_TASK_COM_PRIO                            5u
 #define  APP_CFG_TASK_STAT_PRIO                           30u
 #define  APP_CFG_TASK_IDLE_PRIO                           31u
 #define  APP_CFG_TASK_READC_PRIO						  6u
-#define  APP_CFG_TASK_TFTLCD_PRIO						  3u
+#define  APP_CFG_TASK_TFTLCD_PRIO						  2u
 
 
 /*
@@ -81,14 +81,13 @@ TX_MUTEX AppPrintfSemp;				/* 用于printf互斥 */
 TX_MUTEX AppLCDSemp;				/* 用于LVGL互斥 */
 TX_MUTEX App_PowerDownSave;			/* 用于掉电保存 */  
 TX_EVENT_FLAGS_GROUP  EventGroup; 	/* 事件标志组 */
+
 /*
 *********************************************************************************************************
 *                                       软件定时器回调函数
 *********************************************************************************************************
 */
 void TimerCallback(ULONG thread_input);
-
-
 /*
 *********************************************************************************************************
 *                                      函数声明
@@ -161,8 +160,8 @@ static  void  AppObjCreate (void)
 {
 	/* 创建互斥信号量 */
     tx_mutex_create(&AppPrintfSemp,"AppPrintfSemp",TX_NO_INHERIT);
-	tx_mutex_create(&AppLCDSemp,"AppLCDSemp",TX_NO_INHERIT);
-	
+	tx_mutex_create(&AppLCDSemp,"AppLCDSemp",TX_NO_INHERIT);	
+		
 	/* 定时器组 */
 	tx_timer_create(&AppTimer,
 					"App Timer",
@@ -399,6 +398,17 @@ static  void  AppTaskCreate (void)
                        APP_CFG_TASK_USER_IF_PRIO,      	/* 任务抢占阀值 */
                        TX_NO_TIME_SLICE,               	/* 不开启时间片 */
                        TX_AUTO_START);                 	/* 创建后立即启动 */
+	/**************创建MsgPro任务*********************/
+    tx_thread_create(&AppTaskMsgProTCB,               /* 任务控制块地址 */    
+                       "App Msp Pro",                 /* 任务名 */
+                       AppTaskMsgPro,                  /* 启动任务函数地址 */
+                       0,                             /* 传递给任务的参数 */
+                       &AppTaskMsgProStk[0],            /* 堆栈基地址 */
+                       APP_CFG_TASK_MsgPro_STK_SIZE,    /* 堆栈空间大小 */  
+                       APP_CFG_TASK_MsgPro_PRIO,        /* 任务优先级*/
+                       APP_CFG_TASK_MsgPro_PRIO,        /* 任务抢占阀值 */
+                       TX_NO_TIME_SLICE,               /* 不开启时间片 */
+                       TX_AUTO_START);                /* 创建后立即启动 */	
 
 	/**************创建COM任务*********************/
     tx_thread_create(&AppTaskCOMTCB,               		/* 任务控制块地址 */    
@@ -435,32 +445,49 @@ static  void  AppTaskCreate (void)
                        APP_CFG_TASK_TFTLCD_PRIO,        	/* 任务抢占阀值 */
                        TX_NO_TIME_SLICE,             	/* 不开启时间片 */
                        TX_AUTO_START);               	/* 创建后立即启动 */
-	/**************创建MsgPro任务*********************/
-    tx_thread_create(&AppTaskMsgProTCB,               /* 任务控制块地址 */    
-                       "App Msp Pro",                 /* 任务名 */
-                       AppTaskMsgPro,                  /* 启动任务函数地址 */
-                       0,                             /* 传递给任务的参数 */
-                       &AppTaskMsgProStk[0],            /* 堆栈基地址 */
-                       APP_CFG_TASK_MsgPro_STK_SIZE,    /* 堆栈空间大小 */  
-                       APP_CFG_TASK_MsgPro_PRIO,        /* 任务优先级*/
-                       APP_CFG_TASK_MsgPro_PRIO,        /* 任务抢占阀值 */
-                       TX_NO_TIME_SLICE,               /* 不开启时间片 */
-                       TX_AUTO_START);                /* 创建后立即启动 */
+
 }
-extern void DemoFatFS(void);
+
 static void AppTaskMsgPro(ULONG thread_input)
 {
 	(void)thread_input;
+	ULONG actual_events;
+	UINT status;
+	//uint8_t stop_motor[] = {0xe0,0xf7};
+
+
 	while(1)
-	{	
-		#if 0
-		DemoFatFS();
-		tx_thread_sleep(10);
-		#else
-		//DemoSpiFlash();
+	{				
+		status = tx_event_flags_get(&EventGroup,     /* 事件标志控制块 */
+									DRIVER_POS_ALL,  /* 等待标志 */
+									TX_OR_CLEAR ,    /* 等待任意bit满足即可 */
+									&actual_events,  /* 获取实际值 */
+									TX_WAIT_FOREVER);/* 永久等待 */		
 		
-		tx_thread_sleep(500);
-		#endif
+		if(status == TX_SUCCESS)
+		{
+			switch (actual_events)
+			{
+				case DRIVER1_POS:			  
+					/* */
+				
+					break;
+				
+				case DRIVER2_POS:			  
+					/* */
+
+					break;
+				
+				case DRIVER3_POS:			 
+					/*  */
+
+					break;
+				
+				default:       
+					break;
+			}		
+		}
+		tx_thread_sleep(200);
 	}   
 }
 
@@ -515,6 +542,8 @@ static  void  AppTaskREADADC	(ULONG thread_input)
 //	uint8_t i;
 //	int32_t iTemp;
 //	float fTemp;
+	
+
 		/* 打印芯片ID (通过读ID可以判断硬件接口是否正常) , 正常时状态寄存器的高4bit = 3 */
 #if 0
 		{
@@ -566,6 +595,9 @@ while (1)
 		
 		//App_Printf("CH%d=%07d(%fV) ", 6, g_tADS1256.AdcNow[5], fTemp);
 		//App_Printf("\r\n");
+
+		/* 不运行是什么情况？？？ */
+		//App_Printf("driver 1 pos is : %.2f driver current pos is %.2f\r\n",DriverX_Pos.driver1_pos,DriverX_Pos.current_pos);		
 		#endif
 		tx_thread_sleep(100);
 	}
@@ -602,8 +634,9 @@ static void AppTaskUserIF(ULONG thread_input)
 						break;
 					case KEY_0_DOWN:			/* k0按键按下 */
 					{
-						App_Printf("k0按键按下\r\n");						
-					break;
+						App_Printf("k0按键按下\r\n");	
+						DispTaskInfo();
+						break;
 					}
 					case KEY_UP_UP:
 						//I2C_EE_BufferRead(&pos1,0x05,1);
@@ -679,6 +712,7 @@ void    App_I2C_EE_BufferWrite(uint8_t* pBuffer, uint8_t WriteAddr,uint16_t NumB
 
     tx_mutex_put(&App_PowerDownSave);	
 }
+
 
 /*
 *********************************************************************************************************
