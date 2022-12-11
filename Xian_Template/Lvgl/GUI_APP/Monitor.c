@@ -252,6 +252,7 @@ static void App_btn_Back_Cb(lv_event_t* e)
         case LV_EVENT_RELEASED:
             {
                 lv_obj_del(parent);
+				lv_timer_del(RealtimeMotorpos_timer);
             }
             break;
     }

@@ -33,7 +33,7 @@ static double NumberConuts = 0;
 static uint32_t active_index_2 = 0;/* 车手选择是不是也要做到掉电保存里面？ */
 static lv_obj_t * driverpos_label1,*driverpos_label2,*driverpos_label3;	
 st_driver_pos DriverX_Pos;
-static lv_timer_t * RealtimeMotorpos_timer;
+lv_timer_t * RealtimeMotorpos_timer;
 /************************************************************************/
 
 
@@ -410,7 +410,6 @@ static void Radio_Btn_Cb(lv_event_t * e)
 
     App_Printf("select radio buttons:%d \n",(int)active_index_2+1);
 	if(active_index_2+1 == 1){
-			//lv_timer_resume(RealtimeMotorpos_timer);
 			App_Printf("车手1位置：%.2f 车手上电位置：%.2f\r\n",DriverX_Pos.driver1_pos,DriverX_Pos.current_pos);					
 			if(DriverX_Pos.current_pos < DriverX_Pos.driver1_pos){
 					comSendBuf(COM3,Reverse_rotation,3);
@@ -422,7 +421,6 @@ static void Radio_Btn_Cb(lv_event_t * e)
 			tx_event_flags_set(&EventGroup, DRIVER1_POS, TX_OR);
 		}
 	else if(active_index_2+1 == 2){
-			//lv_timer_resume(RealtimeMotorpos_timer);
 			App_Printf("车手2位置：%.2f 车手上电位置：%.2f\r\n",DriverX_Pos.driver2_pos,DriverX_Pos.current_pos);					
 			if(DriverX_Pos.current_pos < DriverX_Pos.driver2_pos){
 					comSendBuf(COM3,Reverse_rotation,3);
@@ -434,7 +432,6 @@ static void Radio_Btn_Cb(lv_event_t * e)
 			tx_event_flags_set(&EventGroup, DRIVER2_POS, TX_OR);
 		}
 	else if(active_index_2+1 == 3){
-			//lv_timer_resume(RealtimeMotorpos_timer);
 			App_Printf("车手3位置：%.2f 车手上电位置：%.2f\r\n",DriverX_Pos.driver3_pos,DriverX_Pos.current_pos);							
 			if(DriverX_Pos.current_pos < DriverX_Pos.driver2_pos){
 					comSendBuf(COM3,Reverse_rotation,3);
@@ -540,19 +537,16 @@ static void Realtime_MotorPos_Cb(lv_timer_t * e)
 	if((DriverX_Pos.current_pos < (DriverX_Pos.driver1_pos+1.0f))
 		&&(DriverX_Pos.current_pos > (DriverX_Pos.driver1_pos-1.0f))
 		&&active_index_2+1 == 1){
-				//lv_timer_pause(RealtimeMotorpos_timer);
 				comSendBuf(COM3,stop_motor,2);
 			}
 	else if((DriverX_Pos.current_pos < (DriverX_Pos.driver2_pos+1.0f))
 		&&(DriverX_Pos.current_pos > (DriverX_Pos.driver2_pos-1.0f))
 		&&active_index_2+1 == 2){
-				//lv_timer_pause(RealtimeMotorpos_timer);
 				comSendBuf(COM3,stop_motor,2);
 		}
 	else if((DriverX_Pos.current_pos < (DriverX_Pos.driver3_pos+1.0f))
 		&&(DriverX_Pos.current_pos > (DriverX_Pos.driver3_pos-1.0f))
 		&&active_index_2+1 == 3){
-				//lv_timer_pause(RealtimeMotorpos_timer);
 				comSendBuf(COM3,stop_motor,2);
 			}
 	
