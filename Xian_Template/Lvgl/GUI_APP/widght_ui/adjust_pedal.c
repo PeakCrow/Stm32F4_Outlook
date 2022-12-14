@@ -433,7 +433,7 @@ static void Radio_Btn_Cb(lv_event_t * e)
 		}
 	else if(active_index_2+1 == 3){
 			App_Printf("车手3位置：%.2f 车手上电位置：%.2f\r\n",DriverX_Pos.driver3_pos,DriverX_Pos.current_pos);							
-			if(DriverX_Pos.current_pos < DriverX_Pos.driver2_pos){
+			if(DriverX_Pos.current_pos < DriverX_Pos.driver3_pos){
 					comSendBuf(COM3,Reverse_rotation,3);
 					App_Printf("车手3位置选择\r\n");
 				}
@@ -533,6 +533,9 @@ static void Realtime_MotorPos_Cb(lv_timer_t * e)
 
 	lv_label_set_text_fmt(pos_label,"  Pedal_Pos : %.2f",DriverX_Pos.current_pos);
 	
+    /* 要加一个延时将上面读取实时位置的命令发送和下面的电机停止命令分开 */
+    /* 不然电机停止命令无效 */
+    /* 因为串口是异步通讯 */
 	tx_thread_sleep(2);
 	if((DriverX_Pos.current_pos < (DriverX_Pos.driver1_pos+1.0f))
 		&&(DriverX_Pos.current_pos > (DriverX_Pos.driver1_pos-1.0f))
