@@ -40,16 +40,11 @@
 - 打开工程，进入main函数，可以看到任务调度函数，并且开启了6个任务例程和简单的队列间通信的例程，其他的例如flashdemo、eepromdemo、墨水屏驱动，板载外设的驱动需要开启宏定义后者自行调用功能函数。
 - 创建一个0.5s的软件定时器，不断调用轮速信号采集函数，PB6引脚输出500hz方波，接在PA15轮速传感器引脚上串口可以看到数据每0.5s打印一次。
 - 按下keyup按键串口打印MLX90614红外温度传感器的温度。
-- 板载的两个LED灯每隔一秒点亮一次，屏幕显示所需要的界面按钮，初步完善可调踏板UI。
+- 板载的两个LED灯每隔一秒点亮一次，屏幕显示所需要的界面按钮。
+- 可调踏板Ui与关于本机Ui完成。
 - (此状态会随着驱动的更新不断更新)。
 
 #### 占用PIN脚
 ![输入图片说明](Xian_Template/Doc/%E5%B7%B2%E9%85%8D%E7%BD%AEPIN.png)
 ####  **LVGL模拟器效果** 
 ![输入图片说明](Xian_Template/Doc/GIF/TFT%20Simulator.gif)
-####  **LVGL模拟器可调踏板效果** 
-![输入图片说明](Xian_Template/Doc/GIF/TFT%20Simulator%20Adjust%20Pedal.gif)
-#### TFT板卡效果
-![输入图片说明](Xian_Template/Doc/GIF/TFT%20Board.gif)
-#### TFT板卡可调踏板效果
-![输入图片说明](Xian_Template/Doc/GIF/TFT%20Board%20Adjust%20Pedal.gif)
