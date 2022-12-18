@@ -460,7 +460,7 @@
  *你也可以使用这些字体作为默认字体，他们将在全局可用
  *E.g. #define LV_FONT_CUSTOM_DECLARE   LV_FONT_DECLARE(my_font_1) LV_FONT_DECLARE(my_font_2)*/
 #define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(myFont36) \
-																LV_FONT_DECLARE(myFont20)
+							   LV_FONT_DECLARE(myFont20)
 															   
 
 /*Always set a default font*/

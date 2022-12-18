@@ -236,7 +236,7 @@ lv_obj_t* App_Common_Init(const char *title)
     /* 创建标题文本 */
     App_Title = lv_label_create(parent);
     lv_theme_apply(App_Title);
-	lv_obj_set_style_text_font(App_Title,&myFont36,LV_STATE_DEFAULT);
+	lv_obj_set_style_text_font(App_Title,&myFont20,LV_STATE_DEFAULT);
     lv_label_set_text(App_Title,title);
     lv_obj_align_to(App_Title,parent,LV_ALIGN_TOP_MID,0,0);
     /* 创建返回按钮文本 */
@@ -252,6 +252,7 @@ static void App_btn_Back_Cb(lv_event_t* e)
         case LV_EVENT_RELEASED:
             {
                 lv_obj_del(parent);
+				/* 删除可调踏板界面中的定时器任务对象 */
 				lv_timer_del(RealtimeMotorpos_timer);
             }
             break;

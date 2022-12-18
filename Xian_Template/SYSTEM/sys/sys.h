@@ -22,6 +22,7 @@
 #include "tx_api.h"
 #include "tx_timer.h"
 #include "tx_api.h"
+#include "ff.h"
 
 /*
 *********************************************************************************************************
@@ -71,6 +72,10 @@ extern TX_EVENT_FLAGS_GROUP  EventGroup; 	/* 事件标志组 */
 #define DRIVER3_POS (1<<2)
 #define DRIVER_POS_ALL (DRIVER1_POS | DRIVER2_POS | DRIVER3_POS)
 extern uint8_t App_ComGetChar(COM_PORT_E _usPort,uint8_t *_pByte);
+#define HARDWARE_MAJOR_VERSION           1
+#define HARDWARE_MINOR_VERSION           0
+#define HARDWARE_PATCH_VERSION           0
+
 
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug调试组件 */
