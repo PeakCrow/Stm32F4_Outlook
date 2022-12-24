@@ -6,7 +6,7 @@
 
 static void Imgbtn_MC_cb(lv_event_t * e);
 static lv_style_t s_style_common;
-
+static void Imgbtn_Mc_In_Ui(lv_obj_t * parent);
 
 
 
@@ -49,5 +49,46 @@ static void Imgbtn_MC_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
 
     if(code == LV_EVENT_RELEASED)
-         App_Common_Init(" 电池箱数据 ");
+         Imgbtn_Mc_In_Ui(App_Common_Init(" 电池箱数据 "));
 }
+
+static void Imgbtn_Mc_In_Ui(lv_obj_t * parent)
+{
+    /* 定义并创建图像按钮 */
+    lv_obj_t* battery_bg;
+    battery_bg = lv_imgbtn_create(parent);
+    /* 设置按钮释放时的图像 */
+    lv_img_set_src(battery_bg,"0:/PICTURE/battery_bg.bin");
+    lv_obj_set_width(battery_bg, 55);
+    lv_obj_set_height(battery_bg, 125);
+    /* 设置按钮位置 */
+    lv_obj_align_to(battery_bg,parent,LV_ALIGN_CENTER,0,0);	
+
+    lv_obj_t* battery_bg1;
+    battery_bg1 = lv_imgbtn_create(parent);
+    /* 设置按钮释放时的图像 */
+    lv_img_set_src(battery_bg1,"0:/PICTURE/particle_1.bin");
+    lv_obj_set_width(battery_bg1, 50);
+    lv_obj_set_height(battery_bg1, 120);    
+    /* 设置按钮位置 */
+    lv_obj_align_to(battery_bg1,parent,LV_ALIGN_CENTER,80,0);
+
+    lv_obj_t* battery_bg2;
+    battery_bg2 = lv_imgbtn_create(parent);
+    /* 设置按钮释放时的图像 */
+    lv_img_set_src(battery_bg2,"0:/PICTURE/particle_2.bin");
+    lv_obj_set_width(battery_bg2, 50);
+    lv_obj_set_height(battery_bg2, 120);	
+    /* 设置按钮位置 */
+    lv_obj_align_to(battery_bg2,parent,LV_ALIGN_CENTER,190,0);
+
+    lv_obj_t* battery_bg3;
+    battery_bg3 = lv_imgbtn_create(parent);
+    /* 设置按钮释放时的图像 */
+    lv_img_set_src(battery_bg3,"0:/PICTURE/particle_3.bin");
+    lv_obj_set_width(battery_bg3, 50);
+    lv_obj_set_height(battery_bg3, 120);	
+    /* 设置按钮位置 */
+    lv_obj_align_to(battery_bg3,parent,LV_ALIGN_CENTER,270,0);	
+}
+

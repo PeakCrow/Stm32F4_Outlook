@@ -1,17 +1,17 @@
 Build started: Project: Run_Xian
 *** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'xian'
+compiling battery_box.c...
 compiling Monitor.c...
 ..\Lvgl\GUI_APP\Monitor.c(28): warning:  #550-D: variable "meter_height"  was set but never used
       uint16_t meter_height = 0;
-..\Lvgl\GUI_APP\Monitor.c(43): warning:  #177-D: function "Monitor_Main_Style"  was declared but never referenced
+..\Lvgl\GUI_APP\Monitor.c(44): warning:  #177-D: function "Monitor_Main_Style"  was declared but never referenced
   void Monitor_Main_Style(lv_obj_t * Monitor_Speed_Meter)
-..\Lvgl\GUI_APP\Monitor.c(75): warning:  #177-D: function "Monitor_Main_label"  was declared but never referenced
+..\Lvgl\GUI_APP\Monitor.c(76): warning:  #177-D: function "Monitor_Main_label"  was declared but never referenced
   void Monitor_Main_label(lv_coord_t weight,lv_coord_t height)
 ..\Lvgl\GUI_APP\Monitor.c: 3 warnings, 0 errors
-compiling about_phone_ui.c...
 linking...
-ÿProgram Size: Code=272312 RO-data=9609508 RW-data=2516 ZI-data=156280  
+ÿProgram Size: Code=273280 RO-data=9609508 RW-data=2524 ZI-data=156272  
 þFromELF: creating hex file...
 ÿþ"..\Out_Obj\Run_Xian.axf" - 0 Error(s), 3 Warning(s).
-Build Time Elapsed:  00:00:09
+Build Time Elapsed:  00:00:08

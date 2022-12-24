@@ -27,6 +27,7 @@ void Gui_Monitor_App()
 
     uint16_t meter_height = 0;
     meter_height = ((unsigned short)(scr_act_height() * 0.8));
+	lv_obj_set_style_bg_color(lv_scr_act(),lv_color_hex(0x123456),LV_STATE_DEFAULT);
 
     Motor_Control_Ui(lv_scr_act());
     About_Phone_Ui(lv_scr_act());
@@ -226,6 +227,7 @@ lv_obj_t* App_Common_Init(const char *title)
 
     /* 创建返回按钮 */
     parent = lv_obj_create(lv_scr_act());
+	lv_obj_set_style_bg_color(parent,lv_color_hex(0x1cbac8),LV_STATE_DEFAULT);
     lv_obj_set_size(parent,800,480);
     App_btn_Back = lv_imgbtn_create(parent);
 

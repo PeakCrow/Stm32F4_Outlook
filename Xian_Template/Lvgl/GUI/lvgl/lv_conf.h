@@ -100,11 +100,11 @@
 
 /*Default display refresh period. LVG will redraw changed areas with this period time*/
 /* 默认显示刷新周期，LVGL将在此期间重新绘制更改区域 */
-#define LV_DISP_DEF_REFR_PERIOD 30      /*[ms]*/
+#define LV_DISP_DEF_REFR_PERIOD 10      /*[ms]*/
 
 /*Input device read period in milliseconds*/
 /*输入设备读取周期*/
-#define LV_INDEV_DEF_READ_PERIOD 30     /*[ms]*/
+#define LV_INDEV_DEF_READ_PERIOD 10     /*[ms]*/
 
 /*Use a custom tick source that tells the elapsed time in milliseconds.
  *It removes the need to manually update the tick with `lv_tick_inc()`)*/
@@ -324,7 +324,7 @@
  * Requires LV_MEM_CUSTOM = 0*/
  /*1: 显示使用的内存和内存碎片
  * 需要 LV_MEM_CUSTOM = 0*/
-#define LV_USE_MEM_MONITOR 0
+#define LV_USE_MEM_MONITOR 1
 #if LV_USE_MEM_MONITOR
     #define LV_USE_MEM_MONITOR_POS LV_ALIGN_BOTTOM_LEFT
 #endif
