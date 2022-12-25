@@ -669,7 +669,7 @@ static void AppTaskCOM(ULONG thread_input)
 	{
         bsp_LedToggle(2);
 		bsp_LedToggle(1);
-		tx_thread_sleep(1000);
+		tx_thread_sleep(100);
 	}
 }
 

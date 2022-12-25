@@ -8,6 +8,8 @@
 //static lv_style_t s_style_common;
 static lv_style_t style_radio;
 static lv_style_t style_radio_chk;
+
+
 /************************************************************************/
 
 /*************************回调函数***************************************/
@@ -24,6 +26,8 @@ static void Driverpos1_Label_Cb(lv_event_t * e);
 static void Driverpos2_Label_Cb(lv_event_t * e);
 static void Driverpos3_Label_Cb(lv_event_t * e);
 static void Realtime_MotorPos_Cb(lv_timer_t * e);
+static void App_btn_Back_Cb(lv_event_t* e);
+
 /************************************************************************/
 
 /***********************全局对象-obj*************************************/
@@ -39,10 +43,9 @@ lv_timer_t * RealtimeMotorpos_timer;
 
 void Adjust_Pedal_Ui(lv_obj_t *parent)
 {
-	static lv_style_t s_style_common;	
-	
-    /* 定义并创建图像按钮 */
-    lv_obj_t* Imgbtn_MC;
+	static lv_style_t s_style_common;
+	/* 定义并创建图像按钮 */
+	lv_obj_t* Imgbtn_MC;	
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
     lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,"0:/PICTURE/adjust_pedal.bin","0:/PICTURE/adjust_pedal.bin",NULL);
@@ -72,7 +75,11 @@ void Adjust_Pedal_Ui(lv_obj_t *parent)
     lv_obj_add_style(Imgbtn_MC,&style_pr,LV_STATE_PRESSED);
     /* 设置按钮回调 */
     lv_obj_add_event_cb(Imgbtn_MC,Imgbtn_MC_cb,LV_EVENT_ALL,NULL);
+
+
 }
+
+
 static void Imgbtn_MC_cb(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
@@ -296,7 +303,30 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
 	/* 创建一个LVGL定时器用来定时读取实时电机位置 */
 	RealtimeMotorpos_timer = lv_timer_create(Realtime_MotorPos_Cb,100,pos_label);
 	lv_timer_set_cb(RealtimeMotorpos_timer,Realtime_MotorPos_Cb);
+
+	/* 创建返回按钮 */
+	lv_obj_t * App_btn_Back = NULL;	
+    App_btn_Back = lv_imgbtn_create(parent);
+    lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin");
+    lv_obj_set_size(App_btn_Back,40,40);
+    lv_obj_align_to(App_btn_Back,parent,LV_ALIGN_BOTTOM_MID,0,0);
+    lv_obj_add_event_cb(App_btn_Back,App_btn_Back_Cb,LV_EVENT_ALL,parent);		
 }
+static void App_btn_Back_Cb(lv_event_t* e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t* parent = lv_event_get_user_data(e);
+    switch ((uint8_t)code) {
+        case LV_EVENT_RELEASED:
+            {
+				/* 删除可调踏板界面中的定时器任务对象 */
+				lv_timer_del(RealtimeMotorpos_timer);
+                lv_obj_del(parent);
+            }
+            break;
+    }
+}
+
 /* 电机位置label显示回调函数 */
 static void Pos_Label_Cb(lv_event_t *e)
 {

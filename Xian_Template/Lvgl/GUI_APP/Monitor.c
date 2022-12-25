@@ -18,15 +18,12 @@ static void lv_example_Monitor_Speed_Meter(void);
 #define scr_act_width()  lv_obj_get_width(lv_scr_act())
 
 static void Monitor_Main_Style(lv_obj_t* Monitor_Speed_Meter);
-static void Monitor_Main_label(lv_coord_t weight, lv_coord_t height);
-static void App_btn_Back_Cb(lv_event_t* e);
-
 
 void Gui_Monitor_App()
 {
 
-    uint16_t meter_height = 0;
-    meter_height = ((unsigned short)(scr_act_height() * 0.8));
+//    uint16_t meter_height = 0;
+//    meter_height = ((unsigned short)(scr_act_height() * 0.8));
 	lv_obj_set_style_bg_color(lv_scr_act(),lv_color_hex(0x123456),LV_STATE_DEFAULT);
 
     Motor_Control_Ui(lv_scr_act());
@@ -73,17 +70,7 @@ void Monitor_Main_Style(lv_obj_t * Monitor_Speed_Meter)
     //设置速度盘对象的样式
     lv_obj_add_style(Monitor_Speed_Meter, &style_speed_meter, LV_PART_MAIN);
 }
-void Monitor_Main_label(lv_coord_t weight,lv_coord_t height)
-{
-    lv_obj_t* label_speed_value;
 
-    //设置速度值文本标签
-    label_speed_value = lv_label_create(Monitor_Speed_Meter);
-    //设置文本与颜色
-    lv_label_set_text(label_speed_value, "Km/h");
-    //设置文本对齐方式
-    lv_obj_set_pos((lv_obj_t*)(label_speed_value),(short)(weight * 0.45), (short)(height * 0.7));
-}
 /**
  * @brief 仪表2的回调函数
  * @param indic 不知道是啥？
@@ -213,52 +200,34 @@ static void lv_example_Monitor_Speed_Meter(void)
     lv_anim_start(&a);
 
     //创建样式
-    //Monitor_Main_Style(Monitor_Speed_Meter);
+    Monitor_Main_Style(Monitor_Speed_Meter);
     //创建速度值标签
     //Monitor_Main_label((short)(scr_act_height() * 0.8),(short)(scr_act_height() * 0.8));
 }
 
 lv_obj_t* App_Common_Init(const char *title)
-{
-    lv_obj_t * App_btn_Back = NULL;
+{    
     lv_obj_t * App_Title = NULL;
     lv_obj_t * parent = NULL;
     //const char btn_source[] = "E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png";
-
-    /* 创建返回按钮 */
+    
     parent = lv_obj_create(lv_scr_act());
 	lv_obj_set_style_bg_color(parent,lv_color_hex(0x1cbac8),LV_STATE_DEFAULT);
     lv_obj_set_size(parent,800,480);
-    App_btn_Back = lv_imgbtn_create(parent);
 
-    lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin");
-    lv_obj_set_size(App_btn_Back,40,40);
-    lv_obj_align_to(App_btn_Back,parent,LV_ALIGN_BOTTOM_MID,0,0);
-    lv_obj_add_event_cb(App_btn_Back,App_btn_Back_Cb,LV_EVENT_ALL,parent);
+	
     /* 创建标题文本 */
     App_Title = lv_label_create(parent);
     lv_theme_apply(App_Title);
 	lv_obj_set_style_text_font(App_Title,&myFont20,LV_STATE_DEFAULT);
     lv_label_set_text(App_Title,title);
     lv_obj_align_to(App_Title,parent,LV_ALIGN_TOP_MID,0,0);
-    /* 创建返回按钮文本 */
 
     return parent;
 }
 
-static void App_btn_Back_Cb(lv_event_t* e)
-{
-    lv_event_code_t code = lv_event_get_code(e);
-    lv_obj_t* parent = lv_event_get_user_data(e);
-    switch ((uint8_t)code) {
-        case LV_EVENT_RELEASED:
-            {
-                lv_obj_del(parent);
-				/* 删除可调踏板界面中的定时器任务对象 */
-				lv_timer_del(RealtimeMotorpos_timer);
-            }
-            break;
-    }
-}
+
+
+
 
 

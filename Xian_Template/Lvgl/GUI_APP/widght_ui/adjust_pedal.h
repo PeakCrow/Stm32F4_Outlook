@@ -11,7 +11,6 @@ typedef struct _driverx_pos {
 }st_driver_pos;
 
 extern st_driver_pos DriverX_Pos;
-extern lv_timer_t * RealtimeMotorpos_timer;
 
 void Adjust_Pedal_Ui(lv_obj_t *parent);
 

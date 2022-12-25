@@ -511,7 +511,8 @@ uint8_t GT9147_Scan(uint8_t mode)
 	uint8_t res=0;
 	uint8_t temp;
 	uint8_t tempsta;
-	uint8_t temp_area1,temp_area2,temp_area3;
+	uint8_t temp_area1,temp_area2,temp_area3 = 0;
+	temp_area3 = 0;
 	static uint8_t t=0;//控制查询间隔,从而降低CPU占用率   
 	t++;
 	if((t%10)==0||t<10)//空闲时,每进入10次CTP_Scan函数才检测1次,从而节省CPU使用率
@@ -544,7 +545,7 @@ uint8_t GT9147_Scan(uint8_t mode)
 						tp_dev.x[i]=((uint16_t)buf[1]<<8)+buf[0];
 						tp_dev.y[i]=((uint16_t)buf[3]<<8)+buf[2];
 					}  
-					//printf("x[%d]:%d,y[%d]:%d,area:%d\r\n",i,tp_dev.x[i],i,tp_dev.y[i],temp_area3);
+					printf("Touch area : [%d]\r\n",temp_area3);
 					
 				}			
 			} 

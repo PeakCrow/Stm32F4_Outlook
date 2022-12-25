@@ -2,11 +2,11 @@
 #include "monitor.h"
 
 
-
 static void Imgbtn_MC_cb(lv_event_t * e);
 static lv_style_t s_style_common;
 static void About_Phone_In_Ui(lv_obj_t* parent);
 #define screen_left_pos 30
+static void App_btn_Back_Cb(lv_event_t* e);
 
 
 void About_Phone_Ui(lv_obj_t *parent)
@@ -42,7 +42,10 @@ void About_Phone_Ui(lv_obj_t *parent)
     lv_obj_add_style(Imgbtn_MC,&style_pr,LV_STATE_PRESSED);
     /* 设置按钮回调 */
     lv_obj_add_event_cb(Imgbtn_MC,Imgbtn_MC_cb,LV_EVENT_ALL,NULL);
+
 }
+
+
 static void Imgbtn_MC_cb(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
@@ -146,6 +149,27 @@ static void About_Phone_In_Ui(lv_obj_t* parent)
     lv_line_set_points(About_line3,about_lines3,sizeof(about_lines3)/sizeof(lv_point_t));
     lv_obj_set_style_line_color(About_line3,lv_palette_main(LV_PALETTE_LIGHT_GREEN),LV_PART_MAIN);
     lv_obj_set_style_line_width(About_line3,2,LV_PART_MAIN);
-    lv_obj_set_style_line_rounded(About_line3,true,LV_PART_MAIN);	
+    lv_obj_set_style_line_rounded(About_line3,true,LV_PART_MAIN);
+
+	/* 创建返回按钮 */	
+	lv_obj_t * App_btn_Back = NULL;	
+    App_btn_Back = lv_imgbtn_create(parent);
+    lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin");
+    lv_obj_set_size(App_btn_Back,40,40);
+    lv_obj_align_to(App_btn_Back,parent,LV_ALIGN_BOTTOM_MID,0,0);
+    lv_obj_add_event_cb(App_btn_Back,App_btn_Back_Cb,LV_EVENT_ALL,parent);		
 }
+static void App_btn_Back_Cb(lv_event_t* e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t* parent = lv_event_get_user_data(e);
+    switch ((uint8_t)code) {
+        case LV_EVENT_RELEASED:
+            {
+                lv_obj_del(parent);
+            }
+            break;
+    }
+}
+
 
