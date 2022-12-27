@@ -50,7 +50,7 @@ static void Imgbtn_MC_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
 
     if(code == LV_EVENT_RELEASED)
-         Sensor_In_Ui(App_Common_Init(" 传感器数据 "));
+         Sensor_In_Ui(App_Common_Init((" 传感器数据 "),App_btn_Back_Cb));
 }
 static void Sensor_In_Ui(lv_obj_t * parent)
 {

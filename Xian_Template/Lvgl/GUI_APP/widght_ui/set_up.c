@@ -6,7 +6,6 @@
 static void Imgbtn_MC_cb(lv_event_t * e);
 static lv_style_t s_style_common;
 static void App_btn_Back_Cb(lv_event_t* e);
-static void Set_Up_In_Ui(lv_obj_t * parent);
 
 
 
@@ -49,19 +48,9 @@ static void Imgbtn_MC_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
 
     if(code == LV_EVENT_RELEASED)
-         Set_Up_In_Ui(App_Common_Init(" 设置 "));
+         (App_Common_Init((" 设置 "),App_btn_Back_Cb));
 }
 
-static void Set_Up_In_Ui(lv_obj_t * parent)
-{
-	/* 创建返回按钮 */
-	lv_obj_t * App_btn_Back = NULL;
-	App_btn_Back = lv_imgbtn_create(parent);
-	lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin");
-	lv_obj_set_size(App_btn_Back,40,40);
-	lv_obj_align_to(App_btn_Back,parent,LV_ALIGN_BOTTOM_MID,0,0);
-	lv_obj_add_event_cb(App_btn_Back,App_btn_Back_Cb,LV_EVENT_ALL,parent);	
-}
 static void App_btn_Back_Cb(lv_event_t* e)
 {
 	lv_event_code_t code = lv_event_get_code(e);

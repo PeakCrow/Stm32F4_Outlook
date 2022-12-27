@@ -205,7 +205,14 @@ static void lv_example_Monitor_Speed_Meter(void)
     //Monitor_Main_label((short)(scr_act_height() * 0.8),(short)(scr_act_height() * 0.8));
 }
 
-lv_obj_t* App_Common_Init(const char *title)
+/**
+ * @brief 创建界面公共函数，因为不同的界面的返回按键删除回调函数不同
+ *			所以将按键删除函数作为参数传给界面创建公共函数
+ * @param title:界面标题  App_btn_Back_Cb:界面删除函数
+ * @param 返回一个满屏幕的容器，在此容器中创建子控件
+*/
+
+lv_obj_t* App_Common_Init(const char *title,App_btn_Back_Cb_Ptr App_btn_Back_Cb)
 {    
     lv_obj_t * App_Title = NULL;
     lv_obj_t * parent = NULL;
@@ -222,7 +229,14 @@ lv_obj_t* App_Common_Init(const char *title)
 	lv_obj_set_style_text_font(App_Title,&myFont20,LV_STATE_DEFAULT);
     lv_label_set_text(App_Title,title);
     lv_obj_align_to(App_Title,parent,LV_ALIGN_TOP_MID,0,0);
-
+	
+	/* 创建返回按钮 */
+	lv_obj_t * App_btn_Back = NULL;
+	App_btn_Back = lv_imgbtn_create(parent);
+	lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin");
+	lv_obj_set_size(App_btn_Back,40,40);
+	lv_obj_align_to(App_btn_Back,parent,LV_ALIGN_BOTTOM_MID,0,0);
+	lv_obj_add_event_cb(App_btn_Back,App_btn_Back_Cb,LV_EVENT_ALL,parent);	
     return parent;
 }
 
