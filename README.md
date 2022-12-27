@@ -45,6 +45,6 @@
 - (此状态会随着驱动的更新不断更新)。
 
 #### 占用PIN脚
-![输入图片说明](Xian_Template/Doc/%E5%B7%B2%E9%85%8D%E7%BD%AEPIN.png)
+![输入图片说明](Xian_Template/Doc/images/%E5%B7%B2%E9%85%8D%E7%BD%AEPIN.png)
 ####  **LVGL模拟器效果** 
 ![输入图片说明](Xian_Template/Doc/GIF/TFT%20Simulator.gif)
