@@ -66,12 +66,24 @@ void Adjust_Pedal_Ui(lv_obj_t *parent)
     /* 设置按钮回调 */
     lv_obj_add_event_cb(Imgbtn_MC,Imgbtn_MC_cb,LV_EVENT_ALL,NULL);
 }
+static void App_btn_Back_Cb(lv_event_t* e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t* parent = lv_event_get_user_data(e);
+    switch ((uint8_t)code) {
+        case LV_EVENT_RELEASED:
+            {
+                lv_obj_del(parent);
+            }
+            break;
+    }
+}
 static void Imgbtn_MC_cb(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
 
     if(code == LV_EVENT_RELEASED)
-        Adjust_Pedal_In_Ui(App_Common_Init("Adjust_Pedal"));
+        Adjust_Pedal_In_Ui(App_Common_Init("Adjust_Pedal",App_btn_Back_Cb));
 }
 
 static void Adjust_Pedal_In_Ui(lv_obj_t* parent)

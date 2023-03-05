@@ -1,0 +1,121 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_:
+
+
+BO_ 16 Close_Torque: 8 Vector__XXX
+ SG_ Yaw_Moment_Demand : 8|16@1- (1,0) [-32768|32767] "" Vector__XXX
+ SG_ close_Torque : 0|8@1+ (1,0) [0|255] "" Vector__XXX
+
+BO_ 385 sanzhou2: 8 Vector__XXX
+ SG_ G_Z : 32|16@1- (0.001,0) [-32.768|32.767] "" Vector__XXX
+ SG_ ACC_Y : 16|16@1- (0.001,0) [-32.768|32.767] "" Vector__XXX
+ SG_ ACC_X : 0|16@1- (0.001,0) [-32.768|32.767] "" Vector__XXX
+
+BO_ 2556444915 Bat_bms_Rx: 8 Vector__XXX
+ SG_ Bat_voltage : 7|16@0- (0.1,0) [0|900] "" Vector__XXX
+ SG_ Bat_soc : 39|8@0+ (1,0) [0|100] "" Vector__XXX
+ SG_ Bat_currrent : 23|16@0- (0.1,-1000) [-4276.8|2276.7] "" Vector__XXX
+
+BO_ 647 motor_rpm_Rx: 8 Vector__XXX
+ SG_ yh_motor_rpm : 0|16@1- (1,0) [0|20000] "" Vector__XXX
+
+BO_ 9 state_xinhao_Tx: 8 Vector__XXX
+ SG_ Pedal_open : 16|8@1+ (1,0) [0|100] "" Vector__XXX
+ SG_ TSMS : 24|8@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ torquechu : 0|16@1+ (1,0) [0|65535] "" Vector__XXX
+ SG_ duancan : 32|8@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ car_speed : 40|16@1- (1,0) [0|200] "" Vector__XXX
+
+BO_ 8 Sensor_Tx: 8 Vector__XXX
+ SG_ Steering : 16|16@1- (1,0) [-360|360] "" Vector__XXX
+ SG_ current : 8|8@1+ (1,0) [0|200] "" Vector__XXX
+ SG_ brake : 0|8@1+ (1,0) [0|160] "" Vector__XXX
+ SG_ apps2 : 48|16@1+ (1,0) [0|5000] "" Vector__XXX
+ SG_ apps1 : 32|16@1+ (1,0) [0|5000] "" Vector__XXX
+
+BO_ 7 velocity_Yaw_Tx: 8 Vector__XXX
+ SG_ Desired_Yaw_Rate : 16|16@1- (0.01,0) [-327.68|327.67] "" Vector__XXX
+ SG_ Actual_Yaw_Rate : 0|16@1- (0.01,0) [-327.68|327.67] "" Vector__XXX
+
+BO_ 6 motor_torque_Tx: 8 Vector__XXX
+ SG_ RL_motor_T : 48|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
+ SG_ RR_motor_T : 32|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
+ SG_ FR_motor_T : 16|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
+ SG_ FL_motor_T : 0|16@1+ (0.001,0) [0|65.535] "" Vector__XXX
+
+BO_ 5 vehicle_speed_AND_Filter_Tx: 8 Vector__XXX
+ SG_ vehicle_speed_filter : 8|8@1- (1,0) [-128|127] "" Vector__XXX
+ SG_ vehicle_speed : 0|8@1- (1,0) [-128|127] "" Vector__XXX
+
+BO_ 4 sanzhou_Filter_Tx: 8 Vector__XXX
+ SG_ yaw_rate_first : 32|16@1- (0.01,0) [-327.68|327.67] "" Vector__XXX
+ SG_ ACCy_first : 16|16@1- (0.001,0) [-32.768|32.767] "" Vector__XXX
+ SG_ ACCx_first : 0|16@1- (0.001,0) [-32.768|32.767] "" Vector__XXX
+
+BO_ 3 Steering_angle_AND_Filter_Tx: 8 Vector__XXX
+ SG_ Steering_angle_filter : 19|9@1- (1,0) [-256|255] "" Vector__XXX
+ SG_ taban_zhi : 9|10@1+ (1,0) [0|1023] "" Vector__XXX
+ SG_ Steering_angle : 0|9@1- (1,0) [-256|255] "" Vector__XXX
+
+BO_ 2 motor_speed_Tx: 8 Vector__XXX
+ SG_ yh_motor_rpm : 0|16@1- (1,0) [0|20000] "" Vector__XXX
+ SG_ zq_motor_rpm : 48|16@1- (1,0) [0|20000] "" Vector__XXX
+ SG_ zh_motor_rpm : 32|16@1- (1,0) [0|20000] "" Vector__XXX
+ SG_ yq_motor_rpm : 16|16@1- (1,0) [0|20000] "" Vector__XXX
+
+BO_ 1 sanzhou_Rx: 8 Vector__XXX
+ SG_ yaw_rate_first : 32|16@1- (0.01,0) [-327.68|327.67] "" Vector__XXX
+ SG_ ACCy_first : 16|16@1- (0.001,0) [-32.768|32.767] "" Vector__XXX
+ SG_ ACCx_first : 0|16@1- (0.001,0) [-32.768|32.767] "" Vector__XXX
+
+
+
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "ECU" STRING ;
+BA_DEF_ BU_  "CANoeJitterMax" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMin" INT 0 0;
+BA_DEF_ BU_  "CANoeDrift" INT 0 0;
+BA_DEF_ BU_  "CANoeStartDelay" INT 0 0;
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "NodeLayerModules" "";
+BA_DEF_DEF_  "ECU" "";
+BA_DEF_DEF_  "CANoeJitterMax" 0;
+BA_DEF_DEF_  "CANoeJitterMin" 0;
+BA_DEF_DEF_  "CANoeDrift" 0;
+BA_DEF_DEF_  "CANoeStartDelay" 0;
+

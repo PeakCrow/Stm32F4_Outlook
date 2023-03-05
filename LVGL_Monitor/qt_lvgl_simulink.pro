@@ -4,13 +4,6 @@ CONFIG -= app_bundle
 CONFIG -= qt
 LIBS += -L$$PWD/lib/ -lmingw32 -lSDL2main -lSDL2
 SOURCES += \
-        DEMO/Page.c \
-        DEMO/PageMain.c \
-        DEMO/PageManager.c \
-        DEMO/PageMonth.c \
-        DEMO/PagePop.c \
-        DEMO/img.c \
-        DEMO/img1.c \
         lv_drivers/display/GC9A01.c \
         lv_drivers/display/ILI9341.c \
         lv_drivers/display/R61581.c \
@@ -420,7 +413,7 @@ SOURCES += \
         lvgl/src/widgets/lv_img.c \
         lvgl/src/widgets/lv_label.c \
         lvgl/src/widgets/lv_line.c \
-        lvgl/src/widgets/lv_objx_templ.c \
+        lvgl/src/widgets/lv_objx_frame.c \
         lvgl/src/widgets/lv_roller.c \
         lvgl/src/widgets/lv_slider.c \
         lvgl/src/widgets/lv_switch.c \
@@ -462,8 +455,6 @@ SOURCES += \
         widght_ui/vehicle_status.c
 
 HEADERS += \
-    DEMO/Page.h \
-    DEMO/PageManager.h \
     SDL2/SDL.h \
     SDL2/SDL_assert.h \
     SDL2/SDL_atomic.h \
@@ -746,7 +737,7 @@ HEADERS += \
     lvgl/src/widgets/lv_img.h \
     lvgl/src/widgets/lv_label.h \
     lvgl/src/widgets/lv_line.h \
-    lvgl/src/widgets/lv_objx_templ.h \
+    lvgl/src/widgets/lv_objx_frame.h \
     lvgl/src/widgets/lv_roller.h \
     lvgl/src/widgets/lv_slider.h \
     lvgl/src/widgets/lv_switch.h \

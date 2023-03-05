@@ -1,7 +1,7 @@
 #include "adjust_pedal.h"
 #include "monitor.h"
 
-
+/*存储在EEPROM中的车手位置数据大小，一个位置数据占据两个字节*/
 #define Drive_Pos_Size 2
 
 /**********************样式变量必须做为全局变量**************************/
@@ -37,7 +37,7 @@ static double NumberConuts = 0;
 static uint32_t active_index_2 = 0;/* 车手选择是不是也要做到掉电保存里面？ */
 static lv_obj_t * driverpos_label1,*driverpos_label2,*driverpos_label3;	
 st_driver_pos DriverX_Pos;
-lv_timer_t * RealtimeMotorpos_timer;
+static lv_timer_t * Realtime_Motorpos_timer;
 /************************************************************************/
 
 
@@ -301,8 +301,8 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
 		lv_obj_add_event_cb(driverpos_label3,Driverpos3_Label_Cb,LV_EVENT_RELEASED,shadow_label3);
 	}
 	/* 创建一个LVGL定时器用来定时读取实时电机位置 */
-	RealtimeMotorpos_timer = lv_timer_create(Realtime_MotorPos_Cb,100,pos_label);
-	lv_timer_set_cb(RealtimeMotorpos_timer,Realtime_MotorPos_Cb);	
+	Realtime_Motorpos_timer = lv_timer_create(Realtime_MotorPos_Cb,100,pos_label);
+	lv_timer_set_cb(Realtime_Motorpos_timer,Realtime_MotorPos_Cb);	
 }
 static void App_btn_Back_Cb(lv_event_t* e)
 {
@@ -312,7 +312,7 @@ static void App_btn_Back_Cb(lv_event_t* e)
         case LV_EVENT_RELEASED:
             {
 				/* 删除可调踏板界面中的定时器任务对象 */
-				lv_timer_del(RealtimeMotorpos_timer);
+				lv_timer_del(Realtime_Motorpos_timer);
                 lv_obj_del(parent);
             }
             break;
@@ -374,11 +374,11 @@ static void Forward_Btn_Cb(lv_event_t* e)
 	
     if(code == LV_EVENT_PRESSED){        
 		comSendBuf(COM3,Forward_rotation,3);
-		lv_timer_pause(RealtimeMotorpos_timer);
+		lv_timer_pause(Realtime_Motorpos_timer);
 	}
     else if(code == LV_EVENT_RELEASED){
 		comSendBuf(COM3,stop_motor,2);	
-		lv_timer_resume(RealtimeMotorpos_timer);
+		lv_timer_resume(Realtime_Motorpos_timer);
         lv_event_send(pos_label,LV_EVENT_RELEASED,NULL);
     }
 	else if(code == LV_EVENT_PRESSING){
@@ -396,11 +396,11 @@ static void Reverse_Btn_Cb(lv_event_t* e)
 	
     if(code == LV_EVENT_PRESSED){
 		comSendBuf(COM3,Reverse_rotation,3);
-		lv_timer_pause(RealtimeMotorpos_timer);
+		lv_timer_pause(Realtime_Motorpos_timer);
 	}
     else if(code == LV_EVENT_RELEASED){
 		comSendBuf(COM3,stop_motor,2);	
-		lv_timer_resume(RealtimeMotorpos_timer);
+		lv_timer_resume(Realtime_Motorpos_timer);
         lv_event_send(pos_label,LV_EVENT_RELEASED,NULL);
     }
 	else if(code == LV_EVENT_PRESSING){

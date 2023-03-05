@@ -300,7 +300,7 @@
  *如果启用LV_USE_LOG ，则故障时将打印错误消息*/
  #define LV_USE_ASSERT_NULL          1   /*Check if the parameter is NULL. (Very fast, recommended)--检查参数是否为空(非常快，推荐)*/
 #define LV_USE_ASSERT_MALLOC        1   /*Checks is the memory is successfully allocated or no. (Very fast, recommended)--检查内存是否成功分配(非常快，推荐)*/
-#define LV_USE_ASSERT_STYLE         0   /*Check if the styles are properly initialized. (Very fast, recommended)--检查样式是否正确初始化(非常快，推荐)*/
+#define LV_USE_ASSERT_STYLE         1   /*Check if the styles are properly initialized. (Very fast, recommended)--检查样式是否正确初始化(非常快，推荐)*/
 #define LV_USE_ASSERT_MEM_INTEGRITY 0   /*Check the integrity of `lv_mem` after critical operations. (Slow)--关键操作后检查lv_mem的完整性(慢)*/
 #define LV_USE_ASSERT_OBJ           0   /*Check the object's type and existence (e.g. not deleted). (Slow)--检查对象的类型和存在(例如，未删除，(慢))*/
 
@@ -344,7 +344,7 @@
     #define LV_SPRINTF_USE_FLOAT 1
 #endif  /*LV_SPRINTF_CUSTOM*/
 
-#define LV_USE_USER_DATA 0
+#define LV_USE_USER_DATA 1
 
 /*Garbage Collector settings
  *Used if lvgl is bound to higher level language and the memory is managed by that language*/
@@ -465,7 +465,7 @@
 
 /*Always set a default font*/
 /*始终设置默认字体*/
-#define LV_FONT_DEFAULT &lv_font_montserrat_24
+#define LV_FONT_DEFAULT &myFont20
 
 /*Enable handling large font and/or fonts with a lot of characters.
  *The limit depends on the font size, font face and bpp.

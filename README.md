@@ -48,3 +48,14 @@
 ![输入图片说明](Xian_Template/Doc/images/%E5%B7%B2%E9%85%8D%E7%BD%AEPIN.png)
 ####  **LVGL模拟器效果** 
 ![输入图片说明](Xian_Template/Doc/GIF/TFT%20Simulator.gif)
+
+#### TO DO
+
+- bootloader
+- OTA
+- 外部sram
+- 4G
+- Board
+- ![image-20230131002321793](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230131002321793.png)
+- 添加返回按钮风格
+- ...

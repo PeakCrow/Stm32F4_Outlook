@@ -58,6 +58,7 @@ extern "C" {
 #include "src/widgets/lv_textarea.h"
 #include "src/widgets/lv_canvas.h"
 #include "src/widgets/lv_switch.h"
+#include "src/widgets/lv_objx_frame.h"
 
 #include "src/draw/lv_draw.h"
 
@@ -72,6 +73,7 @@ extern "C" {
 #include "src/extra/themes/lv_themes.h"
 #include "src/extra/others/lv_others.h"
 #include "src/extra/libs/lv_libs.h"
+
 
 /*********************
  *      DEFINES
