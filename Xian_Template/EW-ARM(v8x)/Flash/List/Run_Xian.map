@@ -1,428 +1,428 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.50.9.278/W32 for ARM                  08/Mar/2023  20:22:54
+# IAR ELF Linker V8.50.9.278/W32 for ARM                  08/Mar/2023  23:16:23
 # Copyright 2007-2020 IAR Systems AB.
 #
 #    Output file  =
-#        D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Exe\Run_Xian.out
+#        D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Exe\Run_Xian.out
 #    Map file     =
-#        D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\List\Run_Xian.map
+#        D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\List\Run_Xian.map
 #    Command line =
-#        -f C:\Users\sdit\AppData\Local\Temp\EW737E.tmp
-#        ("D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\about_phone_ui.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\adjust_pedal.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\battery_box.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_can_bus.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_dwt.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_font.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_iic_bus.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_key.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_lcd.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_led.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_mlx90614.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_rotation_sensor.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_sdio_sd.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_spi_ads1256.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_spi_bus.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_spi_flash.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_spi_flash_demo.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_tim_pwm.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_touch.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_usart_fifo.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_ws2812b.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\cc936.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\cool_control.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\DEV_Config.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\diskio.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\EPD_2in9b_V3.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\EPD_2in9b_V3_test.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\ff.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\ff_gen_drv.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\font12.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\font12CN.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\font16.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\font20.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\font24.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\font24CN.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\font8.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\GUI_Paint.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\ImageData.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\ImageData2.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\iwdg.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_anim.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_anim_timeline.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_animimg.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_arc.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_area.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_async.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_bar.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_bidi.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_btn.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_btnmatrix.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_calendar.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_calendar_header_arrow.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_calendar_header_dropdown.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_canvas.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_chart.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_checkbox.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_color.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_colorwheel.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_disp.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_arc.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_img.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_label.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_layer.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_line.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_mask.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_rect.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_arc.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_blend.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_dither.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_gradient.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_img.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_layer.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_letter.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_line.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_polygon.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_rect.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_transform.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_transform.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_triangle.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_dropdown.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_event.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_extra.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_flex.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_dejavu_16_persian_hebrew.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_fmt_txt.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_loader.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_10.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_12.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_12_subpx.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_14.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_16.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_24.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_8.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_simsun_16_cjk.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_unscii_16.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_unscii_8.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_fragment.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_fragment_manager.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_fs.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_fs_fatfs.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_gc.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_grid.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_gridnav.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_group.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_hal_disp.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_hal_indev.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_hal_tick.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_ime_pinyin.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_img.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_img_buf.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_img_cache.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_img_decoder.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_imgbtn.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_imgfont.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_indev.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_indev_scroll.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_keyboard.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_label.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_led.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_line.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_list.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_ll.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_log.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_lru.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_math.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_mem.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_menu.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_meter.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_monkey.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_msg.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_msgbox.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_class.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_draw.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_pos.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_scroll.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_style.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_style_gen.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_tree.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_objx_templ.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_port_disp_template.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_port_indev_template.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_printf.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_refr.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_roller.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_slider.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_snapshot.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_span.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_spinbox.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_spinner.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_style.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_style_gen.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_switch.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_table.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_tabview.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_templ.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_textarea.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_theme.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_theme_basic.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_theme_default.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_theme_mono.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_tileview.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_timer.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_tlsf.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_txt.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_txt_ap.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_utils.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_win.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\main.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\Monitor.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\motor_control_ui.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\myFont20.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\myFont36.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\sd_diskio_dma.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\sensor_ui.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\set_up.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\startup_stm32f407xx.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_can.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_cortex.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_crc.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_dma.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_dma_ex.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_eth.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_gpio.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_i2c.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_i2c_ex.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_iwdg.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_msp.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_pwr.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_pwr_ex.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_rcc.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_rcc_ex.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_sd.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_spi.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_sram.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_tim.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_tim_ex.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_timebase_tim.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_uart.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_it.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_ll_fsmc.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_ll_sdmmc.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\sys.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\syscall.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\system_stm32f4xx.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\ticktim.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_allocate.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_cleanup.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_initialize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_performance_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_performance_system_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_prioritize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_release.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_allocate.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_cleanup.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_initialize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_performance_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_performance_system_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_prioritize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_search.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_release.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_cleanup.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_initialize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_performance_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_performance_system_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_set.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_set_notify.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_iar.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_initialize_high_level.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_initialize_kernel_enter.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_initialize_kernel_setup.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_initialize_low_level.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_misra.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_cleanup.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_initialize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_performance_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_performance_system_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_prioritize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_priority_change.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_put.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_cleanup.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_flush.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_front_send.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_initialize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_performance_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_performance_system_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_prioritize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_receive.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_send.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_send_notify.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_ceiling_put.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_cleanup.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_initialize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_performance_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_performance_system_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_prioritize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_put.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_put_notify.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_context_restore.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_context_save.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_entry_exit_notify.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_identify.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_initialize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_interrupt_control.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_interrupt_disable.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_interrupt_restore.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_performance_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_performance_system_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_preemption_change.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_priority_change.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_relinquish.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_reset.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_resume.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_schedule.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_shell_entry.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_sleep.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_stack_analyze.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_stack_build.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_stack_error_handler.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_stack_error_notify.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_suspend.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_system_preempt_check.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_system_resume.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_system_return.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_system_suspend.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_terminate.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_time_slice.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_time_slice_change.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_timeout.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_wait_abort.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_time_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_time_set.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_activate.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_change.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_deactivate.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_expiration_process.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_initialize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_interrupt.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_performance_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_performance_system_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_system_activate.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_system_deactivate.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_thread_entry.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_buffer_full_notify.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_disable.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_enable.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_event_filter.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_event_unfilter.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_initialize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_interrupt_control.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_isr_enter_insert.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_isr_exit_insert.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_object_register.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_object_unregister.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_user_event_insert.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_block_allocate.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_block_pool_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_block_pool_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_block_pool_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_block_pool_prioritize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_block_release.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_byte_allocate.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_byte_pool_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_byte_pool_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_byte_pool_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_byte_pool_prioritize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_byte_release.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_event_flags_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_event_flags_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_event_flags_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_event_flags_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_event_flags_set.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_event_flags_set_notify.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_mutex_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_mutex_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_mutex_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_mutex_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_mutex_prioritize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_mutex_put.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_flush.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_front_send.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_prioritize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_receive.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_send.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_send_notify.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_ceiling_put.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_prioritize.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_put.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_put_notify.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_entry_exit_notify.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_preemption_change.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_priority_change.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_relinquish.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_reset.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_resume.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_suspend.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_terminate.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_time_slice_change.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_wait_abort.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_timer_activate.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_timer_change.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_timer_create.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_timer_deactivate.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_timer_delete.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_timer_info_get.o"
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj\vehicle_status.o"
+#        -f C:\Users\ADMINI~1\AppData\Local\Temp\EW5409.tmp
+#        ("D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\about_phone_ui.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\adjust_pedal.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\battery_box.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_can_bus.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_dwt.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_font.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_iic_bus.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_key.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_lcd.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_led.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_mlx90614.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_rotation_sensor.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_sdio_sd.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_spi_ads1256.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_spi_bus.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_spi_flash.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_spi_flash_demo.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_tim_pwm.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_touch.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_usart_fifo.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\bsp_ws2812b.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\cc936.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\cool_control.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\DEV_Config.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\diskio.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\EPD_2in9b_V3.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\EPD_2in9b_V3_test.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\ff.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\ff_gen_drv.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\font12.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\font12CN.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\font16.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\font20.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\font24.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\font24CN.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\font8.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\GUI_Paint.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\ImageData.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\ImageData2.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\iwdg.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_anim.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_anim_timeline.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_animimg.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_arc.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_area.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_async.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_bar.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_bidi.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_btn.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_btnmatrix.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_calendar.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_calendar_header_arrow.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_calendar_header_dropdown.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_canvas.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_chart.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_checkbox.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_color.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_colorwheel.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_disp.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_arc.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_img.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_label.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_layer.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_line.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_mask.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_rect.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_arc.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_blend.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_dither.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_gradient.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_img.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_layer.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_letter.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_line.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_polygon.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_rect.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_sw_transform.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_transform.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_draw_triangle.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_dropdown.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_event.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_extra.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_flex.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_dejavu_16_persian_hebrew.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_fmt_txt.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_loader.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_10.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_12.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_12_subpx.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_14.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_16.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_24.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_montserrat_8.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_simsun_16_cjk.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_unscii_16.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_font_unscii_8.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_fragment.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_fragment_manager.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_fs.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_fs_fatfs.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_gc.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_grid.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_gridnav.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_group.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_hal_disp.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_hal_indev.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_hal_tick.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_ime_pinyin.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_img.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_img_buf.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_img_cache.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_img_decoder.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_imgbtn.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_imgfont.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_indev.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_indev_scroll.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_keyboard.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_label.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_led.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_line.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_list.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_ll.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_log.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_lru.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_math.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_mem.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_menu.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_meter.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_monkey.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_msg.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_msgbox.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_class.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_draw.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_pos.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_scroll.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_style.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_style_gen.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_obj_tree.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_objx_templ.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_port_disp_template.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_port_indev_template.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_printf.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_refr.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_roller.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_slider.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_snapshot.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_span.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_spinbox.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_spinner.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_style.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_style_gen.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_switch.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_table.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_tabview.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_templ.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_textarea.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_theme.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_theme_basic.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_theme_default.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_theme_mono.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_tileview.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_timer.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_tlsf.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_txt.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_txt_ap.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_utils.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_win.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\main.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\Monitor.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\motor_control_ui.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\myFont20.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\myFont36.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\sd_diskio_dma.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\sensor_ui.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\set_up.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\startup_stm32f407xx.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_can.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_cortex.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_crc.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_dma.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_dma_ex.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_eth.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_gpio.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_i2c.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_i2c_ex.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_iwdg.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_msp.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_pwr.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_pwr_ex.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_rcc.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_rcc_ex.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_sd.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_spi.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_sram.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_tim.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_tim_ex.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_timebase_tim.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_hal_uart.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_it.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_ll_fsmc.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\stm32f4xx_ll_sdmmc.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\sys.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\syscall.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\system_stm32f4xx.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\ticktim.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_allocate.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_cleanup.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_initialize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_performance_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_performance_system_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_pool_prioritize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_block_release.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_allocate.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_cleanup.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_initialize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_performance_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_performance_system_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_prioritize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_pool_search.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_byte_release.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_cleanup.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_initialize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_performance_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_performance_system_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_set.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_event_flags_set_notify.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_iar.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_initialize_high_level.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_initialize_kernel_enter.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_initialize_kernel_setup.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_initialize_low_level.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_misra.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_cleanup.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_initialize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_performance_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_performance_system_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_prioritize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_priority_change.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_mutex_put.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_cleanup.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_flush.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_front_send.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_initialize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_performance_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_performance_system_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_prioritize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_receive.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_send.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_queue_send_notify.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_ceiling_put.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_cleanup.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_initialize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_performance_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_performance_system_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_prioritize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_put.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_semaphore_put_notify.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_context_restore.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_context_save.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_entry_exit_notify.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_identify.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_initialize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_interrupt_control.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_interrupt_disable.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_interrupt_restore.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_performance_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_performance_system_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_preemption_change.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_priority_change.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_relinquish.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_reset.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_resume.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_schedule.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_shell_entry.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_sleep.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_stack_analyze.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_stack_build.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_stack_error_handler.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_stack_error_notify.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_suspend.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_system_preempt_check.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_system_resume.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_system_return.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_system_suspend.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_terminate.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_time_slice.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_time_slice_change.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_timeout.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_thread_wait_abort.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_time_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_time_set.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_activate.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_change.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_deactivate.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_expiration_process.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_initialize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_interrupt.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_performance_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_performance_system_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_system_activate.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_system_deactivate.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_timer_thread_entry.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_buffer_full_notify.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_disable.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_enable.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_event_filter.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_event_unfilter.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_initialize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_interrupt_control.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_isr_enter_insert.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_isr_exit_insert.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_object_register.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_object_unregister.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\tx_trace_user_event_insert.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_block_allocate.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_block_pool_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_block_pool_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_block_pool_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_block_pool_prioritize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_block_release.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_byte_allocate.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_byte_pool_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_byte_pool_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_byte_pool_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_byte_pool_prioritize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_byte_release.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_event_flags_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_event_flags_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_event_flags_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_event_flags_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_event_flags_set.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_event_flags_set_notify.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_mutex_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_mutex_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_mutex_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_mutex_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_mutex_prioritize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_mutex_put.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_flush.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_front_send.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_prioritize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_receive.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_send.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_queue_send_notify.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_ceiling_put.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_prioritize.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_put.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_semaphore_put_notify.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_entry_exit_notify.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_preemption_change.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_priority_change.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_relinquish.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_reset.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_resume.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_suspend.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_terminate.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_time_slice_change.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_thread_wait_abort.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_timer_activate.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_timer_change.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_timer_create.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_timer_deactivate.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_timer_delete.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\txe_timer_info_get.o"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj\vehicle_status.o"
 #        --redirect _Printf=_PrintfFullNoMb --redirect _Scanf=_ScanfFullNoMb
 #        --no_out_extension -o
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Exe\Run_Xian.out"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Exe\Run_Xian.out"
 #        --map
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\List\Run_Xian.map"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\List\Run_Xian.map"
 #        --config
-#        "D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\stm32f407xx_flash.icf"
+#        "D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\stm32f407xx_flash.icf"
 #        --semihosting --entry __iar_program_start --vfe --text_out locale)
 #
 ###############################################################################
@@ -473,7 +473,7 @@ No sections matched the following patterns:
   .intvec            ro code   0x800'0000     0x188  startup_stm32f407xx.o [1]
                              - 0x800'0188     0x188
 
-"P1":                                      0x8'020e
+"P1":                                      0x8'01dc
   .rodata            const     0x800'0188  0x1'5484  cc936.o [1]
   .rodata            const     0x801'560c  0x1'5484  cc936.o [1]
   .rodata            const     0x802'aa90    0x5d4c  lv_font_montserrat_24.o [1]
@@ -833,288 +833,301 @@ No sections matched the following patterns:
   .text              ro code   0x807'e450      0x78  lz77_init_single.o [4]
   .rodata            const     0x807'e4c8      0x70  lv_style.o [1]
   .text              ro code   0x807'e538      0x60  system_stm32f4xx.o [1]
-  .rodata            const     0x807'e598      0x58  bsp_rotation_sensor.o [1]
-  .rodata            const     0x807'e5f0      0x54  bsp_usart_fifo.o [1]
-  .rodata            const     0x807'e644      0x54  lv_keyboard.o [1]
-  .rodata            const     0x807'e698      0x50  lv_keyboard.o [1]
-  .rodata            const     0x807'e6e8      0x50  lv_keyboard.o [1]
-  .rodata            const     0x807'e738      0x50  lv_keyboard.o [1]
-  .rodata            const     0x807'e788      0x50  lv_printf.o [1]
-  .rodata            const     0x807'e7d8      0x50  main.o [1]
-  .rodata            const     0x807'e828      0x4c  bsp_tim_pwm.o [1]
-  .rodata            const     0x807'e874      0x48  bsp_spi_bus.o [1]
-  .rodata            const     0x807'e8bc      0x44  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'e900      0x44  main.o [1]
-  .rodata            const     0x807'e944      0x40  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'e984      0x40  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'e9c4      0x3c  main.o [1]
-  .rodata            const     0x807'ea00      0x38  about_phone_ui.o [1]
-  .rodata            const     0x807'ea38      0x38  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'ea70      0x38  lv_fs_fatfs.o [1]
-  .text              ro code   0x807'eaa8      0x38  tx_thread_timeout.o [1]
+  .rodata            const     0x807'e598      0x54  lv_keyboard.o [1]
+  .rodata            const     0x807'e5ec      0x50  lv_keyboard.o [1]
+  .rodata            const     0x807'e63c      0x50  lv_keyboard.o [1]
+  .rodata            const     0x807'e68c      0x50  lv_keyboard.o [1]
+  .rodata            const     0x807'e6dc      0x44  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'e720      0x50  lv_printf.o [1]
+  .rodata            const     0x807'e770      0x50  main.o [1]
+  .rodata            const     0x807'e7c0      0x48  bsp_rotation_sensor.o [1]
+  .rodata            const     0x807'e808      0x48  bsp_usart_fifo.o [1]
+  .rodata            const     0x807'e850      0x44  main.o [1]
+  .rodata            const     0x807'e894      0x40  bsp_tim_pwm.o [1]
+  .rodata            const     0x807'e8d4      0x40  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'e914      0x40  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'e954      0x3c  bsp_spi_bus.o [1]
+  .rodata            const     0x807'e990      0x3c  main.o [1]
+  .rodata            const     0x807'e9cc      0x38  about_phone_ui.o [1]
+  .rodata            const     0x807'ea04      0x38  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'ea3c      0x38  lv_fs_fatfs.o [1]
+  .text              ro code   0x807'ea74      0x38  tx_thread_timeout.o [1]
+  .rodata            const     0x807'eaac      0x34  adjust_pedal.o [1]
   .rodata            const     0x807'eae0      0x34  adjust_pedal.o [1]
   .rodata            const     0x807'eb14      0x34  adjust_pedal.o [1]
-  .rodata            const     0x807'eb48      0x34  adjust_pedal.o [1]
+  .rodata            const     0x807'eb48      0x34  lv_fs_fatfs.o [1]
   .rodata            const     0x807'eb7c      0x34  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'ebb0      0x34  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'ebe4      0x30  about_phone_ui.o [1]
-  .rodata            const     0x807'ec14      0x30  about_phone_ui.o [1]
-  .rodata            const     0x807'ec44      0x30  bsp_rotation_sensor.o [1]
-  .rodata            const     0x807'ec74      0x30  bsp_spi_bus.o [1]
-  .rodata            const     0x807'eca4      0x30  bsp_tim_pwm.o [1]
-  .rodata            const     0x807'ecd4      0x30  bsp_usart_fifo.o [1]
-  .rodata            const     0x807'ed04      0x30  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'ed34      0x30  lv_roller.o [1]
-  .rodata            const     0x807'ed64      0x30  main.o [1]
-  .rodata            const     0x807'ed94      0x2c  about_phone_ui.o [1]
-  .rodata            const     0x807'edc0      0x2c  about_phone_ui.o [1]
-  .rodata            const     0x807'edec      0x2c  bsp_spi_bus.o [1]
-  .rodata            const     0x807'ee18      0x2c  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'ee44      0x2c  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'ee70      0x28  about_phone_ui.o [1]
-  .rodata            const     0x807'ee98      0x28  lv_color.o [1]
-  .rodata            const     0x807'eec0      0x28  lv_font_montserrat_10.o [1]
-  .rodata            const     0x807'eee8      0x28  lv_font_montserrat_14.o [1]
-  .rodata            const     0x807'ef10      0x28  lv_font_montserrat_24.o [1]
-  .rodata            const     0x807'ef38      0x28  lv_font_montserrat_8.o [1]
-  .rodata            const     0x807'ef60      0x28  lv_fs_fatfs.o [1]
-  .text              ro code   0x807'ef88      0x28  data_init.o [4]
-  .rodata            const     0x807'efb0      0x24  bsp_spi_ads1256.o [1]
-  .rodata            const     0x807'efd4      0x24  lv_calendar_header_dropdown.o [1]
-  .rodata            const     0x807'eff8      0x24  lv_draw_sw_line.o [1]
-  .rodata            const     0x807'f01c      0x24  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'f040      0x24  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'f064      0x24  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'f088      0x24  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'f0ac      0x24  lv_keyboard.o [1]
-  .rodata            const     0x807'f0d0      0x24  lv_refr.o [1]
-  .text              ro code   0x807'f0f4      0x22  fpinit_M.o [3]
-  .iar.init_table    const     0x807'f118      0x28  - Linker created -
-  .rodata            const     0x807'f140       0x2  lv_keyboard.o [1]
-  .rodata            const     0x807'f144      0x20  about_phone_ui.o [1]
-  .rodata            const     0x807'f164      0x20  adjust_pedal.o [1]
-  .rodata            const     0x807'f184      0x20  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'f1a4      0x20  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'f1c4      0x20  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'f1e4      0x20  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'f204      0x20  main.o [1]
-  .rodata            const     0x807'f224      0x20  motor_control_ui.o [1]
-  .rodata            const     0x807'f244      0x20  vehicle_status.o [1]
-  .text              ro code   0x807'f264      0x1e  cmain.o [4]
-  .text              ro code   0x807'f282       0x4  low_level_init.o [2]
-  .text              ro code   0x807'f286       0x4  exit.o [2]
-  .rodata            const     0x807'f28a       0x2  lv_keyboard.o [1]
-  .text              ro code   0x807'f28c       0xa  cexit.o [4]
-  .rodata            const     0x807'f296       0x2  lv_keyboard.o [1]
-  .rodata            const     0x807'f298      0x1c  about_phone_ui.o [1]
-  .rodata            const     0x807'f2b4      0x1c  adjust_pedal.o [1]
-  .rodata            const     0x807'f2d0      0x1c  adjust_pedal.o [1]
-  .rodata            const     0x807'f2ec      0x1c  battery_box.o [1]
-  .rodata            const     0x807'f308      0x1c  battery_box.o [1]
-  .rodata            const     0x807'f324      0x1c  battery_box.o [1]
-  .rodata            const     0x807'f340      0x1c  battery_box.o [1]
-  .rodata            const     0x807'f35c      0x1c  battery_box.o [1]
-  .rodata            const     0x807'f378      0x1c  cool_control.o [1]
-  .rodata            const     0x807'f394      0x1c  lv_arc.o [1]
-  .rodata            const     0x807'f3b0      0x1c  lv_bar.o [1]
-  .rodata            const     0x807'f3cc      0x1c  lv_btn.o [1]
-  .rodata            const     0x807'f3e8      0x1c  lv_btnmatrix.o [1]
-  .rodata            const     0x807'f404      0x1c  lv_calendar.o [1]
-  .rodata            const     0x807'f420      0x1c  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'f43c      0x1c  lv_calendar_header_dropdown.o [1]
-  .rodata            const     0x807'f458      0x1c  lv_chart.o [1]
-  .rodata            const     0x807'f474      0x1c  lv_checkbox.o [1]
-  .rodata            const     0x807'f490      0x1c  lv_colorwheel.o [1]
-  .rodata            const     0x807'f4ac      0x1c  lv_dropdown.o [1]
-  .rodata            const     0x807'f4c8      0x1c  lv_dropdown.o [1]
-  .rodata            const     0x807'f4e4      0x1c  lv_dropdown.o [1]
-  .rodata            const     0x807'f500      0x1c  lv_font_montserrat_10.o [1]
-  .rodata            const     0x807'f51c      0x1c  lv_font_montserrat_14.o [1]
-  .rodata            const     0x807'f538      0x1c  lv_font_montserrat_24.o [1]
-  .rodata            const     0x807'f554      0x1c  lv_font_montserrat_8.o [1]
-  .rodata            const     0x807'f570      0x1c  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'f58c      0x1c  lv_img.o [1]
-  .rodata            const     0x807'f5a8      0x1c  lv_imgbtn.o [1]
-  .rodata            const     0x807'f5c4      0x1c  lv_keyboard.o [1]
-  .rodata            const     0x807'f5e0      0x1c  lv_label.o [1]
-  .rodata            const     0x807'f5fc      0x1c  lv_led.o [1]
-  .rodata            const     0x807'f618      0x1c  lv_line.o [1]
-  .rodata            const     0x807'f634      0x1c  lv_list.o [1]
-  .rodata            const     0x807'f650      0x1c  lv_list.o [1]
-  .rodata            const     0x807'f66c      0x1c  lv_list.o [1]
-  .rodata            const     0x807'f688      0x1c  lv_menu.o [1]
-  .rodata            const     0x807'f6a4      0x1c  lv_menu.o [1]
-  .rodata            const     0x807'f6c0      0x1c  lv_menu.o [1]
-  .rodata            const     0x807'f6dc      0x1c  lv_menu.o [1]
-  .rodata            const     0x807'f6f8      0x1c  lv_menu.o [1]
-  .rodata            const     0x807'f714      0x1c  lv_menu.o [1]
-  .rodata            const     0x807'f730      0x1c  lv_menu.o [1]
-  .rodata            const     0x807'f74c      0x1c  lv_menu.o [1]
-  .rodata            const     0x807'f768      0x1c  lv_menu.o [1]
-  .rodata            const     0x807'f784      0x1c  lv_meter.o [1]
-  .rodata            const     0x807'f7a0      0x1c  lv_msgbox.o [1]
-  .rodata            const     0x807'f7bc      0x1c  lv_msgbox.o [1]
-  .rodata            const     0x807'f7d8      0x1c  lv_obj.o [1]
-  .rodata            const     0x807'f7f4      0x1c  lv_roller.o [1]
-  .rodata            const     0x807'f810      0x1c  lv_roller.o [1]
-  .rodata            const     0x807'f82c      0x1c  lv_slider.o [1]
-  .rodata            const     0x807'f848      0x1c  lv_spinbox.o [1]
-  .rodata            const     0x807'f864      0x1c  lv_spinner.o [1]
-  .rodata            const     0x807'f880      0x1c  lv_switch.o [1]
-  .rodata            const     0x807'f89c      0x1c  lv_table.o [1]
-  .rodata            const     0x807'f8b8      0x1c  lv_tabview.o [1]
-  .rodata            const     0x807'f8d4      0x1c  lv_textarea.o [1]
-  .rodata            const     0x807'f8f0      0x1c  lv_tileview.o [1]
-  .rodata            const     0x807'f90c      0x1c  lv_tileview.o [1]
-  .rodata            const     0x807'f928      0x1c  lv_win.o [1]
-  .rodata            const     0x807'f944      0x1c  main.o [1]
-  .rodata            const     0x807'f960      0x1c  main.o [1]
-  .rodata            const     0x807'f97c      0x1c  myFont20.o [1]
-  .text              ro code   0x807'f998      0x1c  cstartup_M.o [4]
-  .rodata            const     0x807'f9b4      0x18  adjust_pedal.o [1]
-  .rodata            const     0x807'f9cc      0x18  adjust_pedal.o [1]
-  .rodata            const     0x807'f9e4      0x18  adjust_pedal.o [1]
-  .rodata            const     0x807'f9fc      0x18  adjust_pedal.o [1]
-  .rodata            const     0x807'fa14      0x18  adjust_pedal.o [1]
-  .rodata            const     0x807'fa2c      0x18  adjust_pedal.o [1]
-  .rodata            const     0x807'fa44      0x18  bsp_can_bus.o [1]
-  .rodata            const     0x807'fa5c      0x18  lv_font_montserrat_10.o [1]
-  .rodata            const     0x807'fa74      0x18  lv_font_montserrat_14.o [1]
-  .rodata            const     0x807'fa8c      0x18  lv_font_montserrat_24.o [1]
-  .rodata            const     0x807'faa4      0x18  lv_font_montserrat_8.o [1]
-  .rodata            const     0x807'fabc      0x18  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'fad4      0x18  lv_theme_default.o [1]
-  .rodata            const     0x807'faec      0x18  Monitor.o [1]
-  .rodata            const     0x807'fb04      0x18  motor_control_ui.o [1]
-  .rodata            const     0x807'fb1c      0x18  sensor_ui.o [1]
-  .rodata            const     0x807'fb34      0x18  set_up.o [1]
-  .text              ro code   0x807'fb4c      0x16  xprout.o [2]
-  .rodata            const     0x807'fb62       0x2  lv_keyboard.o [1]
-  .text              ro code   0x807'fb64       0xc  putchar.o [2]
-  .rodata            const     0x807'fb70      0x14  adjust_pedal.o [1]
-  .rodata            const     0x807'fb84      0x14  adjust_pedal.o [1]
-  .rodata            const     0x807'fb98      0x14  adjust_pedal.o [1]
-  .rodata            const     0x807'fbac      0x14  battery_box.o [1]
-  .rodata            const     0x807'fbc0      0x14  bsp_touch.o [1]
-  .rodata            const     0x807'fbd4      0x14  bsp_touch.o [1]
-  .rodata            const     0x807'fbe8      0x14  main.o [1]
-  .rodata            const     0x807'fbfc      0x14  main.o [1]
-  .rodata            const     0x807'fc10      0x14  main.o [1]
-  .rodata            const     0x807'fc24      0x14  main.o [1]
-  .rodata            const     0x807'fc38      0x14  sd_diskio_dma.o [1]
-  .rodata            const     0x807'fc4c      0x14  sensor_ui.o [1]
-  .rodata            const     0x807'fc60      0x14  tx_timer_initialize.o [1]
-  .rodata            const     0x807'fc74      0x10  about_phone_ui.o [1]
-  .rodata            const     0x807'fc84      0x10  bsp_key.o [1]
-  .rodata            const     0x807'fc94      0x10  bsp_spi_ads1256.o [1]
-  .rodata            const     0x807'fca4      0x10  bsp_spi_flash.o [1]
-  .rodata            const     0x807'fcb4      0x10  bsp_tim_pwm.o [1]
-  .rodata            const     0x807'fcc4      0x10  bsp_touch.o [1]
-  .rodata            const     0x807'fcd4      0x10  cool_control.o [1]
-  .rodata            const     0x807'fce4      0x10  ff.o [1]
-  .rodata            const     0x807'fcf4      0x10  lv_draw_sw_letter.o [1]
-  .rodata            const     0x807'fd04      0x10  lv_font_montserrat_10.o [1]
-  .rodata            const     0x807'fd14      0x10  lv_font_montserrat_14.o [1]
-  .rodata            const     0x807'fd24      0x10  lv_font_montserrat_24.o [1]
-  .rodata            const     0x807'fd34      0x10  lv_font_montserrat_8.o [1]
-  .rodata            const     0x807'fd44      0x10  lv_fs_fatfs.o [1]
-  .rodata            const     0x807'fd54      0x10  lv_img_decoder.o [1]
-  .rodata            const     0x807'fd64      0x10  lv_refr.o [1]
-  .rodata            const     0x807'fd74      0x10  main.o [1]
-  .rodata            const     0x807'fd84      0x10  main.o [1]
-  .rodata            const     0x807'fd94      0x10  main.o [1]
-  .rodata            const     0x807'fda4      0x10  main.o [1]
-  .rodata            const     0x807'fdb4      0x10  main.o [1]
-  .rodata            const     0x807'fdc4      0x10  main.o [1]
-  .rodata            const     0x807'fdd4      0x10  main.o [1]
-  .rodata            const     0x807'fde4      0x10  main.o [1]
-  .rodata            const     0x807'fdf4      0x10  system_stm32f4xx.o [1]
-  .rodata            const     0x807'fe04      0x10  vehicle_status.o [1]
-  .text              ro code   0x807'fe14      0x10  startup_stm32f407xx.o [1]
-  .rodata            const     0x807'fe24       0xc  adjust_pedal.o [1]
-  .rodata            const     0x807'fe30       0xc  adjust_pedal.o [1]
-  .rodata            const     0x807'fe3c       0xc  adjust_pedal.o [1]
-  .rodata            const     0x807'fe48       0xc  bsp_lcd.o [1]
-  .rodata            const     0x807'fe54       0xc  bsp_spi_flash.o [1]
-  .rodata            const     0x807'fe60       0xc  bsp_spi_flash.o [1]
-  .rodata            const     0x807'fe6c       0xc  bsp_spi_flash.o [1]
-  .rodata            const     0x807'fe78       0xc  bsp_spi_flash.o [1]
-  .rodata            const     0x807'fe84       0xc  bsp_spi_flash.o [1]
-  .rodata            const     0x807'fe90       0xc  bsp_touch.o [1]
-  .rodata            const     0x807'fe9c       0xc  ff.o [1]
-  .rodata            const     0x807'fea8       0xc  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'feb4       0xc  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'fec0       0xc  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'fecc       0xc  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'fed8       0xc  lv_checkbox.o [1]
-  .rodata            const     0x807'fee4       0xc  main.o [1]
-  .rodata            const     0x807'fef0       0xc  main.o [1]
-  .rodata            const     0x807'fefc       0xc  main.o [1]
-  .rodata            const     0x807'ff08       0xc  main.o [1]
-  .rodata            const     0x807'ff14       0xc  set_up.o [1]
-  .rodata            const     0x807'ff20       0x8  adjust_pedal.o [1]
-  .rodata            const     0x807'ff28       0x8  adjust_pedal.o [1]
-  .rodata            const     0x807'ff30       0x8  adjust_pedal.o [1]
-  .rodata            const     0x807'ff38       0x8  adjust_pedal.o [1]
-  .rodata            const     0x807'ff40       0x8  bsp_touch.o [1]
-  .rodata            const     0x807'ff48       0x8  ff.o [1]
-  .rodata            const     0x807'ff50       0x8  lv_btnmatrix.o [1]
-  .rodata            const     0x807'ff58       0x8  lv_btnmatrix.o [1]
-  .rodata            const     0x807'ff60       0x8  lv_btnmatrix.o [1]
-  .rodata            const     0x807'ff68       0x8  lv_btnmatrix.o [1]
-  .rodata            const     0x807'ff70       0x8  lv_btnmatrix.o [1]
-  .rodata            const     0x807'ff78       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'ff80       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'ff88       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'ff90       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'ff98       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'ffa0       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'ffa8       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'ffb0       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x807'ffb8       0x8  lv_draw_img.o [1]
-  .rodata            const     0x807'ffc0       0x8  lv_draw_sw_polygon.o [1]
-  .rodata            const     0x807'ffc8       0x8  lv_keyboard.o [1]
-  .rodata            const     0x807'ffd0       0x8  lv_label.o [1]
-  .rodata            const     0x807'ffd8       0x8  lv_printf.o [1]
-  .rodata            const     0x807'ffe0       0x8  lv_printf.o [1]
-  .rodata            const     0x807'ffe8       0x8  lv_txt.o [1]
-  .rodata            const     0x807'fff0       0x8  sensor_ui.o [1]
-  .rodata            const     0x807'fff8       0x8  sensor_ui.o [1]
-  .rodata            const     0x808'0000       0x8  stm32f4xx_hal_dma.o [1]
-  .rodata            const     0x808'0008       0x8  system_stm32f4xx.o [1]
-  .rodata            const     0x808'0010       0x8  xprintffull_nomb.o [2]
-  .rodata            const     0x808'0018       0x4  adjust_pedal.o [1]
-  .rodata            const     0x808'001c       0x4  adjust_pedal.o [1]
-  .rodata            const     0x808'0020       0x4  adjust_pedal.o [1]
-  .rodata            const     0x808'0024       0x4  adjust_pedal.o [1]
-  .rodata            const     0x808'0028       0x4  lv_calendar.o [1]
-  .rodata            const     0x808'002c       0x4  lv_calendar.o [1]
-  .rodata            const     0x808'0030       0x4  lv_calendar.o [1]
-  .rodata            const     0x808'0034       0x4  lv_calendar.o [1]
-  .rodata            const     0x808'0038       0x4  lv_calendar.o [1]
-  .rodata            const     0x808'003c       0x4  lv_calendar.o [1]
-  .rodata            const     0x808'0040       0x4  lv_calendar.o [1]
-  .rodata            const     0x808'0044       0x4  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0048       0x4  lv_draw_sw_letter.o [1]
-  .rodata            const     0x808'004c       0x4  lv_img_decoder.o [1]
-  .rodata            const     0x808'0050       0x4  lv_keyboard.o [1]
-  .rodata            const     0x808'0054       0x4  lv_keyboard.o [1]
-  .rodata            const     0x808'0058       0x4  lv_keyboard.o [1]
-  .rodata            const     0x808'005c       0x4  lv_keyboard.o [1]
-  .rodata            const     0x808'0060       0x4  lv_keyboard.o [1]
-  .rodata            const     0x808'0064       0x4  lv_keyboard.o [1]
-  .rodata            const     0x808'0068       0x4  lv_keyboard.o [1]
-  .rodata            const     0x808'006c       0x4  lv_keyboard.o [1]
-  .rodata            const     0x808'0070       0x4  lv_keyboard.o [1]
-  .rodata            const     0x808'0074       0x4  lv_keyboard.o [1]
-  .rodata            const     0x808'0078       0x4  lv_obj_pos.o [1]
-  .rodata            const     0x808'007c       0x4  lv_obj_pos.o [1]
-  .rodata            const     0x808'0080       0x4  lv_tlsf.o [1]
-  .rodata            const     0x808'0084       0x4  lv_tlsf.o [1]
-  .rodata            const     0x808'0088       0x4  lv_tlsf.o [1]
-  .rodata            const     0x808'008c       0x4  lv_tlsf.o [1]
-  .rodata            const     0x808'0090       0x4  lv_tlsf.o [1]
-  .rodata            const     0x808'0094       0x4  lv_tlsf.o [1]
+  .rodata            const     0x807'ebb0      0x30  about_phone_ui.o [1]
+  .rodata            const     0x807'ebe0      0x30  about_phone_ui.o [1]
+  .rodata            const     0x807'ec10      0x30  bsp_rotation_sensor.o [1]
+  .rodata            const     0x807'ec40      0x30  bsp_spi_bus.o [1]
+  .rodata            const     0x807'ec70      0x30  bsp_tim_pwm.o [1]
+  .rodata            const     0x807'eca0      0x30  bsp_usart_fifo.o [1]
+  .rodata            const     0x807'ecd0      0x30  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'ed00      0x30  lv_roller.o [1]
+  .rodata            const     0x807'ed30      0x30  main.o [1]
+  .rodata            const     0x807'ed60      0x2c  about_phone_ui.o [1]
+  .rodata            const     0x807'ed8c      0x2c  about_phone_ui.o [1]
+  .rodata            const     0x807'edb8      0x2c  bsp_spi_bus.o [1]
+  .rodata            const     0x807'ede4      0x2c  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'ee10      0x2c  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'ee3c      0x28  about_phone_ui.o [1]
+  .rodata            const     0x807'ee64      0x28  lv_color.o [1]
+  .rodata            const     0x807'ee8c      0x28  lv_font_montserrat_10.o [1]
+  .rodata            const     0x807'eeb4      0x28  lv_font_montserrat_14.o [1]
+  .rodata            const     0x807'eedc      0x28  lv_font_montserrat_24.o [1]
+  .rodata            const     0x807'ef04      0x28  lv_font_montserrat_8.o [1]
+  .rodata            const     0x807'ef2c      0x28  lv_fs_fatfs.o [1]
+  .text              ro code   0x807'ef54      0x28  data_init.o [4]
+  .rodata            const     0x807'ef7c      0x24  bsp_spi_ads1256.o [1]
+  .rodata            const     0x807'efa0      0x24  lv_calendar_header_dropdown.o [1]
+  .rodata            const     0x807'efc4      0x24  lv_draw_sw_line.o [1]
+  .rodata            const     0x807'efe8      0x24  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'f00c      0x24  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'f030      0x24  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'f054      0x24  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'f078      0x24  lv_keyboard.o [1]
+  .rodata            const     0x807'f09c      0x24  lv_refr.o [1]
+  .text              ro code   0x807'f0c0      0x22  fpinit_M.o [3]
+  .iar.init_table    const     0x807'f0e4      0x28  - Linker created -
+  .rodata            const     0x807'f10c       0x2  lv_keyboard.o [1]
+  .rodata            const     0x807'f110      0x20  about_phone_ui.o [1]
+  .rodata            const     0x807'f130      0x20  adjust_pedal.o [1]
+  .rodata            const     0x807'f150      0x20  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'f170      0x20  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'f190      0x20  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'f1b0      0x20  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'f1d0      0x20  main.o [1]
+  .rodata            const     0x807'f1f0      0x20  motor_control_ui.o [1]
+  .rodata            const     0x807'f210      0x20  vehicle_status.o [1]
+  .text              ro code   0x807'f230      0x1e  cmain.o [4]
+  .text              ro code   0x807'f24e       0x4  low_level_init.o [2]
+  .text              ro code   0x807'f252       0x4  exit.o [2]
+  .rodata            const     0x807'f256       0x2  lv_keyboard.o [1]
+  .text              ro code   0x807'f258       0xa  cexit.o [4]
+  .rodata            const     0x807'f262       0x2  lv_keyboard.o [1]
+  .rodata            const     0x807'f264      0x1c  about_phone_ui.o [1]
+  .rodata            const     0x807'f280      0x1c  adjust_pedal.o [1]
+  .rodata            const     0x807'f29c      0x1c  adjust_pedal.o [1]
+  .rodata            const     0x807'f2b8      0x1c  battery_box.o [1]
+  .rodata            const     0x807'f2d4      0x1c  battery_box.o [1]
+  .rodata            const     0x807'f2f0      0x1c  battery_box.o [1]
+  .rodata            const     0x807'f30c      0x1c  battery_box.o [1]
+  .rodata            const     0x807'f328      0x1c  battery_box.o [1]
+  .rodata            const     0x807'f344      0x1c  cool_control.o [1]
+  .rodata            const     0x807'f360      0x1c  lv_arc.o [1]
+  .rodata            const     0x807'f37c      0x1c  lv_bar.o [1]
+  .rodata            const     0x807'f398      0x1c  lv_btn.o [1]
+  .rodata            const     0x807'f3b4      0x1c  lv_btnmatrix.o [1]
+  .rodata            const     0x807'f3d0      0x1c  lv_calendar.o [1]
+  .rodata            const     0x807'f3ec      0x1c  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'f408      0x1c  lv_calendar_header_dropdown.o [1]
+  .rodata            const     0x807'f424      0x1c  lv_chart.o [1]
+  .rodata            const     0x807'f440      0x1c  lv_checkbox.o [1]
+  .rodata            const     0x807'f45c      0x1c  lv_colorwheel.o [1]
+  .rodata            const     0x807'f478      0x1c  lv_dropdown.o [1]
+  .rodata            const     0x807'f494      0x1c  lv_dropdown.o [1]
+  .rodata            const     0x807'f4b0      0x1c  lv_dropdown.o [1]
+  .rodata            const     0x807'f4cc      0x1c  lv_font_montserrat_10.o [1]
+  .rodata            const     0x807'f4e8      0x1c  lv_font_montserrat_14.o [1]
+  .rodata            const     0x807'f504      0x1c  lv_font_montserrat_24.o [1]
+  .rodata            const     0x807'f520      0x1c  lv_font_montserrat_8.o [1]
+  .rodata            const     0x807'f53c      0x1c  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'f558      0x1c  lv_img.o [1]
+  .rodata            const     0x807'f574      0x1c  lv_imgbtn.o [1]
+  .rodata            const     0x807'f590      0x1c  lv_keyboard.o [1]
+  .rodata            const     0x807'f5ac      0x1c  lv_label.o [1]
+  .rodata            const     0x807'f5c8      0x1c  lv_led.o [1]
+  .rodata            const     0x807'f5e4      0x1c  lv_line.o [1]
+  .rodata            const     0x807'f600      0x1c  lv_list.o [1]
+  .rodata            const     0x807'f61c      0x1c  lv_list.o [1]
+  .rodata            const     0x807'f638      0x1c  lv_list.o [1]
+  .rodata            const     0x807'f654      0x1c  lv_menu.o [1]
+  .rodata            const     0x807'f670      0x1c  lv_menu.o [1]
+  .rodata            const     0x807'f68c      0x1c  lv_menu.o [1]
+  .rodata            const     0x807'f6a8      0x1c  lv_menu.o [1]
+  .rodata            const     0x807'f6c4      0x1c  lv_menu.o [1]
+  .rodata            const     0x807'f6e0      0x1c  lv_menu.o [1]
+  .rodata            const     0x807'f6fc      0x1c  lv_menu.o [1]
+  .rodata            const     0x807'f718      0x1c  lv_menu.o [1]
+  .rodata            const     0x807'f734      0x1c  lv_menu.o [1]
+  .rodata            const     0x807'f750      0x1c  lv_meter.o [1]
+  .rodata            const     0x807'f76c      0x1c  lv_msgbox.o [1]
+  .rodata            const     0x807'f788      0x1c  lv_msgbox.o [1]
+  .rodata            const     0x807'f7a4      0x1c  lv_obj.o [1]
+  .rodata            const     0x807'f7c0      0x1c  lv_roller.o [1]
+  .rodata            const     0x807'f7dc      0x1c  lv_roller.o [1]
+  .rodata            const     0x807'f7f8      0x1c  lv_slider.o [1]
+  .rodata            const     0x807'f814      0x1c  lv_spinbox.o [1]
+  .rodata            const     0x807'f830      0x1c  lv_spinner.o [1]
+  .rodata            const     0x807'f84c      0x1c  lv_switch.o [1]
+  .rodata            const     0x807'f868      0x1c  lv_table.o [1]
+  .rodata            const     0x807'f884      0x1c  lv_tabview.o [1]
+  .rodata            const     0x807'f8a0      0x1c  lv_textarea.o [1]
+  .rodata            const     0x807'f8bc      0x1c  lv_tileview.o [1]
+  .rodata            const     0x807'f8d8      0x1c  lv_tileview.o [1]
+  .rodata            const     0x807'f8f4      0x1c  lv_win.o [1]
+  .rodata            const     0x807'f910      0x1c  main.o [1]
+  .rodata            const     0x807'f92c      0x1c  main.o [1]
+  .rodata            const     0x807'f948      0x1c  myFont20.o [1]
+  .text              ro code   0x807'f964      0x1c  cstartup_M.o [4]
+  .rodata            const     0x807'f980      0x18  adjust_pedal.o [1]
+  .rodata            const     0x807'f998      0x18  adjust_pedal.o [1]
+  .rodata            const     0x807'f9b0      0x18  adjust_pedal.o [1]
+  .rodata            const     0x807'f9c8      0x18  adjust_pedal.o [1]
+  .rodata            const     0x807'f9e0      0x18  adjust_pedal.o [1]
+  .rodata            const     0x807'f9f8      0x18  adjust_pedal.o [1]
+  .rodata            const     0x807'fa10      0x18  bsp_can_bus.o [1]
+  .rodata            const     0x807'fa28      0x18  lv_font_montserrat_10.o [1]
+  .rodata            const     0x807'fa40      0x18  lv_font_montserrat_14.o [1]
+  .rodata            const     0x807'fa58      0x18  lv_font_montserrat_24.o [1]
+  .rodata            const     0x807'fa70      0x18  lv_font_montserrat_8.o [1]
+  .rodata            const     0x807'fa88      0x18  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'faa0      0x18  lv_theme_default.o [1]
+  .rodata            const     0x807'fab8      0x18  Monitor.o [1]
+  .rodata            const     0x807'fad0      0x18  motor_control_ui.o [1]
+  .rodata            const     0x807'fae8      0x18  sensor_ui.o [1]
+  .rodata            const     0x807'fb00      0x18  set_up.o [1]
+  .text              ro code   0x807'fb18      0x16  xprout.o [2]
+  .rodata            const     0x807'fb2e       0x2  lv_keyboard.o [1]
+  .text              ro code   0x807'fb30       0xc  putchar.o [2]
+  .rodata            const     0x807'fb3c      0x14  adjust_pedal.o [1]
+  .rodata            const     0x807'fb50      0x14  adjust_pedal.o [1]
+  .rodata            const     0x807'fb64      0x14  adjust_pedal.o [1]
+  .rodata            const     0x807'fb78      0x14  battery_box.o [1]
+  .rodata            const     0x807'fb8c      0x14  bsp_touch.o [1]
+  .rodata            const     0x807'fba0      0x14  bsp_touch.o [1]
+  .rodata            const     0x807'fbb4      0x14  main.o [1]
+  .rodata            const     0x807'fbc8      0x14  main.o [1]
+  .rodata            const     0x807'fbdc      0x14  main.o [1]
+  .rodata            const     0x807'fbf0      0x14  main.o [1]
+  .rodata            const     0x807'fc04      0x14  sd_diskio_dma.o [1]
+  .rodata            const     0x807'fc18      0x14  sensor_ui.o [1]
+  .rodata            const     0x807'fc2c      0x14  tx_timer_initialize.o [1]
+  .rodata            const     0x807'fc40      0x10  about_phone_ui.o [1]
+  .rodata            const     0x807'fc50      0x10  bsp_key.o [1]
+  .rodata            const     0x807'fc60      0x10  bsp_spi_ads1256.o [1]
+  .rodata            const     0x807'fc70      0x10  bsp_spi_flash.o [1]
+  .rodata            const     0x807'fc80      0x10  bsp_tim_pwm.o [1]
+  .rodata            const     0x807'fc90      0x10  bsp_touch.o [1]
+  .rodata            const     0x807'fca0      0x10  cool_control.o [1]
+  .rodata            const     0x807'fcb0      0x10  ff.o [1]
+  .rodata            const     0x807'fcc0      0x10  lv_draw_sw_letter.o [1]
+  .rodata            const     0x807'fcd0      0x10  lv_font_montserrat_10.o [1]
+  .rodata            const     0x807'fce0      0x10  lv_font_montserrat_14.o [1]
+  .rodata            const     0x807'fcf0      0x10  lv_font_montserrat_24.o [1]
+  .rodata            const     0x807'fd00      0x10  lv_font_montserrat_8.o [1]
+  .rodata            const     0x807'fd10      0x10  lv_fs_fatfs.o [1]
+  .rodata            const     0x807'fd20      0x10  lv_img_decoder.o [1]
+  .rodata            const     0x807'fd30      0x10  lv_refr.o [1]
+  .rodata            const     0x807'fd40      0x10  main.o [1]
+  .rodata            const     0x807'fd50      0x10  main.o [1]
+  .rodata            const     0x807'fd60      0x10  main.o [1]
+  .rodata            const     0x807'fd70      0x10  main.o [1]
+  .rodata            const     0x807'fd80      0x10  main.o [1]
+  .rodata            const     0x807'fd90      0x10  main.o [1]
+  .rodata            const     0x807'fda0      0x10  main.o [1]
+  .rodata            const     0x807'fdb0      0x10  main.o [1]
+  .rodata            const     0x807'fdc0      0x10  system_stm32f4xx.o [1]
+  .rodata            const     0x807'fdd0      0x10  vehicle_status.o [1]
+  .text              ro code   0x807'fde0      0x10  startup_stm32f407xx.o [1]
+  .rodata            const     0x807'fdf0       0xc  adjust_pedal.o [1]
+  .rodata            const     0x807'fdfc       0xc  adjust_pedal.o [1]
+  .rodata            const     0x807'fe08       0xc  adjust_pedal.o [1]
+  .rodata            const     0x807'fe14       0xc  bsp_lcd.o [1]
+  .rodata            const     0x807'fe20       0xc  bsp_spi_flash.o [1]
+  .rodata            const     0x807'fe2c       0xc  bsp_spi_flash.o [1]
+  .rodata            const     0x807'fe38       0xc  bsp_spi_flash.o [1]
+  .rodata            const     0x807'fe44       0xc  bsp_spi_flash.o [1]
+  .rodata            const     0x807'fe50       0xc  bsp_spi_flash.o [1]
+  .rodata            const     0x807'fe5c       0xc  bsp_touch.o [1]
+  .rodata            const     0x807'fe68       0xc  ff.o [1]
+  .rodata            const     0x807'fe74       0xc  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'fe80       0xc  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'fe8c       0xc  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'fe98       0xc  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'fea4       0xc  lv_checkbox.o [1]
+  .rodata            const     0x807'feb0       0xc  main.o [1]
+  .rodata            const     0x807'febc       0xc  main.o [1]
+  .rodata            const     0x807'fec8       0xc  main.o [1]
+  .rodata            const     0x807'fed4       0xc  main.o [1]
+  .rodata            const     0x807'fee0       0xc  set_up.o [1]
+  .rodata            const     0x807'feec       0x8  adjust_pedal.o [1]
+  .rodata            const     0x807'fef4       0x8  adjust_pedal.o [1]
+  .rodata            const     0x807'fefc       0x8  adjust_pedal.o [1]
+  .rodata            const     0x807'ff04       0x8  adjust_pedal.o [1]
+  .rodata            const     0x807'ff0c       0x8  bsp_touch.o [1]
+  .rodata            const     0x807'ff14       0x8  ff.o [1]
+  .rodata            const     0x807'ff1c       0x8  lv_btnmatrix.o [1]
+  .rodata            const     0x807'ff24       0x8  lv_btnmatrix.o [1]
+  .rodata            const     0x807'ff2c       0x8  lv_btnmatrix.o [1]
+  .rodata            const     0x807'ff34       0x8  lv_btnmatrix.o [1]
+  .rodata            const     0x807'ff3c       0x8  lv_btnmatrix.o [1]
+  .rodata            const     0x807'ff44       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'ff4c       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'ff54       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'ff5c       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'ff64       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'ff6c       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'ff74       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'ff7c       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x807'ff84       0x8  lv_draw_img.o [1]
+  .rodata            const     0x807'ff8c       0x8  lv_draw_sw_polygon.o [1]
+  .rodata            const     0x807'ff94       0x8  lv_keyboard.o [1]
+  .rodata            const     0x807'ff9c       0x8  lv_label.o [1]
+  .rodata            const     0x807'ffa4       0x8  lv_printf.o [1]
+  .rodata            const     0x807'ffac       0x8  lv_printf.o [1]
+  .rodata            const     0x807'ffb4       0x8  lv_txt.o [1]
+  .rodata            const     0x807'ffbc       0x8  sensor_ui.o [1]
+  .rodata            const     0x807'ffc4       0x8  sensor_ui.o [1]
+  .rodata            const     0x807'ffcc       0x8  stm32f4xx_hal_dma.o [1]
+  .rodata            const     0x807'ffd4       0x8  system_stm32f4xx.o [1]
+  .rodata            const     0x807'ffdc       0x8  xprintffull_nomb.o [2]
+  .rodata            const     0x807'ffe4       0x4  adjust_pedal.o [1]
+  .rodata            const     0x807'ffe8       0x4  adjust_pedal.o [1]
+  .rodata            const     0x807'ffec       0x4  adjust_pedal.o [1]
+  .rodata            const     0x807'fff0       0x4  adjust_pedal.o [1]
+  .rodata            const     0x807'fff4       0x4  lv_calendar.o [1]
+  .rodata            const     0x807'fff8       0x4  lv_calendar.o [1]
+  .rodata            const     0x807'fffc       0x4  lv_calendar.o [1]
+  .rodata            const     0x808'0000       0x4  lv_calendar.o [1]
+  .rodata            const     0x808'0004       0x4  lv_calendar.o [1]
+  .rodata            const     0x808'0008       0x4  lv_calendar.o [1]
+  .rodata            const     0x808'000c       0x4  lv_calendar.o [1]
+  .rodata            const     0x808'0010       0x4  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0014       0x4  lv_draw_sw_letter.o [1]
+  .rodata            const     0x808'0018       0x4  lv_img_decoder.o [1]
+  .rodata            const     0x808'001c       0x4  lv_keyboard.o [1]
+  .rodata            const     0x808'0020       0x4  lv_keyboard.o [1]
+  .rodata            const     0x808'0024       0x4  lv_keyboard.o [1]
+  .rodata            const     0x808'0028       0x4  lv_keyboard.o [1]
+  .rodata            const     0x808'002c       0x4  lv_keyboard.o [1]
+  .rodata            const     0x808'0030       0x4  lv_keyboard.o [1]
+  .rodata            const     0x808'0034       0x4  lv_keyboard.o [1]
+  .rodata            const     0x808'0038       0x4  lv_keyboard.o [1]
+  .rodata            const     0x808'003c       0x4  lv_keyboard.o [1]
+  .rodata            const     0x808'0040       0x4  lv_keyboard.o [1]
+  .rodata            const     0x808'0044       0x4  lv_obj_pos.o [1]
+  .rodata            const     0x808'0048       0x4  lv_obj_pos.o [1]
+  .rodata            const     0x808'004c       0x4  lv_tlsf.o [1]
+  .rodata            const     0x808'0050       0x4  lv_tlsf.o [1]
+  .rodata            const     0x808'0054       0x4  lv_tlsf.o [1]
+  .rodata            const     0x808'0058       0x4  lv_tlsf.o [1]
+  .rodata            const     0x808'005c       0x4  lv_tlsf.o [1]
+  .rodata            const     0x808'0060       0x4  lv_tlsf.o [1]
+  .text              ro code   0x808'0064       0x4  startup_stm32f407xx.o [1]
+  .text              ro code   0x808'0068       0x4  startup_stm32f407xx.o [1]
+  .text              ro code   0x808'006c       0x4  startup_stm32f407xx.o [1]
+  .text              ro code   0x808'0070       0x4  startup_stm32f407xx.o [1]
+  .text              ro code   0x808'0074       0x4  startup_stm32f407xx.o [1]
+  .text              ro code   0x808'0078       0x4  startup_stm32f407xx.o [1]
+  .text              ro code   0x808'007c       0x4  startup_stm32f407xx.o [1]
+  .text              ro code   0x808'0080       0x4  startup_stm32f407xx.o [1]
+  .text              ro code   0x808'0084       0x4  startup_stm32f407xx.o [1]
+  .text              ro code   0x808'0088       0x4  startup_stm32f407xx.o [1]
+  .text              ro code   0x808'008c       0x4  startup_stm32f407xx.o [1]
+  .text              ro code   0x808'0090       0x4  startup_stm32f407xx.o [1]
+  .text              ro code   0x808'0094       0x4  startup_stm32f407xx.o [1]
   .text              ro code   0x808'0098       0x4  startup_stm32f407xx.o [1]
   .text              ro code   0x808'009c       0x4  startup_stm32f407xx.o [1]
   .text              ro code   0x808'00a0       0x4  startup_stm32f407xx.o [1]
@@ -1169,19 +1182,32 @@ No sections matched the following patterns:
   .text              ro code   0x808'0164       0x4  startup_stm32f407xx.o [1]
   .text              ro code   0x808'0168       0x4  startup_stm32f407xx.o [1]
   .text              ro code   0x808'016c       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'0170       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'0174       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'0178       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'017c       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'0180       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'0184       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'0188       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'018c       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'0190       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'0194       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'0198       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'019c       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'01a0       0x4  startup_stm32f407xx.o [1]
+  .rodata            const     0x808'0170       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0172       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0174       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0176       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0178       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'017a       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'017c       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'017e       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0180       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0182       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0184       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0186       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0188       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'018a       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'018c       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'018e       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0190       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0192       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0194       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0196       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0198       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'019a       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'019c       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'019e       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'01a0       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'01a2       0x2  lv_keyboard.o [1]
   .rodata            const     0x808'01a4       0x2  lv_keyboard.o [1]
   .rodata            const     0x808'01a6       0x2  lv_keyboard.o [1]
   .rodata            const     0x808'01a8       0x2  lv_keyboard.o [1]
@@ -1189,41 +1215,15 @@ No sections matched the following patterns:
   .rodata            const     0x808'01ac       0x2  lv_keyboard.o [1]
   .rodata            const     0x808'01ae       0x2  lv_keyboard.o [1]
   .rodata            const     0x808'01b0       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01b2       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01b4       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01b6       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01b8       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01ba       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01bc       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01be       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01c0       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01c2       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01c4       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01c6       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01c8       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01ca       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01cc       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01ce       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01d0       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01d2       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01d4       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01d6       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01d8       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01da       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01dc       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01de       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01e0       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01e2       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01e4       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'01e6       0x2  lv_textarea.o [1]
-  .rodata            const     0x808'01e8       0x2  xlocale_c.o [2]
-  .rodata            const     0x808'01ea       0x1  lv_btnmatrix.o [1]
-  .rodata            const     0x808'01eb       0x1  lv_keyboard.o [1]
-  .rodata            const     0x808'01ec       0x1  xlocale_c.o [2]
-  .rodata            const     0x808'01ed       0x0  zero_init3.o [4]
-  .rodata            const     0x808'01ed       0x0  lz77_init_single.o [4]
-  Initializer bytes  const     0x808'01ed     0x1a9  <for P2-1>
-                             - 0x808'0396  0x8'020e
+  .rodata            const     0x808'01b2       0x2  lv_textarea.o [1]
+  .rodata            const     0x808'01b4       0x2  xlocale_c.o [2]
+  .rodata            const     0x808'01b6       0x1  lv_btnmatrix.o [1]
+  .rodata            const     0x808'01b7       0x1  lv_keyboard.o [1]
+  .rodata            const     0x808'01b8       0x1  xlocale_c.o [2]
+  .rodata            const     0x808'01b9       0x0  zero_init3.o [4]
+  .rodata            const     0x808'01b9       0x0  lz77_init_single.o [4]
+  Initializer bytes  const     0x808'01b9     0x1ab  <for P2-1>
+                             - 0x808'0364  0x8'01dc
 
 "P3":                                        0x7d6c
   .bss               zero     0x1000'0000    0x3e80  lv_port_disp_template.o [1]
@@ -1591,7 +1591,7 @@ Unused ranges:
 
          From           To      Size
          ----           --      ----
-   0x808'0396   0x80f'ffff  0x7'fc6a
+   0x808'0364   0x80f'ffff  0x7'fc9c
   0x1000'7d6c  0x1000'ffff    0x8294
   0x2000'06b3  0x2000'06b3       0x1
   0x2001'cb44  0x2001'cb47       0x4
@@ -1610,8 +1610,8 @@ Zero (__iar_zero_init3)
           0x2000'06b4  0x1'c490
 
 Copy/lz77 (__iar_lz77_init_single3)
-    1 source range, total size 0x1a9 (24% of destination):
-           0x808'01ed     0x1a9
+    1 source range, total size 0x1ab (24% of destination):
+           0x808'01b9     0x1ab
     1 destination range, total size 0x6b3:
           0x2000'0000     0x6b3
 
@@ -1627,7 +1627,7 @@ command line/config:
     -----------------------------------------------------------
     Total:
 
-D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj: [1]
+D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj: [1]
     Monitor.o                           1'500       26       56
     about_phone_ui.o                    1'022      498      132
     adjust_pedal.o                      4'308      544      226
@@ -1638,14 +1638,14 @@ D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj: [1]
     bsp_key.o                             794       16       48
     bsp_lcd.o                           5'236       12       96
     bsp_led.o                             212
-    bsp_rotation_sensor.o                 368      136       65
+    bsp_rotation_sensor.o                 368      120       65
     bsp_sdio_sd.o                         622               324
     bsp_spi_ads1256.o                   1'112       52       40
-    bsp_spi_bus.o                       1'136      164    8'581
+    bsp_spi_bus.o                       1'136      152    8'581
     bsp_spi_flash.o                       636       76       28
-    bsp_tim_pwm.o                       2'100      402    1'216
+    bsp_tim_pwm.o                       2'100      391    1'216
     bsp_touch.o                         2'688      274       55
-    bsp_usart_fifo.o                    1'528      132    6'276
+    bsp_usart_fifo.o                    1'528      120    6'276
     bsp_ws2812b.o                          40
     cc936.o                               296  175'032
     cool_control.o                        346       46       64
@@ -1697,7 +1697,7 @@ D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj: [1]
     lv_font_montserrat_24.o                     28'692        8
     lv_font_montserrat_8.o                       7'712        8
     lv_fs.o                             1'148
-    lv_fs_fatfs.o                         568      947      692
+    lv_fs_fatfs.o                         568      948      692
     lv_gc.o                                                 528
     lv_grid.o                           3'198                22
     lv_group.o                          1'270                 4
@@ -1825,7 +1825,7 @@ D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj: [1]
     txe_timer_create.o                    232
     vehicle_status.o                      350       50       64
     -----------------------------------------------------------
-    Total:                            267'992  243'543  148'963
+    Total:                            267'992  243'493  148'963
 
 dl7M_tlf.a: [2]
     abort.o                                 6
@@ -1896,7 +1896,7 @@ shb_l.a: [5]
     Gaps                                             4        4
     Linker created                                  40    8'192
 ---------------------------------------------------------------
-    Grand Total:                      281'576  243'630  157'871
+    Grand Total:                      281'576  243'580  157'871
 
 
 *******************************************************************************
@@ -1905,9 +1905,9 @@ shb_l.a: [5]
 
 Entry                       Address      Size  Type      Object
 -----                       -------      ----  ----      ------
-.iar.init_table$$Base    0x807'f118             --   Gb  - Linker created -
-.iar.init_table$$Limit   0x807'f140             --   Gb  - Linker created -
-?main                    0x807'f265            Code  Gb  cmain.o [4]
+.iar.init_table$$Base    0x807'f0e4             --   Gb  - Linker created -
+.iar.init_table$$Limit   0x807'f10c             --   Gb  - Linker created -
+?main                    0x807'f231            Code  Gb  cmain.o [4]
 ADS1256_CfgADC           0x805'ac21      0x70  Code  Gb  bsp_spi_ads1256.o [1]
 ADS1256_DelayDATA        0x805'acb3       0xa  Code  Lc  bsp_spi_ads1256.o [1]
 ADS1256_DelaySCLK        0x805'ac91      0x22  Code  Lc  bsp_spi_ads1256.o [1]
@@ -1922,8 +1922,8 @@ ADS1256_StopScan         0x805'ae7d       0xa  Code  Gb  bsp_spi_ads1256.o [1]
 ADS1256_WaitDRDY         0x805'adb9      0x22  Code  Lc  bsp_spi_ads1256.o [1]
 ADS1256_WriteCmd         0x805'ad87      0x16  Code  Lc  bsp_spi_ads1256.o [1]
 ADS1256_WriteReg         0x805'ad5d      0x2a  Code  Lc  bsp_spi_ads1256.o [1]
-AHBPrescTable            0x807'fdf4      0x10  Data  Gb  system_stm32f4xx.o [1]
-APBPrescTable            0x808'0008       0x8  Data  Gb  system_stm32f4xx.o [1]
+AHBPrescTable            0x807'fdc0      0x10  Data  Gb  system_stm32f4xx.o [1]
+APBPrescTable            0x807'ffd4       0x8  Data  Gb  system_stm32f4xx.o [1]
 About_Phone_In_Ui        0x806'0d21     0x268  Code  Lc  about_phone_ui.o [1]
 About_Phone_In_Ui::about_lines1
                         0x2000'0008      0x24  Data  Lc  about_phone_ui.o [1]
@@ -2067,7 +2067,7 @@ DMA2_Stream6_IRQHandler
 DMA_CalcBaseAndBitshift
                          0x806'960d      0x30  Code  Lc  stm32f4xx_hal_dma.o [1]
 DMA_CalcBaseAndBitshift::flagBitshiftOffset
-                         0x808'0000       0x8  Data  Lc  stm32f4xx_hal_dma.o [1]
+                         0x807'ffcc       0x8  Data  Lc  stm32f4xx_hal_dma.o [1]
 DMA_CheckFifoParam       0x806'9649      0x88  Code  Lc  stm32f4xx_hal_dma.o [1]
 DMA_SetConfig            0x806'95df      0x2e  Code  Lc  stm32f4xx_hal_dma.o [1]
 DebugMon_Handler         0x803'4b37       0x2  Code  Gb  stm32f4xx_it.o [1]
@@ -2096,7 +2096,7 @@ GT9147_RD_Reg            0x806'aefb      0x78  Code  Gb  bsp_touch.o [1]
 GT9147_Scan              0x806'b099     0x1ea  Code  Gb  bsp_touch.o [1]
 GT9147_Scan::t          0x2001'cb2c       0x1  Data  Lc  bsp_touch.o [1]
 GT9147_Send_Cfg          0x806'ae39      0x5a  Code  Gb  bsp_touch.o [1]
-GT9147_TPX_TBL           0x807'fe90       0xc  Data  Gb  bsp_touch.o [1]
+GT9147_TPX_TBL           0x807'fe5c       0xc  Data  Gb  bsp_touch.o [1]
 GT9147_WR_Reg            0x806'ae93      0x68  Code  Gb  bsp_touch.o [1]
 Gui_Monitor_App          0x805'ec9f      0x5e  Code  Gb  Monitor.o [1]
 HAL_CAN_ActivateNotification
@@ -2266,7 +2266,7 @@ LV_STYLE_GRID_ROW_ALIGN
                         0x2001'cb0c       0x2  Data  Gb  lv_grid.o [1]
 LV_STYLE_GRID_ROW_DSC_ARRAY
                         0x2001'cb0a       0x2  Data  Gb  lv_grid.o [1]
-LfnOfs                   0x807'fce4      0x10  Data  Lc  ff.o [1]
+LfnOfs                   0x807'fcb0      0x10  Data  Lc  ff.o [1]
 MX_DMA_Init              0x806'55fd      0xc2  Code  Gb  bsp_tim_pwm.o [1]
 MemManage_Handler        0x803'4b2f       0x2  Code  Gb  stm32f4xx_it.o [1]
 Monitor_Main_Style       0x805'ecfd      0x80  Code  Lc  Monitor.o [1]
@@ -2307,8 +2307,8 @@ Realtime_Motorpos_timer
                         0x2001'c968       0x4  Data  Lc  adjust_pedal.o [1]
 Realtime_Sensor_timer   0x2001'ca28       0x4  Data  Lc  sensor_ui.o [1]
 Record_Btn_Cb            0x805'e2f5      0xbc  Code  Lc  adjust_pedal.o [1]
-Region$$Table$$Base      0x807'f118             --   Gb  - Linker created -
-Region$$Table$$Limit     0x807'f140             --   Gb  - Linker created -
+Region$$Table$$Base      0x807'f0e4             --   Gb  - Linker created -
+Region$$Table$$Limit     0x807'f10c             --   Gb  - Linker created -
 Reverse_Btn_Cb           0x805'e0c9      0x80  Code  Lc  adjust_pedal.o [1]
 SDIO_ConfigData          0x806'fd11      0x2c  Code  Gb  stm32f4xx_ll_sdmmc.o [1]
 SDIO_GetCommandResponse
@@ -2355,7 +2355,7 @@ SD_DMAReceiveCplt        0x806'f731      0x44  Code  Lc  stm32f4xx_hal_sd.o [1]
 SD_DMARxAbort            0x806'f829      0x54  Code  Lc  stm32f4xx_hal_sd.o [1]
 SD_DMATransmitCplt       0x806'f721      0x10  Code  Lc  stm32f4xx_hal_sd.o [1]
 SD_DMATxAbort            0x806'f7d5      0x54  Code  Lc  stm32f4xx_hal_sd.o [1]
-SD_Driver                0x807'fc38      0x14  Data  Gb  sd_diskio_dma.o [1]
+SD_Driver                0x807'fc04      0x14  Data  Gb  sd_diskio_dma.o [1]
 SD_FindSCR               0x806'fb17     0x11c  Code  Lc  stm32f4xx_hal_sd.o [1]
 SD_InitCard              0x806'f87d      0xea  Code  Lc  stm32f4xx_hal_sd.o [1]
 SD_PowerON               0x806'f967      0xd2  Code  Lc  stm32f4xx_hal_sd.o [1]
@@ -2454,7 +2454,7 @@ Zero_Btn_Cb              0x805'e3b1       0xa  Code  Lc  adjust_pedal.o [1]
 _LitobFullNoMb           0x804'd7c5     0x10a  Code  Lc  xprintffull_nomb.o [2]
 _Locale_lconv           0x2000'0628      0x38  Data  Lc  xlocale_c.o [2]
 _PrintfFullNoMb          0x804'ca09     0xd98  Code  Gb  xprintffull_nomb.o [2]
-_Prout                   0x807'fb4d      0x16  Code  Gb  xprout.o [2]
+_Prout                   0x807'fb19      0x16  Code  Gb  xprout.o [2]
 _PutcharFullNoMb         0x804'd935      0x20  Code  Lc  xprintffull_nomb.o [2]
 _PutcharsFullNoMb        0x804'd955      0x2e  Code  Lc  xprintffull_nomb.o [2]
 _SNProut                 0x803'3be3      0x1a  Code  Gb  xsnprout.o [2]
@@ -2478,7 +2478,7 @@ __aeabi_memcpy8          0x804'31e9            Code  Gb  ABImemcpy.o [4]
 __aeabi_memset           0x804'2fa5            Code  Gb  ABImemset.o [4]
 __aeabi_ui2d             0x804'e1ad            Code  Gb  U32ToDbl.o [3]
 __aeabi_uldivmod         0x804'dbed            Code  Gb  I64DivMod.o [4]
-__cmain                  0x807'f265            Code  Gb  cmain.o [4]
+__cmain                  0x807'f231            Code  Gb  cmain.o [4]
 __data_GetMemChunk       0x804'fcc1      0x2c  Code  Gb  xgetmemchunk.o [2]
 __data_GetMemChunk::start
                         0x2001'caf0       0x4  Data  Lc  xgetmemchunk.o [2]
@@ -2494,18 +2494,18 @@ __iar_Memset_word        0x804'2fad            Code  Gb  ABImemset.o [4]
 __iar_Stdout            0x2000'0660      0x48  Data  Gb  xfiles.o [2]
 __iar_Strchr             0x804'e58d            Code  Gb  strchr.o [4]
 __iar_dadd               0x804'df0d            Code  Gb  DblSub.o [3]
-__iar_data_init3         0x807'ef89      0x28  Code  Gb  data_init.o [4]
+__iar_data_init3         0x807'ef55      0x28  Code  Gb  data_init.o [4]
 __iar_dlfree             0x804'f781     0x52c  Code  Gb  dlmalloc.o [2]
 __iar_dlmalloc           0x804'e879     0xf08  Code  Gb  dlmalloc.o [2]
 __iar_dsub               0x804'e1d9            Code  Gb  DblAdd.o [3]
 __iar_dsubStart          0x804'e1eb            Code  Gb  DblAdd.o [3]
 __iar_frexp              0x804'e649            Code  Gb  frexp.o [3]
 __iar_frexpl             0x804'e649            Code  Gb  frexp.o [3]
-__iar_init_vfp           0x807'f0f5            Code  Gb  fpinit_M.o [3]
+__iar_init_vfp           0x807'f0c1            Code  Gb  fpinit_M.o [3]
 __iar_ldexp64            0x804'e6ad            Code  Gb  ldexp.o [3]
 __iar_lz77_init_single3
                          0x807'e451      0x78  Code  Gb  lz77_init_single.o [4]
-__iar_program_start      0x807'f999            Code  Gb  cstartup_M.o [4]
+__iar_program_start      0x807'f965            Code  Gb  cstartup_M.o [4]
 __iar_scalbln64          0x804'e6ad            Code  Gb  ldexp.o [3]
 __iar_scalbn64           0x804'e6ad            Code  Gb  ldexp.o [3]
 __iar_softfp___iar_frexp64
@@ -2513,7 +2513,7 @@ __iar_softfp___iar_frexp64
 __iar_softfp_frexp       0x804'e63d            Code  Gb  frexp.o [3]
 __iar_softfp_frexpl      0x804'e63d            Code  Gb  frexp.o [3]
 __iar_zero_init3         0x803'38a7      0x3a  Code  Gb  zero_init3.o [4]
-__low_level_init         0x807'f283       0x4  Code  Gb  low_level_init.o [2]
+__low_level_init         0x807'f24f       0x4  Code  Gb  low_level_init.o [2]
 __tx_PendSVHandler       0x806'878d            Code  Gb  tx_thread_schedule.o [1]
 __tx_SysTickHandler      0x806'86af            Code  Gb  tx_initialize_low_level.o [1]
 __tx_free_memory_start  0x2001'c71c            Data  Gb  tx_initialize_low_level.o [1]
@@ -2523,11 +2523,11 @@ __user_font_get_glyph_dsc
 __user_font_getdata      0x807'd34d      0x16  Code  Lc  myFont20.o [1]
 __vector_table           0x800'0000            Data  Gb  startup_stm32f407xx.o [1]
 _atoi                    0x804'b92d      0x28  Code  Lc  lv_printf.o [1]
-_call_main               0x807'f271            Code  Gb  cmain.o [4]
+_call_main               0x807'f23d            Code  Gb  cmain.o [4]
 _etoa                    0x804'bf71     0x386  Code  Lc  lv_printf.o [1]
-_exit                    0x807'f28d            Code  Gb  cexit.o [4]
+_exit                    0x807'f259            Code  Gb  cexit.o [4]
 _ftoa                    0x804'bc29     0x340  Code  Lc  lv_printf.o [1]
-_ftoa::pow10             0x807'e788      0x50  Data  Lc  lv_printf.o [1]
+_ftoa::pow10             0x807'e720      0x50  Data  Lc  lv_printf.o [1]
 _gm_                    0x2001'b0ec     0x1d8  Data  Lc  dlmalloc.o [2]
 _is_digit                0x804'b91b      0x12  Code  Lc  lv_printf.o [1]
 _lv_anim_core_init       0x803'c811      0x2c  Code  Gb  lv_anim.o [1]
@@ -2540,8 +2540,8 @@ _lv_area_is_out          0x804'1049      0xd4  Code  Gb  lv_area.o [1]
 _lv_area_is_point_on     0x804'0db1     0x182  Code  Gb  lv_area.o [1]
 _lv_area_join            0x804'0d4b      0x66  Code  Gb  lv_area.o [1]
 _lv_bpp1_opa_table       0x804'0c2e       0x2  Data  Gb  lv_draw_sw_letter.o [1]
-_lv_bpp2_opa_table       0x808'0048       0x4  Data  Gb  lv_draw_sw_letter.o [1]
-_lv_bpp4_opa_table       0x807'fcf4      0x10  Data  Gb  lv_draw_sw_letter.o [1]
+_lv_bpp2_opa_table       0x808'0014       0x4  Data  Gb  lv_draw_sw_letter.o [1]
+_lv_bpp4_opa_table       0x807'fcc0      0x10  Data  Gb  lv_draw_sw_letter.o [1]
 _lv_bpp8_opa_table       0x807'd24c     0x100  Data  Gb  lv_draw_sw_letter.o [1]
 _lv_circle_cache        0x2001'be18      0x70  Data  Gb  lv_gc.o [1]
 _lv_disp_ll             0x2001'c804       0xc  Data  Gb  lv_gc.o [1]
@@ -2632,7 +2632,7 @@ _lv_txt_set_text_vfmt    0x804'8fa9      0x42  Code  Gb  lv_txt.o [1]
 _lv_txt_unicode_to_encoded
                         0x2000'05d8       0x4  Data  Gb  lv_txt.o [1]
 _lv_utils_bsearch        0x804'89fb      0x54  Code  Gb  lv_utils.o [1]
-_main                    0x807'f27b            Code  Gb  cmain.o [4]
+_main                    0x807'f247            Code  Gb  cmain.o [4]
 _ntoa_format             0x804'b9c3     0x120  Code  Lc  lv_printf.o [1]
 _ntoa_long               0x804'bae3      0x92  Code  Lc  lv_printf.o [1]
 _ntoa_long_long          0x804'bb75      0xb2  Code  Lc  lv_printf.o [1]
@@ -2731,7 +2731,7 @@ _tx_thread_system_state
 _tx_thread_system_suspend
                          0x806'614d     0x24c  Code  Gb  tx_thread_system_suspend.o [1]
 _tx_thread_time_slice    0x806'bf61     0x15c  Code  Gb  tx_thread_time_slice.o [1]
-_tx_thread_timeout       0x807'eaa9      0x38  Code  Gb  tx_thread_timeout.o [1]
+_tx_thread_timeout       0x807'ea75      0x38  Code  Gb  tx_thread_timeout.o [1]
 _tx_time_get             0x804'803d      0x14  Code  Gb  tx_time_get.o [1]
 _tx_timer_create         0x806'895d      0x84  Code  Gb  tx_timer_create.o [1]
 _tx_timer_created_count
@@ -2813,10 +2813,10 @@ auto_hide_characters     0x805'c3dd      0x54  Code  Lc  lv_textarea.o [1]
 block_absorb             0x803'b47d      0x30  Code  Lc  lv_tlsf.o [1]
 block_can_split          0x803'b3dd      0x18  Code  Lc  lv_tlsf.o [1]
 block_from_ptr           0x803'b10b       0xc  Code  Lc  lv_tlsf.o [1]
-block_header_free_bit    0x808'0080       0x4  Data  Lc  lv_tlsf.o [1]
-block_header_overhead    0x808'0088       0x4  Data  Lc  lv_tlsf.o [1]
+block_header_free_bit    0x808'004c       0x4  Data  Lc  lv_tlsf.o [1]
+block_header_overhead    0x808'0054       0x4  Data  Lc  lv_tlsf.o [1]
 block_header_prev_free_bit
-                         0x808'0084       0x4  Data  Lc  lv_tlsf.o [1]
+                         0x808'0050       0x4  Data  Lc  lv_tlsf.o [1]
 block_insert             0x803'b3bb      0x22  Code  Lc  lv_tlsf.o [1]
 block_is_free            0x803'b0bb       0xc  Code  Lc  lv_tlsf.o [1]
 block_is_last            0x803'b0a7      0x14  Code  Lc  lv_tlsf.o [1]
@@ -2837,10 +2837,10 @@ block_set_prev_used      0x803'b0fd       0xe  Code  Lc  lv_tlsf.o [1]
 block_set_size           0x803'b08b      0x1c  Code  Lc  lv_tlsf.o [1]
 block_set_used           0x803'b0d5       0xe  Code  Lc  lv_tlsf.o [1]
 block_size               0x803'b077      0x14  Code  Lc  lv_tlsf.o [1]
-block_size_max           0x808'0094       0x4  Data  Lc  lv_tlsf.o [1]
-block_size_min           0x808'0090       0x4  Data  Lc  lv_tlsf.o [1]
+block_size_max           0x808'0060       0x4  Data  Lc  lv_tlsf.o [1]
+block_size_min           0x808'005c       0x4  Data  Lc  lv_tlsf.o [1]
 block_split              0x803'b3f5      0x88  Code  Lc  lv_tlsf.o [1]
-block_start_offset       0x808'008c       0x4  Data  Lc  lv_tlsf.o [1]
+block_start_offset       0x808'0058       0x4  Data  Lc  lv_tlsf.o [1]
 block_to_ptr             0x803'b117       0xa  Code  Lc  lv_tlsf.o [1]
 block_trim_free          0x803'b52d      0x40  Code  Lc  lv_tlsf.o [1]
 block_trim_used          0x803'b56d      0x42  Code  Lc  lv_tlsf.o [1]
@@ -2925,10 +2925,10 @@ circ_next                0x804'2aef      0x3c  Code  Lc  lv_draw_mask.o [1]
 clear_lock               0x804'96d7      0x22  Code  Lc  ff.o [1]
 clmt_clust               0x804'9b8d      0x2a  Code  Lc  ff.o [1]
 clust2sect               0x804'981f      0x1a  Code  Lc  ff.o [1]
-cmaps                    0x807'eec0      0x28  Data  Lc  lv_font_montserrat_10.o [1]
-cmaps                    0x807'eee8      0x28  Data  Lc  lv_font_montserrat_14.o [1]
-cmaps                    0x807'ef10      0x28  Data  Lc  lv_font_montserrat_24.o [1]
-cmaps                    0x807'ef38      0x28  Data  Lc  lv_font_montserrat_8.o [1]
+cmaps                    0x807'ee8c      0x28  Data  Lc  lv_font_montserrat_10.o [1]
+cmaps                    0x807'eeb4      0x28  Data  Lc  lv_font_montserrat_14.o [1]
+cmaps                    0x807'eedc      0x28  Data  Lc  lv_font_montserrat_24.o [1]
+cmaps                    0x807'ef04      0x28  Data  Lc  lv_font_montserrat_8.o [1]
 cmp_lfn                  0x804'9e37      0xa2  Code  Lc  ff.o [1]
 color_blend_true_color_additive
                          0x805'7715      0xa4  Code  Lc  lv_draw_sw_blend.o [1]
@@ -2963,14 +2963,14 @@ day_names_def           0x2000'04e0      0x1c  Data  Lc  lv_calendar.o [1]
 dec_lock                 0x804'9695      0x42  Code  Lc  ff.o [1]
 decode_and_draw          0x804'3431     0x250  Code  Lc  lv_draw_img.o [1]
 default_group           0x2001'c9b4       0x4  Data  Lc  lv_group.o [1]
-default_kb_ctrl_lc_map   0x807'e698      0x50  Data  Lc  lv_keyboard.o [1]
+default_kb_ctrl_lc_map   0x807'e5ec      0x50  Data  Lc  lv_keyboard.o [1]
 default_kb_ctrl_num_map
-                         0x807'f0ac      0x24  Data  Lc  lv_keyboard.o [1]
+                         0x807'f078      0x24  Data  Lc  lv_keyboard.o [1]
 default_kb_ctrl_spec_map
-                         0x807'e738      0x50  Data  Lc  lv_keyboard.o [1]
-default_kb_ctrl_uc_map   0x807'e6e8      0x50  Data  Lc  lv_keyboard.o [1]
+                         0x807'e68c      0x50  Data  Lc  lv_keyboard.o [1]
+default_kb_ctrl_uc_map   0x807'e63c      0x50  Data  Lc  lv_keyboard.o [1]
 default_kb_map_lc        0x807'd8a8      0xb0  Data  Lc  lv_keyboard.o [1]
-default_kb_map_num       0x807'e644      0x54  Data  Lc  lv_keyboard.o [1]
+default_kb_map_num       0x807'e598      0x54  Data  Lc  lv_keyboard.o [1]
 default_kb_map_spec      0x807'da08      0xb0  Data  Lc  lv_keyboard.o [1]
 default_kb_map_uc        0x807'd958      0xb0  Data  Lc  lv_keyboard.o [1]
 default_walker           0x803'b65b       0x2  Code  Lc  lv_tlsf.o [1]
@@ -3026,7 +3026,7 @@ draw_letter_normal::prev_opa
                         0x2001'cb33       0x1  Data  Lc  lv_draw_sw_letter.o [1]
 draw_line_hor            0x807'7f6f     0x1d2  Code  Lc  lv_draw_sw_line.o [1]
 draw_line_skew           0x807'82ef     0x464  Code  Lc  lv_draw_sw_line.o [1]
-draw_line_skew::wcorr    0x807'eff8      0x24  Data  Lc  lv_draw_sw_line.o [1]
+draw_line_skew::wcorr    0x807'efc4      0x24  Data  Lc  lv_draw_sw_line.o [1]
 draw_line_ver            0x807'8141     0x1ae  Code  Lc  lv_draw_sw_line.o [1]
 draw_list                0x806'db57      0xae  Code  Lc  lv_dropdown.o [1]
 draw_main                0x805'8a81     0x40c  Code  Lc  lv_btnmatrix.o [1]
@@ -3063,7 +3063,7 @@ event_chart_cb           0x806'19df     0x12e  Code  Lc  sensor_ui.o [1]
 event_head              0x2001'c99c       0x4  Data  Lc  lv_event.o [1]
 event_is_bubbled         0x803'bd17      0x56  Code  Lc  lv_event.o [1]
 event_send_core          0x803'bbb3     0x164  Code  Lc  lv_event.o [1]
-exit                     0x807'f287       0x4  Code  Gb  exit.o [2]
+exit                     0x807'f253       0x4  Code  Gb  exit.o [2]
 f_close                  0x804'b421      0x38  Code  Gb  ff.o [1]
 f_closedir               0x804'b7cd      0x30  Code  Gb  ff.o [1]
 f_lseek                  0x804'b459     0x2a8  Code  Gb  ff.o [1]
@@ -3094,10 +3094,10 @@ find_volume              0x804'a989     0x2dc  Code  Lc  ff.o [1]
 flex_update              0x804'648d     0x3b4  Code  Lc  lv_flex.o [1]
 focus_next_core          0x803'ea57     0x154  Code  Lc  lv_group.o [1]
 follow_path              0x804'a82d      0x96  Code  Lc  ff.o [1]
-font_dsc                 0x807'fa5c      0x18  Data  Lc  lv_font_montserrat_10.o [1]
-font_dsc                 0x807'fa74      0x18  Data  Lc  lv_font_montserrat_14.o [1]
-font_dsc                 0x807'fa8c      0x18  Data  Lc  lv_font_montserrat_24.o [1]
-font_dsc                 0x807'faa4      0x18  Data  Lc  lv_font_montserrat_8.o [1]
+font_dsc                 0x807'fa28      0x18  Data  Lc  lv_font_montserrat_10.o [1]
+font_dsc                 0x807'fa40      0x18  Data  Lc  lv_font_montserrat_14.o [1]
+font_dsc                 0x807'fa58      0x18  Data  Lc  lv_font_montserrat_24.o [1]
+font_dsc                 0x807'fa70      0x18  Data  Lc  lv_font_montserrat_8.o [1]
 forward_btn             0x2001'c950       0x4  Data  Lc  adjust_pedal.o [1]
 fputc                    0x806'03c9      0x14  Code  Gb  bsp_usart_fifo.o [1]
 free                     0x804'fcb5       0x4  Code  Gb  heaptramp0.o [2]
@@ -3250,10 +3250,10 @@ kern_class_values        0x807'2d5c     0xbb0  Data  Lc  lv_font_montserrat_10.o
 kern_class_values        0x807'390c     0xbb0  Data  Lc  lv_font_montserrat_14.o [1]
 kern_class_values        0x807'44bc     0xbb0  Data  Lc  lv_font_montserrat_24.o [1]
 kern_class_values        0x807'506c     0xbb0  Data  Lc  lv_font_montserrat_8.o [1]
-kern_classes             0x807'fd04      0x10  Data  Lc  lv_font_montserrat_10.o [1]
-kern_classes             0x807'fd14      0x10  Data  Lc  lv_font_montserrat_14.o [1]
-kern_classes             0x807'fd24      0x10  Data  Lc  lv_font_montserrat_24.o [1]
-kern_classes             0x807'fd34      0x10  Data  Lc  lv_font_montserrat_8.o [1]
+kern_classes             0x807'fcd0      0x10  Data  Lc  lv_font_montserrat_10.o [1]
+kern_classes             0x807'fce0      0x10  Data  Lc  lv_font_montserrat_14.o [1]
+kern_classes             0x807'fcf0      0x10  Data  Lc  lv_font_montserrat_24.o [1]
+kern_classes             0x807'fd00      0x10  Data  Lc  lv_font_montserrat_8.o [1]
 kern_left_class_mapping
                          0x807'dab8      0xa0  Data  Lc  lv_font_montserrat_10.o [1]
 kern_left_class_mapping
@@ -3381,7 +3381,7 @@ lv_anim_set_var          0x805'f23d       0x4  Code  Lc  lv_switch.o [1]
 lv_anim_set_var          0x805'b15b       0x4  Code  Lc  lv_textarea.o [1]
 lv_anim_speed_to_time    0x803'c9bd      0x1e  Code  Gb  lv_anim.o [1]
 lv_anim_start            0x803'c871      0xa4  Code  Gb  lv_anim.o [1]
-lv_arc_class             0x807'f394      0x1c  Data  Gb  lv_arc.o [1]
+lv_arc_class             0x807'f360      0x1c  Data  Gb  lv_arc.o [1]
 lv_arc_constructor       0x806'c465      0x74  Code  Lc  lv_arc.o [1]
 lv_arc_draw              0x806'ca61     0x206  Code  Lc  lv_arc.o [1]
 lv_arc_event             0x806'c4d9     0x588  Code  Lc  lv_arc.o [1]
@@ -3481,7 +3481,7 @@ lv_area_set_width        0x804'0c5f       0xa  Code  Gb  lv_area.o [1]
 lv_atan2                 0x804'3793      0xb2  Code  Gb  lv_math.o [1]
 lv_bar_anim              0x806'7a7f       0xc  Code  Lc  lv_bar.o [1]
 lv_bar_anim_ready        0x806'7a8b      0x2e  Code  Lc  lv_bar.o [1]
-lv_bar_class             0x807'f3b0      0x1c  Data  Gb  lv_bar.o [1]
+lv_bar_class             0x807'f37c      0x1c  Data  Gb  lv_bar.o [1]
 lv_bar_constructor       0x806'72a7      0x62  Code  Lc  lv_bar.o [1]
 lv_bar_create            0x806'7169      0x18  Code  Gb  lv_bar.o [1]
 lv_bar_destructor        0x806'7309      0x1a  Code  Lc  lv_bar.o [1]
@@ -3502,10 +3502,10 @@ lv_bidi_calculate_align
                          0x804'4ba5       0xc  Code  Lc  lv_label.o [1]
 lv_bidi_calculate_align
                          0x803'4cab       0xc  Code  Lc  lv_obj_style.o [1]
-lv_btn_class             0x807'f3cc      0x1c  Data  Gb  lv_btn.o [1]
+lv_btn_class             0x807'f398      0x1c  Data  Gb  lv_btn.o [1]
 lv_btn_constructor       0x805'f205      0x18  Code  Lc  lv_btn.o [1]
 lv_btn_create            0x805'f1e9      0x16  Code  Gb  lv_btn.o [1]
-lv_btnmatrix_class       0x807'f3e8      0x1c  Data  Gb  lv_btnmatrix.o [1]
+lv_btnmatrix_class       0x807'f3b4      0x1c  Data  Gb  lv_btnmatrix.o [1]
 lv_btnmatrix_clear_btn_ctrl
                          0x805'815b      0x3c  Code  Gb  lv_btnmatrix.o [1]
 lv_btnmatrix_clear_btn_ctrl_all
@@ -3534,21 +3534,21 @@ lv_btnmatrix_set_one_checked
                          0x805'81e7      0x18  Code  Gb  lv_btnmatrix.o [1]
 lv_btnmatrix_set_selected_btn
                          0x805'80d3      0x34  Code  Gb  lv_btnmatrix.o [1]
-lv_calendar_class        0x807'f404      0x1c  Data  Gb  lv_calendar.o [1]
+lv_calendar_class        0x807'f3d0      0x1c  Data  Gb  lv_calendar.o [1]
 lv_calendar_constructor
                          0x807'8fdd     0x12e  Code  Lc  lv_calendar.o [1]
 lv_calendar_get_showed_date
                          0x807'8fd9       0x4  Code  Gb  lv_calendar.o [1]
 lv_calendar_header_arrow_class
-                         0x807'f420      0x1c  Data  Gb  lv_calendar_header_arrow.o [1]
+                         0x807'f3ec      0x1c  Data  Gb  lv_calendar_header_arrow.o [1]
 lv_calendar_header_dropdown_class
-                         0x807'f43c      0x1c  Data  Gb  lv_calendar_header_dropdown.o [1]
+                         0x807'f408      0x1c  Data  Gb  lv_calendar_header_dropdown.o [1]
 lv_calendar_set_showed_date
                          0x807'8e63     0x176  Code  Gb  lv_calendar.o [1]
 lv_calendar_set_today_date
                          0x807'8e4f      0x14  Code  Gb  lv_calendar.o [1]
 lv_chart_add_series      0x805'01af      0xc0  Code  Gb  lv_chart.o [1]
-lv_chart_class           0x807'f458      0x1c  Data  Gb  lv_chart.o [1]
+lv_chart_class           0x807'f424      0x1c  Data  Gb  lv_chart.o [1]
 lv_chart_constructor     0x805'02cf      0x8c  Code  Lc  lv_chart.o [1]
 lv_chart_create          0x804'fd97      0x18  Code  Gb  lv_chart.o [1]
 lv_chart_destructor      0x805'035b      0x6c  Code  Lc  lv_chart.o [1]
@@ -3571,7 +3571,7 @@ lv_chart_set_range       0x804'fed7      0x56  Code  Gb  lv_chart.o [1]
 lv_chart_set_type        0x804'fdaf      0x9e  Code  Gb  lv_chart.o [1]
 lv_chart_set_update_mode
                          0x804'ff2d      0x28  Code  Gb  lv_chart.o [1]
-lv_checkbox_class        0x807'f474      0x1c  Data  Gb  lv_checkbox.o [1]
+lv_checkbox_class        0x807'f440      0x1c  Data  Gb  lv_checkbox.o [1]
 lv_checkbox_constructor
                          0x805'f771      0x2e  Code  Lc  lv_checkbox.o [1]
 lv_checkbox_create       0x805'f70d      0x18  Code  Gb  lv_checkbox.o [1]
@@ -3662,7 +3662,7 @@ lv_color_white           0x806'0abf      0x12  Code  Lc  motor_control_ui.o [1]
 lv_color_white           0x806'1889      0x12  Code  Lc  sensor_ui.o [1]
 lv_color_white           0x806'1023      0x12  Code  Lc  set_up.o [1]
 lv_color_white           0x806'117f      0x12  Code  Lc  vehicle_status.o [1]
-lv_colorwheel_class      0x807'f490      0x1c  Data  Gb  lv_colorwheel.o [1]
+lv_colorwheel_class      0x807'f45c      0x1c  Data  Gb  lv_colorwheel.o [1]
 lv_colorwheel_constructor
                          0x807'08bf      0x64  Code  Lc  lv_colorwheel.o [1]
 lv_colorwheel_event      0x807'0c4b     0x4d0  Code  Lc  lv_colorwheel.o [1]
@@ -3747,7 +3747,7 @@ lv_draw_sw_wait_for_finish
 lv_draw_transform        0x807'8dfd      0x38  Code  Gb  lv_draw_transform.o [1]
 lv_draw_wait_for_finish
                          0x803'ec05       0xe  Code  Gb  lv_draw.o [1]
-lv_dropdown_class        0x807'f4c8      0x1c  Data  Gb  lv_dropdown.o [1]
+lv_dropdown_class        0x807'f494      0x1c  Data  Gb  lv_dropdown.o [1]
 lv_dropdown_close        0x806'd52d      0x28  Code  Gb  lv_dropdown.o [1]
 lv_dropdown_constructor
                          0x806'd583      0x74  Code  Lc  lv_dropdown.o [1]
@@ -3769,7 +3769,7 @@ lv_dropdown_set_options_static
                          0x806'd197      0x78  Code  Gb  lv_dropdown.o [1]
 lv_dropdown_set_selected
                          0x806'd20f      0x28  Code  Gb  lv_dropdown.o [1]
-lv_dropdownlist_class    0x807'f4e4      0x1c  Data  Gb  lv_dropdown.o [1]
+lv_dropdownlist_class    0x807'f4b0      0x1c  Data  Gb  lv_dropdown.o [1]
 lv_dropdownlist_constructor
                          0x806'd625      0x30  Code  Lc  lv_dropdown.o [1]
 lv_dropdownlist_destructor
@@ -3818,10 +3818,10 @@ lv_font_get_line_height
                          0x805'b155       0x6  Code  Lc  lv_textarea.o [1]
 lv_font_get_line_height
                          0x804'8a51       0x6  Code  Lc  lv_txt.o [1]
-lv_font_montserrat_10    0x807'f500      0x1c  Data  Gb  lv_font_montserrat_10.o [1]
-lv_font_montserrat_14    0x807'f51c      0x1c  Data  Gb  lv_font_montserrat_14.o [1]
-lv_font_montserrat_24    0x807'f538      0x1c  Data  Gb  lv_font_montserrat_24.o [1]
-lv_font_montserrat_8     0x807'f554      0x1c  Data  Gb  lv_font_montserrat_8.o [1]
+lv_font_montserrat_10    0x807'f4cc      0x1c  Data  Gb  lv_font_montserrat_10.o [1]
+lv_font_montserrat_14    0x807'f4e8      0x1c  Data  Gb  lv_font_montserrat_14.o [1]
+lv_font_montserrat_24    0x807'f504      0x1c  Data  Gb  lv_font_montserrat_24.o [1]
+lv_font_montserrat_8     0x807'f520      0x1c  Data  Gb  lv_font_montserrat_8.o [1]
 lv_fs_close              0x803'e335      0x5c  Code  Gb  lv_fs.o [1]
 lv_fs_drv_init           0x803'e675       0xa  Code  Gb  lv_fs.o [1]
 lv_fs_drv_register       0x803'e67f      0x18  Code  Gb  lv_fs.o [1]
@@ -3861,7 +3861,7 @@ lv_img_cf_get_px_size    0x804'3361      0x5c  Code  Gb  lv_draw_img.o [1]
 lv_img_cf_has_alpha      0x804'33d3      0x1c  Code  Gb  lv_draw_img.o [1]
 lv_img_cf_is_chroma_keyed
                          0x804'33bd      0x16  Code  Gb  lv_draw_img.o [1]
-lv_img_class             0x807'f58c      0x1c  Data  Gb  lv_img.o [1]
+lv_img_class             0x807'f558      0x1c  Data  Gb  lv_img.o [1]
 lv_img_constructor       0x806'6879      0x78  Code  Lc  lv_img.o [1]
 lv_img_create            0x806'66a1      0x18  Code  Gb  lv_img.o [1]
 lv_img_decoder_built_in_close
@@ -3900,7 +3900,7 @@ lv_img_get_transformed_size
 lv_img_set_offset_y      0x806'685f      0x1a  Code  Gb  lv_img.o [1]
 lv_img_set_src           0x806'66b9     0x1a6  Code  Gb  lv_img.o [1]
 lv_img_src_get_type      0x804'33ef      0x2e  Code  Gb  lv_draw_img.o [1]
-lv_imgbtn_class          0x807'f5a8      0x1c  Data  Gb  lv_imgbtn.o [1]
+lv_imgbtn_class          0x807'f574      0x1c  Data  Gb  lv_imgbtn.o [1]
 lv_imgbtn_constructor    0x805'e765      0x2a  Code  Lc  lv_imgbtn.o [1]
 lv_imgbtn_create         0x805'e727      0x16  Code  Gb  lv_imgbtn.o [1]
 lv_imgbtn_event          0x805'e78f      0xe4  Code  Lc  lv_imgbtn.o [1]
@@ -3927,7 +3927,7 @@ lv_indev_search_obj      0x803'd063      0x84  Code  Gb  lv_indev.o [1]
 lv_indev_wait_release    0x803'd04d       0xe  Code  Gb  lv_indev.o [1]
 lv_init                  0x803'6591      0x80  Code  Gb  lv_obj.o [1]
 lv_initialized          0x2001'cb35       0x1  Data  Lc  lv_obj.o [1]
-lv_keyboard_class        0x807'f5c4      0x1c  Data  Gb  lv_keyboard.o [1]
+lv_keyboard_class        0x807'f590      0x1c  Data  Gb  lv_keyboard.o [1]
 lv_keyboard_constructor
                          0x807'c36f      0x4e  Code  Lc  lv_keyboard.o [1]
 lv_keyboard_def_event_cb
@@ -3935,7 +3935,7 @@ lv_keyboard_def_event_cb
 lv_keyboard_update_ctrl_map
                          0x807'c3db      0x7a  Code  Lc  lv_keyboard.o [1]
 lv_keyboard_update_map   0x807'c3bd      0x1e  Code  Lc  lv_keyboard.o [1]
-lv_label_class           0x807'f5e0      0x1c  Data  Gb  lv_label.o [1]
+lv_label_class           0x807'f5ac      0x1c  Data  Gb  lv_label.o [1]
 lv_label_constructor     0x804'55a3      0x7e  Code  Lc  lv_label.o [1]
 lv_label_create          0x804'4c3d      0x18  Code  Gb  lv_label.o [1]
 lv_label_destructor      0x804'5621      0x24  Code  Lc  lv_label.o [1]
@@ -3968,17 +3968,17 @@ lv_label_set_text_static
                          0x804'4d57      0x40  Code  Gb  lv_label.o [1]
 lv_layer_sys             0x803'ecd5       0xc  Code  Lc  lv_refr.o [1]
 lv_layout_register       0x803'94a5      0x44  Code  Gb  lv_obj_pos.o [1]
-lv_led_class             0x807'f5fc      0x1c  Data  Gb  lv_led.o [1]
+lv_led_class             0x807'f5c8      0x1c  Data  Gb  lv_led.o [1]
 lv_led_constructor       0x807'bedd      0x1a  Code  Lc  lv_led.o [1]
 lv_led_event             0x807'bef7     0x246  Code  Lc  lv_led.o [1]
-lv_line_class            0x807'f618      0x1c  Data  Gb  lv_line.o [1]
+lv_line_class            0x807'f5e4      0x1c  Data  Gb  lv_line.o [1]
 lv_line_constructor      0x806'63fb      0x22  Code  Lc  lv_line.o [1]
 lv_line_create           0x806'63cd      0x16  Code  Gb  lv_line.o [1]
 lv_line_event            0x806'641d     0x1e6  Code  Lc  lv_line.o [1]
 lv_line_set_points       0x806'63e3      0x18  Code  Gb  lv_line.o [1]
-lv_list_btn_class        0x807'f650      0x1c  Data  Gb  lv_list.o [1]
-lv_list_class            0x807'f634      0x1c  Data  Gb  lv_list.o [1]
-lv_list_text_class       0x807'f66c      0x1c  Data  Gb  lv_list.o [1]
+lv_list_btn_class        0x807'f61c      0x1c  Data  Gb  lv_list.o [1]
+lv_list_class            0x807'f600      0x1c  Data  Gb  lv_list.o [1]
+lv_list_text_class       0x807'f638      0x1c  Data  Gb  lv_list.o [1]
 lv_map                   0x804'3887      0x42  Code  Gb  lv_math.o [1]
 lv_mem_alloc             0x803'450f      0x3a  Code  Gb  lv_mem.o [1]
 lv_mem_buf              0x2001'bc18      0x80  Data  Gb  lv_gc.o [1]
@@ -4002,10 +4002,10 @@ lv_memset_ff             0x803'4a9b      0x6e  Code  Gb  lv_mem.o [1]
 lv_menu_back_btn_is_root
                          0x807'ad1d      0x20  Code  Gb  lv_menu.o [1]
 lv_menu_back_event_cb    0x807'afd9      0x94  Code  Lc  lv_menu.o [1]
-lv_menu_class            0x807'f688      0x1c  Data  Gb  lv_menu.o [1]
+lv_menu_class            0x807'f654      0x1c  Data  Gb  lv_menu.o [1]
 lv_menu_clear_history    0x807'ad3d      0x14  Code  Gb  lv_menu.o [1]
 lv_menu_constructor      0x807'ad51     0x15a  Code  Lc  lv_menu.o [1]
-lv_menu_cont_class       0x807'f6c0      0x1c  Data  Gb  lv_menu.o [1]
+lv_menu_cont_class       0x807'f68c      0x1c  Data  Gb  lv_menu.o [1]
 lv_menu_cont_constructor
                          0x807'af11      0x22  Code  Lc  lv_menu.o [1]
 lv_menu_destructor       0x807'aebd       0xc  Code  Lc  lv_menu.o [1]
@@ -4014,33 +4014,33 @@ lv_menu_get_cur_main_page
 lv_menu_get_cur_sidebar_page
                          0x807'ad19       0x4  Code  Gb  lv_menu.o [1]
 lv_menu_main_cont_class
-                         0x807'f730      0x1c  Data  Gb  lv_menu.o [1]
+                         0x807'f6fc      0x1c  Data  Gb  lv_menu.o [1]
 lv_menu_main_header_cont_class
-                         0x807'f74c      0x1c  Data  Gb  lv_menu.o [1]
-lv_menu_page_class       0x807'f6a4      0x1c  Data  Gb  lv_menu.o [1]
+                         0x807'f718      0x1c  Data  Gb  lv_menu.o [1]
+lv_menu_page_class       0x807'f670      0x1c  Data  Gb  lv_menu.o [1]
 lv_menu_page_constructor
                          0x807'aec9      0x32  Code  Lc  lv_menu.o [1]
 lv_menu_page_destructor
                          0x807'aefb      0x16  Code  Lc  lv_menu.o [1]
 lv_menu_refr_main_header_mode
                          0x807'af49      0x8e  Code  Lc  lv_menu.o [1]
-lv_menu_section_class    0x807'f6dc      0x1c  Data  Gb  lv_menu.o [1]
+lv_menu_section_class    0x807'f6a8      0x1c  Data  Gb  lv_menu.o [1]
 lv_menu_section_constructor
                          0x807'af33      0x16  Code  Lc  lv_menu.o [1]
 lv_menu_separator_class
-                         0x807'f6f8      0x1c  Data  Gb  lv_menu.o [1]
+                         0x807'f6c4      0x1c  Data  Gb  lv_menu.o [1]
 lv_menu_set_page         0x807'abf9     0x11c  Code  Gb  lv_menu.o [1]
 lv_menu_sidebar_cont_class
-                         0x807'f714      0x1c  Data  Gb  lv_menu.o [1]
+                         0x807'f6e0      0x1c  Data  Gb  lv_menu.o [1]
 lv_menu_sidebar_header_cont_class
-                         0x807'f768      0x1c  Data  Gb  lv_menu.o [1]
+                         0x807'f734      0x1c  Data  Gb  lv_menu.o [1]
 lv_menu_value_changed_event_cb
                          0x807'b06d      0x6c  Code  Lc  lv_menu.o [1]
 lv_meter_add_arc         0x806'22b7      0x4e  Code  Gb  lv_meter.o [1]
 lv_meter_add_needle_line
                          0x806'2269      0x4e  Code  Gb  lv_meter.o [1]
 lv_meter_add_scale       0x806'21d9      0x4a  Code  Gb  lv_meter.o [1]
-lv_meter_class           0x807'f784      0x1c  Data  Gb  lv_meter.o [1]
+lv_meter_class           0x807'f750      0x1c  Data  Gb  lv_meter.o [1]
 lv_meter_constructor     0x806'2365      0x1a  Code  Lc  lv_meter.o [1]
 lv_meter_create          0x806'21c1      0x18  Code  Gb  lv_meter.o [1]
 lv_meter_destructor      0x806'237f      0x16  Code  Lc  lv_meter.o [1]
@@ -4054,8 +4054,8 @@ lv_meter_set_scale_range
 lv_meter_set_scale_ticks
                          0x806'2223      0x16  Code  Gb  lv_meter.o [1]
 lv_msgbox_backdrop_class
-                         0x807'f7bc      0x1c  Data  Gb  lv_msgbox.o [1]
-lv_msgbox_class          0x807'f7a0      0x1c  Data  Gb  lv_msgbox.o [1]
+                         0x807'f788      0x1c  Data  Gb  lv_msgbox.o [1]
+lv_msgbox_class          0x807'f76c      0x1c  Data  Gb  lv_msgbox.o [1]
 lv_obj_add_event_cb      0x803'b9f9      0xa6  Code  Gb  lv_event.o [1]
 lv_obj_add_flag          0x803'6629      0x6a  Code  Gb  lv_obj.o [1]
 lv_obj_add_state         0x803'6707      0x18  Code  Gb  lv_obj.o [1]
@@ -4073,7 +4073,7 @@ lv_obj_calculate_style_text_align
                          0x803'57cb      0x32  Code  Gb  lv_obj_style.o [1]
 lv_obj_center            0x805'ec85       0xe  Code  Lc  Monitor.o [1]
 lv_obj_check_type        0x803'67d1      0x18  Code  Gb  lv_obj.o [1]
-lv_obj_class             0x807'f7d8      0x1c  Data  Gb  lv_obj.o [1]
+lv_obj_class             0x807'f7a4      0x1c  Data  Gb  lv_obj.o [1]
 lv_obj_class_create_obj
                          0x803'e049      0xf2  Code  Gb  lv_obj_class.o [1]
 lv_obj_class_init_obj    0x803'e13b      0x7a  Code  Gb  lv_obj_class.o [1]
@@ -4858,7 +4858,7 @@ lv_palette_lighten::colors
                          0x807'd5bc      0xc0  Data  Lc  lv_color.o [1]
 lv_palette_main          0x803'3e51      0x22  Code  Gb  lv_color.o [1]
 lv_palette_main::colors
-                         0x807'ee98      0x28  Data  Lc  lv_color.o [1]
+                         0x807'ee64      0x28  Data  Lc  lv_color.o [1]
 lv_pct                   0x805'd629      0x1a  Code  Lc  adjust_pedal.o [1]
 lv_pct                   0x807'8e35      0x1a  Code  Lc  lv_calendar.o [1]
 lv_pct                   0x807'cb3d      0x1a  Code  Lc  lv_calendar_header_arrow.o [1]
@@ -4889,15 +4889,15 @@ lv_rand                  0x804'38c9      0x26  Code  Gb  lv_math.o [1]
 lv_rand::a              0x2000'05cc       0x4  Data  Lc  lv_math.o [1]
 lv_refr_get_top_obj      0x803'f731      0x90  Code  Lc  lv_refr.o [1]
 lv_refr_join_area        0x803'f1d5      0xc2  Code  Lc  lv_refr.o [1]
-lv_roller_class          0x807'f7f4      0x1c  Data  Gb  lv_roller.o [1]
+lv_roller_class          0x807'f7c0      0x1c  Data  Gb  lv_roller.o [1]
 lv_roller_constructor    0x807'2377      0x4c  Code  Lc  lv_roller.o [1]
 lv_roller_event          0x807'23c3     0x1f2  Code  Lc  lv_roller.o [1]
-lv_roller_label_class    0x807'f810      0x1c  Data  Gb  lv_roller.o [1]
+lv_roller_label_class    0x807'f7dc      0x1c  Data  Gb  lv_roller.o [1]
 lv_roller_label_event    0x807'25b5      0x90  Code  Lc  lv_roller.o [1]
 lv_roller_set_options    0x807'21cb     0x102  Code  Gb  lv_roller.o [1]
 lv_roller_set_selected   0x807'22cd      0xaa  Code  Gb  lv_roller.o [1]
 lv_scr_act               0x805'ec93       0xc  Code  Lc  Monitor.o [1]
-lv_slider_class          0x807'f82c      0x1c  Data  Gb  lv_slider.o [1]
+lv_slider_class          0x807'f7f8      0x1c  Data  Gb  lv_slider.o [1]
 lv_slider_constructor    0x807'5cd3      0x66  Code  Lc  lv_slider.o [1]
 lv_slider_event          0x807'5d39     0x79c  Code  Lc  lv_slider.o [1]
 lv_slider_get_left_value
@@ -4908,7 +4908,7 @@ lv_slider_set_left_value
                          0x807'5c99       0xa  Code  Lc  lv_slider.o [1]
 lv_slider_set_value      0x807'5c8f       0xa  Code  Lc  lv_slider.o [1]
 lv_snprintf              0x804'c97d      0x1a  Code  Gb  lv_printf.o [1]
-lv_spinbox_class         0x807'f848      0x1c  Data  Gb  lv_spinbox.o [1]
+lv_spinbox_class         0x807'f814      0x1c  Data  Gb  lv_spinbox.o [1]
 lv_spinbox_constructor   0x807'b1df      0x6a  Code  Lc  lv_spinbox.o [1]
 lv_spinbox_decrement     0x807'b189      0x56  Code  Gb  lv_spinbox.o [1]
 lv_spinbox_event         0x807'b249     0x1ce  Code  Lc  lv_spinbox.o [1]
@@ -4916,7 +4916,7 @@ lv_spinbox_increment     0x807'b133      0x56  Code  Gb  lv_spinbox.o [1]
 lv_spinbox_step_next     0x807'b0d9      0x1e  Code  Gb  lv_spinbox.o [1]
 lv_spinbox_step_prev     0x807'b0f7      0x3c  Code  Gb  lv_spinbox.o [1]
 lv_spinbox_updatevalue   0x807'b417     0x136  Code  Lc  lv_spinbox.o [1]
-lv_spinner_class         0x807'f864      0x1c  Data  Gb  lv_spinner.o [1]
+lv_spinner_class         0x807'f830      0x1c  Data  Gb  lv_spinner.o [1]
 lv_spinner_constructor   0x807'd43f      0x8e  Code  Lc  lv_spinner.o [1]
 lv_style_get_prop        0x803'4225       0xa  Code  Gb  lv_style.o [1]
 lv_style_get_prop_inlined
@@ -5035,17 +5035,17 @@ lv_style_transition_dsc_init
                          0x803'422f      0x2c  Code  Gb  lv_style.o [1]
 lv_switch_anim_exec_cb   0x805'f593       0xa  Code  Lc  lv_switch.o [1]
 lv_switch_anim_ready     0x805'f59d      0x10  Code  Lc  lv_switch.o [1]
-lv_switch_class          0x807'f880      0x1c  Data  Gb  lv_switch.o [1]
+lv_switch_class          0x807'f84c      0x1c  Data  Gb  lv_switch.o [1]
 lv_switch_constructor    0x805'f2b3      0x28  Code  Lc  lv_switch.o [1]
 lv_switch_create         0x805'f29b      0x18  Code  Gb  lv_switch.o [1]
 lv_switch_destructor     0x805'f2db       0xc  Code  Lc  lv_switch.o [1]
 lv_switch_event          0x805'f2e7     0x126  Code  Lc  lv_switch.o [1]
 lv_switch_trigger_anim   0x805'f5ad      0xaa  Code  Lc  lv_switch.o [1]
-lv_table_class           0x807'f89c      0x1c  Data  Gb  lv_table.o [1]
+lv_table_class           0x807'f868      0x1c  Data  Gb  lv_table.o [1]
 lv_table_constructor     0x807'156f      0x44  Code  Lc  lv_table.o [1]
 lv_table_destructor      0x807'15b3      0x66  Code  Lc  lv_table.o [1]
 lv_table_event           0x807'1619     0x206  Code  Lc  lv_table.o [1]
-lv_tabview_class         0x807'f8b8      0x1c  Data  Gb  lv_tabview.o [1]
+lv_tabview_class         0x807'f884      0x1c  Data  Gb  lv_tabview.o [1]
 lv_tabview_constructor   0x807'b65b     0x154  Code  Lc  lv_tabview.o [1]
 lv_tabview_destructor    0x807'b7b5      0x60  Code  Lc  lv_tabview.o [1]
 lv_tabview_event         0x807'b815      0x3c  Code  Lc  lv_tabview.o [1]
@@ -5056,7 +5056,7 @@ lv_tabview_get_tab_btns
 lv_tabview_set_act       0x807'b585      0xbe  Code  Gb  lv_tabview.o [1]
 lv_textarea_add_char     0x805'b1ed      0xf4  Code  Gb  lv_textarea.o [1]
 lv_textarea_add_text     0x805'b2e1     0x108  Code  Gb  lv_textarea.o [1]
-lv_textarea_class        0x807'f8d4      0x1c  Data  Gb  lv_textarea.o [1]
+lv_textarea_class        0x807'f8a0      0x1c  Data  Gb  lv_textarea.o [1]
 lv_textarea_clear_selection
                          0x805'b7e1      0x2e  Code  Gb  lv_textarea.o [1]
 lv_textarea_constructor
@@ -5101,10 +5101,10 @@ lv_theme_get_color_primary
 lv_theme_get_from_obj    0x804'4705      0x16  Code  Gb  lv_theme.o [1]
 lv_tick_elaps            0x804'2f8b      0x18  Code  Gb  lv_hal_tick.o [1]
 lv_tick_get              0x804'2f83       0x8  Code  Gb  lv_hal_tick.o [1]
-lv_tileview_class        0x807'f8f0      0x1c  Data  Gb  lv_tileview.o [1]
+lv_tileview_class        0x807'f8bc      0x1c  Data  Gb  lv_tileview.o [1]
 lv_tileview_constructor
                          0x807'cd29      0x38  Code  Lc  lv_tileview.o [1]
-lv_tileview_tile_class   0x807'f90c      0x1c  Data  Gb  lv_tileview.o [1]
+lv_tileview_tile_class   0x807'f8d8      0x1c  Data  Gb  lv_tileview.o [1]
 lv_tileview_tile_constructor
                          0x807'cd61      0x66  Code  Lc  lv_tileview.o [1]
 lv_timer_create          0x803'775f      0x44  Code  Gb  lv_timer.o [1]
@@ -5155,7 +5155,7 @@ lv_txt_utf8_next         0x804'9113     0x14e  Code  Lc  lv_txt.o [1]
 lv_txt_utf8_prev         0x804'9261      0x54  Code  Lc  lv_txt.o [1]
 lv_txt_utf8_size         0x804'9029      0x38  Code  Lc  lv_txt.o [1]
 lv_vsnprintf             0x804'c997      0x12  Code  Gb  lv_printf.o [1]
-lv_win_class             0x807'f928      0x1c  Data  Gb  lv_win.o [1]
+lv_win_class             0x807'f8f4      0x1c  Data  Gb  lv_win.o [1]
 lv_win_constructor       0x807'e165      0x78  Code  Lc  lv_win.o [1]
 main                     0x806'03dd      0x1e  Code  Gb  main.o [1]
 make_one_button_checked
@@ -5180,7 +5180,7 @@ month_list              0x2000'052c       0x4  Data  Lc  lv_calendar_header_drop
 month_names_def         0x2000'04fc      0x30  Data  Lc  lv_calendar_header_arrow.o [1]
 move_window              0x804'974d      0x3e  Code  Lc  ff.o [1]
 mparams                 0x2001'c5c0      0x18  Data  Lc  dlmalloc.o [2]
-myFont20                 0x807'f97c      0x1c  Data  Gb  myFont20.o [1]
+myFont20                 0x807'f948      0x1c  Data  Gb  myFont20.o [1]
 my_constructor           0x807'cb57      0xe2  Code  Lc  lv_calendar_header_arrow.o [1]
 my_constructor           0x807'cebd      0x86  Code  Lc  lv_calendar_header_dropdown.o [1]
 new_points_alloc         0x805'221b      0xc4  Code  Lc  lv_chart.o [1]
@@ -5202,7 +5202,7 @@ position_to_selected     0x806'dfa1      0x58  Code  Lc  lv_dropdown.o [1]
 printf                   0x804'9485      0x28  Code  Gb  printf.o [2]
 put_fat                  0x804'990b     0x122  Code  Lc  ff.o [1]
 put_lfn                  0x804'9f5f      0x84  Code  Lc  ff.o [1]
-putchar                  0x807'fb65       0xc  Code  Gb  putchar.o [2]
+putchar                  0x807'fb31       0xc  Code  Gb  putchar.o [2]
 pwd_char_hider           0x805'bbd1      0x82  Code  Lc  lv_textarea.o [1]
 pwd_char_hider_anim      0x805'bbc5       0x2  Code  Lc  lv_textarea.o [1]
 pwd_char_hider_anim_ready
@@ -5230,7 +5230,7 @@ rgb_no_aa                0x807'761f      0xce  Code  Lc  lv_draw_sw_transform.o 
 s_BaudRatePrescaler     0x2001'c96c       0x4  Data  Lc  bsp_spi_bus.o [1]
 s_CLKPhase              0x2001'c970       0x4  Data  Lc  bsp_spi_bus.o [1]
 s_CLKPolarity           0x2001'c974       0x4  Data  Lc  bsp_spi_bus.o [1]
-s_gpio_list              0x807'fc84      0x10  Data  Lc  bsp_key.o [1]
+s_gpio_list              0x807'fc50      0x10  Data  Lc  bsp_key.o [1]
 s_style_common          0x2001'c72c       0xc  Data  Lc  about_phone_ui.o [1]
 s_style_common          0x2001'c7b0       0xc  Data  Lc  battery_box.o [1]
 s_style_common          0x2001'c7d4       0xc  Data  Lc  cool_control.o [1]
@@ -5240,7 +5240,7 @@ s_style_common          0x2001'c8dc       0xc  Data  Lc  vehicle_status.o [1]
 s_tBtn                  0x2001'c510      0x20  Data  Lc  bsp_key.o [1]
 s_tKey                  0x2001'c6ec      0x10  Data  Lc  bsp_key.o [1]
 s_tTmr                  0x2001'c28c      0x40  Data  Lc  ticktim.o [1]
-s_tabDataRate            0x807'fc94      0x10  Data  Lc  bsp_spi_ads1256.o [1]
+s_tabDataRate            0x807'fc60      0x10  Data  Lc  bsp_spi_ads1256.o [1]
 scalbln                  0x804'e6ad            Code  Gb  ldexp.o [3]
 scalblnl                 0x804'e6ad            Code  Gb  ldexp.o [3]
 scalbn                   0x804'e6ad            Code  Gb  ldexp.o [3]
@@ -5293,7 +5293,7 @@ style_init::trans_delayed
 style_init::trans_normal
                         0x2001'c664      0x14  Data  Lc  lv_theme_default.o [1]
 style_init::trans_props
-                         0x807'fad4      0x18  Data  Lc  lv_theme_default.o [1]
+                         0x807'faa0      0x18  Data  Lc  lv_theme_default.o [1]
 style_init_reset         0x803'34b7      0x16  Code  Lc  lv_theme_default.o [1]
 style_radio             0x2001'c750       0xc  Data  Lc  adjust_pedal.o [1]
 style_radio_chk         0x2001'c75c       0xc  Data  Lc  adjust_pedal.o [1]
@@ -5352,14 +5352,14 @@ year_list               0x2000'0530       0x4  Data  Lc  lv_calendar_header_drop
 zero_mem                0x2000'05d0       0x4  Data  Lc  lv_mem.o [1]
 
 
-[1] = D:\BaiduNetdiskDownload\goof_off\Xian_Template\EW-ARM(v8x)\Flash\Obj
+[1] = D:\Ls_Monitor_Lower\Xian_Template\EW-ARM(v8x)\Flash\Obj
 [2] = dl7M_tlf.a
 [3] = m7M_tls.a
 [4] = rt7M_tl.a
 [5] = shb_l.a
 
   281'576 bytes of readonly  code memory
-  243'630 bytes of readonly  data memory
+  243'580 bytes of readonly  data memory
   157'871 bytes of readwrite data memory
 
 Errors: none

@@ -15,9 +15,6 @@ static void ofs_set_y_anim(void * img, int32_t v)
     lv_img_set_offset_y(img, v);
 }
 
-
-
-
 void Battery_Box_Ui(lv_obj_t *parent)
 {
     /* 定义并创建图像按钮 */
