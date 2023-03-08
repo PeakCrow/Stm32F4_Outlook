@@ -18,7 +18,7 @@
 #include "lv_drivers/sdl/sdl.h"
 #include "monitor.h"
 #include "lvgl/examples/porting/lv_port_fs_template.h"
-#include "DEMO/Page.h"
+
 /*********************
  *      DEFINES
  *********************/
