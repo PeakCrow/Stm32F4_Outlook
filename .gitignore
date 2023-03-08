@@ -7,6 +7,7 @@ Xian_Template/Obj/
 Run_Xian.uvguix.Administrator
 DebugConfig/
 Xian_Template/EW-ARM(v8x)/Flash/Obj
+Xian_Template/EW-ARM(v8x)/settings
 #lvgl组件内的obj对象文件需要提交
 !LVGL_Monitor/lvgl/examples/widgets/obj
 # Other files and folders
@@ -28,3 +29,4 @@ Run_Xian.uvoptx
 Run_Xian.uvguix.Administrator
 Run_Xian.uvguix.TRX
 Run_Xian.uvoptix
+Run_Xian.dep
