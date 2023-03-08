@@ -1,0 +1,323 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000         ;/******************************************************
+                       ********************/
+    2 00000000         ;/*                                                     
+                                          */
+    3 00000000         ;/*       Copyright (c) Microsoft Corporation. All right
+                       s reserved.        */
+    4 00000000         ;/*                                                     
+                                          */
+    5 00000000         ;/*       This software is licensed under the Microsoft 
+                       Software License   */
+    6 00000000         ;/*       Terms for Microsoft Azure RTOS. Full text of t
+                       he license can be  */
+    7 00000000         ;/*       found in the LICENSE file at https://aka.ms/Az
+                       ureRTOS_EULA       */
+    8 00000000         ;/*       and in the root directory of this software.   
+                                          */
+    9 00000000         ;/*                                                     
+                                          */
+   10 00000000         ;/******************************************************
+                       ********************/
+   11 00000000         ;
+   12 00000000         ;
+   13 00000000         ;/******************************************************
+                       ********************/
+   14 00000000         ;/******************************************************
+                       ********************/
+   15 00000000         ;/**                                                    
+                                          */
+   16 00000000         ;/** ThreadX Component                                  
+                                          */
+   17 00000000         ;/**                                                    
+                                          */
+   18 00000000         ;/**   Thread                                           
+                                          */
+   19 00000000         ;/**                                                    
+                                          */
+   20 00000000         ;/******************************************************
+                       ********************/
+   21 00000000         ;/******************************************************
+                       ********************/
+   22 00000000         ;
+   23 00000000         ;
+   24 00000000         ;#define TX_SOURCE_CODE
+   25 00000000         ;
+   26 00000000         ;
+   27 00000000         ;/* Include necessary system files.  */
+   28 00000000         ;
+   29 00000000         ;#include "tx_api.h"
+   30 00000000         ;#include "tx_thread.h"
+   31 00000000         ;
+   32 00000000         ;
+   33 00000000                 AREA             ||.text||, CODE, READONLY
+   34 00000000         ;/******************************************************
+                       ********************/
+   35 00000000         ;/*                                                     
+                                          */
+   36 00000000         ;/*  FUNCTION                                           
+                           RELEASE        */
+   37 00000000         ;/*                                                     
+
+
+
+ARM Macro Assembler    Page 2 
+
+
+                                          */
+   38 00000000         ;/*    _tx_thread_stack_build                           
+                        Cortex-M4/AC5     */
+   39 00000000         ;/*                                                     
+                             6.0.2        */
+   40 00000000         ;/*  AUTHOR                                             
+                                          */
+   41 00000000         ;/*                                                     
+                                          */
+   42 00000000         ;/*    William E. Lamie, Microsoft Corporation          
+                                          */
+   43 00000000         ;/*                                                     
+                                          */
+   44 00000000         ;/*  DESCRIPTION                                        
+                                          */
+   45 00000000         ;/*                                                     
+                                          */
+   46 00000000         ;/*    This function builds a stack frame on the supplie
+                       d thread's stack.  */
+   47 00000000         ;/*    The stack frame results in a fake interrupt retur
+                       n to the supplied  */
+   48 00000000         ;/*    function pointer.                                
+                                          */
+   49 00000000         ;/*                                                     
+                                          */
+   50 00000000         ;/*  INPUT                                              
+                                          */
+   51 00000000         ;/*                                                     
+                                          */
+   52 00000000         ;/*    thread_ptr                            Pointer to 
+                       thread control blk */
+   53 00000000         ;/*    function_ptr                          Pointer to 
+                       return function    */
+   54 00000000         ;/*                                                     
+                                          */
+   55 00000000         ;/*  OUTPUT                                             
+                                          */
+   56 00000000         ;/*                                                     
+                                          */
+   57 00000000         ;/*    None                                             
+                                          */
+   58 00000000         ;/*                                                     
+                                          */
+   59 00000000         ;/*  CALLS                                              
+                                          */
+   60 00000000         ;/*                                                     
+                                          */
+   61 00000000         ;/*    None                                             
+                                          */
+   62 00000000         ;/*                                                     
+                                          */
+   63 00000000         ;/*  CALLED BY                                          
+                                          */
+   64 00000000         ;/*                                                     
+                                          */
+   65 00000000         ;/*    _tx_thread_create                     Create thre
+                       ad service         */
+   66 00000000         ;/*                                                     
+                                          */
+
+
+
+ARM Macro Assembler    Page 3 
+
+
+   67 00000000         ;/*  RELEASE HISTORY                                    
+                                          */
+   68 00000000         ;/*                                                     
+                                          */
+   69 00000000         ;/*    DATE              NAME                      DESCR
+                       IPTION             */
+   70 00000000         ;/*                                                     
+                                          */
+   71 00000000         ;/*  06-30-2020     William E. Lamie         Initial Ver
+                       sion 6.0.1         */
+   72 00000000         ;/*  08-14-2020     Scott Larson             Modified co
+                       mment(s), clean up */
+   73 00000000         ;/*                                            whitespac
+                       e, resulting       */
+   74 00000000         ;/*                                            in versio
+                       n 6.0.2            */
+   75 00000000         ;/*                                                     
+                                          */
+   76 00000000         ;/******************************************************
+                       ********************/
+   77 00000000         ;VOID   _tx_thread_stack_build(TX_THREAD *thread_ptr, VO
+                       ID (*function_ptr)(VOID))
+   78 00000000         ;{
+   79 00000000                 EXPORT           _tx_thread_stack_build
+   80 00000000         _tx_thread_stack_build
+   81 00000000         ;
+   82 00000000         ;
+   83 00000000         ;    /* Build a fake interrupt frame.  The form of the f
+                       ake interrupt stack
+   84 00000000         ;       on the Cortex-M4 should look like the following 
+                       after it is built:
+   85 00000000         ;
+   86 00000000         ;       Stack Top:
+   87 00000000         ;                       LR          Interrupted LR (LR a
+                       t time of PENDSV)
+   88 00000000         ;                       r4          Initial value for r4
+                       
+   89 00000000         ;                       r5          Initial value for r5
+                       
+   90 00000000         ;                       r6          Initial value for r6
+                       
+   91 00000000         ;                       r7          Initial value for r7
+                       
+   92 00000000         ;                       r8          Initial value for r8
+                       
+   93 00000000         ;                       r9          Initial value for r9
+                       
+   94 00000000         ;                       r10         Initial value for r1
+                       0
+   95 00000000         ;                       r11         Initial value for r1
+                       1
+   96 00000000         ;                       r0          Initial value for r0
+                           (Hardware stack starts here!!)
+   97 00000000         ;                       r1          Initial value for r1
+                       
+   98 00000000         ;                       r2          Initial value for r2
+                       
+   99 00000000         ;                       r3          Initial value for r3
+                       
+
+
+
+ARM Macro Assembler    Page 4 
+
+
+  100 00000000         ;                       r12         Initial value for r1
+                       2
+  101 00000000         ;                       lr          Initial value for lr
+                       
+  102 00000000         ;                       pc          Initial value for pc
+                       
+  103 00000000         ;                       xPSR        Initial value for xP
+                       SR
+  104 00000000         ;
+  105 00000000         ;    Stack Bottom: (higher memory address)  */
+  106 00000000         ;
+  107 00000000 6902            LDR              r2, [r0, #16] ; Pickup end of s
+                                                            tack area
+  108 00000002 F022 0207       BIC              r2, r2, #0x7 ; Align frame for 
+                                                            8-byte alignment
+  109 00000006 F1A2 0244       SUB              r2, r2, #68 ; Subtract frame si
+                                                            ze
+  110 0000000A F06F 0302       LDR              r3, =0xFFFFFFFD ; Build initial
+                                                             LR value
+  111 0000000E 6013            STR              r3, [r2, #0] 
+                                                            ; Save on the stack
+                                                            
+  112 00000010         ;
+  113 00000010         ;    /* Actually build the stack frame.  */
+  114 00000010         ;
+  115 00000010 F04F 0300       MOV              r3, #0      ; Build initial reg
+                                                            ister value
+  116 00000014 6053            STR              r3, [r2, #4] ; Store initial r4
+                                                            
+  117 00000016 6093            STR              r3, [r2, #8] ; Store initial r5
+                                                            
+  118 00000018 60D3            STR              r3, [r2, #12] 
+                                                            ; Store initial r6
+  119 0000001A 6113            STR              r3, [r2, #16] 
+                                                            ; Store initial r7
+  120 0000001C 6153            STR              r3, [r2, #20] 
+                                                            ; Store initial r8
+  121 0000001E 6193            STR              r3, [r2, #24] 
+                                                            ; Store initial r9
+  122 00000020 61D3            STR              r3, [r2, #28] 
+                                                            ; Store initial r10
+                                                            
+  123 00000022 6213            STR              r3, [r2, #32] 
+                                                            ; Store initial r11
+                                                            
+  124 00000024         ;
+  125 00000024         ;    /* Hardware stack follows.  /
+  126 00000024         ;
+  127 00000024 6253            STR              r3, [r2, #36] 
+                                                            ; Store initial r0
+  128 00000026 6293            STR              r3, [r2, #40] 
+                                                            ; Store initial r1
+  129 00000028 62D3            STR              r3, [r2, #44] 
+                                                            ; Store initial r2
+  130 0000002A 6313            STR              r3, [r2, #48] 
+                                                            ; Store initial r3
+  131 0000002C 6353            STR              r3, [r2, #52] 
+                                                            ; Store initial r12
+                                                            
+
+
+
+ARM Macro Assembler    Page 5 
+
+
+  132 0000002E F04F 33FF       MOV              r3, #0xFFFFFFFF ; Poison EXC_RE
+                                                            TURN value
+  133 00000032 6393            STR              r3, [r2, #56] 
+                                                            ; Store initial lr
+  134 00000034 63D1            STR              r1, [r2, #60] 
+                                                            ; Store initial pc
+  135 00000036 F04F 7380       MOV              r3, #0x01000000 ; Only T-bit ne
+                                                            ed be set
+  136 0000003A 6413            STR              r3, [r2, #64] ; Store initial x
+                                                            PSR
+  137 0000003C         ;
+  138 0000003C         ;    /* Setup stack pointer.  */
+  139 0000003C         ;    thread_ptr -> tx_thread_stack_ptr =  r2;
+  140 0000003C         ;
+  141 0000003C 6082            STR              r2, [r0, #8] ; Save stack point
+                                                            er in thread's
+  142 0000003E         ;   control block
+  143 0000003E 4770            BX               lr          ; Return to caller
+  144 00000040         ;}
+  145 00000040                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
+interwork --depend=..\out_obj\tx_thread_stack_build.d -o..\out_obj\tx_thread_st
+ack_build.o -I.\RTE\Compiler -I.\RTE\_xian -IC:\Users\sdit\AppData\Local\Arm\Pa
+cks\Keil\ARM_Compiler\1.6.3\Include -IC:\Users\sdit\AppData\Local\Arm\Packs\Kei
+l\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include --predefine="_
+_EVAL SETA 1" --predefine="__MICROLIB SETA 1" --predefine="__UVISION_VERSION SE
+TA 536" --predefine="_RTE_ SETA 1" --predefine="STM32F407xx SETA 1" --predefine
+="_RTE_ SETA 1" --predefine="TX_ENABLE_FPU_SUPPORT SETA 1" --list=.\listings\tx
+_thread_stack_build.lst ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_stack_buil
+d.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+_tx_thread_stack_build 00000000
+
+Symbol: _tx_thread_stack_build
+   Definitions
+      At line 80 in file ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_stack_bui
+ld.s
+   Uses
+      At line 79 in file ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_stack_bui
+ld.s
+Comment: _tx_thread_stack_build used once
+|.text| 00000000
+
+Symbol: |.text|
+   Definitions
+      At line 33 in file ..\ThreadX\ports\cortex_m4\ac5\src\tx_thread_stack_bui
+ld.s
+   Uses
+      None
+Comment: |.text| unused
+2 symbols
+339 symbols in table

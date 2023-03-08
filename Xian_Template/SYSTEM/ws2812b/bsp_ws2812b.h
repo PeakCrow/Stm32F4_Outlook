@@ -28,6 +28,6 @@ void Ws2812b_Rgb_SetColor(uint8_t _R,uint8_t _G,uint8_t _B);
 uint8_t Ws2812b_Rgb_SetIndexColor(uint8_t _index,uint8_t _R,uint8_t _G,uint8_t _B);
 uint8_t Ws2812b_Rgb_SetIndexPartColor(uint8_t _start_index,uint8_t _end_index,uint8_t _R,uint8_t _G,uint8_t _B);
 void Ws2812b_Gradient_Lamp(unsigned long _color0, unsigned long _color1,uint16_t _speed);
-void Ws2812b_Run_Water_Lamp(uint8_t _R,uint8_t _G,uint8_t _B,uint16_t _speed,uint8_t _flag);
+void Ws2812b_Run_Water_Lamp(uint8_t _R,uint8_t _G,uint8_t _B,uint16_t _speed,run_lamp_state _flag);
 #endif
 

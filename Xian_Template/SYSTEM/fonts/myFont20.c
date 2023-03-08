@@ -10,7 +10,7 @@
 
 
 #include "lvgl.h"
-
+#include "bsp_spi_flash.h"
 
 typedef struct{
     uint16_t min;
