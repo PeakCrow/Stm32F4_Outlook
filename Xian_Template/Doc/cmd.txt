@@ -6,6 +6,7 @@ MDK5下载：e:;cd E:\Ls_Monitor\Xian_Template\User;D:\Keil_v5\UV4\UV4.exe -f -j
 
 qt安装：
 1..run文件安装
+https://download.qt.io/archive/qt/
 chmod +x qt-opensource-linux-x64-5.12.3.run
 sudo ./qt-opensource-linux-x64-5.12.3.run
 2.安装其他依赖，新建hellowrld运行
@@ -14,3 +15,19 @@ sudo apt-get install build-essential
 sudo apt-get install libgl1-mesa-dev
 3.运行qt
 runxian:/opt/Qt5.12.3/Tools/QtCreator/bin$ ./qtcreator
+
+git安装:
+1.安装
+sudo apt install git
+2.检查是否安装成功
+git --version
+
+ubuntu文件没有写入权限
+1.进入路径
+sudo chmod 777 xxx.xx
+
+ununtu安装vim
+1.安装
+sudo apt install vim
+2.查看是否安装成功
+vim --version
