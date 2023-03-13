@@ -2,7 +2,7 @@
 #define ADJUST_PEDAL_H
 #include <stdlib.h>
 #include "lvgl/lvgl.h"
-#include "monitor.h"
+#include "widght_ui/monitor.h"
 
 void Adjust_Pedal_Ui(lv_obj_t *parent);
 

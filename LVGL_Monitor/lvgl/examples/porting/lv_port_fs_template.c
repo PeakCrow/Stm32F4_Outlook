@@ -3,7 +3,7 @@
  *
  */
 
- /*Copy this file as "lv_port_fs.c" and set this value to "1" to enable content*/
+/*Copy this file as "lv_port_fs.c" and set this value to "1" to enable content*/
 #if 0
 
 /*********************
@@ -11,7 +11,7 @@
  *********************/
 #include "lv_port_fs_template.h"
 #include "../../lvgl.h"
-#include <stdio.h>
+
 /*********************
  *      DEFINES
  *********************/
@@ -33,7 +33,7 @@ static lv_fs_res_t fs_seek(lv_fs_drv_t * drv, void * file_p, uint32_t pos, lv_fs
 static lv_fs_res_t fs_size(lv_fs_drv_t * drv, void * file_p, uint32_t * size_p);
 static lv_fs_res_t fs_tell(lv_fs_drv_t * drv, void * file_p, uint32_t * pos_p);
 
-static void * fs_dir_open(lv_fs_drv_t * drv, const char *path);
+static void * fs_dir_open(lv_fs_drv_t * drv, const char * path);
 static lv_fs_res_t fs_dir_read(lv_fs_drv_t * drv, void * rddir_p, char * fn);
 static lv_fs_res_t fs_dir_close(lv_fs_drv_t * drv, void * rddir_p);
 
@@ -44,8 +44,7 @@ static lv_fs_res_t fs_dir_close(lv_fs_drv_t * drv, void * rddir_p);
 /**********************
  * GLOBAL PROTOTYPES
  **********************/
-FX_MEDIA     sdio_disk;
-FX_FILE      fx_file;
+
 /**********************
  *      MACROS
  **********************/
@@ -93,7 +92,7 @@ void lv_port_fs_init(void)
 static void fs_init(void)
 {
     /*E.g. for FatFS initialize the SD card and FatFS itself*/
-    //
+
     /*You code here*/
 }
 
@@ -107,28 +106,23 @@ static void fs_init(void)
 static void * fs_open(lv_fs_drv_t * drv, const char * path, lv_fs_mode_t mode)
 {
     lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    (void)drv;  /* Unused */
-    (void)res;  /* Unused */
-    int  f = -1;
 
-    if(mode == LV_FS_MODE_WR)
-    {
+    void * f = NULL;
+
+    if(mode == LV_FS_MODE_WR) {
         /*Open a file for write*/
-        f = FX_OPEN_FOR_WRITE;        /*Add your code here*/
+        f = ...         /*Add your code here*/
     }
-    else if(mode == LV_FS_MODE_RD)
-    {
+    else if(mode == LV_FS_MODE_RD) {
         /*Open a file for read*/
-        f = FX_OPEN_FOR_READ;        /*Add your code here*/
+        f = ...         /*Add your code here*/
     }
-    else if(mode == (LV_FS_MODE_WR | LV_FS_MODE_RD))
-    {
+    else if(mode == (LV_FS_MODE_WR | LV_FS_MODE_RD)) {
         /*Open a file for read and write*/
-        f = FX_OPEN_FOR_READ_FAST;         /*Add your code here*/
+        f = ...         /*Add your code here*/
     }
-    char buf[256];
-    sprintf(buf,"./%s",path);
-    return fx_file_open(&sdio_disk, &fx_file, buf, f);
+
+    return f;
 }
 
 /**
@@ -140,9 +134,9 @@ static void * fs_open(lv_fs_drv_t * drv, const char * path, lv_fs_mode_t mode)
 static lv_fs_res_t fs_close(lv_fs_drv_t * drv, void * file_p)
 {
     lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    (void)drv;  /* Unused */
+
     /*Add your code here*/
-    fx_file_close(file_p);
+
     return res;
 }
 
@@ -158,12 +152,9 @@ static lv_fs_res_t fs_close(lv_fs_drv_t * drv, void * file_p)
 static lv_fs_res_t fs_read(lv_fs_drv_t * drv, void * file_p, void * buf, uint32_t btr, uint32_t * br)
 {
     lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    (void)drv;  /* Unused */
 
     /*Add your code here*/
-    fx_file_open(&sdio_disk, &fx_file, file_p, FX_OPEN_FOR_READ);
-    fx_file_read(&fx_file, buf, btr, br);
-    res = LV_FS_RES_OK;
+
     return res;
 }
 
@@ -172,19 +163,16 @@ static lv_fs_res_t fs_read(lv_fs_drv_t * drv, void * file_p, void * buf, uint32_
  * @param drv       pointer to a driver where this function belongs
  * @param file_p    pointer to a file_t variable
  * @param buf       pointer to a buffer with the bytes to write
- * @param btr       Bytes To Write
- * @param br        the number of real written bytes (Bytes Written). NULL if unused.
+ * @param btw       Bytes To Write
+ * @param bw        the number of real written bytes (Bytes Written). NULL if unused.
  * @return          LV_FS_RES_OK: no error or  any error from @lv_fs_res_t enum
  */
 static lv_fs_res_t fs_write(lv_fs_drv_t * drv, void * file_p, const void * buf, uint32_t btw, uint32_t * bw)
 {
     lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    (void)drv;  /* Unused */
-    (void)bw;   /* Unused */
+
     /*Add your code here*/
-    fx_file_open(&sdio_disk, &fx_file, file_p, FX_OPEN_FOR_WRITE);
-    fx_file_write(&fx_file, buf, btw);
-    res = LV_FS_RES_OK;
+
     return res;
 }
 
@@ -199,12 +187,9 @@ static lv_fs_res_t fs_write(lv_fs_drv_t * drv, void * file_p, const void * buf, 
 static lv_fs_res_t fs_seek(lv_fs_drv_t * drv, void * file_p, uint32_t pos, lv_fs_whence_t whence)
 {
     lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    (void)drv;  /* Unused */
-    (void)whence;/* Unused */
+
     /*Add your code here*/
-    fx_file_open(&sdio_disk, &fx_file, file_p, FX_OPEN_FOR_READ_FAST);
-    fx_file_seek(&fx_file, pos);
-    res = LV_FS_RES_OK;
+
     return res;
 }
 /**
@@ -217,59 +202,57 @@ static lv_fs_res_t fs_seek(lv_fs_drv_t * drv, void * file_p, uint32_t pos, lv_fs
 static lv_fs_res_t fs_tell(lv_fs_drv_t * drv, void * file_p, uint32_t * pos_p)
 {
     lv_fs_res_t res = LV_FS_RES_NOT_IMP;
-    (void)drv;  /* Unused */
+
     /*Add your code here*/
-    fx_file_open(&sdio_disk, &fx_file, file_p, FX_OPEN_FOR_READ_FAST);
-    fx_directory_local_path_get(&sdio_disk,*pos_p);
-    res = LV_FS_RES_OK;
+
     return res;
 }
 
-///**
-// * Initialize a 'lv_fs_dir_t' variable for directory reading
-// * @param drv       pointer to a driver where this function belongs
-// * @param path      path to a directory
-// * @return          pointer to the directory read descriptor or NULL on error
-// */
-//static void * fs_dir_open(lv_fs_drv_t * drv, const char *path)
-//{
-//    void * dir = NULL;
-//    /*Add your code here*/
-//    dir = ...           /*Add your code here*/
-//    return dir;
-//}
+/**
+ * Initialize a 'lv_fs_dir_t' variable for directory reading
+ * @param drv       pointer to a driver where this function belongs
+ * @param path      path to a directory
+ * @return          pointer to the directory read descriptor or NULL on error
+ */
+static void * fs_dir_open(lv_fs_drv_t * drv, const char * path)
+{
+    void * dir = NULL;
+    /*Add your code here*/
+    dir = ...           /*Add your code here*/
+          return dir;
+}
 
-///**
-// * Read the next filename form a directory.
-// * The name of the directories will begin with '/'
-// * @param drv       pointer to a driver where this function belongs
-// * @param rddir_p   pointer to an initialized 'lv_fs_dir_t' variable
-// * @param fn        pointer to a buffer to store the filename
-// * @return          LV_FS_RES_OK: no error or  any error from @lv_fs_res_t enum
-// */
-//static lv_fs_res_t fs_dir_read(lv_fs_drv_t * drv, void * rddir_p, char *fn)
-//{
-//    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+/**
+ * Read the next filename form a directory.
+ * The name of the directories will begin with '/'
+ * @param drv       pointer to a driver where this function belongs
+ * @param rddir_p   pointer to an initialized 'lv_fs_dir_t' variable
+ * @param fn        pointer to a buffer to store the filename
+ * @return          LV_FS_RES_OK: no error or  any error from @lv_fs_res_t enum
+ */
+static lv_fs_res_t fs_dir_read(lv_fs_drv_t * drv, void * rddir_p, char * fn)
+{
+    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
 
-//    /*Add your code here*/
+    /*Add your code here*/
 
-//    return res;
-//}
+    return res;
+}
 
-///**
-// * Close the directory reading
-// * @param drv       pointer to a driver where this function belongs
-// * @param rddir_p   pointer to an initialized 'lv_fs_dir_t' variable
-// * @return          LV_FS_RES_OK: no error or  any error from @lv_fs_res_t enum
-// */
-//static lv_fs_res_t fs_dir_close(lv_fs_drv_t * drv, void * rddir_p)
-//{
-//    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
+/**
+ * Close the directory reading
+ * @param drv       pointer to a driver where this function belongs
+ * @param rddir_p   pointer to an initialized 'lv_fs_dir_t' variable
+ * @return          LV_FS_RES_OK: no error or  any error from @lv_fs_res_t enum
+ */
+static lv_fs_res_t fs_dir_close(lv_fs_drv_t * drv, void * rddir_p)
+{
+    lv_fs_res_t res = LV_FS_RES_NOT_IMP;
 
-//    /*Add your code here*/
+    /*Add your code here*/
 
-//    return res;
-//}
+    return res;
+}
 
 #else /*Enable this file at the top*/
 

@@ -132,6 +132,8 @@ typedef unsigned short                          USHORT;
 
 */
 
+#define  TX_ENABLE_EVENT_TRACE 1        /* TraceX使能 */
+
 #ifndef TX_MISRA_ENABLE
 #ifndef TX_TRACE_TIME_SOURCE
 #define TX_TRACE_TIME_SOURCE                    *((ULONG *) 0xE0001004)  

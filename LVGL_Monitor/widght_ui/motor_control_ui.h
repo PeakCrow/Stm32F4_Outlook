@@ -2,7 +2,7 @@
 #define MOTOR_CONTROL_H
 #include <stdlib.h>
 #include "lvgl/lvgl.h"
-#include "monitor.h"
+#include "widght_ui/monitor.h"
 
 void Motor_Control_Ui(lv_obj_t *parent);
 

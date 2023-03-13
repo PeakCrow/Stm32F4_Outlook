@@ -2,7 +2,7 @@
 #define SENSOR_UI_H
 #include <stdlib.h>
 #include "lvgl/lvgl.h"
-#include "monitor.h"
+#include "widght_ui/monitor.h"
 
 void Sensor_Ui(lv_obj_t *parent);
 

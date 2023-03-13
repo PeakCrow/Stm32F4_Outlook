@@ -35,7 +35,7 @@ void Adjust_Pedal_Ui(lv_obj_t *parent)
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
 #if enviroment_select == 0
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"D:/Ls_Monitor_Lower/LVGL_Monitor/images/adjust_pedal.png","D:/Ls_Monitor_Lower/LVGL_Monitor/images/adjust_pedal.png");
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"A:images/adjust_pedal.png","A:images/adjust_pedal.png");
 #else
     lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,"E:/Ls_Monitor/LVGL_Monitor/images/adjust_pedal.png","E:/Ls_Monitor/LVGL_Monitor/images/adjust_pedal.png",NULL);
 #endif
@@ -84,6 +84,7 @@ static void Imgbtn_MC_cb(lv_event_t * e)
 
     if(code == LV_EVENT_RELEASED)
         Adjust_Pedal_In_Ui(App_Common_Init("Adjust_Pedal",App_btn_Back_Cb));
+    	//App_Common_Init("Adjust_Pedal",App_btn_Back_Cb);
 }
 
 static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
@@ -164,6 +165,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_add_event_cb(forward_btn,Forward_Btn_Cb,LV_EVENT_ALL,pos_label);
     lv_obj_add_style(forward_btn,&style_pr,LV_STATE_PRESSED);
     lv_obj_add_style(forward_btn,&style_def,0);
+
 
     /* 反转按钮 */
     reverse_btn = lv_btn_create(parent);
@@ -246,7 +248,8 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
 
     for(uint8_t i = 0;i < 3;i++){
         lv_obj_t * shadow_label = lv_label_create(parent);
-        lv_obj_add_style(shadow_label,&style_shadow,0);
+        /* 此API会导致模拟器崩溃。 */
+        //lv_obj_add_style(shadow_label,&style_shadow,0);
         lv_obj_t * driverpos_label = lv_label_create(parent);
         lv_obj_set_style_text_font(driverpos_label,&lv_font_montserrat_24,LV_PART_MAIN);
         lv_label_set_text_fmt(driverpos_label,"Driver %d Pos %d ",i+1,50 + (i+1) * 10);
@@ -347,11 +350,11 @@ static void Radio_Btn_Cb(lv_event_t * e)
 static void Record_Btn_Cb(lv_event_t *e)
 {
     (void)e;
-    printf_s("Driver %d Pos is updated!\n",active_index_2+1);
+    printf("Driver %d Pos is updated!\n",active_index_2+1);
 }
 /* 踏板0位置标定 */
 static void Zero_Btn_Cb(lv_event_t * e)
 {
     (void)e;
-    printf_s("Driver 0 Pos is Cal\n");
+    printf("Driver 0 Pos is Cal\n");
 }

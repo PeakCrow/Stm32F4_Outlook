@@ -1438,7 +1438,7 @@
             <name>$PROJ_DIR$\..\Core\core_cmSimd.h</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\CMSIS\Device\ST\STM32F4xx\Source\Templates\iar\startup_stm32f407xx.s</name>
+            <name>$PROJ_DIR$\..\Hal_lib\CMSIS\Device\ST\STM32F4xx\Source\Templates\iar\startup_stm32f407xx.s</name>
         </file>
     </group>
     <group>
@@ -1465,124 +1465,124 @@
     <group>
         <name>Hallib</name>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_can.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_cortex.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_crc.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_crc.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_dma_ex.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_eth.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_eth.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_gpio.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c_ex.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_i2c_ex.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_iwdg.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_iwdg.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_pwr_ex.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_rcc_ex.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sd.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sd.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_spi.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_sram.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_tim_ex.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_uart.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_fsmc.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_sdmmc.c</name>
+            <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_sdmmc.c</name>
         </file>
     </group>
     <group>
         <name>Inkscreen</name>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\DEV_Config.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\DEV_Config.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\EPD_2in9b_V3.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\EPD_2in9b_V3.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\EPD_2in9b_V3_test.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\EPD_2in9b_V3_test.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\font12.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\font12.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\font12CN.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\font12CN.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\font16.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\font16.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\font20.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\font20.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\font24.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\font24.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\font24CN.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\font24CN.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\font8.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\font8.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\GUI_Paint.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\GUI_Paint.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\ImageData.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\ImageData.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ink_screen\ImageData2.c</name>
+            <name>$PROJ_DIR$\..\System\ink_screen\ImageData2.c</name>
         </file>
     </group>
     <group>
         <name>Lvgl/Fonts</name>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\fonts\myFont20.c</name>
+            <name>$PROJ_DIR$\..\System\fonts\myFont20.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\fonts\myFont36.c</name>
+            <name>$PROJ_DIR$\..\System\fonts\myFont36.c</name>
         </file>
     </group>
     <group>
@@ -2017,70 +2017,70 @@
     <group>
         <name>System</name>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\can\bsp_can_bus.c</name>
+            <name>$PROJ_DIR$\..\System\can\bsp_can_bus.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ticktim\bsp_dwt.c</name>
+            <name>$PROJ_DIR$\..\System\ticktim\bsp_dwt.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\lcd\bsp_font.c</name>
+            <name>$PROJ_DIR$\..\System\lcd\bsp_font.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\iic\bsp_iic_bus.c</name>
+            <name>$PROJ_DIR$\..\System\iic\bsp_iic_bus.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\key_fifo\bsp_key.c</name>
+            <name>$PROJ_DIR$\..\System\key_fifo\bsp_key.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\lcd\bsp_lcd.c</name>
+            <name>$PROJ_DIR$\..\System\lcd\bsp_lcd.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\led\bsp_led.c</name>
+            <name>$PROJ_DIR$\..\System\led\bsp_led.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\mlx90614\bsp_mlx90614.c</name>
+            <name>$PROJ_DIR$\..\System\mlx90614\bsp_mlx90614.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\rotation\bsp_rotation_sensor.c</name>
+            <name>$PROJ_DIR$\..\System\rotation\bsp_rotation_sensor.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\sd_card\bsp_sdio_sd.c</name>
+            <name>$PROJ_DIR$\..\System\sd_card\bsp_sdio_sd.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ads1256\bsp_spi_ads1256.c</name>
+            <name>$PROJ_DIR$\..\System\ads1256\bsp_spi_ads1256.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\spi\bsp_spi_bus.c</name>
+            <name>$PROJ_DIR$\..\System\spi\bsp_spi_bus.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\flash\bsp_spi_flash.c</name>
+            <name>$PROJ_DIR$\..\System\flash\bsp_spi_flash.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\flash\bsp_spi_flash_demo.c</name>
+            <name>$PROJ_DIR$\..\System\flash\bsp_spi_flash_demo.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\timer\bsp_tim_pwm.c</name>
+            <name>$PROJ_DIR$\..\System\timer\bsp_tim_pwm.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\touch\bsp_touch.c</name>
+            <name>$PROJ_DIR$\..\System\touch\bsp_touch.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\usart_fifo\bsp_usart_fifo.c</name>
+            <name>$PROJ_DIR$\..\System\usart_fifo\bsp_usart_fifo.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ws2812b\bsp_ws2812b.c</name>
+            <name>$PROJ_DIR$\..\System\ws2812b\bsp_ws2812b.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\Iwdg\iwdg.c</name>
+            <name>$PROJ_DIR$\..\System\Iwdg\iwdg.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ticktim\stm32f4xx_hal_timebase_tim.c</name>
+            <name>$PROJ_DIR$\..\System\ticktim\stm32f4xx_hal_timebase_tim.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\sys\sys.c</name>
+            <name>$PROJ_DIR$\..\System\sys\sys.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\SYSTEM\ticktim\ticktim.c</name>
+            <name>$PROJ_DIR$\..\System\ticktim\ticktim.c</name>
         </file>
     </group>
     <group>
@@ -2680,9 +2680,6 @@
     <group>
         <name>User</name>
         <file>
-            <name>$PROJ_DIR$\stm32f4_main\includes.h</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\stm32f4_main\main.c</name>
         </file>
         <file>
@@ -2696,9 +2693,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\ThreadX\ports\cortex_m4\iar\inc\tx_port.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\stm32f4_main\tx_user.h</name>
         </file>
     </group>
 </project>

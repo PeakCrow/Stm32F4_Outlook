@@ -2,7 +2,7 @@
 #define ABOUT_PHONE_H
 #include <stdlib.h>
 #include "lvgl/lvgl.h"
-#include "monitor.h"
+#include "widght_ui/monitor.h"
 
 void About_Phone_Ui(lv_obj_t *parent);
 

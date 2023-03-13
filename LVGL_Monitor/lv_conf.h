@@ -1,4 +1,4 @@
-﻿/**
+/**
  * @file lv_conf.h
  * Configuration file for v8.2.0
  */
@@ -19,15 +19,12 @@
 
 #include <stdint.h>
 
-/* 0:family_xian 1:machine_xian */
-#define enviroment_select 0
-
 /*====================
    COLOR SETTINGS
  *====================*/
 
 /*Color depth: 1 (1 byte per pixel), 8 (RGB332), 16 (RGB565), 32 (ARGB8888)*/
-#define LV_COLOR_DEPTH 16
+#define LV_COLOR_DEPTH 32
 
 /*Swap the 2 bytes of RGB565 color. Useful if the display has an 8-bit interface (e.g. SPI)*/
 #define LV_COLOR_16_SWAP 0
@@ -52,7 +49,7 @@
 #define LV_MEM_CUSTOM 0
 #if LV_MEM_CUSTOM == 0
     /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
-    #define LV_MEM_SIZE (8 * 1024 * 1024U)          /*[bytes]*/
+    #define LV_MEM_SIZE (8U * 1024U * 1024U)          /*[bytes]*/
 
     /*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/
     #define LV_MEM_ADR 0     /*0: unused*/
@@ -81,17 +78,17 @@
  *====================*/
 
 /*Default display refresh period. LVG will redraw changed areas with this period time*/
-#define LV_DISP_DEF_REFR_PERIOD 10      /*[ms]*/
+#define LV_DISP_DEF_REFR_PERIOD 30      /*[ms]*/
 
 /*Input device read period in milliseconds*/
-#define LV_INDEV_DEF_READ_PERIOD 10     /*[ms]*/
+#define LV_INDEV_DEF_READ_PERIOD 30     /*[ms]*/
 
 /*Use a custom tick source that tells the elapsed time in milliseconds.
  *It removes the need to manually update the tick with `lv_tick_inc()`)*/
-#define LV_TICK_CUSTOM 0
+#define LV_TICK_CUSTOM 1
 #if LV_TICK_CUSTOM
-    #define LV_TICK_CUSTOM_INCLUDE "Arduino.h"         /*Header for the system time function*/
-    #define LV_TICK_CUSTOM_SYS_TIME_EXPR (millis())    /*Expression evaluating to current system time in ms*/
+    #define LV_TICK_CUSTOM_INCLUDE "SDL2/SDL.h"         /*Header for the system time function*/
+    #define LV_TICK_CUSTOM_SYS_TIME_EXPR (SDL_GetTicks())    /*Expression evaluating to current system time in ms*/
 #endif   /*LV_TICK_CUSTOM*/
 
 /*Default Dot Per Inch. Used to initialize default sizes such as widgets sized, style paddings.
@@ -139,7 +136,7 @@
  *LV_GRAD_CACHE_DEF_SIZE sets the size of this cache in bytes.
  *If the cache is too small the map will be allocated only while it's required for the drawing.
  *0 mean no caching.*/
-#define LV_GRAD_CACHE_DEF_SIZE      4
+#define LV_GRAD_CACHE_DEF_SIZE      8*1024
 
 /*Allow dithering the gradients (to achieve visual smooth color gradients on limited color depth display)
  *LV_DITHER_GRADIENT implies allocating one or two more lines of the object's rendering surface
@@ -207,7 +204,7 @@
     *LV_LOG_LEVEL_ERROR       Only critical issue, when the system may fail
     *LV_LOG_LEVEL_USER        Only logs added by the user
     *LV_LOG_LEVEL_NONE        Do not log anything*/
-    #define LV_LOG_LEVEL LV_LOG_LEVEL_INFO
+    #define LV_LOG_LEVEL LV_LOG_LEVEL_WARN
 
     /*1: Print the log with 'printf';
     *0: User need to register a callback with `lv_log_register_print_cb()`*/
@@ -233,9 +230,9 @@
  *If LV_USE_LOG is enabled an error message will be printed on failure*/
 #define LV_USE_ASSERT_NULL          1   /*Check if the parameter is NULL. (Very fast, recommended)*/
 #define LV_USE_ASSERT_MALLOC        1   /*Checks is the memory is successfully allocated or no. (Very fast, recommended)*/
-#define LV_USE_ASSERT_STYLE         0   /*Check if the styles are properly initialized. (Very fast, recommended)*/
-#define LV_USE_ASSERT_MEM_INTEGRITY 0   /*Check the integrity of `lv_mem` after critical operations. (Slow)*/
-#define LV_USE_ASSERT_OBJ           0   /*Check the object's type and existence (e.g. not deleted). (Slow)*/
+#define LV_USE_ASSERT_STYLE         1   /*Check if the styles are properly initialized. (Very fast, recommended)*/
+#define LV_USE_ASSERT_MEM_INTEGRITY 1   /*Check the integrity of `lv_mem` after critical operations. (Slow)*/
+#define LV_USE_ASSERT_OBJ           1   /*Check the object's type and existence (e.g. not deleted). (Slow)*/
 
 /*Add a custom handler when assert happens e.g. to restart the MCU*/
 #define LV_ASSERT_HANDLER_INCLUDE <stdint.h>
@@ -246,14 +243,14 @@
  *-----------*/
 
 /*1: Show CPU usage and FPS count*/
-#define LV_USE_PERF_MONITOR 0
+#define LV_USE_PERF_MONITOR 1
 #if LV_USE_PERF_MONITOR
     #define LV_USE_PERF_MONITOR_POS LV_ALIGN_BOTTOM_RIGHT
 #endif
 
 /*1: Show the used memory and the memory fragmentation
  * Requires LV_MEM_CUSTOM = 0*/
-#define LV_USE_MEM_MONITOR 0
+#define LV_USE_MEM_MONITOR 1
 #if LV_USE_MEM_MONITOR
     #define LV_USE_MEM_MONITOR_POS LV_ALIGN_BOTTOM_LEFT
 #endif
@@ -271,7 +268,7 @@
     #define LV_SPRINTF_USE_FLOAT 1
 #endif  /*LV_SPRINTF_CUSTOM*/
 
-#define LV_USE_USER_DATA  1
+#define LV_USE_USER_DATA 1
 
 /*Garbage Collector settings
  *Used if lvgl is bound to higher level language and the memory is managed by that language*/
@@ -477,8 +474,6 @@
 
 #define LV_USE_TABLE      1
 
-#define LV_USE_Frame      1
-
 /*==================
  * EXTRA COMPONENTS
  *==================*/
@@ -577,13 +572,9 @@
 /*API for fopen, fread, etc*/
 #define LV_USE_FS_STDIO 1
 #if LV_USE_FS_STDIO
-    #if enviroment_select == 0
-        #define LV_FS_STDIO_LETTER 'D'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
-    #else
-        #define LV_FS_STDIO_LETTER 'E'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
-    #endif
+    #define LV_FS_STDIO_LETTER 'A'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
     #define LV_FS_STDIO_PATH ""         /*Set the working directory. File/directory paths will be appended to it.*/
-    #define LV_FS_STDIO_CACHE_SIZE  2*512   /*>0 to cache this number of bytes in lv_fs_read()*/
+    #define LV_FS_STDIO_CACHE_SIZE  2*1024   /*>0 to cache this number of bytes in lv_fs_read()*/
 #endif
 
 /*API for open, read, etc*/
@@ -684,16 +675,16 @@
 #endif
 
 /*Demonstrate the usage of encoder and keyboard*/
-#define LV_USE_DEMO_KEYPAD_AND_ENCODER     1
+#define LV_USE_DEMO_KEYPAD_AND_ENCODER     0
 
 /*Benchmark your system*/
-#define LV_USE_DEMO_BENCHMARK   1
+#define LV_USE_DEMO_BENCHMARK   0
 
 /*Stress test for LVGL*/
-#define LV_USE_DEMO_STRESS      1
+#define LV_USE_DEMO_STRESS      0
 
 /*Music player demo*/
-#define LV_USE_DEMO_MUSIC       1
+#define LV_USE_DEMO_MUSIC       0
 #if LV_USE_DEMO_MUSIC
 # define LV_DEMO_MUSIC_SQUARE       0
 # define LV_DEMO_MUSIC_LANDSCAPE    0

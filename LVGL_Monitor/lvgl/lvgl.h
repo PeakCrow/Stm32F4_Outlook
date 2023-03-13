@@ -15,8 +15,8 @@ extern "C" {
  ***************************/
 #define LVGL_VERSION_MAJOR 8
 #define LVGL_VERSION_MINOR 3
-#define LVGL_VERSION_PATCH 0
-#define LVGL_VERSION_INFO "dev"
+#define LVGL_VERSION_PATCH 3
+#define LVGL_VERSION_INFO ""
 
 /*********************
  *      INCLUDES
@@ -58,7 +58,6 @@ extern "C" {
 #include "src/widgets/lv_textarea.h"
 #include "src/widgets/lv_canvas.h"
 #include "src/widgets/lv_switch.h"
-#include "src/widgets/lv_objx_frame.h"
 
 #include "src/draw/lv_draw.h"
 
@@ -68,12 +67,6 @@ extern "C" {
  * EXTRAS
  *----------------*/
 #include "src/extra/lv_extra.h"
-#include "src/extra/widgets/lv_widgets.h"
-#include "src/extra/layouts/lv_layouts.h"
-#include "src/extra/themes/lv_themes.h"
-#include "src/extra/others/lv_others.h"
-#include "src/extra/libs/lv_libs.h"
-
 
 /*********************
  *      DEFINES

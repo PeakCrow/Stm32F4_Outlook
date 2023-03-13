@@ -117,6 +117,10 @@ __IO uint32_t  OSIdleCtr;     	    /* 空闲任务计数 */
 __IO float     OSCPUUsage;   	    /* CPU百分比 */
 uint32_t       OSIdleCtrMax; 	    /* 1秒内最大的空闲计数 */
 uint32_t       OSIdleCtrRun; 	    /* 1秒内空闲任务当前计数 */
+/* Tracex使用 */
+#define TRC_BUF_SIZE (100*32)                 /* Buffer size 500 events */
+#define TRC_MAX_OBJ_COUNT (40)         /* Max number of ThreadX objects */
+UCHAR myBuf[TRC_BUF_SIZE];
 
 /*******************************************************************************
   * @FunctionName: main
@@ -265,7 +269,7 @@ void  tx_application_define(void *first_unused_memory)
 static  void  AppTaskStart (ULONG thread_input)
 {
 	(void)thread_input;
-
+    UINT status;
 	/* 优先执行任务统计 */
 	OSStatInit();
 
@@ -301,7 +305,7 @@ static  void  AppTaskStart (ULONG thread_input)
 
 	while (1)
 		{
-//			tx_trace_enable(&myBuf,TRC_BUF_SIZE,TRC_MAX_OBJ_COUNT);
+            status = tx_trace_enable(&myBuf,TRC_BUF_SIZE,TRC_MAX_OBJ_COUNT);
 			/* 需要周期性处理的程序，对应裸机工程调用的SysTick_ISR */
 			bsp_ProPer1ms();
 			tx_thread_sleep(1);

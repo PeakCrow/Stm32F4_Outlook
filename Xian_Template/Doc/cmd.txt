@@ -22,12 +22,28 @@ sudo apt install git
 2.检查是否安装成功
 git --version
 
-ubuntu文件没有写入权限
-1.进入路径
-sudo chmod 777 xxx.xx
-
-ununtu安装vim
+安装vim
 1.安装
 sudo apt install vim
 2.查看是否安装成功
 vim --version
+
+修改文件权限
+1.对所有用户的权限将xxx.xxx改为可读写
+chmod a+rw xxx.xxx
+
+安装eclipse(注意安装C/C++版本即可)
+1.sudo tar -xzvf eclipse-cpp-2022-12-R-linux-gtk-x86_64.tar.gz -C /opt/eclipse
+
+eclipse-run-lvgl
+1.clone仓库
+git clone --recursive https://github.com/littlevgl/pc_simulator_sdl_eclipse.git
+2.安装SDL
+sudo apt-get update
+sudo apt-get install -y build-essential libsdl2-dev
+3.eclipse导入lvgl模拟器
+Open Eclipse CDT
+Click File->Import and choose General->Existing project into Workspace
+Browse the root directory of the project and click Finish
+Build your project and run it
+

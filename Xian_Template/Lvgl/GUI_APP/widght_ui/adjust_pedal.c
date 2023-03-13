@@ -144,7 +144,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_style_set_shadow_width(&style_warning, 10);
     lv_style_set_shadow_ofs_y(&style_warning, 5);
     lv_style_set_shadow_opa(&style_warning, LV_OPA_50);
-    lv_style_set_width(&style_warning, 250);
+    lv_style_set_width(&style_warning, LV_SIZE_CONTENT);
     lv_style_set_height(&style_warning,LV_SIZE_CONTENT);
 	
 	/* 电机实时位置标签 */
@@ -153,7 +153,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
 	lv_obj_align(pos_label,LV_ALIGN_CENTER,0,0);	
 	lv_obj_add_style(pos_label,&style_warning,0);
     NumberConuts = DriverX_Pos.current_pos;
-	lv_label_set_text_fmt(pos_label,"  Pedal_Pos:%.2f",NumberConuts);	
+	lv_label_set_text_fmt(pos_label,"Pedal_Pos:%.2f",NumberConuts);	
 	lv_obj_add_event_cb(pos_label,Pos_Label_Cb,LV_EVENT_ALL,pos_label);
 	
 		
@@ -340,7 +340,7 @@ static void Pos_Label_Cb(lv_event_t *e)
 		/* 更新标签文本值 */			
 		NumberConuts = PosQueue / 65535.00;
 		DriverX_Pos.current_pos = NumberConuts;
-		lv_label_set_text_fmt(pos_label,"  Pedal_Pos : %.2f",NumberConuts);
+		lv_label_set_text_fmt(pos_label,"Pedal_Pos : %.2f",NumberConuts);
 
 	}else if(code == LV_EVENT_RELEASED){
 		App_Printf("%d ",PosQueue);
@@ -553,7 +553,7 @@ static void Realtime_MotorPos_Cb(lv_timer_t * e)
 	if(NumberConuts < 100.00)
 		DriverX_Pos.current_pos = NumberConuts;
 
-	lv_label_set_text_fmt(pos_label,"  Pedal_Pos : %.2f",DriverX_Pos.current_pos);
+	lv_label_set_text_fmt(pos_label,"Pedal_Pos : %.2f",DriverX_Pos.current_pos);
 	
     /* 要加一个延时将上面读取实时位置的命令发送和下面的电机停止命令分开 */
     /* 不然电机停止命令无效 */

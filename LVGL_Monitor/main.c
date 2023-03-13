@@ -7,7 +7,7 @@
 /*********************
  *      INCLUDES
  *********************/
-//#define _DEFAULT_SOURCE /* needed for usleep() */
+#define _DEFAULT_SOURCE /* needed for usleep() */
 #include <stdlib.h>
 #include <unistd.h>
 #define SDL_MAIN_HANDLED /*To fix SDL's "undefined reference to WinMain" issue*/
@@ -16,8 +16,7 @@
 #include "lvgl/examples/lv_examples.h"
 #include "lvgl/demos/lv_demos.h"
 #include "lv_drivers/sdl/sdl.h"
-#include "monitor.h"
-#include "lvgl/examples/porting/lv_port_fs_template.h"
+#include "widght_ui/monitor.h"
 
 /*********************
  *      DEFINES
@@ -71,7 +70,7 @@ int main(int argc, char **argv)
 
   /*Initialize LVGL*/
   lv_init();
-  //lv_port_fs_init();
+
   /*Initialize the HAL (display, input devices, tick) for LVGL*/
   hal_init();
 
@@ -92,20 +91,9 @@ int main(int argc, char **argv)
 //  lv_example_tabview_1();
 //  lv_example_flex_3();
 //  lv_example_label_1();
-
-//  lv_demo_widgets();
-//  lv_demo_stress();
-//  lv_demo_music();
- // lv_example_menu_3();
-//  lv_example_slider_3();
- // lv_example_img_3();
-    Gui_Monitor_App();
-//    lv_example_img_2();
-//  lv_example_animimg_1();
-//  lv_example_anim_2();
-//  lv_example_menu_3();
-//  lv_demo_keypad_encoder();
-//    PageManagerInit();
+  Gui_Monitor_App();
+//    lv_demo_widgets();
+//  lv_example_png_1();
   while(1) {
       /* Periodically call the lv_task handler.
        * It could be done in a timer interrupt or an OS task too.*/
@@ -113,7 +101,7 @@ int main(int argc, char **argv)
       usleep(5 * 1000);
   }
 
-  //return 0;
+  return 0;
 }
 
 /**********************
