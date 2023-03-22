@@ -1,7 +1,7 @@
 ﻿#include "motor_control_ui.h"
 #include "monitor.h"
 #include <stdio.h>
-#include "lv_drv_conf.h"
+//#include "lv_drv_conf.h"
 
 
 static void Imgbtn_MC_cb(lv_event_t * e);
@@ -29,7 +29,7 @@ void Motor_Control_Ui(lv_obj_t *parent)
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"A:images/motor_control.png","A:images/motor_control.png");
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/motor_control.png","D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/motor_control.png");
     /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,400,120);
     /* 设置按钮位置 */
@@ -88,7 +88,7 @@ static void Motor_Control_In_Ui(lv_obj_t *parent)
 
     /* 电池soc */
     ui_Image_Particle1 = lv_img_create(parent);
-    lv_img_set_src(ui_Image_Particle1,"A:images/horzi_direction.png");
+    lv_img_set_src(ui_Image_Particle1,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/horzi_direction.png");
     lv_obj_set_height(ui_Image_Particle1, LV_SIZE_CONTENT);
     lv_obj_set_width(ui_Image_Particle1, LV_SIZE_CONTENT);   /// 1
     //lv_obj_align_to(ui_Image_Particle1,NULL, LV_ALIGN_LEFT_MID,50,20);
@@ -98,7 +98,7 @@ static void Motor_Control_In_Ui(lv_obj_t *parent)
     //lv_obj_set_style_blend_mode(ui_Image_Particle1, LV_BLEND_MODE_ADDITIVE, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Image_Particle2 = lv_img_create(parent);
-    lv_img_set_src(ui_Image_Particle2,"A:images/verti_direction.png");
+    lv_img_set_src(ui_Image_Particle2,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/verti_direction.png");
     lv_obj_set_height(ui_Image_Particle2, LV_SIZE_CONTENT);
     lv_obj_set_width(ui_Image_Particle2, LV_SIZE_CONTENT);   /// 1
     //lv_obj_align_to(ui_Image_Particle1,NULL, LV_ALIGN_LEFT_MID,50,20);

@@ -24,10 +24,13 @@ LVGL_Monitor/Debug
 *.apk
 *.axf
 *.chm
+*.user
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
 qt_lvgl_simulink.pro.user
+lvgl-qt-sim.pro.user.f559df6
+lvgl-qt-sim-music-demo.pro.user.f559df6
 Run_Xian.uvoptx
 Run_Xian.uvguix.Administrator
 Run_Xian.uvguix.TRX

@@ -1,7 +1,7 @@
 ﻿#include "sensor_ui.h"
 #include "monitor.h"
 #include <stdio.h>
-#include "lv_drv_conf.h"
+//#include "lv_drv_conf.h"
 #include "time.h"
 
 static void Imgbtn_MC_cb(lv_event_t * e);
@@ -24,7 +24,7 @@ void Sensor_Ui(lv_obj_t *parent)
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
 #if enviroment_select == 0
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"A:images/sensor.png","A:images/sensor.png");
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/sensor.png","D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/sensor.png");
 #else
     lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"E:/Ls_Monitor/LVGL_Monitor/images/sensor.png","E:/Ls_Monitor/LVGL_Monitor/images/sensor.png");
 #endif

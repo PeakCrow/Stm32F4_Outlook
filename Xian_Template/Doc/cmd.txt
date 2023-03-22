@@ -13,14 +13,14 @@ sudo ./qt-opensource-linux-x64-5.12.3.run
 sudo apt-get install clang
 sudo apt-get install build-essential
 sudo apt-get install libgl1-mesa-dev
-3.运行qt
+3.运行qt给i他
 runxian:/opt/Qt5.12.3/Tools/QtCreator/bin$ ./qtcreator
 
 git安装:
 1.安装
 sudo apt install git
 2.检查是否安装成功
-git --version
+git version
 
 安装vim
 1.安装
@@ -46,4 +46,49 @@ Open Eclipse CDT
 Click File->Import and choose General->Existing project into Workspace
 Browse the root directory of the project and click Finish
 Build your project and run it
+4.
+git clone git@gitee.com:tian-runxian/ls_monitor.git
+
+树莓派开启管理员权限
+1.sudo passwd root
+接着输入两次密码即可
+2.sudo passwd --status root
+返回P代表开启成功
+
+级联目录里的所有子目录与文件 到复制与改写权限
+1.sudo chmod -R 777 opt
+
+树莓派安装eclipse
+sudo apt-get install eclipse-cdt
+
+树莓派查看系统位数
+getconf LONG_BIT
+
+树莓派查看版本类型
+lsb_release -a
+
+uname -m 确定你使用的系统的架构
+
+树莓派换源
+sudo nano /etc/apt/sources.list
+deb https://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ bullseye main non-free contrib rpi
+deb-src https://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ bullseye main non-free contrib rpi
+
+sudo nano /etc/apt/sources.list.d/raspi.list
+deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo reboot
+
+树莓派安装cmake
+sudo apt-get install cmake
+
+安装gtk2
+sudo apt-get install libgtk2.0-dev
+
+终端进入eclipse安装目录
+./eclipse > /dev/null 2>&1 &
+
+有道翻译词典软件运行会造成qtcreater未响应
 

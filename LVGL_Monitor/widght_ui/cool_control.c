@@ -1,7 +1,7 @@
 ﻿#include "cool_control.h"
 #include "monitor.h"
 #include <stdio.h>
-#include "lv_drv_conf.h"
+//#include "lv_drv_conf.h"
 
 
 static void Imgbtn_MC_cb(lv_event_t * e);
@@ -17,7 +17,7 @@ void Cool_Control_Ui(lv_obj_t *parent)
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
 #if enviroment_select == 0
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"A:images/cool_control.png","A:images/cool_control.png");
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/cool_control.png","D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/cool_control.png");
 #else
     lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,"E:/Ls_Monitor/LVGL_Monitor/images/cool_control.png","E:/Ls_Monitor/LVGL_Monitor/images/cool_control.png",NULL);
 #endif

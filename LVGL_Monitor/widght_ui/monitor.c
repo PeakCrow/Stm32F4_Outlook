@@ -2,7 +2,7 @@
 #include "lvgl/lvgl.h"
 #include <stdio.h>
 #include "lvgl/demos/lv_demos.h"
-#include "lv_drv_conf.h"
+//#include "lv_drv_conf.h"
 
 #include "widght_ui/motor_control_ui.h"
 #include "widght_ui/about_phone_ui.h"
@@ -32,6 +32,7 @@ void Gui_Monitor_App()
     uint16_t meter_height = 0;
     meter_height = ((unsigned short)(scr_act_height() * 0.8));
     lv_obj_set_style_bg_color(lv_scr_act(),lv_color_hex(0x123456),LV_STATE_DEFAULT);
+#if 1
     Motor_Control_Ui(lv_scr_act());
     About_Phone_Ui(lv_scr_act());
     Set_Up_Ui(lv_scr_act());
@@ -40,6 +41,7 @@ void Gui_Monitor_App()
     Cool_Control_Ui(lv_scr_act());
     Battery_Box_Ui(lv_scr_act());
     Sensor_Ui(lv_scr_act());
+#endif
     /* 创建速度盘 */
     /* 暂时将仪表盘放在最下面，以此来屏蔽其他部件 */
     lv_example_Monitor_Speed_Meter();
@@ -229,13 +231,13 @@ lv_obj_t* App_Common_Init(const char *title,App_btn_Back_Cb_Ptr App_btn_Back_Cb)
     //const char btn_source[] = "E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png";
 
     parent = lv_obj_create(lv_scr_act());
-    lv_obj_set_size(parent,SDL_HOR_RES,SDL_VER_RES);
+    lv_obj_set_size(parent,LV_HOR_RES_MAX,LV_VER_RES_MAX);
     lv_obj_set_style_bg_color(parent,lv_color_hex(0x1cbac8),LV_STATE_DEFAULT);
 
     /* 创建返回按钮 */
     App_btn_Back = lv_imgbtn_create(parent);
 #if enviroment_select == 0
-    lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"A:images/app_btn.png","A:images/app_btn.png","A:images/app_btn.png");
+    lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/app_btn.png","D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/app_btn.png","D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/app_btn.png");
 #else
     lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png","E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png","E:/Ls_Monitor/LVGL_Monitor/images/app_btn.png");
 #endif
