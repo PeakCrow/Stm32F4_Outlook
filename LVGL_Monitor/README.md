@@ -5,7 +5,7 @@ Note that your App is portable to any LVGL supported Embedded System. <br>
 Qt just provides the dev evironment for developing your UI.
 <br>
 <br>
-![docs/demo.png](docs/demo.png)
+![widght_ui/images/demo.png](widght_ui/images/demo.png)
 
 # Installation
 - install Qt (tested with 5.12.2)
@@ -24,7 +24,7 @@ git submodule update --init
 ## Video
 
 <a href="https://rumble.com/v19160b-lvgl-qt-simulator.html">
-  <img src="docs/video.png">
+  <img src="widght_ui/images/video.png">
 </a>
 
 
