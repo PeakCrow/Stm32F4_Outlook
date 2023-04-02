@@ -16,11 +16,7 @@ void Set_Up_Ui(lv_obj_t *parent)
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
-#if enviroment_select == 0
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/set_up.png","D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/set_up.png");
-#else
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"E:/Ls_Monitor/LVGL_Monitor/images/set_up.png","E:/Ls_Monitor/LVGL_Monitor/images/set_up.png");
-#endif
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,png_load_path(set_up.png),png_load_path(set_up.png));
     /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,400,120);
     /* 设置按钮位置 */
@@ -101,7 +97,7 @@ static void Set_Up_In_Ui(lv_obj_t *parent)
     lv_obj_set_style_bg_opa(apps_slider1, 0, LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_main_stop(apps_slider1, 0, LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_grad_stop(apps_slider1, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_img_src(apps_slider1, "D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/img_slider.png", LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(apps_slider1, png_load_path(img_slider.png), LV_PART_INDICATOR | LV_STATE_DEFAULT);
 
     lv_obj_set_style_opa(apps_slider1, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
 }

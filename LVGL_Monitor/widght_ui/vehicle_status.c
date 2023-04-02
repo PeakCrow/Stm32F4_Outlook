@@ -16,11 +16,7 @@ void Vehicle_Status_Ui(lv_obj_t *parent)
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
-#if enviroment_select == 0
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/vehicle_status.png","D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/vehicle_status.png");
-#else
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,"E:/Ls_Monitor/LVGL_Monitor/images/vehicle_status.png","E:/Ls_Monitor/LVGL_Monitor/images/vehicle_status.png",NULL);
-#endif
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,png_load_path(vehicle_status.png),png_load_path(vehicle_status.png));
     /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,400,120);
     /* 设置按钮位置 */

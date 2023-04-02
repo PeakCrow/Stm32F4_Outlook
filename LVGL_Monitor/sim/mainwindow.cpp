@@ -44,7 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->lb_display->setMaximumWidth(LV_HOR_RES_MAX);
     ui->lb_display->setMaximumHeight(LV_VER_RES_MAX);
-    setWindowTitle("LVGL Qt Simulator - version " LUA_EOS_VERSION);
+    setWindowTitle("LVGL Qt Simulator LS Racing - version " LUA_EOS_VERSION);
 
     setGeometry(0,0, LV_HOR_RES_MAX, LV_VER_RES_MAX);
 
@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->lb_display, SIGNAL(mousePressed(int, int)), this, SLOT(onMousePressed(int, int)));
     connect(ui->lb_display, SIGNAL(mouseReleased(int, int)), this, SLOT(onMouseReleased(int, int)));
 
-    // ui->lb_display->setPixmap(display_pixelmap);
+    //ui->lb_display->setPixmap(display_pixelmap);
     //ui->lb_display->setPixmap(QPixmap::fromImage(display_image));
     //display_image.fill(Qt::green);
     //ui->lb_display->setPixmap(QPixmap::fromImage(display_image));

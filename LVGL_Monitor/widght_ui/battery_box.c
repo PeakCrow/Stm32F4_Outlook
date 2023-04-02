@@ -14,7 +14,7 @@ static void wave_animation(lv_obj_t * TargetObject, int delay,int end_value);
 static void particle_animation(lv_obj_t * TargetObject, int delay_time,int end_value);
 static void ofs_set_y_anim(void * img, int32_t v);
 static void ofs_set_x_anim(void  * a, int32_t v);
-static void Battery_Lable_In_Ui(lv_obj_t * parent,lv_obj_t * align_parent);
+static void Battery_Lable_png(char* title,png_direction direction,lv_obj_t * parent,lv_obj_t * align_parent,lv_coord_t x_ofs,lv_coord_t y_ofs);
 /******************************************************************************/
 void Battery_Box_Ui(lv_obj_t *parent)
 {
@@ -22,11 +22,7 @@ void Battery_Box_Ui(lv_obj_t *parent)
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
-#if enviroment_select == 0
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/battery_box.png","D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/battery_box.png");
-#else
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"E:/Ls_Monitor/LVGL_Monitor/images/battery_box.png","E:/Ls_Monitor/LVGL_Monitor/images/battery_box.png");
-#endif
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,png_load_path(battery_box.png),png_load_path(battery_box.png));
     /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,200,120);
     /* 设置按钮位置 */
@@ -84,11 +80,12 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
     lv_obj_t * break_led,* tsms_led;
     lv_obj_t * apps_slider1,* apps_slider2;
     lv_obj_t * current_bar,*voltage_bar;
+    lv_obj_t * soc_label;
 
 
     /* 电池soc */
     ui_Image_Particle1 = lv_img_create(parent);
-    lv_img_set_src(ui_Image_Particle1,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/particle_1.png");
+    lv_img_set_src(ui_Image_Particle1,png_load_path(particle_1.png));
     lv_obj_set_height(ui_Image_Particle1, 240/2);
     lv_obj_set_width(ui_Image_Particle1, LV_SIZE_CONTENT);   /// 1
     //lv_obj_align_to(ui_Image_Particle1,NULL, LV_ALIGN_LEFT_MID,50,20);
@@ -99,7 +96,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
 
 
     ui_Image_Particle2 = lv_img_create(parent);
-    lv_img_set_src(ui_Image_Particle2,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/particle_2.png");
+    lv_img_set_src(ui_Image_Particle2,png_load_path(particle_2.png));
     lv_obj_set_height(ui_Image_Particle2, 240/2);
     lv_obj_set_width(ui_Image_Particle2, LV_SIZE_CONTENT);   /// 1
     lv_obj_align_to(ui_Image_Particle2,ui_Image_Particle1, LV_ALIGN_CENTER,0,0);
@@ -109,7 +106,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
 
 
     ui_Image_Particle3 = lv_img_create(parent);
-    lv_img_set_src(ui_Image_Particle3,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/particle_3.png");
+    lv_img_set_src(ui_Image_Particle3,png_load_path(particle_3.png));
     lv_obj_set_height(ui_Image_Particle3, 240/2);
     lv_obj_set_width(ui_Image_Particle3, LV_SIZE_CONTENT);   /// 1
     lv_obj_align_to(ui_Image_Particle3,ui_Image_Particle1, LV_ALIGN_CENTER,0,0);
@@ -118,7 +115,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
     lv_obj_set_style_blend_mode(ui_Image_Particle3, LV_BLEND_MODE_ADDITIVE, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Wave1 = lv_img_create(parent);
-    lv_img_set_src(ui_Wave1,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/water_2.png");
+    lv_img_set_src(ui_Wave1,png_load_path(water_2.png));
     lv_obj_set_width(ui_Wave1, 103/2 - 5);
     lv_obj_set_height(ui_Wave1, 130/2 - 5);
     lv_obj_align_to(ui_Wave1,ui_Image_Particle1, LV_ALIGN_CENTER,0,20);
@@ -128,7 +125,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
     lv_obj_set_style_img_opa(ui_Wave1,LV_OPA_80,LV_STATE_DEFAULT);
 
     ui_Wave2 = lv_img_create(parent);
-    lv_img_set_src(ui_Wave2,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/water_1.png");
+    lv_img_set_src(ui_Wave2,png_load_path(water_1.png));
     lv_obj_set_width(ui_Wave2,103/2 - 5);
     lv_obj_set_height(ui_Wave2, 130/2 - 5);
     lv_obj_align_to(ui_Wave2,ui_Image_Particle1, LV_ALIGN_CENTER,0,29);
@@ -138,7 +135,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
     lv_obj_set_style_img_opa(ui_Wave2,LV_OPA_80,LV_STATE_DEFAULT);
 
     ui_Image_Battery_BG = lv_img_create(parent);
-    lv_img_set_src(ui_Image_Battery_BG,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/battery_bg.png");
+    lv_img_set_src(ui_Image_Battery_BG,png_load_path(battery_bg.png));
     lv_obj_set_width(ui_Image_Battery_BG, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Image_Battery_BG, LV_SIZE_CONTENT);    /// 1
     lv_obj_align_to(ui_Image_Battery_BG,ui_Image_Particle1, LV_ALIGN_CENTER,0,0);
@@ -149,6 +146,28 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
     lv_obj_set_style_shadow_opa(ui_Image_Battery_BG, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_width(ui_Image_Battery_BG, 50, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_shadow_spread(ui_Image_Battery_BG, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+
+    /*Set only the properties that should be different*/
+    static lv_style_t style_warning;
+    lv_style_init(&style_warning);
+    lv_style_set_bg_color(&style_warning, lv_palette_main(LV_PALETTE_YELLOW));
+    lv_style_set_border_color(&style_warning, lv_palette_darken(LV_PALETTE_YELLOW, 3));
+    lv_style_set_text_color(&style_warning, lv_palette_darken(LV_PALETTE_YELLOW, 4));
+    lv_style_set_border_width(&style_warning, 2);
+    lv_style_set_radius(&style_warning, 10);
+    lv_style_set_shadow_width(&style_warning, 10);
+    lv_style_set_shadow_ofs_y(&style_warning, 5);
+    lv_style_set_shadow_opa(&style_warning, LV_OPA_50);
+    lv_style_set_width(&style_warning, 100);
+    lv_style_set_height(&style_warning,LV_SIZE_CONTENT);
+
+    /* 电池SOC标签 */
+    soc_label = lv_label_create(parent);
+    lv_obj_align_to(soc_label,ui_Image_Battery_BG,LV_ALIGN_OUT_BOTTOM_MID,-35,30);
+    lv_label_set_text_fmt(soc_label,"  SOC:%d",9999);
+    lv_obj_add_style(soc_label,&style_warning,0);
+
+
 
     /* 制动指示灯 */
     break_led  = lv_led_create(parent);
@@ -161,7 +180,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
 
     /* 安全回路指示灯 */
     tsms_led  = lv_led_create(parent);
-    lv_obj_align_to(tsms_led,ui_Image_Particle1, LV_ALIGN_OUT_BOTTOM_RIGHT, 100, 0);
+    lv_obj_align_to(tsms_led,ui_Image_Particle1, LV_ALIGN_OUT_BOTTOM_RIGHT, 100, 30);
     lv_led_set_brightness(tsms_led, 150);
     lv_obj_set_height(tsms_led,50);
     lv_obj_set_width(tsms_led,50);
@@ -177,7 +196,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
         lv_slider_set_left_value(apps_slider1, 0, LV_ANIM_OFF);
     lv_obj_set_width(apps_slider1, 20);
     lv_obj_set_height(apps_slider1, 235);
-    lv_obj_align_to(apps_slider1,ui_Image_Particle1, LV_ALIGN_CENTER,250,0);
+    lv_obj_align_to(apps_slider1,ui_Image_Particle1, LV_ALIGN_CENTER,250,30);
     lv_obj_set_style_radius(apps_slider1, 4, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(apps_slider1, lv_color_hex(0xD0D7DF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(apps_slider1, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -200,7 +219,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
     lv_obj_set_style_bg_opa(apps_slider1, 0, LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_main_stop(apps_slider1, 0, LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_grad_stop(apps_slider1, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_img_src(apps_slider1, "D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/img_slider.png", LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(apps_slider1, png_load_path(img_slider.png), LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_opa(apps_slider1, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
 
     /* 油门踏板信号量2 */
@@ -212,7 +231,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
         lv_slider_set_left_value(apps_slider2, 0, LV_ANIM_OFF);
     lv_obj_set_width(apps_slider2, 20);
     lv_obj_set_height(apps_slider2, 235);
-    lv_obj_align_to(apps_slider2,ui_Image_Particle1, LV_ALIGN_CENTER,350,0);
+    lv_obj_align_to(apps_slider2,ui_Image_Particle1, LV_ALIGN_CENTER,350,30);
     lv_obj_set_style_radius(apps_slider2, 4, LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(apps_slider2, lv_color_hex(0xD0D7DF), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_opa(apps_slider2, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -235,7 +254,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
     lv_obj_set_style_bg_opa(apps_slider2, 0, LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_main_stop(apps_slider2, 0, LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_grad_stop(apps_slider2, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_img_src(apps_slider2, "D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/img_slider.png", LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(apps_slider2, png_load_path(img_slider.png), LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_opa(apps_slider2, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
 
     /* 电流信号 */
@@ -247,7 +266,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
     lv_obj_set_style_anim_time(current_bar, 5000, LV_STATE_DEFAULT);
     lv_bar_set_value(current_bar, 3090, LV_ANIM_ON);
     lv_bar_set_start_value(current_bar, 0, LV_ANIM_ON);
-    lv_obj_set_style_bg_img_src(current_bar, "D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/img_skew_strip.png", LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(current_bar, png_load_path(img_skew_strip.png), LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_opa(current_bar, LV_OPA_30, LV_PART_KNOB | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_img_tiled(current_bar,true,LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(current_bar,1,LV_STATE_DEFAULT);
@@ -257,19 +276,28 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
     voltage_bar = lv_bar_create(parent);
     lv_obj_set_size(voltage_bar, 260, 20);
     lv_bar_set_range(voltage_bar,0,5000);
-    lv_obj_align_to(voltage_bar,ui_Image_Particle1, LV_ALIGN_OUT_BOTTOM_LEFT,-350,0);
+    lv_obj_align_to(voltage_bar,ui_Image_Particle1, LV_ALIGN_OUT_BOTTOM_LEFT,-350,50);
     lv_bar_set_mode(voltage_bar, LV_BAR_MODE_SYMMETRICAL);
     lv_obj_set_style_anim_time(voltage_bar, 5000, LV_STATE_DEFAULT);
     lv_bar_set_value(voltage_bar, 4090, LV_ANIM_ON);
     lv_bar_set_start_value(voltage_bar, 0, LV_ANIM_ON);
     lv_obj_set_style_arc_rounded(voltage_bar,true,LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_img_src(voltage_bar, "D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/img_skew_strip.png", LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_img_src(voltage_bar, png_load_path(img_skew_strip.png), LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_opa(voltage_bar, LV_OPA_30, LV_PART_KNOB | LV_STATE_DEFAULT);
     lv_obj_set_style_bg_img_tiled(voltage_bar,true,LV_PART_INDICATOR | LV_STATE_DEFAULT);
     lv_obj_set_style_border_width(voltage_bar,1,LV_STATE_DEFAULT);
     lv_obj_set_style_bg_color(voltage_bar,lv_color_hex(0x00ff80),LV_PART_MAIN);
 
-    Battery_Lable_In_Ui(parent,ui_Image_Particle1);
+    /* 给每个数据显示添加标签说明 */
+    Battery_Lable_png("CURRENT VLAUE",horzi_direct_png,parent,current_bar,0,0);
+    Battery_Lable_png("VOLTAGE VLAUE",horzi_direct_png,parent,voltage_bar,0,0);
+    Battery_Lable_png("APPS1",verti_direct_png,parent,apps_slider1,0,15);
+    Battery_Lable_png("APPS2",verti_direct_png,parent,apps_slider2,0,15);
+    Battery_Lable_png("BREAK",verti_direct_png,parent,break_led,0,15);
+    Battery_Lable_png("TSMS",verti_direct_png,parent,tsms_led,0,20);
+    Battery_Lable_png(" SOC ",verti_direct_png,parent,ui_Image_Particle1,0,0);
+
+
 
     /* 电池soc动画部分 */
     wave_animation(ui_Wave1, 2920,-207);
@@ -281,31 +309,34 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
 
 }
 /********************************************************************************************/
-static void Battery_Lable_In_Ui(lv_obj_t * parent,lv_obj_t * align_parent)
+static void Battery_Lable_png(char * title,png_direction direction,lv_obj_t * parent,lv_obj_t * align_parent,lv_coord_t x_ofs,lv_coord_t y_ofs)
 {
-    lv_obj_t * horzi_direction,*verti_direction;
+    lv_obj_t * png_direction;
+    lv_obj_t * png_label;
 
 
-    horzi_direction = lv_img_create(parent);
-    lv_img_set_src(horzi_direction,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/horzi_direction.png");
-    lv_obj_set_height(horzi_direction, LV_SIZE_CONTENT);
-    lv_obj_set_width(horzi_direction, LV_SIZE_CONTENT);   /// 1
-    //lv_obj_align_to(ui_Image_Particle1,NULL, LV_ALIGN_LEFT_MID,50,20);
-    lv_obj_align_to(horzi_direction,align_parent, LV_ALIGN_OUT_BOTTOM_LEFT,-300,-210);
-    lv_obj_add_flag(horzi_direction, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(horzi_direction, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    //lv_obj_set_style_blend_mode(horzi_direction, LV_BLEND_MODE_ADDITIVE, LV_PART_MAIN | LV_STATE_DEFAULT);
+    png_direction = lv_img_create(parent);
+    if(direction == horzi_direct_png){
+        lv_img_set_src(png_direction,png_load_path(horzi_direction.png));
+    }
+    else {
+        lv_img_set_src(png_direction,png_load_path(verti_direction.png));
+    }
+    lv_obj_set_height(png_direction, LV_SIZE_CONTENT);
+    lv_obj_set_width(png_direction, LV_SIZE_CONTENT);   /// 1
+    lv_obj_align_to(png_direction,align_parent,LV_ALIGN_OUT_TOP_MID,x_ofs,y_ofs);
+    lv_obj_add_flag(png_direction, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+    lv_obj_clear_flag(png_direction, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+    png_label = lv_label_create(png_direction);
+    lv_label_set_text(png_label,title);
+    if(direction == horzi_direct_png){
+        lv_obj_align_to(png_label,png_direction,LV_ALIGN_CENTER,0,-15);
+    }
+    else {
+        lv_obj_align_to(png_label,png_direction,LV_ALIGN_CENTER,0,0);
+    }
 
-
-    verti_direction = lv_img_create(parent);
-    lv_img_set_src(verti_direction,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/verti_direction.png");
-    lv_obj_set_height(verti_direction,LV_SIZE_CONTENT);
-    lv_obj_set_width(verti_direction, LV_SIZE_CONTENT);   /// 1
-    //lv_obj_align_to(ui_Image_Particle1,NULL, LV_ALIGN_LEFT_MID,50,20);
-    lv_obj_align_to(verti_direction,align_parent, LV_ALIGN_OUT_BOTTOM_RIGHT,275,-280);
-    lv_obj_add_flag(verti_direction, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    lv_obj_clear_flag(verti_direction, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    //lv_obj_set_style_blend_mode(verti_direction, LV_BLEND_MODE_ADDITIVE, LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(png_label,lv_color_white(), LV_STATE_DEFAULT);
 }
 static void particle_animation(lv_obj_t * TargetObject, int delay_time,int end_value)
 {

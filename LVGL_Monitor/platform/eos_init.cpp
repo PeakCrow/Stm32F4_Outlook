@@ -89,7 +89,7 @@ void toConsole(char * msg)
 };
 
 void lvglAppMain (void * arg)
-{
+{    
 #if defined USE_DEMO_MUSIC
     lv_demo_music();
 #else
@@ -115,10 +115,12 @@ static void luaCppThread(void)
 
 QThread * luaCppInit(void)
 {
-    QThread * thread = QThread::create([]{ luaCppThread(); });
-    thread->setStackSize(1024 * 1024);
+    /* 函数luacppthread将在新线程中调用，返回新创建的qthread实例 */
+    //QThread * thread = QThread::create([]{ luaCppThread(); });
+    QThread * thread = QThread::create(luaCppThread);
+    thread->setStackSize(8 * 1024 * 1024);
     LOG("Stack size = %d", thread->stackSize());
-
+    /* 必须显示的调用start函数 */
     thread->start();
     return thread;
 }

@@ -240,7 +240,6 @@ HEADERS += \
     ./sim/mainwindow.h \
     ./sim/termdlg.h \
     lv_conf.h \
-    lvgl/lv_conf_template.h \
     lvgl/src/core/lv_disp.h \
     lvgl/src/core/lv_event.h \
     lvgl/src/core/lv_group.h \

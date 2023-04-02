@@ -195,7 +195,7 @@
 /*-------------
  * Logging
  *-----------*/
-#define LV_USE_LOG 0
+//#define LV_USE_LOG 1
 /*Enable the log module*/
 // LV_USE_LOG is defined in Qt project file (.pro).
 #if LV_USE_LOG
@@ -217,8 +217,8 @@
     #define LV_LOG_TRACE_MEM        1
     #define LV_LOG_TRACE_TIMER      0
     #define LV_LOG_TRACE_INDEV      0
-    #define LV_LOG_TRACE_DISP_REFR  1
-    #define LV_LOG_TRACE_EVENT      1
+    #define LV_LOG_TRACE_DISP_REFR  0
+    #define LV_LOG_TRACE_EVENT      0
     #define LV_LOG_TRACE_OBJ_CREATE 1
     #define LV_LOG_TRACE_LAYOUT     0
     #define LV_LOG_TRACE_ANIM       0
@@ -268,7 +268,7 @@
     #define lv_snprintf  snprintf
     #define lv_vsnprintf vsnprintf
 #else   /*LV_SPRINTF_CUSTOM*/
-    #define LV_SPRINTF_USE_FLOAT 0
+    #define LV_SPRINTF_USE_FLOAT 1
 #endif  /*LV_SPRINTF_CUSTOM*/
 
 #define LV_USE_USER_DATA 1
@@ -688,7 +688,7 @@
 
 /*Music player demo*/
 // LV_USE_DEMO_MUSIC is defined in Qt if it is the case project
-// #define LV_USE_DEMO_MUSIC       0
+#define LV_USE_DEMO_MUSIC       0
 
 #if LV_USE_DEMO_MUSIC
 # define LV_DEMO_MUSIC_SQUARE       0

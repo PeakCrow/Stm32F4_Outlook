@@ -23,11 +23,7 @@ void Sensor_Ui(lv_obj_t *parent)
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
-#if enviroment_select == 0
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/sensor.png","D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/sensor.png");
-#else
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"E:/Ls_Monitor/LVGL_Monitor/images/sensor.png","E:/Ls_Monitor/LVGL_Monitor/images/sensor.png");
-#endif
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,png_load_path(sensor.png),png_load_path(sensor.png));
     /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,200,120);
     /* 设置按钮位置 */
