@@ -56,6 +56,4 @@
 - 外部sram
 - 4G
 - Board
-- ![image-20230131002321793](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20230131002321793.png)
-- 添加返回按钮风格
 - ...
