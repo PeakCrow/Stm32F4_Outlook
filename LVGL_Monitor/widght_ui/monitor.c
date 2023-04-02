@@ -22,8 +22,8 @@ static void lv_example_Monitor_Speed_Meter(void);
 #define scr_act_width()  lv_obj_get_width(lv_scr_act())
 
 static void Monitor_Main_Style(lv_obj_t* Monitor_Speed_Meter);
-static void Monitor_Main_label(lv_coord_t weight, lv_coord_t height);
-static void App_btn_Back_Cb(lv_event_t* e);
+static void Monitor_Main_label(void);
+//static void App_btn_Back_Cb(lv_event_t* e);
 
 
 void Gui_Monitor_App()
@@ -47,49 +47,7 @@ void Gui_Monitor_App()
     lv_example_Monitor_Speed_Meter();
 
 }
-void Monitor_Main_Style(lv_obj_t * Monitor_Speed_Meter)
-{
-    lv_style_t style_speed_meter;
-    //创建普通样式
-    //样式初始化
-    lv_style_init(&style_speed_meter);
-    //设置背景--黑色
-    //lv_style_set_bg_color(&style_speed_meter, lv_color_hex(0x000000));
-    //设置背景透明度--20
-    lv_style_set_bg_opa(&style_speed_meter, 80);
-    //设置字体颜色--黄色
-    lv_style_set_text_color(&style_speed_meter, lv_color_hex(0xffff00));
-    //设置速度盘背景渐变颜色方向--垂直向下
-    lv_style_set_bg_grad_dir(&style_speed_meter, LV_GRAD_DIR_VER);
-    //设置背景梯度起点属性--渐变从0顶部开始
-    lv_style_set_bg_grad_stop(&style_speed_meter, 255);
-    //设置背景梯度颜色属性
-    lv_style_set_bg_grad_color(&style_speed_meter, lv_palette_main(LV_PALETTE_GREEN));
-    //设置边框颜色--蓝色
-    lv_style_set_border_color(&style_speed_meter, lv_palette_main(LV_PALETTE_BLUE));
-    //设置边框的宽度--3
-    lv_style_set_border_width(&style_speed_meter, 3);
-    //设置速度盘的轮廓属性--3
-    lv_style_set_outline_width(&style_speed_meter, 3);
-    //设置轮廓属性的颜色--橙色
-    lv_style_set_outline_color(&style_speed_meter, lv_palette_main(LV_PALETTE_ORANGE));
-    //设置轮廓间隙属性--3
-    lv_style_set_outline_pad(&style_speed_meter, 3);
 
-    //设置速度盘对象的样式
-    lv_obj_add_style(Monitor_Speed_Meter, &style_speed_meter, LV_PART_MAIN);
-}
-void Monitor_Main_label(lv_coord_t weight,lv_coord_t height)
-{
-    lv_obj_t* label_speed_value;
-
-    //设置速度值文本标签
-    label_speed_value = lv_label_create(Monitor_Speed_Meter);
-    //设置文本与颜色
-    lv_label_set_text(label_speed_value, "Km/h");
-    //设置文本对齐方式
-    lv_obj_set_pos((lv_obj_t*)(label_speed_value),(short)(weight * 0.45), (short)(height * 0.7));
-}
 /**
  * @brief 仪表2的回调函数
  * @param indic 不知道是啥？
@@ -219,9 +177,52 @@ static void lv_example_Monitor_Speed_Meter(void)
     lv_anim_start(&a);
 
     //创建样式
-    //Monitor_Main_Style(Monitor_Speed_Meter);
+    Monitor_Main_Style(Monitor_Speed_Meter);
     //创建速度值标签
-    //Monitor_Main_label((short)(scr_act_height() * 0.8),(short)(scr_act_height() * 0.8));
+    Monitor_Main_label();
+}
+void Monitor_Main_label()
+{
+    lv_obj_t* label_speed_value;
+
+    //设置速度值文本标签
+    label_speed_value = lv_label_create(Monitor_Speed_Meter);
+    //设置文本与颜色
+    lv_label_set_text(label_speed_value, "  45\nKm/h");
+    //设置文本对齐方式
+    lv_obj_align_to(label_speed_value,Monitor_Speed_Meter,LV_ALIGN_BOTTOM_MID,0,-10);
+}
+void Monitor_Main_Style(lv_obj_t * Monitor_Speed_Meter)
+{
+    static lv_style_t style_speed_meter;
+    //创建普通样式
+    //样式初始化
+    lv_style_init(&style_speed_meter);
+    //设置背景--黑色
+    //lv_style_set_bg_color(&style_speed_meter, lv_color_hex(0x000000));
+    //设置背景透明度--20
+    lv_style_set_bg_opa(&style_speed_meter, 80);
+    //设置字体颜色--黄色
+    lv_style_set_text_color(&style_speed_meter, lv_color_hex(0xffff00));
+    //设置速度盘背景渐变颜色方向--垂直向下
+    lv_style_set_bg_grad_dir(&style_speed_meter, LV_GRAD_DIR_VER);
+    //设置背景梯度起点属性--渐变从0顶部开始
+    lv_style_set_bg_grad_stop(&style_speed_meter, 255);
+    //设置背景梯度颜色属性
+    lv_style_set_bg_grad_color(&style_speed_meter, lv_palette_main(LV_PALETTE_GREEN));
+    //设置边框颜色--蓝色
+    lv_style_set_border_color(&style_speed_meter, lv_palette_main(LV_PALETTE_BLUE));
+    //设置边框的宽度--3
+    lv_style_set_border_width(&style_speed_meter, 3);
+    //设置速度盘的轮廓属性--3
+    lv_style_set_outline_width(&style_speed_meter, 3);
+    //设置轮廓属性的颜色--橙色
+    lv_style_set_outline_color(&style_speed_meter, lv_palette_main(LV_PALETTE_ORANGE));
+    //设置轮廓间隙属性--3
+    lv_style_set_outline_pad(&style_speed_meter, 3);
+
+    //设置速度盘对象的样式
+    lv_obj_add_style(Monitor_Speed_Meter, &style_speed_meter, LV_PART_MAIN);
 }
 
 lv_obj_t* App_Common_Init(const char *title,App_btn_Back_Cb_Ptr App_btn_Back_Cb)

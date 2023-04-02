@@ -17,14 +17,12 @@ static void lv_example_Monitor_Speed_Meter(void);
 #define scr_act_width()  lv_obj_get_width(lv_scr_act())
 
 static void Monitor_Main_Style(lv_obj_t* Monitor_Speed_Meter);
+static void Monitor_Main_label(void);
 
 void Gui_Monitor_App()
 {
-
-//    uint16_t meter_height = 0;
-//    meter_height = ((unsigned short)(scr_act_height() * 0.8));
+    /* 配置界面背景的基准色调 */
 	lv_obj_set_style_bg_color(lv_scr_act(),lv_color_hex(0x123456),LV_STATE_DEFAULT);
-
     Motor_Control_Ui(lv_scr_act());
     About_Phone_Ui(lv_scr_act());
     Set_Up_Ui(lv_scr_act());
@@ -39,7 +37,7 @@ void Gui_Monitor_App()
 }
 void Monitor_Main_Style(lv_obj_t * Monitor_Speed_Meter)
 {
-    lv_style_t style_speed_meter;
+    static lv_style_t style_speed_meter;
     //创建普通样式
     //样式初始化
     lv_style_init(&style_speed_meter);
@@ -103,6 +101,8 @@ static void lv_example_Monitor_Speed_Meter(void)
     lv_obj_set_style_text_font(Monitor_Speed_Meter, font, LV_PART_MAIN);
     /* 删除仪表指针样式 */
     //lv_obj_remove_style(Monitor_Speed_Meter, NULL, LV_PART_INDICATOR);
+    //创建样式
+    Monitor_Main_Style(Monitor_Speed_Meter);
 
     /* 设置仪表刻度 */
     /* 添加刻度 */
@@ -129,7 +129,7 @@ static void lv_example_Monitor_Speed_Meter(void)
     /* 添加指针 */
     lv_meter_indicator_t * indic = lv_meter_add_needle_line(Monitor_Speed_Meter,
                              scale,
-                             3,
+                             6,
                              lv_color_hex3(0xf34),
                              -6
                             );
@@ -159,51 +159,20 @@ static void lv_example_Monitor_Speed_Meter(void)
                                                     );
 
 
-
-
-
-//    /* 设置指针动画 */
-//    lv_anim_t a;
-//    /* 初始化动画对象 */
-//    lv_anim_init(&a);
-//    /* 设置动画函数 */
-//    lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)anim_2_indic_cb);
-//    /* 设置动画的起始值和结束值 */
-//    lv_anim_set_values(&a, 0, 100);
-//    /* 重复前延迟，默认为0(禁用)[ms] */
-//    lv_anim_set_repeat_delay(&a, 100);
-//    /* 延迟后在回放，默认为0(禁用)[ms] */
-//    lv_anim_set_playback_delay(&a, 100);
-//    /* 重复的数量，默认数值为1，LV_ANIM_REPEAT_INFINITE用于无限重复 */
-//    lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
-//    /* 设置动画时间长度 */
-//    lv_anim_set_time(&a, 2000);
-//    /* 准备好后，按此持续时间倒放动画，默认为0(禁用)[ms] */
-//    lv_anim_set_playback_time(&a, 500);
-//    /* 设置动画的对象 */
-//    lv_anim_set_var(&a, indic1);
-//    /* 开始动画 */
-//    lv_anim_start(&a);
-
-
-//    /* 设置动画的时间长度 */
-//    lv_anim_set_time(&a, 1000);
-//    lv_anim_set_playback_time(&a, 1000);
-//    lv_anim_set_var(&a, indic2);
-//    lv_anim_start(&a);
-
-
-//    lv_anim_set_time(&a, 1000);
-//    lv_anim_set_playback_time(&a, 2000);
-//    lv_anim_set_var(&a, indic3);
-//    lv_anim_start(&a);
-
-    //创建样式
-    Monitor_Main_Style(Monitor_Speed_Meter);
     //创建速度值标签
-    //Monitor_Main_label((short)(scr_act_height() * 0.8),(short)(scr_act_height() * 0.8));
+    Monitor_Main_label();
 }
+void Monitor_Main_label()
+{
+    lv_obj_t* label_speed_value;
 
+    //设置速度值文本标签
+    label_speed_value = lv_label_create(Monitor_Speed_Meter);
+    //设置文本与颜色
+    lv_label_set_text(label_speed_value, "  33\nKm/h");
+    //设置文本对齐方式
+    lv_obj_align_to(label_speed_value,Monitor_Speed_Meter,LV_ALIGN_BOTTOM_MID,0,-10);
+}
 /**
  * @brief 创建界面公共函数，因为不同的界面的返回按键删除回调函数不同
  *			所以将按键删除函数作为参数传给界面创建公共函数

@@ -392,6 +392,7 @@
                     <state>$PROJ_DIR$\..\Lvgl\GUI\lvgl\src\misc</state>
                     <state>$PROJ_DIR$\..\ThreadX\ports\cortex_m4\iar\src</state>
                     <state>$PROJ_DIR$\..\ThreadX\ports\cortex_m4\iar\inc</state>
+                    <state>$PROJ_DIR$\..\segger\HardFaultHandlerIAR</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1698,6 +1699,15 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\Lvgl\GUI\lvgl\examples\porting\lv_port_indev_template.c</name>
+        </file>
+    </group>
+    <group>
+        <name>Segger/HardFault</name>
+        <file>
+            <name>$PROJ_DIR$\..\segger\HardFaultHandlerIAR\HardFaultHandler.S</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\segger\HardFaultHandlerIAR\SEGGER_HardFaultHandler.c</name>
         </file>
     </group>
     <group>

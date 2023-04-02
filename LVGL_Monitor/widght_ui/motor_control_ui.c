@@ -7,22 +7,10 @@
 static void Imgbtn_MC_cb(lv_event_t * e);
 static lv_style_t s_style_common;
 static void Motor_Control_In_Ui(lv_obj_t *parent);
+static void wave_animation(lv_obj_t * TargetObject, uint32_t delay,int32_t end_value);
+static void ofs_set_x_anim(void  * a, lv_coord_t v);
 
 
-static void ofs_y_anim(void * img, int32_t v)
-{
-    lv_img_set_offset_y(img, v);
-    printf("%d\n",v);
-    //lv_img_set_pivot(img,400,240);
-    //lv_img_set_angle(img,100);
-}
-static void ofs_x_anim(void * img, int32_t v)
-{
-    lv_img_set_offset_x(img, v);
-    printf("%d\n",v);
-    //lv_img_set_pivot(img,400,240);
-    //lv_img_set_angle(img,100);
-}
 void Motor_Control_Ui(lv_obj_t *parent)
 {
     /* 定义并创建图像按钮 */
@@ -79,31 +67,106 @@ static void Imgbtn_MC_cb(lv_event_t * e)
 
 static void Motor_Control_In_Ui(lv_obj_t *parent)
 {
-    lv_obj_t * ui_Image_Particle1,* ui_Image_Particle2;
+    lv_obj_t * chassis,* wheel_1;
+    lv_obj_t * obj_warning1,* obj_warning2,* obj_warning3,* obj_warning4;
+    lv_obj_t * label1,*label2,*label3,*label4;
 
+    /*A base style*/
+    static lv_style_t style_base;
+    lv_style_init(&style_base);
+    lv_style_set_bg_color(&style_base, lv_palette_main(LV_PALETTE_LIGHT_BLUE));
+    lv_style_set_border_color(&style_base, lv_palette_darken(LV_PALETTE_LIGHT_BLUE, 3));
+    lv_style_set_border_width(&style_base, 2);
+    lv_style_set_radius(&style_base, 10);
+    lv_style_set_shadow_width(&style_base, 10);
+    lv_style_set_shadow_ofs_y(&style_base, 5);
+    lv_style_set_shadow_opa(&style_base, LV_OPA_50);
+    lv_style_set_text_color(&style_base, lv_color_white());
+    lv_style_set_width(&style_base, 120);
+    lv_style_set_height(&style_base, LV_SIZE_CONTENT);
 
-    lv_obj_t * spinner = lv_spinner_create(parent, 1000, 80);
-    lv_obj_set_size(spinner, 400, 400);
-    lv_obj_center(spinner);
+    /*Set only the properties that should be different*/
+    static lv_style_t style_warning;
+    lv_style_init(&style_warning);
+    lv_style_set_bg_color(&style_warning, lv_palette_main(LV_PALETTE_YELLOW));
+    lv_style_set_border_color(&style_warning, lv_palette_darken(LV_PALETTE_YELLOW, 3));
+    lv_style_set_text_color(&style_warning, lv_palette_darken(LV_PALETTE_YELLOW, 4));
+
 
     /* 电池soc */
-    ui_Image_Particle1 = lv_img_create(parent);
-    lv_img_set_src(ui_Image_Particle1,png_load_path(horzi_direction.png));
-    lv_obj_set_height(ui_Image_Particle1, LV_SIZE_CONTENT);
-    lv_obj_set_width(ui_Image_Particle1, LV_SIZE_CONTENT);   /// 1
-    //lv_obj_align_to(ui_Image_Particle1,NULL, LV_ALIGN_LEFT_MID,50,20);
-    lv_obj_align(ui_Image_Particle1,LV_ALIGN_CENTER,0,0);
-    lv_obj_add_flag(ui_Image_Particle1, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    //lv_obj_clear_flag(ui_Image_Particle1, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    //lv_obj_set_style_blend_mode(ui_Image_Particle1, LV_BLEND_MODE_ADDITIVE, LV_PART_MAIN | LV_STATE_DEFAULT);
+    chassis = lv_img_create(parent);
+    lv_img_set_src(chassis,png_load_path(chassis.png));
+    lv_obj_set_height(chassis, LV_SIZE_CONTENT);
+    lv_obj_set_width(chassis, LV_SIZE_CONTENT);   /// 1
+    lv_obj_align(chassis,LV_ALIGN_CENTER,0,0);
+    lv_obj_add_flag(chassis, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
 
-    ui_Image_Particle2 = lv_img_create(parent);
-    lv_img_set_src(ui_Image_Particle2,png_load_path(verti_direction.png));
-    lv_obj_set_height(ui_Image_Particle2, LV_SIZE_CONTENT);
-    lv_obj_set_width(ui_Image_Particle2, LV_SIZE_CONTENT);   /// 1
-    //lv_obj_align_to(ui_Image_Particle1,NULL, LV_ALIGN_LEFT_MID,50,20);
-    lv_obj_align(ui_Image_Particle2,LV_ALIGN_CENTER,150,0);
-    lv_obj_add_flag(ui_Image_Particle2, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
-    //lv_obj_clear_flag(ui_Image_Particle2, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    //lv_obj_set_style_blend_mode(ui_Image_Particle2, LV_BLEND_MODE_ADDITIVE, LV_PART_MAIN | LV_STATE_DEFAULT);
+    wheel_1 = lv_img_create(parent);
+    lv_img_set_src(wheel_1,png_load_path(wheel.png));
+    lv_obj_set_height(wheel_1, LV_SIZE_CONTENT);
+    lv_obj_set_width(wheel_1, LV_SIZE_CONTENT);   /// 1
+    lv_obj_align(wheel_1,LV_ALIGN_CENTER,0,0);
+    lv_obj_add_flag(wheel_1, LV_OBJ_FLAG_ADV_HITTEST);     /// Flags
+
+    /*Create another object with the base style and earnings style too*/
+    obj_warning1 = lv_obj_create(parent);
+    lv_obj_add_style(obj_warning1, &style_base, 0);
+    lv_obj_add_style(obj_warning1, &style_warning, 0);
+    lv_obj_align_to(obj_warning1,chassis, LV_ALIGN_OUT_TOP_LEFT, 20, 40);
+
+    label1 = lv_label_create(obj_warning1);
+    lv_label_set_text(label1, "2316 rpm");
+    lv_obj_center(label1);
+
+    obj_warning2 = lv_obj_create(parent);
+    lv_obj_add_style(obj_warning2, &style_base, 0);
+    lv_obj_add_style(obj_warning2, &style_warning, 0);
+    lv_obj_align_to(obj_warning2,chassis, LV_ALIGN_OUT_TOP_RIGHT, -20, 40);
+
+    label2 = lv_label_create(obj_warning2);
+    lv_label_set_text(label2, "3316 rpm");
+    lv_obj_center(label2);
+
+    obj_warning3 = lv_obj_create(parent);
+    lv_obj_add_style(obj_warning3, &style_base, 0);
+    lv_obj_add_style(obj_warning3, &style_warning, 0);
+    lv_obj_align_to(obj_warning3,chassis, LV_ALIGN_OUT_BOTTOM_LEFT, 20, -40);
+
+    label3 = lv_label_create(obj_warning3);
+    lv_label_set_text(label3, "1316 rpm");
+    lv_obj_center(label3);
+
+    obj_warning4 = lv_obj_create(parent);
+    lv_obj_add_style(obj_warning4, &style_base, 0);
+    lv_obj_add_style(obj_warning4, &style_warning, 0);
+    lv_obj_align_to(obj_warning4,chassis, LV_ALIGN_OUT_BOTTOM_RIGHT, -20, -40);
+
+    label4 = lv_label_create(obj_warning4);
+    lv_label_set_text(label4, "4316 rpm");
+    lv_obj_center(label4);
+
+    wave_animation(wheel_1, 2920,200);
+
+}
+static void wave_animation(lv_obj_t * TargetObject, uint32_t delay_time,int32_t end_value)
+{
+    lv_anim_t c;
+    lv_anim_init(&c);
+    lv_anim_set_var(&c, TargetObject);
+    lv_anim_set_time(&c, delay_time);
+    lv_anim_set_exec_cb(&c, ofs_set_x_anim);
+    lv_anim_set_values(&c,0, end_value);
+    lv_anim_set_path_cb(&c, lv_anim_path_linear);
+    lv_anim_set_delay(&c,0);
+    lv_anim_set_playback_time(&c, 0);
+    lv_anim_set_playback_delay(&c,0);
+    lv_anim_set_repeat_count(&c, LV_ANIM_REPEAT_INFINITE);
+    lv_anim_set_repeat_delay(&c, 0);
+    lv_anim_set_early_apply(&c, false);
+    lv_anim_start(&c);
+}
+static void ofs_set_x_anim(void  * a, lv_coord_t v)
+{
+    lv_img_set_offset_x(a, v);
+    //printf("ofs x = %d\n",v);
 }

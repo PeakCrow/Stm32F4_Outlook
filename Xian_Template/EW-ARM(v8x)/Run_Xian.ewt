@@ -2015,6 +2015,15 @@
         </file>
     </group>
     <group>
+        <name>Segger/HardFault</name>
+        <file>
+            <name>$PROJ_DIR$\..\segger\HardFaultHandlerIAR\HardFaultHandler.S</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\segger\HardFaultHandlerIAR\SEGGER_HardFaultHandler.c</name>
+        </file>
+    </group>
+    <group>
         <name>System</name>
         <file>
             <name>$PROJ_DIR$\..\System\can\bsp_can_bus.c</name>
