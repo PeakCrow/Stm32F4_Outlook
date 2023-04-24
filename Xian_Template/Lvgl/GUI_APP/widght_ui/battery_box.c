@@ -97,9 +97,6 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
 	lv_obj_align_to(ui_Image_Particle1,ui_Image_Battery_BG,LV_ALIGN_CENTER,0,0);
 	lv_obj_set_style_shadow_opa(ui_Image_Particle1, 255, LV_STATE_DEFAULT);
 
-
-
-
     ui_Image_Particle2 = lv_img_create(parent);
     lv_img_set_src(ui_Image_Particle2,"0:/PICTURE/particle_2.bin");
     lv_obj_set_height(ui_Image_Particle2, LV_SIZE_CONTENT);
@@ -107,17 +104,12 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
     lv_obj_align_to(ui_Image_Particle2,ui_Image_Battery_BG,LV_ALIGN_CENTER,0,0);
 	lv_obj_set_style_shadow_opa(ui_Image_Particle2, 255, LV_STATE_DEFAULT );
 
-
-
-
     ui_Image_Particle3 = lv_img_create(parent);
     lv_img_set_src(ui_Image_Particle3,"0:/PICTURE/particle_3.bin");
     lv_obj_set_height(ui_Image_Particle3, LV_SIZE_CONTENT);
    	lv_obj_set_width(ui_Image_Particle3, LV_SIZE_CONTENT);   /// 1
     lv_obj_align_to(ui_Image_Particle3,ui_Image_Battery_BG,LV_ALIGN_CENTER,0,0);
 	lv_obj_set_style_shadow_opa(ui_Image_Particle3, 255, LV_STATE_DEFAULT);
-
-
 
 
     lv_anim_t a;

@@ -44,6 +44,8 @@
 /*Images pixels with this color will not be drawn if they are chroma keyed)*/
 #define LV_COLOR_CHROMA_KEY lv_color_hex(0x00ff00)         /*pure green*/
 
+#define LV_USE_TEMPL 1
+
 /*=========================
    MEMORY SETTINGS
  *=========================*/
@@ -195,7 +197,7 @@
 /*-------------
  * Logging
  *-----------*/
-//#define LV_USE_LOG 1
+//#define LV_USE_LOG 0
 /*Enable the log module*/
 // LV_USE_LOG is defined in Qt project file (.pro).
 #if LV_USE_LOG
@@ -215,13 +217,13 @@
 
     /*Enable/disable LV_LOG_TRACE in modules that produces a huge number of logs*/
     #define LV_LOG_TRACE_MEM        1
-    #define LV_LOG_TRACE_TIMER      0
-    #define LV_LOG_TRACE_INDEV      0
-    #define LV_LOG_TRACE_DISP_REFR  0
-    #define LV_LOG_TRACE_EVENT      0
+    #define LV_LOG_TRACE_TIMER      1
+    #define LV_LOG_TRACE_INDEV      1
+    #define LV_LOG_TRACE_DISP_REFR  1
+    #define LV_LOG_TRACE_EVENT      1
     #define LV_LOG_TRACE_OBJ_CREATE 1
-    #define LV_LOG_TRACE_LAYOUT     0
-    #define LV_LOG_TRACE_ANIM       0
+    #define LV_LOG_TRACE_LAYOUT     1
+    #define LV_LOG_TRACE_ANIM       1
 
 #endif  /*LV_USE_LOG*/
 
@@ -575,7 +577,7 @@
 /*API for fopen, fread, etc*/
 #define LV_USE_FS_STDIO 1
 #if LV_USE_FS_STDIO
-    #define LV_FS_STDIO_LETTER 'D'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
+    #define LV_FS_STDIO_LETTER 'A'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')*/
     #define LV_FS_STDIO_PATH ""         /*Set the working directory. File/directory paths will be appended to it.*/
     #define LV_FS_STDIO_CACHE_SIZE  1024*1024   /*>0 to cache this number of bytes in lv_fs_read()*/
 #endif

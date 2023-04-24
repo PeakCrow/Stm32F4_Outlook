@@ -2017,10 +2017,10 @@
     <group>
         <name>Segger/HardFault</name>
         <file>
-            <name>$PROJ_DIR$\..\segger\HardFaultHandlerIAR\HardFaultHandler.S</name>
+            <name>$PROJ_DIR$\..\Segger\HardFaultHandlerIAR\HardFaultHandler.S</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\segger\HardFaultHandlerIAR\SEGGER_HardFaultHandler.c</name>
+            <name>$PROJ_DIR$\..\Segger\HardFaultHandlerIAR\SEGGER_HardFaultHandler.c</name>
         </file>
     </group>
     <group>
@@ -2036,6 +2036,9 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\System\iic\bsp_iic_bus.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\System\ink_screen\bsp_inkscreen.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\System\key_fifo\bsp_key.c</name>
@@ -2689,16 +2692,19 @@
     <group>
         <name>User</name>
         <file>
-            <name>$PROJ_DIR$\stm32f4_main\main.c</name>
+            <name>$PROJ_DIR$\..\stm32f4_main\main.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\stm32f4_main\stm32f4xx_hal_msp.c</name>
+            <name>$PROJ_DIR$\..\stm32f4_main\stm32f4xx_hal_msp.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\stm32f4_main\stm32f4xx_it.c</name>
+            <name>$PROJ_DIR$\..\stm32f4_main\stm32f4xx_it.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\stm32f4_main\system_stm32f4xx.c</name>
+            <name>$PROJ_DIR$\..\stm32f4_main\system_stm32f4xx.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\stm32f4_main\system_task_create.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\ThreadX\ports\cortex_m4\iar\inc\tx_port.h</name>

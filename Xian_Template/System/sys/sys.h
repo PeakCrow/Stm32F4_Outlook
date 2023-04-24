@@ -4,17 +4,17 @@
 
 /*
 *********************************************************************************************************
-*                                         æ ‡å‡†åº“
+*                                         ±ê×¼ø
 *********************************************************************************************************
 */
-#include <stdarg.h>					/* Cåº“æ–‡ä»¶ï¼Œå‚æ•°ä¸ªæ•°æœªçŸ¥æ—¶è·å–å‡½æ•°ä¸­çš„å‚æ•° */
-#include <stdio.h>					/* Cåº“æ–‡ä»¶ï¼Œæ ‡å‡†è¾“å…¥è¾“å‡ºå‡½æ•° */
-#include <stdlib.h>					/* Cåº“æ–‡ä»¶ï¼Œå®šä¹‰äº†4ä¸ªå˜é‡ç±»å‹ï¼Œä¸€äº›å®å’Œå„ç§é€šç”¨å·¥å…·å‡½æ•° */
-#include <math.h>					/* Cåº“æ–‡ä»¶ï¼Œå„ç§æ•°å­¦å‡½æ•° */
-#include <string.h>					/* Cåº“æ–‡ä»¶ï¼Œå„ç§æ“ä½œå­—ç¬¦æ•°ç»„çš„å‡½æ•° */
+#include <stdarg.h>					/* C¿âÎÄ¼ş£¬²ÎÊı¸öÊıÎ´ÖªÊ±»ñÈ¡º¯ÊıÖĞµÄ²Î”¼*/
+#include <stdio.h>					/* C¿âÎÄ¼ş£¬±ê×¼ÊäÈëÊä³öº¯Êı */
+#include <stdlib.h>					/* C¿âÎÄ¼ş£¬¶¨ÒåÒÚ¸ö±äÁ¿ÀàĞÍ£¬Ò»Ğ©ºêºÍ¸÷ÖÖÍ¨ÓÃ¹¤¾ßº¯Êı */
+#include <math.h>					/* C¿âÎÄ¼ş£¬¸÷ÖÖÊıÑ§º¯Êı */
+#include <string.h>					/* C¿âÎÄ¼ş£¬¸÷ÖÖ²Ù×÷×Ö·ûÊı×éµÄº¯”¼*/
 /*
 *********************************************************************************************************
-*                                           ST HALåº“
+*                                           ST HALø
 *********************************************************************************************************
 */
 #include "stm32F407xx.h"
@@ -43,50 +43,37 @@
 *                                        APP / BSP
 *********************************************************************************************************
 */
-#include "ticktim.h"						/* è½¯ä»¶å®šæ—¶å™¨ */
-#include "bsp_usart_fifo.h"			/* ä¸²å£é€šè®¯ */
-#include "bsp_key.h"						/* è½»è§¦æŒ‰é”® */
-#include "bsp_spi_flash_demo.h"	/* spi flash é©±åŠ¨ demo test*/
-#include "bsp_spi_bus.h"				/* spi1 spi2 æ€»çº¿ */
-#include "bsp_iic_bus.h"				/* IIC1æ€»çº¿(åŒ…å«AT24C02èŠ¯ç‰‡) */
-#include "EPD_Test.h"						/* å¢¨æ°´å±é©±åŠ¨ */
-#include "bsp_font.h"
-#include "bsp_dwt.h"						/* èŠ¯ç‰‡DWTæ¨¡å—ï¼Œå®‰å¯Œè±æ•™ç¨‹æä¾› */
-#include "bsp_led.h"						/* æ¿è½½ledç¯ */
-#include "bsp_spi_flash.h"			/* spi flashé©±åŠ¨ */
-#include "bsp_can_bus.h"				/* can1 æ€»çº¿ */
-#include "bsp_tim_pwm.h"				/* å®šæ—¶å™¨ä¸­æ–­åˆå§‹åŒ–å’ŒPWMåˆå§‹åŒ– */
-#include "bsp_ws2812b.h"				/* ws2812bä¸‰è‰²RGBç¯ */
-#include "bsp_rotation_sensor.h"/* è½®é€Ÿä¼ æ„Ÿå™¨ */
-#include "bsp_spi_ads1256.h"		/* 24ä½ADCæ¨¡æ‹Ÿé‡é‡‡é›† */
-#include "bsp_mlx90614.h"				/* mlx90614çº¢å¤–æ¸©åº¦ä¼ æ„Ÿå™¨åˆå§‹åŒ– */
-#include "bsp_font.h"						/* å±å¹•æ˜¾ç¤ºçš„å­—ä½“Cåº“æ–‡ä»¶ */
-#include "bsp_lcd.h"						/* å±å¹•æ˜¾ç¤ºé©±åŠ¨ */
-#include "bsp_touch.h"					/* ç”µå®¹å±è§¦æ‘¸é©±åŠ¨,åŒ…å«æœ‰è§¦æ‘¸ç”»æ¿ä¾‹ç¨‹ */
-#include "bsp_sdio_sd.h"				/* SDå¡åº•å±‚é©±åŠ¨ */	
+#include "ticktim.h"						/* Èí¼ş¶¨Ê±‡’*/
+#include "bsp_usart_fifo.h"					/* ´®¿ÚÍ¨Ñ¶ */
+#include "bsp_key.h"						/* Çá´¥°´¼ü */
+#include "bsp_spi_flash_demo.h"				/* spi flash Çı¶¯ demo test*/
+#include "bsp_spi_bus.h"					/* spi1 spi2 ×ÜÏß */
+#include "bsp_iic_bus.h"					/* IIC1×ÜÏß(°üº¬AT24C02Ğ¾Æ¬) */
+#include "EPD_Test.h"						/* Ä«Ë®ÆÁÇı¶¯*/
+#include "bsp_font.h"						/* Ä«Ë®Æ¿×Ö¿â */
+#include "bsp_dwt.h"						/* Ğ¾Æ¬DWTÄ£¿é£¬°²¸»À³½Ì³ÌÌá¹© */
+#include "bsp_led.h"						/* °åÔØled²Ó*/
+#include "bsp_spi_flash.h"					/* spi flashÇı¶¯ */
+#include "bsp_can_bus.h"					/* can1 ×ÜÏß */
+#include "bsp_tim_pwm.h"					/* ¶¨Ê±Æ÷ÖĞ¶Ï³õÊ¼»¯ºÍPWM³õÊ¼Ää*/
+#include "bsp_ws2812b.h"					/* ws2812bÈıÉ«RGB²Ó*/
+#include "bsp_rotation_sensor.h"			/* ÂÖËÙ´«¸ĞÆ÷ */
+#include "bsp_spi_ads1256.h"				/* 24Î»ADCÄ£ÄâÁ¿²Éë*/
+#include "bsp_mlx90614.h"					/* mlx90614ºìÍâÎÂ¶È´«¸ĞÆ÷³õÊ¼»¯ */
+#include "bsp_font.h"						/* ÆÁÄ»ÏÔÊ¾µÄ×ÖÌåC¿âÎÄ·Â*/
+#include "bsp_lcd.h"						/* ÆÁÄ»ÏÔÊ¾Çı¶¯ */
+#include "bsp_touch.h"						/* µçÈİÆÁ´¥ÃşÇıÊÆ°üº¬ÓĞ´¥Ãş»­°åÀı¸å*/
+#include "bsp_sdio_sd.h"					/* SD¿¨µ×²ãÇıÊÆ*/	
 #include "adjust_pedal.h"
 #include "iwdg.h"
+#include "system_task_create.h"
 
-/***********************************ThreadXæ“ä½œç³»ç»Ÿç»„ä»¶å±æ€§å¤–éƒ¨å£°å*************************************************************/
-extern void  App_Printf 			(const char *fmt, ...);
-extern TX_EVENT_FLAGS_GROUP  EventGroup; /* äº‹ä»¶æ ‡å¿—ç»„ */
-extern void    App_I2C_EE_ByteWrite(uint8_t * pBuffer, uint8_t WriteAddr);
-extern TX_EVENT_FLAGS_GROUP  EventGroup; 	/* äº‹ä»¶æ ‡å¿—ç»„ */
-#define DRIVER1_POS (1<<0)
-#define	DRIVER2_POS (1<<1)
-#define DRIVER3_POS (1<<2)
-#define DRIVER_POS_ALL (DRIVER1_POS | DRIVER2_POS | DRIVER3_POS)
-extern uint8_t App_ComGetChar(COM_PORT_E _usPort,uint8_t *_pByte);
-#define HARDWARE_MAJOR_VERSION           1
-#define HARDWARE_MINOR_VERSION           0
-#define HARDWARE_PATCH_VERSION           0
-/***********************************ThreadXæ“ä½œç³»ç»Ÿç»„ä»¶å±æ€§å¤–éƒ¨å£°å*************************************************************/
 
 #if	DEBUG_SWITCH_EN == 1
-#include "EventRecorder.h"			/* å†…éƒ¨dedbugè°ƒè¯•ç»„ä»¶ */
+#include "EventRecorder.h"			/* ÄÚ²¿dedbug(printf)µ÷ÊÔ×é¼ş */
 #endif
 
-/* å®šä¹‰ä¸€äº›å¸¸ç”¨çš„æ•°æ®ç±»å‹çŸ­å…³é”®å­— */
+/* ¶¨ÒåÒ»Ğ©³£ÓÃµÄÊı¾İÀàĞÍ¶Ì¹Ø¼ü×Ö */
 typedef int16_t s16;
 typedef int8_t  s8;
 
@@ -120,7 +107,7 @@ typedef __I uint8_t vuc8;
 
 /*
 *********************************************************************************************************
-*                                          å˜é‡å’Œå‡½æ•°
+*                                          ±äÁ¿ºÍº¯”¼
 *********************************************************************************************************
 */
 
@@ -133,18 +120,18 @@ typedef __I uint8_t vuc8;
 #define FALSE     0
 #define TRUE      1
 
-/* æ–¹ä¾¿RTOSé‡Œé¢ä½¿ç”¨ */
-extern void SysTick_ISR(void);		/* æ»´ç­”å®šæ—¶å™¨ä¸­æ–­å¤–éƒ¨æ–‡ä»¶å£°æ˜ */
+/* ·½±ãRTOSÀïÃæÊ¹ÓÃ */
+extern void SysTick_ISR(void);		/* µÎ´ğ¶¨Ê±Æ÷ÖĞ¶ÏÍâ²¿ÎÄ¼şÉù•p*/
 
 #define bsp_ProPer1ms  SysTick_ISR
 
-//ä½å¸¦æ“ä½œ,å®ç°51ç±»ä¼¼çš„GPIOæ§åˆ¶åŠŸèƒ½
-//å…·ä½“å®ç°æ€æƒ³,å‚è€ƒ<<CM3æƒå¨æŒ‡å—>>ç¬¬äº”ç« (87é¡µ~92é¡µ).M4åŒM3ç±»ä¼¼,åªæ˜¯å¯„å­˜å™¨åœ°å€å˜äº†.
-//IOå£æ“ä½œå®å®šä¹‰
+//Î»´ø²Ù×÷,ÊµÏÖ51ÀàËÆµÄGPIO¿ØÖÆ¹¦ÄÜ
+//¾ßÌåÊµÏÖË¼Ïë,²Î¹¢<CM3È¨ÍşÖ¸ÄÏ>>µÚÎå¸Í87Ò³~92¶Ù.M4Í¬M3ÀàËÆ,Ö»ÊÇ¼Ä´æÆ÷µØÖ·±äÁË.
+//IO¿Ú²Ù×÷ºê¶¨Òå
 #define BITBAND(addr, bitnum) ((addr & 0xF0000000)+0x2000000+((addr &0xFFFFF)<<5)+(bitnum<<2)) 
 #define MEM_ADDR(addr)  *((volatile unsigned long  *)(addr)) 
 #define BIT_ADDR(addr, bitnum)   MEM_ADDR(BITBAND(addr, bitnum)) 
-//IOå£åœ°å€æ˜ å°„
+//IO¿ÚµØÖ·Ó³Éä
 #define GPIOA_ODR_Addr    (GPIOA_BASE+20) 		//0x40020014
 #define GPIOB_ODR_Addr    (GPIOB_BASE+20) 		//0x40020414
 #define GPIOC_ODR_Addr    (GPIOC_BASE+20) 		//0x40020814
@@ -169,65 +156,65 @@ extern void SysTick_ISR(void);		/* æ»´ç­”å®šæ—¶å™¨ä¸­æ–­å¤–éƒ¨æ–‡ä»¶å£°æ˜ */
 #define GPIOJ_IDR_Addr    (GPIOJ_BASE+16) 		//0x40022410
 #define GPIOK_IDR_Addr    (GPIOK_BASE+16) 		//0x40022810
 
-//IOå£æ“ä½œ,åªå¯¹å•ä¸€çš„IOå£!
-//ç¡®ä¿nçš„å€¼å°äº16!
-#define PAout(n)   BIT_ADDR(GPIOA_ODR_Addr,n)  	//è¾“å‡º 
-#define PAin(n)    BIT_ADDR(GPIOA_IDR_Addr,n) 	//è¾“å…¥ 
+//IO¿Ú²ÙÊ¹Ö»¶Ôµ¥Ò»µÄIO…·
+//È·±£nµÄÖµĞ¡ÒÚ6!
+#define PAout(n)   BIT_ADDR(GPIOA_ODR_Addr,n)  	//Êä³ö 
+#define PAin(n)    BIT_ADDR(GPIOA_IDR_Addr,n) 	//ÊäÈë 
 
-#define PBout(n)   BIT_ADDR(GPIOB_ODR_Addr,n) 	//è¾“å‡º 
-#define PBin(n)    BIT_ADDR(GPIOB_IDR_Addr,n) 	//è¾“å…¥ 
+#define PBout(n)   BIT_ADDR(GPIOB_ODR_Addr,n) 	//Êä³ö 
+#define PBin(n)    BIT_ADDR(GPIOB_IDR_Addr,n) 	//ÊäÈë 
 
-#define PCout(n)   BIT_ADDR(GPIOC_ODR_Addr,n) 	//è¾“å‡º 
-#define PCin(n)    BIT_ADDR(GPIOC_IDR_Addr,n) 	//è¾“å…¥ 
+#define PCout(n)   BIT_ADDR(GPIOC_ODR_Addr,n) 	//Êä³ö 
+#define PCin(n)    BIT_ADDR(GPIOC_IDR_Addr,n) 	//ÊäÈë 
 
-#define PDout(n)   BIT_ADDR(GPIOD_ODR_Addr,n) 	//è¾“å‡º 
-#define PDin(n)    BIT_ADDR(GPIOD_IDR_Addr,n) 	//è¾“å…¥ 
+#define PDout(n)   BIT_ADDR(GPIOD_ODR_Addr,n) 	//Êä³ö 
+#define PDin(n)    BIT_ADDR(GPIOD_IDR_Addr,n) 	//ÊäÈë 
 
-#define PEout(n)   BIT_ADDR(GPIOE_ODR_Addr,n) 	//è¾“å‡º 
-#define PEin(n)    BIT_ADDR(GPIOE_IDR_Addr,n) 	//è¾“å…¥
+#define PEout(n)   BIT_ADDR(GPIOE_ODR_Addr,n) 	//Êä³ö 
+#define PEin(n)    BIT_ADDR(GPIOE_IDR_Addr,n) 	//ÊäÈë
 
-#define PFout(n)   BIT_ADDR(GPIOF_ODR_Addr,n) 	//è¾“å‡º 
-#define PFin(n)    BIT_ADDR(GPIOF_IDR_Addr,n) 	//è¾“å…¥
+#define PFout(n)   BIT_ADDR(GPIOF_ODR_Addr,n) 	//Êä³ö 
+#define PFin(n)    BIT_ADDR(GPIOF_IDR_Addr,n) 	//ÊäÈë
 
-#define PGout(n)   BIT_ADDR(GPIOG_ODR_Addr,n)	//è¾“å‡º 
-#define PGin(n)    BIT_ADDR(GPIOG_IDR_Addr,n)	//è¾“å…¥
+#define PGout(n)   BIT_ADDR(GPIOG_ODR_Addr,n)	//Êä³ö 
+#define PGin(n)    BIT_ADDR(GPIOG_IDR_Addr,n)	//ÊäÈë
 
-#define PHout(n)   BIT_ADDR(GPIOH_ODR_Addr,n) 	//è¾“å‡º 
-#define PHin(n)    BIT_ADDR(GPIOH_IDR_Addr,n) 	//è¾“å…¥
+#define PHout(n)   BIT_ADDR(GPIOH_ODR_Addr,n) 	//Êä³ö 
+#define PHin(n)    BIT_ADDR(GPIOH_IDR_Addr,n) 	//ÊäÈë
 
-#define PIout(n)   BIT_ADDR(GPIOI_ODR_Addr,n) 	//è¾“å‡º 
-#define PIin(n)    BIT_ADDR(GPIOI_IDR_Addr,n) 	//è¾“å…¥
+#define PIout(n)   BIT_ADDR(GPIOI_ODR_Addr,n) 	//Êä³ö 
+#define PIin(n)    BIT_ADDR(GPIOI_IDR_Addr,n) 	//ÊäÈë
 
-#define PJout(n)   BIT_ADDR(GPIOJ_ODR_Addr,n) 	//è¾“å‡º 
-#define PJin(n)    BIT_ADDR(GPIOJ_IDR_Addr,n) 	//è¾“å…¥
+#define PJout(n)   BIT_ADDR(GPIOJ_ODR_Addr,n) 	//Êä³ö 
+#define PJin(n)    BIT_ADDR(GPIOJ_IDR_Addr,n) 	//ÊäÈë
 
-#define PKout(n)   BIT_ADDR(GPIOK_ODR_Addr,n)	//è¾“å‡º 
-#define PKin(n)    BIT_ADDR(GPIOK_IDR_Addr,n)	//è¾“å…¥ 
-
-
+#define PKout(n)   BIT_ADDR(GPIOK_ODR_Addr,n)	//Êä³ö 
+#define PKin(n)    BIT_ADDR(GPIOK_IDR_Addr,n)	//ÊäÈë 
 
 
-void Stm32_Clock_Init(uint32_t plln,uint32_t pllm,uint32_t pllp,uint32_t pllq);//æ—¶é’Ÿç³»ç»Ÿé…ç½®
+
+
+void Stm32_Clock_Init(uint32_t plln,uint32_t pllm,uint32_t pllp,uint32_t pllq);//Ê±ÖÓÏµÍ³ÅäÖÃ
 /*
 *********************************************************************************************************
-*                                           æ±‡ç¼–å‡½æ•°ï¼Œnouseful
+*                                           »ã±àº¯Êı£¬nouseful
 *********************************************************************************************************
 */
 
-void WFI_SET(void);		//æ‰§è¡ŒWFIæŒ‡ä»¤
-void INTX_DISABLE(void);//å…³é—­æ‰€æœ‰ä¸­æ–­
-void INTX_ENABLE(void);	//å¼€å¯æ‰€æœ‰ä¸­æ–­
-void MSR_MSP(uint32_t addr);	//è®¾ç½®å †æ ˆåœ°å€ 
+void WFI_SET(void);		//Ö´ĞĞWFIÖ¸Áî
+void INTX_DISABLE(void);//¹Ø±ÕËùÓĞÖĞ”å
+void INTX_ENABLE(void);	//¿ªÆôËùÓĞÖĞ”å
+void MSR_MSP(uint32_t addr);	//ÉèÖÃ¶ÑÕ»µØÖ· 
 
-#define  USE_THREADX    1						/* é…ç½®æ˜¯å¦ä½¿ç”¨threadxæ“ä½œç³»ç»Ÿ */
+#define  USE_THREADX    1						/* ÅäÖÃÊÇ·ñÊ¹ÓÃthreadx²Ù×÷ÏµÍ³ */
 
 /*
 *********************************************************************************************************
-*                                           å®å®šä¹‰
+*                                           ºê¶¨v
 *********************************************************************************************************
 */
 
-/*   æœ€å¿«é€Ÿåº¦ä¼˜åŒ–éœ€è¦å¼€å¯çš„é€‰é¡¹ : */
+/*   ×î¿ìËÙ¶ÈÓÅ»¯ĞèÒª¿ªÆôµÄÑ¡Ïî : */
 		/*
         TX_MAX_PRIORITIES                       32
         TX_DISABLE_PREEMPTION_THRESHOLD
@@ -239,7 +226,7 @@ void MSR_MSP(uint32_t addr);	//è®¾ç½®å †æ ˆåœ°å€
         TX_DISABLE_STACK_FILLING
         TX_INLINE_THREAD_RESUME_SUSPEND
 */
-/*   æœ€å°ä»£ç ä¼˜åŒ–éœ€è¦å¼€å¯çš„é€‰é¡¹:  */
+/*   ×îĞ¡´úÂëÓÅ»¯ĞèÒª¿ªÆôµÄÑ¡Ïî:  */
 /*
 #define        TX_MAX_PRIORITIES                       32
 #define        TX_DISABLE_PREEMPTION_THRESHOLD
@@ -250,7 +237,7 @@ void MSR_MSP(uint32_t addr);	//è®¾ç½®å †æ ˆåœ°å€
 */
 
 
-/* è¦†ç›–tx_port.h é‡Œé¢çš„å®å®šä¹‰  */
+/* ¸²¸Çtx_port.h ÀïÃæµÄºê¶¨Òå  */
 /*
 #define TX_MAX_PRIORITIES                       32
 #define TX_MINIMUM_STACK                        ????
@@ -260,35 +247,35 @@ void MSR_MSP(uint32_t addr);	//è®¾ç½®å †æ ˆåœ°å€
 */
 
 /* 
-   ç¡®å®šå®šæ—¶å™¨æ˜¯å¦åˆ°æœŸçš„å¤„ç†ï¼Œæ¯”å¦‚åº”ç”¨å®šæ—¶å™¨ï¼Œæº¢å‡ºæ—¶é—´å’Œå‡½æ•°tx_thread_sleepè°ƒç”¨ç­‰ï¼Œæ˜¯åœ¨ç³»ç»Ÿå®šæ—¶å™¨ä»»åŠ¡é‡Œé¢è¿˜æ˜¯åœ¨å®šæ—¶å™¨ä¸­æ–­é‡Œé¢è°ƒç”¨ã€‚
-   é»˜è®¤æ˜¯åœ¨å®šæ—¶ä»»åŠ¡é‡Œé¢ï¼Œå½“å®šä¹‰äº†ä¸‹é¢å‡½æ•°åï¼Œå°†ç›´æ¥åœ¨å®šæ—¶å™¨ä¸­æ–­é‡Œé¢å¤„ç†ï¼Œå¯ä»¥å»æ‰å®šæ—¶å™¨ä»»åŠ¡æ‰€æ¶ˆè€—èµ„æºã€‚ */
+   È·¶¨¶¨Ê±Æ÷ÊÇ·ñµ½ÆÚµÄ´¦Àí£¬±ÈÈçÓ¦ÓÃ¶¨Ê±Æ÷£¬Òç³öÊ±¼äºÍº¯Êıtx_thread_sleepµ÷ÓÃµÈ£¬ÊÇÔÚÏµÍ³¶¨Ê±Æ÷ÈÎÎñÀïÃæ»¹ÊÇÔÚ¶¨Ê±Æ÷ÖĞ¶ÏÀïÃæµ÷ÓÃ?
+   Ä¬ÈÏÊÇÔÚ¶¨Ê±ÈÎÎñÀïÃæ£¬µ±¶¨ÒåÁËÏÂÃæº¯Êıºó£¬½«Ö±½ÓÔÚ¶¨Ê±Æ÷ÖĞ¶ÏÀïÃæ´¦Àí£¬¿ÉÒÔÈ¥µô¶¨Ê±Æ÷ÈÎÎñËùÏûºÄ×ÊÔ´?*/
 //#define TX_TIMER_PROCESS_IN_ISR
 
 
-/* ç”¨äºè®¾ç½®å®šæ—¶å™¨æ¿€æ´»æ˜¯å¦é‡‡ç”¨å†…è”æ–¹å¼ï¼Œé»˜è®¤æ­¤åŠŸèƒ½æ˜¯å…³é—­çš„ã€‚å¦‚æœä½¿èƒ½åï¼Œå†…è”æ–¹å¼çš„æ‰§è¡Œé€Ÿåº¦å¿«ï¼Œä½†å¢åŠ ä»£ç é‡ */
+/* ÓÃÓÚÉèÖÃ¶¨Ê±Æ÷¼¤»îÊÇ·ñ²ÉÓÃÄÚÁª·½Ê½£¬Ä¬ÈÏ´Ë¹¦ÄÜÊÇ¹Ø±ÕµÄ¡£Èç¹ûÊ¹ÄÜºó£¬ÄÚÁª·½Ê½µÄÖ´ĞĞËÙ¶È¿ì£¬µ«Ôö¼Ó´úÂëÁ¿ */
 //#define TX_REACTIVATE_INLINE
 
 
-/* ç”¨äºè®¾ç½®æ˜¯å¦å…³é—­æ ˆå¡«å……ï¼Œé»˜è®¤æƒ…å†µä¸‹æ˜¯ä½¿èƒ½çš„ï¼Œæ‰€æœ‰ä»»åŠ¡çš„æ ˆç©ºé—´å…¨éƒ¨å¡«å……ä¸º0xEFï¼Œ
-*  å¸¦æœ‰ThreadXè°ƒè¯•ç»„ä»¶æˆ–è€…è¿è¡Œæ—¶æ ˆæ£€æµ‹ä¼šç”¨åˆ°ã€‚
+/* ÓÃÓÚÉèÖÃÊÇ·ñ¹Ø±ÕÕ»Ìî³ä£¬Ä¬ÈÏÇé¿öÏÂÊÇÊ¹ÄÜµÄ£¬ËùÓĞÈÎÎñµÄÕ»¿Õ¼äÈ«²¿Ìî³äÎª0xEF£ß
+*  ´øÓĞThreadXµ÷ÊÔ×é¼ş»òÕßÔËĞĞÊ±Õ»¼ì²â»áÓÃµ½?
 */
 //#define TX_DISABLE_STACK_FILLING
 
 
-/* ç”¨äºä½¿èƒ½æ ˆæ£€æµ‹ï¼Œé»˜è®¤æ˜¯å…³é—­çš„ã€‚æ­¤é€‰é¡¹ä½¿èƒ½åï¼Œè€ŒTX_DISABLE_STACK_FILLINGæ²¡ä½¿èƒ½æ—¶ï¼Œæ ˆå¡«å……å°†å¼€å¯ï¼Œæ–¹ä¾¿æ ˆæ£€æµ‹ */
+/* ÓÃÓÚÊ¹ÄÜÕ»¼ì²â£¬Ä¬ÈÏÊÇ¹Ø±ÕµÄ¡£´ËÑ¡ÏîÊ¹ÄÜºó£¬¶øTX_DISABLE_STACK_FILLINGÃ»Ê¹ÄÜÊ±£¬Õ»Ìî³ä½«¿ªÆô£¬·½±ãÕ»¼ì›Ö*/
 //#define TX_ENABLE_STACK_CHECKING
 
 
-/* ç”¨äºè®¾ç½®æ˜¯å¦å…³é—­æŠ¢å é˜€å€¼ï¼Œé»˜è®¤æ˜¯å¼€å¯çš„ã€‚å¦‚æœåº”ç”¨ç¨‹åºä¸éœ€è¦æ­¤åŠŸèƒ½ï¼Œå…³é—­åå¯ä»¥é™ä½ä»£ç éœ€æ±‚ï¼Œæå‡æ€§èƒ½ */
+/* ÓÃÓÚÉèÖÃÊÇ·ñ¹Ø±ÕÇÀÕ¼·§Öµ£¬Ä¬ÈÏÊÇ¿ªÆôµÄ¡£Èç¹ûÓ¦ÓÃ³ÌĞò²»ĞèÒª´Ë¹¦ÄÜ£¬¹Ø±Õºó¿ÉÒÔ½µµÍ´úÂëĞèÇó£¬ÌáÉıĞÔÄÜ */
 //#define TX_DISABLE_PREEMPTION_THRESHOLD
 
 
-/* ç”¨äºè®¾ç½®æ˜¯å¦æ¸…é›¶ThreadXå…¨å±€å˜é‡ï¼Œå¦‚æœç¼–è¯‘å™¨å¯åŠ¨ä»£ç åœ¨ThreadXè¿è¡Œå‰æ¸…é™¤äº†.bssæ®µï¼Œé‚£ä¹ˆå¯ä»¥å…³é—­ä¸å¿…è¦çš„æ¸…é›¶ */
+/* ÓÃÓÚÉèÖÃÊÇ·ñÇåÁãThreadXÈ«¾Ö±äÁ¿£¬Èç¹û±àÒëÆ÷Æô¶¯´úÂëÔÚThreadXÔËĞĞÇ°Çå³ıÁË.bss¶Î£¬ÄÇÃ´¿ÉÒÔ¹Ø±Õ²»±ØÒªµÄÇåÁã */
 //#define TX_DISABLE_REDUNDANT_CLEARING
 
 
-/* ç¡®å®šæ˜¯å¦ä¸éœ€è¦å®šæ—¶å™¨ç»„ï¼Œç¦æ­¢åéœ€è¦ç”¨æˆ·æ³¨é‡Šæ‰tx_initialize_low_levelæ–‡ä»¶é‡Œé¢tx_timer_interruptçš„è°ƒç”¨ã€‚
-   å¦å¤–ï¼Œç¦æ­¢åï¼Œå¿…é¡»ä½¿èƒ½TX_TIMER_PROCESS_IN_ISR */
+/* È·¶¨ÊÇ·ñ²»ĞèÒª¶¨Ê±Æ÷×é£¬½ûÖ¹ºóĞèÒªÓÃ»§×¢ÊÍµôtx_initialize_low_levelÎÄ¼şÀïÃætx_timer_interruptµÄµ÷ÓÃ?
+   ÁíÍâ£¬½ûÖ¹ºó£¬±ØĞëÊ¹ÄÜTX_TIMER_PROCESS_IN_ISR */
 /*
 #define TX_NO_TIMER
 #ifndef TX_TIMER_PROCESS_IN_ISR
@@ -297,50 +284,50 @@ void MSR_MSP(uint32_t addr);	//è®¾ç½®å †æ ˆåœ°å€
 */
 
 
-/* ç”¨äºè®¾ç½®æ˜¯å¦å…³é—­é€šçŸ¥å›è°ƒï¼Œé»˜è®¤æ˜¯ä½¿èƒ½çš„ã€‚å¦‚æœåº”ç”¨ç¨‹åºæ²¡æœ‰ç”¨åˆ°æ¶ˆæ¯å›è°ƒï¼Œå…³é—­æ‰åå¯ä»¥å‡å°ä»£ç ï¼Œå¹¶ä¸”å¯ä»¥æå‡æ€§èƒ½ã€‚ */
+/* ÓÃÓÚÉèÖÃÊÇ·ñ¹Ø±ÕÍ¨Öª»Øµ÷£¬Ä¬ÈÏÊÇÊ¹ÄÜµÄ¡£Èç¹ûÓ¦ÓÃ³ÌĞòÃ»ÓĞÓÃµ½ÏûÏ¢»Øµ÷£¬¹Ø±Õµôºó¿ÉÒÔ¼õĞ¡´úÂë£¬²¢ÇÒ¿ÉÒÔÌáÉıĞÔÄÜ?*/
 //#define TX_DISABLE_NOTIFY_CALLBACKS
 
 
-/* ä½¿èƒ½tx_thread_resumeå’Œtx_thread_suspendä½¿ç”¨å†…è”ä»£ç ï¼Œä¼˜åŠ¿æ˜¯æå‡è¿™ä¸¤ä¸ªå‡½æ•°çš„æ‰§è¡Œæ€§èƒ½ï¼ŒåŠ£åŠ¿æ˜¯å¢åŠ ä»£ç é‡ */
+/* Ê¹ÄÜtx_thread_resumeºÍtx_thread_suspendÊ¹ÓÃÄÚÁª´úÂë£¬ÓÅÊÆÊÇÌáÉıÕâÁ½¸öº¯ÊıµÄÖ´ĞĞĞÔÄÜ£¬ÁÓÊÆÊÇÔö¼Ó´úÂëâY*/
 //#define TX_INLINE_THREAD_RESUME_SUSPEND
 
 
-/* è®¾ç½®TreadXå†…æ ¸ä¸å¯ä¸­æ–­ï¼Œå¥½å¤„æ˜¯é™ä½å¤„ç†è´Ÿæ‹…ï¼Œå¹¶ä¸”äº§ç”Ÿçš„ä»£ç å°ã€‚ä½†å¢åŠ é”æ—¶é—´ */
+/* ÉèÖÃTreadXÄÚºË²»¿ÉÖĞ¶Ï£¬ºÃ´¦ÊÇ½µµÍ´¦Àí¸ºµ££¬²¢ÇÒ²úÉúµÄ´úÂëĞ¡¡£µ«Ôö¼ÓËøÊ±ê]*/
 //#define TX_NOT_INTERRUPTABLE
 
 
-/* ä½¿èƒ½äº‹ä»¶Traceï¼Œä¼šç¨å¾®å¢åŠ ç‚¹ä»£ç  */
+/* Ê¹ÄÜÊÂ¼şTrace£¬»áÉÔÎ¢Ôö¼Óµã´ú³m*/
 //#define TX_ENABLE_EVENT_TRACE
 
 
-/* ä½¿èƒ½BLOCK_POOLä¿¡æ¯è·å– */
+/* Ê¹ÄÜBLOCK_POOLĞÅÏ¢»ñÈ¡ */
 //#define TX_BLOCK_POOL_ENABLE_PERFORMANCE_INFO
 
 
-/* ä½¿èƒ½BYTE_POOLä¿¡æ¯è·å– */
+/* Ê¹ÄÜBYTE_POOLĞÅÏ¢»ñÈ¡ */
 //#define TX_BYTE_POOL_ENABLE_PERFORMANCE_INFO
 
 
-/* ä½¿èƒ½äº‹ä»¶æ ‡å¿—ä¿¡æ¯è·å– */
+/* Ê¹ÄÜÊÂ¼ş±êÖ¾ĞÅÏ¢»ñÈ¡ */
 //#define TX_EVENT_FLAGS_ENABLE_PERFORMANCE_INFO
 
 
-/* ä½¿èƒ½äº’æ–¥ä¿¡å·é‡ä¿¡æ¯è·å–  */
+/* Ê¹ÄÜ»¥³âĞÅºÅÁ¿ĞÅÏ¢»ñ…· */
 //#define TX_MUTEX_ENABLE_PERFORMANCE_INFO
 
 
-/* ä½¿èƒ½æ¶ˆæ¯å¯¹è±¡ä¿¡æ¯è·å– */
+/* Ê¹ÄÜÏûÏ¢¶ÔÏóĞÅÏ¢»ñÈ¡ */
 //#define TX_QUEUE_ENABLE_PERFORMANCE_INFO
 
-/* ä½¿èƒ½ä¿¡å·é‡ä¿¡æ¯è·å–  */
+/* Ê¹ÄÜĞÅºÅÁ¿ĞÅÏ¢»ñ…· */
 //#define TX_SEMAPHORE_ENABLE_PERFORMANCE_INFO
 
 
-/* ä½¿èƒ½ä»»åŠ¡ä¿¡æ¯è·å– */
+/* Ê¹ÄÜÈÎÎñĞÅÏ¢»ñÈ¡ */
 //#define TX_THREAD_ENABLE_PERFORMANCE_INFO
 
 
-/* ä½¿èƒ½å®šæ—¶å™¨ä¿¡æ¯è·å– */
+/* Ê¹ÄÜ¶¨Ê±Æ÷ĞÅÏ¢»ñ…·*/
 //#define TX_TIMER_ENABLE_PERFORMANCE_INFO
 
 

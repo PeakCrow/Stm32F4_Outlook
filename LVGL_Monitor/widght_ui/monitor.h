@@ -4,7 +4,7 @@
 #include "lvgl/lvgl.h"
 #include "log.h"
 
-#define png_load_path(png) "D:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/"#png
+#define png_load_path(png) "A:/Ls_Monitor_Lower/LVGL_Monitor/widght_ui/images/"#png
 
 void Gui_Monitor_App(void);
 typedef void (*App_btn_Back_Cb_Ptr)(lv_event_t* e);

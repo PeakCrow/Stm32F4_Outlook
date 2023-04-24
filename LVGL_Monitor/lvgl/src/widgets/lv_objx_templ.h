@@ -21,6 +21,7 @@ extern "C" {
  *      INCLUDES
  *********************/
 #include "../lv_conf_internal.h"
+#include "lvgl.h"
 
 #if LV_USE_TEMPL != 0
 
@@ -35,11 +36,13 @@ extern "C" {
  **********************/
 /*Data of template*/
 typedef struct {
-    lv_ANCESTOR_t ancestor; /*The ancestor widget, e.g. lv_slider_t slider*/
-    /*New data for this type*/
-} lv_templ_t;
+    lv_obj_t obj;
+    lv_color_t color;
+    uint8_t bright;     /**< Current brightness of the LED (0..255)*/
+} lv_indicator_t;
 
-extern const lv_obj_class_t lv_templ_class;
+
+extern const lv_obj_class_t lv_indicator_class;
 
 /**********************
  * GLOBAL PROTOTYPES
@@ -50,8 +53,7 @@ extern const lv_obj_class_t lv_templ_class;
  * @param parent    pointer to an object, it will be the parent of the new templ
  * @return          pointer to the created bar
  */
-lv_obj_t * lv_templ_create(lv_obj_t * parent);
-
+lv_obj_t * lv_panel_create(lv_obj_t* parent, const char* title, lv_coord_t height);
 /*======================
  * Add/remove functions
  *=====================*/

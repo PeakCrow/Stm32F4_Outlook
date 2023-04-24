@@ -103,7 +103,7 @@ void EPD_2IN9B_V3_Init(void)
     EPD_2IN9B_V3_ReadBusy();//waiting for the electronic paper IC to release the idle signal
 
     EPD_2IN9B_V3_SendCommand(0x00);//panel setting
-    EPD_2IN9B_V3_SendData(0x0f);//LUT from OTPï¼Œ128x296
+    EPD_2IN9B_V3_SendData(0x0f);//LUT from OTPï¼?28x296
     EPD_2IN9B_V3_SendData(0x89);//Temperature sensor, boost and other related timing settings
 
     EPD_2IN9B_V3_SendCommand(0x61);//resolution setting
@@ -140,7 +140,7 @@ void EPD_2IN9B_V3_Clear(void)
             EPD_2IN9B_V3_SendData(0xFF);
         }
     }
-    
+
     EPD_2IN9B_V3_SendCommand(0x12);
     EPD_2IN9B_V3_ReadBusy();
 }

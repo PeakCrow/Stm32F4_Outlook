@@ -62,7 +62,7 @@
 /* Yes, include the user defines in tx_user.h. The defines in this file may 
    alternately be defined on the command line.  */
 
-#include "tx_user.h"
+//#include "tx_user.h"
 #endif
 
 

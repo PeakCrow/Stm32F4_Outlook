@@ -1,3 +1,13 @@
+本机型号：
+处理器：AMD Ryzen5 3600 6-Core 7nm
+内存：英睿达 DDR4 3000MHz 8GBx2 金士顿 DDR4 3200MHz 8GBx2
+显卡：AMD Radeon RX590 GME(8GB 华硕)
+主板：微星 B450M MORTAR MAX(MS-7B89)
+硬盘：西数 WDC WDS500G2B0C-00PXH0 500G
+硬盘：Zeeksys SSD 240G
+硬盘：希捷ST1000DM003-1CH162 1TB
+2023-04-05跑分：822475 击败74%
+
 SAVE Estm32F407zet6TemplateXian_TemplateDocTraceX_Data.trx 0x20000548,0x2000043c8
 
 MDK5编译：e:;cd E:\Ls_Monitor\Xian_Template\User;D:\Keil_v5\UV4\UV4.exe -b -j0 "Run_Xian.uvprojx" -o buildlog.txt;echo build completely system time:;time /t;type buildlog.txt;
@@ -13,7 +23,7 @@ sudo ./qt-opensource-linux-x64-5.12.3.run
 sudo apt-get install clang
 sudo apt-get install build-essential
 sudo apt-get install libgl1-mesa-dev
-3.运行qt给i他
+3.运行qt
 runxian:/opt/Qt5.12.3/Tools/QtCreator/bin$ ./qtcreator
 
 git安装:
@@ -91,4 +101,17 @@ sudo apt-get install libgtk2.0-dev
 ./eclipse > /dev/null 2>&1 &
 
 有道翻译词典软件运行会造成qtcreater未响应
+
+ubuntu查看ip地址
+ip a
+
+winscp 从windows本地连接虚拟机
+1.虚拟机终端中输入 ip a 查看地址 >>inet 开始 ens33结尾的为正确的ip地址<<
+2.输入用户名 密码   runxiantian 134638  即可连接
+
+
+树莓派开始ssh服务
+1.sudo service ssh status 查看是否正在运行
+2.sudo service ssh start 启动ssh服
+
 

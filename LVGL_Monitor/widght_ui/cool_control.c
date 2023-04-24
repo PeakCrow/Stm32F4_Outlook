@@ -6,7 +6,7 @@
 
 static void Imgbtn_MC_cb(lv_event_t * e);
 static lv_style_t s_style_common;
-
+static void Cool_Control_In_Ui(lv_obj_t* parent);
 
 
 
@@ -61,5 +61,12 @@ static void Imgbtn_MC_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
 
     if(code == LV_EVENT_RELEASED)
-         App_Common_Init("Cool_Control",App_btn_Back_Cb);
+         Cool_Control_In_Ui(App_Common_Init("Cool_Control",App_btn_Back_Cb));
+}
+
+void Cool_Control_In_Ui(lv_obj_t* parent)
+{
+    lv_obj_t * tmp_obj;
+    tmp_obj = lv_panel_create(parent,"trx",100);
+    lv_obj_center(tmp_obj);
 }
