@@ -58,7 +58,6 @@
 /*=========================
    MEMORY SETTINGS--内存设置
  *=========================*/
-
 /*1: use custom malloc/free, 0: use the built-in `lv_mem_alloc()` and `lv_mem_free()`*/
 /*1: 使用自定义的malloc/free,0：使用内置的‘lv_mem_alloc() 和 lv_mem_free() */
 #define LV_MEM_CUSTOM 0
@@ -73,8 +72,8 @@
     /*Instead of an address give a memory allocator that will be called to get a memory pool for LVGL. E.g. my_malloc*/
 	/*代替地址给出一个内存分配器，他将被调用来获得LVGL的内存池，例如 my_malloc*/
     #if LV_MEM_ADR == 0
-        //#define LV_MEM_POOL_INCLUDE "malloc.h"  /* Uncomment if using an external allocator--如果使用外部分配器，请取消注释*/
-        //#define LV_MEM_POOL_ALLOC   lv_mymalloc          /* Uncomment if using an external allocator--如果使用外部分配器，请取消注释*/
+        #undef LV_MEM_POOL_INCLUDE 
+        #undef LV_MEM_POOL_ALLOC   
     #endif
 
 #else       /*LV_MEM_CUSTOM*/
@@ -270,7 +269,7 @@
     *LV_LOG_LEVEL_ERROR       Only critical issue, when the system may fail--系统可能出现故障时的唯一关键问题
     *LV_LOG_LEVEL_USER        Only logs added by the user--仅用户添加的日志
     *LV_LOG_LEVEL_NONE        Do not log anything--不记录任何内容*/
-    #define LV_LOG_LEVEL LV_LOG_LEVEL_INFO
+    #define LV_LOG_LEVEL      LV_LOG_LEVEL_ERROR
 
     /*1: Print the log with 'printf';打印日志使用printf
     *0: User need to register a callback with `lv_log_register_print_cb()`*/

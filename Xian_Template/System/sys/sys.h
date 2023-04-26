@@ -49,11 +49,11 @@
 #include "bsp_spi_flash_demo.h"				/* spi flash 驱动 demo test*/
 #include "bsp_spi_bus.h"					/* spi1 spi2 总线 */
 #include "bsp_iic_bus.h"					/* IIC1总线(包含AT24C02芯片) */
-#include "EPD_Test.h"						/* 墨水屏驱动*/
+#include "EPD_Test.h"						/* 墨水屏模块*/
 #include "bsp_font.h"						/* 墨水瓶字库 */
 #include "bsp_dwt.h"						/* 芯片DWT模块，安富莱教程提供 */
 #include "bsp_led.h"						/* 板载led灿*/
-#include "bsp_spi_flash.h"					/* spi flash驱动 */
+#include "bsp_spi_flash.h"					/* spi flash模块 */
 #include "bsp_can_bus.h"					/* can1 总线 */
 #include "bsp_tim_pwm.h"					/* 定时器中断初始化和PWM初始匿*/
 #include "bsp_ws2812b.h"					/* ws2812b三色RGB灿*/
@@ -61,12 +61,13 @@
 #include "bsp_spi_ads1256.h"				/* 24位ADC模拟量采雿*/
 #include "bsp_mlx90614.h"					/* mlx90614红外温度传感器初始化 */
 #include "bsp_font.h"						/* 屏幕显示的字体C库文仿*/
-#include "bsp_lcd.h"						/* 屏幕显示驱动 */
+#include "bsp_lcd.h"						/* 屏幕显示模块 */
 #include "bsp_touch.h"						/* 电容屏触摸驱势包含有触摸画板例稿*/
-#include "bsp_sdio_sd.h"					/* SD卡底层驱势*/	
-#include "adjust_pedal.h"
-#include "iwdg.h"
-#include "system_task_create.h"
+#include "bsp_sdio_sd.h"					/* SD卡底层模块 */	
+#include "adjust_pedal.h"                   /* 可调踏板GUI界面 */
+#include "iwdg.h"                           /* 看门狗模块 */
+#include "system_task_create.h"             /* threadx操作系统任务创建 */
+#include "bsp_sram.h"                       /* 外部1Msram模块 */
 
 
 #if	DEBUG_SWITCH_EN == 1

@@ -523,6 +523,11 @@
               <FileType>1</FileType>
               <FilePath>..\System\ink_screen\bsp_inkscreen.c</FilePath>
             </File>
+            <File>
+              <FileName>bsp_sram.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\sram\bsp_sram.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -704,59 +709,59 @@
               <FilePath>..\SYSTEM\ink_screen\EPD_2in9b_V3_test.c</FilePath>
             </File>
             <File>
-              <FileName>font8.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\font8.c</FilePath>
-            </File>
-            <File>
-              <FileName>font12.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\font12.c</FilePath>
-            </File>
-            <File>
-              <FileName>font12CN.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\font12CN.c</FilePath>
-            </File>
-            <File>
-              <FileName>font16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\font16.c</FilePath>
-            </File>
-            <File>
-              <FileName>font20.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\font20.c</FilePath>
-            </File>
-            <File>
-              <FileName>font24.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\font24.c</FilePath>
-            </File>
-            <File>
-              <FileName>font24CN.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\font24CN.c</FilePath>
-            </File>
-            <File>
               <FileName>GUI_Paint.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\ink_screen\GUI_Paint.c</FilePath>
             </File>
             <File>
+              <FileName>bsp_font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\SYSTEM\lcd\bsp_font.c</FilePath>
+            </File>
+            <File>
+              <FileName>font8.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\fonts\font8.c</FilePath>
+            </File>
+            <File>
+              <FileName>font12.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\fonts\font12.c</FilePath>
+            </File>
+            <File>
+              <FileName>font12CN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\fonts\font12CN.c</FilePath>
+            </File>
+            <File>
+              <FileName>font16.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\fonts\font16.c</FilePath>
+            </File>
+            <File>
+              <FileName>font20.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\fonts\font20.c</FilePath>
+            </File>
+            <File>
+              <FileName>font24.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\fonts\font24.c</FilePath>
+            </File>
+            <File>
+              <FileName>font24CN.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\fonts\font24CN.c</FilePath>
+            </File>
+            <File>
               <FileName>ImageData.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\ImageData.c</FilePath>
+              <FilePath>..\System\fonts\ImageData.c</FilePath>
             </File>
             <File>
               <FileName>ImageData2.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\ImageData2.c</FilePath>
-            </File>
-            <File>
-              <FileName>bsp_font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\lcd\bsp_font.c</FilePath>
+              <FilePath>..\System\fonts\ImageData2.c</FilePath>
             </File>
           </Files>
         </Group>

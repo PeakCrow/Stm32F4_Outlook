@@ -705,7 +705,7 @@
                 </option>
                 <option>
                     <name>OOCOutputFile</name>
-                    <state></state>
+                    <state>Run_Xian.srec</state>
                 </option>
                 <option>
                     <name>OOCCommandLineProducer</name>
@@ -1234,34 +1234,40 @@
             <name>$PROJ_DIR$\..\System\ink_screen\EPD_2in9b_V3_test.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\font12.c</name>
+            <name>$PROJ_DIR$\..\System\fonts\font12.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\font12CN.c</name>
+            <name>$PROJ_DIR$\..\System\fonts\font12CN.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\font16.c</name>
+            <name>$PROJ_DIR$\..\System\fonts\font16.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\font20.c</name>
+            <name>$PROJ_DIR$\..\System\fonts\font20.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\font24.c</name>
+            <name>$PROJ_DIR$\..\System\fonts\font24.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\font24CN.c</name>
+            <name>$PROJ_DIR$\..\System\fonts\font24CN.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\font8.c</name>
+            <name>$PROJ_DIR$\..\System\fonts\font8.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\System\fonts\fonts.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\System\ink_screen\GUI_Paint.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\ImageData.c</name>
+            <name>$PROJ_DIR$\..\System\fonts\ImageData.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\ImageData2.c</name>
+            <name>$PROJ_DIR$\..\System\fonts\ImageData.h</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\System\fonts\ImageData2.c</name>
         </file>
     </group>
     <group>
@@ -1757,6 +1763,9 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\System\flash\bsp_spi_flash_demo.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\System\sram\bsp_sram.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\System\timer\bsp_tim_pwm.c</name>

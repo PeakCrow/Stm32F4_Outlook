@@ -27,7 +27,8 @@
 
 ## 切换回主界面时，有明显的加载时间，并且中断其他线程？
 
-- 
+- 目前通过使用屏幕显示内存全缓存的方式有极大缓解，目前性能消耗大小
+- Program Size: Code=278640 RO-data=9623272 RW-data=770332 ZI-data=118712  
 
 
 ## keil5无法debug，并且报错cannot access target. shutting down debug session？

@@ -22,7 +22,6 @@ void bsp_InitSram(void)
 	GPIO_InitTypeDef GPIO_Initure;
 	FSMC_NORSRAM_TimingTypeDef FSMC_ReadWriteTim;
 
-	XmRamInit();                //初始化XMRAM 20191024
 	bsp_DelayUS(100);
 
 	__HAL_RCC_FSMC_CLK_ENABLE();                //使能FSMC时钟

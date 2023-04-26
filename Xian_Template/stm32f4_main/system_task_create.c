@@ -289,8 +289,8 @@ static  void  AppTaskStart (ULONG thread_input)
 	bsp_SetTIMOutPWM(GPIOB,GPIO_PIN_6,TIM4,1,500,5000);/* 生成一个1k，50占空比的方波，用来验证脉冲计数 */
 	bsp_InitSPI1Bus();							/* SPI1总线初始化 */
 	bsp_InitSFlash();							/* 初始化SPI FLASH芯片 */
-	//IWDG_Init(IWDG_PRESCALER_64,500);  	//·??μêy?a64,?????μ?a500,ò?3?ê±???a1s
-	
+    bsp_InitSram();
+
 	lv_init(); 									/* lvgl 系统初始化 */
 	lv_port_disp_init(); 						/* lvgl 显示接口初始化,放在 lv_init()的后面 */
 	lv_port_indev_init(); 						/* lvgl 输入接口初始化,放在 lv_init()的后面 */
