@@ -1,8 +1,6 @@
 #ifndef __TICK_TIM_H
 #define __TICK_TIM_H
-#include "stdint.h"
-#include "stdio.h"
-#include "stm32f4xx_hal.h"
+
 #include "sys.h"
 /*
 	在此定义若干个软件定时器全局变量

@@ -1,4 +1,4 @@
-#include "sys.h"
+#include "bsp_can_bus.h"
 
 /* 使用最新的hal库提供的can外设文件 */
 /* 此文件中没有使用互斥量App_Printf函数 */

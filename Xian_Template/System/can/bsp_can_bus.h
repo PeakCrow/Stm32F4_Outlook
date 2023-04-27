@@ -1,7 +1,7 @@
 #ifndef __BSP_CAN_BUS_H_
 #define __BSP_CAN_BUS_H_
 
-
+#include "sys.h"
 
 #define		CANx_BUS_1				CAN1
 #define		CAN1_CLK_ENABLE()		__HAL_RCC_CAN1_CLK_ENABLE()

@@ -15,6 +15,9 @@
 #ifndef _BSP_ROTATION_SENSOR_H_
 #define _BSP_ROTATION_SENSOR_H_
 
+#include "sys.h"
+
+
 void bsp_InitRotationSensor(void);
 float Rotation_Sensor_Get(uint8_t _gear_num,float _wheel_radius);
 

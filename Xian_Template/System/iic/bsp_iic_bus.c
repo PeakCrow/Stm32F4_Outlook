@@ -1,6 +1,4 @@
-#include "sys.h"
-
-
+#include "bsp_iic_bus.h"
 
 I2C_HandleTypeDef	iic_handle;
 

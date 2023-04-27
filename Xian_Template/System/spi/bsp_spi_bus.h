@@ -1,8 +1,7 @@
 #ifndef __BSP_SPI_BUS_H_
 #define __BSP_SPI_BUS_H_
 
-#include "stm32f4xx.h"
-#include "stdio.h"
+#include "sys.h"
 
 
 /* 最小擦除单位(扇区)--4k */

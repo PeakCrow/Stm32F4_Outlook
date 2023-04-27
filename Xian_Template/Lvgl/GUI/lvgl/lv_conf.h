@@ -269,7 +269,7 @@
     *LV_LOG_LEVEL_ERROR       Only critical issue, when the system may fail--系统可能出现故障时的唯一关键问题
     *LV_LOG_LEVEL_USER        Only logs added by the user--仅用户添加的日志
     *LV_LOG_LEVEL_NONE        Do not log anything--不记录任何内容*/
-    #define LV_LOG_LEVEL      LV_LOG_LEVEL_ERROR
+    #define LV_LOG_LEVEL      LV_LOG_LEVEL_TRACE
 
     /*1: Print the log with 'printf';打印日志使用printf
     *0: User need to register a callback with `lv_log_register_print_cb()`*/

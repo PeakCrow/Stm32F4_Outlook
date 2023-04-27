@@ -11,8 +11,9 @@
 *********************************************************************************************************
 */
 
-#ifndef __BSP_TIM_PWM_H
-#define __BSP_TIM_PWM_H
+#ifndef __BSP_TIM_PWM_H__
+#define __BSP_TIM_PWM_H__
+#include "sys.h"
 extern TIM_HandleTypeDef  g_TimHandle;
 
 void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx, uint8_t _ucChannel,

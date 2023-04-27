@@ -1,6 +1,6 @@
 #ifndef __BSP_MLX90614_H_
 #define __BSP_MLX90614_H_
-
+#include "sys.h"
 
 
 #define SA            0x00 //Slave address 单个MLX90614时地址为0x00,多个时地址默认为0x5a
