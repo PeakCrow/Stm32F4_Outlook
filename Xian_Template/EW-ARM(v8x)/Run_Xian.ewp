@@ -1225,15 +1225,6 @@
     <group>
         <name>Inkscreen</name>
         <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\DEV_Config.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\EPD_2in9b_V3.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\EPD_2in9b_V3_test.c</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\..\System\fonts\font12.c</name>
         </file>
         <file>
@@ -1255,16 +1246,7 @@
             <name>$PROJ_DIR$\..\System\fonts\font8.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\System\fonts\fonts.h</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\ink_screen\GUI_Paint.c</name>
-        </file>
-        <file>
             <name>$PROJ_DIR$\..\System\fonts\ImageData.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\fonts\ImageData.h</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\System\fonts\ImageData2.c</name>

@@ -1,8 +1,7 @@
 #ifndef	_BSP_KEY_H_
 #define	_BSP_KEY_H_
 
-#include "stm32f4xx.h"
-#include "stdio.h"
+#include "sys.h"
 
 
 ///* 根据应用程序的功能重命名按键宏 */

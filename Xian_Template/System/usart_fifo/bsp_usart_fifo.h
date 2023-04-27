@@ -1,8 +1,7 @@
 #ifndef _BSP_USART_FIFO_H_
 #define _BSP_USART_FIFO_H_
 
-#include "stm32f4xx.h"
-#include "stdio.h"
+#include "sys.h"
 /*
 	使用内部debug(因为使用的是狂暴模式)打印时，会增加32k的sram空间，所以调试的时候可以使用，release版本要去掉此组件
 	去除组件：DEBUG_SWITCH_EN 宏改为0，接着在Manage Run-Time Environment->Compiler->Event Recorder&&STDOUT勾选取消

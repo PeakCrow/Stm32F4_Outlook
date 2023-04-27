@@ -1,6 +1,7 @@
 #ifndef _BSP_TOUCH_H_
 #define _BSP_TOUCH_H_
 
+#include "sys.h"
 
 #define TP_PRES_DOWN 0X80	//屏幕被按下，取最高位
 #define TP_CATH_PRES 0X40   //有按键按下，取次高位

@@ -43,8 +43,7 @@
 #endif 
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx_hal.h"
-#include "bsp_sdio_sd.h"
+#include "sys.h"
 
 /** @addtogroup BSP
   * @{

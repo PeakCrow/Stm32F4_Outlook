@@ -1,6 +1,8 @@
 #ifndef   _BSP_WS2812B_H_
 #define   _BSP_WS2812B_H_
 
+#include "sys.h"
+
 
 #define RESET_WORD 	240
 #define LED_NUM		12

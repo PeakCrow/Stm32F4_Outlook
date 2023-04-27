@@ -694,26 +694,6 @@
           <GroupName>INKSCREEN</GroupName>
           <Files>
             <File>
-              <FileName>DEV_Config.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\DEV_Config.c</FilePath>
-            </File>
-            <File>
-              <FileName>EPD_2in9b_V3.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\EPD_2in9b_V3.c</FilePath>
-            </File>
-            <File>
-              <FileName>EPD_2in9b_V3_test.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\EPD_2in9b_V3_test.c</FilePath>
-            </File>
-            <File>
-              <FileName>GUI_Paint.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ink_screen\GUI_Paint.c</FilePath>
-            </File>
-            <File>
               <FileName>bsp_font.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\SYSTEM\lcd\bsp_font.c</FilePath>

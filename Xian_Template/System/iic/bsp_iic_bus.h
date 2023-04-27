@@ -14,8 +14,7 @@
 #ifndef __BSP_IIC_BUS_H_
 #define __BSP_IIC_BUS_H_
 
-#include 	"stm32f4xx.h"
-#include	"stdio.h"
+#include "sys.h"
 
 #define		I2C_OWN_ADDRESS7		0x0A	/* stm32自身的IIC器件地址 */
 #define		EEP_Firstpage				0x00	/* eeprom芯片数据起始地址 */

@@ -1,4 +1,4 @@
-#include "sys.h"
+#include "bsp_sram.h"
 
 //////////////////////////////////////////////////////////////////////////////////	 
 //本程序只供学习使用，未经作者许可，不得用于其它任何用途
@@ -21,8 +21,6 @@ void bsp_InitSram(void)
 {	
 	GPIO_InitTypeDef GPIO_Initure;
 	FSMC_NORSRAM_TimingTypeDef FSMC_ReadWriteTim;
-
-	bsp_DelayUS(100);
 
 	__HAL_RCC_FSMC_CLK_ENABLE();                //使能FSMC时钟
 	__HAL_RCC_GPIOD_CLK_ENABLE();               //使能GPIOD时钟

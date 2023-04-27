@@ -1,5 +1,7 @@
 #ifndef _BSP_LCD_H_
 #define _BSP_LCD_H_
+#include "sys.h"
+
 
 typedef __IO uint16_t vuint16_t;
 

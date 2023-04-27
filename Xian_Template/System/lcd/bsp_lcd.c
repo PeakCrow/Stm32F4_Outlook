@@ -1,4 +1,4 @@
-#include "sys.h"
+#include "bsp_lcd.h"
 
 //NT35510 -- 屏幕显示芯片
 SRAM_HandleTypeDef TFTSRAM_Handler;//SRAM句柄(用于控制LCD)

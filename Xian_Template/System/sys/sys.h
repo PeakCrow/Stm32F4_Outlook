@@ -64,11 +64,10 @@
 #include "bsp_lcd.h"						/* 屏幕显示模块 */
 #include "bsp_touch.h"						/* 电容屏触摸驱势包含有触摸画板例稿*/
 #include "bsp_sdio_sd.h"					/* SD卡底层模块 */	
-#include "adjust_pedal.h"                   /* 可调踏板GUI界面 */
 #include "iwdg.h"                           /* 看门狗模块 */
 #include "system_task_create.h"             /* threadx操作系统任务创建 */
 #include "bsp_sram.h"                       /* 外部1Msram模块 */
-
+#include "DEV_Config.h"
 
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug(printf)调试组件 */

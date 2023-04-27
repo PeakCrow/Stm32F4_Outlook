@@ -1,4 +1,4 @@
-#include "sys.h"
+#include "bsp_touch.h"
 
 _m_tp_dev tp_dev = 
 {

@@ -1,4 +1,4 @@
-#include "sys.h"
+#include "bsp_ws2812b.h"
 
 				//GRB
 static uint16_t g_Ws_2812b_lamp_buf[RESET_WORD+24*LED_NUM]={0};
