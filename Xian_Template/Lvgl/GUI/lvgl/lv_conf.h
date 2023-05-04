@@ -64,7 +64,7 @@
 #if LV_MEM_CUSTOM == 0
     /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
 	/*可用于’lv_mem_alloc()'分配的内存大小，以字节为单位，大于等于2Kb*/
-    #define LV_MEM_SIZE (80U * 1024U)          /*[bytes]*/
+    #define LV_MEM_SIZE (32U * 1024U)          /*[bytes]*/
 
     /*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/
 	/*设置内存池的地址，而不是将其分配为普通数组，也可以在外部sram中.*/
