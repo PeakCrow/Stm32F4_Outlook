@@ -61,7 +61,7 @@ UNS32 OnCOB_ID_SyncUpdate(CO_Data* d, const indextable * unsused_indextable,
 **/   
 void SyncAlarm(CO_Data* d, UNS32 id)
 {
-	//sendSYNC(d) ;
+	sendSYNC(d) ;
 }
 
 /*!                                                                                                
@@ -173,8 +173,8 @@ UNS8 proceedSYNC(CO_Data* d)
   (*d->post_sync)(d);
 
   /* only operational state allows PDO transmission */
-  //if(! d->CurrentCommunicationState.csPDO)  zxb
-    //return 0; zxb
+  if(! d->CurrentCommunicationState.csPDO) 
+    return 0;
 
   res = _sendPDOevent(d, 1 /*isSyncEvent*/ );
   

@@ -46,13 +46,17 @@ struct struct_s_BOARD {
 };
 
 #ifndef DLL_CALL
-#if !defined(WIN32) || defined(__CYGWIN__)
+#if !defined(WIN32) || defined(__CYGWIN__) || defined(__MINGW32__)
+#define LIBAPI
 #define DLL_CALL(funcname) funcname##_driver
 #else
+#define LIBAPI __stdcall
 //Windows was missing the definition of the calling convention
-#define DLL_CALL(funcname) __stdcall funcname##_driver
+#define DLL_CALL(funcname) LIBAPI funcname##_driver
 #endif
 #endif //DLL_CALL
+
+#define LIBPUBLIC
 
 #ifndef FCT_PTR_INIT
 #define FCT_PTR_INIT
@@ -63,7 +67,7 @@ UNS8 DLL_CALL(canReceive)(CAN_HANDLE, Message *)FCT_PTR_INIT;
 UNS8 DLL_CALL(canSend)(CAN_HANDLE, Message const *)FCT_PTR_INIT;
 CAN_HANDLE DLL_CALL(canOpen)(s_BOARD *)FCT_PTR_INIT;
 int DLL_CALL(canClose)(CAN_HANDLE)FCT_PTR_INIT;
-//UNS8 DLL_CALL(canChangeBaudRate)(CAN_HANDLE, char *)FCT_PTR_INIT; //zxb change this
+UNS8 DLL_CALL(canChangeBaudRate)(CAN_HANDLE, char *)FCT_PTR_INIT;
 
 #if defined DEBUG_MSG_CONSOLE_ON || defined NEED_PRINT_MESSAGE
 #include "def.h"

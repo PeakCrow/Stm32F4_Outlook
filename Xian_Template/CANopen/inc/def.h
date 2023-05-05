@@ -24,7 +24,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #ifndef __def_h__
 #define __def_h__
 
-#include "config.h"
+#include <config.h>
 
 /** definitions used for object dictionary access. ie SDO Abort codes . (See DS 301 v.4.02 p.48)
  */
@@ -42,7 +42,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 #define SDOABT_TOGGLE_NOT_ALTERNED   0x05030000
 #define SDOABT_TIMED_OUT             0x05040000
-#define SDOABT_OUT_OF_MEMORY         0x05040005 /* Size data exceed SDO_MAX_LENGTH_TRANSFERT */
+#define SDOABT_OUT_OF_MEMORY         0x05040005 /* Size data exceed SDO_MAX_LENGTH_TRANSFER */
 #define SDOABT_GENERAL_ERROR         0x08000000 /* Error size of SDO message */
 #define SDOABT_LOCAL_CTRL_ERROR      0x08000021 
 
@@ -82,7 +82,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 #define SDO_PROVIDED_BUFFER_TOO_SMALL   0x8A
 
-/* Status of the node during the SDO transfert : */
+/* Status of the node during the SDO transfer : */
 #define SDO_SERVER  0x1
 #define SDO_CLIENT  0x2
 #define SDO_UNKNOWN 0x3             
@@ -128,7 +128,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
    ---------------
   defined in the canopen DS301 
 */
-#define NMT	   		 0x0
+#define NMT	   0x0
 #define SYNC       0x1
 #define TIME_STAMP 0x2
 #define PDO1tx     0x3
@@ -142,7 +142,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #define SDOtx      0xB
 #define SDOrx      0xC
 #define NODE_GUARD 0xE
-#define LSS 	     0xF
+#define LSS 	   0xF
 
 /* NMT Command Specifier, sent by master to change a slave state */
 /* ------------------------------------------------------------- */

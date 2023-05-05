@@ -254,7 +254,13 @@ static  void  AppTaskCreate (void)
 
 }
 
-
+static int test_master(void)
+{
+	setNodeId(&TestSlave_Data_Data,0x00);
+	setState(&TestSlave_Data_Data,Initialisation);
+	setState(&TestSlave_Data_Data,Operational);
+	return 0;
+}
 /*
 *********************************************************************************************************
 *	函 数 名: AppTaskStart
@@ -293,7 +299,9 @@ static  void  AppTaskStart (ULONG thread_input)
 	lv_init(); 									/* lvgl 系统初始化 */
 	lv_port_disp_init(); 						/* lvgl 显示接口初始化,放在 lv_init()的后面 */
 	lv_port_indev_init(); 						/* lvgl 输入接口初始化,放在 lv_init()的后面 */
-
+	
+	test_master();
+	
 	/* 创建任务间通信机制,主要是各种任务间通讯函数 */
 	AppObjCreate();
 

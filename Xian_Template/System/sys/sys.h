@@ -69,6 +69,10 @@
 #include "bsp_sram.h"                       /* 外部1Msram模块 */
 #include "DEV_Config.h"
 
+#include "data.h"
+#include "TestSlave_Data.h"
+
+
 #if	DEBUG_SWITCH_EN == 1
 #include "EventRecorder.h"			/* 内部dedbug(printf)调试组件 */
 #endif

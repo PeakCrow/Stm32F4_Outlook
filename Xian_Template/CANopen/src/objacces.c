@@ -34,8 +34,8 @@
 
 
 
-#define DEBUG_WAR_CONSOLE_ON
-#define DEBUG_ERR_CONSOLE_ON 
+/* #define DEBUG_WAR_CONSOLE_ON */
+/* #define DEBUG_ERR_CONSOLE_ON */
 
 
 #include "data.h"
@@ -185,34 +185,23 @@ UNS32 _setODentry( CO_Data* d,
 
   ptrTable =(*d->scanIndexOD)(wIndex, &errorCode, &Callback);
   if (errorCode != OD_SUCCESSFUL)
-  {
-  MSG_WAR(0Xaaaa, "scanIndexOD is  error: ",0x0);
     return errorCode;
-  }
-  MSG_WAR(0Xaaaa, "ptrTable->bSubCount is : ",ptrTable->bSubCount);
-  MSG_WAR(0Xaaaa, "bSubindex is : ",bSubindex);
-  
+
   if( ptrTable->bSubCount <= bSubindex ) {
     /* Subindex not found */
     accessDictionaryError(wIndex, bSubindex, 0, *pExpectedSize, OD_NO_SUCH_SUBINDEX);
-	MSG_WAR(0Xaaaa, "OD_NO_SUCH_SUBINDEX......",0x0);
     return OD_NO_SUCH_SUBINDEX;
   }
   if (checkAccess && (ptrTable->pSubindex[bSubindex].bAccessType == RO)) {
     MSG_WAR(0x2B25, "Access Type : ", ptrTable->pSubindex[bSubindex].bAccessType);
     accessDictionaryError(wIndex, bSubindex, 0, *pExpectedSize, OD_WRITE_NOT_ALLOWED);
-	MSG_WAR(0Xaaaa, "OD_WRITE_NOT_ALLOWED......",0x0);
     return OD_WRITE_NOT_ALLOWED;
   }
 
-  MSG_WAR(0Xaaaa, "after checkAccess......",0x0);
+
   dataType = ptrTable->pSubindex[bSubindex].bDataType;
   szData = ptrTable->pSubindex[bSubindex].size;
-  MSG_WAR(0Xaaaa, "*pExpectedSize:",*pExpectedSize);
-  MSG_WAR(0Xaaaa, "szData:",szData);
-  MSG_WAR(0Xaaaa, "dataType:",dataType);
 
-  
   if( *pExpectedSize == 0 ||
       *pExpectedSize == szData ||
       /* allow to store a shorter string than entry size */
@@ -239,12 +228,8 @@ UNS32 _setODentry( CO_Data* d,
       errorCode = (*d->valueRangeTest)(dataType, pSourceData);
       if (errorCode) {
         accessDictionaryError(wIndex, bSubindex, szData, *pExpectedSize, errorCode);
-		MSG_WAR(0Xaaaa, "accessDictionaryError......",0x0);
         return errorCode;
       }
-	  
-	  MSG_WAR(0Xaaaa, "after accessDictionaryError......",0x0);
-	  
       memcpy(ptrTable->pSubindex[bSubindex].pObject,pSourceData, *pExpectedSize);
      /* TODO : CONFORM TO DS-301 : 
       *  - stop using NULL terminated strings
@@ -255,15 +240,12 @@ UNS32 _setODentry( CO_Data* d,
         ((UNS8*)ptrTable->pSubindex[bSubindex].pObject)[*pExpectedSize] = 0;
       
       *pExpectedSize = szData;
-	  
-	  MSG_WAR(0Xaaaa, "after ptrTable->pSubindex......",0x0);
 
       /* Callbacks */
       if(Callback && Callback[bSubindex]){
         errorCode = (Callback[bSubindex])(d, ptrTable, bSubindex);
         if(errorCode != OD_SUCCESSFUL)
         {
-            MSG_WAR(0Xaaaa, "Callback is error......",0x0); 
             return errorCode;
         }
        }
@@ -275,7 +257,6 @@ UNS32 _setODentry( CO_Data* d,
       return OD_SUCCESSFUL;
     }else{
       *pExpectedSize = szData;
-	  MSG_WAR(0Xaaaa, "accessDictionaryError......",0x0); 
       accessDictionaryError(wIndex, bSubindex, szData, *pExpectedSize, OD_LENGTH_DATA_INVALID);
       return OD_LENGTH_DATA_INVALID;
     }

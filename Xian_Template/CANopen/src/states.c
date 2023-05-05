@@ -32,7 +32,6 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include "data.h"
 #include "sysdep.h"
 
-
 /** Prototypes for internals functions */
 /*!                                                                                                
 **                                                                                                 
@@ -64,19 +63,11 @@ e_nodeState getState(CO_Data* d)
 void canDispatch(CO_Data* d, Message *m)
 {
 	UNS16 cob_id = UNS16_LE(m->cob_id);
-	MSG_WAR(0x000,"after cob_id >>7 is ",(cob_id >> 7));
-	MSG_WAR(0x000,"UNS16_LE(m->cob_id) is ",UNS16_LE(m->cob_id));
-	MSG_WAR(0x000,"m->cob_id is ",m->cob_id);
-	
 	 switch(cob_id >> 7)
 	{
 		case SYNC:		/* can be a SYNC or a EMCY message */
-			//printf("SYNC SYNC SYNC \r\n");
-		MSG_WAR(0x000,"SYNC SYNC SYNC",0x0000);
 			if(cob_id == 0x080)	/* SYNC */
 			{
-				MSG_WAR(0x000,"d->CurrentCommunicationState.csSYNC is ",d->CurrentCommunicationState.csSYNC);
-				MSG_WAR(0x000,"d->CurrentCommunicationState.csEmergency is ",d->CurrentCommunicationState.csEmergency);
 				if(d->CurrentCommunicationState.csSYNC)
 					proceedSYNC(d);
 			} else 		/* EMCY */
@@ -92,38 +83,27 @@ void canDispatch(CO_Data* d, Message *m)
 		case PDO3rx:
 		case PDO4tx:
 		case PDO4rx:
-			MSG_WAR(0x000,"PDO4rx PDO4rx PDO4rx csPDO is",d->CurrentCommunicationState.csPDO);
-			//if (d->CurrentCommunicationState.csPDO)
-			if (1)
+			if (d->CurrentCommunicationState.csPDO)
 				proceedPDO(d,m);
 			break;
 		case SDOtx:
 		case SDOrx:
-			MSG_WAR(0x000,"SDOrx SDOrx SDOrx csSDO is ",d->CurrentCommunicationState.csSDO);
 			if (d->CurrentCommunicationState.csSDO)
 				proceedSDO(d,m);
 			break;
 		case NODE_GUARD:
-			MSG_WAR(0x000,"NODE_GUARD NODE_GUARD NODE_GUARD csHeartbeat is",d->CurrentCommunicationState.csHeartbeat);
-			if (d->CurrentCommunicationState.csHeartbeat)
-			{
-				MSG_WAR(0x000,"it has go into NODE_GUARD........",0);
-				MSG_WAR(0x000,"*d->bDeviceNodeId is ",*d->bDeviceNodeId);
+			if (d->CurrentCommunicationState.csLifeGuard)
 				proceedNODE_GUARD(d,m);
-			}
 			break;
 		case NMT:
-			MSG_WAR(0x000,"NMT NMT NMT *(d->iam_a_slave) is ",*(d->iam_a_slave));
 			if (*(d->iam_a_slave))
 			{
 				proceedNMTstateChange(d,m);
 			}
-      break;
+            break;
 #ifdef CO_ENABLE_LSS
 		case LSS:
-			MSG_WAR(0x000,"*(d->iam_a_slave) is: ",*(d->iam_a_slave));
-			MSG_WAR(0x000,"cob_id is: ",cob_id);
-			//if (!d->CurrentCommunicationState.csLSS)break;
+			if (!d->CurrentCommunicationState.csLSS)break;
 			if ((*(d->iam_a_slave)) && cob_id==MLSS_ADRESS)
 			{
 				proceedLSS_Slave(d,m);
@@ -157,18 +137,15 @@ void canDispatch(CO_Data* d, Message *m)
 **/  	
 void switchCommunicationState(CO_Data* d, s_state_communication *newCommunicationState)
 {
-	//while(1) printf("switchCommunicationState  is\r\n");
 #ifdef CO_ENABLE_LSS
 	StartOrStop(csLSS,	startLSS(d),	stopLSS(d))
 #endif
 	StartOrStop(csSDO,	None,		resetSDO(d))
 	StartOrStop(csSYNC,	startSYNC(d),		stopSYNC(d))
-	StartOrStop(csHeartbeat,	heartbeatInit(d),	heartbeatStop(d))
+	StartOrStop(csLifeGuard,	lifeGuardInit(d),	lifeGuardStop(d))
 	StartOrStop(csEmergency,	emergencyInit(d),	emergencyStop(d)) 
 	StartOrStop(csPDO,	PDOInit(d),	PDOStop(d))
 	StartOrStop(csBoot_Up,	None,	slaveSendBootUp(d))
-	
-	//StartOrStop(csBoot_Up,	None,	heartbeatInit(d))
 }
 
 /*!                                                                                                
@@ -181,22 +158,18 @@ void switchCommunicationState(CO_Data* d, s_state_communication *newCommunicatio
 **/  
 UNS8 setState(CO_Data* d, e_nodeState newState)
 {
-	MSG_WAR(setState, "has go into setState...........\r\n",0);
 	if(newState != d->nodeState){
 		switch( newState ){
 			case Initialisation:
-			{	
+			{
 				s_state_communication newCommunicationState = {1, 0, 0, 0, 0, 0, 0};
-				//s_state_communication newCommunicationState = {0, 0, 0, 0, 0, 0, 0};
 				d->nodeState = Initialisation;
-				MSG_WAR(Initialisation, "newState is :  ",newState);
 				switchCommunicationState(d, &newCommunicationState);
-				// call user app init callback now. 
-				// d->initialisation MUST NOT CALL SetState 
-				(*d->initialisation)(d);		
-          				
+				/* call user app init callback now. */
+				/* d->initialisation MUST NOT CALL SetState */
+				(*d->initialisation)(d);				
 			}
-      
+
 			/* Automatic transition - No break statement ! */
 			/* Transition from Initialisation to Pre_operational */
 			/* is automatic as defined in DS301. */
@@ -204,22 +177,15 @@ UNS8 setState(CO_Data* d, e_nodeState newState)
 								
 			case Pre_operational:
 			{
+				
 				s_state_communication newCommunicationState = {0, 1, 1, 1, 1, 0, 1};
-				//while(1) printf("newState 22 is [%0x]\r\n",newState);
 				d->nodeState = Pre_operational;
-				MSG_WAR(Pre_operational, "newState is :  ",newState);	
 				switchCommunicationState(d, &newCommunicationState);
-				if (!(*(d->iam_a_slave)))
-				{
-					//while(1) printf(" 222222222222222222222222\r\n");
-					masterSendNMTstateChange (d, 0, NMT_Reset_Node);
-				}
-        (*d->preOperational)(d);
+                (*d->preOperational)(d);
 			}
 			break;
 								
 			case Operational:
-				MSG_WAR(Pre_operational, "newState is :  ",newState);
 			if(d->nodeState == Initialisation) return 0xFF;
 			{
 				s_state_communication newCommunicationState = {0, 1, 1, 1, 1, 1, 0};
@@ -231,7 +197,6 @@ UNS8 setState(CO_Data* d, e_nodeState newState)
 			break;
 						
 			case Stopped:
-				MSG_WAR(Pre_operational, "newState is :  ",newState);
 			if(d->nodeState == Initialisation) return 0xFF;
 			{
 				s_state_communication newCommunicationState = {0, 0, 0, 0, 1, 0, 1};
@@ -273,13 +238,11 @@ UNS8 getNodeId(CO_Data* d)
 void setNodeId(CO_Data* d, UNS8 nodeId)
 {
   UNS16 offset = d->firstIndex->SDO_SVR;
-
-  MSG_WAR(0x2D01, "dddddddddddddddddddddddd ",nodeId);
+  
 #ifdef CO_ENABLE_LSS
   d->lss_transfer.nodeID=nodeId;
   if(nodeId==0xFF){
   	*d->bDeviceNodeId = nodeId;
-		MSG_WAR(0x2D01, "CO_ENABLE_LSS CO_ENABLE_LSS",nodeId);
   	return;
   }
   else
@@ -288,7 +251,6 @@ void setNodeId(CO_Data* d, UNS8 nodeId)
 	  MSG_WAR(0x2D01, "Invalid NodeID",nodeId);
 	  return;
   }
- 
 
   if(offset){
     /* Adjust COB-ID Client->Server (rx) only id already set to default value or id not valid (id==0xFF)*/
@@ -340,15 +302,18 @@ void setNodeId(CO_Data* d, UNS8 nodeId)
 
   /* Update EMCY COB-ID if already set to default*/
   if((*d->error_cobid == *d->bDeviceNodeId + 0x80)||(*d->bDeviceNodeId==0xFF))
-    *d->error_cobid = nodeId + 0x80;  //SYNC
+    *d->error_cobid = nodeId + 0x80;
 
   /* bDeviceNodeId is defined in the object dictionary. */
   *d->bDeviceNodeId = nodeId;
-	MSG_WAR(0x2D01, "*d->bDeviceNodeId is ",*(d->bDeviceNodeId));
-  
 }
 
 void _initialisation(CO_Data* d){}
-void _preOperational(CO_Data* d){}
+void _preOperational(CO_Data* d){
+    if (!(*(d->iam_a_slave)))
+    {
+        masterSendNMTstateChange (d, 0, NMT_Reset_Node);
+    }
+}
 void _operational(CO_Data* d){}
 void _stopped(CO_Data* d){}

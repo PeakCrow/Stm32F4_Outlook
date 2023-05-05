@@ -45,10 +45,6 @@ typedef struct struct_CO_Data CO_Data;
 #include "nmtSlave.h"
 #include "nmtMaster.h"
 #include "emcy.h"
-
-#define CO_ENABLE_LSS
-#define CO_ENABLE_LSS_FS    //zxb add this
-
 #ifdef CO_ENABLE_LSS
 #include "lss.h"
 #endif
@@ -59,7 +55,7 @@ typedef struct struct_CO_Data CO_Data;
  */
 struct struct_CO_Data {
 	/* Object dictionary */
-	UNS8 *bDeviceNodeId; //node id
+	UNS8 *bDeviceNodeId;
 	const indextable *objdict;
 	s_PDO_status *PDO_status;
 	TIMER_HANDLE *RxPDO_EventTimers;
@@ -71,7 +67,7 @@ struct struct_CO_Data {
 	valueRangeTest_t valueRangeTest;
 	
 	/* SDO */
-	s_transfer transfers[SDO_MAX_SIMULTANEOUS_TRANSFERTS];
+	s_transfer transfers[SDO_MAX_SIMULTANEOUS_TRANSFERS];
 	/* s_sdo_parameter *sdo_parameters; */
 
 	/* State machine */
@@ -92,6 +88,14 @@ struct struct_CO_Data {
 	TIMER_HANDLE ProducerHeartBeatTimer;
 	heartbeatError_t heartbeatError;
 	e_nodeState NMTable[NMT_MAX_NODE_ID]; 
+
+	/* NMT-nodeguarding */
+	TIMER_HANDLE GuardTimeTimer;
+	TIMER_HANDLE LifeTimeTimer;
+	nodeguardError_t nodeguardError;
+	UNS16 *GuardTime;
+	UNS8 *LifeTimeFactor;
+	UNS8 nodeGuardStatus[NMT_MAX_NODE_ID];
 
 	/* SYNC */
 	TIMER_HANDLE syncTimer;
@@ -135,10 +139,11 @@ struct struct_CO_Data {
 };
 
 #define NMTable_Initializer Unknown_state,
+#define nodeGuardStatus_Initializer 0x00,
 
 #ifdef SDO_DYNAMIC_BUFFER_ALLOCATION
 #define s_transfer_Initializer {\
-		0,          /* CliServNbr */\
+		0,          /* CliServ{REPEAT_NMT_MAX_NODE_ID_TIMES(NMTable_Initializer)},Nbr */\
 		0,          /* wohami */\
 		SDO_RESET,  /* state */\
 		0,          /* toggle */\
@@ -255,7 +260,7 @@ struct struct_CO_Data {
 	\
 	/* SDO, structure s_transfer */\
 	{\
-          REPEAT_SDO_MAX_SIMULTANEOUS_TRANSFERTS_TIMES(s_transfer_Initializer)\
+          REPEAT_SDO_MAX_SIMULTANEOUS_TRANSFERS_TIMES(s_transfer_Initializer)\
 	},\
 	\
 	/* State machine*/\
@@ -287,6 +292,14 @@ struct struct_CO_Data {
 	\
 	{REPEAT_NMT_MAX_NODE_ID_TIMES(NMTable_Initializer)},\
                                                    /* is  well initialized at "Unknown_state". Is it ok ? (FD)*/\
+	\
+	/* NMT-nodeguarding */\
+	TIMER_NONE,                                /* GuardTimeTimer */\
+	TIMER_NONE,                                /* LifeTimeTimer */\
+	_nodeguardError,           /* nodeguardError */\
+	& NODE_PREFIX ## _obj100C,                 /* GuardTime */\
+	& NODE_PREFIX ## _obj100D,                 /* LifeTimeFactor */\
+	{REPEAT_NMT_MAX_NODE_ID_TIMES(nodeGuardStatus_Initializer)},\
 	\
 	/* SYNC */\
 	TIMER_NONE,                                /* syncTimer */\

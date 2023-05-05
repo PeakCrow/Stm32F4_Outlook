@@ -1,8 +1,7 @@
 /*
-This file is part of CanFestival, a library implementing CanOpen Stack.
+This file is part of CanFestival, a library implementing CanOpen Stack. 
 
 Copyright (C): Edouard TISSERANT and Francis DUPIN
-AT91 Port: Peter CHRISTEN
 
 See COPYING file for copyrights details.
 
@@ -24,15 +23,13 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #ifndef __TIMERSCFG_H__
 #define __TIMERSCFG_H__
 
-// Whatever your microcontroller, the timer wont work if
-// TIMEVAL is not at least on 32 bits
-#define TIMEVAL UNS32
+/* Time unit : ns */
+/* Time resolution : 64bit (~585 years) */
+#define TIMEVAL unsigned long long
+#define TIMEVAL_MAX ~(TIMEVAL)0
+#define MS_TO_TIMEVAL(ms) ms*1000000L
+#define US_TO_TIMEVAL(us) us*1000L
 
-// The timer of the STM32 counts from 0000 to 0xFFFF
-#define TIMEVAL_MAX 0xFFFF
-
-// The timer is incrementing every 1 us.
-#define MS_TO_TIMEVAL(ms) ((ms) * 1000)  //change @bruce
-#define US_TO_TIMEVAL(us) ((us) * 1)     //change @bruce
+#define TASK_HANDLE void*
 
 #endif

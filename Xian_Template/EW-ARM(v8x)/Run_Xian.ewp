@@ -394,6 +394,8 @@
                     <state>$PROJ_DIR$\..\ThreadX\ports\cortex_m4\iar\inc</state>
                     <state>$PROJ_DIR$\..\segger\HardFaultHandlerIAR</state>
                     <state>$PROJ_DIR$\..\stm32f4_main</state>
+                    <state>$PROJ_DIR$\..\CANopen\inc</state>
+                    <state>$PROJ_DIR$\..\CANopen\dictionary</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1108,6 +1110,51 @@
             <data />
         </settings>
     </configuration>
+    <group>
+        <name>CanFestival</name>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\dcf.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\emcy.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\lifegrd.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\lss.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\nmtMaster.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\nmtSlave.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\objacces.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\pdo.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\sdo.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\states.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\sync.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\dictionary\TestSlave_Data.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\timer.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\CANopen\src\usr_canfestival.c</name>
+        </file>
+    </group>
     <group>
         <name>Core_h</name>
         <file>

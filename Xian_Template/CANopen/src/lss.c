@@ -42,12 +42,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #include "canfestival.h"
 #include "sysdep.h"
 
-#define CO_ENABLE_LSS   //zxb add this
-
 #ifdef CO_ENABLE_LSS
 
-#define LSS_TIMEOUT_MS	(TIMEVAL)1000  /* ms */
-#define LSS_FS_TIMEOUT_MS	(TIMEVAL)100  /* ms */
+//#define LSS_TIMEOUT_MS	(TIMEVAL)1000  /* ms */
+//#define LSS_FS_TIMEOUT_MS	(TIMEVAL)100  /* ms */
 
 /* Returns the LSS ident field from a Message struct */
 #define getLSSIdent(msg) (((UNS32)msg->data[4] << 24) | ((UNS32)msg->data[3] << 16) | (msg->data[2] << 8) | (msg->data[1]))
@@ -175,7 +173,7 @@ void LssAlarmSDELAY(CO_Data* d, UNS32 id)
    		MSG_WAR(0x3D0B, "LSS switch delay first period expired",0);
     	d->lss_transfer.switchDelayState=SDELAY_SECOND;
     	//(*d->lss_ChangeBaudRate)(d,d->lss_transfer.baudRate);
-    	//canChangeBaudRate(d->lss_transfer.canHandle_t, d->lss_transfer.baudRate);
+    	canChangeBaudRate(d->lss_transfer.canHandle_t, d->lss_transfer.baudRate);
     }
     else{ /* d->lss_transfer.switchDelayState==SDELAY_SECOND */
     	MSG_WAR(0x3D0C, "LSS switch delay second period expired",0);
@@ -297,7 +295,7 @@ void LssAlarmFS(CO_Data* d, UNS32 id)
 **/ 
 void startLSS(CO_Data* d)
 {
-	MSG_WAR(0x3D09, "LSS services started",0);
+	/*MSG_WAR(0x3D09, "LSS services started",0);*/
 }
 
 /*!                                                                                                
@@ -307,7 +305,7 @@ void startLSS(CO_Data* d)
 **/   
 void stopLSS(CO_Data* d)
 {
-	MSG_WAR(0x3D09, "LSS services stopped",0);
+	/*MSG_WAR(0x3D09, "LSS services stopped",0);*/
 }
 
 /*!                                                                                                
@@ -341,10 +339,10 @@ UNS8 sendSlaveLSSMessage(CO_Data* d, UNS8 command,void *dat1,void *dat2)
   	break;
   case LSS_CONF_NODE_ID: /* Configure Node-ID */
   case LSS_CONF_BIT_TIMING: /* Configure Bit Timing Parameters */
-  case LSS_CONF_STORE: // Store Configured Parameters //zxb change this
+  case LSS_CONF_STORE: /* Store Configured Parameters */
   	m.data[1]=*(UNS8 *)dat1;
   	m.data[2]=*(UNS8 *)dat2;
-  	break;
+  	break; 
   case LSS_INQ_VENDOR_ID: /* Inquire Identity Vendor-ID */
   case LSS_INQ_PRODUCT_CODE: /* Inquire Identity Product-Code */
   case LSS_INQ_REV_NUMBER: /* Inquire Identity Revision-Number */
@@ -474,7 +472,7 @@ UNS8 sendMasterLSSMessage(CO_Data* d, UNS8 command,void *dat1,void *dat2)
 	m.data[4]=(UNS8)(*(UNS32*)dat1>>24 & 0xFF);
 	break;
 	
-  case LSS_CONF_STORE: /* Store Configured Parameters */ 
+  case LSS_CONF_STORE: /* Store Configured Parameters */
   case LSS_IDENT_REMOTE_NON_CONF: /* LSS identify non-configured remote slave */
   case LSS_INQ_VENDOR_ID: /* Inquire Identity Vendor-ID */
   case LSS_INQ_PRODUCT_CODE: /* Inquire Identity Product-Code */
@@ -578,7 +576,7 @@ UNS8 proceedLSS_Master(CO_Data* d, Message* m )
    			break;
    		case LSS_CONF_NODE_ID: /* Configure Node-ID */
    		case LSS_CONF_BIT_TIMING: /* Configure Bit Timing Parameters */
-   		case LSS_CONF_STORE: /* Store Configured Parameters */ //zxb change this
+   		case LSS_CONF_STORE: /* Store Configured Parameters */
    			if(d->lss_transfer.command!=msg_cs)goto ErrorProcessMaster;
    			Dat1=m->data[1];
    			Dat2=m->data[2];
@@ -651,12 +649,9 @@ UNS8 proceedLSS_Slave(CO_Data* d, Message* m )
 {  
 	UNS8 msg_cs;
 	
-  	MSG_WAR(0x3D21, "111111 SlaveLSS proceedLSS; command ", m->data[0]);
-  	msg_cs=m->data[0];
-	MSG_WAR(0x000, "msg_cs is:", msg_cs);
-   //switch(msg_cs=m->data[0]){
-	switch(msg_cs){
-	
+  	MSG_WAR(0x3D21, "SlaveLSS proceedLSS; command ", m->data[0]);
+  	
+   	switch(msg_cs=m->data[0]){
    	case LSS_SM_GLOBAL:		/* Switch Mode Global */
    		/* if there is not a mode change break*/
    		if(m->data[1] == d->lss_transfer.mode){
@@ -686,12 +681,11 @@ UNS8 proceedLSS_Slave(CO_Data* d, Message* m )
 			d->lss_transfer.mode=LSS_WAITING_MODE;
 		}
 	break;
-	MSG_WAR(0x000, "msg_cs is:", msg_cs);
 	case LSS_CONF_NODE_ID: /* Configure Node-ID */
 	{ 
 		UNS8 error_code=0;
 		UNS8 spec_error=0;
-		MSG_WAR(0x000, "LSS_CONF_NODE_ID LSS_CONF_NODE_ID LSS_CONF_NODE_ID ", 0x000);	
+			
 		if(d->lss_transfer.mode==LSS_CONFIGURATION_MODE){
 			if(m->data[1]>127 && m->data[1]!=0xFF){
 				MSG_ERR(0x1D26, "NodeID out of range",0);
@@ -709,7 +703,6 @@ UNS8 proceedLSS_Slave(CO_Data* d, Message* m )
 		sendSlaveLSSMessage(d,msg_cs,&error_code,&spec_error);
 	}	
 	break;
-	MSG_WAR(0x000, "msg_cs is:", msg_cs);
 	case LSS_CONF_BIT_TIMING: /* Configure Bit Timing Parameters */
 	{
 		UNS8 error_code=0;
@@ -748,7 +741,6 @@ UNS8 proceedLSS_Slave(CO_Data* d, Message* m )
 		sendSlaveLSSMessage(d,msg_cs,&error_code,&spec_error);
 	}
 	break;
-	MSG_WAR(0x000, "msg_cs is:", msg_cs);
 	case LSS_CONF_ACT_BIT_TIMING: /* Activate Bit Timing Parameters */
 		
 		if(d->lss_transfer.mode!=LSS_CONFIGURATION_MODE){
@@ -767,24 +759,23 @@ UNS8 proceedLSS_Slave(CO_Data* d, Message* m )
 			StartLSS_SDELAY_TIMER();
 		}
 	break;
-	MSG_WAR(0x000, "msg_cs is:", msg_cs);
-	case LSS_CONF_STORE: // Store Configured Parameters 
+	case LSS_CONF_STORE: /* Store Configured Parameters */
 	{
 		UNS8 error_code=0;
 		UNS8 spec_error=0;
 		
 		if(d->lss_transfer.mode==LSS_CONFIGURATION_MODE){ 
 			if(d->lss_StoreConfiguration){
-				 // call lss_StoreConfiguration with NodeId 
+				 /* call lss_StoreConfiguration with NodeId */
 	  			(*d->lss_StoreConfiguration)(d,&error_code,&spec_error);
 			}
 			else{
-				MSG_ERR(0x1D2E, "1111111 Store configuration not supported",0);
-				error_code=1; // store configuration is not supported 
+				MSG_ERR(0x1D2E, "Store configuration not supported",0);
+				error_code=1; /* store configuration is not supported */
 			}	
 		}
 		else{
-			MSG_WAR(0x3D2F, "222222 SlaveLSS not in configuration mode",0);
+			MSG_WAR(0x3D2F, "SlaveLSS not in configuration mode",0);
 			//error_code=0xFF;
 			break;
 		}
@@ -838,22 +829,13 @@ UNS8 proceedLSS_Slave(CO_Data* d, Message* m )
 	case LSS_IDENT_REMOTE_SERIAL_HIGH:
 	{
 		UNS32 errorCode;
-		UNS32 *vendorId = NULL;
-  	const indextable *ptrTable;
-  	ODCallback_t *Callback;
-  	UNS32 _SpecificNodeInfo;
-		subindex  temp;
-		 ptrTable = (indextable *)malloc(sizeof(indextable));
-		 //ptrTable->pSubindex = (subindex*)malloc(sizeof(subindex));
+  		const indextable *ptrTable;
+  		ODCallback_t *Callback;
+  		UNS32 _SpecificNodeInfo;
   		
 		_SpecificNodeInfo=getLSSIdent(m);
 		
-		 ptrTable = (*d->scanIndexOD)(0x1018, &errorCode, &Callback);
-
-      vendorId =  (UNS32*) d->objdict[9].pSubindex[1].pObject;
-		
-		if(_SpecificNodeInfo == *(UNS32*)ptrTable->pSubindex[1].pObject)
-			 MSG_WAR(0x3D33, " ================= ", 0);
+		ptrTable = (*d->scanIndexOD)(0x1018, &errorCode, &Callback);
 			
 		/* Check if the data match the identity object. */
 		switch(msg_cs){
@@ -873,8 +855,6 @@ UNS8 proceedLSS_Slave(CO_Data* d, Message* m )
 		else if(d->lss_transfer.addr_ident_match==0){
 			MSG_WAR(0x3D34, "LSS identify field doesn't match ", _SpecificNodeInfo);
 		}
-		free(ptrTable->pSubindex);
-		free(ptrTable);
 	}
 	break;
 	case LSS_IDENT_REMOTE_NON_CONF: /* LSS identify non-configured remote slave */
@@ -1032,6 +1012,6 @@ UNS8 getConfigResultNetworkNode (CO_Data* d, UNS8 command, UNS32* dat1, UNS8* da
   return d->lss_transfer.state;
 }
 
-void _lss_StoreConfiguration(UNS8 *error, UNS8 *spec_error){printf("_lss_StoreConfiguration\n");}
+//void _lss_StoreConfiguration(UNS8 *error, UNS8 *spec_error){printf("_lss_StoreConfiguration\n");}
 
 #endif

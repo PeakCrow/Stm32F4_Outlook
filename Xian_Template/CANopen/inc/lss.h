@@ -52,7 +52,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #define LSS_SM_SELECTIVE_SERIAL 	67
 #define LSS_SM_SELECTIVE_RESP 		68
 /* Configuration services */
-#define LSS_CONF_NODE_ID 			18
+#define LSS_CONF_NODE_ID 			17
 #define LSS_CONF_BIT_TIMING 		19
 #define LSS_CONF_ACT_BIT_TIMING 	21
 #define LSS_CONF_STORE 				23
@@ -79,21 +79,19 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 #define LSS_FS_PROCESSING 1
 #define LSS_FS_CONFIRMATION 2
 
-#define CO_ENABLE_LSS   //zxb add this
-
 
 typedef void (*LSSCallback_t)(CO_Data* d, UNS8 command); 
 
 typedef void (*lss_StoreConfiguration_t)(CO_Data* d,UNS8*,UNS8*);
-void _lss_StoreConfiguration(UNS8 *error, UNS8 *spec_error); //zxb add this
+//void _lss_StoreConfiguration(UNS8 *error, UNS8 *spec_error);
 
-typedef void (*lss_ChangeBaudRate_t)(CO_Data* d,char*); //zxb add this
-void _lss_ChangeBaudRate(char *BaudRate);//zxb add this
+//typedef void (*lss_ChangeBaudRate_t)(CO_Data* d,char*);
+//void _lss_ChangeBaudRate(char *BaudRate);
 
 
 struct struct_lss_transfer;
 
-//#include "timer.h"
+//#include "timers.h"
 
 #ifdef CO_ENABLE_LSS_FS
 struct struct_lss_fs_transfer {

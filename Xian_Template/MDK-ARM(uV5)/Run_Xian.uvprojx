@@ -2731,19 +2731,14 @@
               <FilePath>..\CANopen\src\timer.c</FilePath>
             </File>
             <File>
-              <FileName>Master.c</FileName>
+              <FileName>TestSlave_Data.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\CANopen\dictionary\Master.c</FilePath>
+              <FilePath>..\CANopen\dictionary\TestSlave_Data.c</FilePath>
             </File>
             <File>
-              <FileName>canfestival.c</FileName>
+              <FileName>usr_canfestival.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\CANopen\src\canfestival.c</FilePath>
-            </File>
-            <File>
-              <FileName>TestMaster.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\CANopen\dictionary\TestMaster.c</FilePath>
+              <FilePath>..\CANopen\src\usr_canfestival.c</FilePath>
             </File>
           </Files>
         </Group>
