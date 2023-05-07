@@ -48,6 +48,9 @@ typedef struct struct_CO_Data CO_Data;
 #ifdef CO_ENABLE_LSS
 #include "lss.h"
 #endif
+/* 添加系统驱动库头文件 */
+//#include "sys.h"
+
 
 /**
  * @ingroup od

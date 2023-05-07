@@ -31,7 +31,9 @@ git安装:
 sudo apt install git
 2.检查是否安装成功
 git version
+3.
 {
+					;远程子分支需要与本地分支同名，否则拒绝pull/push
   git branch -r				;查看远程分支
   git branch -a				;查看远程和本地分支
   git rebase -i HEAD~4 			;合并前面4笔的提交，这样分支看起来会更干净
