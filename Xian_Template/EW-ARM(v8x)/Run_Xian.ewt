@@ -2048,6 +2048,24 @@
         </file>
     </group>
     <group>
+        <name>Main</name>
+        <file>
+            <name>$PROJ_DIR$\..\Main\main.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Main\stm32f4xx_hal_msp.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Main\stm32f4xx_it.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Main\system_stm32f4xx.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Main\system_task_create.c</name>
+        </file>
+    </group>
+    <group>
         <name>Segger/HardFault</name>
         <file>
             <name>$PROJ_DIR$\..\Segger\HardFaultHandlerIAR\HardFaultHandler.S</name>
@@ -2723,27 +2741,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\ThreadX\common\src\txe_timer_info_get.c</name>
-        </file>
-    </group>
-    <group>
-        <name>User</name>
-        <file>
-            <name>$PROJ_DIR$\..\stm32f4_main\main.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\stm32f4_main\stm32f4xx_hal_msp.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\stm32f4_main\stm32f4xx_it.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\stm32f4_main\system_stm32f4xx.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\stm32f4_main\system_task_create.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\ThreadX\ports\cortex_m4\iar\inc\tx_port.h</name>
         </file>
     </group>
 </project>

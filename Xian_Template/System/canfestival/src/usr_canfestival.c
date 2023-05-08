@@ -1,10 +1,9 @@
-#include "canfestival.h"
-#include "timers.h"
-
+#include "sys.h"
+#include "data.h"
 
 UNS8 canSend(CAN_PORT port, Message *m)
 {
-	if(bsp_Can1_Send_buf(m->cob_id,m->data,m->len) == 0)
+	if(bsp_Can1_Send_buf(m->cob_id,(uint8_t*)m->data,m->len) == 0)
     {
 		return 0;
     }
@@ -12,7 +11,7 @@ UNS8 canSend(CAN_PORT port, Message *m)
 }
 void setTimer(TIMEVAL value)
 {
-	
+	CanFestival_Timer_CB(value);
 }
 
 TIMEVAL getElapsedTime(void)
@@ -20,6 +19,10 @@ TIMEVAL getElapsedTime(void)
 	return 1;
 }
 
+void CanFestival_Timer_CB(TIMEVAL thread_input)
+{
+    thread_input++;
+}    
 
 
 

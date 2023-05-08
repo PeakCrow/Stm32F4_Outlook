@@ -359,7 +359,6 @@
                     <state>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Src\Legacy</state>
                     <state>$PROJ_DIR$\..\HAL_lib\CMSIS\Include</state>
                     <state>$PROJ_DIR$\..\HAL_lib\STM32F4xx_HAL_Driver\Inc</state>
-                    <state>$PROJ_DIR$\stm32f4_main</state>
                     <state>$PROJ_DIR$\..\SYSTEM\ads1256</state>
                     <state>$PROJ_DIR$\..\SYSTEM\can</state>
                     <state>$PROJ_DIR$\..\SYSTEM\flash</state>
@@ -396,6 +395,7 @@
                     <state>$PROJ_DIR$\..\stm32f4_main</state>
                     <state>$PROJ_DIR$\..\System\canfestival\inc</state>
                     <state>$PROJ_DIR$\..\System\canfestival\dictionary</state>
+                    <state>$PROJ_DIR$\..\Main</state>
                 </option>
                 <option>
                     <name>CCStdIncCheck</name>
@@ -1738,6 +1738,24 @@
         </file>
     </group>
     <group>
+        <name>Main</name>
+        <file>
+            <name>$PROJ_DIR$\..\Main\main.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Main\stm32f4xx_hal_msp.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Main\stm32f4xx_it.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Main\system_stm32f4xx.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\Main\system_task_create.c</name>
+        </file>
+    </group>
+    <group>
         <name>Segger/HardFault</name>
         <file>
             <name>$PROJ_DIR$\..\Segger\HardFaultHandlerIAR\HardFaultHandler.S</name>
@@ -2413,27 +2431,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\ThreadX\common\src\txe_timer_info_get.c</name>
-        </file>
-    </group>
-    <group>
-        <name>User</name>
-        <file>
-            <name>$PROJ_DIR$\..\stm32f4_main\main.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\stm32f4_main\stm32f4xx_hal_msp.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\stm32f4_main\stm32f4xx_it.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\stm32f4_main\system_stm32f4xx.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\stm32f4_main\system_task_create.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\ThreadX\ports\cortex_m4\iar\inc\tx_port.h</name>
         </file>
     </group>
 </project>

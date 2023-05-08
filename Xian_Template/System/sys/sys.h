@@ -70,6 +70,8 @@
 #include "DEV_Config.h"						/* 墨水屏配置文件 */
 #include "data.h"							/* canfestival组件中所有必须的头文件 */
 #include "TestSlave_Data.h"					/* 图形化工具生成的对象字典头文件 */
+#include "timers.h"
+#include "canfestival.h"
 
 
 #if	DEBUG_SWITCH_EN == 1

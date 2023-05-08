@@ -17,6 +17,7 @@
 |     User     |  main.c文件和编译信息的.txt文件  |
 | MDK-ARM(uV5) |          Keil配置的工程          |
 |    Segger    | 用来调试硬件故障卡死的segger模板 |
+|     Main     |         main函数调用接口         |
 
 #### 实现功能
 
