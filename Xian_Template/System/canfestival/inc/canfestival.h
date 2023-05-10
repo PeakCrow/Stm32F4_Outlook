@@ -63,5 +63,4 @@ int canClose(CO_Data * d);
  */
 UNS8 canChangeBaudRate(CAN_PORT port, char* baud);
 
-void CanFestival_Timer_CB(TIMEVAL thread_input);
 #endif

@@ -469,16 +469,6 @@
               <FilePath>..\SYSTEM\ads1256\bsp_spi_ads1256.c</FilePath>
             </File>
             <File>
-              <FileName>bsp_rotation_sensor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\rotation\bsp_rotation_sensor.c</FilePath>
-            </File>
-            <File>
-              <FileName>stm32f4xx_hal_timebase_tim.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\ticktim\stm32f4xx_hal_timebase_tim.c</FilePath>
-            </File>
-            <File>
               <FileName>iwdg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\System\Iwdg\iwdg.c</FilePath>
@@ -492,6 +482,11 @@
               <FileName>bsp_sram.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\System\sram\bsp_sram.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_rotation.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\rotation\bsp_rotation.c</FilePath>
             </File>
           </Files>
         </Group>

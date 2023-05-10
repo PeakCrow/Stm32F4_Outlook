@@ -2104,7 +2104,7 @@
             <name>$PROJ_DIR$\..\System\mlx90614\bsp_mlx90614.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\System\rotation\bsp_rotation_sensor.c</name>
+            <name>$PROJ_DIR$\..\System\rotation\bsp_rotation.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\System\sd_card\bsp_sdio_sd.c</name>
@@ -2138,9 +2138,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\System\Iwdg\iwdg.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\ticktim\stm32f4xx_hal_timebase_tim.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\System\sys\sys.c</name>

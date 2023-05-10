@@ -11,7 +11,7 @@ UNS8 canSend(CAN_PORT port, Message *m)
 }
 void setTimer(TIMEVAL value)
 {
-	CanFestival_Timer_CB(value);
+	
 }
 
 TIMEVAL getElapsedTime(void)
@@ -19,10 +19,6 @@ TIMEVAL getElapsedTime(void)
 	return 1;
 }
 
-void CanFestival_Timer_CB(TIMEVAL thread_input)
-{
-    thread_input++;
-}    
 
 
 

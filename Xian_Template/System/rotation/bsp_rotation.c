@@ -1,4 +1,4 @@
-#include "bsp_rotation_sensor.h"
+#include "bsp_rotation.h"
 
 #define ROTATION_SENSOR_TIM			TIM2
 #define ROTATION_SENSOR_PIN			GPIO_PIN_15

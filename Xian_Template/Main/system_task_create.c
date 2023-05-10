@@ -84,8 +84,9 @@ static  void  AppTaskCreate         (void);
 static  void  DispTaskInfo          (void);
 static  void  AppObjCreate          (void);
 static  void  OSStatInit 			(void);
-void  	App_Printf 			(const char *fmt, ...);
-void    App_I2C_EE_BufferWrite(uint8_t* pBuffer, uint8_t WriteAddr,uint16_t NumByteToWrite);
+        void  App_Printf 			(const char *fmt, ...);
+        void  App_I2C_EE_BufferWrite(uint8_t* pBuffer, uint8_t WriteAddr,uint16_t NumByteToWrite);
+        void  TimerCallback         (ULONG thread_input);
 /*
 *******************************************************************************************************
 *                               变量
@@ -695,11 +696,11 @@ static void DispTaskInfo(void)
   * @param:        thread_input
   * @return:       none
 *******************************************************************************/
-//void TimerCallback(ULONG thread_input)
-//{
-//	/* 带延迟参数，且设置大于0，都不要在定时组的回调函数里面调用 */
-//	//App_Printf("%.1fm/s\r\n",Rotation_Sensor_Get(24,0.464));/* 1000HZ方波下应该121.41m/s */
-//}
+void TimerCallback(ULONG thread_input)
+{
+	/* 带延迟参数，且设置大于0，都不要在定时组的回调函数里面调用 */
+	//App_Printf("%.1fm/s\r\n",Rotation_Sensor_Get(24,0.464));/* 1000HZ方波下应该121.41m/s */
+}
 
 /*
 *********************************************************************************************************
@@ -718,7 +719,7 @@ static  void  AppObjCreate (void)
 	/* 定时器组 */
 	tx_timer_create(&AppTimer,
 					"App Timer",
-					CanFestival_Timer_CB, 
+					TimerCallback, 
 					0,                  /* 传递的参数 */
 					500,                /* 设置定时器时间溢出的初始延迟，单位ThreadX系统时间节拍数 */
 					1, 				    /* 设置初始延迟后的定时器运行周期，如果设置为0，表示单次定时器,单位ms */
