@@ -1,7 +1,7 @@
 #include "bsp_inkscreen.h"
 
 
-static void GPIO_INK_Init(void);
+static void gpio_ink_init(void);
 static void inkscreen_writebyte(uint8_t _value);
 static void inkscreen_sendcommand(uint8_t _reg);
 static void inkscreen_senddata(uint8_t _data);
@@ -15,7 +15,7 @@ static uint8_t inkscreen_readbusy(void);
   * @param:        void
   * @return:       none
 *******************************************************************************/
-static void GPIO_INK_Init(void)
+static void gpio_ink_init(void)
 {
 	GPIO_InitTypeDef gpio_initstruct = {0};
 
@@ -120,10 +120,27 @@ void bsp_InkscreenExit(void)
 *******************************************************************************/
 void bsp_InkscreenInit(void)
 {
-	GPIO_INK_Init();
+	gpio_ink_init();
 	PBout(12) = 0;
 	PCout(0) = 0;
 	PAout(7) = 1;
+
+    bsp_InkscreenReset();
+
+    inkscreen_sendcommand(0x04);  
+    inkscreen_readbusy();
+
+    inkscreen_sendcommand(0x00);
+    inkscreen_senddata(0x0f);
+    inkscreen_senddata(0x89);
+
+    inkscreen_sendcommand(0x61);
+    inkscreen_senddata (0x80);
+    inkscreen_senddata (0x01);
+    inkscreen_senddata (0x28);
+
+    inkscreen_sendcommand(0X50);
+    inkscreen_senddata(0x77);                            
 
 }
 /*******************************************************************************
@@ -140,7 +157,7 @@ void bsp_InkscreenReset(void)
 	inkscreen_delay_ms(200);
 	PAout(7) = 0;
 	inkscreen_delay_ms(5);
-	PAout(1);
+	PAout(1) = 1;
 	inkscreen_delay_ms(200);
 }
 /*******************************************************************************
