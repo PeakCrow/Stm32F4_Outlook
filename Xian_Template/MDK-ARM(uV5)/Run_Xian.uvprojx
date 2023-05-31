@@ -336,7 +336,7 @@
             <v6WtE>0</v6WtE>
             <v6Rtti>0</v6Rtti>
             <VariousControls>
-              <MiscControls>--diag_suppress=188 --diag_suppress=68 --diag_suppress=111 --diag_suppress=188 --diag_suppress=223 --diag_suppress=546 --diag_suppress=1295 --diag_suppress=870</MiscControls>
+              <MiscControls>--diag_suppress=188 --diag_suppress=68 --diag_suppress=111 --diag_suppress=188 --diag_suppress=223 --diag_suppress=546 --diag_suppress=1295 --diag_suppress=870 --diag_suppress=550</MiscControls>
               <Define>USE_HAL_DRIVER,STM32F407xx,USE_FULL_LL_DRIVER,TX_ENABLE_FPU_SUPPORT,TX_ENABLE_STACK_CHECKING</Define>
               <Undefine></Undefine>
               <IncludePath>..\Core;..\Obj;..\User;..\SYSTEM\sys;..\HAL_lib\Inc;..\HAL_lib\STM32F4xx_HAL_Driver\Inc;..\HAL_lib\CMSIS\Include;..\HAL_lib\STM32F4xx_HAL_Driver\Src;..\SYSTEM\ticktim;..\SYSTEM\usart_fifo;..\SYSTEM\key_fifo;..\SYSTEM\spi;..\SYSTEM\flash;..\SYSTEM\iic;..\SYSTEM\ink_screen;..\ThreadX\ports\cortex_m4\ac5\inc;..\ThreadX\common\inc;..\SYSTEM\led;..\SYSTEM\can;..\SYSTEM\timer;..\SYSTEM\ws2812b;..\SYSTEM\rotation;..\SYSTEM\ads1256;..\SYSTEM\lcd;..\SYSTEM\touch;..\SYSTEM\sram;..\SYSTEM\mlx90614;..\SYSTEM\sd_card;..\Lvgl\GUI\lvgl;..\Lvgl\GUI\lvgl\src;..\Lvgl\GUI\lvgl\examples\porting;..\Lvgl\GUI_APP;..\SYSTEM\fonts;..\FatFs\src;..\FatFs\doc;..\FatFs\src\drivers;..\Lvgl\GUI\lvgl\src\misc;..\Lvgl\GUI_APP\widght_ui;..\System\Iwdg;..\stm32f4_main;..\System\canfestival\dictionary;..\System\canfestival\inc;..\Main</IncludePath>
@@ -487,6 +487,16 @@
               <FileName>bsp_rotation.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\System\rotation\bsp_rotation.c</FilePath>
+            </File>
+            <File>
+              <FileName>bsp_font.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\fonts\bsp_font.c</FilePath>
+            </File>
+            <File>
+              <FileName>ImageData2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\System\fonts\ImageData2.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -647,61 +657,6 @@
               <FileName>stm32f4xx_hal_iwdg.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal_iwdg.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>INKSCREEN</GroupName>
-          <Files>
-            <File>
-              <FileName>bsp_font.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\SYSTEM\lcd\bsp_font.c</FilePath>
-            </File>
-            <File>
-              <FileName>font8.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\System\fonts\font8.c</FilePath>
-            </File>
-            <File>
-              <FileName>font12.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\System\fonts\font12.c</FilePath>
-            </File>
-            <File>
-              <FileName>font12CN.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\System\fonts\font12CN.c</FilePath>
-            </File>
-            <File>
-              <FileName>font16.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\System\fonts\font16.c</FilePath>
-            </File>
-            <File>
-              <FileName>font20.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\System\fonts\font20.c</FilePath>
-            </File>
-            <File>
-              <FileName>font24.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\System\fonts\font24.c</FilePath>
-            </File>
-            <File>
-              <FileName>font24CN.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\System\fonts\font24CN.c</FilePath>
-            </File>
-            <File>
-              <FileName>ImageData.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\System\fonts\ImageData.c</FilePath>
-            </File>
-            <File>
-              <FileName>ImageData2.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\System\fonts\ImageData2.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -2732,37 +2687,19 @@
             </File>
           </Files>
         </Group>
-        <Group>
-          <GroupName>::Compiler</GroupName>
-        </Group>
       </Groups>
     </Target>
   </Targets>
 
   <RTE>
     <apis/>
-    <components>
-      <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="Keil" Cversion="1.5.0" condition="Cortex-M Device">
-        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.7.0"/>
-        <targetInfos>
-          <targetInfo name="xian"/>
-        </targetInfos>
-      </component>
-      <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="I/O" Csub="STDOUT" Cvariant="EVR" Cvendor="Keil" Cversion="1.2.0" condition="ARMCC Cortex-M with EVR">
-        <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.7.0"/>
-        <targetInfos>
-          <targetInfo name="xian"/>
-        </targetInfos>
-      </component>
-    </components>
+    <components/>
     <files>
       <file attr="config" category="header" name="Config\EventRecorderConf.h" version="1.1.0">
-        <instance index="0">RTE\Compiler\EventRecorderConf.h</instance>
+        <instance index="0" removed="1">RTE\Compiler\EventRecorderConf.h</instance>
         <component Cbundle="ARM Compiler" Cclass="Compiler" Cgroup="Event Recorder" Cvariant="DAP" Cvendor="Keil" Cversion="1.4.0" condition="Cortex-M Device"/>
         <package name="ARM_Compiler" schemaVersion="1.6.3" url="http://www.keil.com/pack/" vendor="Keil" version="1.6.3"/>
-        <targetInfos>
-          <targetInfo name="xian"/>
-        </targetInfos>
+        <targetInfos/>
       </file>
     </files>
   </RTE>

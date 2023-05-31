@@ -294,7 +294,7 @@ static  void  AppTaskStart (ULONG thread_input)
 	lv_port_disp_init(); 						/* lvgl 显示接口初始化,放在 lv_init()的后面 */
 	lv_port_indev_init(); 						/* lvgl 输入接口初始化,放在 lv_init()的后面 */
 	
-	test_master();
+	//test_master();
 	
 	/* 创建任务间通信机制,主要是各种任务间通讯函数 */
 	AppObjCreate();
@@ -310,8 +310,6 @@ static  void  AppTaskStart (ULONG thread_input)
 			tx_thread_sleep(1);
 		}
 }
-
-
 /*
 *********************************************************************************************************
 *	函 数 名: AppTaskStatistic
@@ -552,8 +550,7 @@ static void AppTaskUserIF(ULONG thread_input)
 {
 	uint8_t ucKeyCode;	/* 按键代码 */
 	(void)thread_input;
-	uint16_t pos = 0;
-	uint8_t buf[2] = {0};
+    App_Printf("k0按键弹起\r\n");
 	while(1)
 	{        
 		ucKeyCode = bsp_GetKey();
@@ -562,23 +559,33 @@ static void AppTaskUserIF(ULONG thread_input)
 				switch(ucKeyCode)
 				{
 					case KEY_0_UP: 			  /* K1键按打印任务执行情况 */
-						App_Printf("k0按键弹起\r\n");						
+						App_Printf("k0按键弹起\r\n");
 					 	break;
-					case KEY_UP_DOWN:			/* kup按键按下 */
-						App_Printf("kup按键按下\r\n");				//红色	
-						break;
 					case KEY_0_DOWN:			/* k0按键按下 */
-					{
-						App_Printf("k0按键按下\r\n");	
+						App_Printf("k0按键按下\r\n");
 						DispTaskInfo();
 						break;
-					}
 					case KEY_UP_UP:
-						//I2C_EE_BufferRead(&pos1,0x05,1);
-						//I2C_EE_BufferRead(&pos2,0x06,1);
-						I2C_EE_BufferRead(buf,0x05,2);
-						pos = buf[0] * 100 + buf[1];
-						App_Printf("kup按键弹起,pos %d  \r\n",pos);
+						App_Printf("kup按键弹起\r\n");
+						break;
+					case KEY_UP_DOWN:			/* kup按键按下 */
+						App_Printf("kup按键按下\r\n");
+						//bsp_InkscreenDisplay(gImage_2in13b_V4b, gImage_2in13b_V4r);
+						break;                    
+					case KEY_0_LONG:
+						App_Printf("k0按键长按\r\n");
+						break;
+					case KEY_UP_LONG:
+						App_Printf("kup按键长按\r\n");
+						break;
+					case KEY_MULTI_DOWM:
+						App_Printf("kmulti按键按下\r\n");
+						break;
+					case KEY_MULTI_UP:
+						App_Printf("kmulti按键弹起\r\n");
+						break;
+					case KEY_MULTI_LONG:
+						App_Printf("kmulti按键长按\r\n");
 						break;
 				}
 		}

@@ -73,6 +73,7 @@
  * Image attributes
 **/
 typedef struct {
+/* 结构体第一个成员存储的就是屏幕数据的缓存的地址 */
     UBYTE *Image;
     UWORD Width;
     UWORD Height;

@@ -1773,7 +1773,7 @@
             <name>$PROJ_DIR$\..\System\ticktim\bsp_dwt.c</name>
         </file>
         <file>
-            <name>$PROJ_DIR$\..\System\lcd\bsp_font.c</name>
+            <name>$PROJ_DIR$\..\System\fonts\bsp_font.c</name>
         </file>
         <file>
             <name>$PROJ_DIR$\..\System\iic\bsp_iic_bus.c</name>

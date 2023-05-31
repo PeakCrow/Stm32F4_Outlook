@@ -127,21 +127,27 @@ void bsp_InkscreenInit(void)
 
     bsp_InkscreenReset();
 
+	/* 打开电源 */	
     inkscreen_sendcommand(0x04);  
     inkscreen_readbusy();
-
+	/* panel setting 仪表设置 */
     inkscreen_sendcommand(0x00);
+    /* 0x0f 0x89 全都是0x00寄存器的默认配置 */
     inkscreen_senddata(0x0f);
     inkscreen_senddata(0x89);
-
+	/* resolution setting 分辨率设置 */
     inkscreen_sendcommand(0x61);
+    /* 水平方向128 -   1 = 127 */
     inkscreen_senddata (0x80);
+    /* 竖直方向296 -     1 = 295，需要1个字节加1位来表示 */
     inkscreen_senddata (0x01);
     inkscreen_senddata (0x28);
-
+	/* vcom and data interval setting vcom和数据间隔设置 */
     inkscreen_sendcommand(0X50);
-    inkscreen_senddata(0x77);                            
+    /* 配置屏幕颜色数据包含有红色、黑色和白色 */
+    inkscreen_senddata(0x77);
 
+	bsp_InkscreeenClear();
 }
 /*******************************************************************************
   * @FunctionName: bsp_InkscreenReset

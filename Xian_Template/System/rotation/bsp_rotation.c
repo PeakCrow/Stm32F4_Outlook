@@ -32,23 +32,23 @@ void bsp_InitRotationSensor(void)
 	__HAL_TIM_ENABLE_IT(&g_RotationTimeHandle, TIM_IT_UPDATE);						/* 使能定时器溢出更新中�?*/
 	
 	if(HAL_TIM_Base_Init(&g_RotationTimeHandle) != HAL_OK)
-		{
-			printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-		}
+    {
+        printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+    }
 	sclocksourceconfig.ClockSource 				= TIM_CLOCKSOURCE_ETRMODE2;
 	sclocksourceconfig.ClockPolarity 			= TIM_CLOCKPOLARITY_RISING;
 	sclocksourceconfig.ClockPrescaler 			= TIM_CLOCKPRESCALER_DIV1;
 	sclocksourceconfig.ClockFilter 				= 0;
 	if(HAL_TIM_ConfigClockSource(&g_RotationTimeHandle,&sclocksourceconfig) != HAL_OK)
-		{
-			printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-		}
+    {
+        printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+    }
 	smasterconfig.MasterOutputTrigger 			= TIM_TRGO_RESET;
 	smasterconfig.MasterSlaveMode 				= TIM_MASTERSLAVEMODE_DISABLE;
 	if(HAL_TIMEx_MasterConfigSynchronization(&g_RotationTimeHandle,&smasterconfig) != HAL_OK)
-		{
-			printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-		}
+    {
+        printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+    }
 
 	HAL_NVIC_SetPriority(TIM2_IRQn,1,0);
 	HAL_NVIC_EnableIRQ(TIM2_IRQn);				/* 配置中断优先�? */
@@ -60,14 +60,14 @@ void TIM2_IRQHandler(void)
 {
 	  /* TIM Update event */
   if (__HAL_TIM_GET_FLAG(&g_RotationTimeHandle, TIM_FLAG_UPDATE) != RESET)
-	  {
-	    if (__HAL_TIM_GET_IT_SOURCE(&g_RotationTimeHandle, TIM_IT_UPDATE) != RESET)
-		    {
-		      __HAL_TIM_CLEAR_IT(&g_RotationTimeHandle, TIM_IT_UPDATE);
+  {
+    if (__HAL_TIM_GET_IT_SOURCE(&g_RotationTimeHandle, TIM_IT_UPDATE) != RESET)
+    {
+      __HAL_TIM_CLEAR_IT(&g_RotationTimeHandle, TIM_IT_UPDATE);
 
-		      HAL_TIM_PeriodElapsedCallback(&g_RotationTimeHandle);
-		    }
-	  }
+      HAL_TIM_PeriodElapsedCallback(&g_RotationTimeHandle);
+    }
+  }
 }
 /*******************************************************************************
   * @FunctionName: HAL_TIM_PeriodElapsedCallback

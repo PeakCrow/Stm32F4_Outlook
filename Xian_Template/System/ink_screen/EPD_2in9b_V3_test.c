@@ -43,6 +43,8 @@ int EPD_2in9b_V3_test(void)
     //Create a new image cache named IMAGE_BW and fill it with white
     UBYTE *BlackImage, *RYImage; // Red or Yellow
     UWORD Imagesize = ((EPD_2IN9B_V3_WIDTH % 8 == 0)? (EPD_2IN9B_V3_WIDTH / 8 ): (EPD_2IN9B_V3_WIDTH / 8 + 1)) * EPD_2IN9B_V3_HEIGHT;
+    /* 下面两个malloc加起来申请的就是整个屏幕的大小 */
+    /* 但是不是对半分的，而是根据坐标来分配屏幕区域的 */
     if((BlackImage = (UBYTE *)malloc(Imagesize)) == NULL) {
         printf("Failed to apply for black memory...\r\n");
         return -1;
@@ -62,6 +64,7 @@ int EPD_2in9b_V3_test(void)
     Paint_Clear(WHITE);
 
 #if 1   // show image for array    
+	/* 这里的图像是微雪logo，5秒钟后会被下面的#if 1更新掉 */
     printf("show image for array\r\n");
     EPD_2IN9B_V3_Display(gImage_2in9bc_b, gImage_2in9bc_ry);
     DEV_Delay_ms(5000);
@@ -70,6 +73,8 @@ int EPD_2in9b_V3_test(void)
 #if 1   // Drawing on the image
     /*Horizontal screen*/
     //1.Draw black image
+    /* 这里的API调用顺序是有讲究的 */
+    /* Paint_SelectImage()需要首先调用以此来确定后面填充数据的buffer首地址 */
     Paint_SelectImage(BlackImage);
     Paint_Clear(WHITE);
     Paint_DrawPoint(10, 80, BLACK, DOT_PIXEL_1X1, DOT_STYLE_DFT);
