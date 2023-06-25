@@ -14,6 +14,7 @@ CSRCS += lv_switch.c
 CSRCS += lv_table.c
 CSRCS += lv_textarea.c
 CSRCS += lv_objx_templ.c
+CSRCS += lv_btn_x.c
 
 DEPPATH += --dep-path $(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets
 VPATH += :$(LVGL_DIR)/$(LVGL_DIR_NAME)/src/widgets

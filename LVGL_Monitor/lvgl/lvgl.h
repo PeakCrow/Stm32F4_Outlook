@@ -62,6 +62,7 @@ extern "C" {
 #include "src/draw/lv_draw.h"
 #include "src/lv_api_map.h"
 #include "src/widgets/lv_objx_templ.h"
+#include "src/widgets/lv_btn_x.h"
 
 /*-----------------
  * EXTRAS

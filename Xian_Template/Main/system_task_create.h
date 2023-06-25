@@ -4,10 +4,7 @@
 #include "sys.h"
 
 /***********************************ThreadX操作系统组件属性外部声名*************************************************************/
-extern void  App_Printf 			(const char *fmt, ...);
-extern TX_EVENT_FLAGS_GROUP  EventGroup; /* 事件标志组 */
-extern void    App_I2C_EE_ByteWrite(uint8_t * pBuffer, uint8_t WriteAddr);
-extern TX_EVENT_FLAGS_GROUP  EventGroup; 	/* 事件标志组 */
+
 #define DRIVER1_POS (1<<0)
 #define	DRIVER2_POS (1<<1)
 #define DRIVER3_POS (1<<2)

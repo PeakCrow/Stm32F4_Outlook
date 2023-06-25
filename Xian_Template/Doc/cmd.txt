@@ -42,7 +42,7 @@ git version
   git pull origin <远程分支名字>:<本地分支名字> 	;拉取代码
   git push origin --delete <远程分支名字> 		;删除远程分支
 }
-
+git@gitee.com:tian-runxian/Ls_DashBoard_Demo.git
 安装vim
 1.安装
 sudo apt install vim
@@ -91,12 +91,18 @@ lsb_release -a
 uname -m 确定你使用的系统的架构
 
 树莓派换源
-sudo nano /etc/apt/sources.list
-deb https://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ bullseye main non-free contrib rpi
-deb-src https://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ bullseye main non-free contrib rpi
-
-sudo nano /etc/apt/sources.list.d/raspi.list
-deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui
+1.sudo nano /etc/apt/sources.list
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-free
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-backports main contrib non-free
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-backports main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bullseye-security main contrib non-free
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security bullseye-security main contrib non-free
+2.sudo nano /etc/apt/sources.list.d/raspi.list
+deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ bullseye main
 
 sudo apt-get update
 sudo apt-get upgrade
@@ -123,6 +129,36 @@ winscp 从windows本地连接虚拟机
 
 树莓派开始ssh服务
 1.sudo service ssh status 查看是否正在运行
-2.sudo service ssh start 启动ssh服
+2.sudo service ssh start 启动ssh服务
+
+树莓派安装lua
+curl -R -O http://www.lua.org/ftp/lua-5.3.0.tar.gz
+tar zxf lua-5.3.0.tar.gz
+sudo apt -get install libreadline-dev
+cd lua-5.3.0
+make linux test
+make install
+
+树莓派安装中文输入法
+1.sudo apt-get update
+sudo apt-get install fcitx fcitx-googlepinyin
+sudo reboot
+2.在首选项中点击fcitx设置，点击+号
+3.将谷歌拼音放到第一位
 
 
+树莓派bullseye架构安装qt
+1.sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install qtbase5-dev qtchooser
+sudo apt-get install qt5-qmake qtbase5-dev-tools
+sudo apt-get install qtcreator
+sudo apt-get install qtdeclarative5-dev
+sudo apt-get install clang
+安装qt的串口模块
+sudo apt-get install libqt5serialport5
+sudo apt-get install libqt5serialport5-dev
+
+
+winscp连接树莓派虚拟机，提示网络错误拒绝，使用如下命令
+sudo /etc/init.d/ssh restart

@@ -1,7 +1,6 @@
 #ifndef MONITOR_H
 #define MONITOR_H
 
-#include "lvgl.h"
 #include "sys.h"
 
 typedef void (*App_btn_Back_Cb_Ptr)(lv_event_t* e);

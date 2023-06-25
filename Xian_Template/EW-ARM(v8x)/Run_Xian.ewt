@@ -1421,51 +1421,6 @@
         </settings>
     </configuration>
     <group>
-        <name>CanFestival</name>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\dcf.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\emcy.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\lifegrd.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\lss.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\nmtMaster.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\nmtSlave.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\objacces.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\pdo.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\sdo.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\states.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\sync.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\dictionary\TestSlave_Data.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\timer.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\canfestival\src\usr_canfestival.c</name>
-        </file>
-    </group>
-    <group>
         <name>Core_h</name>
         <file>
             <name>$PROJ_DIR$\..\Core\cmsis_armcc.h</name>
@@ -1607,6 +1562,18 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\System\fonts\ImageData2.c</name>
+        </file>
+    </group>
+    <group>
+        <name>LogicalApp</name>
+        <file>
+            <name>$PROJ_DIR$\..\LogicalApp\gui_task\gui_task.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\LogicalApp\msg_task\msg_task.c</name>
+        </file>
+        <file>
+            <name>$PROJ_DIR$\..\LogicalApp\statistic_task\statistic_task.c</name>
         </file>
     </group>
     <group>

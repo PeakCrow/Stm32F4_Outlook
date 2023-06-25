@@ -11,11 +11,11 @@
  *    - add the path as include path
  */
 /*
-* ä»¥`lv_conf.h` å¤åˆ¶è¿™ä¸ªæ–‡ä»¶
- * 1. è·Ÿlvglæ–‡ä»¶å¤¹æ”¾åœ¨ä¸€èµ·
- * 2. æˆ–è€…å…¶ä»–ä»»ä½•åœ°æ–¹
- *    - å®å®šä¹‰äº† `LV_CONF_INCLUDE_SIMPLE`
- *    - æ·»åŠ è·¯å¾„ä½œä¸ºåŒ…å«è·¯å¾„
+* ÒÔ`lv_conf.h` ¸´ÖÆÕâ¸öÎÄ¼ş
+ * 1. ¸úlvglÎÄ¼ş¼Ğ·ÅÔÚÒ»Æğ
+ * 2. »òÕßÆäËûÈÎºÎµØ·½
+ *    - ºê¶¨ÒåÁË `LV_CONF_INCLUDE_SIMPLE`
+ *    - Ìí¼ÓÂ·¾¶×÷Îª°üº¬Â·¾¶
  */
 /* clang-format off */
 #if 1 /*Set it to "1" to enable content*/
@@ -26,51 +26,51 @@
 #include <stdint.h>
 
 /*====================
-   COLOR SETTINGS--é¢œè‰²è®¾ç½®
+   COLOR SETTINGS--ÑÕÉ«ÉèÖÃ
  *====================*/
 
 /*Color depth: 1 (1 byte per pixel), 8 (RGB332), 16 (RGB565), 32 (ARGB8888)*/
-/*é¢œè‰²æ·±åº¦: 1 (æ¯åƒç´ 1å­—èŠ‚), 8 (RGB332), 16 (RGB565), 32 (ARGB8888)*/
+/*ÑÕÉ«Éî¶È: 1 (Ã¿ÏñËØ1×Ö½Ú), 8 (RGB332), 16 (RGB565), 32 (ARGB8888)*/
 #define LV_COLOR_DEPTH 16
 
 /*Swap the 2 bytes of RGB565 color. Useful if the display has an 8-bit interface (e.g. SPI)*/
-/*äº¤æ¢RGB565é¢œè‰²çš„2å­—èŠ‚. æ˜¾ç¤ºå™¨å…·æœ‰8ä½æ¥å£ï¼Œä¾‹å¦‚SPI (e.g. SPI)*/
+/*½»»»RGB565ÑÕÉ«µÄ2×Ö½Ú. ÏÔÊ¾Æ÷¾ßÓĞ8Î»½Ó¿Ú£¬ÀıÈçSPI (e.g. SPI)*/
 #define LV_COLOR_16_SWAP 0
 
 /*Enable more complex drawing routines to manage screens transparency.
  *Can be used if the UI is above another layer, e.g. an OSD menu or video player.
  *Requires `LV_COLOR_DEPTH = 32` colors and the screen's `bg_opa` should be set to non LV_OPA_COVER value*/
- /*ä½¿ç”¨æ›´å¤æ‚çš„ç»˜å›¾ä¾‹ç¨‹æ¥ç®¡ç†å±å¹•é€æ˜åº¦.
- *å¦‚æœUIä½äºå¦ä¸€å±‚ä¹‹ä¸Šï¼Œä¾‹å¦‚OSDèœå•æˆ–è€…è§†é¢‘æ’­æ”¾å™¨ï¼Œåˆ™å¯ä»¥ä½¿ç”¨
- *éœ€è¦LV_COLOR_DEPTH=32é¢œè‰²ï¼Œå±å¹•çš„bg_opaåº”è¯¥è®¾ç½®ä¸ºéLV_OPA_COVERå€¼*/
+ /*Ê¹ÓÃ¸ü¸´ÔÓµÄ»æÍ¼Àı³ÌÀ´¹ÜÀíÆÁÄ»Í¸Ã÷¶È.
+ *Èç¹ûUIÎ»ÓÚÁíÒ»²ãÖ®ÉÏ£¬ÀıÈçOSD²Ëµ¥»òÕßÊÓÆµ²¥·ÅÆ÷£¬Ôò¿ÉÒÔÊ¹ÓÃ
+ *ĞèÒªLV_COLOR_DEPTH=32ÑÕÉ«£¬ÆÁÄ»µÄbg_opaÓ¦¸ÃÉèÖÃÎª·ÇLV_OPA_COVERÖµ*/
 #define LV_COLOR_SCREEN_TRANSP 0
 
 /* Adjust color mix functions rounding. GPUs might calculate color mix (blending) differently.
  * 0: round down, 64: round up from x.75, 128: round up from half, 192: round up from x.25, 254: round up */
- /* é€šè¿‡å››èˆäº”å…¥è°ƒæ•´é¢œè‰²æ··åˆå‡½æ•°.GPUå¯èƒ½ä»¥ä¸åŒçš„æ–¹å¼è®¡ç®—é¢œè‰²æ··åˆ.
- * 0ï¼šå‘ä¸‹å–è¯, 64: ä»x.75å‘ä¸Šå–æ•´, 128: ä»ä¸€åŠå‘ä¸Šå–èˆ, 192: ä»x.25å‘ä¸Šå–æ•´æ•°, 254: å‘ä¸Šå–åœ† */
+ /* Í¨¹ıËÄÉáÎåÈëµ÷ÕûÑÕÉ«»ìºÏº¯Êı.GPU¿ÉÄÜÒÔ²»Í¬µÄ·½Ê½¼ÆËãÑÕÉ«»ìºÏ.
+ * 0£ºÏòÏÂÈ¡Ö¤, 64: ´Óx.75ÏòÉÏÈ¡Õû, 128: ´ÓÒ»°ëÏòÉÏÈ¡Éá, 192: ´Óx.25ÏòÉÏÈ¡ÕûÊı, 254: ÏòÉÏÈ¡Ô² */
 #define LV_COLOR_MIX_ROUND_OFS (LV_COLOR_DEPTH == 32 ? 0: 128)
 
 /*Images pixels with this color will not be drawn if they are chroma keyed)*/
-/*å›¾åƒå¦‚æœä½¿ç”¨è‰²åº¦é”®æ§ï¼Œåˆ™ä¸ä¼šç»˜åˆ¶æ­¤é¢œè‰²çš„åƒç´ */
+/*Í¼ÏñÈç¹ûÊ¹ÓÃÉ«¶È¼ü¿Ø£¬Ôò²»»á»æÖÆ´ËÑÕÉ«µÄÏñËØ*/
 #define LV_COLOR_CHROMA_KEY lv_color_hex(0x00ff00)         /*pure green*/
 
 /*=========================
-   MEMORY SETTINGS--å†…å­˜è®¾ç½®
+   MEMORY SETTINGS--ÄÚ´æÉèÖÃ
  *=========================*/
 /*1: use custom malloc/free, 0: use the built-in `lv_mem_alloc()` and `lv_mem_free()`*/
-/*1: ä½¿ç”¨è‡ªå®šä¹‰çš„malloc/free,0ï¼šä½¿ç”¨å†…ç½®çš„â€˜lv_mem_alloc() å’Œ lv_mem_free() */
+/*1: Ê¹ÓÃ×Ô¶¨ÒåµÄmalloc/free,0£ºÊ¹ÓÃÄÚÖÃµÄ¡®lv_mem_alloc() ºÍ lv_mem_free() */
 #define LV_MEM_CUSTOM 0
 #if LV_MEM_CUSTOM == 0
     /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
-	/*å¯ç”¨äºâ€™lv_mem_alloc()'åˆ†é…çš„å†…å­˜å¤§å°ï¼Œä»¥å­—èŠ‚ä¸ºå•ä½ï¼Œå¤§äºç­‰äº2Kb*/
+	/*¿ÉÓÃÓÚ¡¯lv_mem_alloc()'·ÖÅäµÄÄÚ´æ´óĞ¡£¬ÒÔ×Ö½ÚÎªµ¥Î»£¬´óÓÚµÈÓÚ2Kb*/
     #define LV_MEM_SIZE (32U * 1024U)          /*[bytes]*/
 
     /*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/
-	/*è®¾ç½®å†…å­˜æ± çš„åœ°å€ï¼Œè€Œä¸æ˜¯å°†å…¶åˆ†é…ä¸ºæ™®é€šæ•°ç»„ï¼Œä¹Ÿå¯ä»¥åœ¨å¤–éƒ¨sramä¸­.*/
+	/*ÉèÖÃÄÚ´æ³ØµÄµØÖ·£¬¶ø²»ÊÇ½«Æä·ÖÅäÎªÆÕÍ¨Êı×é£¬Ò²¿ÉÒÔÔÚÍâ²¿sramÖĞ.*/
     #define LV_MEM_ADR  0    /*0: unused*/
     /*Instead of an address give a memory allocator that will be called to get a memory pool for LVGL. E.g. my_malloc*/
-	/*ä»£æ›¿åœ°å€ç»™å‡ºä¸€ä¸ªå†…å­˜åˆ†é…å™¨ï¼Œä»–å°†è¢«è°ƒç”¨æ¥è·å¾—LVGLçš„å†…å­˜æ± ï¼Œä¾‹å¦‚ my_malloc*/
+	/*´úÌæµØÖ·¸ø³öÒ»¸öÄÚ´æ·ÖÅäÆ÷£¬Ëû½«±»µ÷ÓÃÀ´»ñµÃLVGLµÄÄÚ´æ³Ø£¬ÀıÈç my_malloc*/
     #if LV_MEM_ADR == 0
         #undef LV_MEM_POOL_INCLUDE 
         #undef LV_MEM_POOL_ALLOC   
@@ -85,30 +85,30 @@
 
 /*Number of the intermediate memory buffer used during rendering and other internal processing mechanisms.
  *You will see an error log message if there wasn't enough buffers. */
- /*æ¸²æŸ“å’Œå…¶ä»–å¤„ç†æœºåˆ¶æœŸé—´ä½¿ç”¨çš„ä¸­é—´å†…å­˜ç¼“å†²åŒºçš„æ•°é‡.
- *å¦‚æœç¼“å†²åŒºä¸è¶³ï¼Œä½ å°†çœ‹åˆ°é”™è¯¯æ—¥æœŸæ¶ˆæ¯. */
+ /*äÖÈ¾ºÍÆäËû´¦Àí»úÖÆÆÚ¼äÊ¹ÓÃµÄÖĞ¼äÄÚ´æ»º³åÇøµÄÊıÁ¿.
+ *Èç¹û»º³åÇø²»×ã£¬Äã½«¿´µ½´íÎóÈÕÆÚÏûÏ¢. */
 #define LV_MEM_BUF_MAX_NUM 16
 
 /*Use the standard `memcpy` and `memset` instead of LVGL's own functions. (Might or might not be faster).*/
-/*ä½¿ç”¨æ ‡å‡†çš„ `memcpy` and `memset` ï¼Œè€Œä¸æ˜¯LVGLè‡ªå·±çš„åŠŸèƒ½(å¯èƒ½æ›´å¿«ï¼Œä¹Ÿå¯èƒ½ä¸ä¼šæ›´å¿«).*/
+/*Ê¹ÓÃ±ê×¼µÄ `memcpy` and `memset` £¬¶ø²»ÊÇLVGL×Ô¼ºµÄ¹¦ÄÜ(¿ÉÄÜ¸ü¿ì£¬Ò²¿ÉÄÜ²»»á¸ü¿ì).*/
 #define LV_MEMCPY_MEMSET_STD 0
 
 /*====================
-   HAL SETTINGS--HALè®¾ç½®
+   HAL SETTINGS--HALÉèÖÃ
  *====================*/
 
 /*Default display refresh period. LVG will redraw changed areas with this period time*/
-/* é»˜è®¤æ˜¾ç¤ºåˆ·æ–°å‘¨æœŸï¼ŒLVGLå°†åœ¨æ­¤æœŸé—´é‡æ–°ç»˜åˆ¶æ›´æ”¹åŒºåŸŸ */
+/* Ä¬ÈÏÏÔÊ¾Ë¢ĞÂÖÜÆÚ£¬LVGL½«ÔÚ´ËÆÚ¼äÖØĞÂ»æÖÆ¸ü¸ÄÇøÓò */
 #define LV_DISP_DEF_REFR_PERIOD 10      /*[ms]*/
 
 /*Input device read period in milliseconds*/
-/*è¾“å…¥è®¾å¤‡è¯»å–å‘¨æœŸ*/
+/*ÊäÈëÉè±¸¶ÁÈ¡ÖÜÆÚ*/
 #define LV_INDEV_DEF_READ_PERIOD 10     /*[ms]*/
 
 /*Use a custom tick source that tells the elapsed time in milliseconds.
  *It removes the need to manually update the tick with `lv_tick_inc()`)*/
- /*ä½¿ç”¨ä»¥æ¯«ç§’ä¸ºå•ä½è¡¨ç¤ºç»è¿‡æ—¶é—´çš„è‡ªå®šä¹‰åˆ»åº¦æº.
- *ä»–æ¶ˆé™¤äº†ä½¿ç”¨`lv_tick_inc()`æ‰‹åŠ¨æ›´æ–°ä¿¡å·çš„éœ€è¦*/
+ /*Ê¹ÓÃÒÔºÁÃëÎªµ¥Î»±íÊ¾¾­¹ıÊ±¼äµÄ×Ô¶¨Òå¿Ì¶ÈÔ´.
+ *ËûÏû³ıÁËÊ¹ÓÃ`lv_tick_inc()`ÊÖ¶¯¸üĞÂĞÅºÅµÄĞèÒª*/
 #define LV_TICK_CUSTOM 1
 #if LV_TICK_CUSTOM
     #define LV_TICK_CUSTOM_INCLUDE "sys.h"         /*Header for the system time function*/
@@ -117,41 +117,41 @@
 
 /*Default Dot Per Inch. Used to initialize default sizes such as widgets sized, style paddings.
  *(Not so important, you can adjust it to modify default sizes and spaces)*/
- /*é»˜è®¤åƒç´ ç‚¹çš„æ¯è‹±å¯¸å¤§å°ï¼Œç”¨äºåˆå§‹åŒ–é»˜è®¤å¤§å°ï¼Œå¦‚å°éƒ¨ä»¶å¤§å°ï¼Œæ ·å¼å¡«å…….
- *ä¸å¤ªé‡è¦ï¼Œä½ å¯ä»¥è°ƒæ•´ä»–ä»¥ä¿®æ”¹é»˜è®¤å¤§å°å’Œç©ºé—´*/
+ /*Ä¬ÈÏÏñËØµãµÄÃ¿Ó¢´ç´óĞ¡£¬ÓÃÓÚ³õÊ¼»¯Ä¬ÈÏ´óĞ¡£¬ÈçĞ¡²¿¼ş´óĞ¡£¬ÑùÊ½Ìî³ä.
+ *²»Ì«ÖØÒª£¬Äã¿ÉÒÔµ÷ÕûËûÒÔĞŞ¸ÄÄ¬ÈÏ´óĞ¡ºÍ¿Õ¼ä*/
 #define LV_DPI_DEF 130     /*[px/inch]*/
 
 /*=======================
- * FEATURE CONFIGURATION--ç‰¹å¾é…ç½®
+ * FEATURE CONFIGURATION--ÌØÕ÷ÅäÖÃ
  *=======================*/
 
 /*-------------
- * Drawing--å›¾ç”»
+ * Drawing--Í¼»­
  *-----------*/
 
 /*Enable complex draw engine.
  *Required to draw shadow, gradient, rounded corners, circles, arc, skew lines, image transformations or any masks*/
- /*å¯åŠ¨å¤æ‚ç»˜å›¾å¼•æ“
- *éœ€è¦ç»˜åˆ¶é˜´å½±ã€æ¸å˜ã€åœ†è§’ã€åœ†ã€åœ†å¼§ã€æ–œçº¿ã€å›¾åƒå˜æ¢æˆ–ä»»ä½•é®ç½©*/
+ /*Æô¶¯¸´ÔÓ»æÍ¼ÒıÇæ
+ *ĞèÒª»æÖÆÒõÓ°¡¢½¥±ä¡¢Ô²½Ç¡¢Ô²¡¢Ô²»¡¡¢Ğ±Ïß¡¢Í¼Ïñ±ä»»»òÈÎºÎÕÚÕÖ*/
 #define LV_DRAW_COMPLEX 1
 #if LV_DRAW_COMPLEX != 0
 
     /*Allow buffering some shadow calculation.
     *LV_SHADOW_CACHE_SIZE is the max. shadow size to buffer, where shadow size is `shadow_width + radius`
     *Caching has LV_SHADOW_CACHE_SIZE^2 RAM cost*/
-	/*å…è®¸ç¼“å†²ä¸€äº›é˜´å½±è®¡ç®—.
-    *LV_SHADOW_CACHE_SIZE æ˜¯ç¼“å†²åŒºçš„æœ€å¤§é˜´å½±å¤§å°ï¼Œå…¶ä¸­é˜´å½±å¤§å°ä¸ºâ€˜é˜´å½±å®½åº¦+åŠå¾„`
-    *ç¼“å­˜å…·æœ‰LV_SHADOW_CACHE_SIZE^2 å¤§å°çš„RAMæˆæœ¬*/
+	/*ÔÊĞí»º³åÒ»Ğ©ÒõÓ°¼ÆËã.
+    *LV_SHADOW_CACHE_SIZE ÊÇ»º³åÇøµÄ×î´óÒõÓ°´óĞ¡£¬ÆäÖĞÒõÓ°´óĞ¡Îª¡®ÒõÓ°¿í¶È+°ë¾¶`
+    *»º´æ¾ßÓĞLV_SHADOW_CACHE_SIZE^2 ´óĞ¡µÄRAM³É±¾*/
     #define LV_SHADOW_CACHE_SIZE 0
 
     /* Set number of maximally cached circle data.
     * The circumference of 1/4 circle are saved for anti-aliasing
     * radius * 4 bytes are used per circle (the most often used radiuses are saved)
     * 0: to disable caching */
-	/*è®¾ç½®æœ€å¤§ç¼“å­˜çš„åœ†åœˆæ•°æ®æ•°
-    * ä¿å­˜1/4çš„å‘¨é•¿ä»¥è¿›è¡ŒæŠ—é”¯é½¿
-    * â€åŠå¾„â€œæ¯ä¸ªåœ†åœˆä½¿ç”¨4å­—èŠ‚(ä¿å­˜æœ€å¸¸ç”¨çš„åŠå¾„)
-    * 0ï¼šç¦ç”¨ç¼“å†²*/
+	/*ÉèÖÃ×î´ó»º´æµÄÔ²È¦Êı¾İÊı
+    * ±£´æ1/4µÄÖÜ³¤ÒÔ½øĞĞ¿¹¾â³İ
+    * ¡±°ë¾¶¡°Ã¿¸öÔ²È¦Ê¹ÓÃ4×Ö½Ú(±£´æ×î³£ÓÃµÄ°ë¾¶)
+    * 0£º½ûÓÃ»º³å*/
     #define LV_CIRCLE_CACHE_SIZE 4
 #endif /*LV_DRAW_COMPLEX*/
 
@@ -160,17 +160,17 @@
  *With complex image decoders (e.g. PNG or JPG) caching can save the continuous open/decode of images.
  *However the opened images might consume additional RAM.
  *0: to disable caching*/
- /*é»˜è®¤å›¾åƒç¼“å­˜å¤§å°ï¼Œå›¾åƒç¼“å­˜ä½¿å›¾åƒä¿æŒæ‰“å¼€çŠ¶æ€
- *å¦‚æœåªä½¿ç”¨å†…ç½®å›¾åƒæ ¼å¼ï¼Œåˆ™ç¼“å­˜æ²¡æœ‰çœŸæ­£çš„ä¼˜åŠ¿ï¼Œ(å³ï¼Œå¦‚æœæ²¡æœ‰æ·»åŠ æ–°çš„å›¾åƒè§£ç å™¨)
- *å¯¹äºå¤æ‚çš„å›¾åƒè§£ç å™¨(ä¾‹å¦‚PNGæˆ–è€…JPG)ï¼Œç¼“å­˜å¯ä»¥ä¿å­˜å›¾åƒçš„è¿ç»­æ‰“å¼€/è§£ç 
- *ä½†æ˜¯ï¼Œæ‰“å¼€çš„æ˜ åƒå¯èƒ½ä¼šæ¶ˆè€—é¢å¤–çš„RAM
- *0: ç¦ç”¨ç¼“å­˜*/
+ /*Ä¬ÈÏÍ¼Ïñ»º´æ´óĞ¡£¬Í¼Ïñ»º´æÊ¹Í¼Ïñ±£³Ö´ò¿ª×´Ì¬
+ *Èç¹ûÖ»Ê¹ÓÃÄÚÖÃÍ¼Ïñ¸ñÊ½£¬Ôò»º´æÃ»ÓĞÕæÕıµÄÓÅÊÆ£¬(¼´£¬Èç¹ûÃ»ÓĞÌí¼ÓĞÂµÄÍ¼Ïñ½âÂëÆ÷)
+ *¶ÔÓÚ¸´ÔÓµÄÍ¼Ïñ½âÂëÆ÷(ÀıÈçPNG»òÕßJPG)£¬»º´æ¿ÉÒÔ±£´æÍ¼ÏñµÄÁ¬Ğø´ò¿ª/½âÂë
+ *µ«ÊÇ£¬´ò¿ªµÄÓ³Ïñ¿ÉÄÜ»áÏûºÄ¶îÍâµÄRAM
+ *0: ½ûÓÃ»º´æ*/
 #define LV_IMG_CACHE_DEF_SIZE   0
 
 /*Number of stops allowed per gradient. Increase this to allow more stops.
  *This adds (sizeof(lv_color_t) + 1) bytes per additional stop*/
- /*æ¯éš”æ¢¯åº¦å…è®¸çš„åœæ­¢æ•°ï¼Œå¢åŠ è¯¥å€¼ä»¥å…è®¸æ›´å¤šçš„åœæ­¢
- *æ¯å¢åŠ ä¸€ä¸ªç«™ç‚¹ï¼Œå°±å¢åŠ (sizeof(lv_color_t) + 1ä¸ªå­—èŠ‚*/
+ /*Ã¿¸ôÌİ¶ÈÔÊĞíµÄÍ£Ö¹Êı£¬Ôö¼Ó¸ÃÖµÒÔÔÊĞí¸ü¶àµÄÍ£Ö¹
+ *Ã¿Ôö¼ÓÒ»¸öÕ¾µã£¬¾ÍÔö¼Ó(sizeof(lv_color_t) + 1¸ö×Ö½Ú*/
 #define LV_GRADIENT_MAX_STOPS       2
 
 /*Default gradient buffer size.
@@ -178,34 +178,34 @@
  *LV_GRAD_CACHE_DEF_SIZE sets the size of this cache in bytes.
  *If the cache is too small the map will be allocated only while it's required for the drawing.
  *0 mean no caching.*/
- /*é»˜è®¤æ¸å˜ç¼“å†²åŒºå¤§å°
- *å½“LVGLè®¡ç®—æ¸å˜è´´å›¾æ—¶ï¼Œä»–å¯ä»¥å°†ä»–ä»¬ä¿å­˜åœ¨ç¼“å­˜ä¸­ï¼Œä»¥é¿å…å†æ¬¡è®¡ç®—ä»–ä»¬
- *LV_GRAD_CACHE_DEF_SIZE ä»¥å­—èŠ‚ä¸ºå•ä½è®¾ç½®æ­¤ç¼“å­˜çš„å¤§å°.
- *å¦‚æœç¼“å­˜å¤ªå°ï¼Œåˆ™ä»…åœ¨å›¾å½¢éœ€è¦æ—¶åˆ†é…è´´å›¾
- *0 è¡¨ç¤ºæ²¡æœ‰ç¼“å­˜.*/
+ /*Ä¬ÈÏ½¥±ä»º³åÇø´óĞ¡
+ *µ±LVGL¼ÆËã½¥±äÌùÍ¼Ê±£¬Ëû¿ÉÒÔ½«ËûÃÇ±£´æÔÚ»º´æÖĞ£¬ÒÔ±ÜÃâÔÙ´Î¼ÆËãËûÃÇ
+ *LV_GRAD_CACHE_DEF_SIZE ÒÔ×Ö½ÚÎªµ¥Î»ÉèÖÃ´Ë»º´æµÄ´óĞ¡.
+ *Èç¹û»º´æÌ«Ğ¡£¬Ôò½öÔÚÍ¼ĞÎĞèÒªÊ±·ÖÅäÌùÍ¼
+ *0 ±íÊ¾Ã»ÓĞ»º´æ.*/
 #define LV_GRAD_CACHE_DEF_SIZE      0
 
 /*Allow dithering the gradients (to achieve visual smooth color gradients on limited color depth display)
  *LV_DITHER_GRADIENT implies allocating one or two more lines of the object's rendering surface
  *The increase in memory consumption is (32 bits * object width) plus 24 bits * object width if using error diffusion */
- /*å…è®¸æŠ–åŠ¨æ¸å˜(ä»¥åœ¨æœ‰é™çš„é¢œè‰²æ·±åº¦æ˜¾ç¤ºä¸Šå®ç°è§†è§‰å¹³æ»‘çš„é¢œè‰²æ¸å˜)
- *LV_DITHER_GRADIENT æ„å‘³ç€åˆ†é…å¯¹è±¡æ¸²æŸ“æ›²é¢çš„ä¸€æ¡æˆ–å¤šæ¡çº¿
- *å¦‚æœä½¿ç”¨è¯¯å·®æ‰©æ•£ï¼Œå†…å­˜æ¶ˆè€—çš„å¢åŠ æ˜¯(32ä½*å¯¹è±¡å®½åº¦)åŠ ä¸Š24ä½*å¯¹è±¡å®½åº¦ */
+ /*ÔÊĞí¶¶¶¯½¥±ä(ÒÔÔÚÓĞÏŞµÄÑÕÉ«Éî¶ÈÏÔÊ¾ÉÏÊµÏÖÊÓ¾õÆ½»¬µÄÑÕÉ«½¥±ä)
+ *LV_DITHER_GRADIENT ÒâÎ¶×Å·ÖÅä¶ÔÏóäÖÈ¾ÇúÃæµÄÒ»Ìõ»ò¶àÌõÏß
+ *Èç¹ûÊ¹ÓÃÎó²îÀ©É¢£¬ÄÚ´æÏûºÄµÄÔö¼ÓÊÇ(32Î»*¶ÔÏó¿í¶È)¼ÓÉÏ24Î»*¶ÔÏó¿í¶È */
 #define LV_DITHER_GRADIENT      0
 #if LV_DITHER_GRADIENT
     /*Add support for error diffusion dithering.
      *Error diffusion dithering gets a much better visual result, but implies more CPU consumption and memory when drawing.
      *The increase in memory consumption is (24 bits * object's width)*/
-	/*æ·»åŠ å¯¹è¯¯å·®æ‰©æ•£æŠ–åŠ¨çš„æ”¯æŒ
-	*é”™è¯¯æ‰©æ•£æŠ–åŠ¨ä»¥è·å¾—æ›´å¥½çš„è§†è§‰æ•ˆæœï¼Œä½†åœ¨ç»˜åˆ¶æ—¶æ„å‘³ç€æ›´å¤šçš„CPUæ¶ˆè€—å’ŒRAM
-     *å†…å­˜æ¶ˆè€—çš„å¢åŠ æ˜¯ (24 bits * å¯¹è±¡çš„å®½åº¦)*/
+	/*Ìí¼Ó¶ÔÎó²îÀ©É¢¶¶¶¯µÄÖ§³Ö
+	*´íÎóÀ©É¢¶¶¶¯ÒÔ»ñµÃ¸üºÃµÄÊÓ¾õĞ§¹û£¬µ«ÔÚ»æÖÆÊ±ÒâÎ¶×Å¸ü¶àµÄCPUÏûºÄºÍRAM
+     *ÄÚ´æÏûºÄµÄÔö¼ÓÊÇ (24 bits * ¶ÔÏóµÄ¿í¶È)*/
     #define LV_DITHER_ERROR_DIFFUSION   0
 #endif
 
 /*Maximum buffer size to allocate for rotation.
  *Only used if software rotation is enabled in the display driver.*
- *ä¸ºæ—‹è½¬åˆ†é…çš„æœ€å¤§ç¼“å†²åŒºå¤§å° 
- *ä»…åœ¨æ˜¾ç¤ºé©±åŠ¨ç¨‹åºä¸­å¯åŠ¨è½¯ä»¶æ—‹è½¬æ—¶ä½¿ç”¨.*/
+ *ÎªĞı×ª·ÖÅäµÄ×î´ó»º³åÇø´óĞ¡ 
+ *½öÔÚÏÔÊ¾Çı¶¯³ÌĞòÖĞÆô¶¯Èí¼şĞı×ªÊ±Ê¹ÓÃ.*/
 #define LV_DISP_ROT_MAX_BUF (10*1024)
 
 /*-------------
@@ -217,13 +217,13 @@
 #if LV_USE_GPU_STM32_DMA2D
     /*Must be defined to include path of CMSIS header of target processor
     e.g. "stm32f769xx.h" or "stm32f429xx.h"*/
-	/*å¿…é¡»å®šä¹‰ä¸ºåŒ…æ‹¬ç›®æ ‡å¤„ç†å™¨çš„CMSISå¤´æ–‡ä»¶çš„è·¯å¾„
-    ä¾‹å¦‚. "stm32f769xx.h" or "stm32f429xx.h"*/
+	/*±ØĞë¶¨ÒåÎª°üÀ¨Ä¿±ê´¦ÀíÆ÷µÄCMSISÍ·ÎÄ¼şµÄÂ·¾¶
+    ÀıÈç. "stm32f769xx.h" or "stm32f429xx.h"*/
     #define LV_GPU_DMA2D_CMSIS_INCLUDE
 #endif
 
 /*Use NXP's PXP GPU iMX RTxxx platforms*/
-/*ä½¿ç”¨ NXP's PXP GPU iMX RTxxx å¹³å°*/
+/*Ê¹ÓÃ NXP's PXP GPU iMX RTxxx Æ½Ì¨*/
 #define LV_USE_GPU_NXP_PXP 0
 #if LV_USE_GPU_NXP_PXP
     /*1: Add default bare metal and FreeRTOS interrupt handling routines for PXP (lv_gpu_nxp_pxp_osa.c)
@@ -231,10 +231,10 @@
     *   has to be defined in order to use FreeRTOS OSA, otherwise bare-metal implementation is selected.
     *0: lv_gpu_nxp_pxp_init() has to be called manually before lv_init()
     */
-	/*1: ä¸ºPXPæ·»åŠ é»˜è®¤é€»è¾‘å’ŒFreeRTOSä¸­æ–­å¤„ç†ä¾‹ç¨‹(lv_gpu_nxp_PXP_osa.c)
-    *  åœ¨lv_init()æœŸé—´è‡ªåŠ¨è°ƒç”¨lv_gpu_nxp_pxp_init(). è¯·æ³¨æ„ç¬¦å·SDK_OS_FREE_RTOS
-    *   å¿…é¡»å®šä¹‰æ‰èƒ½ä½¿ç”¨FreeRTOS OSA, å¦åˆ™é€‰æ‹©é€»è¾‘å®ç°ã€‚
-    *0: lv_gpu_nxp_pxp_init() å¿…é¡»åœ¨lv_init()ä¹‹å‰æ‰‹åŠ¨è°ƒç”¨
+	/*1: ÎªPXPÌí¼ÓÄ¬ÈÏÂß¼­ºÍFreeRTOSÖĞ¶Ï´¦ÀíÀı³Ì(lv_gpu_nxp_PXP_osa.c)
+    *  ÔÚlv_init()ÆÚ¼ä×Ô¶¯µ÷ÓÃlv_gpu_nxp_pxp_init(). Çë×¢Òâ·ûºÅSDK_OS_FREE_RTOS
+    *   ±ØĞë¶¨Òå²ÅÄÜÊ¹ÓÃFreeRTOS OSA, ·ñÔòÑ¡ÔñÂß¼­ÊµÏÖ¡£
+    *0: lv_gpu_nxp_pxp_init() ±ØĞëÔÚlv_init()Ö®Ç°ÊÖ¶¯µ÷ÓÃ
     */
     #define LV_USE_GPU_NXP_PXP_AUTO_INIT 0
 #endif
@@ -243,7 +243,7 @@
 #define LV_USE_GPU_NXP_VG_LITE 0
 
 /*Use SDL renderer API*/
-/*ä½¿ç”¨ SDL æ¸²æŸ“å™¨ API*/
+/*Ê¹ÓÃ SDL äÖÈ¾Æ÷ API*/
 #define LV_USE_GPU_SDL 0
 #if LV_USE_GPU_SDL
     #define LV_GPU_SDL_INCLUDE_PATH <SDL2/SDL.h>
@@ -254,30 +254,30 @@
 #endif
 
 /*-------------
- * Logging--æ—¥å¿—
+ * Logging--ÈÕÖ¾
  *-----------*/
 
 /*Enable the log module*/
-/* ä½¿èƒ½æ—¥å¿—æ¨¡å‹ */
+/* Ê¹ÄÜÈÕÖ¾Ä£ĞÍ */
 #define LV_USE_LOG 0
 #if LV_USE_LOG
 
-    /*How important log should be added:--åº”æ·»åŠ çš„æ—¥å¿—çš„é‡è¦æ€§
-    *LV_LOG_LEVEL_TRACE       A lot of logs to give detailed information--æä¾›è¯¦ç»†ä¿¡æ¯çš„å¤§é‡æ—¥å¿—
-    *LV_LOG_LEVEL_INFO        Log important events--è®°å½•é‡è¦äº‹ä»¶
-    *LV_LOG_LEVEL_WARN        Log if something unwanted happened but didn't cause a problem--å¦‚æœå‘ç”Ÿäº†ä¸éœ€è¦çš„äº‹æƒ…ï¼Œä½†æ²¡æœ‰å¼•èµ·é—®é¢˜ï¼Œè¯·è®°å½•
-    *LV_LOG_LEVEL_ERROR       Only critical issue, when the system may fail--ç³»ç»Ÿå¯èƒ½å‡ºç°æ•…éšœæ—¶çš„å”¯ä¸€å…³é”®é—®é¢˜
-    *LV_LOG_LEVEL_USER        Only logs added by the user--ä»…ç”¨æˆ·æ·»åŠ çš„æ—¥å¿—
-    *LV_LOG_LEVEL_NONE        Do not log anything--ä¸è®°å½•ä»»ä½•å†…å®¹*/
+    /*How important log should be added:--Ó¦Ìí¼ÓµÄÈÕÖ¾µÄÖØÒªĞÔ
+    *LV_LOG_LEVEL_TRACE       A lot of logs to give detailed information--Ìá¹©ÏêÏ¸ĞÅÏ¢µÄ´óÁ¿ÈÕÖ¾
+    *LV_LOG_LEVEL_INFO        Log important events--¼ÇÂ¼ÖØÒªÊÂ¼ş
+    *LV_LOG_LEVEL_WARN        Log if something unwanted happened but didn't cause a problem--Èç¹û·¢ÉúÁË²»ĞèÒªµÄÊÂÇé£¬µ«Ã»ÓĞÒıÆğÎÊÌâ£¬Çë¼ÇÂ¼
+    *LV_LOG_LEVEL_ERROR       Only critical issue, when the system may fail--ÏµÍ³¿ÉÄÜ³öÏÖ¹ÊÕÏÊ±µÄÎ¨Ò»¹Ø¼üÎÊÌâ
+    *LV_LOG_LEVEL_USER        Only logs added by the user--½öÓÃ»§Ìí¼ÓµÄÈÕÖ¾
+    *LV_LOG_LEVEL_NONE        Do not log anything--²»¼ÇÂ¼ÈÎºÎÄÚÈİ*/
     #define LV_LOG_LEVEL      LV_LOG_LEVEL_TRACE
 
-    /*1: Print the log with 'printf';æ‰“å°æ—¥å¿—ä½¿ç”¨printf
+    /*1: Print the log with 'printf';´òÓ¡ÈÕÖ¾Ê¹ÓÃprintf
     *0: User need to register a callback with `lv_log_register_print_cb()`*/
-	/* ç”¨æˆ·éœ€è¦æ³¨å†Œå›è°ƒå‡½æ•°ï¼š lv_log_register_print_cb() */
+	/* ÓÃ»§ĞèÒª×¢²á»Øµ÷º¯Êı£º lv_log_register_print_cb() */
     #define LV_LOG_PRINTF 1
 
     /*Enable/disable LV_LOG_TRACE in modules that produces a huge number of logs*/
-	/* åœ¨äº§ç”Ÿå¤§é‡æ—¥å¿—çš„æ¨¡å—ä¸­å¯ç”¨/ç¦ç”¨LV_LOG_TRACE */
+	/* ÔÚ²úÉú´óÁ¿ÈÕÖ¾µÄÄ£¿éÖĞÆôÓÃ/½ûÓÃLV_LOG_TRACE */
     #define LV_LOG_TRACE_MEM        1
     #define LV_LOG_TRACE_TIMER      1
     #define LV_LOG_TRACE_INDEV      1
@@ -290,30 +290,30 @@
 #endif  /*LV_USE_LOG*/
 
 /*-------------
- * Asserts--æ–­è¨€
+ * Asserts--¶ÏÑÔ
  *-----------*/
 
 /*Enable asserts if an operation is failed or an invalid data is found.
  *If LV_USE_LOG is enabled an error message will be printed on failure*/
- /*å¦‚æœæ“ä½œå¤±è´¥æˆ–å‘ç°æ— æ•ˆæ•°æ®ï¼Œåˆ™å¯ç”¨æ–­è¨€
- *å¦‚æœå¯ç”¨LV_USE_LOG ï¼Œåˆ™æ•…éšœæ—¶å°†æ‰“å°é”™è¯¯æ¶ˆæ¯*/
- #define LV_USE_ASSERT_NULL          1   /*Check if the parameter is NULL. (Very fast, recommended)--æ£€æŸ¥å‚æ•°æ˜¯å¦ä¸ºç©º(éå¸¸å¿«ï¼Œæ¨è)*/
-#define LV_USE_ASSERT_MALLOC        1   /*Checks is the memory is successfully allocated or no. (Very fast, recommended)--æ£€æŸ¥å†…å­˜æ˜¯å¦æˆåŠŸåˆ†é…(éå¸¸å¿«ï¼Œæ¨è)*/
-#define LV_USE_ASSERT_STYLE         1   /*Check if the styles are properly initialized. (Very fast, recommended)--æ£€æŸ¥æ ·å¼æ˜¯å¦æ­£ç¡®åˆå§‹åŒ–(éå¸¸å¿«ï¼Œæ¨è)*/
-#define LV_USE_ASSERT_MEM_INTEGRITY 0   /*Check the integrity of `lv_mem` after critical operations. (Slow)--å…³é”®æ“ä½œåæ£€æŸ¥lv_memçš„å®Œæ•´æ€§(æ…¢)*/
-#define LV_USE_ASSERT_OBJ           0   /*Check the object's type and existence (e.g. not deleted). (Slow)--æ£€æŸ¥å¯¹è±¡çš„ç±»å‹å’Œå­˜åœ¨(ä¾‹å¦‚ï¼Œæœªåˆ é™¤ï¼Œ(æ…¢))*/
+ /*Èç¹û²Ù×÷Ê§°Ü»ò·¢ÏÖÎŞĞ§Êı¾İ£¬ÔòÆôÓÃ¶ÏÑÔ
+ *Èç¹ûÆôÓÃLV_USE_LOG £¬Ôò¹ÊÕÏÊ±½«´òÓ¡´íÎóÏûÏ¢*/
+#define LV_USE_ASSERT_NULL          1   /*Check if the parameter is NULL. (Very fast, recommended)--¼ì²é²ÎÊıÊÇ·ñÎª¿Õ(·Ç³£¿ì£¬ÍÆ¼ö)*/
+#define LV_USE_ASSERT_MALLOC        1   /*Checks is the memory is successfully allocated or no. (Very fast, recommended)--¼ì²éÄÚ´æÊÇ·ñ³É¹¦·ÖÅä(·Ç³£¿ì£¬ÍÆ¼ö)*/
+#define LV_USE_ASSERT_STYLE         1   /*Check if the styles are properly initialized. (Very fast, recommended)--¼ì²éÑùÊ½ÊÇ·ñÕıÈ·³õÊ¼»¯(·Ç³£¿ì£¬ÍÆ¼ö)*/
+#define LV_USE_ASSERT_MEM_INTEGRITY 0   /*Check the integrity of `lv_mem` after critical operations. (Slow)--¹Ø¼ü²Ù×÷ºó¼ì²élv_memµÄÍêÕûĞÔ(Âı)*/
+#define LV_USE_ASSERT_OBJ           0   /*Check the object's type and existence (e.g. not deleted). (Slow)--¼ì²é¶ÔÏóµÄÀàĞÍºÍ´æÔÚ(ÀıÈç£¬Î´É¾³ı£¬(Âı))*/
 
 /*Add a custom handler when assert happens e.g. to restart the MCU*/
-/*åœ¨å‘ç”Ÿæ–­è¨€æ—¶æ·»åŠ è‡ªå®šä¹‰å¤„ç†ç¨‹åºï¼Œä¾‹å¦‚é‡æ–°å¯åŠ¨MCU*/
+/*ÔÚ·¢Éú¶ÏÑÔÊ±Ìí¼Ó×Ô¶¨Òå´¦Àí³ÌĞò£¬ÀıÈçÖØĞÂÆô¶¯MCU*/
 #define LV_ASSERT_HANDLER_INCLUDE <stdint.h>
-#define LV_ASSERT_HANDLER while(1);   /*Halt by default--é»˜è®¤åœæ­¢*/
+#define LV_ASSERT_HANDLER while(1);   /*Halt by default--Ä¬ÈÏÍ£Ö¹*/
 
 /*-------------
- * Others--å…¶ä»–
+ * Others--ÆäËû
  *-----------*/
 
 /*1: Show CPU usage and FPS count*/
-/*1: æ˜¾ç¤ºCPUä½¿ç”¨ç‡å’ŒFPSè®¡æ•°*/
+/*1: ÏÔÊ¾CPUÊ¹ÓÃÂÊºÍFPS¼ÆÊı*/
 #define LV_USE_PERF_MONITOR 1
 #if LV_USE_PERF_MONITOR
     #define LV_USE_PERF_MONITOR_POS LV_ALIGN_BOTTOM_RIGHT
@@ -321,19 +321,19 @@
 
 /*1: Show the used memory and the memory fragmentation
  * Requires LV_MEM_CUSTOM = 0*/
- /*1: æ˜¾ç¤ºä½¿ç”¨çš„å†…å­˜å’Œå†…å­˜ç¢ç‰‡
- * éœ€è¦ LV_MEM_CUSTOM = 0*/
+ /*1: ÏÔÊ¾Ê¹ÓÃµÄÄÚ´æºÍÄÚ´æËéÆ¬
+ * ĞèÒª LV_MEM_CUSTOM = 0*/
 #define LV_USE_MEM_MONITOR 1
 #if LV_USE_MEM_MONITOR
     #define LV_USE_MEM_MONITOR_POS LV_ALIGN_BOTTOM_LEFT
 #endif
 
 /*1: Draw random colored rectangles over the redrawn areas*/
-/*1: åœ¨é‡æ–°ç»˜åˆ¶åŒºåŸŸä¸Šç»˜åˆ¶éšæœºå½©è‰²çŸ©å½¢*/
+/*1: ÔÚÖØĞÂ»æÖÆÇøÓòÉÏ»æÖÆËæ»ú²ÊÉ«¾ØĞÎ*/
 #define LV_USE_REFR_DEBUG 0
 
 /*Change the built in (v)snprintf functions*/
-/*æ›´æ”¹å†…ç½®çš„snprintfå‡½æ•°*/
+/*¸ü¸ÄÄÚÖÃµÄsnprintfº¯Êı*/
 #define LV_SPRINTF_CUSTOM 0
 #if LV_SPRINTF_CUSTOM
     #define LV_SPRINTF_INCLUDE <stdio.h>
@@ -347,67 +347,67 @@
 
 /*Garbage Collector settings
  *Used if lvgl is bound to higher level language and the memory is managed by that language*/
- /*åƒåœ¾æ”¶é›†å™¨è®¾ç½®
- *å¦‚æœlvglç»‘å®šåˆ°æ›´é«˜çº§åˆ«çš„è¯­è¨€ï¼Œå¹¶ä¸”å†…å­˜ç”±è¯¥è¯­è¨€ç®¡ç†*/
+ /*À¬»øÊÕ¼¯Æ÷ÉèÖÃ
+ *Èç¹ûlvgl°ó¶¨µ½¸ü¸ß¼¶±ğµÄÓïÑÔ£¬²¢ÇÒÄÚ´æÓÉ¸ÃÓïÑÔ¹ÜÀí*/
 #define LV_ENABLE_GC 0
 #if LV_ENABLE_GC != 0
-    #define LV_GC_INCLUDE "gc.h"  /*Include Garbage Collector related things--åŒ…æ‹¬åƒåœ¾æ”¶é›†å™¨ç›¸å…³çš„ä¸œè¥¿*/
+    #define LV_GC_INCLUDE "gc.h"  /*Include Garbage Collector related things--°üÀ¨À¬»øÊÕ¼¯Æ÷Ïà¹ØµÄ¶«Î÷*/
 #endif /*LV_ENABLE_GC*/
 
 /*=====================
- *  COMPILER SETTINGS--ç¼–è¯‘å™¨é€‰é¡¹
+ *  COMPILER SETTINGS--±àÒëÆ÷Ñ¡Ïî
  *====================*/
 
 /*For big endian systems set to 1*/
-/*å¯¹äºå¤§ç«¯ç³»ç»Ÿï¼Œè®¾ç½®ä¸º1*/
+/*¶ÔÓÚ´ó¶ËÏµÍ³£¬ÉèÖÃÎª1*/
 #define LV_BIG_ENDIAN_SYSTEM 0
 
 /*Define a custom attribute to `lv_tick_inc` function*/
-/*å°†è‡ªå®šä¹‰å±æ€§å®šä¹‰ä¸º `lv_tick_inc`*/
+/*½«×Ô¶¨ÒåÊôĞÔ¶¨ÒåÎª `lv_tick_inc`*/
 #define LV_ATTRIBUTE_TICK_INC
 
 /*Define a custom attribute to `lv_timer_handler` function*/
-/*å°†è‡ªå®šä¹‰å±æ€§å®šä¹‰ä¸º `lv_timer_handler` å‡½æ•°*/
+/*½«×Ô¶¨ÒåÊôĞÔ¶¨ÒåÎª `lv_timer_handler` º¯Êı*/
 #define LV_ATTRIBUTE_TIMER_HANDLER
 
 /*Define a custom attribute to `lv_disp_flush_ready` function*/
-/*å°†è‡ªå®šä¹‰å±æ€§å®šä¹‰ä¸º`lv_disp_flush_readyâ€˜ å‡½æ•°*/
+/*½«×Ô¶¨ÒåÊôĞÔ¶¨ÒåÎª`lv_disp_flush_ready¡® º¯Êı*/
 #define LV_ATTRIBUTE_FLUSH_READY
 
 /*Required alignment size for buffers*/
-/*ç¼“å†²åŒºæ‰€éœ€çš„å¯¹é½å¤§å°*/
+/*»º³åÇøËùĞèµÄ¶ÔÆë´óĞ¡*/
 #define LV_ATTRIBUTE_MEM_ALIGN_SIZE 1
 
 /*Will be added where memories needs to be aligned (with -Os data might not be aligned to boundary by default).
  * E.g. __attribute__((aligned(4)))*/
- /*å°†æ·»åŠ åˆ°éœ€è¦å¯¹é½å†…å­˜çš„ä½ç½®(é»˜è®¤æƒ…å†µä¸‹ï¼Œä¸-Osæ•°æ®å¯èƒ½ä¸å¯¹é½è¾¹ç•Œ).
+ /*½«Ìí¼Óµ½ĞèÒª¶ÔÆëÄÚ´æµÄÎ»ÖÃ(Ä¬ÈÏÇé¿öÏÂ£¬Óë-OsÊı¾İ¿ÉÄÜ²»¶ÔÆë±ß½ç).
  * E.g. __attribute__((aligned(4)))*/
 #define LV_ATTRIBUTE_MEM_ALIGN
 
 /*Attribute to mark large constant arrays for example font's bitmaps*/
-/*å±æ€§æ ‡è®°å¤§å¸¸é‡æ•°ç»„ï¼Œä¾‹å¦‚å­—ä½“çš„ä½å›¾*/
+/*ÊôĞÔ±ê¼Ç´ó³£Á¿Êı×é£¬ÀıÈç×ÖÌåµÄÎ»Í¼*/
 #define LV_ATTRIBUTE_LARGE_CONST
 
 /*Compiler prefix for a big array declaration in RAM*/
-/*RAMä¸­å¤§æ•°ç»„å£°æ˜çš„ç¼–è¯‘å™¨å‰ç¼€*/
+/*RAMÖĞ´óÊı×éÉùÃ÷µÄ±àÒëÆ÷Ç°×º*/
 #define LV_ATTRIBUTE_LARGE_RAM_ARRAY
 
 /*Place performance critical functions into a faster memory (e.g RAM)*/
-/*å°†æ€§èƒ½å…³é”®åŠŸèƒ½æ”¾å…¥é€Ÿåº¦æ›´å¿«çš„å†…å­˜ (e.g RAM)*/
+/*½«ĞÔÄÜ¹Ø¼ü¹¦ÄÜ·ÅÈëËÙ¶È¸ü¿ìµÄÄÚ´æ (e.g RAM)*/
 #define LV_ATTRIBUTE_FAST_MEM
 
 /*Prefix variables that are used in GPU accelerated operations, often these need to be placed in RAM sections that are DMA accessible*/
-/*GPUåŠ é€Ÿæ“ä½œä¸­ä½¿ç”¨çš„å‰ç¼€å˜é‡ï¼Œé€šå¸¸éœ€è¦æ”¾ç½®åœ¨DMAå¯è®¿é—®çš„RAMéƒ¨åˆ†ä¸­*/
+/*GPU¼ÓËÙ²Ù×÷ÖĞÊ¹ÓÃµÄÇ°×º±äÁ¿£¬Í¨³£ĞèÒª·ÅÖÃÔÚDMA¿É·ÃÎÊµÄRAM²¿·ÖÖĞ*/
 #define LV_ATTRIBUTE_DMA
 
 /*Export integer constant to binding. This macro is used with constants in the form of LV_<CONST> that
  *should also appear on LVGL binding API such as Micropython.*/
- /*å°†æ•´æ•°å¸¸é‡åˆ°å¤„åˆ°ç»‘å®šï¼Œè¯¥å®ä¸ LV_<CONST> å½¢å¼çš„å¸¸é‡ä¸€èµ·ä½¿ç”¨
- *è¿˜åº”å‡ºç°åœ¨LVGLç»‘å®šçš„APIä¸Š*/
+ /*½«ÕûÊı³£Á¿µ½´¦µ½°ó¶¨£¬¸ÃºêÓë LV_<CONST> ĞÎÊ½µÄ³£Á¿Ò»ÆğÊ¹ÓÃ
+ *»¹Ó¦³öÏÖÔÚLVGL°ó¶¨µÄAPIÉÏ*/
 #define LV_EXPORT_CONST_INT(int_value) struct _silence_gcc_warning /*The default value just prevents GCC warning*/
 
 /*Extend the default -32k..32k coordinate range to -4M..4M by using int32_t for coordinates instead of int16_t*/
-/*å°†é»˜è®¤çš„-32k..32kåæ ‡èŒƒå›´æ‰©å±•åˆ°-4m..4m,æ–¹æ³•æ˜¯ä½¿ç”¨int32_tè€Œä¸æ˜¯int16_tä½œä¸ºåæ ‡*/
+/*½«Ä¬ÈÏµÄ-32k..32k×ø±ê·¶Î§À©Õ¹µ½-4m..4m,·½·¨ÊÇÊ¹ÓÃint32_t¶ø²»ÊÇint16_t×÷Îª×ø±ê*/
 #define LV_USE_LARGE_COORD 0
 
 /*==================
@@ -416,7 +416,7 @@
 
 /*Montserrat fonts with ASCII range and some symbols using bpp = 4
  *https://fonts.google.com/specimen/Montserrat*/
-/*Montserrat å­—ä½“ï¼ŒASCIIèŒƒå›´å’Œä¸€äº›ç¬¦å·ä½¿ç”¨bpp = 4
+/*Montserrat ×ÖÌå£¬ASCII·¶Î§ºÍÒ»Ğ©·ûºÅÊ¹ÓÃbpp = 4
  *https://fonts.google.com/specimen/Montserrat*/
 #define LV_FONT_MONTSERRAT_8  1
 #define LV_FONT_MONTSERRAT_10 1
@@ -441,54 +441,54 @@
 #define LV_FONT_MONTSERRAT_48 0
 
 /*Demonstrate special features*/
-/*å±•ç¤ºç‰¹è‰²*/
+/*Õ¹Ê¾ÌØÉ«*/
 #define LV_FONT_MONTSERRAT_12_SUBPX      0
 #define LV_FONT_MONTSERRAT_28_COMPRESSED 0  /*bpp = 3*/
 #define LV_FONT_DEJAVU_16_PERSIAN_HEBREW 0  /*Hebrew, Arabic, Persian letters and all their forms*/
 #define LV_FONT_SIMSUN_16_CJK            0  /*1000 most common CJK radicals*/
 
 /*Pixel perfect monospace fonts*/
-/*åƒç´ å®Œç¾å•ç©ºé—´å­—ä½“*/
+/*ÏñËØÍêÃÀµ¥¿Õ¼ä×ÖÌå*/
 #define LV_FONT_UNSCII_8  0
 #define LV_FONT_UNSCII_16 0
 
 /*Optionally declare custom fonts here.
  *You can use these fonts as default font too and they will be available globally.
  *E.g. #define LV_FONT_CUSTOM_DECLARE   LV_FONT_DECLARE(my_font_1) LV_FONT_DECLARE(my_font_2)*/
- /*å¯ä»¥é€‰æ‹©åœ¨æ­¤å¤„å£°æ˜è‡ªå®šä¹‰å­—ä½“
- *ä½ ä¹Ÿå¯ä»¥ä½¿ç”¨è¿™äº›å­—ä½“ä½œä¸ºé»˜è®¤å­—ä½“ï¼Œä»–ä»¬å°†åœ¨å…¨å±€å¯ç”¨
+ /*¿ÉÒÔÑ¡ÔñÔÚ´Ë´¦ÉùÃ÷×Ô¶¨Òå×ÖÌå
+ *ÄãÒ²¿ÉÒÔÊ¹ÓÃÕâĞ©×ÖÌå×÷ÎªÄ¬ÈÏ×ÖÌå£¬ËûÃÇ½«ÔÚÈ«¾Ö¿ÉÓÃ
  *E.g. #define LV_FONT_CUSTOM_DECLARE   LV_FONT_DECLARE(my_font_1) LV_FONT_DECLARE(my_font_2)*/
 #define LV_FONT_CUSTOM_DECLARE LV_FONT_DECLARE(myFont36) \
 							   LV_FONT_DECLARE(myFont20)
 															   
 
 /*Always set a default font*/
-/*å§‹ç»ˆè®¾ç½®é»˜è®¤å­—ä½“*/
+/*Ê¼ÖÕÉèÖÃÄ¬ÈÏ×ÖÌå*/
 #define LV_FONT_DEFAULT &myFont20
 
 /*Enable handling large font and/or fonts with a lot of characters.
  *The limit depends on the font size, font face and bpp.
  *Compiler error will be triggered if a font needs it.*/
- /*å¯ç”¨å¤„ç†å¤§å­—ä½“/æˆ–åŒ…å«å¤§é‡å­—ç¬¦çš„å­—ä½“
- *é™åˆ¶å–å†³ä¸å­—ä½“å¤§å°ã€å­—ä½“é¢å’Œbpp
- *å¦‚æœå­—ä½“éœ€è¦ï¼Œå°†è§¦å‘ç¼–è¯‘å™¨é”™è¯¯.*/
+ /*ÆôÓÃ´¦Àí´ó×ÖÌå/»ò°üº¬´óÁ¿×Ö·ûµÄ×ÖÌå
+ *ÏŞÖÆÈ¡¾öÓë×ÖÌå´óĞ¡¡¢×ÖÌåÃæºÍbpp
+ *Èç¹û×ÖÌåĞèÒª£¬½«´¥·¢±àÒëÆ÷´íÎó.*/
 #define LV_FONT_FMT_TXT_LARGE 0
 
 /*Enables/disables support for compressed fonts.*/
-/*å¯ç”¨/ç¦ç”¨å¯¹å‹ç¼©å­—ä½“çš„æ”¯æŒ*/
+/*ÆôÓÃ/½ûÓÃ¶ÔÑ¹Ëõ×ÖÌåµÄÖ§³Ö*/
 #define LV_USE_FONT_COMPRESSED 0
 
 /*Enable subpixel rendering*/
-/*å¯ç”¨å­åƒç´ æ¸²æŸ“*/
+/*ÆôÓÃ×ÓÏñËØäÖÈ¾*/
 #define LV_USE_FONT_SUBPX 0
 #if LV_USE_FONT_SUBPX
     /*Set the pixel order of the display. Physical order of RGB channels. Doesn't matter with "normal" fonts.*/
-	/*è®¾ç½®æ˜¾ç¤ºå™¨çš„åƒç´ é¡ºåºï¼ŒRGBé€šé“çš„ç‰©ç†é¡ºåºã€‚æ™®é€šå­—ä½“æ²¡æœ‰å…³ç³».*/
+	/*ÉèÖÃÏÔÊ¾Æ÷µÄÏñËØË³Ğò£¬RGBÍ¨µÀµÄÎïÀíË³Ğò¡£ÆÕÍ¨×ÖÌåÃ»ÓĞ¹ØÏµ.*/
     #define LV_FONT_SUBPX_BGR 0  /*0: RGB; 1:BGR order*/
 #endif
 
 /*=================
- *  TEXT SETTINGS--æ–‡æœ¬è®¾ç½®
+ *  TEXT SETTINGS--ÎÄ±¾ÉèÖÃ
  *=================*/
 
 /**
@@ -498,62 +498,62 @@
  * - LV_TXT_ENC_ASCII
  */
  /**
- * é€‰æ‹©å­—ç¬¦ä¸²çš„å­—ç¬¦ç¼–ç 
- * IDEæˆ–ç¼–è¾‘å™¨åº”å…·æœ‰ç›¸åŒçš„å­—ç¬¦ç¼–ç 
+ * Ñ¡Ôñ×Ö·û´®µÄ×Ö·û±àÂë
+ * IDE»ò±à¼­Æ÷Ó¦¾ßÓĞÏàÍ¬µÄ×Ö·û±àÂë
  * - LV_TXT_ENC_UTF8
  * - LV_TXT_ENC_ASCII
  */
 #define LV_TXT_ENC 		LV_TXT_ENC_UTF8
 
 /*Can break (wrap) texts on these chars*/
-/*å¯ä»¥åœ¨è¿™äº›å­—ç¬¦ä¸Šæ–­å¼€(æ¢è¡Œ)æ–‡æœ¬*/
+/*¿ÉÒÔÔÚÕâĞ©×Ö·ûÉÏ¶Ï¿ª(»»ĞĞ)ÎÄ±¾*/
 #define LV_TXT_BREAK_CHARS " ,.;:-_"
 
 /*If a word is at least this long, will break wherever "prettiest"
  *To disable, set to a value <= 0*/
- /*å¦‚æœä¸€ä¸ªè¯è‡³å°‘è¿™ä¹ˆé•¿ï¼Œä»–ä¼šåœ¨ "prettiest" çš„åœ°æ–¹æ–­å¼€
- *è¦ç¦ç”¨ï¼Œè¯·å°†å€¼è®¾ç½®ä¸º <= 0*/
+ /*Èç¹ûÒ»¸ö´ÊÖÁÉÙÕâÃ´³¤£¬Ëû»áÔÚ "prettiest" µÄµØ·½¶Ï¿ª
+ *Òª½ûÓÃ£¬Çë½«ÖµÉèÖÃÎª <= 0*/
 #define LV_TXT_LINE_BREAK_LONG_LEN 0
 
 /*Minimum number of characters in a long word to put on a line before a break.
  *Depends on LV_TXT_LINE_BREAK_LONG_LEN.*/
- /*åœ¨ä¸€ä¸ªé•¿å•è¯ä¸­ï¼Œåœ¨æ¢è¡Œä¹‹å‰è¦æ”¾åœ¨ä¸€è¡Œä¸­çš„æœ€å°å­—ç¬¦æ•°
- *å–å†³äº LV_TXT_LINE_BREAK_LONG_LEN.*/
+ /*ÔÚÒ»¸ö³¤µ¥´ÊÖĞ£¬ÔÚ»»ĞĞÖ®Ç°Òª·ÅÔÚÒ»ĞĞÖĞµÄ×îĞ¡×Ö·ûÊı
+ *È¡¾öÓÚ LV_TXT_LINE_BREAK_LONG_LEN.*/
 #define LV_TXT_LINE_BREAK_LONG_PRE_MIN_LEN 3
 
 /*Minimum number of characters in a long word to put on a line after a break.
  *Depends on LV_TXT_LINE_BREAK_LONG_LEN.*/
- /*ä¸€ä¸ªé•¿å•è¯ä¸­çš„æœ€å°å­—ç¬¦æ•°ï¼Œåœ¨ä¸­æ–­åæ”¾åœ¨ä¸€è¡Œä¸­
- *å–å†³äº LV_TXT_LINE_BREAK_LONG_LEN.*/ 
+ /*Ò»¸ö³¤µ¥´ÊÖĞµÄ×îĞ¡×Ö·ûÊı£¬ÔÚÖĞ¶Ïºó·ÅÔÚÒ»ĞĞÖĞ
+ *È¡¾öÓÚ LV_TXT_LINE_BREAK_LONG_LEN.*/ 
 #define LV_TXT_LINE_BREAK_LONG_POST_MIN_LEN 3
 
 /*The control character to use for signalling text recoloring.*/
-/*ç”¨äºä¿¡å·æ–‡æœ¬é‡æ–°ç€è‰²çš„æ§åˆ¶å­—ç¬¦*/
+/*ÓÃÓÚĞÅºÅÎÄ±¾ÖØĞÂ×ÅÉ«µÄ¿ØÖÆ×Ö·û*/
 #define LV_TXT_COLOR_CMD "#"
 
 /*Support bidirectional texts. Allows mixing Left-to-Right and Right-to-Left texts.
  *The direction will be processed according to the Unicode Bidirectional Algorithm:
  *https://www.w3.org/International/articles/inline-bidi-markup/uba-basics*/
- /*æ”¯æŒåŒå‘æ–‡æœ¬ï¼Œå…è®¸æ··åˆä»å·¦åˆ°å³å’Œä»å³åˆ°å·¦æ–‡æœ¬
- *æ–¹å‘å°†æ ¹æ®UnicodeåŒå‘ç®—æ³•è¿›è¡Œå¤„ç†
+ /*Ö§³ÖË«ÏòÎÄ±¾£¬ÔÊĞí»ìºÏ´Ó×óµ½ÓÒºÍ´ÓÓÒµ½×óÎÄ±¾
+ *·½Ïò½«¸ù¾İUnicodeË«ÏòËã·¨½øĞĞ´¦Àí
  *https://www.w3.org/International/articles/inline-bidi-markup/uba-basics*/
 #define LV_USE_BIDI 0
 #if LV_USE_BIDI
-    /*Set the default direction. Supported values:--è®¾ç½®é»˜è®¤æ–¹å‘ï¼Œæ”¯æŒçš„å€¼
-    *`LV_BASE_DIR_LTR` Left-to-Right-å·¦åˆ°å³
-    *`LV_BASE_DIR_RTL` Right-to-Left-å³åˆ°å·¦
-    *`LV_BASE_DIR_AUTO` detect texts base direction--æ£€æµ‹æ–‡æœ¬åŸºæœ¬æ–¹å‘*/
+    /*Set the default direction. Supported values:--ÉèÖÃÄ¬ÈÏ·½Ïò£¬Ö§³ÖµÄÖµ
+    *`LV_BASE_DIR_LTR` Left-to-Right-×óµ½ÓÒ
+    *`LV_BASE_DIR_RTL` Right-to-Left-ÓÒµ½×ó
+    *`LV_BASE_DIR_AUTO` detect texts base direction--¼ì²âÎÄ±¾»ù±¾·½Ïò*/
     #define LV_BIDI_BASE_DIR_DEF LV_BASE_DIR_AUTO
 #endif
 
 /*Enable Arabic/Persian processing
  *In these languages characters should be replaced with an other form based on their position in the text*/
- /*å¯ç”¨Arabic/Persianå¤„ç†
- *åœ¨è¿™äº›è¯­è¨€ä¸­ï¼Œå­—ç¬¦åº”æ ¹æ®å…¶åœ¨æ–‡æœ¬ä¸­çš„ä½ç½®ç”¨å…¶ä»–å½¢å¼æ›¿æ¢*/
+ /*ÆôÓÃArabic/Persian´¦Àí
+ *ÔÚÕâĞ©ÓïÑÔÖĞ£¬×Ö·ûÓ¦¸ù¾İÆäÔÚÎÄ±¾ÖĞµÄÎ»ÖÃÓÃÆäËûĞÎÊ½Ìæ»»*/
 #define LV_USE_ARABIC_PERSIAN_CHARS 0
 
 /*==================
- *  WIDGET USAGE--å°éƒ¨ä»¶ä½¿ç”¨
+ *  WIDGET USAGE--Ğ¡²¿¼şÊ¹ÓÃ
  *================*/
 
 /*Documentation of the widgets: https://docs.lvgl.io/latest/en/html/widgets/index.html*/
@@ -578,16 +578,16 @@
 
 #define LV_USE_LABEL      1
 #if LV_USE_LABEL
-    #define LV_LABEL_TEXT_SELECTION 1 /*Enable selecting text of the label--å¯ç”¨é€‰æ‹©æ ‡ç­¾çš„æ–‡æœ¬*/
+    #define LV_LABEL_TEXT_SELECTION 1 /*Enable selecting text of the label--ÆôÓÃÑ¡Ôñ±êÇ©µÄÎÄ±¾*/
     #define LV_LABEL_LONG_TXT_HINT 1  /*Store some extra info in labels to speed up drawing of very long texts*/
-																	/*--åœ¨æ ‡ç­¾ä¸­å­˜å‚¨ä¸€äº›é¢å¤–ä¿¡æ¯ï¼Œä»¥åŠ å¿«ç»˜åˆ¶éå¸¸é•¿çš„æ–‡æœ¬*/
+																	/*--ÔÚ±êÇ©ÖĞ´æ´¢Ò»Ğ©¶îÍâĞÅÏ¢£¬ÒÔ¼Ó¿ì»æÖÆ·Ç³£³¤µÄÎÄ±¾*/
 #endif
 
 #define LV_USE_LINE       1
 
 #define LV_USE_ROLLER     1   /*Requires: lv_label*/
 #if LV_USE_ROLLER
-    #define LV_ROLLER_INF_PAGES 7 /*Number of extra "pages" when the roller is infinite--æ»šè½®æ— é™å¤§æ—¶çš„é¢å¤–é¡µæ•°*/
+    #define LV_ROLLER_INF_PAGES 7 /*Number of extra "pages" when the roller is infinite--¹öÂÖÎŞÏŞ´óÊ±µÄ¶îÍâÒ³Êı*/
 #endif
 
 #define LV_USE_SLIDER     1   /*Requires: lv_bar*/
@@ -602,11 +602,11 @@
 #define LV_USE_TABLE      1
 
 /*==================
- * EXTRA COMPONENTS--ç‰¹åˆ«é›¶éƒ¨ä»¶
+ * EXTRA COMPONENTS--ÌØ±ğÁã²¿¼ş
  *==================*/
 
 /*-----------
- * Widgets--å°å·¥å…·
+ * Widgets--Ğ¡¹¤¾ß
  *----------*/
 #define LV_USE_CALENDAR   1
 #if LV_USE_CALENDAR
@@ -652,15 +652,15 @@
 
 #define LV_USE_SPAN       1
 #if LV_USE_SPAN
-    /*A line text can contain maximum num of span descriptor--è¡Œæ–‡æœ¬å¯ä»¥åŒ…å«æœ€å¤§è·¨åº¦æè¿°å­—ç¬¦æ•° */
+    /*A line text can contain maximum num of span descriptor--ĞĞÎÄ±¾¿ÉÒÔ°üº¬×î´ó¿ç¶ÈÃèÊö×Ö·ûÊı */
     #define LV_SPAN_SNIPPET_STACK_SIZE 64
 #endif
 
 /*-----------
- * Themes--ä¸»é¢˜
+ * Themes--Ö÷Ìâ
  *----------*/
 
-/*A simple, impressive and very complete theme--ä¸€ä¸ªç®€å•ã€ä»¤äººå°è±¡æ·±åˆ»ä¸”éå¸¸å®Œæ•´çš„ä¸»é¢˜*/
+/*A simple, impressive and very complete theme--Ò»¸ö¼òµ¥¡¢ÁîÈËÓ¡ÏóÉî¿ÌÇÒ·Ç³£ÍêÕûµÄÖ÷Ìâ*/
 #define LV_USE_THEME_DEFAULT 1
 #if LV_USE_THEME_DEFAULT
 
@@ -668,47 +668,47 @@
     #define LV_THEME_DEFAULT_DARK 0
 
     /*1: Enable grow on press*/
-	/*1: å¯ç”¨æŒ‰éœ€å¢é•¿*/
+	/*1: ÆôÓÃ°´ĞèÔö³¤*/
     #define LV_THEME_DEFAULT_GROW 1
 
     /*Default transition time in [ms]*/
-	/*é»˜è®¤è½¬æ¢æ—¶é—´ [ms]*/
+	/*Ä¬ÈÏ×ª»»Ê±¼ä [ms]*/
     #define LV_THEME_DEFAULT_TRANSITION_TIME 80
 #endif /*LV_USE_THEME_DEFAULT*/
 
 /*A very simple theme that is a good starting point for a custom theme*/
-/*ä¸€ä¸ªéå¸¸ç®€å•çš„ä¸»é¢˜ï¼Œè¿™æ˜¯è‡ªå®šä¹‰ä¸»é¢˜çš„è‰¯å¥½èµ·ç‚¹*/
+/*Ò»¸ö·Ç³£¼òµ¥µÄÖ÷Ìâ£¬ÕâÊÇ×Ô¶¨ÒåÖ÷ÌâµÄÁ¼ºÃÆğµã*/
 #define LV_USE_THEME_BASIC 1
 
 /*A theme designed for monochrome displays*/
-/*ä¸ºå•è‰²æ˜¾ç¤ºå™¨è®¾è®¡çš„ä¸»é¢˜*/
+/*Îªµ¥É«ÏÔÊ¾Æ÷Éè¼ÆµÄÖ÷Ìâ*/
 #define LV_USE_THEME_MONO 1
 
 /*-----------
- * Layouts--å¸ƒå±€
+ * Layouts--²¼¾Ö
  *----------*/
 
 /*A layout similar to Flexbox in CSS.*/
-/*ç±»ä¼¼äºCSSä¸­å¼¹æ€§æ¡†çš„å¸ƒå±€.*/
+/*ÀàËÆÓÚCSSÖĞµ¯ĞÔ¿òµÄ²¼¾Ö.*/
 #define LV_USE_FLEX 1
 
 /*A layout similar to Grid in CSS.*/
-/*ç±»ä¼¼CSSä¸­ç½‘æ ¼çš„å¸ƒå±€.*/
+/*ÀàËÆCSSÖĞÍø¸ñµÄ²¼¾Ö.*/
 #define LV_USE_GRID 1
 
 /*---------------------
- * 3rd party libraries--ç¬¬ä¸‰æ–¹åº“
+ * 3rd party libraries--µÚÈı·½¿â
  *--------------------*/
 
 /*File system interfaces for common APIs */
-/*é€šè¿‡APIçš„æ–‡ä»¶ç³»ç»Ÿæ¥å£ */
+/*Í¨¹ıAPIµÄÎÄ¼şÏµÍ³½Ó¿Ú */
 
 /*API for fopen, fread, etc*/
 #define LV_USE_FS_STDIO 0
 #if LV_USE_FS_STDIO
-    #define LV_FS_STDIO_LETTER '\0'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')--è®¾ç½®å¯è®¿é—®é©±åŠ¨å™¨çš„å¤§å†™å­—æ¯ï¼Œä¾‹å¦‚'A'*/
-    #define LV_FS_STDIO_PATH ""         /*Set the working directory. File/directory paths will be appended to it.--è®¾ç½®å·¥ä½œç›®å½•ï¼Œæ–‡ä»¶/ç›®å½•è·¯å¾„å°†é™„åŠ åˆ°ä»–*/
-    #define LV_FS_STDIO_CACHE_SIZE  0   /*>0 to cache this number of bytes in lv_fs_read()-->0åœ¨LV_FS_READ()ä¸­ç¼“å­˜æ­¤æ•°å­—å­—èŠ‚*/
+    #define LV_FS_STDIO_LETTER '\0'     /*Set an upper cased letter on which the drive will accessible (e.g. 'A')--ÉèÖÃ¿É·ÃÎÊÇı¶¯Æ÷µÄ´óĞ´×ÖÄ¸£¬ÀıÈç'A'*/
+    #define LV_FS_STDIO_PATH ""         /*Set the working directory. File/directory paths will be appended to it.--ÉèÖÃ¹¤×÷Ä¿Â¼£¬ÎÄ¼ş/Ä¿Â¼Â·¾¶½«¸½¼Óµ½Ëû*/
+    #define LV_FS_STDIO_CACHE_SIZE  0   /*>0 to cache this number of bytes in lv_fs_read()-->0ÔÚLV_FS_READ()ÖĞ»º´æ´ËÊı×Ö×Ö½Ú*/
 #endif
 
 /*API for open, read, etc*/
@@ -735,62 +735,62 @@
 #endif
 
 /*PNG decoder library*/
-/*PNG è§£ç å™¨åº“*/
+/*PNG ½âÂëÆ÷¿â*/
 #define LV_USE_PNG 0
 
 /*BMP decoder library*/
-/*BMP è§£ç å™¨åº“*/
+/*BMP ½âÂëÆ÷¿â*/
 #define LV_USE_BMP 0
 
 /* JPG + split JPG decoder library.
  * Split JPG is a custom format optimized for embedded systems. */
- /* JPG + æ‹†åˆ† JPG è§£ç å™¨åº“.
- * Split JPG æ˜¯ä¸ºåµŒå…¥å¼ç³»ç»Ÿä¼˜åŒ–çš„å®šåˆ¶æ ¼å¼. */
+ /* JPG + ²ğ·Ö JPG ½âÂëÆ÷¿â.
+ * Split JPG ÊÇÎªÇ¶ÈëÊ½ÏµÍ³ÓÅ»¯µÄ¶¨ÖÆ¸ñÊ½. */
 #define LV_USE_SJPG 0
 
 /*GIF decoder library*/
-/*GIF è§£ç å™¨åº“*/
+/*GIF ½âÂëÆ÷¿â*/
 #define LV_USE_GIF 0
 
 /*QR code library*/
 #define LV_USE_QRCODE 0
 
 /*FreeType library*/
-/*è‡ªç”±ç±»å‹åº“*/
+/*×ÔÓÉÀàĞÍ¿â*/
 #define LV_USE_FREETYPE 0
 #if LV_USE_FREETYPE
     /*Memoryused by FreeType to cache characters [bytes] (-1: no caching)*/
-	/* FreeType ç”¨äºç¼“å­˜[bytes] (-1: æ— ç¼“å­˜) çš„å†…å­˜ */
+	/* FreeType ÓÃÓÚ»º´æ[bytes] (-1: ÎŞ»º´æ) µÄÄÚ´æ */
     #define LV_FREETYPE_CACHE_SIZE (16 * 1024)
     #if LV_FREETYPE_CACHE_SIZE >= 0
         /* 1: bitmap cache use the sbit cache, 0:bitmap cache use the image cache. */
         /* sbit cache:it is much more memory efficient for small bitmaps(font size < 256) */
         /* if font size >= 256, must be configured as image cache */
-		/* 1: ä½å›¾ç¼“å­˜ä½¿ç”¨sbitç¼“å­˜ï¼Œ0:ä½å›¾ç¼“å­˜ä½¿ç”¨å›¾åƒç¼“å­˜. */
-        /* sbitç¼“å­˜ï¼Œå¯¹äºå°ä½å›¾(font size < 256)ï¼Œä»–çš„å†…å­˜æ•ˆç‡æ›´é«˜ */
-        /* å¦‚æœ font size >= 256, åˆ™å¿…é¡»é…ç½®ä¸ºå›¾åƒç¼“å­˜ */
+		/* 1: Î»Í¼»º´æÊ¹ÓÃsbit»º´æ£¬0:Î»Í¼»º´æÊ¹ÓÃÍ¼Ïñ»º´æ. */
+        /* sbit»º´æ£¬¶ÔÓÚĞ¡Î»Í¼(font size < 256)£¬ËûµÄÄÚ´æĞ§ÂÊ¸ü¸ß */
+        /* Èç¹û font size >= 256, Ôò±ØĞëÅäÖÃÎªÍ¼Ïñ»º´æ */
         #define LV_FREETYPE_SBIT_CACHE 0
         /* Maximum number of opened FT_Face/FT_Size objects managed by this cache instance. */
         /* (0:use system defaults) */
-        /* æ­¤ç¼“å­˜å®ä¾‹ç®¡ç†çš„æœ€å¤§æ‰“å¼€FT_Face/FT_Size å¯¹è±¡æ•°. */
-        /* (0:ä½¿ç”¨ç³»ç»Ÿé»˜è®¤å€¼) */		
+        /* ´Ë»º´æÊµÀı¹ÜÀíµÄ×î´ó´ò¿ªFT_Face/FT_Size ¶ÔÏóÊı. */
+        /* (0:Ê¹ÓÃÏµÍ³Ä¬ÈÏÖµ) */		
         #define LV_FREETYPE_CACHE_FT_FACES 0
         #define LV_FREETYPE_CACHE_FT_SIZES 0
     #endif
 #endif
 
 /*Rlottie library*/
-/*Rlottie åº“*/	
+/*Rlottie ¿â*/	
 #define LV_USE_RLOTTIE 0
 
 /*FFmpeg library for image decoding and playing videos
  *Supports all major image formats so do not enable other image decoder with it*/
- /*ç”¨äºå›¾åƒè§£ç å’Œæ’­æ”¾è§†é¢‘çš„FFmpeg åº“
- *æ”¯æŒæ‰€æœ‰ä¸»è¦å›¾åƒæ ¼å¼ï¼Œå› æ­¤ä¸è¦å¯ç”¨å…¶ä»–å›¾åƒè§£ç å™¨*/
+ /*ÓÃÓÚÍ¼Ïñ½âÂëºÍ²¥·ÅÊÓÆµµÄFFmpeg ¿â
+ *Ö§³ÖËùÓĞÖ÷ÒªÍ¼Ïñ¸ñÊ½£¬Òò´Ë²»ÒªÆôÓÃÆäËûÍ¼Ïñ½âÂëÆ÷*/
 #define LV_USE_FFMPEG  0
 #if LV_USE_FFMPEG
     /*Dump input information to stderr*/
-	/*å°†è¾“å…¥ä¿¡æ¯è½¬å‚¨åˆ°stderr*/
+	/*½«ÊäÈëĞÅÏ¢×ª´¢µ½stderr*/
     #define LV_FFMPEG_AV_DUMP_FORMAT 0
 #endif
 
@@ -799,15 +799,15 @@
  *----------*/
 
 /*1: Enable API to take snapshot for object*/
-/*1: å¯ç”¨APIä»¥è·å–å¯¹è±¡çš„å¿«ç…§*/
+/*1: ÆôÓÃAPIÒÔ»ñÈ¡¶ÔÏóµÄ¿ìÕÕ*/
 #define LV_USE_SNAPSHOT 0
 
 /*1: Enable Monkey test*/
-/*1: å¯ç”¨çŒ´å­æµ‹è¯•*/
+/*1: ÆôÓÃºï×Ó²âÊÔ*/
 #define LV_USE_MONKEY   0
 
 /*1: Enable grid navigation*/
-/*1: å¯ç”¨ç½‘æ ¼å¯¼èˆª*/
+/*1: ÆôÓÃÍø¸ñµ¼º½*/
 #define LV_USE_GRIDNAV  0
 
 /*==================
@@ -815,7 +815,7 @@
 *==================*/
 
 /*Enable the examples to be built with the library*/
-/*å¯ç”¨è¦ä½¿ç”¨åº“æ„å»ºçš„ç¤ºä¾‹*/
+/*ÆôÓÃÒªÊ¹ÓÃ¿â¹¹½¨µÄÊ¾Àı*/
 #define LV_BUILD_EXAMPLES 1
 
 /*===================
@@ -823,26 +823,26 @@
  ====================*/
 
 /*Show some widget. It might be required to increase `LV_MEM_SIZE` */
-/*æ˜¾ç¤ºä¸€äº›å°éƒ¨ä»¶ï¼Œå¯èƒ½éœ€è¦å¢åŠ  `LV_MEM_SIZE` */
+/*ÏÔÊ¾Ò»Ğ©Ğ¡²¿¼ş£¬¿ÉÄÜĞèÒªÔö¼Ó `LV_MEM_SIZE` */
 #define LV_USE_DEMO_WIDGETS        0
 #if LV_USE_DEMO_WIDGETS
 #define LV_DEMO_WIDGETS_SLIDESHOW  0
 #endif
 
 /*Demonstrate the usage of encoder and keyboard*/
-/*æ¼”ç¤ºè§£ç å™¨å’Œé”®ç›˜çš„ä½¿ç”¨*/
+/*ÑİÊ¾½âÂëÆ÷ºÍ¼üÅÌµÄÊ¹ÓÃ*/
 #define LV_USE_DEMO_KEYPAD_AND_ENCODER     0
 
 /*Benchmark your system*/
-/*å¯¹ç³»ç»Ÿè¿›è¡ŒåŸºå‡†æµ‹è¯•*/
+/*¶ÔÏµÍ³½øĞĞ»ù×¼²âÊÔ*/
 #define LV_USE_DEMO_BENCHMARK   0
 
 /*Stress test for LVGL*/
-/*LVGLçš„å‹åŠ›æµ‹è¯•*/
+/*LVGLµÄÑ¹Á¦²âÊÔ*/
 #define LV_USE_DEMO_STRESS      0
 
 /*Music player demo*/
-/*éŸ³ä¹æ’­æ”¾å™¨æ¼”ç¤º*/
+/*ÒôÀÖ²¥·ÅÆ÷ÑİÊ¾*/
 #define LV_USE_DEMO_MUSIC       0
 #if LV_USE_DEMO_MUSIC
 # define LV_DEMO_MUSIC_SQUARE       0
@@ -856,4 +856,4 @@
 
 #endif /*LV_CONF_H*/
 
-#endif /*End of "Content enable"--å±æ€§å¯ç”¨çš„ç»“æŸ*/
+#endif /*End of "Content enable"--ÊôĞÔÆôÓÃµÄ½áÊø*/

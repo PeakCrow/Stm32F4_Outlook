@@ -18,6 +18,7 @@
 //#include "lv_templ.h" /*TODO uncomment this*/
 
 #include "lv_objx_templ.h"
+#include "log.h"
 
 #if defined(LV_USE_TEMPL) && LV_USE_TEMPL != 0
 
@@ -37,19 +38,16 @@
 static void lv_indicator_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj);
 static void lv_indicator_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj);
 static void lv_indicator_event(const lv_obj_class_t * class_p, lv_event_t * e);
-static void lv_led_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj);
+static void lv_btn_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj);
 /**********************
  *  STATIC VARIABLES
  **********************/
 const lv_obj_class_t lv_indicator_class = {
-    .constructor_cb = lv_led_constructor,
-    //.destructor_cb = lv_indicator_destructor,
-    //.event_cb = lv_indicator_event,
+    .constructor_cb = lv_btn_constructor,
     .width_def = LV_SIZE_CONTENT,
     .height_def = LV_SIZE_CONTENT,
     .instance_size = sizeof(lv_indicator_t),
     .group_def = LV_OBJ_CLASS_GROUP_DEF_TRUE,
-    //.editable = LV_OBJ_CLASS_EDITABLE_TRUE,
     .base_class = &lv_obj_class
 };
 
@@ -62,10 +60,10 @@ const lv_obj_class_t lv_indicator_class = {
  *   GLOBAL FUNCTIONS
  **********************/
 
-lv_obj_t * lv_panel_create(lv_obj_t* parent, const char* title, lv_coord_t height)
+lv_obj_t * lv_panel_create(lv_obj_t* parent)
 {
     LV_LOG_INFO("begin");
-
+    LOG("cool control begian\r\n");
     lv_obj_t * obj = lv_obj_class_create_obj(MY_CLASS,parent);
     lv_obj_class_init_obj(obj);
     return obj;
@@ -106,29 +104,17 @@ lv_obj_t * lv_panel_create(lv_obj_t* parent, const char* title, lv_coord_t heigh
 /**********************
  *   STATIC FUNCTIONS
  **********************/
-static void lv_led_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
-{
-    LV_UNUSED(class_p);
-    lv_indicator_t * led = (lv_indicator_t *)obj;
-    //led->color = lv_theme_get_color_primary(obj);
-    led->color = lv_color_hex(0x123456);
-    led->bright = LV_LED_BRIGHT_MAX;
-    lv_obj_set_height(led,50);
-    lv_obj_set_width(led,50);
-    lv_led_set_color(led, lv_palette_main(LV_PALETTE_RED));;
-}
-static void lv_indicator_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
+static void lv_btn_constructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {
     LV_UNUSED(class_p);
     LV_TRACE_OBJ_CREATE("begin");
 
-
-    lv_obj_clear_flag(obj, LV_OBJ_FLAG_CHECKABLE);
     lv_obj_clear_flag(obj, LV_OBJ_FLAG_SCROLLABLE);
-
+    lv_obj_add_flag(obj, LV_OBJ_FLAG_SCROLL_ON_FOCUS);
 
     LV_TRACE_OBJ_CREATE("finished");
 }
+
 
 static void lv_indicator_destructor(const lv_obj_class_t * class_p, lv_obj_t * obj)
 {

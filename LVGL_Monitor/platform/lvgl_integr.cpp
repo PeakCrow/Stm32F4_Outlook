@@ -31,7 +31,9 @@ static void updateDisplay (const lv_area_t * area, lv_color_t * color_p, bool la
 extern "C" {
 #endif
 
-#define DISP_BUF_SIZE (LV_HOR_RES_MAX * 10)
+//#define DISP_BUF_SIZE (LV_HOR_RES_MAX * 10)
+/* 使用双缓冲buffer进行画图 */
+#define DISP_BUF_SIZE (LV_HOR_RES_MAX * LV_VER_RES_MAX)
 
 static lv_indev_drv_t indev_drv;
 static int touchpad_x = 0, touchpad_y = 0;

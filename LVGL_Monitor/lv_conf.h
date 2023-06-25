@@ -11,9 +11,6 @@
  *    - add the path as include path
  */
 
-#define LV_HOR_RES_MAX (800)
-#define LV_VER_RES_MAX (480)
-
 /* clang-format off */
 #if 1 /*Set it to "1" to enable content*/
 
@@ -25,6 +22,9 @@
 /*====================
    COLOR SETTINGS
  *====================*/
+
+#define LV_HOR_RES_MAX (800)
+#define LV_VER_RES_MAX (480)
 
 /*Color depth: 1 (1 byte per pixel), 8 (RGB332), 16 (RGB565), 32 (ARGB8888)*/
 #define LV_COLOR_DEPTH 16
@@ -54,7 +54,7 @@
 #define LV_MEM_CUSTOM 0
 #if LV_MEM_CUSTOM == 0
     /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
-    #define LV_MEM_SIZE (32u * 1024U * 1024U)          /*[bytes]*/
+    #define LV_MEM_SIZE (32u *1024 * 1024U)          /*[bytes]*/
 
     /*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/
     #define LV_MEM_ADR 0     /*0: unused*/
@@ -197,7 +197,7 @@
 /*-------------
  * Logging
  *-----------*/
-//#define LV_USE_LOG 0
+//#define LV_USE_LOG 1
 /*Enable the log module*/
 // LV_USE_LOG is defined in Qt project file (.pro).
 #if LV_USE_LOG

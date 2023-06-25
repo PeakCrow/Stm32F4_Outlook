@@ -37,8 +37,6 @@ extern "C" {
 /*Data of template*/
 typedef struct {
     lv_obj_t obj;
-    lv_color_t color;
-    uint8_t bright;     /**< Current brightness of the LED (0..255)*/
 } lv_indicator_t;
 
 
@@ -53,7 +51,7 @@ extern const lv_obj_class_t lv_indicator_class;
  * @param parent    pointer to an object, it will be the parent of the new templ
  * @return          pointer to the created bar
  */
-lv_obj_t * lv_panel_create(lv_obj_t* parent, const char* title, lv_coord_t height);
+lv_obj_t * lv_panel_create(lv_obj_t* parent);
 /*======================
  * Add/remove functions
  *=====================*/

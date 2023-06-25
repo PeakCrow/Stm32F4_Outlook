@@ -168,6 +168,7 @@ SOURCES += \
     lvgl/src/widgets/lv_arc.c \
     lvgl/src/widgets/lv_bar.c \
     lvgl/src/widgets/lv_btn.c \
+    lvgl/src/widgets/lv_btn_x.c \
     lvgl/src/widgets/lv_btnmatrix.c \
     lvgl/src/widgets/lv_canvas.c \
     lvgl/src/widgets/lv_checkbox.c \
@@ -287,6 +288,7 @@ HEADERS += \
     lvgl/src/hal/lv_hal_disp.h \
     lvgl/src/hal/lv_hal_indev.h \
     lvgl/src/hal/lv_hal_tick.h \
+    lvgl/src/lv_conf_internal.h \
     lvgl/src/misc/lv_anim.h \
     lvgl/src/misc/lv_anim_timeline.h \
     lvgl/src/misc/lv_area.h \
@@ -314,6 +316,7 @@ HEADERS += \
     lvgl/src/widgets/lv_arc.h \
     lvgl/src/widgets/lv_bar.h \
     lvgl/src/widgets/lv_btn.h \
+    lvgl/src/widgets/lv_btn_x.h \
     lvgl/src/widgets/lv_btnmatrix.h \
     lvgl/src/widgets/lv_canvas.h \
     lvgl/src/widgets/lv_checkbox.h \

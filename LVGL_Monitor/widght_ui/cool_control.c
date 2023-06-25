@@ -67,6 +67,9 @@ static void Imgbtn_MC_cb(lv_event_t * e)
 void Cool_Control_In_Ui(lv_obj_t* parent)
 {
     lv_obj_t * tmp_obj;
-    tmp_obj = lv_panel_create(parent,"trx",100);
-    lv_obj_center(tmp_obj);
+
+    //tmp_obj = lv_btn_x_create(parent);
+    //tmp_obj = lv_btn_create(parent);
+    tmp_obj = lv_panel_create(parent);
+    //lv_obj_center(tmp_obj);
 }

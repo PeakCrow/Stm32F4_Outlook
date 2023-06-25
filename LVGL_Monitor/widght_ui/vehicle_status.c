@@ -63,3 +63,5 @@ static void Imgbtn_MC_cb(lv_event_t * e)
     if(code == LV_EVENT_RELEASED)
          App_Common_Init("Vehicle_Status",App_btn_Back_Cb);
 }
+
+
