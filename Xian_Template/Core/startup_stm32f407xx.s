@@ -45,7 +45,7 @@
 ;   <o> Stack Size (in Bytes) <0x0-0xFFFFFFFF:8>
 ; </h>
 
-Stack_Size      EQU     0x0400;			;栈的大小，这里分配了4k大小
+Stack_Size      EQU     0x0400;			;栈的大小，这里分配了1k大小
                 AREA    STACK, NOINIT, READWRITE, ALIGN=3 ;AREA，一个新的数据段，STACK是段名，不初始化，可读可写，8字节对齐
 Stack_Mem       SPACE   Stack_Size				;分配栈内存空间
 __initial_sp									;紧挨着SPACE语句放置，表示栈的结束地址，即栈顶地址，栈是由高向低生长的
@@ -56,7 +56,7 @@ __initial_sp									;紧挨着SPACE语句放置，表示栈的结束地址，�
 ; </h>
 
 
-Heap_Size      EQU     0x0400;				;堆的大小，这里同样分配了4k大小,这里可以开小点无所谓，因为malloc函数是从这里申请内存的
+Heap_Size      EQU     0x0400;				;堆的大小，这里同样分配了1k大小,这里可以开小点无所谓，因为malloc函数是从这里申请内存的
 
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3 ;AREA，一个新的数据段，HEAP是段名，不初始化，可读可写，8字节对齐

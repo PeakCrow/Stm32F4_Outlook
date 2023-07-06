@@ -43,7 +43,7 @@ static uint8_t __g_font_buf[378];//如bin文件存在SPI FLASH可使用此buff
 
 static uint8_t *__user_font_getdata(int offset, int size){
     //如字模保存在SPI FLASH, SPIFLASH_Read(__g_font_buf,offset,size);
-	sf_ReadBuffer(__g_font_buf,0x00C41970+offset,size);
+		sf_ReadBuffer(__g_font_buf,0x00C41970+offset,size);
     //如字模已加载到SDRAM,直接返回偏移地址即可如:return (uint8_t*)(sdram_fontddr+offset);
     return __g_font_buf;
 }

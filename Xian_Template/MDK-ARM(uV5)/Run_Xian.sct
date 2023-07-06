@@ -12,11 +12,22 @@ LR_IROM1 0x08000000 0x00100000  {    ; load region size_region
   RW_IRAM1 0x20000000 0x00020000  {  ; RW data
    .ANY (+RW +ZI)
   }
-  ;f4内核的ccm sram，涉及到外设的代码都无法访问，正常运行
+  ;f4内核的ccm sram，涉及到外设的代码都无法访问，无法正常运行
   ;但是只能分配变量，不能分配函数
-  ;目前放了显示缓冲内存、启动堆栈内存与字体查找内存
+  ;目前放了启动堆栈文件与字库索引文件
   CCM_SRAM 0x10000000 0x00010000 {
-  startup_stm32f407xx.o (+RW +ZI)
+	startup_stm32f407xx.o (+RW +ZI)	;stm32f407启动文件
+	Monitor.o						;|ui文件
+	about_phone_ui.o				;|
+	adjust_pedal.o					;|
+	battery_box.o					;|	
+	cool_control.o					;|
+	motor_control_ui.o				;|
+	sensor_ui.o						;|
+	set_up.o						;|
+	vehicle_status.o				;|ui文件
+	myFont20.o						;从外部flash中查找字号20的字体
+	;myFont36.o						;从外部flash中查找字号36的字体
   ;myfont36.o (+RW +ZI)
   }
   ;外部SRAM
