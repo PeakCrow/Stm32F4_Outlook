@@ -17,10 +17,10 @@
 
 #define 	CAN1_RX_IRQN            CAN1_RX0_IRQn
 
-#define		CAN1_BUS_BAUDE_1M		3					/* 使用1mbps的速度时，在发送报文时(不管时小于3条还是大于3条),都会丢失少量报文，谨慎使用 */
+#define		CAN1_BUS_BAUDE_1M		3					/* ʹ��1mbps���ٶ�ʱ���ڷ��ͱ���ʱ(����ʱС��3�����Ǵ���3��),���ᶪʧ�������ģ�����ʹ�� */
 #define		CAN1_BUS_BAUDE_500k		6
 #define		CAN1_BUS_BAUDE_250k		12
-#define		CAN1_BUS_BUUDE_RATE		CAN1_BUS_BAUDE_500k	/* 默认波特率 */
+#define		CAN1_BUS_BUUDE_RATE		CAN1_BUS_BAUDE_500k	/* Ĭ�ϲ����� */
 
 
 void bsp_InitCan1Bus(void);

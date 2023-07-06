@@ -381,7 +381,7 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>SYSTEM</GroupName>
+          <GroupName>System</GroupName>
           <Files>
             <File>
               <FileName>sys.c</FileName>
@@ -496,7 +496,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>CORE_H</GroupName>
+          <GroupName>Core</GroupName>
           <Files>
             <File>
               <FileName>startup_stm32f407xx.s</FileName>
@@ -531,7 +531,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>HALLIB</GroupName>
+          <GroupName>HalLib</GroupName>
           <Files>
             <File>
               <FileName>stm32f4xx_hal.c</FileName>
@@ -2578,7 +2578,7 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>MAIN</GroupName>
+          <GroupName>Main</GroupName>
           <Files>
             <File>
               <FileName>main.c</FileName>

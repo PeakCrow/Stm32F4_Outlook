@@ -3,39 +3,39 @@
 
 #include "sys.h"
 /*
-	åœ¨æ­¤å®šä¹‰è‹¥å¹²ä¸ªè½¯ä»¶å®šæ—¶å™¨å…¨å±€å˜é‡
-	æ³¨æ„ï¼Œå¿…é¡»å¢åŠ __IO å³ volatileï¼Œå› ä¸ºè¿™ä¸ªå˜é‡åœ¨ä¸­æ–­å’Œä¸»ç¨‹åºä¸­åŒæ—¶è¢«è®¿é—®ï¼Œæœ‰å¯èƒ½é€ æˆç¼–è¯‘å™¨é”™è¯¯ä¼˜åŒ–ã€‚
+	ÔÚ´Ë¶¨ÒåÈô¸É¸öÈí¼ş¶¨Ê±Æ÷È«¾Ö±äÁ¿
+	×¢Òâ£¬±ØĞëÔö¼Ó__IO ¼´ volatile£¬ÒòÎªÕâ¸ö±äÁ¿ÔÚÖĞ¶ÏºÍÖ÷³ÌĞòÖĞÍ¬Ê±±»·ÃÎÊ£¬ÓĞ¿ÉÄÜÔì³É±àÒëÆ÷´íÎóÓÅ»¯¡£
 */
-#define TIM_TASK_COUNT 4  //è½¯ä»¶å®šæ—¶å™¨çš„ä¸ªæ•°ï¼Œ(å®šæ—¶å™¨IDèŒƒå›´0-3)
+#define TIM_TASK_COUNT 4  //Èí¼ş¶¨Ê±Æ÷µÄ¸öÊı£¬(¶¨Ê±Æ÷ID·¶Î§0-3)
 
-/*å®šæ—¶å™¨ç»“æ„ä½“ï¼Œæˆå‘˜å˜é‡å¿…é¡»æ˜¯volatile,å¦åˆ™Cç¼–è¯‘å™¨ä¼˜åŒ–æ—¶å¯èƒ½æœ‰é—®é¢˜*/
+/*¶¨Ê±Æ÷½á¹¹Ìå£¬³ÉÔ±±äÁ¿±ØĞëÊÇvolatile,·ñÔòC±àÒëÆ÷ÓÅ»¯Ê±¿ÉÄÜÓĞÎÊÌâ*/
 typedef enum{
-	TIM_ONCE_MODE = 0,	/*ä¸€æ¬¡å·¥ä½œæ¨¡å¼*/
-	TIM_MULTI_MODE = 1	/*é‡å¤å®šæ—¶å·¥ä½œæ¨¡å¼*/
+	TIM_ONCE_MODE = 0,	/*Ò»´Î¹¤×÷Ä£Ê½*/
+	TIM_MULTI_MODE = 1	/*ÖØ¸´¶¨Ê±¹¤×÷Ä£Ê½*/
 }TIM_MODE_E;
-/*å®šæ—¶å™¨ç»“æ„ä½“ï¼Œæˆå‘˜å˜é‡å¿…é¡»æ˜¯volatile,å¦åˆ™Cç¼–è¯‘å™¨ä¼˜åŒ–æ—¶å¯èƒ½æœ‰é—®é¢˜*/
+/*¶¨Ê±Æ÷½á¹¹Ìå£¬³ÉÔ±±äÁ¿±ØĞëÊÇvolatile,·ñÔòC±àÒëÆ÷ÓÅ»¯Ê±¿ÉÄÜÓĞÎÊÌâ*/
 typedef struct{
-	volatile uint8_t State;			//0-ä¸€æ¬¡å·¥ä½œæ¨¡å¼ï¼›1-é‡å¤è°ƒç”¨
-	volatile uint8_t Mode;			//è®¡æ•°å™¨æ¨¡å¼ï¼Œä¸€æ¬¡æ€§
-	volatile uint8_t Flag;			//å®šæ—¶åˆ°è¾¾æ ‡å¿—
-	volatile uint32_t Count;		//è®¡æ•°å™¨
-	volatile uint32_t PreLoad;		//è®¡æ•°å™¨é‡è£…è½½å€¼
-	void (*callfunc) (void);		//åŠŸèƒ½å‡½æ•°
+	volatile uint8_t State;			//0-Ò»´Î¹¤×÷Ä£Ê½£»1-ÖØ¸´µ÷ÓÃ
+	volatile uint8_t Mode;			//¼ÆÊıÆ÷Ä£Ê½£¬Ò»´ÎĞÔ
+	volatile uint8_t Flag;			//¶¨Ê±µ½´ï±êÖ¾
+	volatile uint32_t Count;		//¼ÆÊıÆ÷
+	volatile uint32_t PreLoad;		//¼ÆÊıÆ÷ÖØ×°ÔØÖµ
+	void (*callfunc) (void);		//¹¦ÄÜº¯Êı
 }SOFT_TIM;
 
-/*æä¾›ç»™å…¶ä»–Cæ–‡ä»¶è°ƒç”¨çš„å‡½æ•°*/
-/*å¤šå®šæ—¶å™¨å¤ç”¨å‡½æ•°*/
+/*Ìá¹©¸øÆäËûCÎÄ¼şµ÷ÓÃµÄº¯Êı*/
+/*¶à¶¨Ê±Æ÷¸´ÓÃº¯Êı*/
 void bsp_InitTimer(void);
 void bsp_StartOnceTimer(uint8_t _id,uint32_t _period,void (*callfunc) (void));
 void bsp_StartAutoTimer(uint8_t _id,uint32_t _period,void (*callfunc) (void));
 void bsp_StopTimer(uint8_t _id);
 int32_t bsp_GetRunTime(void);
 
-/*å‘¨æœŸè°ƒç”¨å‡½æ•°ï¼Œä¸å…è®¸æ”¾åœ¨while(1)ä¸­*/
+/*ÖÜÆÚµ÷ÓÃº¯Êı£¬²»ÔÊĞí·ÅÔÚwhile(1)ÖĞ*/
 void bsp_RunPer1ms(void);
 void bsp_RunPer10ms(void);
 void bsp_RunPer50ms(void);
-/*å»¶æ—¶å‡½æ•°ï¼Œé€‚åˆæ”¾åœ¨while(1)ä¸­*/
+/*ÑÓÊ±º¯Êı£¬ÊÊºÏ·ÅÔÚwhile(1)ÖĞ*/
 void bsp_DelayUs(uint32_t n);
 void bsp_DelayMs(uint32_t n);
 #endif

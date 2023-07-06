@@ -16,8 +16,8 @@ void bsp_I2C_EE_Init()
 /*******************************************************************************
   * @FunctionName: I2C_Mode_Config
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ5æ—¥ 12:46:56 
-  * @Purpose:      iicå·¥ä½œæ¨¡å¼é…ç½®
+  * @DateTime:     2022Äê5ÔÂ5ÈÕ 12:46:56 
+  * @Purpose:      iic¹¤×÷Ä£Ê½ÅäÖÃ
   * @param:        void               
   * @return:       none
 *******************************************************************************/
@@ -26,7 +26,7 @@ static void I2C_Mode_Config(void)
 	iic_handle.Instance					= I2Cx;
 
 	iic_handle.Init.AddressingMode		= I2C_ADDRESSINGMODE_7BIT;
-	iic_handle.Init.ClockSpeed			= 60000;/* é»˜è®¤eepromé€Ÿåº¦æ˜¯400k */
+	iic_handle.Init.ClockSpeed			= 60000;/* Ä¬ÈÏeepromËÙ¶ÈÊÇ400k */
 	iic_handle.Init.DualAddressMode		= I2C_DUALADDRESS_DISABLE;
 	iic_handle.Init.DutyCycle			= I2C_DUTYCYCLE_2;
 	iic_handle.Init.GeneralCallMode		= I2C_GENERALCALL_DISABLE;
@@ -34,29 +34,29 @@ static void I2C_Mode_Config(void)
 	iic_handle.Init.OwnAddress1			= I2C_OWN_ADDRESS7;
 	iic_handle.Init.OwnAddress2			= 0;
 
-	/* åˆå§‹åŒ–I2C */
+	/* ³õÊ¼»¯I2C */
 	HAL_I2C_Init(&iic_handle);
 }
 /*******************************************************************************
   * @FunctionName: HAL_I2C_MspInit
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ7æ—¥ 19:56:26 
-  * @Purpose:      iicæ€»çº¿å¼•è„šåˆå§‹åŒ–
-  * @param:        hi2cï¼šiicæ€»çº¿å¤–è®¾å¥æŸ„
+  * @DateTime:     2022Äê5ÔÂ7ÈÕ 19:56:26 
+  * @Purpose:      iic×ÜÏßÒı½Å³õÊ¼»¯
+  * @param:        hi2c£ºiic×ÜÏßÍâÉè¾ä±ú
   * @return:       none
 *******************************************************************************/
 void HAL_I2C_MspInit(I2C_HandleTypeDef * hi2c)
 {
 	GPIO_InitTypeDef	gpio_initstruct;
 
-	/* åˆå§‹åŒ–iicé€šè®¯çš„å¼•è„šæ—¶é’Ÿ */
+	/* ³õÊ¼»¯iicÍ¨Ñ¶µÄÒı½ÅÊ±ÖÓ */
 	I2Cx_SCL_GPIO_CLK_ENABLE();
 	I2Cx_SDA_GPIO_CLK_ENABLE();
 
-	/* ä½¿èƒ½iicæ€»çº¿æ—¶é’Ÿ */
+	/* Ê¹ÄÜiic×ÜÏßÊ±ÖÓ */
 	I2Cx_CLK_ENABLE();
 
-	/* é…ç½®iicæ€»çº¿æ—¶é’Ÿå¼•è„š */
+	/* ÅäÖÃiic×ÜÏßÊ±ÖÓÒı½Å */
 	gpio_initstruct.Pin			= I2Cx_SCL_PIN;
 	gpio_initstruct.Mode		= GPIO_MODE_AF_OD;
 	gpio_initstruct.Pull		= GPIO_NOPULL;
@@ -64,14 +64,14 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef * hi2c)
 	gpio_initstruct.Alternate	= I2Cx_SCL_AF;
 	HAL_GPIO_Init(I2Cx_SCL_GPIO_PORT,&gpio_initstruct);
 
-	/* é…ç½®iicæ€»çº¿æ•°æ®å¼•è„š */
+	/* ÅäÖÃiic×ÜÏßÊı¾İÒı½Å */
 	gpio_initstruct.Pin			= I2Cx_SDA_PIN;
 	gpio_initstruct.Alternate	= I2Cx_SDA_AF;
 	HAL_GPIO_Init(I2Cx_SDA_GPIO_PORT,&gpio_initstruct);
 
-	/* å ç”¨iicæ€»çº¿å¤–è®¾æ—¶é’Ÿ */
+	/* Õ¼ÓÃiic×ÜÏßÍâÉèÊ±ÖÓ */
 	I2Cx_FORCE_RESET();
-	/* é‡Šæ”¾iicæ€»çº¿å¤–è®¾æ—¶é’Ÿ */
+	/* ÊÍ·Åiic×ÜÏßÍâÉèÊ±ÖÓ */
 	I2Cx_RELEASE_RESET();
 }
 
@@ -80,11 +80,11 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef * hi2c)
 /*******************************************************************************
   * @FunctionName: I2C_EE_ByteWrite
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ7æ—¥ 20:15:08 
-  * @Purpose:      å†™ä¸€ä¸ªå­—èŠ‚åˆ°iic eepromä¸­
-  * @param:        pBuffer  ï¼šç¼“å†²åŒºå†™æŒ‡é’ˆ
-  * @param:        WriteAddrï¼šå†™åœ°å€
-  * @return:       status   ï¼šiicæ€»çº¿é€šè®¯çŠ¶æ€
+  * @DateTime:     2022Äê5ÔÂ7ÈÕ 20:15:08 
+  * @Purpose:      Ğ´Ò»¸ö×Ö½Úµ½iic eepromÖĞ
+  * @param:        pBuffer  £º»º³åÇøĞ´Ö¸Õë
+  * @param:        WriteAddr£ºĞ´µØÖ·
+  * @return:       status   £ºiic×ÜÏßÍ¨Ñ¶×´Ì¬
 *******************************************************************************/
 uint32_t I2C_EE_ByteWrite(uint8_t * pBuffer, uint8_t WriteAddr)
 {
@@ -92,22 +92,22 @@ uint32_t I2C_EE_ByteWrite(uint8_t * pBuffer, uint8_t WriteAddr)
 
 	status = HAL_I2C_Mem_Write(&iic_handle,EEPROM_ADDRESS,(uint16_t)WriteAddr,I2C_MEMADD_SIZE_8BIT,pBuffer,1,100);
 
-	/* æ£€æŸ¥é€šè®¯çŠ¶æ€ */
+	/* ¼ì²éÍ¨Ñ¶×´Ì¬ */
 	if (status != HAL_OK)
 		{
-			/* æ‰§è¡Œç”¨æˆ·å®šä¹‰çš„è¶…æ—¶å›è°ƒå‡½æ•° */
+			/* Ö´ĞĞÓÃ»§¶¨ÒåµÄ³¬Ê±»Øµ÷º¯Êı */
 		}
 	while (HAL_I2C_GetState(&iic_handle) != HAL_I2C_STATE_READY)
 		{
 			
 		}
 
-	/* æ£€æŸ¥eepromèŠ¯ç‰‡æ˜¯å¦å‡†å¤‡å¥½å¯¹äºä¸‹ä¸€ä¸ªæ–°çš„æ“ä½œ */
+	/* ¼ì²éeepromĞ¾Æ¬ÊÇ·ñ×¼±¸ºÃ¶ÔÓÚÏÂÒ»¸öĞÂµÄ²Ù×÷ */
 	while(HAL_I2C_IsDeviceReady(&iic_handle,EEPROM_ADDRESS,I2Cx_TIMEOUT_MAX,I2Cx_TIMEOUT_MAX) == HAL_TIMEOUT)
 		{
 			
 		}
-	/* ç­‰å¾…æ•°æ®ä¼ è¾“ç»“æŸ */
+	/* µÈ´ıÊı¾İ´«Êä½áÊø */
 	while(HAL_I2C_GetState(&iic_handle) != HAL_I2C_STATE_READY)
 		{
 			
@@ -121,11 +121,11 @@ uint32_t I2C_EE_ByteWrite(uint8_t * pBuffer, uint8_t WriteAddr)
 /*******************************************************************************
   * @FunctionName: I2C_EE_BufferRead
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ7æ—¥ 20:22:07 
-  * @Purpose:      ä»eepromé‡Œé¢è¯»å–æ•°æ®
-  * @param:        pBuffer      ï¼šå­˜æ”¾è¯»å–eepromèŠ¯ç‰‡æ•°æ®çš„ç¼“å†²åŒºæŒ‡é’ˆ
-  * @param:        ReadAdder    ï¼šè¯»å–æ•°æ®eepormèŠ¯ç‰‡æ•°æ®çš„åœ°å€
-  * @param:        NumByteToReadï¼šè¯»å–æ•°æ®çš„å­—èŠ‚ä¸ªæ•°
+  * @DateTime:     2022Äê5ÔÂ7ÈÕ 20:22:07 
+  * @Purpose:      ´ÓeepromÀïÃæ¶ÁÈ¡Êı¾İ
+  * @param:        pBuffer      £º´æ·Å¶ÁÈ¡eepromĞ¾Æ¬Êı¾İµÄ»º³åÇøÖ¸Õë
+  * @param:        ReadAdder    £º¶ÁÈ¡Êı¾İeepormĞ¾Æ¬Êı¾İµÄµØÖ·
+  * @param:        NumByteToRead£º¶ÁÈ¡Êı¾İµÄ×Ö½Ú¸öÊı
   * @return:       none
 *******************************************************************************/
 uint32_t I2C_EE_BufferRead(uint8_t * pBuffer, uint8_t ReadAdder, uint16_t NumByteToRead)
@@ -140,35 +140,35 @@ uint32_t I2C_EE_BufferRead(uint8_t * pBuffer, uint8_t ReadAdder, uint16_t NumByt
 /*******************************************************************************
   * @FunctionName: I2C_EE_PageWrite
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ7æ—¥ 20:37:36 
-  * @Purpose:      åœ¨eepromä¸­çš„ä¸€ä¸ªå†™å¾ªç¯å¯ä»¥å†™å¤šä¸ªå­—èŠ‚ï¼Œä½†ä¸€æ¬¡å†™å…¥çš„å­—èŠ‚æ•°ä¸èƒ½è¶…è¿‡eepromé¡µçš„å¤§å°ï¼ŒAT24C02æ¯é¡µæœ‰8ä¸ªå­—èŠ‚
-  * @param:        pBuffer       ï¼šç¼“å†²å»åœ°å€
-  * @param:        WriteAddr     ï¼šå†™åœ°å€
-  * @param:        NumByteToWriteï¼šå†™å…¥çš„æ•°æ®å­—æ•°
-  * @return:       statusï¼šiicæ€»çº¿é€šè®¯çš„çŠ¶æ€
+  * @DateTime:     2022Äê5ÔÂ7ÈÕ 20:37:36 
+  * @Purpose:      ÔÚeepromÖĞµÄÒ»¸öĞ´Ñ­»·¿ÉÒÔĞ´¶à¸ö×Ö½Ú£¬µ«Ò»´ÎĞ´ÈëµÄ×Ö½ÚÊı²»ÄÜ³¬¹ıeepromÒ³µÄ´óĞ¡£¬AT24C02Ã¿Ò³ÓĞ8¸ö×Ö½Ú
+  * @param:        pBuffer       £º»º³åÈ¥µØÖ·
+  * @param:        WriteAddr     £ºĞ´µØÖ·
+  * @param:        NumByteToWrite£ºĞ´ÈëµÄÊı¾İ×ÖÊı
+  * @return:       status£ºiic×ÜÏßÍ¨Ñ¶µÄ×´Ì¬
 *******************************************************************************/
 uint32_t I2C_EE_PageWrite(uint8_t * pBuffer, uint8_t WriteAddr, uint8_t NumByteToWrite)
 {
 	HAL_StatusTypeDef status = HAL_OK;
 
-	/* å†™eepromçš„é¡µå¤§å° */
+	/* Ğ´eepromµÄÒ³´óĞ¡ */
 	status = HAL_I2C_Mem_Write(&iic_handle,EEPROM_ADDRESS,WriteAddr,I2C_MEMADD_SIZE_8BIT,(uint8_t*)(pBuffer),NumByteToWrite,100);
 
 	while (HAL_I2C_GetState(&iic_handle) != HAL_I2C_STATE_READY)
 		{
-			//printf("iicæ€»çº¿å‘ç”Ÿé”™è¯¯");
+			//printf("iic×ÜÏß·¢Éú´íÎó");
 		}
 
-	/* æ£€æŸ¥eepromèŠ¯ç‰‡æ˜¯å¦å‡†å¤‡å¥½ä¸‹ä¸€æ¬¡æ–°æ“ä½œ */
+	/* ¼ì²éeepromĞ¾Æ¬ÊÇ·ñ×¼±¸ºÃÏÂÒ»´ÎĞÂ²Ù×÷ */
 	while (HAL_I2C_IsDeviceReady(&iic_handle,EEPROM_ADDRESS,I2Cx_MAX_TRIALS,I2Cx_TIMEOUT_MAX) == HAL_TIMEOUT)
 		{
-			//printf("iicæ€»çº¿æ²¡æœ‰å‡†å¤‡å¥½");
+			//printf("iic×ÜÏßÃ»ÓĞ×¼±¸ºÃ");
 		}
 
-	/* ç­‰å¾…æ•°æ®ä¼ è¾“ç»“æŸ */
+	/* µÈ´ıÊı¾İ´«Êä½áÊø */
 	while (HAL_I2C_GetState(&iic_handle) != HAL_I2C_STATE_READY)
 		{
-			//printf("iicæ€»çº¿æ•°æ®ä¼ è¾“æœªç»“æŸ");
+			//printf("iic×ÜÏßÊı¾İ´«ÊäÎ´½áÊø");
 		}
 
 	return status;
@@ -179,12 +179,12 @@ void I2C_EE_BufferWrite(uint8_t * pBuffer, uint8_t WriteAddr, uint16_t NumByteTo
 {
 	uint8_t NumOfPage = 0,NumOfSingle = 0,Addr = 0,count = 0;
 
-	Addr = WriteAddr % EEPROM_PAGESIZE;				/* å…ˆå¾—åˆ°é¡µæ•° */
-	count = EEPROM_PAGESIZE - Addr;					/* åœ¨å¾—åˆ°å½“å‰é¡µæ•°çš„ç¬¬å‡ ä¸ªä½ç½® */
-	NumOfPage = NumByteToWrite / EEPROM_PAGESIZE;	/* è®¡ç®—å†™å…¥çš„æ•°æ®æ˜¯å¦æ»¡è¶³ä¸€é¡µ */
-	NumOfSingle = NumByteToWrite % EEPROM_PAGESIZE;	/* è®¡ç®—å†™å…¥ä¸€é¡µæˆ–è€…ä¸æ»¡ä¸€é¡µçš„æ•°æ®ä¸ªæ•° */
+	Addr = WriteAddr % EEPROM_PAGESIZE;				/* ÏÈµÃµ½Ò³Êı */
+	count = EEPROM_PAGESIZE - Addr;					/* ÔÚµÃµ½µ±Ç°Ò³ÊıµÄµÚ¼¸¸öÎ»ÖÃ */
+	NumOfPage = NumByteToWrite / EEPROM_PAGESIZE;	/* ¼ÆËãĞ´ÈëµÄÊı¾İÊÇ·ñÂú×ãÒ»Ò³ */
+	NumOfSingle = NumByteToWrite % EEPROM_PAGESIZE;	/* ¼ÆËãĞ´ÈëÒ»Ò³»òÕß²»ÂúÒ»Ò³µÄÊı¾İ¸öÊı */
 
-	/* å¦‚æœå†™å…¥åœ°å€ä¸eepromé¡µå¤§å°å¯¹é½ */
+	/* Èç¹ûĞ´ÈëµØÖ·ÓëeepromÒ³´óĞ¡¶ÔÆë */
 	if (Addr == 0)
 		{
 			if (NumOfPage == 0)
@@ -196,17 +196,17 @@ void I2C_EE_BufferWrite(uint8_t * pBuffer, uint8_t WriteAddr, uint16_t NumByteTo
 					while (NumOfPage--)
 						{
 							I2C_EE_PageWrite(pBuffer,WriteAddr,EEPROM_PAGESIZE);
-							WriteAddr += EEPROM_PAGESIZE;	/* èŠ¯ç‰‡æ•°æ®å†™å…¥çš„åœ°å€é€’å¢ä¸€é¡µ */
-							pBuffer += EEPROM_PAGESIZE;		/* æ•°æ®æ•°ç»„ä¸‹å…¥çš„ç´¢å¼•é€’å¢ä¸€é¡µ */
+							WriteAddr += EEPROM_PAGESIZE;	/* Ğ¾Æ¬Êı¾İĞ´ÈëµÄµØÖ·µİÔöÒ»Ò³ */
+							pBuffer += EEPROM_PAGESIZE;		/* Êı¾İÊı×éÏÂÈëµÄË÷ÒıµİÔöÒ»Ò³ */
 						}
-					/* å¦‚æœå‰©ä½™çš„ä¸ªæ•°ä¸º0ï¼Œåˆ™ä¸å†™å…¥ï¼Œä¸ä¸º0ï¼Œåˆ™å†™å…¥ */
+					/* Èç¹ûÊ£ÓàµÄ¸öÊıÎª0£¬Ôò²»Ğ´Èë£¬²»Îª0£¬ÔòĞ´Èë */
 					if (NumOfSingle != 0)
 						{
 							I2C_EE_PageWrite(pBuffer,WriteAddr, NumOfSingle);
 						}
 				}
 		}
-	/* å¦‚æœå†™å…¥çš„åœ°å€ä¸ä¸iicèŠ¯ç‰‡é¡µå¤§å°å¯¹é½ */
+	/* Èç¹ûĞ´ÈëµÄµØÖ·²»ÓëiicĞ¾Æ¬Ò³´óĞ¡¶ÔÆë */
 	else
 	{
 		if (NumOfPage == 0)
@@ -248,15 +248,15 @@ uint8_t		I2Cx_BUFFER_READ[I2Cx_MAX_BYTE_NUM];
 /*******************************************************************************
   * @FunctionName: DemoIicEeprom
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ7æ—¥ 21:13:33 
-  * @Purpose:      eepromèŠ¯ç‰‡è¯»å†™æµ‹è¯•
+  * @DateTime:     2022Äê5ÔÂ7ÈÕ 21:13:33 
+  * @Purpose:      eepromĞ¾Æ¬¶ÁĞ´²âÊÔ
   * @param:        none
   * @return:       none
 *******************************************************************************/
 void DemoIicEeprom()
 {
 	uint16_t i;
-	printf("å†™å…¥æ•°æ®\r\n");
+	printf("Ğ´ÈëÊı¾İ\r\n");
 
 	for (i = 0; i < I2Cx_MAX_BYTE_NUM; ++i)
 		{
@@ -268,22 +268,22 @@ void DemoIicEeprom()
 				}
 		}
 
-	/* å°†ii2cx_buffer_writeä¸­é¡ºåºé€’å¢çš„æ•°æ®å†™å…¥eepromä¸­ */
-	/* æ­»å¾ªç¯åˆ°æ­¤å‡½æ•°ä¸­ */
+	/* ½«ii2cx_buffer_writeÖĞË³ĞòµİÔöµÄÊı¾İĞ´ÈëeepromÖĞ */
+	/* ËÀÑ­»·µ½´Ëº¯ÊıÖĞ */
 	I2C_EE_BufferWrite(I2Cx_BUFFER_WRITE,EEP_Firstpage,I2Cx_MAX_BYTE_NUM);
 
-	printf("è¯»å‡ºçš„æ•°æ®\r\n");
+	printf("¶Á³öµÄÊı¾İ\r\n");
 
-	/* å°†eeprimä¸­è¯»å‡ºçš„æ•°æ®æŒ‰ç…§é¡ºåºæ”¾å…¥åˆ°iicx_buffer_readä¸­ */
+	/* ½«eeprimÖĞ¶Á³öµÄÊı¾İ°´ÕÕË³Ğò·ÅÈëµ½iicx_buffer_readÖĞ */
 	I2C_EE_BufferRead(I2Cx_BUFFER_READ,EEP_Firstpage,I2Cx_MAX_BYTE_NUM);
 
-	/* å°†iicx_buffer_readä¸­çš„æ•°æ®æ‰“å°å‡ºæ¥ */
+	/* ½«iicx_buffer_readÖĞµÄÊı¾İ´òÓ¡³öÀ´ */
 	for (i = 0; i < I2Cx_MAX_BYTE_NUM; ++i)
 		{
 			if (I2Cx_BUFFER_READ[i] != I2Cx_BUFFER_WRITE[i])
 				{
 					printf("0x%02x ",I2Cx_BUFFER_READ[i]);
-					printf("é”™è¯¯ï¼šeepromèŠ¯ç‰‡å†™å…¥çš„æ•°æ®ä¸è¯»å‡ºçš„æ•°æ®ä¸ä¸€è‡´!");
+					printf("´íÎó£ºeepromĞ¾Æ¬Ğ´ÈëµÄÊı¾İÓë¶Á³öµÄÊı¾İ²»Ò»ÖÂ!");
 					break;
 				}
 			printf("0x%02x ",I2Cx_BUFFER_READ[i]);
@@ -292,7 +292,7 @@ void DemoIicEeprom()
 					printf("\r\n");
 				}
 		}	
-	printf("AT24C02è¯»å†™æµ‹è¯•æˆåŠŸ\r\n");
+	printf("AT24C02¶ÁĞ´²âÊÔ³É¹¦\r\n");
 }
 
 #endif

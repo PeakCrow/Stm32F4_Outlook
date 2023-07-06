@@ -2,7 +2,7 @@
 
 
 
-/* ä¸²å£1çš„GPIO PA9 PA10 æŽ¥å£ */
+/* ´®¿Ú1µÄGPIO PA9 PA10 ½Ó¿Ú */
 #define USART1_CLK_ENABLE()			    __HAL_RCC_USART1_CLK_ENABLE()
 
 #define USART1_TX_GPIO_CLK_ENABLE()     __HAL_RCC_GPIOA_CLK_ENABLE()
@@ -14,7 +14,7 @@
 #define USART1_RX_GPIO_PORT			     GPIOA
 #define USART1_RX_PIN				     GPIO_PIN_10
 #define USART1_RX_AF				     GPIO_AF7_USART1
-/* ä¸²å£2çš„GPIO --- PA2 PA3  GPS (åªç”¨RXã€?TXè¢«ä»¥å¤ªç½‘å ç”¨ï¼?*/
+/* ´®¿Ú2µÄGPIO --- PA2 PA3  GPS (Ö»ÓÃRX??TX±»ÒÔÌ«ÍøÕ¼ÓÃ??*/
 #define USART2_CLK_ENABLE()              __HAL_RCC_USART2_CLK_ENABLE()
 
 #define USART2_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOA_CLK_ENABLE()
@@ -27,7 +27,7 @@
 #define USART2_RX_PIN                    GPIO_PIN_3
 #define USART2_RX_AF                     GPIO_AF7_USART2
 
-/* ä¸²å£3çš„GPIO --- PB10 PB11  RS485 */
+/* ´®¿Ú3µÄGPIO --- PB10 PB11  RS485 */
 #define USART3_CLK_ENABLE()              __HAL_RCC_USART3_CLK_ENABLE()
 
 #define USART3_TX_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOB_CLK_ENABLE()
@@ -39,23 +39,23 @@
 #define USART3_RX_GPIO_PORT              GPIOB
 #define USART3_RX_PIN                    GPIO_PIN_11
 #define USART3_RX_AF                     GPIO_AF7_USART3
-/* å®šä¹‰æ¯ä¸ªä¸²å£ç»“æž„ä½“å˜é‡?*/
+/* ¶¨ÒåÃ¿¸ö´®¿Ú½á¹¹Ìå±ä??*/
 #if UART1_FIFO_EN == 1
 	static UART_T g_tUart1;
-	static uint8_t g_TxBuff1[UART1_TX_BUF_SIZE];	/* å‘é€ç¼“å†²åŒº */
-	static uint8_t g_RxBuff1[UART1_RX_BUF_SIZE];	/* æŽ¥æ”¶ç¼“å†²åŒ?*/
+	static uint8_t g_TxBuff1[UART1_TX_BUF_SIZE];	/* ·¢ËÍ»º³åÇø */
+	static uint8_t g_RxBuff1[UART1_RX_BUF_SIZE];	/* ½ÓÊÕ»º³å??*/
 #endif
 
 #if UART2_FIFO_EN == 1
 	static UART_T g_tUart2;
-	static uint8_t g_TxBuf2[UART2_TX_BUF_SIZE];		/* å‘é€ç¼“å†²åŒº */
-	static uint8_t g_RxBuf2[UART2_RX_BUF_SIZE];		/* æŽ¥æ”¶ç¼“å†²åŒ?*/
+	static uint8_t g_TxBuf2[UART2_TX_BUF_SIZE];		/* ·¢ËÍ»º³åÇø */
+	static uint8_t g_RxBuf2[UART2_RX_BUF_SIZE];		/* ½ÓÊÕ»º³å??*/
 #endif
 
 #if UART3_FIFO_EN == 1
 	static UART_T g_tUart3;
-	static uint8_t g_TxBuf3[UART3_TX_BUF_SIZE];		/* å‘é€ç¼“å†²åŒº */
-	static uint8_t g_RxBuf3[UART3_RX_BUF_SIZE];		/* æŽ¥æ”¶ç¼“å†²åŒ?*/
+	static uint8_t g_TxBuf3[UART3_TX_BUF_SIZE];		/* ·¢ËÍ»º³åÇø */
+	static uint8_t g_RxBuf3[UART3_RX_BUF_SIZE];		/* ½ÓÊÕ»º³å??*/
 #endif
 
 static void UartVarInit(void);
@@ -65,11 +65,11 @@ static uint8_t UartGetChar(UART_T *_pUart,uint8_t *_pByte);
 static void UartIRQ(UART_T *_pUart);
 
 /*
-*	å‡?æ•?å? bsp_InitUart
-*	åŠŸèƒ½è¯´æ˜Ž: ä¸»å‡½æ•°ä¸­è°ƒç”¨çš„ä¸²å£åˆå§‹åŒ–å‡½æ•°
-*	å½?   å? none
-*	è¿?å›?å€? none
-*	æ—¶é—´ï¼?022å¹?æœ?5æ—?1ç‚?7åˆ?
+*	?????? bsp_InitUart
+*	¹¦ÄÜËµÃ÷: Ö÷º¯ÊýÖÐµ÷ÓÃµÄ´®¿Ú³õÊ¼»¯º¯Êý
+*	??   ?? none
+*	?????? none
+*	Ê±¼ä??022????5??1??7??
 */
 void bsp_InitUart()
 {
@@ -78,88 +78,88 @@ void bsp_InitUart()
 }
 
 /*
-*	å‡?æ•?å? UartVarInit
-*	åŠŸèƒ½è¯´æ˜Ž: ä¸²å£ç›¸å…³çš„å˜é‡åˆå§‹åŒ–
-*	å½?   å? æ—?
-*	è¿?å›?å€? æ—?
-*	æ—¶é—´ï¼?022å¹?æœ?4æ—?2ç‚?9åˆ?
+*	?????? UartVarInit
+*	¹¦ÄÜËµÃ÷: ´®¿ÚÏà¹ØµÄ±äÁ¿³õÊ¼»¯
+*	??   ?? ??
+*	?????? ??
+*	Ê±¼ä??022????4??2??9??
 */
 static void UartVarInit(void)
 {
 #if	UART1_FIFO_EN == 1
-	g_tUart1.uart = USART1;						/* STM32ä¸²å£è®¾å¤‡ */
-	g_tUart1.pTxBuf = g_TxBuff1;				/* ä¸²å£å‘é€ç¼“å†²åŒºæŒ‡é’ˆ */
-	g_tUart1.pRxBuf = g_RxBuff1;				/* ä¸²å£æŽ¥æ”¶ç¼“å†²åŒºæŒ‡é’?*/
-	g_tUart1.usTxBufSize = UART1_TX_BUF_SIZE;	/* å‘é€ç¼“å†²åŒºå¤§å° */
-	g_tUart1.usRxBufSize = UART1_RX_BUF_SIZE;	/* æŽ¥æ”¶ç¼“å†²åŒºå¤§å°?*/
-	g_tUart1.usTxWrite = 0;						/* å‘é€FIFOå†™ç´¢å¼?*/
-	g_tUart1.usTxRead = 0;						/* å‘é€FIFOè¯»ç´¢å¼?*/
-	g_tUart1.usRxWrite = 0;						/* æŽ¥æ”¶FIFOå†™ç´¢å¼?*/
-	g_tUart1.usRxRead = 0;						/* æŽ¥æ”¶FIFOè¯»ç´¢å¼?*/
-	g_tUart1.usRxCount = 0;						/* æŽ¥æ”¶åˆ°çš„æ–°æ•°æ®ä¸ªæ•?*/
-	g_tUart1.usTxCount = 0;						/* å¾…å‘é€çš„æ•°æ®ä¸ªæ•° */
-	g_tUart1.SendBefor = 0;						/* å‘é€æ•°æ®å‰çš„å›žè°ƒå‡½æ•?*/
-	g_tUart1.SendOver = 0;						/* å‘é€å®Œæ¯•åŽçš„å›žè°ƒå‡½æ•?*/
-	g_tUart1.ReciveNew = 0;						/* æŽ¥æ”¶åˆ°æ–°æ•°æ®åŽçš„å›žè°ƒå‡½æ•° */
-	g_tUart1.Sending  = 0;						/* æ­£åœ¨å‘é€ä¸­æ ‡å¿— */
+	g_tUart1.uart = USART1;						/* STM32´®¿ÚÉè±¸ */
+	g_tUart1.pTxBuf = g_TxBuff1;				/* ´®¿Ú·¢ËÍ»º³åÇøÖ¸Õë */
+	g_tUart1.pRxBuf = g_RxBuff1;				/* ´®¿Ú½ÓÊÕ»º³åÇøÖ¸??*/
+	g_tUart1.usTxBufSize = UART1_TX_BUF_SIZE;	/* ·¢ËÍ»º³åÇø´óÐ¡ */
+	g_tUart1.usRxBufSize = UART1_RX_BUF_SIZE;	/* ½ÓÊÕ»º³åÇø´ó??*/
+	g_tUart1.usTxWrite = 0;						/* ·¢ËÍFIFOÐ´Ë÷??*/
+	g_tUart1.usTxRead = 0;						/* ·¢ËÍFIFO¶ÁË÷??*/
+	g_tUart1.usRxWrite = 0;						/* ½ÓÊÕFIFOÐ´Ë÷??*/
+	g_tUart1.usRxRead = 0;						/* ½ÓÊÕFIFO¶ÁË÷??*/
+	g_tUart1.usRxCount = 0;						/* ½ÓÊÕµ½µÄÐÂÊý¾Ý¸ö??*/
+	g_tUart1.usTxCount = 0;						/* ´ý·¢ËÍµÄÊý¾Ý¸öÊý */
+	g_tUart1.SendBefor = 0;						/* ·¢ËÍÊý¾ÝÇ°µÄ»Øµ÷º¯??*/
+	g_tUart1.SendOver = 0;						/* ·¢ËÍÍê±ÏºóµÄ»Øµ÷º¯??*/
+	g_tUart1.ReciveNew = 0;						/* ½ÓÊÕµ½ÐÂÊý¾ÝºóµÄ»Øµ÷º¯Êý */
+	g_tUart1.Sending  = 0;						/* ÕýÔÚ·¢ËÍÖÐ±êÖ¾ */
 #endif
 
 #if UART2_FIFO_EN == 1
-	g_tUart2.uart = USART2;						/* STM32 ä¸²å£è®¾å¤‡ */
-	g_tUart2.pTxBuf = g_TxBuf2;					/* å‘é€ç¼“å†²åŒºæŒ‡é’ˆ */
-	g_tUart2.pRxBuf = g_RxBuf2;					/* æŽ¥æ”¶ç¼“å†²åŒºæŒ‡é’?*/
-	g_tUart2.usTxBufSize = UART2_TX_BUF_SIZE;	/* å‘é€ç¼“å†²åŒºå¤§å° */
-	g_tUart2.usRxBufSize = UART2_RX_BUF_SIZE;	/* æŽ¥æ”¶ç¼“å†²åŒºå¤§å°?*/
-	g_tUart2.usTxWrite = 0;						/* å‘é€FIFOå†™ç´¢å¼?*/
-	g_tUart2.usTxRead = 0;						/* å‘é€FIFOè¯»ç´¢å¼?*/
-	g_tUart2.usRxWrite = 0;						/* æŽ¥æ”¶FIFOå†™ç´¢å¼?*/
-	g_tUart2.usRxRead = 0;						/* æŽ¥æ”¶FIFOè¯»ç´¢å¼?*/
-	g_tUart2.usRxCount = 0;						/* æŽ¥æ”¶åˆ°çš„æ–°æ•°æ®ä¸ªæ•?*/
-	g_tUart2.usTxCount = 0;						/* å¾…å‘é€çš„æ•°æ®ä¸ªæ•° */
-	g_tUart2.SendBefor = 0;						/* å‘é€æ•°æ®å‰çš„å›žè°ƒå‡½æ•?*/
-	g_tUart2.SendOver = 0;						/* å‘é€å®Œæ¯•åŽçš„å›žè°ƒå‡½æ•?*/
-	g_tUart2.ReciveNew = 0;						/* æŽ¥æ”¶åˆ°æ–°æ•°æ®åŽçš„å›žè°ƒå‡½æ•° */
-	g_tUart2.Sending = 0;						/* æ­£åœ¨å‘é€ä¸­æ ‡å¿— */
+	g_tUart2.uart = USART2;						/* STM32 ´®¿ÚÉè±¸ */
+	g_tUart2.pTxBuf = g_TxBuf2;					/* ·¢ËÍ»º³åÇøÖ¸Õë */
+	g_tUart2.pRxBuf = g_RxBuf2;					/* ½ÓÊÕ»º³åÇøÖ¸??*/
+	g_tUart2.usTxBufSize = UART2_TX_BUF_SIZE;	/* ·¢ËÍ»º³åÇø´óÐ¡ */
+	g_tUart2.usRxBufSize = UART2_RX_BUF_SIZE;	/* ½ÓÊÕ»º³åÇø´ó??*/
+	g_tUart2.usTxWrite = 0;						/* ·¢ËÍFIFOÐ´Ë÷??*/
+	g_tUart2.usTxRead = 0;						/* ·¢ËÍFIFO¶ÁË÷??*/
+	g_tUart2.usRxWrite = 0;						/* ½ÓÊÕFIFOÐ´Ë÷??*/
+	g_tUart2.usRxRead = 0;						/* ½ÓÊÕFIFO¶ÁË÷??*/
+	g_tUart2.usRxCount = 0;						/* ½ÓÊÕµ½µÄÐÂÊý¾Ý¸ö??*/
+	g_tUart2.usTxCount = 0;						/* ´ý·¢ËÍµÄÊý¾Ý¸öÊý */
+	g_tUart2.SendBefor = 0;						/* ·¢ËÍÊý¾ÝÇ°µÄ»Øµ÷º¯??*/
+	g_tUart2.SendOver = 0;						/* ·¢ËÍÍê±ÏºóµÄ»Øµ÷º¯??*/
+	g_tUart2.ReciveNew = 0;						/* ½ÓÊÕµ½ÐÂÊý¾ÝºóµÄ»Øµ÷º¯Êý */
+	g_tUart2.Sending = 0;						/* ÕýÔÚ·¢ËÍÖÐ±êÖ¾ */
 #endif
 
 #if UART3_FIFO_EN == 1
-	g_tUart3.uart = USART3;						/* STM32 ä¸²å£è®¾å¤‡ */
-	g_tUart3.pTxBuf = g_TxBuf3;					/* å‘é€ç¼“å†²åŒºæŒ‡é’ˆ */
-	g_tUart3.pRxBuf = g_RxBuf3;					/* æŽ¥æ”¶ç¼“å†²åŒºæŒ‡é’?*/
-	g_tUart3.usTxBufSize = UART3_TX_BUF_SIZE;	/* å‘é€ç¼“å†²åŒºå¤§å° */
-	g_tUart3.usRxBufSize = UART3_RX_BUF_SIZE;	/* æŽ¥æ”¶ç¼“å†²åŒºå¤§å°?*/
-	g_tUart3.usTxWrite = 0;						/* å‘é€FIFOå†™ç´¢å¼?*/
-	g_tUart3.usTxRead = 0;						/* å‘é€FIFOè¯»ç´¢å¼?*/
-	g_tUart3.usRxWrite = 0;						/* æŽ¥æ”¶FIFOå†™ç´¢å¼?*/
-	g_tUart3.usRxRead = 0;						/* æŽ¥æ”¶FIFOè¯»ç´¢å¼?*/
-	g_tUart3.usRxCount = 0;						/* æŽ¥æ”¶åˆ°çš„æ–°æ•°æ®ä¸ªæ•?*/
-	g_tUart3.usTxCount = 0;						/* å¾…å‘é€çš„æ•°æ®ä¸ªæ•° */
-	g_tUart3.SendBefor = 0;						/* å‘é€æ•°æ®å‰çš„å›žè°ƒå‡½æ•?*/
-	g_tUart3.SendOver = 0;						/* å‘é€å®Œæ¯•åŽçš„å›žè°ƒå‡½æ•?*/
-	g_tUart3.ReciveNew = 0;						/* æŽ¥æ”¶åˆ°æ–°æ•°æ®åŽçš„å›žè°ƒå‡½æ•° */
-	g_tUart3.Sending = 0;						/* æ­£åœ¨å‘é€ä¸­æ ‡å¿— */
+	g_tUart3.uart = USART3;						/* STM32 ´®¿ÚÉè±¸ */
+	g_tUart3.pTxBuf = g_TxBuf3;					/* ·¢ËÍ»º³åÇøÖ¸Õë */
+	g_tUart3.pRxBuf = g_RxBuf3;					/* ½ÓÊÕ»º³åÇøÖ¸??*/
+	g_tUart3.usTxBufSize = UART3_TX_BUF_SIZE;	/* ·¢ËÍ»º³åÇø´óÐ¡ */
+	g_tUart3.usRxBufSize = UART3_RX_BUF_SIZE;	/* ½ÓÊÕ»º³åÇø´ó??*/
+	g_tUart3.usTxWrite = 0;						/* ·¢ËÍFIFOÐ´Ë÷??*/
+	g_tUart3.usTxRead = 0;						/* ·¢ËÍFIFO¶ÁË÷??*/
+	g_tUart3.usRxWrite = 0;						/* ½ÓÊÕFIFOÐ´Ë÷??*/
+	g_tUart3.usRxRead = 0;						/* ½ÓÊÕFIFO¶ÁË÷??*/
+	g_tUart3.usRxCount = 0;						/* ½ÓÊÕµ½µÄÐÂÊý¾Ý¸ö??*/
+	g_tUart3.usTxCount = 0;						/* ´ý·¢ËÍµÄÊý¾Ý¸öÊý */
+	g_tUart3.SendBefor = 0;						/* ·¢ËÍÊý¾ÝÇ°µÄ»Øµ÷º¯??*/
+	g_tUart3.SendOver = 0;						/* ·¢ËÍÍê±ÏºóµÄ»Øµ÷º¯??*/
+	g_tUart3.ReciveNew = 0;						/* ½ÓÊÕµ½ÐÂÊý¾ÝºóµÄ»Øµ÷º¯Êý */
+	g_tUart3.Sending = 0;						/* ÕýÔÚ·¢ËÍÖÐ±êÖ¾ */
 #endif
 }
 
 /*
-*	å‡?æ•?å? InitHardUart
-*	åŠŸèƒ½è¯´æ˜Ž: ä¸²å£å¤–è®¾çš„åˆå§‹åŒ–
-*	å½?   å? none
-*	è¿?å›?å€? none
-*	æ—¶é—´ï¼?022å¹?æœ?5æ—?1ç‚?8åˆ?
+*	?????? InitHardUart
+*	¹¦ÄÜËµÃ÷: ´®¿ÚÍâÉèµÄ³õÊ¼»¯
+*	??   ?? none
+*	?????? none
+*	Ê±¼ä??022????5??1??8??
 */
 void InitHardUart(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
-#if UART1_FIFO_EN == 1	/* ä¸²å£1 */
-	/* ä½¿èƒ½GPIO TX/RXæ—¶é’Ÿ */
+#if UART1_FIFO_EN == 1	/* ´®¿Ú1 */
+	/* Ê¹ÄÜGPIO TX/RXÊ±ÖÓ */
 	USART1_TX_GPIO_CLK_ENABLE();
 	USART1_RX_GPIO_CLK_ENABLE();
 	
-	/* ä½¿èƒ½USARTxæ—¶é’Ÿ */
+	/* Ê¹ÄÜUSARTxÊ±ÖÓ */
 	USART1_CLK_ENABLE();
 	
-	/* é…ç½®TXå¼•è„š */
+	/* ÅäÖÃTXÒý½Å */
 	GPIO_InitStruct.Pin			= USART1_TX_PIN;
 	GPIO_InitStruct.Mode		= GPIO_MODE_AF_PP;
 	GPIO_InitStruct.Pull		= GPIO_PULLUP;
@@ -167,35 +167,35 @@ void InitHardUart(void)
 	GPIO_InitStruct.Alternate	= USART1_TX_AF;
 	HAL_GPIO_Init(USART1_TX_GPIO_PORT,&GPIO_InitStruct);
 	
-	/* é…ç½®RXå¼•è„š */
+	/* ÅäÖÃRXÒý½Å */
 	GPIO_InitStruct.Pin 		= USART1_RX_PIN;
 	GPIO_InitStruct.Alternate 	= USART1_RX_AF;
 	HAL_GPIO_Init(USART1_RX_GPIO_PORT,&GPIO_InitStruct);
 	
-	/* é…ç½®NVIC the NVIC for UART */
+	/* ÅäÖÃNVIC the NVIC for UART */
 	HAL_NVIC_SetPriority(USART1_IRQn,0,1);
 	HAL_NVIC_EnableIRQ(USART1_IRQn);
 	
-	/* é…ç½®æ³¢ç‰¹çŽ‡ã€å¥‡å¶æ ¡éªŒä½ */
+	/* ÅäÖÃ²¨ÌØÂÊ¡¢ÆæÅ¼Ð£ÑéÎ» */
 	bsp_SetUartParam(USART1,UART1_BAUD,UART_PARITY_NONE,UART_MODE_TX_RX);
 	
-	/* æ¸…é™¤TCå‘é€å®Œæˆæ ‡å¿?*/
+	/* Çå³ýTC·¢ËÍÍê³É±ê??*/
 	CLEAR_BIT(USART1->SR,USART_SR_TC);
-	/* æ¸…é™¤RXENæŽ¥æ”¶æ ‡å¿— */
+	/* Çå³ýRXEN½ÓÊÕ±êÖ¾ */
 	CLEAR_BIT(USART1->SR,USART_SR_RXNE);
-	/* ä½¿èƒ½PEï¼ŒRXæŽ¥æ”¶ä¸­æ–­ */
+	/* Ê¹ÄÜPE£¬RX½ÓÊÕÖÐ¶Ï */
 	SET_BIT(USART1->CR1,USART_CR1_RXNEIE);
 #endif
 
-#if UART2_FIFO_EN == 1		/* ä¸²å£2 */
-	/* ä½¿èƒ½ GPIO TX/RX æ—¶é’Ÿ */
+#if UART2_FIFO_EN == 1		/* ´®¿Ú2 */
+	/* Ê¹ÄÜ GPIO TX/RX Ê±ÖÓ */
 	USART2_TX_GPIO_CLK_ENABLE();
 	USART2_RX_GPIO_CLK_ENABLE();
 	
-	/* ä½¿èƒ½ USARTx æ—¶é’Ÿ */
+	/* Ê¹ÄÜ USARTx Ê±ÖÓ */
 	USART2_CLK_ENABLE();	
 
-	/* é…ç½®TXå¼•è„š */
+	/* ÅäÖÃTXÒý½Å */
 	GPIO_InitStruct.Pin       = USART2_TX_PIN;
 	GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
 	GPIO_InitStruct.Pull      = GPIO_PULLUP;
@@ -203,32 +203,32 @@ void InitHardUart(void)
 	GPIO_InitStruct.Alternate = USART2_TX_AF;
 	HAL_GPIO_Init(USART2_TX_GPIO_PORT, &GPIO_InitStruct);	
 	
-	/* é…ç½®RXå¼•è„š */
+	/* ÅäÖÃRXÒý½Å */
 	GPIO_InitStruct.Pin = USART2_RX_PIN;
 	GPIO_InitStruct.Alternate = USART2_RX_AF;
 	HAL_GPIO_Init(USART2_RX_GPIO_PORT, &GPIO_InitStruct);
 
-	/* é…ç½®NVIC the NVIC for UART */   
+	/* ÅäÖÃNVIC the NVIC for UART */   
 	HAL_NVIC_SetPriority(USART2_IRQn, 0, 2);
 	HAL_NVIC_EnableIRQ(USART2_IRQn);
   
-	/* é…ç½®æ³¢ç‰¹çŽ‡ã€å¥‡å¶æ ¡éª?*/
+	/* ÅäÖÃ²¨ÌØÂÊ¡¢ÆæÅ¼Ð£??*/
 	bsp_SetUartParam(USART2,  UART2_BAUD, UART_PARITY_NONE, UART_MODE_TX_RX);	// UART_MODE_TX_RX
 
-	CLEAR_BIT(USART2->SR, USART_SR_TC);   /* æ¸…é™¤TCå‘é€å®Œæˆæ ‡å¿?*/
-    CLEAR_BIT(USART2->SR, USART_SR_RXNE); /* æ¸…é™¤RXNEæŽ¥æ”¶æ ‡å¿— */
-	SET_BIT(USART2->CR1, USART_CR1_RXNEIE);	/* ä½¿èƒ½PE. RXæŽ¥å—ä¸­æ–­ */
+	CLEAR_BIT(USART2->SR, USART_SR_TC);   /* Çå³ýTC·¢ËÍÍê³É±ê??*/
+    CLEAR_BIT(USART2->SR, USART_SR_RXNE); /* Çå³ýRXNE½ÓÊÕ±êÖ¾ */
+	SET_BIT(USART2->CR1, USART_CR1_RXNEIE);	/* Ê¹ÄÜPE. RX½ÓÊÜÖÐ¶Ï */
 #endif
 
-#if UART3_FIFO_EN == 1			/* ä¸²å£3 */
-	/* ä½¿èƒ½ GPIO TX/RX æ—¶é’Ÿ */
+#if UART3_FIFO_EN == 1			/* ´®¿Ú3 */
+	/* Ê¹ÄÜ GPIO TX/RX Ê±ÖÓ */
 	USART3_TX_GPIO_CLK_ENABLE();
 	USART3_RX_GPIO_CLK_ENABLE();
 	
-	/* ä½¿èƒ½ USARTx æ—¶é’Ÿ */
+	/* Ê¹ÄÜ USARTx Ê±ÖÓ */
 	USART3_CLK_ENABLE();	
 
-	/* é…ç½®TXå¼•è„š */
+	/* ÅäÖÃTXÒý½Å */
 	GPIO_InitStruct.Pin       = USART3_TX_PIN;
 	GPIO_InitStruct.Mode      = GPIO_MODE_AF_PP;
 	GPIO_InitStruct.Pull      = GPIO_PULLUP;
@@ -236,29 +236,29 @@ void InitHardUart(void)
 	GPIO_InitStruct.Alternate = USART3_TX_AF;
 	HAL_GPIO_Init(USART3_TX_GPIO_PORT, &GPIO_InitStruct);	
 	
-	/* é…ç½®RXå¼•è„š */
+	/* ÅäÖÃRXÒý½Å */
 	GPIO_InitStruct.Pin = USART3_RX_PIN;
 	GPIO_InitStruct.Alternate = USART3_RX_AF;
 	HAL_GPIO_Init(USART3_RX_GPIO_PORT, &GPIO_InitStruct);
 
-	/* é…ç½®NVIC the NVIC for UART */   
+	/* ÅäÖÃNVIC the NVIC for UART */   
 	HAL_NVIC_SetPriority(USART3_IRQn, 0, 3);
 	HAL_NVIC_EnableIRQ(USART3_IRQn);
   
-	/* é…ç½®æ³¢ç‰¹çŽ‡ã€å¥‡å¶æ ¡éª?*/
+	/* ÅäÖÃ²¨ÌØÂÊ¡¢ÆæÅ¼Ð£??*/
 	bsp_SetUartParam(USART3,  UART3_BAUD, UART_PARITY_NONE, UART_MODE_TX_RX);
 
-	CLEAR_BIT(USART3->SR, USART_SR_TC);   /* æ¸…é™¤TCå‘é€å®Œæˆæ ‡å¿?*/
-    CLEAR_BIT(USART3->SR, USART_SR_RXNE); /* æ¸…é™¤RXNEæŽ¥æ”¶æ ‡å¿— */
-	SET_BIT(USART3->CR1, USART_CR1_RXNEIE);	/* ä½¿èƒ½PE. RXæŽ¥å—ä¸­æ–­ */
+	CLEAR_BIT(USART3->SR, USART_SR_TC);   /* Çå³ýTC·¢ËÍÍê³É±ê??*/
+    CLEAR_BIT(USART3->SR, USART_SR_RXNE); /* Çå³ýRXNE½ÓÊÕ±êÖ¾ */
+	SET_BIT(USART3->CR1, USART_CR1_RXNEIE);	/* Ê¹ÄÜPE. RX½ÓÊÜÖÐ¶Ï */
 #endif
 }
 /*
 *********************************************************************************************************
-*	å‡?æ•?å? ComToUart
-*	åŠŸèƒ½è¯´æ˜Ž: å°†COMç«¯å£å·è½¬æ¢ä¸ºUARTæŒ‡é’ˆ
-*	å½?   å? _ucPort: ç«¯å£å?COM1 - COM8)
-*	è¿?å›?å€? uartæŒ‡é’ˆ
+*	?????? ComToUart
+*	¹¦ÄÜËµÃ÷: ½«COM¶Ë¿ÚºÅ×ª»»ÎªUARTÖ¸Õë
+*	??   ?? _ucPort: ¶Ë¿Ú??COM1 - COM8)
+*	?????? uartÖ¸Õë
 *********************************************************************************************************
 */
 UART_T *ComToUart(COM_PORT_E _ucPort)
@@ -295,26 +295,26 @@ UART_T *ComToUart(COM_PORT_E _ucPort)
 }
 
 /*
-*	å‡?æ•?å? bsp_SetUartParam
-*	åŠŸèƒ½è¯´æ˜Ž: é…ç½®ä¸²å£çš„ç¡¬ä»¶å‚æ•?
-*	å½?   å? Instance	USART_TypeDefç±»åž‹ç»“æž„ä½?
-				BaudRate	æ³¢ç‰¹çŽ?
-				Partity		æ ¡éªŒç±»åž‹ï¼Œå¥‡æ ¡éªŒæˆ–è€…å¶æ ¡éªŒ
-				Mode		å‘é€å’ŒæŽ¥æ”¶æ¨¡å¼ä½¿èƒ½
-*	è¿?å›?å€? æ—?
-*	æ—¶é—´ï¼?022å¹?æœ?4æ—?3ç‚?3åˆ?
+*	?????? bsp_SetUartParam
+*	¹¦ÄÜËµÃ÷: ÅäÖÃ´®¿ÚµÄÓ²¼þ²Î??
+*	??   ?? Instance	USART_TypeDefÀàÐÍ½á¹¹??
+				BaudRate	²¨ÌØ??
+				Partity		Ð£ÑéÀàÐÍ£¬ÆæÐ£Ñé»òÕßÅ¼Ð£Ñé
+				Mode		·¢ËÍºÍ½ÓÊÕÄ£Ê½Ê¹ÄÜ
+*	?????? ??
+*	Ê±¼ä??022????4??3??3??
 */
 void bsp_SetUartParam(USART_TypeDef *Instance,uint32_t BaudRate,uint32_t Parity,uint32_t Mode)
 {
 	UART_HandleTypeDef UartHandle;
 	
-/*	ä¸²å£1ç¡¬ä»¶é…ç½®å‚æ•°
-	å¼‚æ­¥ä¸²å£æ¨¡å¼
-	-å­—é•¿	= 8ä½?
-	-åœæ­¢ä½?= 1ä¸ªåœæ­¢ä½
-	-æ ¡éªŒ	= å‚æ•°Parity
-	-æ³¢ç‰¹çŽ?= å‚æ•°BaudRate
-	-ç¡¬ä»¶æµæŽ§åˆ¶å…³é—?RTS and CTS signals) */
+/*	´®¿Ú1Ó²¼þÅäÖÃ²ÎÊý
+	Òì²½´®¿ÚÄ£Ê½
+	-×Ö³¤	= 8??
+	-Í£Ö¹??= 1¸öÍ£Ö¹Î»
+	-Ð£Ñé	= ²ÎÊýParity
+	-²¨ÌØ??= ²ÎÊýBaudRate
+	-Ó²¼þÁ÷¿ØÖÆ¹Ø??RTS and CTS signals) */
 	UartHandle.Instance			= Instance;
 	UartHandle.Init.BaudRate	= BaudRate;
 	UartHandle.Init.WordLength	= UART_WORDLENGTH_8B;
@@ -332,64 +332,64 @@ void bsp_SetUartParam(USART_TypeDef *Instance,uint32_t BaudRate,uint32_t Parity,
 }
 
 /*
-*	å‡?æ•?å? UartIRQ
-*	åŠŸèƒ½è¯´æ˜Ž: ä¸²å£å‘é€æŽ¥æ”¶ä¸­æ–­çš„å¤„ç†å‡½æ•°
-*	å½?   å? _pUart:ä¸²å£å¤–è®¾è‡ªå®šä¹‰ç»“æž„ä½“çš„å…¨å±€å˜é‡
-*	è¿?å›?å€? none
-*	æ—¶é—´ï¼?022å¹?æœ?5æ—?1ç‚?0åˆ?
+*	?????? UartIRQ
+*	¹¦ÄÜËµÃ÷: ´®¿Ú·¢ËÍ½ÓÊÕÖÐ¶ÏµÄ´¦Àíº¯Êý
+*	??   ?? _pUart:´®¿ÚÍâÉè×Ô¶¨Òå½á¹¹ÌåµÄÈ«¾Ö±äÁ¿
+*	?????? none
+*	Ê±¼ä??022????5??1??0??
 */
 static void UartIRQ(UART_T *_pUart)
 {
 	
-	/* èŽ·å–ç›¸åº”å¯„å­˜å™¨çš„æ•°æ® */
+	/* »ñÈ¡ÏàÓ¦¼Ä´æÆ÷µÄÊý¾Ý */
 	uint32_t isrflags	= READ_REG(_pUart->uart->SR);
 	uint32_t cr1its		= READ_REG(_pUart->uart->CR1);
 	uint32_t cr3its		= READ_REG(_pUart->uart->CR3);
 	
-	/* å¤„ç†æŽ¥æ”¶ä¸­æ–­ */
-	if((isrflags & USART_SR_RXNE) != RESET)/* è¿›è¡Œ ä½ä¸Ž åˆ¤æ–­æ˜¯å¦å‡†å¤‡å¥½è¯»å–æŽ¥æ”¶åˆ°çš„æ•°æ?*/
+	/* ´¦Àí½ÓÊÕÖÐ¶Ï */
+	if((isrflags & USART_SR_RXNE) != RESET)/* ½øÐÐ Î»Óë ÅÐ¶ÏÊÇ·ñ×¼±¸ºÃ¶ÁÈ¡½ÓÊÕµ½µÄÊý??*/
 	{
-		/* ä»Žä¸²å£æŽ¥æ”¶æ•°æ®å¯„å­˜å™¨è¯»å–æ•°æ®å­˜æ”¾åˆ°æŽ¥æ”¶FIFO */
+		/* ´Ó´®¿Ú½ÓÊÕÊý¾Ý¼Ä´æÆ÷¶ÁÈ¡Êý¾Ý´æ·Åµ½½ÓÊÕFIFO */
 		uint8_t ch;
-		/* æ•°æ®å¯„å­˜å™¨DRåªæœ‰ä½?ä½æœ‰æ•?*/
+		/* Êý¾Ý¼Ä´æÆ÷DRÖ»ÓÐ??Î»ÓÐ??*/
 		ch = READ_REG(_pUart->uart->DR);
 		_pUart->pRxBuf[_pUart->usRxWrite] = ch;
-		/* æŽ¥æ”¶æ•°æ®è¯»æŒ‡é’ˆå¤§äºŽbufï¼Œåˆ™æ¸?ï¼Œå¦åˆ™è®¡æ•°è‡ªåŠ?*/
+		/* ½ÓÊÕÊý¾Ý¶ÁÖ¸Õë´óÓÚbuf£¬Ôò??£¬·ñÔò¼ÆÊý×Ô??*/
 		if(++_pUart->usRxWrite >= _pUart->usRxBufSize)
 		{
 			_pUart->usRxWrite = 0;
 		}
-		/* æ¯æŽ¥æ”¶ä¸€æ¬¡æ•°æ®ï¼ŒFIFOåŠ? */
+		/* Ã¿½ÓÊÕÒ»´ÎÊý¾Ý£¬FIFO?? */
 		if(_pUart->usRxCount < _pUart->usRxBufSize)
 		{
 			_pUart->usRxCount++;
 		}
-		/* å›žè°ƒå‡½æ•°ï¼Œé€šçŸ¥åº”ç”¨ç¨‹åºæŽ¥æ”¶åˆ°æ–°æ•°æ®ï¼Œä¸€èˆ¬æ˜¯å‘é€ä¸€ä¸ªæ¶ˆæ¯æˆ–è€…æ ‡å¿—ç½®1 */
+		/* »Øµ÷º¯Êý£¬Í¨ÖªÓ¦ÓÃ³ÌÐò½ÓÊÕµ½ÐÂÊý¾Ý£¬Ò»°ãÊÇ·¢ËÍÒ»¸öÏûÏ¢»òÕß±êÖ¾ÖÃ1 */
 		if(_pUart->ReciveNew)
 		{
 			_pUart->ReciveNew(ch);
 		}
 	}
 	
-	/* å¤„ç†å‘é€ç¼“å†²åŒºç©ºä¸­æ–?*/
-	//æ•°æ®ä¼ è¾“åˆ°ç§»ä½å¯„å­˜å™¨						å‘é€ä¸­æ–­ä½¿èƒ?
+	/* ´¦Àí·¢ËÍ»º³åÇø¿ÕÖÐ??*/
+	//Êý¾Ý´«Êäµ½ÒÆÎ»¼Ä´æÆ÷						·¢ËÍÖÐ¶ÏÊ¹??
 	if(((isrflags & USART_SR_TXE) != RESET) && (cr1its & USART_CR1_TXEIE) != RESET)
 	{
 		if(_pUart->usTxCount == 0)
 		{
-			/* å‘é€ç¼“å†²åŒºçš„æ•°æ®å·²ç»å–å®Œæ—¶ï¼Œç¦æ­¢å‘é€ç¼“å†²åŒºä¸­æ–­(æ­¤æ—¶æœ€åŽä¸€ä¸ªæ•°æ®è¿˜æœªçœŸæ­£å‘é€å®Œæ¯? */
+			/* ·¢ËÍ»º³åÇøµÄÊý¾ÝÒÑ¾­È¡ÍêÊ±£¬½ûÖ¹·¢ËÍ»º³åÇøÖÐ¶Ï(´ËÊ±×îºóÒ»¸öÊý¾Ý»¹Î´ÕæÕý·¢ËÍÍê?? */
 			CLEAR_BIT(_pUart->uart->CR1,USART_CR1_TXEIE);
 			
-			/* ä½¿èƒ½æ•°æ®å‘é€å®Œæ¯•ä¸­æ–?*/
+			/* Ê¹ÄÜÊý¾Ý·¢ËÍÍê±ÏÖÐ??*/
 			SET_BIT(_pUart->uart->CR1,USART_CR1_TCIE);
 		}else
 		{
-			/* æ­£åœ¨å‘é€ä¸²å£æ•°æ?*/
+			/* ÕýÔÚ·¢ËÍ´®¿ÚÊý??*/
 			_pUart->Sending = 1;
 			
-			/* ä»Žå‘é€FIFOä¸­å–1ä¸ªå­—èŠ‚å†™å…¥ä¸²å£å‘é€æ•°æ®å¯„å­˜å™¨ */
+			/* ´Ó·¢ËÍFIFOÖÐÈ¡1¸ö×Ö½ÚÐ´Èë´®¿Ú·¢ËÍÊý¾Ý¼Ä´æÆ÷ */
 			_pUart->uart->DR = _pUart->pTxBuf[_pUart->usTxRead];
-			/* å‘é€ç¼“å†²åŒºè¯»æŒ‡é’ˆå¤§äºŽç¼“å†²åŒºå¤§å° */
+			/* ·¢ËÍ»º³åÇø¶ÁÖ¸Õë´óÓÚ»º³åÇø´óÐ¡ */
 			if(++_pUart->usTxRead >= _pUart->usTxBufSize)
 			{
 				_pUart->usTxRead = 0;
@@ -397,14 +397,14 @@ static void UartIRQ(UART_T *_pUart)
 			_pUart->usTxCount--;
 		}
 	}
-	/* æ•°æ®ä½å…¨éƒ¨å‘é€å®Œæ¯•çš„ä¸­æ–­ */
+	/* Êý¾ÝÎ»È«²¿·¢ËÍÍê±ÏµÄÖÐ¶Ï */
 	if(((isrflags & USART_SR_TC) != RESET) && ((cr1its & USART_CR1_TCIE) != RESET))
 	{
 		if(_pUart->usTxCount == 0)
 		{
-			/* å¦‚æžœå‘é€FIFOçš„æ•°æ®å…¨éƒ¨å‘é€å®Œæ¯•ï¼Œç¦æ­¢æ•°æ®å‘é€å®Œæ¯•ä¸­æ–?*/
+			/* Èç¹û·¢ËÍFIFOµÄÊý¾ÝÈ«²¿·¢ËÍÍê±Ï£¬½ûÖ¹Êý¾Ý·¢ËÍÍê±ÏÖÐ??*/
 			CLEAR_BIT(_pUart->uart->CR1,USART_CR1_TCIE);
-			/* å›žè°ƒå‡½æ•°ï¼Œä¸€èˆ¬ç”¨æ¥å¤„ç†RS485é€šä¿¡ */
+			/* »Øµ÷º¯Êý£¬Ò»°ãÓÃÀ´´¦ÀíRS485Í¨ÐÅ */
 			if(_pUart->SendOver)
 			{
 				_pUart->SendOver();
@@ -412,8 +412,8 @@ static void UartIRQ(UART_T *_pUart)
 			_pUart->Sending = 0;
 		}else
 		{
-			/* æ­£å¸¸æƒ…å†µä¸‹ï¼Œä¸ä¼šè¿›å…¥æ­¤åˆ†æ”?*/
-			/* å¦‚æžœå‘é€FIFOçš„æ•°æ®è¿˜æœªå®Œæ¯•ï¼Œåˆ™ä»Žå‘é€FIFOå?ä¸ªæ•°æ®å†™å…¥å‘é€æ•°æ®å¯„å­˜å™¨ */
+			/* Õý³£Çé¿öÏÂ£¬²»»á½øÈë´Ë·Ö??*/
+			/* Èç¹û·¢ËÍFIFOµÄÊý¾Ý»¹Î´Íê±Ï£¬Ôò´Ó·¢ËÍFIFO??¸öÊý¾ÝÐ´Èë·¢ËÍÊý¾Ý¼Ä´æÆ÷ */
 			_pUart->uart->DR = _pUart->pTxBuf[_pUart->usTxRead];
 			if(++_pUart->usTxRead >= _pUart->usTxBufSize)
 			{
@@ -425,11 +425,11 @@ static void UartIRQ(UART_T *_pUart)
 }
 
 /*
-*	å‡?æ•?å? USART1_IRQHandler
-*	åŠŸèƒ½è¯´æ˜Ž: HALåº“çš„ä¸­æ®µå¤„ç†å‡½æ•°
-*	å½?   å? none
-*	è¿?å›?å€? none
-*	æ—¶é—´ï¼?022å¹?æœ?5æ—?1ç‚?1åˆ?
+*	?????? USART1_IRQHandler
+*	¹¦ÄÜËµÃ÷: HAL¿âµÄÖÐ¶Î´¦Àíº¯Êý
+*	??   ?? none
+*	?????? none
+*	Ê±¼ä??022????5??1??1??
 */
 #if UART1_FIFO_EN == 1
 void USART1_IRQHandler(void)
@@ -451,11 +451,11 @@ void USART3_IRQHandler(void)
 }
 #endif
 /*
-*	å‡?æ•?å? UartSend
-*	åŠŸèƒ½è¯´æ˜Ž: ä½¿èƒ½ä¸²å£å‘é€ä¸­æ–?
-*	å½?   å? _pUartï¼šä¸²å£å¤–è®¾è‡ªå®šä¹‰ç»“æž„ä½“æŒ‡é’ˆï¼›_ucaBufï¼šè¦å‘é€çš„buffï¼›_usLenï¼šå‘é€çš„buffé•¿åº¦
-*	è¿?å›?å€? none
-*	æ—¶é—´ï¼?022å¹?æœ?5æ—?1ç‚?8åˆ?
+*	?????? UartSend
+*	¹¦ÄÜËµÃ÷: Ê¹ÄÜ´®¿Ú·¢ËÍÖÐ??
+*	??   ?? _pUart£º´®¿ÚÍâÉè×Ô¶¨Òå½á¹¹ÌåÖ¸Õë£»_ucaBuf£ºÒª·¢ËÍµÄbuff£»_usLen£º·¢ËÍµÄbuff³¤¶È
+*	?????? none
+*	Ê±¼ä??022????5??1??8??
 */
 static void UartSend(UART_T *_pUart,uint8_t *_ucaBuf,uint16_t _usLen)
 {
@@ -463,20 +463,20 @@ static void UartSend(UART_T *_pUart,uint8_t *_ucaBuf,uint16_t _usLen)
 	
 	for(i = 0;i < _usLen;i++)
 	{
-		/* å¦‚æžœå‘é€ç¼“å†²åŒºå·²ç»æ»¡äº†ï¼Œåˆ™ç­‰å¾…ç¼“å†²åŒºç©º */
+		/* Èç¹û·¢ËÍ»º³åÇøÒÑ¾­ÂúÁË£¬ÔòµÈ´ý»º³åÇø¿Õ */
 		while(1)
 		{
 			__IO uint16_t usCount;
 			
-			__set_PRIMASK(1);	/* ç¦æ­¢å…¨å±€ä¸­æ–­ */
+			__set_PRIMASK(1);	/* ½ûÖ¹È«¾ÖÖÐ¶Ï */
 			usCount = _pUart->usTxCount;
-			__set_PRIMASK(0);	/* æ‰“å¼€å…¨å±€ä¸­æ–­ */
+			__set_PRIMASK(0);	/* ´ò¿ªÈ«¾ÖÖÐ¶Ï */
 			if(usCount < _pUart->usTxBufSize)
 			{
 				break;	
-			}else if(usCount == _pUart->usTxBufSize)/* æ•°æ®å·²ç»å¡«æ»¡ç¼“å†²åŒ?*/
+			}else if(usCount == _pUart->usTxBufSize)/* Êý¾ÝÒÑ¾­ÌîÂú»º³å??*/
 			{
-				/* å‘é€ä¸­æ–­ä½¿èƒ?*/
+				/* ·¢ËÍÖÐ¶ÏÊ¹??*/
 				if((_pUart->uart->CR1 & USART_CR1_TXEIE) == 0)
 				{
 					SET_BIT(_pUart->uart->CR1,USART_CR1_TXEIE);
@@ -484,27 +484,27 @@ static void UartSend(UART_T *_pUart,uint8_t *_ucaBuf,uint16_t _usLen)
 			}
 		}
 		
-		/* å°†æ•°æ®å¡«å…¥å‘é€ç¼“å†²åŒº */
+		/* ½«Êý¾ÝÌîÈë·¢ËÍ»º³åÇø */
 		_pUart->pTxBuf[_pUart->usTxWrite] = _ucaBuf[i];
 		
-		__set_PRIMASK(1);	/* ç¦æ­¢å…¨å±€ä¸­æ–­ */
+		__set_PRIMASK(1);	/* ½ûÖ¹È«¾ÖÖÐ¶Ï */
 		if(++_pUart->usTxWrite >= _pUart->usTxBufSize)
 		{
 			_pUart->usTxWrite = 0;
 		}
 		_pUart->usTxCount++;
-		__set_PRIMASK(0);	/* æ‰“å¼€å…¨å±€ä¸­æ–­ */
+		__set_PRIMASK(0);	/* ´ò¿ªÈ«¾ÖÖÐ¶Ï */
 	}
-	/* ä½¿èƒ½å‘é€ä¸­æ–?ç¼“å†²åŒºç©º) */
+	/* Ê¹ÄÜ·¢ËÍÖÐ??»º³åÇø¿Õ) */
 	SET_BIT(_pUart->uart->CR1,USART_CR1_TXEIE);
 }
 
 /*
-*	å‡?æ•?å? comSenBuf
-*	åŠŸèƒ½è¯´æ˜Ž: é…ç½®ä¸²å£å‘é€å­—ç¬¦ä¸²
-*	å½?   å? _ucPortï¼šå‡†å¤‡å‘é€çš„ä¸²å£å¤–è®¾ï¼›_ucaBufï¼šè¦å‘é€çš„æ•°æ®buffï¼›_usLenï¼šè¦å‘é€çš„buffé•¿åº¦
-*	è¿?å›?å€? none
-*	æ—¶é—´ï¼?022å¹?æœ?5æ—?1ç‚?0åˆ?
+*	?????? comSenBuf
+*	¹¦ÄÜËµÃ÷: ÅäÖÃ´®¿Ú·¢ËÍ×Ö·û´®
+*	??   ?? _ucPort£º×¼±¸·¢ËÍµÄ´®¿ÚÍâÉè£»_ucaBuf£ºÒª·¢ËÍµÄÊý¾Ýbuff£»_usLen£ºÒª·¢ËÍµÄbuff³¤¶È
+*	?????? none
+*	Ê±¼ä??022????5??1??0??
 */
 void comSendBuf(COM_PORT_E _ucPort,uint8_t *_ucaBuf,uint16_t _usLen)
 {
@@ -517,18 +517,18 @@ void comSendBuf(COM_PORT_E _ucPort,uint8_t *_ucaBuf,uint16_t _usLen)
 	}
 	if(pUart->SendBefor != 0)
 	{
-		pUart->SendBefor();/* å¦‚æžœæ˜¯RS485é€šä¿¡ï¼Œå¯ä»¥åœ¨è¿™ä¸ªå‡½æ•°ä¸­å°†RS485è®¾ç½®ä¸ºå‘é€æ¨¡å¼?*/
+		pUart->SendBefor();/* Èç¹ûÊÇRS485Í¨ÐÅ£¬¿ÉÒÔÔÚÕâ¸öº¯ÊýÖÐ½«RS485ÉèÖÃÎª·¢ËÍÄ£??*/
 	}
 	UartSend(pUart,_ucaBuf,_usLen);
 }
 
 
 /*
-*	å‡?æ•?å? comSendChar
-*	åŠŸèƒ½è¯´æ˜Ž: ä¸²å£å‘é€ä¸€ä¸ªå­—èŠ?
-*	å½?   å? _ucPort:ä¸²å£å¤–è®¾æžšä¸¾å˜é‡ï¼›_ucByteï¼šå‘é€çš„å­—èŠ‚æ•°æ®
-*	è¿?å›?å€? none
-*	æ—¶é—´ï¼?022å¹?æœ?5æ—?1ç‚?6åˆ?
+*	?????? comSendChar
+*	¹¦ÄÜËµÃ÷: ´®¿Ú·¢ËÍÒ»¸ö×Ö??
+*	??   ?? _ucPort:´®¿ÚÍâÉèÃ¶¾Ù±äÁ¿£»_ucByte£º·¢ËÍµÄ×Ö½ÚÊý¾Ý
+*	?????? none
+*	Ê±¼ä??022????5??1??6??
 */
 void comSendChar(COM_PORT_E _ucPort,uint8_t _ucByte)
 {
@@ -536,49 +536,49 @@ void comSendChar(COM_PORT_E _ucPort,uint8_t _ucByte)
 }
 
 /*
-*	å‡?æ•?å? UartGetChar
-*	åŠŸèƒ½è¯´æ˜Ž: ä»Žä¸²å£å¤–è®¾çš„æŽ¥æ”¶ç¼“å†²åŒºä¸­è¯»å–ä¸€ä¸ªå­—èŠ?
-*	å½?   å? _pUartï¼šä¸²å£å¤–è®¾è‡ªå®šä¹‰ç»“æž„ä½“ï¼›_pByteï¼šå­˜æ”¾è¯»å–æ•°æ®çš„æŒ‡é’ˆ
-*	è¿?å›?å€? 0ï¼šè¡¨ç¤ºæ— æ•°æ®è¯»å–ï¼?ï¼šè¡¨ç¤ºè¯»å–åˆ°æ•°æ®
-*	æ—¶é—´ï¼?022å¹?æœ?6æ—?4ç‚?9åˆ?
+*	?????? UartGetChar
+*	¹¦ÄÜËµÃ÷: ´Ó´®¿ÚÍâÉèµÄ½ÓÊÕ»º³åÇøÖÐ¶ÁÈ¡Ò»¸ö×Ö??
+*	??   ?? _pUart£º´®¿ÚÍâÉè×Ô¶¨Òå½á¹¹Ìå£»_pByte£º´æ·Å¶ÁÈ¡Êý¾ÝµÄÖ¸Õë
+*	?????? 0£º±íÊ¾ÎÞÊý¾Ý¶ÁÈ¡??£º±íÊ¾¶ÁÈ¡µ½Êý¾Ý
+*	Ê±¼ä??022????6??4??9??
 */
 static uint8_t UartGetChar(UART_T *_pUart,uint8_t * _pByte)
 {
 	uint16_t usCount;
 	
-	/* usRxWrite å˜é‡åœ¨ä¸­æ–­å‡½æ•°ä¸­è¢«æ”¹å†™ï¼Œä¸»ç¨‹åºè¯»å–è¯¥å˜é‡æ—¶ï¼Œå¿…é¡»è¿›è¡Œä¸´ç•ŒåŒºä¿æŠ?*/
-	__set_PRIMASK(1);	/* ç¦æ­¢å…¨å±€ä¸­æ–­ */
+	/* usRxWrite ±äÁ¿ÔÚÖÐ¶Ïº¯ÊýÖÐ±»¸ÄÐ´£¬Ö÷³ÌÐò¶ÁÈ¡¸Ã±äÁ¿Ê±£¬±ØÐë½øÐÐÁÙ½çÇø±£??*/
+	__set_PRIMASK(1);	/* ½ûÖ¹È«¾ÖÖÐ¶Ï */
 	usCount = _pUart->usRxCount;
-	__set_PRIMASK(0);	/* å¼€å¯å…¨å±€ä¸­æ–­ */
+	__set_PRIMASK(0);	/* ¿ªÆôÈ«¾ÖÖÐ¶Ï */
 
 	
-	/* å¦‚æžœè¯»å’Œå†™ç´¢å¼•ç›¸åŒï¼Œåˆ™è¿”å›? */
+	/* Èç¹û¶ÁºÍÐ´Ë÷ÒýÏàÍ¬£¬Ôò·µ?? */
 	if(usCount == 0)
 	{
 		return 0;
 	}
 	else
 	{
-		/* ä»Žä¸²å£æŽ¥æ”¶FIFOå?ä¸ªæ•°æ?*/
+		/* ´Ó´®¿Ú½ÓÊÕFIFO??¸öÊý??*/
 		*_pByte = _pUart->pRxBuf[_pUart->usRxRead];
 		
-		/* æ”¹å†™FIFOè¯»ç´¢å¼?*/
-		__set_PRIMASK(1);	/* ç¦æ­¢å…¨å±€ä¸­æ–­ */
+		/* ¸ÄÐ´FIFO¶ÁË÷??*/
+		__set_PRIMASK(1);	/* ½ûÖ¹È«¾ÖÖÐ¶Ï */
 		if(++_pUart->usRxRead >= _pUart->usRxBufSize)
 		{
 			_pUart->usRxRead = 0;
 		}
 		_pUart->usRxCount--;
-		__set_PRIMASK(0);	/* å¼€å¯å…¨å±€ä¸­æ–­ */
+		__set_PRIMASK(0);	/* ¿ªÆôÈ«¾ÖÖÐ¶Ï */
 		return 1;
 	}
 }
 /*
-*	å‡?æ•?å? comGetChar
-*	åŠŸèƒ½è¯´æ˜Ž: ä»Žä¸²å£æŽ¥æ”¶ç¼“å†²åŒºä¸­è¯»å–ä¸€ä¸ªæ•°æ?
-*	å½?   å? _usPort:ä¸²å£å¤–è®¾å·çš„æžšä¸¾å˜é‡ï¼›_pByteï¼šå­˜æ”¾æ•°æ®çš„æŒ‡é’ˆ
-*	è¿?å›?å€? 0ï¼šè¡¨ç¤ºæ— æ•°æ®ï¼?ï¼šè¡¨ç¤ºè¯»å–åˆ°æœ‰æ•ˆæ•°æ®
-*	æ—¶é—´ï¼?022å¹?æœ?6æ—?5ç‚?5åˆ?
+*	?????? comGetChar
+*	¹¦ÄÜËµÃ÷: ´Ó´®¿Ú½ÓÊÕ»º³åÇøÖÐ¶ÁÈ¡Ò»¸öÊý??
+*	??   ?? _usPort:´®¿ÚÍâÉèºÅµÄÃ¶¾Ù±äÁ¿£»_pByte£º´æ·ÅÊý¾ÝµÄÖ¸Õë
+*	?????? 0£º±íÊ¾ÎÞÊý¾Ý??£º±íÊ¾¶ÁÈ¡µ½ÓÐÐ§Êý¾Ý
+*	Ê±¼ä??022????6??5??5??
 */
 uint8_t comGetChar(COM_PORT_E _usPort,uint8_t *_pByte)
 {
@@ -591,11 +591,11 @@ uint8_t comGetChar(COM_PORT_E _usPort,uint8_t *_pByte)
 	return UartGetChar(pUart,_pByte);
 }
 /*
-*	å‡?æ•?å? fputc
-*	åŠŸèƒ½è¯´æ˜Ž: é‡å®šå‘Cæ ‡å‡†åº“çš„printfå‡½æ•°
-*	å½?   å? ...
-*	è¿?å›?å€? è¿”å›žå†™å…¥çš„å­—ç¬¦æ€»æ•°ï¼Œå¦åˆ™è¿”å›žä¸€ä¸ªè´Ÿæ•?
-*	æ—¶é—´ï¼?022å¹?æœ?5æ—?1ç‚?1åˆ?
+*	?????? fputc
+*	¹¦ÄÜËµÃ÷: ÖØ¶¨ÏòC±ê×¼¿âµÄprintfº¯Êý
+*	??   ?? ...
+*	?????? ·µ»ØÐ´ÈëµÄ×Ö·û×ÜÊý£¬·ñÔò·µ»ØÒ»¸ö¸º??
+*	Ê±¼ä??022????5??1??1??
 */
 #if DEBUG_SWITCH_EN == 0
 int fputc(int ch,FILE *f)
@@ -614,17 +614,17 @@ int fputc(int ch,FILE *f)
 
 
 /*
-*	å‡?æ•?å? fgetc
-*	åŠŸèƒ½è¯´æ˜Ž: é‡å®šä¹‰getcå‡½æ•°ï¼Œè¿™æ ·å¯ä»¥ä½¿ç”¨getcharå‡½æ•°ä»Žä¸²å?è¾“å…¥æ•°æ®
-*	å½?   å? none
-*	è¿?å›?å€? none
-*	æ—¶é—´ï¼?022å¹?æœ?6æ—?5ç‚?9åˆ?
+*	?????? fgetc
+*	¹¦ÄÜËµÃ÷: ÖØ¶¨Òågetcº¯Êý£¬ÕâÑù¿ÉÒÔÊ¹ÓÃgetcharº¯Êý´Ó´®??ÊäÈëÊý¾Ý
+*	??   ?? none
+*	?????? none
+*	Ê±¼ä??022????6??5??9??
 */
 #if DEBUG_SWITCH_EN == 0
 int fgetc(FILE *f)
 {
 #if 1
-	/* ä»Žä¸²å?æŽ¥æ”¶FIFOä¸­å–1ä¸ªæ•°æ®ï¼Œåªæœ‰å–åˆ°æ•°æ®æ‰è¿”å›?*/
+	/* ´Ó´®??½ÓÊÕFIFOÖÐÈ¡1¸öÊý¾Ý£¬Ö»ÓÐÈ¡µ½Êý¾Ý²Å·µ??*/
 	uint8_t ucData;
 	while(comGetChar(COM1,&ucData) == 0);
 	

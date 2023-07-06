@@ -1,38 +1,38 @@
 /*
 *********************************************************************************************************
 *
-*	æ¨¡å—åç§° : SDå¡Fatæ–‡ä»¶ç³»ç»Ÿå’ŒSDå¡æ¨¡æ‹Ÿæ¼”ç¤ºæ¨¡å—ã€‚
-*	æ–‡ä»¶åç§° : demo_sd_fatfs.c
-*	ç‰ˆ    æœ¬ : V1.0
-*	è¯´    æ˜ : è¯¥ä¾‹ç¨‹ç§»æ¤FatFSæ–‡ä»¶ç³»ç»Ÿï¼ˆç‰ˆæœ¬ R0.12cï¼‰ï¼Œæ¼”ç¤ºå¦‚ä½•åˆ›å»ºæ–‡ä»¶ã€è¯»å–æ–‡ä»¶ã€åˆ›å»ºç›®å½•å’Œåˆ é™¤æ–‡ä»¶
-*			   å¹¶æµ‹è¯•äº†æ–‡ä»¶è¯»å†™é€Ÿåº¦.æ”¯æŒä»¥ä¸‹6ä¸ªåŠŸèƒ½ï¼Œç”¨æˆ·é€šè¿‡ç”µè„‘ç«¯ä¸²å£è½¯ä»¶å‘é€æ•°å­—ç»™å¼€å‘æ¿å³å¯:
-*              1 - æ˜¾ç¤ºæ ¹ç›®å½•ä¸‹çš„æ–‡ä»¶åˆ—è¡¨
-*              2 - åˆ›å»ºä¸€ä¸ªæ–°æ–‡ä»¶armfly.txt
-*              3 - è¯»armfly.txtæ–‡ä»¶çš„å†…å®¹
-*              4 - åˆ›å»ºç›®å½•
-*              5 - åˆ é™¤æ–‡ä»¶å’Œç›®å½•
-*              6 - è¯»å†™æ–‡ä»¶é€Ÿåº¦æµ‹è¯•
+*	Ä£¿éÃû³Æ : SD¿¨FatÎÄ¼şÏµÍ³ºÍSD¿¨Ä£ÄâÑİÊ¾Ä£¿é¡£
+*	ÎÄ¼şÃû³Æ : demo_sd_fatfs.c
+*	°æ    ±¾ : V1.0
+*	Ëµ    Ã÷ : ¸ÃÀı³ÌÒÆÖ²FatFSÎÄ¼şÏµÍ³£¨°æ±¾ R0.12c£©£¬ÑİÊ¾ÈçºÎ´´½¨ÎÄ¼ş¡¢¶ÁÈ¡ÎÄ¼ş¡¢´´½¨Ä¿Â¼ºÍÉ¾³ıÎÄ¼ş
+*			   ²¢²âÊÔÁËÎÄ¼ş¶ÁĞ´ËÙ¶È.Ö§³ÖÒÔÏÂ6¸ö¹¦ÄÜ£¬ÓÃ»§Í¨¹ıµçÄÔ¶Ë´®¿ÚÈí¼ş·¢ËÍÊı×Ö¸ø¿ª·¢°å¼´¿É:
+*              1 - ÏÔÊ¾¸ùÄ¿Â¼ÏÂµÄÎÄ¼şÁĞ±í
+*              2 - ´´½¨Ò»¸öĞÂÎÄ¼şarmfly.txt
+*              3 - ¶Áarmfly.txtÎÄ¼şµÄÄÚÈİ
+*              4 - ´´½¨Ä¿Â¼
+*              5 - É¾³ıÎÄ¼şºÍÄ¿Â¼
+*              6 - ¶ÁĞ´ÎÄ¼şËÙ¶È²âÊÔ
 *
-*              å¦å¤–æ³¨æ„ï¼ŒSDå¡æ¨¡æ‹ŸUç›˜æ˜¯ç”¨çš„MicroUSBæ¥å£ã€‚
-*	ä¿®æ”¹è®°å½• :
-*		ç‰ˆæœ¬å·   æ—¥æœŸ         ä½œè€…        è¯´æ˜
-*		V1.0    2020-10-06   Eric2013    æ­£å¼å‘å¸ƒ
+*              ÁíÍâ×¢Òâ£¬SD¿¨Ä£ÄâUÅÌÊÇÓÃµÄMicroUSB½Ó¿Ú¡£
+*	ĞŞ¸Ä¼ÇÂ¼ :
+*		°æ±¾ºÅ   ÈÕÆÚ         ×÷Õß        ËµÃ÷
+*		V1.0    2020-10-06   Eric2013    ÕıÊ½·¢²¼
 *
-*	Copyright (C), 2020-2030, å®‰å¯Œè±ç”µå­ www.armfly.com
+*	Copyright (C), 2020-2030, °²¸»À³µç×Ó www.armfly.com
 *
 *********************************************************************************************************
 */
 #include "sys.h"
-#include "ff.h"				/* FatFSæ–‡ä»¶ç³»ç»Ÿæ¨¡å—*/
+#include "ff.h"				/* FatFSÎÄ¼şÏµÍ³Ä£¿é*/
 #include "ff_gen_drv.h"
 #include "sd_diskio_dma.h"
 
 
-/* ç”¨äºæµ‹è¯•è¯»å†™é€Ÿåº¦ */
-#define TEST_FILE_LEN			(2*1024*1024)	/* ç”¨äºæµ‹è¯•çš„æ–‡ä»¶é•¿åº¦ */
-#define BUF_SIZE				(4*1024)		/* æ¯æ¬¡è¯»å†™SDå¡çš„æœ€å¤§æ•°æ®é•¿åº¦ */
+/* ÓÃÓÚ²âÊÔ¶ÁĞ´ËÙ¶È */
+#define TEST_FILE_LEN			(2*1024*1024)	/* ÓÃÓÚ²âÊÔµÄÎÄ¼ş³¤¶È */
+#define BUF_SIZE				(4*1024)		/* Ã¿´Î¶ÁĞ´SD¿¨µÄ×î´óÊı¾İ³¤¶È */
 
-/* ä»…å…è®¸æœ¬æ–‡ä»¶å†…è°ƒç”¨çš„å‡½æ•°å£°æ˜ */
+/* ½öÔÊĞí±¾ÎÄ¼şÄÚµ÷ÓÃµÄº¯ÊıÉùÃ÷ */
 static void DispMenu(void);
 static void ViewRootDir(void);
 static void CreateNewFile(void);
@@ -49,95 +49,95 @@ uint8_t g_TestBuf[BUF_SIZE];
 
 DIR DirInf;
 FILINFO FileInf;
-char DiskPath[4]; /* SDå¡é€»è¾‘é©±åŠ¨è·¯å¾„ï¼Œæ¯”ç›˜ç¬¦0ï¼Œå°±æ˜¯"0:/" */
+char DiskPath[4]; /* SD¿¨Âß¼­Çı¶¯Â·¾¶£¬±ÈÅÌ·û0£¬¾ÍÊÇ"0:/" */
 
-/* FatFs APIçš„è¿”å›å€¼ */
+/* FatFs APIµÄ·µ»ØÖµ */
 static const char * FR_Table[]= 
 {
-	"FR_OKï¼šæˆåŠŸ!",				                             /* (0) Succeeded */
-	"FR_DISK_ERRï¼šåº•å±‚ç¡¬ä»¶é”™è¯¯!",			                 /* (1) A hard error occurred in the low level disk I/O layer */
-	"FR_INT_ERRï¼šæ–­è¨€å¤±è´¥!",				                     /* (2) Assertion failed */
-	"FR_NOT_READYï¼šç‰©ç†é©±åŠ¨æ²¡æœ‰å·¥ä½œ!",			             /* (3) The physical drive cannot work */
-	"FR_NO_FILEï¼šæ–‡ä»¶ä¸å­˜åœ¨!",				                 /* (4) Could not find the file */
-	"FR_NO_PATHï¼šè·¯å¾„ä¸å­˜åœ¨!",				                 /* (5) Could not find the path */
-	"FR_INVALID_NAMEï¼šæ— æ•ˆæ–‡ä»¶å!",		                     /* (6) The path name format is invalid */
-	"FR_DENIEDï¼šç”±äºç¦æ­¢è®¿é—®æˆ–è€…ç›®å½•å·²æ»¡è®¿é—®è¢«æ‹’ç»!",         /* (7) Access denied due to prohibited access or directory full */
-	"FR_EXISTï¼šæ–‡ä»¶å·²ç»å­˜åœ¨!",			                     /* (8) Access denied due to prohibited access */
-	"FR_INVALID_OBJECTï¼šæ–‡ä»¶æˆ–è€…ç›®å½•å¯¹è±¡æ— æ•ˆ!",		         /* (9) The file/directory object is invalid */
-	"FR_WRITE_PROTECTEDï¼šç‰©ç†é©±åŠ¨è¢«å†™ä¿æŠ¤!",		             /* (10) The physical drive is write protected */
-	"FR_INVALID_DRIVEï¼šé€»è¾‘é©±åŠ¨å·æ— æ•ˆ!",		                 /* (11) The logical drive number is invalid */
-	"FR_NOT_ENABLEDï¼šå·ä¸­æ— å·¥ä½œåŒº!",			                 /* (12) The volume has no work area */
-	"FR_NO_FILESYSTEMï¼šæ²¡æœ‰æœ‰æ•ˆçš„FATå·!",		             /* (13) There is no valid FAT volume */
-	"FR_MKFS_ABORTEDï¼šç”±äºå‚æ•°é”™è¯¯f_mkfs()è¢«ç»ˆæ­¢!",	         /* (14) The f_mkfs() aborted due to any parameter error */
-	"FR_TIMEOUTï¼šåœ¨è§„å®šçš„æ—¶é—´å†…æ— æ³•è·å¾—è®¿é—®å·çš„è®¸å¯!",		 /* (15) Could not get a grant to access the volume within defined period */
-	"FR_LOCKEDï¼šç”±äºæ–‡ä»¶å…±äº«ç­–ç•¥æ“ä½œè¢«æ‹’ç»!",				 /* (16) The operation is rejected according to the file sharing policy */
-	"FR_NOT_ENOUGH_COREï¼šæ— æ³•åˆ†é…é•¿æ–‡ä»¶åå·¥ä½œåŒº!",		     /* (17) LFN working buffer could not be allocated */
-	"FR_TOO_MANY_OPEN_FILESï¼šå½“å‰æ‰“å¼€çš„æ–‡ä»¶æ•°å¤§äº_FS_SHARE!", /* (18) Number of open files > _FS_SHARE */
-	"FR_INVALID_PARAMETERï¼šå‚æ•°æ— æ•ˆ!"	                     /* (19) Given parameter is invalid */
+	"FR_OK£º³É¹¦!",				                             /* (0) Succeeded */
+	"FR_DISK_ERR£ºµ×²ãÓ²¼ş´íÎó!",			                 /* (1) A hard error occurred in the low level disk I/O layer */
+	"FR_INT_ERR£º¶ÏÑÔÊ§°Ü!",				                     /* (2) Assertion failed */
+	"FR_NOT_READY£ºÎïÀíÇı¶¯Ã»ÓĞ¹¤×÷!",			             /* (3) The physical drive cannot work */
+	"FR_NO_FILE£ºÎÄ¼ş²»´æÔÚ!",				                 /* (4) Could not find the file */
+	"FR_NO_PATH£ºÂ·¾¶²»´æÔÚ!",				                 /* (5) Could not find the path */
+	"FR_INVALID_NAME£ºÎŞĞ§ÎÄ¼şÃû!",		                     /* (6) The path name format is invalid */
+	"FR_DENIED£ºÓÉÓÚ½ûÖ¹·ÃÎÊ»òÕßÄ¿Â¼ÒÑÂú·ÃÎÊ±»¾Ü¾ø!",         /* (7) Access denied due to prohibited access or directory full */
+	"FR_EXIST£ºÎÄ¼şÒÑ¾­´æÔÚ!",			                     /* (8) Access denied due to prohibited access */
+	"FR_INVALID_OBJECT£ºÎÄ¼ş»òÕßÄ¿Â¼¶ÔÏóÎŞĞ§!",		         /* (9) The file/directory object is invalid */
+	"FR_WRITE_PROTECTED£ºÎïÀíÇı¶¯±»Ğ´±£»¤!",		             /* (10) The physical drive is write protected */
+	"FR_INVALID_DRIVE£ºÂß¼­Çı¶¯ºÅÎŞĞ§!",		                 /* (11) The logical drive number is invalid */
+	"FR_NOT_ENABLED£º¾íÖĞÎŞ¹¤×÷Çø!",			                 /* (12) The volume has no work area */
+	"FR_NO_FILESYSTEM£ºÃ»ÓĞÓĞĞ§µÄFAT¾í!",		             /* (13) There is no valid FAT volume */
+	"FR_MKFS_ABORTED£ºÓÉÓÚ²ÎÊı´íÎóf_mkfs()±»ÖÕÖ¹!",	         /* (14) The f_mkfs() aborted due to any parameter error */
+	"FR_TIMEOUT£ºÔÚ¹æ¶¨µÄÊ±¼äÄÚÎŞ·¨»ñµÃ·ÃÎÊ¾íµÄĞí¿É!",		 /* (15) Could not get a grant to access the volume within defined period */
+	"FR_LOCKED£ºÓÉÓÚÎÄ¼ş¹²Ïí²ßÂÔ²Ù×÷±»¾Ü¾ø!",				 /* (16) The operation is rejected according to the file sharing policy */
+	"FR_NOT_ENOUGH_CORE£ºÎŞ·¨·ÖÅä³¤ÎÄ¼şÃû¹¤×÷Çø!",		     /* (17) LFN working buffer could not be allocated */
+	"FR_TOO_MANY_OPEN_FILES£ºµ±Ç°´ò¿ªµÄÎÄ¼şÊı´óÓÚ_FS_SHARE!", /* (18) Number of open files > _FS_SHARE */
+	"FR_INVALID_PARAMETER£º²ÎÊıÎŞĞ§!"	                     /* (19) Given parameter is invalid */
 };
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: DemoFatFS
-*	åŠŸèƒ½è¯´æ˜: FatFSæ–‡ä»¶ç³»ç»Ÿæ¼”ç¤ºä¸»ç¨‹åº
-*	å½¢    å‚: æ— 
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: DemoFatFS
+*	¹¦ÄÜËµÃ÷: FatFSÎÄ¼şÏµÍ³ÑİÊ¾Ö÷³ÌĞò
+*	ĞÎ    ²Î: ÎŞ
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 void DemoFatFS(void)
 {
 	uint8_t cmd;
 
-	/* æ‰“å°å‘½ä»¤åˆ—è¡¨ï¼Œç”¨æˆ·å¯ä»¥é€šè¿‡ä¸²å£æ“ä½œæŒ‡ä»¤ */
+	/* ´òÓ¡ÃüÁîÁĞ±í£¬ÓÃ»§¿ÉÒÔÍ¨¹ı´®¿Ú²Ù×÷Ö¸Áî */
 	DispMenu();
 	
-	/* æ³¨å†ŒSDå¡é©±åŠ¨ */
+	/* ×¢²áSD¿¨Çı¶¯ */
 	FATFS_LinkDriver(&SD_Driver, DiskPath);
     
-//	bsp_StartAutoTimer(0, 500);	/* å¯åŠ¨1ä¸ª500msçš„è‡ªåŠ¨é‡è£…çš„å®šæ—¶å™¨ */
+//	bsp_StartAutoTimer(0, 500);	/* Æô¶¯1¸ö500msµÄ×Ô¶¯ÖØ×°µÄ¶¨Ê±Æ÷ */
 	
 	while (1)
 	{
-//        /* åˆ¤æ–­å®šæ—¶å™¨è¶…æ—¶æ—¶é—´ */
+//        /* ÅĞ¶Ï¶¨Ê±Æ÷³¬Ê±Ê±¼ä */
 //		if (bsp_CheckTimer(0))	
 //		{            
-//			/* æ¯éš”500ms è¿›æ¥ä¸€æ¬¡ */  
+//			/* Ã¿¸ô500ms ½øÀ´Ò»´Î */  
 //			bsp_LedToggle(2);
 //		}
 		
-		if (comGetChar(COM1, &cmd))	/* ä»ä¸²å£è¯»å…¥ä¸€ä¸ªå­—ç¬¦(éé˜»å¡æ–¹å¼) */
+		if (comGetChar(COM1, &cmd))	/* ´Ó´®¿Ú¶ÁÈëÒ»¸ö×Ö·û(·Ç×èÈû·½Ê½) */
 		{
 			printf("\r\n");
 			switch (cmd)
 			{
 				case '1':
-					printf("ã€1 - ViewRootDirã€‘\r\n");
-					ViewRootDir();		/* æ˜¾ç¤ºSDå¡æ ¹ç›®å½•ä¸‹çš„æ–‡ä»¶å */
+					printf("¡¾1 - ViewRootDir¡¿\r\n");
+					ViewRootDir();		/* ÏÔÊ¾SD¿¨¸ùÄ¿Â¼ÏÂµÄÎÄ¼şÃû */
 					break;
 
 				case '2':
-					printf("ã€2 - CreateNewFileã€‘\r\n");
-					CreateNewFile();	/* åˆ›å»ºä¸€ä¸ªæ–°æ–‡ä»¶,å†™å…¥ä¸€ä¸ªå­—ç¬¦ä¸² */
+					printf("¡¾2 - CreateNewFile¡¿\r\n");
+					CreateNewFile();	/* ´´½¨Ò»¸öĞÂÎÄ¼ş,Ğ´ÈëÒ»¸ö×Ö·û´® */
 					break;
 
 				case '3':
-					printf("ã€3 - ReadFileDataã€‘\r\n");
-					ReadFileData();		/* è¯»å–æ ¹ç›®å½•ä¸‹armfly.txtçš„å†…å®¹ */
+					printf("¡¾3 - ReadFileData¡¿\r\n");
+					ReadFileData();		/* ¶ÁÈ¡¸ùÄ¿Â¼ÏÂarmfly.txtµÄÄÚÈİ */
 					break;
 
 				case '4':
-					printf("ã€4 - CreateDirã€‘\r\n");
-					CreateDir();		/* åˆ›å»ºç›®å½• */
+					printf("¡¾4 - CreateDir¡¿\r\n");
+					CreateDir();		/* ´´½¨Ä¿Â¼ */
 					break;
 
 				case '5':
-					printf("ã€5 - DeleteDirFileã€‘\r\n");
-					DeleteDirFile();	/* åˆ é™¤ç›®å½•å’Œæ–‡ä»¶ */
+					printf("¡¾5 - DeleteDirFile¡¿\r\n");
+					DeleteDirFile();	/* É¾³ıÄ¿Â¼ºÍÎÄ¼ş */
 					break;
 
 				case '6':
-					printf("ã€6 - TestSpeedã€‘\r\n");
-					WriteFileTest();	/* é€Ÿåº¦æµ‹è¯• */
+					printf("¡¾6 - TestSpeed¡¿\r\n");
+					WriteFileTest();	/* ËÙ¶È²âÊÔ */
 					break;
 				
 				
@@ -151,30 +151,30 @@ void DemoFatFS(void)
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: DispMenu
-*	åŠŸèƒ½è¯´æ˜: æ˜¾ç¤ºæ“ä½œæç¤ºèœå•
-*	å½¢    å‚ï¼šæ— 
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: DispMenu
+*	¹¦ÄÜËµÃ÷: ÏÔÊ¾²Ù×÷ÌáÊ¾²Ëµ¥
+*	ĞÎ    ²Î£ºÎŞ
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 static void DispMenu(void)
 {
 	printf("\r\n------------------------------------------------\r\n");
-	printf("è¯·é€‰æ‹©æ“ä½œå‘½ä»¤ï¼Œæ‰“å¼€SDå¡æ¨¡æ‹ŸUç›˜æ“ä½œæœŸé—´ä¸æ”¯æŒå†è°ƒç”¨å‘½ä»¤1-6:\r\n");
-	printf("1 - æ˜¾ç¤ºæ ¹ç›®å½•ä¸‹çš„æ–‡ä»¶åˆ—è¡¨\r\n");
-	printf("2 - åˆ›å»ºä¸€ä¸ªæ–°æ–‡ä»¶armfly.txt\r\n");
-	printf("3 - è¯»armfly.txtæ–‡ä»¶çš„å†…å®¹\r\n");
-	printf("4 - åˆ›å»ºç›®å½•\r\n");
-	printf("5 - åˆ é™¤æ–‡ä»¶å’Œç›®å½•\r\n");
-	printf("6 - è¯»å†™æ–‡ä»¶é€Ÿåº¦æµ‹è¯•\r\n");
+	printf("ÇëÑ¡Ôñ²Ù×÷ÃüÁî£¬´ò¿ªSD¿¨Ä£ÄâUÅÌ²Ù×÷ÆÚ¼ä²»Ö§³ÖÔÙµ÷ÓÃÃüÁî1-6:\r\n");
+	printf("1 - ÏÔÊ¾¸ùÄ¿Â¼ÏÂµÄÎÄ¼şÁĞ±í\r\n");
+	printf("2 - ´´½¨Ò»¸öĞÂÎÄ¼şarmfly.txt\r\n");
+	printf("3 - ¶Áarmfly.txtÎÄ¼şµÄÄÚÈİ\r\n");
+	printf("4 - ´´½¨Ä¿Â¼\r\n");
+	printf("5 - É¾³ıÎÄ¼şºÍÄ¿Â¼\r\n");
+	printf("6 - ¶ÁĞ´ÎÄ¼şËÙ¶È²âÊÔ\r\n");
 }
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: ViewRootDir
-*	åŠŸèƒ½è¯´æ˜: æ˜¾ç¤ºSDå¡æ ¹ç›®å½•ä¸‹çš„æ–‡ä»¶å
-*	å½¢    å‚ï¼šæ— 
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: ViewRootDir
+*	¹¦ÄÜËµÃ÷: ÏÔÊ¾SD¿¨¸ùÄ¿Â¼ÏÂµÄÎÄ¼şÃû
+*	ĞÎ    ²Î£ºÎŞ
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 static void ViewRootDir(void)
@@ -184,27 +184,27 @@ static void ViewRootDir(void)
 	FILINFO fno;
 	
 	
- 	/* æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿ */
+ 	/* ¹ÒÔØÎÄ¼şÏµÍ³ */
 	result = f_mount(&fs, DiskPath, 0);	/* Mount a logical drive */
-	printf("SDç›˜ç¬¦ï¼š%s\r\n",DiskPath);
+	printf("SDÅÌ·û£º%s\r\n",DiskPath);
 	if (result != FR_OK)
 	{
-		printf("æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿå¤±è´¥ (%s)\r\n", FR_Table[result]);
+		printf("¹ÒÔØÎÄ¼şÏµÍ³Ê§°Ü (%s)\r\n", FR_Table[result]);
 	}
 
-	/* æ‰“å¼€æ ¹æ–‡ä»¶å¤¹ */
-	result = f_opendir(&DirInf, DiskPath); /* å¦‚æœä¸å¸¦å‚æ•°ï¼Œåˆ™ä»å½“å‰ç›®å½•å¼€å§‹ */
-	printf("SDç›˜ç¬¦ï¼š%s\r\n",DiskPath);
+	/* ´ò¿ª¸ùÎÄ¼ş¼Ğ */
+	result = f_opendir(&DirInf, DiskPath); /* Èç¹û²»´ø²ÎÊı£¬Ôò´Óµ±Ç°Ä¿Â¼¿ªÊ¼ */
+	printf("SDÅÌ·û£º%s\r\n",DiskPath);
 	if (result != FR_OK)
 	{
-		printf("æ‰“å¼€æ ¹ç›®å½•å¤±è´¥  (%s)\r\n", FR_Table[result]);
+		printf("´ò¿ª¸ùÄ¿Â¼Ê§°Ü  (%s)\r\n", FR_Table[result]);
 		return;
 	}
 
-	printf("å±æ€§        |  æ–‡ä»¶å¤§å° | çŸ­æ–‡ä»¶å | é•¿æ–‡ä»¶å\r\n");
+	printf("ÊôĞÔ        |  ÎÄ¼ş´óĞ¡ | ¶ÌÎÄ¼şÃû | ³¤ÎÄ¼şÃû\r\n");
 	for (cnt = 0; ;cnt++)
 	{
-		result = f_readdir(&DirInf, &FileInf); 		/* è¯»å–ç›®å½•é¡¹ï¼Œç´¢å¼•ä¼šè‡ªåŠ¨ä¸‹ç§» */
+		result = f_readdir(&DirInf, &FileInf); 		/* ¶ÁÈ¡Ä¿Â¼Ïî£¬Ë÷Òı»á×Ô¶¯ÏÂÒÆ */
 		if (result != FR_OK || FileInf.fname[0] == 0)
 		{
 			break;
@@ -215,35 +215,35 @@ static void ViewRootDir(void)
 			continue;
 		}
 
-		/* åˆ¤æ–­æ˜¯æ–‡ä»¶è¿˜æ˜¯å­ç›®å½• */
+		/* ÅĞ¶ÏÊÇÎÄ¼ş»¹ÊÇ×ÓÄ¿Â¼ */
 		if (FileInf.fattrib & AM_DIR)
 		{
-			printf("(0x%02d)ç›®å½•  ", FileInf.fattrib);
+			printf("(0x%02d)Ä¿Â¼  ", FileInf.fattrib);
 		}
 		else
 		{
-			printf("(0x%02d)æ–‡ä»¶  ", FileInf.fattrib);
+			printf("(0x%02d)ÎÄ¼ş  ", FileInf.fattrib);
 		}
 
 		f_stat(FileInf.fname, &fno);
 		
-		/* æ‰“å°æ–‡ä»¶å¤§å°, æœ€å¤§4G */
+		/* ´òÓ¡ÎÄ¼ş´óĞ¡, ×î´ó4G */
 		printf(" %10d", (int)fno.fsize);
 
 
-		printf("  %s\r\n", (char *)FileInf.fname);	/* é•¿æ–‡ä»¶å */
+		printf("  %s\r\n", (char *)FileInf.fname);	/* ³¤ÎÄ¼şÃû */
 	}  
   
-	/* å¸è½½æ–‡ä»¶ç³»ç»Ÿ */
+	/* Ğ¶ÔØÎÄ¼şÏµÍ³ */
 	 f_mount(NULL, DiskPath, 0);
 }
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: CreateNewFile
-*	åŠŸèƒ½è¯´æ˜: åœ¨SDå¡åˆ›å»ºä¸€ä¸ªæ–°æ–‡ä»¶ï¼Œæ–‡ä»¶å†…å®¹å¡«å†™â€œwww.armfly.comâ€
-*	å½¢    å‚ï¼šæ— 
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: CreateNewFile
+*	¹¦ÄÜËµÃ÷: ÔÚSD¿¨´´½¨Ò»¸öĞÂÎÄ¼ş£¬ÎÄ¼şÄÚÈİÌîĞ´¡°www.armfly.com¡±
+*	ĞÎ    ²Î£ºÎŞ
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 static void CreateNewFile(void)
@@ -253,49 +253,49 @@ static void CreateNewFile(void)
 	char path[32];
 
 
- 	/* æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿ */
+ 	/* ¹ÒÔØÎÄ¼şÏµÍ³ */
 	result = f_mount(&fs, DiskPath, 0);			/* Mount a logical drive */
 	if (result != FR_OK)
 	{
-		printf("æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿå¤±è´¥ (%s)\r\n", FR_Table[result]);
+		printf("¹ÒÔØÎÄ¼şÏµÍ³Ê§°Ü (%s)\r\n", FR_Table[result]);
 	}
 
-	/* æ‰“å¼€æ–‡ä»¶ */
+	/* ´ò¿ªÎÄ¼ş */
 	sprintf(path, "%sarmfly.txt", DiskPath);
 	result = f_open(&file, path, FA_CREATE_ALWAYS | FA_WRITE);
 	if (result == FR_OK)
 	{
-		printf("armfly.txt æ–‡ä»¶æ‰“å¼€æˆåŠŸ\r\n");
+		printf("armfly.txt ÎÄ¼ş´ò¿ª³É¹¦\r\n");
 	}
 	else
 	{
-		printf("armfly.txt æ–‡ä»¶æ‰“å¼€å¤±è´¥  (%s)\r\n", FR_Table[result]);
+		printf("armfly.txt ÎÄ¼ş´ò¿ªÊ§°Ü  (%s)\r\n", FR_Table[result]);
 	}
 
-	/* å†™ä¸€ä¸²æ•°æ® */
+	/* Ğ´Ò»´®Êı¾İ */
 	result = f_write(&file, FsWriteBuf, strlen(FsWriteBuf), &bw);
 	if (result == FR_OK)
 	{
-		printf("armfly.txt æ–‡ä»¶å†™å…¥æˆåŠŸ\r\n");
+		printf("armfly.txt ÎÄ¼şĞ´Èë³É¹¦\r\n");
 	}
 	else
 	{
-		printf("armfly.txt æ–‡ä»¶å†™å…¥å¤±è´¥  (%s)\r\n", FR_Table[result]);
+		printf("armfly.txt ÎÄ¼şĞ´ÈëÊ§°Ü  (%s)\r\n", FR_Table[result]);
 	}
 
-	/* å…³é—­æ–‡ä»¶*/
+	/* ¹Ø±ÕÎÄ¼ş*/
 	f_close(&file);
 
-	/* å¸è½½æ–‡ä»¶ç³»ç»Ÿ */
+	/* Ğ¶ÔØÎÄ¼şÏµÍ³ */
 	f_mount(NULL, DiskPath, 0);
 }
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: ReadFileData
-*	åŠŸèƒ½è¯´æ˜: è¯»å–æ–‡ä»¶armfly.txtå‰128ä¸ªå­—ç¬¦ï¼Œå¹¶æ‰“å°åˆ°ä¸²å£
-*	å½¢    å‚ï¼šæ— 
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: ReadFileData
+*	¹¦ÄÜËµÃ÷: ¶ÁÈ¡ÎÄ¼şarmfly.txtÇ°128¸ö×Ö·û£¬²¢´òÓ¡µ½´®¿Ú
+*	ĞÎ    ²Î£ºÎŞ
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 static void ReadFileData(void)
@@ -305,14 +305,14 @@ static void ReadFileData(void)
 	char path[64];
 
 	
- 	/* æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿ */
+ 	/* ¹ÒÔØÎÄ¼şÏµÍ³ */
 	result = f_mount(&fs, DiskPath, 0);			/* Mount a logical drive */
 	if (result != FR_OK)
 	{
-		printf("æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿå¤±è´¥ (%s)\r\n", FR_Table[result]);
+		printf("¹ÒÔØÎÄ¼şÏµÍ³Ê§°Ü (%s)\r\n", FR_Table[result]);
 	}
 
-	/* æ‰“å¼€æ–‡ä»¶ */
+	/* ´ò¿ªÎÄ¼ş */
 	sprintf(path, "%sarmfly.txt", DiskPath);
 	result = f_open(&file, path, FA_OPEN_EXISTING | FA_READ);
 	if (result !=  FR_OK)
@@ -321,31 +321,31 @@ static void ReadFileData(void)
 		return;
 	}
 
-	/* è¯»å–æ–‡ä»¶ */
+	/* ¶ÁÈ¡ÎÄ¼ş */
 	result = f_read(&file, FsReadBuf, sizeof(FsReadBuf), &bw);
 	if (bw > 0)
 	{
 		FsReadBuf[bw] = 0;
-		printf("\r\narmfly.txt æ–‡ä»¶å†…å®¹ : \r\n%s\r\n", FsReadBuf);
+		printf("\r\narmfly.txt ÎÄ¼şÄÚÈİ : \r\n%s\r\n", FsReadBuf);
 	}
 	else
 	{
-		printf("\r\narmfly.txt æ–‡ä»¶å†…å®¹ : \r\n");
+		printf("\r\narmfly.txt ÎÄ¼şÄÚÈİ : \r\n");
 	}
 
-	/* å…³é—­æ–‡ä»¶*/
+	/* ¹Ø±ÕÎÄ¼ş*/
 	f_close(&file);
 
-	/* å¸è½½æ–‡ä»¶ç³»ç»Ÿ */
+	/* Ğ¶ÔØÎÄ¼şÏµÍ³ */
 	f_mount(NULL, DiskPath, 0);
 }
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: CreateDir
-*	åŠŸèƒ½è¯´æ˜: åœ¨SDå¡æ ¹ç›®å½•åˆ›å»ºDir1å’ŒDir2ç›®å½•ï¼Œåœ¨Dir1ç›®å½•ä¸‹åˆ›å»ºå­ç›®å½•Dir1_1
-*	å½¢    å‚ï¼šæ— 
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: CreateDir
+*	¹¦ÄÜËµÃ÷: ÔÚSD¿¨¸ùÄ¿Â¼´´½¨Dir1ºÍDir2Ä¿Â¼£¬ÔÚDir1Ä¿Â¼ÏÂ´´½¨×ÓÄ¿Â¼Dir1_1
+*	ĞÎ    ²Î£ºÎŞ
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 static void CreateDir(void)
@@ -354,14 +354,14 @@ static void CreateDir(void)
 	char path[64]; 
 
 	
- 	/* æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿ */
+ 	/* ¹ÒÔØÎÄ¼şÏµÍ³ */
 	result = f_mount(&fs, DiskPath, 0);			/* Mount a logical drive */
 	if (result != FR_OK)
 	{
-		printf("æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿå¤±è´¥ (%s)\r\n", FR_Table[result]);
+		printf("¹ÒÔØÎÄ¼şÏµÍ³Ê§°Ü (%s)\r\n", FR_Table[result]);
 	}
 
-	/* åˆ›å»ºç›®å½•/Dir1 */
+	/* ´´½¨Ä¿Â¼/Dir1 */
 	sprintf(path, "%sDir1", DiskPath);
 	result = f_mkdir(path);
 	if (result == FR_OK)
@@ -370,16 +370,16 @@ static void CreateDir(void)
 	}
 	else if (result == FR_EXIST)
 	{
-		printf("Dir1 ç›®å½•å·²ç»å­˜åœ¨(%d)\r\n", result);
+		printf("Dir1 Ä¿Â¼ÒÑ¾­´æÔÚ(%d)\r\n", result);
 	}
 	else
 	{
-		printf("f_mkdir Dir1 å¤±è´¥ (%s)\r\n", FR_Table[result]);
+		printf("f_mkdir Dir1 Ê§°Ü (%s)\r\n", FR_Table[result]);
 		return;
 		
 	}
 
-	/* åˆ›å»ºç›®å½•/Dir2 */
+	/* ´´½¨Ä¿Â¼/Dir2 */
 	sprintf(path, "%sDir2", DiskPath);
 	result = f_mkdir(path);
 	if (result == FR_OK)
@@ -388,41 +388,41 @@ static void CreateDir(void)
 	}
 	else if (result == FR_EXIST)
 	{
-		printf("Dir2 ç›®å½•å·²ç»å­˜åœ¨(%d)\r\n", result);
+		printf("Dir2 Ä¿Â¼ÒÑ¾­´æÔÚ(%d)\r\n", result);
 	}
 	else
 	{
-		printf("f_mkdir Dir2 å¤±è´¥ (%s)\r\n", FR_Table[result]);
+		printf("f_mkdir Dir2 Ê§°Ü (%s)\r\n", FR_Table[result]);
 		return;
 	}
 
-	/* åˆ›å»ºå­ç›®å½• /Dir1/Dir1_1	   æ³¨æ„ï¼šåˆ›å»ºå­ç›®å½•Dir1_1æ—¶ï¼Œå¿…é¡»å…ˆåˆ›å»ºå¥½Dir1 */
+	/* ´´½¨×ÓÄ¿Â¼ /Dir1/Dir1_1	   ×¢Òâ£º´´½¨×ÓÄ¿Â¼Dir1_1Ê±£¬±ØĞëÏÈ´´½¨ºÃDir1 */
 	sprintf(path, "%sDir1/Dir1_1", DiskPath);
 	result = f_mkdir(path); /* */
 	if (result == FR_OK)
 	{
-		printf("f_mkdir Dir1_1 æˆåŠŸ\r\n");
+		printf("f_mkdir Dir1_1 ³É¹¦\r\n");
 	}
 	else if (result == FR_EXIST)
 	{
-		printf("Dir1_1 ç›®å½•å·²ç»å­˜åœ¨ (%d)\r\n", result);
+		printf("Dir1_1 Ä¿Â¼ÒÑ¾­´æÔÚ (%d)\r\n", result);
 	}
 	else
 	{
-		printf("f_mkdir Dir1_1 å¤±è´¥ (%s)\r\n", FR_Table[result]);
+		printf("f_mkdir Dir1_1 Ê§°Ü (%s)\r\n", FR_Table[result]);
 		return;
 	}
 
-	/* å¸è½½æ–‡ä»¶ç³»ç»Ÿ */
+	/* Ğ¶ÔØÎÄ¼şÏµÍ³ */
 	f_mount(NULL, DiskPath, 0);
 }
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: DeleteDirFile
-*	åŠŸèƒ½è¯´æ˜: åˆ é™¤SDå¡æ ¹ç›®å½•ä¸‹çš„ armfly.txt æ–‡ä»¶å’Œ Dir1ï¼ŒDir2 ç›®å½•
-*	å½¢    å‚ï¼šæ— 
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: DeleteDirFile
+*	¹¦ÄÜËµÃ÷: É¾³ıSD¿¨¸ùÄ¿Â¼ÏÂµÄ armfly.txt ÎÄ¼şºÍ Dir1£¬Dir2 Ä¿Â¼
+*	ĞÎ    ²Î£ºÎŞ
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 static void DeleteDirFile(void)
@@ -431,122 +431,122 @@ static void DeleteDirFile(void)
 	uint8_t i;
 	char path[64]; 
 	
- 	/* æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿ */
+ 	/* ¹ÒÔØÎÄ¼şÏµÍ³ */
 	result = f_mount(&fs, DiskPath, 0);			/* Mount a logical drive */
 	if (result != FR_OK)
 	{
-		printf("æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿå¤±è´¥ (%s)\r\n", FR_Table[result]);
+		printf("¹ÒÔØÎÄ¼şÏµÍ³Ê§°Ü (%s)\r\n", FR_Table[result]);
 	}
 	
-	/* åˆ é™¤ç›®å½•/Dir1 ã€å› ä¸ºè¿˜å­˜åœ¨ç›®å½•éç©ºï¼ˆå­˜åœ¨å­ç›®å½•)ï¼Œæ‰€ä»¥è¿™æ¬¡åˆ é™¤ä¼šå¤±è´¥ã€‘*/
+	/* É¾³ıÄ¿Â¼/Dir1 ¡¾ÒòÎª»¹´æÔÚÄ¿Â¼·Ç¿Õ£¨´æÔÚ×ÓÄ¿Â¼)£¬ËùÒÔÕâ´ÎÉ¾³ı»áÊ§°Ü¡¿*/
 	sprintf(path, "%sDir1", DiskPath);
 	result = f_unlink(path);
 	if (result == FR_OK)
 	{
-		printf("åˆ é™¤ç›®å½•Dir1æˆåŠŸ\r\n");
+		printf("É¾³ıÄ¿Â¼Dir1³É¹¦\r\n");
 	}
 	else if (result == FR_NO_FILE)
 	{
-		printf("æ²¡æœ‰å‘ç°æ–‡ä»¶æˆ–ç›®å½• :%s\r\n", "/Dir1");
+		printf("Ã»ÓĞ·¢ÏÖÎÄ¼ş»òÄ¿Â¼ :%s\r\n", "/Dir1");
 	}
 	else
 	{
-		printf("åˆ é™¤Dir1å¤±è´¥(é”™è¯¯ä»£ç  = %d) æ–‡ä»¶åªè¯»æˆ–ç›®å½•éç©º\r\n", result);
+		printf("É¾³ıDir1Ê§°Ü(´íÎó´úÂë = %d) ÎÄ¼şÖ»¶Á»òÄ¿Â¼·Ç¿Õ\r\n", result);
 	}
 
-	/* å…ˆåˆ é™¤ç›®å½•/Dir1/Dir1_1 */
+	/* ÏÈÉ¾³ıÄ¿Â¼/Dir1/Dir1_1 */
 	sprintf(path, "%sDir1/Dir1_1", DiskPath);
 	result = f_unlink(path);
 	if (result == FR_OK)
 	{
-		printf("åˆ é™¤å­ç›®å½•/Dir1/Dir1_1æˆåŠŸ\r\n");
+		printf("É¾³ı×ÓÄ¿Â¼/Dir1/Dir1_1³É¹¦\r\n");
 	}
 	else if ((result == FR_NO_FILE) || (result == FR_NO_PATH))
 	{
-		printf("æ²¡æœ‰å‘ç°æ–‡ä»¶æˆ–ç›®å½• :%s\r\n", "/Dir1/Dir1_1");
+		printf("Ã»ÓĞ·¢ÏÖÎÄ¼ş»òÄ¿Â¼ :%s\r\n", "/Dir1/Dir1_1");
 	}
 	else
 	{
-		printf("åˆ é™¤å­ç›®å½•/Dir1/Dir1_1å¤±è´¥(é”™è¯¯ä»£ç  = %d) æ–‡ä»¶åªè¯»æˆ–ç›®å½•éç©º\r\n", result);
+		printf("É¾³ı×ÓÄ¿Â¼/Dir1/Dir1_1Ê§°Ü(´íÎó´úÂë = %d) ÎÄ¼şÖ»¶Á»òÄ¿Â¼·Ç¿Õ\r\n", result);
 	}
 
-	/* å…ˆåˆ é™¤ç›®å½•/Dir1 */
+	/* ÏÈÉ¾³ıÄ¿Â¼/Dir1 */
 	sprintf(path, "%sDir1", DiskPath);
 	result = f_unlink(path);
 	if (result == FR_OK)
 	{
-		printf("åˆ é™¤ç›®å½•Dir1æˆåŠŸ\r\n");
+		printf("É¾³ıÄ¿Â¼Dir1³É¹¦\r\n");
 	}
 	else if (result == FR_NO_FILE)
 	{
-		printf("æ²¡æœ‰å‘ç°æ–‡ä»¶æˆ–ç›®å½• :%s\r\n", "/Dir1");
+		printf("Ã»ÓĞ·¢ÏÖÎÄ¼ş»òÄ¿Â¼ :%s\r\n", "/Dir1");
 	}
 	else
 	{
-		printf("åˆ é™¤Dir1å¤±è´¥(é”™è¯¯ä»£ç  = %d) æ–‡ä»¶åªè¯»æˆ–ç›®å½•éç©º\r\n", result);
+		printf("É¾³ıDir1Ê§°Ü(´íÎó´úÂë = %d) ÎÄ¼şÖ»¶Á»òÄ¿Â¼·Ç¿Õ\r\n", result);
 	}
 
-	/* åˆ é™¤ç›®å½•/Dir2 */
+	/* É¾³ıÄ¿Â¼/Dir2 */
 	sprintf(path, "%sDir2", DiskPath);
 	result = f_unlink(path);
 	if (result == FR_OK)
 	{
-		printf("åˆ é™¤ç›®å½• Dir2 æˆåŠŸ\r\n");
+		printf("É¾³ıÄ¿Â¼ Dir2 ³É¹¦\r\n");
 	}
 	else if (result == FR_NO_FILE)
 	{
-		printf("æ²¡æœ‰å‘ç°æ–‡ä»¶æˆ–ç›®å½• :%s\r\n", "/Dir2");
+		printf("Ã»ÓĞ·¢ÏÖÎÄ¼ş»òÄ¿Â¼ :%s\r\n", "/Dir2");
 	}
 	else
 	{
-		printf("åˆ é™¤Dir2 å¤±è´¥(é”™è¯¯ä»£ç  = %d) æ–‡ä»¶åªè¯»æˆ–ç›®å½•éç©º\r\n", result);
+		printf("É¾³ıDir2 Ê§°Ü(´íÎó´úÂë = %d) ÎÄ¼şÖ»¶Á»òÄ¿Â¼·Ç¿Õ\r\n", result);
 	}
 
-	/* åˆ é™¤æ–‡ä»¶ armfly.txt */
+	/* É¾³ıÎÄ¼ş armfly.txt */
 	sprintf(path, "%sarmfly.txt", DiskPath);
 	result = f_unlink(path);
 	if (result == FR_OK)
 	{
-		printf("åˆ é™¤æ–‡ä»¶ armfly.txt æˆåŠŸ\r\n");
+		printf("É¾³ıÎÄ¼ş armfly.txt ³É¹¦\r\n");
 	}
 	else if (result == FR_NO_FILE)
 	{
-		printf("æ²¡æœ‰å‘ç°æ–‡ä»¶æˆ–ç›®å½• :%s\r\n", "armfly.txt");
+		printf("Ã»ÓĞ·¢ÏÖÎÄ¼ş»òÄ¿Â¼ :%s\r\n", "armfly.txt");
 	}
 	else
 	{
-		printf("åˆ é™¤armfly.txtå¤±è´¥(é”™è¯¯ä»£ç  = %d) æ–‡ä»¶åªè¯»æˆ–ç›®å½•éç©º\r\n", result);
+		printf("É¾³ıarmfly.txtÊ§°Ü(´íÎó´úÂë = %d) ÎÄ¼şÖ»¶Á»òÄ¿Â¼·Ç¿Õ\r\n", result);
 	}
 
-	/* åˆ é™¤æ–‡ä»¶ speed1.txt */
+	/* É¾³ıÎÄ¼ş speed1.txt */
 	for (i = 0; i < 20; i++)
 	{
-		sprintf(path, "%sSpeed%02d.txt", DiskPath, i);/* æ¯å†™1æ¬¡ï¼Œåºå·é€’å¢ */	
+		sprintf(path, "%sSpeed%02d.txt", DiskPath, i);/* Ã¿Ğ´1´Î£¬ĞòºÅµİÔö */	
 		result = f_unlink(path);
 		if (result == FR_OK)
 		{
-			printf("åˆ é™¤æ–‡ä»¶%sæˆåŠŸ\r\n", path);
+			printf("É¾³ıÎÄ¼ş%s³É¹¦\r\n", path);
 		}
 		else if (result == FR_NO_FILE)
 		{
-			printf("æ²¡æœ‰å‘ç°æ–‡ä»¶:%s\r\n", path);
+			printf("Ã»ÓĞ·¢ÏÖÎÄ¼ş:%s\r\n", path);
 		}
 		else
 		{
-			printf("åˆ é™¤%sæ–‡ä»¶å¤±è´¥(é”™è¯¯ä»£ç  = %d) æ–‡ä»¶åªè¯»æˆ–ç›®å½•éç©º\r\n", path, result);
+			printf("É¾³ı%sÎÄ¼şÊ§°Ü(´íÎó´úÂë = %d) ÎÄ¼şÖ»¶Á»òÄ¿Â¼·Ç¿Õ\r\n", path, result);
 		}
 	}
 
-	/* å¸è½½æ–‡ä»¶ç³»ç»Ÿ */
+	/* Ğ¶ÔØÎÄ¼şÏµÍ³ */
 	f_mount(NULL, DiskPath, 0);
 }
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: WriteFileTest
-*	åŠŸèƒ½è¯´æ˜: æµ‹è¯•æ–‡ä»¶è¯»å†™é€Ÿåº¦
-*	å½¢    å‚ï¼šæ— 
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: WriteFileTest
+*	¹¦ÄÜËµÃ÷: ²âÊÔÎÄ¼ş¶ÁĞ´ËÙ¶È
+*	ĞÎ    ²Î£ºÎŞ
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 static void WriteFileTest(void)
@@ -565,21 +565,21 @@ static void WriteFileTest(void)
 		g_TestBuf[i] = (i / 512) + '0';
 	}
 
-  	/* æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿ */
+  	/* ¹ÒÔØÎÄ¼şÏµÍ³ */
 	result = f_mount(&fs, DiskPath, 0);			/* Mount a logical drive */
 	if (result != FR_OK)
 	{
-		printf("æŒ‚è½½æ–‡ä»¶ç³»ç»Ÿå¤±è´¥ (%s)\r\n", FR_Table[result]);
+		printf("¹ÒÔØÎÄ¼şÏµÍ³Ê§°Ü (%s)\r\n", FR_Table[result]);
 	}
 
-	/* æ‰“å¼€æ–‡ä»¶ */
-	sprintf(path, "%sSpeed%02d.txt", DiskPath, s_ucTestSn++); /* æ¯å†™1æ¬¡ï¼Œåºå·é€’å¢ */	
+	/* ´ò¿ªÎÄ¼ş */
+	sprintf(path, "%sSpeed%02d.txt", DiskPath, s_ucTestSn++); /* Ã¿Ğ´1´Î£¬ĞòºÅµİÔö */	
 	result = f_open(&file, path, FA_CREATE_ALWAYS | FA_WRITE);
 
-	/* å†™ä¸€ä¸²æ•°æ® */
-	printf("å¼€å§‹å†™æ–‡ä»¶%s %dKB ...\r\n", path, TEST_FILE_LEN / 1024);
+	/* Ğ´Ò»´®Êı¾İ */
+	printf("¿ªÊ¼Ğ´ÎÄ¼ş%s %dKB ...\r\n", path, TEST_FILE_LEN / 1024);
 	
-	runtime1 = bsp_GetRunTime();	/* è¯»å–ç³»ç»Ÿè¿è¡Œæ—¶é—´ */
+	runtime1 = bsp_GetRunTime();	/* ¶ÁÈ¡ÏµÍ³ÔËĞĞÊ±¼ä */
 	for (i = 0; i < TEST_FILE_LEN / BUF_SIZE; i++)
 	{
 		result = f_write(&file, g_TestBuf, sizeof(g_TestBuf), &bw);
@@ -593,35 +593,35 @@ static void WriteFileTest(void)
 		else
 		{
 			err = 1;
-			printf("%sæ–‡ä»¶å†™å¤±è´¥\r\n", path);
+			printf("%sÎÄ¼şĞ´Ê§°Ü\r\n", path);
 			break;
 		}
 	}
-	runtime2 = bsp_GetRunTime();	/* è¯»å–ç³»ç»Ÿè¿è¡Œæ—¶é—´ */
+	runtime2 = bsp_GetRunTime();	/* ¶ÁÈ¡ÏµÍ³ÔËĞĞÊ±¼ä */
 	
 	if (err == 0)
 	{
 		timelen = (runtime2 - runtime1);
-		printf("\r\n  å†™è€—æ—¶ : %dms   å¹³å‡å†™é€Ÿåº¦ : %dB/S (%dKB/S)\r\n",
+		printf("\r\n  Ğ´ºÄÊ± : %dms   Æ½¾ùĞ´ËÙ¶È : %dB/S (%dKB/S)\r\n",
 			timelen,
 			(TEST_FILE_LEN * 1000) / timelen,
 			((TEST_FILE_LEN / 1024) * 1000) / timelen);
 	}
 
-	f_close(&file);		/* å…³é—­æ–‡ä»¶*/
+	f_close(&file);		/* ¹Ø±ÕÎÄ¼ş*/
 
 
-	/* å¼€å§‹è¯»æ–‡ä»¶æµ‹è¯• */
+	/* ¿ªÊ¼¶ÁÎÄ¼ş²âÊÔ */
 	result = f_open(&file, path, FA_OPEN_EXISTING | FA_READ);
 	if (result !=  FR_OK)
 	{
-		printf("æ²¡æœ‰æ‰¾åˆ°æ–‡ä»¶: %s\r\n", path);
+		printf("Ã»ÓĞÕÒµ½ÎÄ¼ş: %s\r\n", path);
 		return;
 	}
 
-	printf("å¼€å§‹è¯»æ–‡ä»¶ %dKB ...\r\n", TEST_FILE_LEN / 1024);
+	printf("¿ªÊ¼¶ÁÎÄ¼ş %dKB ...\r\n", TEST_FILE_LEN / 1024);
 	
-	runtime1 = bsp_GetRunTime();	/* è¯»å–ç³»ç»Ÿè¿è¡Œæ—¶é—´ */
+	runtime1 = bsp_GetRunTime();	/* ¶ÁÈ¡ÏµÍ³ÔËĞĞÊ±¼ä */
 	for (i = 0; i < TEST_FILE_LEN / BUF_SIZE; i++)
 	{
 		result = f_read(&file, g_TestBuf, sizeof(g_TestBuf), &bw);
@@ -632,13 +632,13 @@ static void WriteFileTest(void)
 				printf(".");
 			}
 
-			/* æ¯”è¾ƒå†™å…¥çš„æ•°æ®æ˜¯å¦æ­£ç¡®ï¼Œæ­¤è¯­å¥ä¼šå¯¼è‡´è¯»å¡é€Ÿåº¦ç»“æœé™ä½åˆ° 3.5MBytes/S */
+			/* ±È½ÏĞ´ÈëµÄÊı¾İÊÇ·ñÕıÈ·£¬´ËÓï¾ä»áµ¼ÖÂ¶Á¿¨ËÙ¶È½á¹û½µµÍµ½ 3.5MBytes/S */
 			for (k = 0; k < sizeof(g_TestBuf); k++)
 			{
 				if (g_TestBuf[k] != (k / 512) + '0')
 				{
 				  	err = 1;
-					printf("Speed1.txt æ–‡ä»¶è¯»æˆåŠŸï¼Œä½†æ˜¯æ•°æ®å‡ºé”™\r\n");
+					printf("Speed1.txt ÎÄ¼ş¶Á³É¹¦£¬µ«ÊÇÊı¾İ³ö´í\r\n");
 					break;
 				}
 			}
@@ -650,25 +650,25 @@ static void WriteFileTest(void)
 		else
 		{
 			err = 1;
-			printf("Speed1.txt æ–‡ä»¶è¯»å¤±è´¥\r\n");
+			printf("Speed1.txt ÎÄ¼ş¶ÁÊ§°Ü\r\n");
 			break;
 		}
 	}
 
-	runtime2 = bsp_GetRunTime();	/* è¯»å–ç³»ç»Ÿè¿è¡Œæ—¶é—´ */
+	runtime2 = bsp_GetRunTime();	/* ¶ÁÈ¡ÏµÍ³ÔËĞĞÊ±¼ä */
 	
 	if (err == 0)
 	{
 		timelen = (runtime2 - runtime1);
-		printf("\r\n  è¯»è€—æ—¶ : %dms   å¹³å‡è¯»é€Ÿåº¦ : %dB/S (%dKB/S)\r\n", timelen,
+		printf("\r\n  ¶ÁºÄÊ± : %dms   Æ½¾ù¶ÁËÙ¶È : %dB/S (%dKB/S)\r\n", timelen,
 			(TEST_FILE_LEN * 1000) / timelen, ((TEST_FILE_LEN / 1024) * 1000) / timelen);
 	}
 
-	/* å…³é—­æ–‡ä»¶*/
+	/* ¹Ø±ÕÎÄ¼ş*/
 	f_close(&file);
 
-	/* å¸è½½æ–‡ä»¶ç³»ç»Ÿ */
+	/* Ğ¶ÔØÎÄ¼şÏµÍ³ */
 	f_mount(NULL, DiskPath, 0);
 }
 
-/***************************** å®‰å¯Œè±ç”µå­ www.armfly.com (END OF FILE) *********************************/
+/***************************** °²¸»À³µç×Ó www.armfly.com (END OF FILE) *********************************/

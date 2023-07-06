@@ -11,18 +11,18 @@
 
 typedef enum _run_lamp_state
 {
-	gradua_on = 0,	//閫愭鐐逛寒
-	signal_on = 1,	//鍗曟鐐逛寒
+	gradua_on = 0,	//逐次点亮
+	signal_on = 1,	//单次点亮
 }run_lamp_state;
 
 
 
-#define   White        0xFFFFFF  	// 鐧借壊
-#define   Black        0x000000  	// 榛戣壊
-#define   Blue         0x0000ff  	// 钃濊壊
-#define   Red          0x00FF00  	// 绾㈣壊
-#define   Green        0xff0000  	// 缁胯壊
-#define	  Yellow	   0xffff00		// 榛勮壊
+#define   White        0xFFFFFF  	// 白色
+#define   Black        0x000000  	// 黑色
+#define   Blue         0x0000ff  	// 蓝色
+#define   Red          0x00FF00  	// 红色
+#define   Green        0xff0000  	// 绿色
+#define	  Yellow	   0xffff00		// 黄色
 void bsp_InitWs2812b(void);
 void Ws2812b_Set_resetdata(void);
 void Ws2812b_Set_Alloff(void);

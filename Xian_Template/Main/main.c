@@ -15,24 +15,20 @@
 /*******************************************************************************
   * @FunctionName: main
   * @Author:       trx
-  * @DateTime:     2022骞?鏈?5鏃?9鐐?8鍒?
-  * @Purpose:      
+  * @DateTime:     2023年7月3日 23:37:11
+  * @Purpose:      程序入口文件
   * @param:        void               
-  * @return:
+  * @return:       void
 *******************************************************************************/
 int main(void)
 {
-	HAL_Init();                    	 			/* 鍒濆鍖朒AL搴?*/   
-	Stm32_Clock_Init(336,8,2,7);   				/* 璁剧疆鏃堕挓,168Mhz */
+	HAL_Init();                    	 			/* 初始化HAL??*/   
+	Stm32_Clock_Init(336,8,2,7);   				/* 设置时钟,168Mhz */
 
-#if	DEBUG_SWITCH_EN == 1
-	EventRecorderInitialize(EventRecordAll, 1U);/* 鍒濆鍖?EventRecorder 骞跺紑鍚?*/
-#endif
-
-	/* 鍐呮牳寮�鍚墠鍏抽棴HAL鐨勬椂闂村熀鍑?*/
+	/* 内核开启前关闭HAL的时间基??*/
 	HAL_SuspendTick();
 	
-    /* 杩涘叆ThreadX鍐呮牳 */
+    /* 进入ThreadX内核 */
     tx_kernel_enter();
 	while(1)
 		;

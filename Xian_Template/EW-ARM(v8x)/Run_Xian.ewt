@@ -1421,7 +1421,7 @@
         </settings>
     </configuration>
     <group>
-        <name>Core_h</name>
+        <name>Core</name>
         <file>
             <name>$PROJ_DIR$\..\Core\cmsis_armcc.h</name>
         </file>
@@ -1463,7 +1463,7 @@
         </file>
     </group>
     <group>
-        <name>Hallib</name>
+        <name>HalLib</name>
         <file>
             <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_hal.c</name>
         </file>
@@ -1532,36 +1532,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\Hal_lib\STM32F4xx_HAL_Driver\Src\stm32f4xx_ll_sdmmc.c</name>
-        </file>
-    </group>
-    <group>
-        <name>Inkscreen</name>
-        <file>
-            <name>$PROJ_DIR$\..\System\fonts\font12.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\fonts\font12CN.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\fonts\font16.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\fonts\font20.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\fonts\font24.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\fonts\font24CN.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\fonts\font8.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\fonts\ImageData.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\System\fonts\ImageData2.c</name>
         </file>
     </group>
     <group>

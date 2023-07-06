@@ -7,21 +7,21 @@ typedef __IO uint16_t vuint16_t;
 
 typedef struct
 {
-	uint16_t width;	//LCDå®½åº¦
-	uint16_t height;	//LCDé«˜åº¦
+	uint16_t width;	//LCD¿í¶È
+	uint16_t height;	//LCD¸ß¶È
 	uint16_t id;		//LCD ID
-	uint8_t dir;		//0,ç«–å±ï¼š1ï¼Œæ¨ªå±
-	uint16_t wramcmd;//å¼€å§‹å†™gramæŒ‡ä»¤
-	uint16_t setxcmd;//è®¾ç½®xåæ ‡æŒ‡ä»¤
-	uint16_t setycmd;//è®¾ç½®yåæ ‡æŒ‡ä»¤
+	uint8_t dir;		//0,ÊúÆÁ£º1£¬ºáÆÁ
+	uint16_t wramcmd;//¿ªÊ¼Ğ´gramÖ¸Áî
+	uint16_t setxcmd;//ÉèÖÃx×ø±êÖ¸Áî
+	uint16_t setycmd;//ÉèÖÃy×ø±êÖ¸Áî
 }_lcd_dev;
 
-extern _lcd_dev lcddev;		//ç®¡ç†LCDé‡è¦å‚æ•°
-//LCDçš„ç”»ç¬”é¢œè‰²å’ŒèƒŒæ™¯è‰²
-extern uint32_t POINT_COLOR;		//é»˜è®¤çº¢è‰²
-extern uint32_t BACK_COLOR;		//èƒŒæ™¯é¢œè‰²ï¼Œé»˜è®¤ä¸ºç™½è‰²
+extern _lcd_dev lcddev;		//¹ÜÀíLCDÖØÒª²ÎÊı
+//LCDµÄ»­±ÊÑÕÉ«ºÍ±³¾°É«
+extern uint32_t POINT_COLOR;		//Ä¬ÈÏºìÉ«
+extern uint32_t BACK_COLOR;		//±³¾°ÑÕÉ«£¬Ä¬ÈÏÎª°×É«
 
-#define LCD_LED PBout(15) 	//LCDèƒŒå…‰	PB15
+#define LCD_LED PBout(15) 	//LCD±³¹â	PB15
 
 typedef struct 
 {
@@ -29,8 +29,8 @@ typedef struct
 	vuint16_t LCD_RAM;
 }LCD_TypeDef;
 
-//ä½¿ç”¨NOR/SRAMçš„ Bank1.sector4,åœ°å€ä½HADDR[27,26]=11 A6ä½œä¸ºæ•°æ®å‘½ä»¤åŒºåˆ†çº¿ 
-//æ³¨æ„è®¾ç½®æ—¶STM32å†…éƒ¨ä¼šå³ç§»ä¸€ä½å¯¹å…¶! 111 1110=0X7E	
+//Ê¹ÓÃNOR/SRAMµÄ Bank1.sector4,µØÖ·Î»HADDR[27,26]=11 A6×÷ÎªÊı¾İÃüÁîÇø·ÖÏß 
+//×¢ÒâÉèÖÃÊ±STM32ÄÚ²¿»áÓÒÒÆÒ»Î»¶ÔÆä! 111 1110=0X7E	
 #define LCD_BASE	((uint32_t)(0x6C000000 | 0x0000007E))
 #define LCD			((LCD_TypeDef *)LCD_BASE)
 
@@ -49,27 +49,27 @@ void LCD_Clear(uint32_t);
 void LCD_Draw_Circle(uint16_t x0,uint16_t y0,uint8_t r);
 void LCD_DrawPoint(uint16_t x,uint16_t y);	
 void LCD_Color_Fill(uint16_t,uint16_t,uint16_t,uint16_t,uint16_t*);
-void LCD_Fill(uint16_t sx,uint16_t sy,uint16_t ex,uint16_t ey,uint32_t color);		   				//å¡«å……å•è‰²
+void LCD_Fill(uint16_t sx,uint16_t sy,uint16_t ex,uint16_t ey,uint32_t color);		   				//Ìî³äµ¥É«
 void LCD_Set_Window(uint16_t sx, uint16_t sy, uint16_t width, uint16_t height);
 	
 void LCD_Fast_DrawPoint(uint16_t x,uint16_t y,uint32_t color);	
-void LCD_ShowChar(uint16_t x,uint16_t y,uint8_t num,uint8_t size,uint8_t mode);						//æ˜¾ç¤ºä¸€ä¸ªå­—ç¬¦
-void LCD_ShowString(uint16_t x,uint16_t y,uint16_t width,uint16_t height,uint8_t size,uint8_t *p);		//æ˜¾ç¤ºä¸€ä¸ªå­—ç¬¦ä¸²,12/16å­—ä½“
+void LCD_ShowChar(uint16_t x,uint16_t y,uint8_t num,uint8_t size,uint8_t mode);						//ÏÔÊ¾Ò»¸ö×Ö·û
+void LCD_ShowString(uint16_t x,uint16_t y,uint16_t width,uint16_t height,uint8_t size,uint8_t *p);		//ÏÔÊ¾Ò»¸ö×Ö·û´®,12/16×ÖÌå
 
-//æ‰«ææ–¹å‘å®šä¹‰
-#define L2R_U2D  0 		//ä»å·¦åˆ°å³,ä»ä¸Šåˆ°ä¸‹
-#define L2R_D2U  1 		//ä»å·¦åˆ°å³,ä»ä¸‹åˆ°ä¸Š
-#define R2L_U2D  2 		//ä»å³åˆ°å·¦,ä»ä¸Šåˆ°ä¸‹
-#define R2L_D2U  3 		//ä»å³åˆ°å·¦,ä»ä¸‹åˆ°ä¸Š
+//É¨Ãè·½Ïò¶¨Òå
+#define L2R_U2D  0 		//´Ó×óµ½ÓÒ,´ÓÉÏµ½ÏÂ
+#define L2R_D2U  1 		//´Ó×óµ½ÓÒ,´ÓÏÂµ½ÉÏ
+#define R2L_U2D  2 		//´ÓÓÒµ½×ó,´ÓÉÏµ½ÏÂ
+#define R2L_D2U  3 		//´ÓÓÒµ½×ó,´ÓÏÂµ½ÉÏ
 
-#define U2D_L2R  4 		//ä»ä¸Šåˆ°ä¸‹,ä»å·¦åˆ°å³
-#define U2D_R2L  5 		//ä»ä¸Šåˆ°ä¸‹,ä»å³åˆ°å·¦
-#define D2U_L2R  6 		//ä»ä¸‹åˆ°ä¸Š,ä»å·¦åˆ°å³ âˆš
-#define D2U_R2L  7		//ä»ä¸‹åˆ°ä¸Š,ä»å³åˆ°å·¦	 
+#define U2D_L2R  4 		//´ÓÉÏµ½ÏÂ,´Ó×óµ½ÓÒ
+#define U2D_R2L  5 		//´ÓÉÏµ½ÏÂ,´ÓÓÒµ½×ó
+#define D2U_L2R  6 		//´ÓÏÂµ½ÉÏ,´Ó×óµ½ÓÒ ¡Ì
+#define D2U_R2L  7		//´ÓÏÂµ½ÉÏ,´ÓÓÒµ½×ó	 
 
-#define DFT_SCAN_DIR  D2U_L2R  //é»˜è®¤çš„æ‰«ææ–¹å‘
+#define DFT_SCAN_DIR  D2U_L2R  //Ä¬ÈÏµÄÉ¨Ãè·½Ïò
 
-//ç”»ç¬”é¢œè‰²
+//»­±ÊÑÕÉ«
 #define TFT_WHITE         	 0xFFFF
 #define TFT_BLACK         	 0x0000	  
 #define TFT_BLUE         	 0x001F  
@@ -81,9 +81,9 @@ void LCD_ShowString(uint16_t x,uint16_t y,uint16_t width,uint16_t height,uint8_t
 #define TFT_GREEN         	 0x07E0
 #define TFT_CYAN          	 0x7FFF
 #define TFT_YELLOW        	 0xFFE0
-#define TFT_BROWN 			 0XBC40 //æ£•è‰²
-#define TFT_BRRED 			 0XFC07 //æ£•çº¢è‰²
-#define TFT_GRAY  			 0X8430 //ç°è‰²
+#define TFT_BROWN 			 0XBC40 //×ØÉ«
+#define TFT_BRRED 			 0XFC07 //×ØºìÉ«
+#define TFT_GRAY  			 0X8430 //»ÒÉ«
 
 
 

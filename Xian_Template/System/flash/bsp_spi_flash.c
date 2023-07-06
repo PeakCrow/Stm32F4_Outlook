@@ -13,9 +13,9 @@
 *******************************************************************************/
 #include "bsp_spi_flash.h"
 
-/* èŠ¯ç‰‡ID 	0x5217   21015 */
+/* Ğ¾Æ¬ID 	0x5217   21015 */
 
-/* ä¸²è¡ŒFlashçš„ç‰‡é€‰GPIOç«¯å£ï¼Œ PB14  */
+/* ´®ĞĞFlashµÄÆ¬Ñ¡GPIO¶Ë¿Ú£¬ PB14  */
 #define SF_CS_CLK_ENABLE() 			__HAL_RCC_GPIOB_CLK_ENABLE()
 #define SF_CS_GPIO					GPIOB
 #define SF_CS_PIN					GPIO_PIN_14
@@ -23,19 +23,19 @@
 #define SF_CS_0()					SF_CS_GPIO->BSRR = ((uint32_t)SF_CS_PIN << 16U)
 #define SF_CS_1()					SF_CS_GPIO->BSRR = SF_CS_PIN
 	
-#define CMD_AAI       0xAD  	/* AAI è¿ç»­ç¼–ç¨‹æŒ‡ä»¤(FOR SST25VF016B) */
-#define CMD_DISWR	  0x04		/* ç¦æ­¢å†™, é€€å‡ºAAIçŠ¶æ€ */
-#define CMD_EWRSR	  0x50		/* å…è®¸å†™çŠ¶æ€å¯„å­˜å™¨çš„å‘½ä»¤ */
-#define CMD_WRSR      0x01  	/* å†™çŠ¶æ€å¯„å­˜å™¨å‘½ä»¤ */
-#define CMD_WREN      0x06		/* å†™ä½¿èƒ½å‘½ä»¤ */
-#define CMD_READ      0x03  	/* è¯»æ•°æ®åŒºå‘½ä»¤ */
-#define CMD_RDSR      0x05		/* è¯»çŠ¶æ€å¯„å­˜å™¨å‘½ä»¤ */
-#define CMD_RDID      0x9F		/* è¯»å™¨ä»¶IDå‘½ä»¤ */
-#define CMD_SE        0x20		/* æ“¦é™¤æ‰‡åŒºå‘½ä»¤ */
-#define CMD_BE        0xC7		/* æ‰¹é‡æ“¦é™¤å‘½ä»¤ */
-#define DUMMY_BYTE    0xA5		/* å“‘å‘½ä»¤ï¼Œå¯ä»¥ä¸ºä»»æ„å€¼ï¼Œç”¨äºè¯»æ“ä½œ */
+#define CMD_AAI       0xAD  	/* AAI Á¬Ğø±à³ÌÖ¸Áî(FOR SST25VF016B) */
+#define CMD_DISWR	  0x04		/* ½ûÖ¹Ğ´, ÍË³öAAI×´Ì¬ */
+#define CMD_EWRSR	  0x50		/* ÔÊĞíĞ´×´Ì¬¼Ä´æÆ÷µÄÃüÁî */
+#define CMD_WRSR      0x01  	/* Ğ´×´Ì¬¼Ä´æÆ÷ÃüÁî */
+#define CMD_WREN      0x06		/* Ğ´Ê¹ÄÜÃüÁî */
+#define CMD_READ      0x03  	/* ¶ÁÊı¾İÇøÃüÁî */
+#define CMD_RDSR      0x05		/* ¶Á×´Ì¬¼Ä´æÆ÷ÃüÁî */
+#define CMD_RDID      0x9F		/* ¶ÁÆ÷¼şIDÃüÁî */
+#define CMD_SE        0x20		/* ²Á³ıÉÈÇøÃüÁî */
+#define CMD_BE        0xC7		/* ÅúÁ¿²Á³ıÃüÁî */
+#define DUMMY_BYTE    0xA5		/* ÑÆÃüÁî£¬¿ÉÒÔÎªÈÎÒâÖµ£¬ÓÃÓÚ¶Á²Ù×÷ */
 
-#define WIP_FLAG      0x01		/* çŠ¶æ€å¯„å­˜å™¨ä¸­çš„æ­£åœ¨ç¼–ç¨‹æ ‡å¿—ï¼ˆWIP) */
+#define WIP_FLAG      0x01		/* ×´Ì¬¼Ä´æÆ÷ÖĞµÄÕıÔÚ±à³Ì±êÖ¾£¨WIP) */
 
 SFLASH_T g_tSF;
 
@@ -45,14 +45,14 @@ static uint8_t sf_NeedErase(uint8_t * _ucpOldBuf, uint8_t *_ucpNewBuf, uint16_t 
 static uint8_t sf_CmpData(uint32_t _uiSrcAddr, uint8_t *_ucpTar, uint32_t _uiSize);
 uint8_t sf_AutoWriteSector(uint8_t *_ucpSrc, uint32_t _uiWrAddr, uint16_t _usWrLen);
 
-//static uint8_t g_spiTxBuf[4*1024];	/* ç”¨äºå†™å‡½æ•°ï¼Œå…ˆè¯»å‡ºæ•´ä¸ªæ‰‡åŒºï¼Œä¿®æ”¹ç¼“å†²åŒºåï¼Œå†æ•´ä¸ªæ‰‡åŒºå›å†™ */
+//static uint8_t g_spiTxBuf[4*1024];	/* ÓÃÓÚĞ´º¯Êı£¬ÏÈ¶Á³öÕû¸öÉÈÇø£¬ĞŞ¸Ä»º³åÇøºó£¬ÔÙÕû¸öÉÈÇø»ØĞ´ */
 
 /*******************************************************************************
   * @FunctionName: sf_SetCS
   * @Author:       trx
-  * @DateTime:     2022å¹´4æœˆ29æ—¥ 13:13:02 
-  * @Purpose:      ä¸²è¡Œflashç‰‡é€‰æ§åˆ¶å‡½æ•°âˆšâˆšâˆš
-  * @param:        _Levelï¼š0ï¼šç‰‡é€‰ï¼›1ï¼šç¦æ­¢ç‰‡é€‰
+  * @DateTime:     2022Äê4ÔÂ29ÈÕ 13:13:02 
+  * @Purpose:      ´®ĞĞflashÆ¬Ñ¡¿ØÖÆº¯Êı¡Ì¡Ì¡Ì
+  * @param:        _Level£º0£ºÆ¬Ñ¡£»1£º½ûÖ¹Æ¬Ñ¡
   * @return:       none
 *******************************************************************************/
 void sf_SetCS(uint8_t _Level)
@@ -60,7 +60,7 @@ void sf_SetCS(uint8_t _Level)
 	if (_Level == 0)
 	{
 		bsp_Spi1BusEnter();	
-		/* æœ€é«˜é€Ÿå†™flashä¼šå‡ºé”™ï¼Œæ‰€ä»¥è¿™é‡Œä½¿ç”¨æ¬¡é«˜é€Ÿ */
+		/* ×î¸ßËÙĞ´flash»á³ö´í£¬ËùÒÔÕâÀïÊ¹ÓÃ´Î¸ßËÙ */
 		bsp_InitSPI1Param(SPI_BAUDRATEPRESCALER_21M, SPI_PHASE_2EDGE, SPI_POLARITY_HIGH);
 		SF_CS_0();
 	}
@@ -74,94 +74,94 @@ void sf_SetCS(uint8_t _Level)
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: sf_WriteEnable
-*	åŠŸèƒ½è¯´æ˜: å‘å™¨ä»¶å‘é€å†™ä½¿èƒ½å‘½ä»¤âˆšâˆšâˆš
-*	å½¢    å‚: æ—  
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: sf_WriteEnable
+*	¹¦ÄÜËµÃ÷: ÏòÆ÷¼ş·¢ËÍĞ´Ê¹ÄÜÃüÁî¡Ì¡Ì¡Ì
+*	ĞÎ    ²Î: ÎŞ 
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 void sf_WriteEnable(void)
 {
-	sf_SetCS(0);									/* ä½¿èƒ½ç‰‡é€‰ */
+	sf_SetCS(0);									/* Ê¹ÄÜÆ¬Ñ¡ */
 	g_spiLen = 0;
-	g_spiTxBuf[g_spiLen++] = (CMD_WREN);			/* å‘é€å‘½ä»¤ */
+	g_spiTxBuf[g_spiLen++] = (CMD_WREN);			/* ·¢ËÍÃüÁî */
 	bsp_spi1Transfer();
-	sf_SetCS(1);									/* ç¦èƒ½ç‰‡é€‰ */
+	sf_SetCS(1);									/* ½ûÄÜÆ¬Ñ¡ */
 }
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: sf_WaitForWriteEnd
-*	åŠŸèƒ½è¯´æ˜: é‡‡ç”¨å¾ªç¯æŸ¥è¯¢çš„æ–¹å¼ç­‰å¾…å™¨ä»¶å†…éƒ¨å†™æ“ä½œå®Œæˆ
-*	å½¢    å‚: æ— 	âˆšâˆšâˆš
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: sf_WaitForWriteEnd
+*	¹¦ÄÜËµÃ÷: ²ÉÓÃÑ­»·²éÑ¯µÄ·½Ê½µÈ´ıÆ÷¼şÄÚ²¿Ğ´²Ù×÷Íê³É
+*	ĞÎ    ²Î: ÎŞ	¡Ì¡Ì¡Ì
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 static void sf_WaitForWriteEnd(void)
 {
-	sf_SetCS(0);									/* ä½¿èƒ½ç‰‡é€‰ */
-	g_spiTxBuf[0] = (CMD_RDSR);						/* å‘é€å‘½ä»¤ï¼Œ è¯»çŠ¶æ€å¯„å­˜å™¨ */
+	sf_SetCS(0);									/* Ê¹ÄÜÆ¬Ñ¡ */
+	g_spiTxBuf[0] = (CMD_RDSR);						/* ·¢ËÍÃüÁî£¬ ¶Á×´Ì¬¼Ä´æÆ÷ */
 	g_spiLen = 2;
 	bsp_spi1Transfer();	
-	sf_SetCS(1);									/* ç¦èƒ½ç‰‡é€‰ */
+	sf_SetCS(1);									/* ½ûÄÜÆ¬Ñ¡ */
 	
 	while(1)
 	{
-		sf_SetCS(0);								/* ä½¿èƒ½ç‰‡é€‰ */
-		g_spiTxBuf[0] = (CMD_RDSR);					/* å‘é€å‘½ä»¤ï¼Œ è¯»çŠ¶æ€å¯„å­˜å™¨ */
-		g_spiTxBuf[1] = 0;							/* æ— å…³æ•°æ® */
+		sf_SetCS(0);								/* Ê¹ÄÜÆ¬Ñ¡ */
+		g_spiTxBuf[0] = (CMD_RDSR);					/* ·¢ËÍÃüÁî£¬ ¶Á×´Ì¬¼Ä´æÆ÷ */
+		g_spiTxBuf[1] = 0;							/* ÎŞ¹ØÊı¾İ */
 		g_spiLen = 2;
 		bsp_spi1Transfer();	
-		sf_SetCS(1);								/* ç¦èƒ½ç‰‡é€‰ */
-		/* å‘é€è¯»çŠ¶æ€å™¨æŒ‡ä»¤å,åˆ¤æ–­æ¥æ”¶åˆ°å­—èŠ‚çš„ç¬¬0ä½æ˜¯å¦ä¸º0 */
-		/* 0ä»£è¡¨è¯¥è®¾å¤‡å·²å‡†å¤‡å¥½è¿›ä¸€æ­¥çš„æŒ‡ç¤º(é€šè¿‡æŸ¥æ•°æ®æ‰‹å†Œå¾—çŸ¥) */
-		if ((g_spiRxBuf[1] & WIP_FLAG) != SET)		/* åˆ¤æ–­çŠ¶æ€å¯„å­˜å™¨çš„å¿™æ ‡å¿—ä½ */
+		sf_SetCS(1);								/* ½ûÄÜÆ¬Ñ¡ */
+		/* ·¢ËÍ¶Á×´Ì¬Æ÷Ö¸Áîºó,ÅĞ¶Ï½ÓÊÕµ½×Ö½ÚµÄµÚ0Î»ÊÇ·ñÎª0 */
+		/* 0´ú±í¸ÃÉè±¸ÒÑ×¼±¸ºÃ½øÒ»²½µÄÖ¸Ê¾(Í¨¹ı²éÊı¾İÊÖ²áµÃÖª) */
+		if ((g_spiRxBuf[1] & WIP_FLAG) != SET)		/* ÅĞ¶Ï×´Ì¬¼Ä´æÆ÷µÄÃ¦±êÖ¾Î» */
 		{
 			break;
 		}		
 	}
-	//printf("å™¨ä»¶å†…éƒ¨æ“ä½œå®Œæˆ\r\n");
+	//printf("Æ÷¼şÄÚ²¿²Ù×÷Íê³É\r\n");
 }
 
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: sf_ReadInfo
-*	åŠŸèƒ½è¯´æ˜: è¯»å–å™¨ä»¶ID,å¹¶å¡«å……å™¨ä»¶å‚æ•°
-*	å½¢    å‚: æ— 
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: sf_ReadInfo
+*	¹¦ÄÜËµÃ÷: ¶ÁÈ¡Æ÷¼şID,²¢Ìî³äÆ÷¼ş²ÎÊı
+*	ĞÎ    ²Î: ÎŞ
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 
 void sf_ReadInfo(void)
 {
-	/* è‡ªåŠ¨è¯†åˆ«ä¸²è¡ŒFlashå‹å· */
+	/* ×Ô¶¯Ê¶±ğ´®ĞĞFlashĞÍºÅ */
 	{
-		g_tSF.ChipID = sf_ReadID();	/* èŠ¯ç‰‡ID */
+		g_tSF.ChipID = sf_ReadID();	/* Ğ¾Æ¬ID */
 
 		switch (g_tSF.ChipID)
 		{
 			case SST25VF016B_ID:
 				strcpy(g_tSF.ChipName, "SST25VF016B");
-				g_tSF.TotalSize = 2 * 1024 * 1024;	/* æ€»å®¹é‡ = 2M */
-				g_tSF.SectorSize = 4 * 1024;		/* æ‰‡åŒºå¤§å° = 4K */
+				g_tSF.TotalSize = 2 * 1024 * 1024;	/* ×ÜÈİÁ¿ = 2M */
+				g_tSF.SectorSize = 4 * 1024;		/* ÉÈÇø´óĞ¡ = 4K */
 				break;
 
 			case MX25L1606E_ID:
 				strcpy(g_tSF.ChipName, "MX25L1606E");
-				g_tSF.TotalSize = 2 * 1024 * 1024;	/* æ€»å®¹é‡ = 2M */
-				g_tSF.SectorSize = 4 * 1024;		/* æ‰‡åŒºå¤§å° = 4K */
+				g_tSF.TotalSize = 2 * 1024 * 1024;	/* ×ÜÈİÁ¿ = 2M */
+				g_tSF.SectorSize = 4 * 1024;		/* ÉÈÇø´óĞ¡ = 4K */
 				break;
 
 			case W25Q64BV_ID:
 				strcpy(g_tSF.ChipName, "W25Q64BV");
-				g_tSF.TotalSize = 8 * 1024 * 1024;	/* æ€»å®¹é‡ = 8M */
-				g_tSF.SectorSize = 4 * 1024;		/* æ‰‡åŒºå¤§å° = 4K */
+				g_tSF.TotalSize = 8 * 1024 * 1024;	/* ×ÜÈİÁ¿ = 8M */
+				g_tSF.SectorSize = 4 * 1024;		/* ÉÈÇø´óĞ¡ = 4K */
 				break;
 			
 			case N25Q128_ID:
 				strcpy(g_tSF.ChipName, "N25Q128FV");
-				g_tSF.TotalSize = 16 * 1024 * 1024;	/* æ€»å®¹é‡ = 8M */
-				g_tSF.SectorSize = 4 * 1024;		/* æ‰‡åŒºå¤§å° = 4K */
+				g_tSF.TotalSize = 16 * 1024 * 1024;	/* ×ÜÈİÁ¿ = 8M */
+				g_tSF.SectorSize = 4 * 1024;		/* ÉÈÇø´óĞ¡ = 4K */
 				break;			
 			case W25Q128FV_ID:
 				strcpy(g_tSF.ChipName,"W25Q128FV");
@@ -180,10 +180,10 @@ void sf_ReadInfo(void)
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: sf_ReadID
-*	åŠŸèƒ½è¯´æ˜: è¯»å–å™¨ä»¶åˆ¶é€ å•†ID
-*	å½¢    å‚:  æ— 
-*	è¿” å› å€¼: 32bitçš„å™¨ä»¶ID (æœ€é«˜8bitå¡«0ï¼Œæœ‰æ•ˆIDä½æ•°ä¸º24bitï¼‰
+*	º¯ Êı Ãû: sf_ReadID
+*	¹¦ÄÜËµÃ÷: ¶ÁÈ¡Æ÷¼şÖÆÔìÉÌID
+*	ĞÎ    ²Î:  ÎŞ
+*	·µ »Ø Öµ: 32bitµÄÆ÷¼şID (×î¸ß8bitÌî0£¬ÓĞĞ§IDÎ»ÊıÎª24bit£©
 *********************************************************************************************************
 */
 uint32_t sf_ReadID(void)
@@ -191,16 +191,16 @@ uint32_t sf_ReadID(void)
 	uint32_t uiID;
 	uint8_t id1, id2, id3;
 
-	sf_SetCS(0);							/* ä½¿èƒ½ç‰‡é€‰ */
+	sf_SetCS(0);							/* Ê¹ÄÜÆ¬Ñ¡ */
 	g_spiLen = 0;
-	g_spiTxBuf[0] = (CMD_RDID);				/* å‘é€è¯»IDå‘½ä»¤ */
+	g_spiTxBuf[0] = (CMD_RDID);				/* ·¢ËÍ¶ÁIDÃüÁî */
 	g_spiLen = 4;
 	bsp_spi1Transfer();
 	
-	id1 = g_spiRxBuf[1];					/* è¯»IDçš„ç¬¬1ä¸ªå­—èŠ‚ */
-	id2 = g_spiRxBuf[2];					/* è¯»IDçš„ç¬¬2ä¸ªå­—èŠ‚ */
-	id3 = g_spiRxBuf[3];					/* è¯»IDçš„ç¬¬3ä¸ªå­—èŠ‚ */
-	sf_SetCS(1);							/* ç¦èƒ½ç‰‡é€‰ */
+	id1 = g_spiRxBuf[1];					/* ¶ÁIDµÄµÚ1¸ö×Ö½Ú */
+	id2 = g_spiRxBuf[2];					/* ¶ÁIDµÄµÚ2¸ö×Ö½Ú */
+	id3 = g_spiRxBuf[3];					/* ¶ÁIDµÄµÚ3¸ö×Ö½Ú */
+	sf_SetCS(1);							/* ½ûÄÜÆ¬Ñ¡ */
 
 	uiID = ((uint32_t)id1 << 16) | ((uint32_t)id2 << 8) | id3;
 	return uiID;
@@ -209,62 +209,62 @@ uint32_t sf_ReadID(void)
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: sf_EraseChip
-*	åŠŸèƒ½è¯´æ˜: æ“¦é™¤æ•´ä¸ªèŠ¯ç‰‡âˆšâˆšâˆš
-*	å½¢    å‚:  æ— 
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: sf_EraseChip
+*	¹¦ÄÜËµÃ÷: ²Á³ıÕû¸öĞ¾Æ¬¡Ì¡Ì¡Ì
+*	ĞÎ    ²Î:  ÎŞ
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 void sf_EraseChip(void)
 {	
-	sf_WriteEnable();								/* å‘é€å†™ä½¿èƒ½å‘½ä»¤ */
+	sf_WriteEnable();								/* ·¢ËÍĞ´Ê¹ÄÜÃüÁî */
 
-	/* æ“¦é™¤æ‰‡åŒºæ“ä½œ */
-	sf_SetCS(0);		/* ä½¿èƒ½ç‰‡é€‰ */
+	/* ²Á³ıÉÈÇø²Ù×÷ */
+	sf_SetCS(0);		/* Ê¹ÄÜÆ¬Ñ¡ */
 	g_spiLen = 0;
-	g_spiTxBuf[g_spiLen++] = CMD_BE;				/* å‘é€æ•´ç‰‡æ“¦é™¤å‘½ä»¤ */
+	g_spiTxBuf[g_spiLen++] = CMD_BE;				/* ·¢ËÍÕûÆ¬²Á³ıÃüÁî */
 	bsp_spi1Transfer();
-	sf_SetCS(1);									/* ç¦èƒ½ç‰‡é€‰ */
+	sf_SetCS(1);									/* ½ûÄÜÆ¬Ñ¡ */
 
-	sf_WaitForWriteEnd();							/* ç­‰å¾…ä¸²è¡ŒFlashå†…éƒ¨å†™æ“ä½œå®Œæˆ */
+	sf_WaitForWriteEnd();							/* µÈ´ı´®ĞĞFlashÄÚ²¿Ğ´²Ù×÷Íê³É */
 }
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: bsp_InitSFlash
-*	åŠŸèƒ½è¯´æ˜: ä¸²è¡Œfalshç¡¬ä»¶åˆå§‹åŒ–ã€‚ é…ç½®CS GPIOç‰‡é€‰ä¿¡å·ï¼Œ è¯»å–IDã€‚
-*	å½¢    å‚: æ— 
-*	è¿” å› å€¼: æ— 
+*	º¯ Êı Ãû: bsp_InitSFlash
+*	¹¦ÄÜËµÃ÷: ´®ĞĞfalshÓ²¼ş³õÊ¼»¯¡£ ÅäÖÃCS GPIOÆ¬Ñ¡ĞÅºÅ£¬ ¶ÁÈ¡ID¡£
+*	ĞÎ    ²Î: ÎŞ
+*	·µ »Ø Öµ: ÎŞ
 *********************************************************************************************************
 */
 void bsp_InitSFlash(void)
 {
-	/* é…ç½®CS GPIO */
+	/* ÅäÖÃCS GPIO */
 	{
 		GPIO_InitTypeDef gpio_init;
 
-		/* æ‰“å¼€GPIOæ—¶é’Ÿ */
+		/* ´ò¿ªGPIOÊ±ÖÓ */
 		SF_CS_CLK_ENABLE();
 		
-		gpio_init.Mode = GPIO_MODE_OUTPUT_PP;	/* è®¾ç½®æ¨æŒ½è¾“å‡º */
-		gpio_init.Pull = GPIO_PULLUP;			/* ä¸Šä¸‹æ‹‰ç”µé˜»ä¸ä½¿èƒ½ */
-		gpio_init.Speed = GPIO_SPEED_HIGH;  	/* GPIOé€Ÿåº¦ç­‰çº§ */	
+		gpio_init.Mode = GPIO_MODE_OUTPUT_PP;	/* ÉèÖÃÍÆÍìÊä³ö */
+		gpio_init.Pull = GPIO_PULLUP;			/* ÉÏÏÂÀ­µç×è²»Ê¹ÄÜ */
+		gpio_init.Speed = GPIO_SPEED_HIGH;  	/* GPIOËÙ¶ÈµÈ¼¶ */	
 		gpio_init.Pin = SF_CS_PIN;	
 		HAL_GPIO_Init(SF_CS_GPIO, &gpio_init);	
 	}
 	
-	/* è¯»å–èŠ¯ç‰‡ID, è‡ªåŠ¨è¯†åˆ«èŠ¯ç‰‡å‹å· */
+	/* ¶ÁÈ¡Ğ¾Æ¬ID, ×Ô¶¯Ê¶±ğĞ¾Æ¬ĞÍºÅ */
 	sf_ReadInfo();
 }	
 /*******************************************************************************
   * @FunctionName: sf_NeedErase
   * @Author:       trx
-  * @DateTime:     2022å¹´4æœˆ25æ—¥ 13:28:19 
-  * @Purpose:      åˆ¤æ–­å†™PAGEä¹‹å‰æ˜¯å¦éœ€è¦æ“¦é™¤âˆšâˆšâˆš
-  * @param:        _ucpOldBufï¼šæ—§æ•°æ®
-  * @param:        _ucpNewBufï¼šæ–°æ•°æ®
-  * @param:        _usLen    ï¼šæ•°æ®ä¸ªæ•°
-  * @return:		0ï¼›ä¸éœ€è¦æ“¦é™¤ï¼›1ï¼šéœ€è¦æ“¦é™¤
+  * @DateTime:     2022Äê4ÔÂ25ÈÕ 13:28:19 
+  * @Purpose:      ÅĞ¶ÏĞ´PAGEÖ®Ç°ÊÇ·ñĞèÒª²Á³ı¡Ì¡Ì¡Ì
+  * @param:        _ucpOldBuf£º¾ÉÊı¾İ
+  * @param:        _ucpNewBuf£ºĞÂÊı¾İ
+  * @param:        _usLen    £ºÊı¾İ¸öÊı
+  * @return:		0£»²»ĞèÒª²Á³ı£»1£ºĞèÒª²Á³ı
 *******************************************************************************/
 static uint8_t sf_NeedErase(uint8_t * _ucpOldBuf, uint8_t * _ucpNewBuf, uint16_t _usLen)
 {
@@ -272,15 +272,15 @@ static uint8_t sf_NeedErase(uint8_t * _ucpOldBuf, uint8_t * _ucpNewBuf, uint16_t
 	uint8_t ucOld;
 
 	/*
-	ç®—æ³•ç¬¬ä¸€æ­¥ï¼šoldæ±‚åï¼Œnewä¸å˜
+	Ëã·¨µÚÒ»²½£ºoldÇó·´£¬new²»±ä
 				1101	0101
 			~	
 			=	0010	0101
-	ç®—æ³•ç¬¬äºŒéƒ¨ï¼šoldæ±‚åç»“æœä½ä¸new
+	Ëã·¨µÚ¶ş²¿£ºoldÇó·´½á¹ûÎ»Óënew
 				0010
 			&	0101
 			=	0000
-	ç®—æ³•ç¬¬ä¸‰æ­¥ï¼šç»“æœä¸º0ï¼Œåˆ™è¡¨ç¤ºæ— éœ€æ“¦é™¤ï¼Œå¦åˆ™è¡¨ç¤ºéœ€è¦æ“¦é™¤
+	Ëã·¨µÚÈı²½£º½á¹ûÎª0£¬Ôò±íÊ¾ÎŞĞè²Á³ı£¬·ñÔò±íÊ¾ĞèÒª²Á³ı
 	*/
 
 	for (i = 0; i < _usLen; ++i)
@@ -299,19 +299,19 @@ static uint8_t sf_NeedErase(uint8_t * _ucpOldBuf, uint8_t * _ucpNewBuf, uint16_t
 /*******************************************************************************
   * @FunctionName: sf_CmpData
   * @Author:       trx
-  * @DateTime:     2022å¹´4æœˆ25æ—¥ 14:07:40 
-  * @Purpose:      æ¯”è¾ƒflashçš„æ•°æ®âˆšâˆšâˆš
-  * @param:        _uiSrcAddrï¼šæ•°æ®ç¼“å†²åŒº
-  * @param:        _ucpTar     falshåœ°å€
-  * @param:        _uiSize     æ•°æ®ä¸ªæ•°ï¼Œä¸èƒ½è¶…å‡ºèŠ¯ç‰‡æ€»å®¹é‡
-  * @return:       0ï¼šç›¸ç­‰ï¼›1ï¼›ä¸ç›¸ç­‰ï¼›
+  * @DateTime:     2022Äê4ÔÂ25ÈÕ 14:07:40 
+  * @Purpose:      ±È½ÏflashµÄÊı¾İ¡Ì¡Ì¡Ì
+  * @param:        _uiSrcAddr£ºÊı¾İ»º³åÇø
+  * @param:        _ucpTar     falshµØÖ·
+  * @param:        _uiSize     Êı¾İ¸öÊı£¬²»ÄÜ³¬³öĞ¾Æ¬×ÜÈİÁ¿
+  * @return:       0£ºÏàµÈ£»1£»²»ÏàµÈ£»
 *******************************************************************************/
 static uint8_t sf_CmpData(uint32_t _uiSrcAddr, uint8_t * _ucpTar, uint32_t _uiSize)
 {
 	uint16_t i,j;
 	uint16_t rem;
 	
-	/* å¦‚æœè¯»å–çš„æ•°æ®é•¿åº¦ä¸º0æˆ–è€…è¶…å‡ºä¸²è¡Œflashåœ°å€ç©ºé—´ï¼Œåˆ™ç›´æ¥è¿”å› */
+	/* Èç¹û¶ÁÈ¡µÄÊı¾İ³¤¶ÈÎª0»òÕß³¬³ö´®ĞĞflashµØÖ·¿Õ¼ä£¬ÔòÖ±½Ó·µ»Ø */
 
 	if ((_uiSrcAddr + _uiSize) > g_tSF.TotalSize)
 		{
@@ -322,7 +322,7 @@ static uint8_t sf_CmpData(uint32_t _uiSrcAddr, uint8_t * _ucpTar, uint32_t _uiSi
 		{
 			return 0;
 		}
-	sf_SetCS(0);				/* ä½¿èƒ½ç‰‡é€‰ */
+	sf_SetCS(0);				/* Ê¹ÄÜÆ¬Ñ¡ */
 	g_spiLen = 0;
 	g_spiTxBuf[g_spiLen++] = (CMD_READ);
 	g_spiTxBuf[g_spiLen++] = ((_uiSrcAddr & 0xff0000) >> 16);
@@ -330,7 +330,7 @@ static uint8_t sf_CmpData(uint32_t _uiSrcAddr, uint8_t * _ucpTar, uint32_t _uiSi
 	g_spiTxBuf[g_spiLen++] = (_uiSrcAddr & 0xff);
 	bsp_spi1Transfer();
 
-	/* å¼€å§‹è¯»æ•°æ®ï¼Œåº”ä¸ºåº•å±‚DMAç¼“å†²åŒºæœ‰é™ï¼Œå¿…é¡»åˆ†åŒ…è¯» */
+	/* ¿ªÊ¼¶ÁÊı¾İ£¬Ó¦Îªµ×²ãDMA»º³åÇøÓĞÏŞ£¬±ØĞë·Ö°ü¶Á */
 	for (i = 0; i < _uiSize / SPI_BUFFER_SIZE; ++i)
 		{
 			g_spiLen = SPI_BUFFER_SIZE;
@@ -340,11 +340,11 @@ static uint8_t sf_CmpData(uint32_t _uiSrcAddr, uint8_t * _ucpTar, uint32_t _uiSi
 				{
 					if(g_spiRxBuf[j] != *_ucpTar++)
 						{
-							goto NOTEQ;			/* ä¸ç›¸ç­‰ */
+							goto NOTEQ;			/* ²»ÏàµÈ */
 						}
 				}
 		}
-	rem = _uiSize % SPI_BUFFER_SIZE;			/* å‰©ä½™å­—èŠ‚ */
+	rem = _uiSize % SPI_BUFFER_SIZE;			/* Ê£Óà×Ö½Ú */
 	if (rem > 0)
 		{
 			g_spiLen = rem;
@@ -354,149 +354,149 @@ static uint8_t sf_CmpData(uint32_t _uiSrcAddr, uint8_t * _ucpTar, uint32_t _uiSi
 				{
 					if (g_spiRxBuf[j] != *_ucpTar++)
 						{
-							goto NOTEQ;		/* ä¸ç›¸ç­‰ */
+							goto NOTEQ;		/* ²»ÏàµÈ */
 						}
 				}
 		}
 	sf_SetCS(1);
-	return 0;			/* ç›¸ç­‰ */
+	return 0;			/* ÏàµÈ */
 
 NOTEQ:
 	sf_SetCS(1);
-	return 1;			/* ä¸ç›¸ç­‰ */
+	return 1;			/* ²»ÏàµÈ */
 }
 
 
 /*******************************************************************************
   * @FunctionName: sf_ReadBuffer
   * @Author:       trx
-  * @DateTime:     2022å¹´4æœˆ25æ—¥ 14:47:32 
-  * @Purpose:      è¿ç»­è¯»å–è‹¥å¹²å­—èŠ‚ï¼Œå­—èŠ‚ä¸ªæ•°ä¸èƒ½è¶…å‡ºèŠ¯ç‰‡æ•°é‡âˆšâˆšâˆš
-  * @param:        _pBuf       æ•°æ®æºç¼“å†²åŒº
-  * @param:        _uiReadAddr é¦–åœ°å€
-  * @param:        _uiSize     æ•°æ®ä¸ªæ•°ï¼Œä¸èƒ½è¶…å‡ºèŠ¯ç‰‡æ€»å®¹é‡
+  * @DateTime:     2022Äê4ÔÂ25ÈÕ 14:47:32 
+  * @Purpose:      Á¬Ğø¶ÁÈ¡Èô¸É×Ö½Ú£¬×Ö½Ú¸öÊı²»ÄÜ³¬³öĞ¾Æ¬ÊıÁ¿¡Ì¡Ì¡Ì
+  * @param:        _pBuf       Êı¾İÔ´»º³åÇø
+  * @param:        _uiReadAddr Ê×µØÖ·
+  * @param:        _uiSize     Êı¾İ¸öÊı£¬²»ÄÜ³¬³öĞ¾Æ¬×ÜÈİÁ¿
 *******************************************************************************/
 void sf_ReadBuffer(uint8_t * _pBuf, uint32_t _uiReadAddr, uint32_t _uiSize)
 {
 	uint16_t rem;
 	uint16_t i;
 
-	/* å¦‚æœè¯»å–çš„æ•°æ®é•¿åº¦ä¸º0æˆ–è€…è¶…å‡ºä¸²è¡Œflashåœ°å€ç©ºé—´ï¼Œåˆ™ç›´æ¥è¿”å› */
+	/* Èç¹û¶ÁÈ¡µÄÊı¾İ³¤¶ÈÎª0»òÕß³¬³ö´®ĞĞflashµØÖ·¿Õ¼ä£¬ÔòÖ±½Ó·µ»Ø */
 	if ((_uiSize == 0) || (_uiReadAddr + _uiSize) > g_tSF.TotalSize)
 		{
 			return ;
 		}
 
-	/* æ“¦é™¤æ‰‡åŒºæ“ä½œ */
-	sf_SetCS(0);								/* ä½¿èƒ½ç‰‡é€‰ */
+	/* ²Á³ıÉÈÇø²Ù×÷ */
+	sf_SetCS(0);								/* Ê¹ÄÜÆ¬Ñ¡ */
 	g_spiLen = 0;
-	g_spiTxBuf[g_spiLen++] = (CMD_READ);						/* å‘é€è¯»æŒ‡ä»¤ */
-	g_spiTxBuf[g_spiLen++] = ((_uiReadAddr & 0xff0000) >> 16);	/* å‘é€æ‰‡åŒºåœ°å€çš„é«˜8bit */
-	g_spiTxBuf[g_spiLen++] = ((_uiReadAddr & 0xff00) >> 8);		/* å‘é€æ‰‡åŒºåœ°å€çš„ä¸­8bit */
-	g_spiTxBuf[g_spiLen++] = (_uiReadAddr & 0xff);				/* å‘é€æ‰‡åŒºåœ°å€ä½8bit */
-	bsp_spi1Transfer();			/* ç¬¬ä¸€æ¬¡å‘é€0x03 */
+	g_spiTxBuf[g_spiLen++] = (CMD_READ);						/* ·¢ËÍ¶ÁÖ¸Áî */
+	g_spiTxBuf[g_spiLen++] = ((_uiReadAddr & 0xff0000) >> 16);	/* ·¢ËÍÉÈÇøµØÖ·µÄ¸ß8bit */
+	g_spiTxBuf[g_spiLen++] = ((_uiReadAddr & 0xff00) >> 8);		/* ·¢ËÍÉÈÇøµØÖ·µÄÖĞ8bit */
+	g_spiTxBuf[g_spiLen++] = (_uiReadAddr & 0xff);				/* ·¢ËÍÉÈÇøµØÖ·µÍ8bit */
+	bsp_spi1Transfer();			/* µÚÒ»´Î·¢ËÍ0x03 */
 
-	/* å¼€å§‹è¯»æ•°æ®ï¼Œå› ä¸ºåº•å±‚DMAç¼“å†²åŒºæœ‰é™ï¼Œå¿…é¡»åˆ†åŒ…è¯» */
+	/* ¿ªÊ¼¶ÁÊı¾İ£¬ÒòÎªµ×²ãDMA»º³åÇøÓĞÏŞ£¬±ØĞë·Ö°ü¶Á */
 	for (i = 0; i < _uiSize / SPI_BUFFER_SIZE; ++i)
 		{
-			g_spiLen = SPI_BUFFER_SIZE;							/* æ¯æ¬¡è¯»å–4kå¤§å°çš„æ‰‡åŒº */
-			bsp_spi1Transfer();	/* ç¬¬äºŒæ¬¡å‘é€0x03 */
-			/* ä»å­˜å‚¨åŒºg_spiRxBufå¤åˆ¶SPI_BUFFER_SIZEä¸ªå­—èŠ‚åˆ°_pBuf */
-			/* è¿”å›ä¸€ä¸ªæŒ‡å‘_pBufå­˜å‚¨åŒºçš„æŒ‡é’ˆ */
+			g_spiLen = SPI_BUFFER_SIZE;							/* Ã¿´Î¶ÁÈ¡4k´óĞ¡µÄÉÈÇø */
+			bsp_spi1Transfer();	/* µÚ¶ş´Î·¢ËÍ0x03 */
+			/* ´Ó´æ´¢Çøg_spiRxBuf¸´ÖÆSPI_BUFFER_SIZE¸ö×Ö½Úµ½_pBuf */
+			/* ·µ»ØÒ»¸öÖ¸Ïò_pBuf´æ´¢ÇøµÄÖ¸Õë */
 			memcpy(_pBuf, g_spiRxBuf,SPI_BUFFER_SIZE);
-			_pBuf += SPI_BUFFER_SIZE;							/* åœ°å€è¿ç®—ï¼Œå°†_pBufæŒ‡é’ˆæŒ‡å‘ä¸‹ä¸€ä¸ªæ‰‡åŒºçš„é¦–åœ°å€ */
+			_pBuf += SPI_BUFFER_SIZE;							/* µØÖ·ÔËËã£¬½«_pBufÖ¸ÕëÖ¸ÏòÏÂÒ»¸öÉÈÇøµÄÊ×µØÖ· */
 		}
-	rem = _uiSize % SPI_BUFFER_SIZE;			/* å‰©ä½™å­—èŠ‚ï¼Œè®¡ç®—è¦è¯»å–çš„æ•°æ®æ˜¯å¦æ˜¯æ•´æ‰‡åŒº */
+	rem = _uiSize % SPI_BUFFER_SIZE;			/* Ê£Óà×Ö½Ú£¬¼ÆËãÒª¶ÁÈ¡µÄÊı¾İÊÇ·ñÊÇÕûÉÈÇø */
 
 	if (rem > 0)
 		{
 			g_spiLen = rem;
 			bsp_spi1Transfer();
-			memcpy(_pBuf,g_spiRxBuf,rem);		/* å°†å¤šä½™çš„å­—èŠ‚å†æ¬¡è¿›è¡Œå¤åˆ¶ */
+			memcpy(_pBuf,g_spiRxBuf,rem);		/* ½«¶àÓàµÄ×Ö½ÚÔÙ´Î½øĞĞ¸´ÖÆ */
 		}
-	sf_SetCS(1);								/* ç¦æ­¢ç‰‡é€‰ */
+	sf_SetCS(1);								/* ½ûÖ¹Æ¬Ñ¡ */
 }
 /*******************************************************************************
   * @FunctionName: sf_AutoWriteSector
   * @Author:       trx
-  * @DateTime:     2022å¹´4æœˆ25æ—¥ 15:47:44 
-  * @Purpose:      å†™ä¸€ä¸ªæ‰‡åŒºå¹¶æ ¡éªŒï¼Œå¦‚æœä¸æ­£ç¡®åˆ™å†é‡å†™ä¸¤æ¬¡ï¼Œæœ¬å‡½æ•°è‡ªåŠ¨å®Œæˆâˆšâˆšâˆš
-  * @param:        _ucpSrc     æ•°æ®æºç¼“å†²åŒº
-  * @param:        _uiWrAddr   ç›®æ ‡åŒºåŸŸé¦–åœ°å€
-  * @param:        _usWrLen    æ•°æ®ä¸ªæ•°ï¼Œä¸èƒ½è¶…è¿‡æ‰‡åŒºå¤§å°
-  * @return:       0ï¼šé”™è¯¯ï¼›1ï¼šæˆåŠŸï¼›
+  * @DateTime:     2022Äê4ÔÂ25ÈÕ 15:47:44 
+  * @Purpose:      Ğ´Ò»¸öÉÈÇø²¢Ğ£Ñé£¬Èç¹û²»ÕıÈ·ÔòÔÙÖØĞ´Á½´Î£¬±¾º¯Êı×Ô¶¯Íê³É¡Ì¡Ì¡Ì
+  * @param:        _ucpSrc     Êı¾İÔ´»º³åÇø
+  * @param:        _uiWrAddr   Ä¿±êÇøÓòÊ×µØÖ·
+  * @param:        _usWrLen    Êı¾İ¸öÊı£¬²»ÄÜ³¬¹ıÉÈÇø´óĞ¡
+  * @return:       0£º´íÎó£»1£º³É¹¦£»
 *******************************************************************************/
 uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_t _usWrLen)
 {
 	uint16_t i;
-	uint16_t j;				/* ç”¨äºå»¶æ—¶ */
-	uint32_t uiFirstAddr;	/* æ‰‡åŒºé¦–åœ°å€ */
-	uint8_t ucNeedErase;	/* 1è¡¨ç¤ºéœ€è¦æ“¦é™¤ */
+	uint16_t j;				/* ÓÃÓÚÑÓÊ± */
+	uint32_t uiFirstAddr;	/* ÉÈÇøÊ×µØÖ· */
+	uint8_t ucNeedErase;	/* 1±íÊ¾ĞèÒª²Á³ı */
 	uint8_t cRet;
 	
-	/* é•¿åº¦ä¸º0æ—¶ä¸ç»§ç»­æ“ä½œï¼Œç›´æ¥è®¤ä¸ºæˆåŠŸ */
+	/* ³¤¶ÈÎª0Ê±²»¼ÌĞø²Ù×÷£¬Ö±½ÓÈÏÎª³É¹¦ */
 	if (_usWrLen == 0)
 		{
 			return 1;
 		}
 
-	/* å¦‚æœåç§»åœ°å€è¶…è¿‡èŠ¯ç‰‡å®¹é‡åˆ™é€€å‡º */
+	/* Èç¹ûÆ«ÒÆµØÖ·³¬¹ıĞ¾Æ¬ÈİÁ¿ÔòÍË³ö */
 	if (_uiWrAddr >= g_tSF.TotalSize)
 		{
 			return 0;
 		}
 
-	/* å¦‚æœæ•°æ®é•¿åº¦å¤§äºæ‰‡åŒºå®¹é‡ï¼Œåˆ™é€€å‡º */
+	/* Èç¹ûÊı¾İ³¤¶È´óÓÚÉÈÇøÈİÁ¿£¬ÔòÍË³ö */
 	if (_usWrLen > g_tSF.SectorSize)
 		{
 			return 0;
 		}
 
-	/* å¦‚æœflashä¸­çš„æ•°æ®æ²¡æœ‰å˜åŒ–ï¼Œåˆ™ä¸å†™flash */
+	/* Èç¹ûflashÖĞµÄÊı¾İÃ»ÓĞ±ä»¯£¬Ôò²»Ğ´flash */
 	sf_ReadBuffer(g_spiTxBuf,_uiWrAddr,_usWrLen);
 	if (memcmp(g_spiTxBuf,_ucpSrc,_usWrLen) == 0)
 		{
 			return 1;
 		}
 
-	/* åˆ¤æ–­æ˜¯å¦éœ€è¦å…ˆæ“¦é™¤æ‰‡åŒº */
-	/* å¦‚æœæ—§æ•°æ®ä¿®æ”¹ä¸ºæ–°æ•°æ®ï¼Œæ‰€æœ‰ä½å‡æ˜¯ 1->0 æˆ–è€… 0->0,åˆ™æ— éœ€æ“¦é™¤ï¼Œæé«˜flashå¯¿å‘½ */
-	ucNeedErase = 0;			/* 0ä¸éœ€è¦æ“¦é™¤ */
+	/* ÅĞ¶ÏÊÇ·ñĞèÒªÏÈ²Á³ıÉÈÇø */
+	/* Èç¹û¾ÉÊı¾İĞŞ¸ÄÎªĞÂÊı¾İ£¬ËùÓĞÎ»¾ùÊÇ 1->0 »òÕß 0->0,ÔòÎŞĞè²Á³ı£¬Ìá¸ßflashÊÙÃü */
+	ucNeedErase = 0;			/* 0²»ĞèÒª²Á³ı */
 	if (sf_NeedErase(g_spiTxBuf,_ucpSrc,_usWrLen))
 		{
-			ucNeedErase = 1;	/* 1éœ€è¦æ“¦é™¤ */
+			ucNeedErase = 1;	/* 1ĞèÒª²Á³ı */
 		}
 
 	uiFirstAddr = _uiWrAddr & (~(g_tSF.SectorSize - 1));
 
-	if (_usWrLen == g_tSF.SectorSize)		/* æ•´ä¸ªæ‰‡åŒºéƒ½æ”¹å†™ */
+	if (_usWrLen == g_tSF.SectorSize)		/* Õû¸öÉÈÇø¶¼¸ÄĞ´ */
 		{
 			for (i = 0; i < g_tSF.SectorSize; ++i)
 				{
 					g_spiTxBuf[i] = _ucpSrc[i];
 				}
 		}
-	else									/* æ”¹å†™éƒ¨åˆ†æ•°æ® */
+	else									/* ¸ÄĞ´²¿·ÖÊı¾İ */
 	{
-		/* å…ˆå°†æ•´ä¸ªæ‰‡åŒºçš„æ•°æ®è¯»å‡º */
+		/* ÏÈ½«Õû¸öÉÈÇøµÄÊı¾İ¶Á³ö */
 		sf_ReadBuffer(g_spiTxBuf,uiFirstAddr,g_tSF.SectorSize);
 
-		/* å†ç”¨æ–°æ•°æ®è¦†ç›– */
+		/* ÔÙÓÃĞÂÊı¾İ¸²¸Ç */
 		i = _uiWrAddr & (g_tSF.SectorSize - 1);
 		memcpy(&g_spiTxBuf[i],_ucpSrc,_usWrLen);
 	}
 
-	/* å†™å®Œä¹‹åè¿›è¡Œæ ¡éªŒï¼Œå¦‚æœä¸æ­£ç¡®åˆ™é‡å†™ï¼Œæœ€å¤š3æ¬¡ */
+	/* Ğ´ÍêÖ®ºó½øĞĞĞ£Ñé£¬Èç¹û²»ÕıÈ·ÔòÖØĞ´£¬×î¶à3´Î */
 	cRet = 0;
 	for (i = 0; i < 3; ++i)
 		{
-			/* å¦‚æœæ—§æ•°æ®ä¿®æ”¹ä¸ºæ–°æ•°æ®ï¼Œæ‰€æœ‰ä½å‡æ˜¯1->0,æˆ–è€…0->0ï¼Œåˆ™æ— éœ€æ“¦é™¤ï¼Œæé«˜flashå¯¿å‘½ */
+			/* Èç¹û¾ÉÊı¾İĞŞ¸ÄÎªĞÂÊı¾İ£¬ËùÓĞÎ»¾ùÊÇ1->0,»òÕß0->0£¬ÔòÎŞĞè²Á³ı£¬Ìá¸ßflashÊÙÃü */
 			if (ucNeedErase == 1)
 				{
-					sf_EraseSector(uiFirstAddr);	/* æ“¦é™¤1ä¸ªæ‰‡åŒº */
+					sf_EraseSector(uiFirstAddr);	/* ²Á³ı1¸öÉÈÇø */
 				}
 
-			/* ç¼–ç¨‹ä¸€ä¸ªæ‰‡åŒº */
+			/* ±à³ÌÒ»¸öÉÈÇø */
 			sf_PageWrite(g_spiTxBuf,uiFirstAddr,g_tSF.SectorSize);
 			
 			if (sf_CmpData(_uiWrAddr,_ucpSrc,_usWrLen) == 0)
@@ -511,7 +511,7 @@ uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_t _usWr
 						cRet = 1;
 						break;
 					}
-				/* å¤±è´¥åå»¶è¿Ÿä¸€æ®µæ—¶é—´å†é‡è¯• */
+				/* Ê§°ÜºóÑÓ³ÙÒ»¶ÎÊ±¼äÔÙÖØÊÔ */
 				for(j = 0;j < 10000;j++);
 			}
 		}
@@ -521,32 +521,32 @@ uint8_t sf_AutoWriteSector(uint8_t * _ucpSrc, uint32_t _uiWrAddr, uint16_t _usWr
 /*******************************************************************************
   * @FunctionName: sf_WriteBuffer
   * @Author:       trx
-  * @DateTime:     2022å¹´4æœˆ25æ—¥ 17:59:58 
-  * @Purpose:      å†™ä¸€ä¸ªæ‰‡åŒºå¹¶æ ¡éªŒï¼Œå¦‚æœä¸æ­£ç¡®åˆ™å†é‡å†™ä¸¤æ¬¡ï¼Œå‡½æ•°è‡ªåŠ¨å®Œæˆ,ä¸€ä¸ªæ‰‡åŒºçš„å¤§å°ä¸º4Kâˆšâˆšâˆš
-  * @param:        _pBuf        æ•°æ®æºç¼“å†²åŒº
-  * @param:        _uiWriteAddr ç›®æ ‡åŒºåŸŸé¦–åœ°å€
-  * @param:        _usWriteSize  æ•°æ®ä¸ªæ•°ï¼Œä¸å…è®¸è¶…è¿‡èŠ¯ç‰‡å®¹é‡
-  * @return:       1ï¼šæˆåŠŸï¼›0ï¼šå¤±è´¥ï¼›
+  * @DateTime:     2022Äê4ÔÂ25ÈÕ 17:59:58 
+  * @Purpose:      Ğ´Ò»¸öÉÈÇø²¢Ğ£Ñé£¬Èç¹û²»ÕıÈ·ÔòÔÙÖØĞ´Á½´Î£¬º¯Êı×Ô¶¯Íê³É,Ò»¸öÉÈÇøµÄ´óĞ¡Îª4K¡Ì¡Ì¡Ì
+  * @param:        _pBuf        Êı¾İÔ´»º³åÇø
+  * @param:        _uiWriteAddr Ä¿±êÇøÓòÊ×µØÖ·
+  * @param:        _usWriteSize  Êı¾İ¸öÊı£¬²»ÔÊĞí³¬¹ıĞ¾Æ¬ÈİÁ¿
+  * @return:       1£º³É¹¦£»0£ºÊ§°Ü£»
 *******************************************************************************/
 uint8_t sf_WriteBuffer(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint32_t _usWriteSize)
 {
 	uint32_t NumOfPage = 0,NumOfSingle = 0,Addr = 0,count = 0,temp = 0;
 
-	Addr = _uiWriteAddr % g_tSF.SectorSize;			/* æ‰‡åŒºå†…çš„åœ°å€ */
-	count = g_tSF.SectorSize - Addr;				/* ä»èµ·å§‹åœ°å€å¼€å§‹è¦å†™å‡ ä¸ªæ‰‡åŒº */
-	NumOfPage = _usWriteSize / g_tSF.SectorSize;	/* é¡µæ•° */
-	NumOfSingle = _usWriteSize % g_tSF.SectorSize;	/* å‰©ä½™çš„å­—èŠ‚æ•° */
+	Addr = _uiWriteAddr % g_tSF.SectorSize;			/* ÉÈÇøÄÚµÄµØÖ· */
+	count = g_tSF.SectorSize - Addr;				/* ´ÓÆğÊ¼µØÖ·¿ªÊ¼ÒªĞ´¼¸¸öÉÈÇø */
+	NumOfPage = _usWriteSize / g_tSF.SectorSize;	/* Ò³Êı */
+	NumOfSingle = _usWriteSize % g_tSF.SectorSize;	/* Ê£ÓàµÄ×Ö½ÚÊı */
 
-	if (Addr == 0)				/* èµ·å§‹åœ°å€æ˜¯æ‰‡åŒºé¦–åœ°å€ */
+	if (Addr == 0)				/* ÆğÊ¼µØÖ·ÊÇÉÈÇøÊ×µØÖ· */
 		{
-			if (NumOfPage == 0)	/* æ•°æ®é•¿åº¦å°äºæ‰‡åŒºå¤§å° */
+			if (NumOfPage == 0)	/* Êı¾İ³¤¶ÈĞ¡ÓÚÉÈÇø´óĞ¡ */
 				{
 					if(sf_AutoWriteSector(_pBuf,_uiWriteAddr,_usWriteSize))
 					{
 						return 0;
 					}
 				}
-			else				/* æ•°æ®é•¿åº¦å¤§äºæ‰‡åŒºå¤§å° */
+			else				/* Êı¾İ³¤¶È´óÓÚÉÈÇø´óĞ¡ */
 				{
 					while (NumOfPage--)
 						{
@@ -563,9 +563,9 @@ uint8_t sf_WriteBuffer(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint32_t _usWrite
 						}
 				}
 		}
-	else							/* èµ·å§‹åœ°å€ä¸æ˜¯æ‰‡åŒºé¦–åœ°å€ */
+	else							/* ÆğÊ¼µØÖ·²»ÊÇÉÈÇøÊ×µØÖ· */
 		{
-			if(NumOfPage == 0)		/* æ•°æ®é•¿åº¦å°äºæ‰‡åŒºå¤§å° */
+			if(NumOfPage == 0)		/* Êı¾İ³¤¶ÈĞ¡ÓÚÉÈÇø´óĞ¡ */
 			{
 				if (NumOfSingle > count)
 					{
@@ -592,7 +592,7 @@ uint8_t sf_WriteBuffer(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint32_t _usWrite
 						}
 					}
 			}
-			else				/* æ•°æ®é•¿åº¦å¤§äºæ‰‡åŒºå¤§å° */
+			else				/* Êı¾İ³¤¶È´óÓÚÉÈÇø´óĞ¡ */
 				{
 					_usWriteSize -= count;
 					NumOfPage = _usWriteSize / g_tSF.SectorSize;
@@ -622,58 +622,58 @@ uint8_t sf_WriteBuffer(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint32_t _usWrite
 						}
 				}
 		}
-	return 1;			/* æˆåŠŸ */
+	return 1;			/* ³É¹¦ */
 }
 
 /*******************************************************************************
   * @FunctionName: sf_PageWrite
   * @Author:       trx
-  * @DateTime:     2022å¹´4æœˆ25æ—¥ 17:03:59 
-  * @Purpose:      é¡µç¼–ç¨‹âˆšâˆšâˆš
-  * @param:        _pBuf        æ•°æ®æºç¼“å†²åŒº
-  * @param:        _uiWriteAddr ç›®æ ‡åŒºåŸŸé¦–åœ°å€
-  * @param:        _usSize       æ•°æ®ä¸ªæ•°ï¼Œé¡µå¤§å°çš„æ•´æ•°å€(256å­—èŠ‚çš„æ•´æ•°å€)
+  * @DateTime:     2022Äê4ÔÂ25ÈÕ 17:03:59 
+  * @Purpose:      Ò³±à³Ì¡Ì¡Ì¡Ì
+  * @param:        _pBuf        Êı¾İÔ´»º³åÇø
+  * @param:        _uiWriteAddr Ä¿±êÇøÓòÊ×µØÖ·
+  * @param:        _usSize       Êı¾İ¸öÊı£¬Ò³´óĞ¡µÄÕûÊı±¶(256×Ö½ÚµÄÕûÊı±¶)
 *******************************************************************************/
 void sf_PageWrite(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint16_t _usSize)
 {
 	uint32_t i,j;
 	if (g_tSF.ChipID == SST25VF016B_ID)
 		{
-			/* AAIæŒ‡ä»¤è¦æ±‚ä¼ å…¥çš„æ•°æ®ä¸ªæ•°æ˜¯å¶æ•° */
+			/* AAIÖ¸ÁîÒªÇó´«ÈëµÄÊı¾İ¸öÊıÊÇÅ¼Êı */
 			if ((_usSize < 2) && (_usSize % 2))
 				{
 					return ;
 				}
-			sf_WriteEnable();		/* å‘é€å†™ä½¿èƒ½å‘½ä»¤ */
+			sf_WriteEnable();		/* ·¢ËÍĞ´Ê¹ÄÜÃüÁî */
 
-			sf_SetCS(0);			/* ä½¿èƒ½ç‰‡é€‰ */
+			sf_SetCS(0);			/* Ê¹ÄÜÆ¬Ñ¡ */
 			g_spiLen = 0;
-			g_spiTxBuf[g_spiLen++] = CMD_AAI;		/* å‘é€AAIå‘½ä»¤(åœ°å€è‡ªåŠ¨å¢åŠ ç¼–ç¨‹) */
-			g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff0000) >> 16);	/* å‘é€æ‰‡åŒºåœ°å€çš„é«˜8bit */
-			g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff00) >> 8);	/* å‘é€æ‰‡åŒºåœ°å€ä¸­8bit */
-			g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff));			/*å‘é€æ‰‡åŒºåœ°å€ä½8bit */
-			g_spiTxBuf[g_spiLen++] = (*_pBuf++);						/* å‘é€ç¬¬ä¸€ä¸ªæ•°æ® */
-			g_spiTxBuf[g_spiLen++] = (*_pBuf++);						/* å‘é€ç¬¬2ä¸ªæ•°æ® */
+			g_spiTxBuf[g_spiLen++] = CMD_AAI;		/* ·¢ËÍAAIÃüÁî(µØÖ·×Ô¶¯Ôö¼Ó±à³Ì) */
+			g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff0000) >> 16);	/* ·¢ËÍÉÈÇøµØÖ·µÄ¸ß8bit */
+			g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff00) >> 8);	/* ·¢ËÍÉÈÇøµØÖ·ÖĞ8bit */
+			g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff));			/*·¢ËÍÉÈÇøµØÖ·µÍ8bit */
+			g_spiTxBuf[g_spiLen++] = (*_pBuf++);						/* ·¢ËÍµÚÒ»¸öÊı¾İ */
+			g_spiTxBuf[g_spiLen++] = (*_pBuf++);						/* ·¢ËÍµÚ2¸öÊı¾İ */
 			bsp_spi1Transfer();
-			sf_SetCS(0);			/* ç¦æ­¢ç‰‡é€‰ */
+			sf_SetCS(0);			/* ½ûÖ¹Æ¬Ñ¡ */
 
-			sf_WaitForWriteEnd();	/* ç­‰å¾…ä¸²è¡Œflashå†…éƒ¨å†™æ“ä½œå®Œæˆ */
+			sf_WaitForWriteEnd();	/* µÈ´ı´®ĞĞflashÄÚ²¿Ğ´²Ù×÷Íê³É */
 
-			_usSize -= 2;			/* è®¡ç®—å‰©ä½™å­—èŠ‚æ•°ç›® */
+			_usSize -= 2;			/* ¼ÆËãÊ£Óà×Ö½ÚÊıÄ¿ */
 
 			for (i = 0; i < _usSize / 2; ++i)
 				{
-					sf_SetCS(0);	/* ä½¿èƒ½ç‰‡é€‰ */
+					sf_SetCS(0);	/* Ê¹ÄÜÆ¬Ñ¡ */
 					g_spiLen = 0;
 					g_spiTxBuf[g_spiLen++] = (CMD_AAI);
 					g_spiTxBuf[g_spiLen++] = (*_pBuf++);
 					g_spiTxBuf[g_spiLen++] = (*_pBuf++);
 					bsp_spi1Transfer();
-					sf_SetCS(1);	/* ç¦æ­¢ç‰‡é€‰ */
-					sf_WaitForWriteEnd();/* ç­‰å¾…ä¸²è¡Œflashå†…éƒ¨æ“ä½œå®Œæˆ */
+					sf_SetCS(1);	/* ½ûÖ¹Æ¬Ñ¡ */
+					sf_WaitForWriteEnd();/* µÈ´ı´®ĞĞflashÄÚ²¿²Ù×÷Íê³É */
 				}
 
-			/* è¿›å…¥å†™ä¿æŠ¤çŠ¶æ€ */
+			/* ½øÈëĞ´±£»¤×´Ì¬ */
 			sf_SetCS(0);
 			g_spiLen = 0;
 			g_spiTxBuf[g_spiLen++] = (CMD_DISWR);
@@ -686,33 +686,33 @@ void sf_PageWrite(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint16_t _usSize)
 		{
 			for (j = 0; j < _usSize / 256; ++j)
 				{
-					sf_WriteEnable();	/* å‘é€å†™ä½¿èƒ½å‘½ä»¤ */
+					sf_WriteEnable();	/* ·¢ËÍĞ´Ê¹ÄÜÃüÁî */
 
-					sf_SetCS(0);		/* ä½¿èƒ½ç‰‡é€‰ */
+					sf_SetCS(0);		/* Ê¹ÄÜÆ¬Ñ¡ */
 					g_spiLen = 0;
-					g_spiTxBuf[g_spiLen++] = (0x02);								/* å‘é€AAIå‘½ä»¤(åœ°å€è‡ªåŠ¨å¢åŠ ç¼–ç¨‹) */
+					g_spiTxBuf[g_spiLen++] = (0x02);								/* ·¢ËÍAAIÃüÁî(µØÖ·×Ô¶¯Ôö¼Ó±à³Ì) */
 					g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff0000) >> 16);
 					g_spiTxBuf[g_spiLen++] = ((_uiWriteAddr & 0xff00) >> 8);
 					g_spiTxBuf[g_spiLen++] = (_uiWriteAddr & 0xff);
 					for (i = 0; i < 256; ++i)
 						{
-							g_spiTxBuf[g_spiLen++] = (*_pBuf++);			/* å‘é€æ•°æ® */
+							g_spiTxBuf[g_spiLen++] = (*_pBuf++);			/* ·¢ËÍÊı¾İ */
 						}
 					bsp_spi1Transfer();
-					sf_SetCS(1);		/* ç¦æ­¢ç‰‡é€‰ */
+					sf_SetCS(1);		/* ½ûÖ¹Æ¬Ñ¡ */
 
-					sf_WaitForWriteEnd();/* ç­‰å¾…ä¸²è¡Œflashå†…éƒ¨æ“ä½œå®Œæˆ */
+					sf_WaitForWriteEnd();/* µÈ´ı´®ĞĞflashÄÚ²¿²Ù×÷Íê³É */
 					_uiWriteAddr += 256;
 				}
 
-			/* è¿›å…¥å†™ä¿æŠ¤çŠ¶æ€ */
+			/* ½øÈëĞ´±£»¤×´Ì¬ */
 			sf_SetCS(0);
 			g_spiLen = 0;
 			g_spiTxBuf[g_spiLen++] = (CMD_DISWR);
 			bsp_spi1Transfer();
 			sf_SetCS(1);
 
-			sf_WaitForWriteEnd();		/* ç­‰å¾…ä¸²è¡Œflashå†…éƒ¨æ“ä½œå®Œæˆ */
+			sf_WaitForWriteEnd();		/* µÈ´ı´®ĞĞflashÄÚ²¿²Ù×÷Íê³É */
 		}
 }
 
@@ -720,27 +720,27 @@ void sf_PageWrite(uint8_t * _pBuf, uint32_t _uiWriteAddr, uint16_t _usSize)
 /*******************************************************************************
   * @FunctionName: sf_EraseSector
   * @Author:       trx
-  * @DateTime:     2022å¹´4æœˆ25æ—¥ 17:21:35 
-  * @Purpose:      æ“¦é™¤æŒ‡å®šçš„æ‰‡åŒºâˆšâˆšâˆš
-  * @param:        _uiSectorAddr      æ‰‡åŒºåœ°å€
+  * @DateTime:     2022Äê4ÔÂ25ÈÕ 17:21:35 
+  * @Purpose:      ²Á³ıÖ¸¶¨µÄÉÈÇø¡Ì¡Ì¡Ì
+  * @param:        _uiSectorAddr      ÉÈÇøµØÖ·
   * @return:       none
 *******************************************************************************/
 void sf_EraseSector(uint32_t _uiSectorAddr)
 {
-	sf_WriteEnable();		/* å‘é€å†™ä½¿èƒ½å‘½ä»¤ */
+	sf_WriteEnable();		/* ·¢ËÍĞ´Ê¹ÄÜÃüÁî */
 
-	/* æ“¦é™¤æ‰‡åŒºæ“ä½œ */
-	sf_SetCS(0);			/* ä½¿èƒ½ç‰‡é€‰ */
+	/* ²Á³ıÉÈÇø²Ù×÷ */
+	sf_SetCS(0);			/* Ê¹ÄÜÆ¬Ñ¡ */
 	g_spiLen = 0;
 	g_spiTxBuf[g_spiLen++] = CMD_SE;
-	/* åœ¨å‘é€æ“¦é™¤æŒ‡ä»¤å,ç´§æ¥è¿™å‘é€24ä½çš„åœ°å€ */
+	/* ÔÚ·¢ËÍ²Á³ıÖ¸Áîºó,½ô½ÓÕâ·¢ËÍ24Î»µÄµØÖ· */
 	g_spiTxBuf[g_spiLen++] = ((_uiSectorAddr & 0xf0000) >> 16);
 	g_spiTxBuf[g_spiLen++] = ((_uiSectorAddr & 0xff00) >> 8);
 	g_spiTxBuf[g_spiLen++] = (_uiSectorAddr & 0xff);
 	bsp_spi1Transfer();
-	sf_SetCS(1);			/* ç¦æ­¢ç‰‡é€‰ */
+	sf_SetCS(1);			/* ½ûÖ¹Æ¬Ñ¡ */
 
-	sf_WaitForWriteEnd();	/* ç­‰å¾…ä¸²è¡Œflashå†…éƒ¨æ“ä½œå®Œæˆ */
+	sf_WaitForWriteEnd();	/* µÈ´ı´®ĞĞflashÄÚ²¿²Ù×÷Íê³É */
 }
 
 

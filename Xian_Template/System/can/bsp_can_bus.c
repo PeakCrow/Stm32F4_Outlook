@@ -1,16 +1,16 @@
 #include "bsp_can_bus.h"
 
-/* ä½¿ç”¨æœ€æ–°çš„halåº“æä¾›çš„canå¤–è®¾æ–‡ä»¶ */
-/* æ­¤æ–‡ä»¶ä¸­æ²¡æœ‰ä½¿ç”¨äº’æ–¥é‡App_Printfå‡½æ•° */
+/* Ê¹ÓÃ×îĞÂµÄhal¿âÌá¹©µÄcanÍâÉèÎÄ¼ş */
+/* ´ËÎÄ¼şÖĞÃ»ÓĞÊ¹ÓÃ»¥³âÁ¿App_Printfº¯Êı */
 CAN_HandleTypeDef hCAN;
 static CAN_RxHeaderTypeDef can_rx_msg;
-static uint8_t g_canrxbuf[8] = {0};			/* ä¸èƒ½åšæˆå…¨å±€å˜é‡ï¼Œä¸ç„¶æ— æ³•è§¦å‘ä¸­æ–­(?????) */
+static uint8_t g_canrxbuf[8] = {0};			/* ²»ÄÜ×ö³ÉÈ«¾Ö±äÁ¿£¬²»È»ÎŞ·¨´¥·¢ÖĞ¶Ï(?????) */
 
 /*******************************************************************************
   * @FunctionName: bsp_InitCan1Bus
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ22æ—¥ 17:36:06 
-  * @Purpose:      can1æ€»çº¿å¤–è®¾åˆå§‹åŒ–
+  * @DateTime:     2022Äê5ÔÂ22ÈÕ 17:36:06 
+  * @Purpose:      can1×ÜÏßÍâÉè³õÊ¼»¯
   * @param:        void
   * @return:       none
 *******************************************************************************/
@@ -19,49 +19,49 @@ void bsp_InitCan1Bus(void)
 	CAN_FilterTypeDef  sFilterConfig;
 	CAN_FilterTypeDef  sFilterConfig2;
 	
-	/*CANå•å…ƒåˆå§‹åŒ–*/
-	hCAN.Instance 					  = CANx_BUS_1;				/* CANå¤–è®¾ */
-	hCAN.Init.Prescaler 			  = CAN1_BUS_BUUDE_RATE;	/* BTR-BRP æ³¢ç‰¹ç‡åˆ†é¢‘å™¨  å®šä¹‰äº†æ—¶é—´å•å…ƒçš„æ—¶é—´é•¿åº¦ 42/(1+6+7)/6=500kbps */
-	hCAN.Init.Mode 					  = CAN_MODE_NORMAL; 		/* æ­£å¸¸å·¥ä½œæ¨¡å¼ */
-	hCAN.Init.SyncJumpWidth 		  = CAN_SJW_1TQ;	  		/* BTR-SJW é‡æ–°åŒæ­¥è·³è·ƒå®½åº¦ 1ä¸ªæ—¶é—´å•å…ƒ */
-	hCAN.Init.TimeSeg1 				  = CAN_BS1_6TQ;	  		/* BTR-TS1 æ—¶é—´æ®µ1 å ç”¨äº†6ä¸ªæ—¶é—´å•å…ƒ */
-	hCAN.Init.TimeSeg2 				  = CAN_BS2_7TQ;	  		/* BTR-TS1 æ—¶é—´æ®µ2 å ç”¨äº†7ä¸ªæ—¶é—´å•å…ƒ */
-	hCAN.Init.TimeTriggeredMode 	  = DISABLE;		  		/* MCR-TTCM  å…³é—­æ—¶é—´è§¦å‘é€šä¿¡æ¨¡å¼ä½¿èƒ½ */
-	hCAN.Init.AutoBusOff 			  = ENABLE;			  		/* MCR-ABOM  è‡ªåŠ¨ç¦»çº¿ç®¡ç† */
-	hCAN.Init.AutoWakeUp 			  = ENABLE;		 	  		/* MCR-AWUM  ä½¿ç”¨è‡ªåŠ¨å”¤é†’æ¨¡å¼ */
-	hCAN.Init.AutoRetransmission  	  = DISABLE;		  		/* MCR-NART  ç¦æ­¢æŠ¥æ–‡è‡ªåŠ¨é‡ä¼  	DISABLE-è‡ªåŠ¨é‡ä¼  */
-	hCAN.Init.ReceiveFifoLocked 	  = DISABLE;		  		/* MCR-RFLM  æ¥æ”¶FIFO é”å®šæ¨¡å¼	DISABLE-æº¢å‡ºæ—¶æ–°æŠ¥æ–‡ä¼šè¦†ç›–åŸæœ‰æŠ¥æ–‡ */
-	hCAN.Init.TransmitFifoPriority 	  = ENABLE;			  		/* MCR-TXFP  å‘é€FIFOä¼˜å…ˆçº§ DISABLE-ä¼˜å…ˆçº§å–å†³äºæŠ¥æ–‡æ ‡ç¤ºç¬¦ */
+	/*CANµ¥Ôª³õÊ¼»¯*/
+	hCAN.Instance 					  = CANx_BUS_1;				/* CANÍâÉè */
+	hCAN.Init.Prescaler 			  = CAN1_BUS_BUUDE_RATE;	/* BTR-BRP ²¨ÌØÂÊ·ÖÆµÆ÷  ¶¨ÒåÁËÊ±¼äµ¥ÔªµÄÊ±¼ä³¤¶È 42/(1+6+7)/6=500kbps */
+	hCAN.Init.Mode 					  = CAN_MODE_NORMAL; 		/* Õı³£¹¤×÷Ä£Ê½ */
+	hCAN.Init.SyncJumpWidth 		  = CAN_SJW_1TQ;	  		/* BTR-SJW ÖØĞÂÍ¬²½ÌøÔ¾¿í¶È 1¸öÊ±¼äµ¥Ôª */
+	hCAN.Init.TimeSeg1 				  = CAN_BS1_6TQ;	  		/* BTR-TS1 Ê±¼ä¶Î1 Õ¼ÓÃÁË6¸öÊ±¼äµ¥Ôª */
+	hCAN.Init.TimeSeg2 				  = CAN_BS2_7TQ;	  		/* BTR-TS1 Ê±¼ä¶Î2 Õ¼ÓÃÁË7¸öÊ±¼äµ¥Ôª */
+	hCAN.Init.TimeTriggeredMode 	  = DISABLE;		  		/* MCR-TTCM  ¹Ø±ÕÊ±¼ä´¥·¢Í¨ĞÅÄ£Ê½Ê¹ÄÜ */
+	hCAN.Init.AutoBusOff 			  = ENABLE;			  		/* MCR-ABOM  ×Ô¶¯ÀëÏß¹ÜÀí */
+	hCAN.Init.AutoWakeUp 			  = ENABLE;		 	  		/* MCR-AWUM  Ê¹ÓÃ×Ô¶¯»½ĞÑÄ£Ê½ */
+	hCAN.Init.AutoRetransmission  	  = DISABLE;		  		/* MCR-NART  ½ûÖ¹±¨ÎÄ×Ô¶¯ÖØ´« 	DISABLE-×Ô¶¯ÖØ´« */
+	hCAN.Init.ReceiveFifoLocked 	  = DISABLE;		  		/* MCR-RFLM  ½ÓÊÕFIFO Ëø¶¨Ä£Ê½	DISABLE-Òç³öÊ±ĞÂ±¨ÎÄ»á¸²¸ÇÔ­ÓĞ±¨ÎÄ */
+	hCAN.Init.TransmitFifoPriority 	  = ENABLE;			  		/* MCR-TXFP  ·¢ËÍFIFOÓÅÏÈ¼¶ DISABLE-ÓÅÏÈ¼¶È¡¾öÓÚ±¨ÎÄ±êÊ¾·û */
 	HAL_CAN_Init(&hCAN);
 	
-	/*CANè¿‡æ»¤å™¨åˆå§‹åŒ–*/
-	sFilterConfig.FilterMode 		  = CAN_FILTERMODE_IDMASK;  /* å·¥ä½œåœ¨æ ‡è¯†ç¬¦å±è”½ä½æ¨¡å¼ */
-	sFilterConfig.FilterScale 		  = CAN_FILTERSCALE_32BIT; /* è¿‡æ»¤å™¨ä½å®½ä¸ºå•ä¸ª32ä½ã€‚*/
-	/* ä½¿èƒ½æŠ¥æ–‡æ ‡è¯†ç¬¦è¿‡æ»¤å™¨æŒ‰ç…§æ ‡è¯†ç¬¦çš„å†…å®¹è¿›è¡Œå¯¹æ¯”è¿‡æ»¤ï¼Œæ‰©å±•IDä¸æ˜¯å¦‚ä¸‹çš„æ—§æŠ›å¼ƒæ‰ï¼Œæ˜¯çš„è¯ï¼Œä¼šå­˜å…¥FIFO0 */
-	/* idå·¦ç§»3ä½ï¼Œæ˜¯ä¸ºäº†å°†0ä½ä¿ç•™ä½ã€1ä½RTRä½ã€2ä½IDEä½è¡¥0 */
-	/* å³ç§»16ä½æ˜¯å°†æ•´ä¸ªidçš„é«˜16ä½å–å‡ºèµ‹å€¼ç»™è¿‡æ»¤å™¨é«˜ä½ */
-	sFilterConfig.FilterIdHigh		  = (((uint32_t)0x1314<<3)&0xFFFF0000)>>16;			  /* è¦è¿‡æ»¤çš„IDé«˜ä½ */
-	sFilterConfig.FilterIdLow		  = (((uint32_t)0x1314<<3)|CAN_ID_EXT|CAN_RTR_DATA)&0xFFFF; /* è¦è¿‡æ»¤çš„IDä½ä½ */
-	sFilterConfig.FilterMaskIdHigh	  = 0xFFFF;		  	  /* è¿‡æ»¤å™¨é«˜16ä½æ¯ä½å¿…é¡»åŒ¹é… */
-	sFilterConfig.FilterMaskIdLow	  = 0xFFFF;		  	  /* è¿‡æ»¤å™¨ä½16ä½æ¯ä½å¿…é¡»åŒ¹é… */
-	sFilterConfig.FilterFIFOAssignment= CAN_FILTER_FIFO0; /* è¿‡æ»¤å™¨è¢«å…³è”åˆ°FIFO 0 */
-	sFilterConfig.FilterActivation 	  = ENABLE;		  	  /* ä½¿èƒ½è¿‡æ»¤å™¨ */ 
+	/*CAN¹ıÂËÆ÷³õÊ¼»¯*/
+	sFilterConfig.FilterMode 		  = CAN_FILTERMODE_IDMASK;  /* ¹¤×÷ÔÚ±êÊ¶·ûÆÁ±ÎÎ»Ä£Ê½ */
+	sFilterConfig.FilterScale 		  = CAN_FILTERSCALE_32BIT; /* ¹ıÂËÆ÷Î»¿íÎªµ¥¸ö32Î»¡£*/
+	/* Ê¹ÄÜ±¨ÎÄ±êÊ¶·û¹ıÂËÆ÷°´ÕÕ±êÊ¶·ûµÄÄÚÈİ½øĞĞ¶Ô±È¹ıÂË£¬À©Õ¹ID²»ÊÇÈçÏÂµÄ¾ÉÅ×Æúµô£¬ÊÇµÄ»°£¬»á´æÈëFIFO0 */
+	/* id×óÒÆ3Î»£¬ÊÇÎªÁË½«0Î»±£ÁôÎ»¡¢1Î»RTRÎ»¡¢2Î»IDEÎ»²¹0 */
+	/* ÓÒÒÆ16Î»ÊÇ½«Õû¸öidµÄ¸ß16Î»È¡³ö¸³Öµ¸ø¹ıÂËÆ÷¸ßÎ» */
+	sFilterConfig.FilterIdHigh		  = (((uint32_t)0x1314<<3)&0xFFFF0000)>>16;			  /* Òª¹ıÂËµÄID¸ßÎ» */
+	sFilterConfig.FilterIdLow		  = (((uint32_t)0x1314<<3)|CAN_ID_EXT|CAN_RTR_DATA)&0xFFFF; /* Òª¹ıÂËµÄIDµÍÎ» */
+	sFilterConfig.FilterMaskIdHigh	  = 0xFFFF;		  	  /* ¹ıÂËÆ÷¸ß16Î»Ã¿Î»±ØĞëÆ¥Åä */
+	sFilterConfig.FilterMaskIdLow	  = 0xFFFF;		  	  /* ¹ıÂËÆ÷µÍ16Î»Ã¿Î»±ØĞëÆ¥Åä */
+	sFilterConfig.FilterFIFOAssignment= CAN_FILTER_FIFO0; /* ¹ıÂËÆ÷±»¹ØÁªµ½FIFO 0 */
+	sFilterConfig.FilterActivation 	  = ENABLE;		  	  /* Ê¹ÄÜ¹ıÂËÆ÷ */ 
 	sFilterConfig.FilterBank 		  = 14;
 	HAL_CAN_ConfigFilter(&hCAN, &sFilterConfig);
 	
-	/*CANè¿‡æ»¤å™¨åˆå§‹åŒ–*/
-	sFilterConfig2.FilterMode 		  = CAN_FILTERMODE_IDMASK;  /* å·¥ä½œåœ¨æ ‡è¯†ç¬¦å±è”½ä½æ¨¡å¼ */
-	sFilterConfig2.FilterScale 		  = CAN_FILTERSCALE_32BIT; /* è¿‡æ»¤å™¨ä½å®½ä¸ºå•ä¸ª32ä½ã€‚*/
-	sFilterConfig2.FilterIdHigh		  = (((uint32_t)0x1315<<3)&0xFFFF0000)>>16;			  /* è¦è¿‡æ»¤çš„IDé«˜ä½ */
-	sFilterConfig2.FilterIdLow		  = (((uint32_t)0x1315<<3)|CAN_ID_EXT|CAN_RTR_DATA)&0xFFFF; /* è¦è¿‡æ»¤çš„IDä½ä½ */
-	sFilterConfig2.FilterMaskIdHigh	  = 0xFFFF;		  	  /* è¿‡æ»¤å™¨é«˜16ä½æ¯ä½å¿…é¡»åŒ¹é… */
-	sFilterConfig2.FilterMaskIdLow	  = 0xFFFF;		  	  /* è¿‡æ»¤å™¨ä½16ä½æ¯ä½å¿…é¡»åŒ¹é… */
-	sFilterConfig2.FilterFIFOAssignment= CAN_FILTER_FIFO1;/* è¿‡æ»¤å™¨è¢«å…³è”åˆ°FIFO 1 */
-	sFilterConfig2.FilterActivation   = ENABLE;		  	  /* ä½¿èƒ½è¿‡æ»¤å™¨ */ 
+	/*CAN¹ıÂËÆ÷³õÊ¼»¯*/
+	sFilterConfig2.FilterMode 		  = CAN_FILTERMODE_IDMASK;  /* ¹¤×÷ÔÚ±êÊ¶·ûÆÁ±ÎÎ»Ä£Ê½ */
+	sFilterConfig2.FilterScale 		  = CAN_FILTERSCALE_32BIT; /* ¹ıÂËÆ÷Î»¿íÎªµ¥¸ö32Î»¡£*/
+	sFilterConfig2.FilterIdHigh		  = (((uint32_t)0x1315<<3)&0xFFFF0000)>>16;			  /* Òª¹ıÂËµÄID¸ßÎ» */
+	sFilterConfig2.FilterIdLow		  = (((uint32_t)0x1315<<3)|CAN_ID_EXT|CAN_RTR_DATA)&0xFFFF; /* Òª¹ıÂËµÄIDµÍÎ» */
+	sFilterConfig2.FilterMaskIdHigh	  = 0xFFFF;		  	  /* ¹ıÂËÆ÷¸ß16Î»Ã¿Î»±ØĞëÆ¥Åä */
+	sFilterConfig2.FilterMaskIdLow	  = 0xFFFF;		  	  /* ¹ıÂËÆ÷µÍ16Î»Ã¿Î»±ØĞëÆ¥Åä */
+	sFilterConfig2.FilterFIFOAssignment= CAN_FILTER_FIFO1;/* ¹ıÂËÆ÷±»¹ØÁªµ½FIFO 1 */
+	sFilterConfig2.FilterActivation   = ENABLE;		  	  /* Ê¹ÄÜ¹ıÂËÆ÷ */ 
 	sFilterConfig2.FilterBank 		  = 10;
 	HAL_CAN_ConfigFilter(&hCAN, &sFilterConfig2);
 
-	HAL_CAN_Start(&hCAN);								  /* ä¸è°ƒç”¨æ­¤å‡½æ•°æ— æ³•è¿›è¡Œcanå‘é€ */
+	HAL_CAN_Start(&hCAN);								  /* ²»µ÷ÓÃ´Ëº¯ÊıÎŞ·¨½øĞĞcan·¢ËÍ */
 	HAL_CAN_ActivateNotification(&hCAN,CAN_IT_RX_FIFO0_MSG_PENDING);
 	HAL_CAN_ActivateNotification(&hCAN,CAN_IT_RX_FIFO0_FULL);
 	HAL_CAN_ActivateNotification(&hCAN,CAN_IT_RX_FIFO0_OVERRUN);
@@ -77,9 +77,9 @@ void bsp_InitCan1Bus(void)
 /*******************************************************************************
   * @FunctionName: HAL_CAN_MspInit
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ25æ—¥22:14:29 
-  * @Purpose:      canæ€»çº¿å¼•è„šåˆå§‹åŒ–ï¼ŒåŒ…å«æœ‰ä¸­æ–­é…ç½®
-  * @param:        hcanï¼šcanå¤–è®¾å¥æŸ„(å…¨å±€å˜é‡)
+  * @DateTime:     2022Äê5ÔÂ25ÈÕ22:14:29 
+  * @Purpose:      can×ÜÏßÒı½Å³õÊ¼»¯£¬°üº¬ÓĞÖĞ¶ÏÅäÖÃ
+  * @param:        hcan£ºcanÍâÉè¾ä±ú(È«¾Ö±äÁ¿)
   * @return:       none
 *******************************************************************************/
 void HAL_CAN_MspInit(CAN_HandleTypeDef * hcan)
@@ -87,8 +87,8 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef * hcan)
 	GPIO_InitTypeDef	gpio_init;
 	if(hcan->Instance == CANx_BUS_1)
 	{
-		CAN1_CLK_ENABLE();			/* canå¤–è®¾æ—¶é’Ÿä½¿èƒ½ */
-		CAN1_GPIO_CLK_ENABLE();		/* å¼•è„šæ—¶é’Ÿä½¿èƒ½ */
+		CAN1_CLK_ENABLE();			/* canÍâÉèÊ±ÖÓÊ¹ÄÜ */
+		CAN1_GPIO_CLK_ENABLE();		/* Òı½ÅÊ±ÖÓÊ¹ÄÜ */
 
 		gpio_init.Pin		= CAN1_TX_PIN;
 		gpio_init.Mode		= GPIO_MODE_AF_PP;
@@ -102,7 +102,7 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef * hcan)
 		gpio_init.Alternate	= GPIO_AF9_CAN1;
 		HAL_GPIO_Init(CAN1_RX_GPIO_PORT,&gpio_init);
 
-		HAL_NVIC_SetPriority(CAN1_RX_IRQN,0,0);/* åˆå§‹åŒ–ä¸­æ–­ä¼˜å…ˆçº§ */
+		HAL_NVIC_SetPriority(CAN1_RX_IRQN,0,0);/* ³õÊ¼»¯ÖĞ¶ÏÓÅÏÈ¼¶ */
 		HAL_NVIC_EnableIRQ(CAN1_RX_IRQN);
 	}
 }
@@ -110,12 +110,12 @@ void HAL_CAN_MspInit(CAN_HandleTypeDef * hcan)
 /*******************************************************************************
   * @FunctionName: bsp_Can1_Send_buf
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ25æ—¥ 20:58:40 
-  * @Purpose:      canå‘é€å‡½æ•°ï¼Œæ”¯æŒä¸€æ¬¡å‘é€3ä¸ªä»¥ä¸Šçš„æŠ¥æ–‡ï¼Œä¸ç„¶ä¸€æ¬¡æœ€å¤šåªèƒ½å‘é€3æ¡
-  * @param:        _id                è¦å‘é€çš„æŠ¥æ–‡id
-  * @param:        _buf[]             æŠ¥æ–‡çš„æ•°æ®
-  * @param:        _dlc               æŠ¥æ–‡æ•°æ®çš„é•¿åº¦ï¼Œ0-8å¯é€‰
-  * @return:       HAL_OK:ä»£è¡¨å‘é€æˆåŠŸ;HAL_ERROR:å‘é€å¤±è´¥
+  * @DateTime:     2022Äê5ÔÂ25ÈÕ 20:58:40 
+  * @Purpose:      can·¢ËÍº¯Êı£¬Ö§³ÖÒ»´Î·¢ËÍ3¸öÒÔÉÏµÄ±¨ÎÄ£¬²»È»Ò»´Î×î¶àÖ»ÄÜ·¢ËÍ3Ìõ
+  * @param:        _id                Òª·¢ËÍµÄ±¨ÎÄid
+  * @param:        _buf[]             ±¨ÎÄµÄÊı¾İ
+  * @param:        _dlc               ±¨ÎÄÊı¾İµÄ³¤¶È£¬0-8¿ÉÑ¡
+  * @return:       HAL_OK:´ú±í·¢ËÍ³É¹¦;HAL_ERROR:·¢ËÍÊ§°Ü
 *******************************************************************************/
 HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id,uint8_t _buf[],uint8_t _dlc)
 {
@@ -138,10 +138,10 @@ HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id,uint8_t _buf[],uint8_t _dlc)
 		return HAL_ERROR;
 	else
 		can_tx_msg.DLC = _dlc;
-	can_tx_msg.RTR = CAN_RTR_DATA;			/* é»˜è®¤éƒ½æ˜¯æ•°æ®å¸§ */
+	can_tx_msg.RTR = CAN_RTR_DATA;			/* Ä¬ÈÏ¶¼ÊÇÊı¾İÖ¡ */
 	can_tx_msg.TransmitGlobalTime = DISABLE;
 	
-	if(HAL_CAN_IsTxMessagePending(&hCAN,CAN_TX_MAILBOX0) == HAL_OK)/* ä»£è¡¨æ²¡æœ‰æŒ‚èµ·çš„å‘é€æŠ¥æ–‡  */
+	if(HAL_CAN_IsTxMessagePending(&hCAN,CAN_TX_MAILBOX0) == HAL_OK)/* ´ú±íÃ»ÓĞ¹ÒÆğµÄ·¢ËÍ±¨ÎÄ  */
 		HAL_CAN_AddTxMessage(&hCAN,&can_tx_msg,_buf,(uint32_t*)CAN_TX_MAILBOX0);
 	else if(HAL_CAN_IsTxMessagePending(&hCAN,CAN_TX_MAILBOX0) != HAL_OK)
 		HAL_CAN_AddTxMessage(&hCAN,&can_tx_msg,_buf,(uint32_t*)CAN_TX_MAILBOX1);
@@ -149,8 +149,8 @@ HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id,uint8_t _buf[],uint8_t _dlc)
 		HAL_CAN_AddTxMessage(&hCAN,&can_tx_msg,_buf,(uint32_t*)CAN_TX_MAILBOX2);
 	else
 		return HAL_ERROR;
-	while(HAL_CAN_GetTxMailboxesFreeLevel(&hCAN) == 0){}			/* å¦‚æœç©ºé—²å‘é€é‚®ç®±ä¸º0ï¼Œåˆ™æ­»å¾ªç¯ï¼Œç­‰å¾…å‘é€é‚®ç®±ä¸ä¸ºç©ºï¼Œæœ‰å¯ç”¨çš„é‚®ç®± */
-																	/* æ·»åŠ ä¸€ç»„å¤§æ‹¬å·ï¼Œé¿å…æŠ¥è­¦å‘Šæ²¡æœ‰è¿”å›çŠ¶æ€ */
+	while(HAL_CAN_GetTxMailboxesFreeLevel(&hCAN) == 0){}			/* Èç¹û¿ÕÏĞ·¢ËÍÓÊÏäÎª0£¬ÔòËÀÑ­»·£¬µÈ´ı·¢ËÍÓÊÏä²»Îª¿Õ£¬ÓĞ¿ÉÓÃµÄÓÊÏä */
+																	/* Ìí¼ÓÒ»×é´óÀ¨ºÅ£¬±ÜÃâ±¨¾¯¸æÃ»ÓĞ·µ»Ø×´Ì¬ */
 	return HAL_OK;
 
 }
@@ -158,9 +158,9 @@ HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id,uint8_t _buf[],uint8_t _dlc)
 /*******************************************************************************
   * @FunctionName: HAL_CAN_MspDeInit
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ25æ—¥23:55:24 
-  * @Purpose:      canå¤–è®¾éåˆå§‹åŒ–
-  * @param:        hcanï¼šcanå¤–è®¾å¥æŸ„
+  * @DateTime:     2022Äê5ÔÂ25ÈÕ23:55:24 
+  * @Purpose:      canÍâÉè·Ç³õÊ¼»¯
+  * @param:        hcan£ºcanÍâÉè¾ä±ú
   * @return:       none
 *******************************************************************************/
 void HAL_CAN_MspDeInit(CAN_HandleTypeDef* hcan)
@@ -186,39 +186,39 @@ void HAL_CAN_MspDeInit(CAN_HandleTypeDef* hcan)
 /*******************************************************************************
   * @FunctionName: HAL_CAN_RxFifo0FullCallback
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ26æ—¥ 20:07:04 
-  * @Purpose:      canæ¥æ”¶fifo0å¡«æ»¡å›è°ƒå‡½æ•°
-  * @param:        hcanï¼šcanå¤–è®¾å¥æŸ„
+  * @DateTime:     2022Äê5ÔÂ26ÈÕ 20:07:04 
+  * @Purpose:      can½ÓÊÕfifo0ÌîÂú»Øµ÷º¯Êı
+  * @param:        hcan£ºcanÍâÉè¾ä±ú
   * @return:       none
 *******************************************************************************/
 void HAL_CAN_RxFifo0FullCallback(CAN_HandleTypeDef *hcan)
 {
-	printf("fifo0æ•°æ®æ¥æ”¶æ»¡\r\n");			/* ç›®å‰æ— æ³•è§¦å‘FIFOé‚®ç®±æ»¡çš„æƒ…å†µ */
+	printf("fifo0Êı¾İ½ÓÊÕÂú\r\n");			/* Ä¿Ç°ÎŞ·¨´¥·¢FIFOÓÊÏäÂúµÄÇé¿ö */
 }
 
 /*******************************************************************************
   * @FunctionName: HAL_CAN_RxFifo0MsgPendingCallback
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ26æ—¥ 20:07:03 
-  * @Purpose:      canæ¥æ”¶fifo0æ­£åœ¨æ¥æ”¶æ•°æ®å›è°ƒå‡½æ•°
-  * @param:        hcanï¼šcanå¤–è®¾å¥æŸ„
+  * @DateTime:     2022Äê5ÔÂ26ÈÕ 20:07:03 
+  * @Purpose:      can½ÓÊÕfifo0ÕıÔÚ½ÓÊÕÊı¾İ»Øµ÷º¯Êı
+  * @param:        hcan£ºcanÍâÉè¾ä±ú
   * @return:       none
 *******************************************************************************/
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan)
 {
-	//App_Printf("æŒç»­æ¥æ”¶æ•°æ®fifo0\r\n");
+	//App_Printf("³ÖĞø½ÓÊÕÊı¾İfifo0\r\n");
 }
 /*******************************************************************************
   * @FunctionName: CAN1_RX0_IRQHandler
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ26æ—¥ 18:15:34 
-  * @Purpose:      canæ¥æ”¶ä¸­æ–­å‡½æ•°ï¼Œåº•å±‚åº“æä¾›
+  * @DateTime:     2022Äê5ÔÂ26ÈÕ 18:15:34 
+  * @Purpose:      can½ÓÊÕÖĞ¶Ïº¯Êı£¬µ×²ã¿âÌá¹©
   * @param:        void
   * @return:       none
 *******************************************************************************/
 void CAN1_RX0_IRQHandler(void)
 {
-	HAL_CAN_IRQHandler(&hCAN);				/* éœ€è¦åœ¨ä¸­æ–­å‡½æ•°ä¸­è°ƒç”¨æ­¤å‡½æ•°æ¥æ¸…é™¤ä¸­æ–­æ ‡å¿—ä½ */
+	HAL_CAN_IRQHandler(&hCAN);				/* ĞèÒªÔÚÖĞ¶Ïº¯ÊıÖĞµ÷ÓÃ´Ëº¯ÊıÀ´Çå³ıÖĞ¶Ï±êÖ¾Î» */
 	HAL_CAN_GetRxMessage(&hCAN, CAN_FILTER_FIFO0,&can_rx_msg,g_canrxbuf);
 }
 
@@ -226,11 +226,11 @@ void CAN1_RX0_IRQHandler(void)
 /*******************************************************************************
   * @FunctionName: bsp_Can1_Receive_buf
   * @Author:       trx
-  * @DateTime:     2022å¹´5æœˆ26æ—¥ 20:37:22 
-  * @Purpose:      canæŠ¥æ–‡æ¥æ”¶å‡½æ•°ï¼Œç›®å‰åªé…ç½®äº†ä¸€ä¸ªidï¼Œè€Œä¸”å¥½åƒfifo1æ— æ³•æ­£å¸¸ä½¿ç”¨ï¼Œå¹¶ä¸”fifo0ä¸fifo1éƒ½æ— æ³•è¿›å…¥é‚®ç®±å¡«æ»¡å‡½æ•°
-  * @param:        _id   ï¼šè¦æ¥æ”¶æŠ¥æ–‡çš„id
-  * @param:        _buf[]ï¼šæŠ¥æ–‡æ•°æ®æ•°ç»„
-  * @return:       DLC:è¿”å›æŠ¥æ–‡çš„æ•°æ®é•¿åº¦
+  * @DateTime:     2022Äê5ÔÂ26ÈÕ 20:37:22 
+  * @Purpose:      can±¨ÎÄ½ÓÊÕº¯Êı£¬Ä¿Ç°Ö»ÅäÖÃÁËÒ»¸öid£¬¶øÇÒºÃÏñfifo1ÎŞ·¨Õı³£Ê¹ÓÃ£¬²¢ÇÒfifo0Óëfifo1¶¼ÎŞ·¨½øÈëÓÊÏäÌîÂúº¯Êı
+  * @param:        _id   £ºÒª½ÓÊÕ±¨ÎÄµÄid
+  * @param:        _buf[]£º±¨ÎÄÊı¾İÊı×é
+  * @return:       DLC:·µ»Ø±¨ÎÄµÄÊı¾İ³¤¶È
 *******************************************************************************/
 uint8_t bsp_Can1_Receive_buf(uint32_t _id,uint8_t _buf[])
 {

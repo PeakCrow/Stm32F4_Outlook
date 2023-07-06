@@ -1,6 +1,6 @@
 ###############################################################################
 #
-# IAR ELF Linker V8.50.9.278/W32 for ARM                  26/Jun/2023  00:18:35
+# IAR ELF Linker V8.50.9.278/W32 for ARM                  03/Jul/2023  23:38:32
 # Copyright 2007-2020 IAR Systems AB.
 #
 #    Output file  =
@@ -8,7 +8,7 @@
 #    Map file     =
 #        D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\List\Run_Xian.map
 #    Command line =
-#        -f C:\Users\ADMINI~1\AppData\Local\Temp\EWA769.tmp
+#        -f C:\Users\ADMINI~1\AppData\Local\Temp\EWC535.tmp
 #        ("D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\about_phone_ui.o"
 #        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\adjust_pedal.o"
 #        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\battery_box.o"
@@ -37,17 +37,8 @@
 #        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\diskio.o"
 #        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\ff.o"
 #        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\ff_gen_drv.o"
-#        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\font12.o"
-#        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\font12CN.o"
-#        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\font16.o"
-#        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\font20.o"
-#        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\font24.o"
-#        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\font24CN.o"
-#        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\font8.o"
 #        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\gui_task.o"
 #        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\HardFaultHandler.o"
-#        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\ImageData.o"
-#        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\ImageData2.o"
 #        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\iwdg.o"
 #        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_anim.o"
 #        "D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj\lv_anim_timeline.o"
@@ -474,7 +465,7 @@ No sections matched the following patterns:
   .intvec            ro code   0x800'0000     0x188  startup_stm32f407xx.o [1]
                              - 0x800'0188     0x188
 
-"P1":                                      0x8'0e3d
+"P1":                                      0x8'0e39
   .rodata            const     0x800'0188  0x1'5484  cc936.o [1]
   .rodata            const     0x801'560c  0x1'5484  cc936.o [1]
   .rodata            const     0x802'aa90    0x5d4c  lv_font_montserrat_24.o [1]
@@ -985,135 +976,136 @@ No sections matched the following patterns:
   .rodata            const     0x808'05c0      0x18  adjust_pedal.o [1]
   .rodata            const     0x808'05d8      0x18  adjust_pedal.o [1]
   .rodata            const     0x808'05f0      0x18  adjust_pedal.o [1]
-  .rodata            const     0x808'0608      0x18  bsp_can_bus.o [1]
-  .rodata            const     0x808'0620      0x18  lv_font_montserrat_10.o [1]
-  .rodata            const     0x808'0638      0x18  lv_font_montserrat_14.o [1]
-  .rodata            const     0x808'0650      0x18  lv_font_montserrat_24.o [1]
-  .rodata            const     0x808'0668      0x18  lv_font_montserrat_8.o [1]
-  .rodata            const     0x808'0680      0x18  lv_fs_fatfs.o [1]
-  .rodata            const     0x808'0698      0x18  lv_theme_default.o [1]
-  .rodata            const     0x808'06b0      0x18  Monitor.o [1]
-  .rodata            const     0x808'06c8      0x18  motor_control_ui.o [1]
-  .rodata            const     0x808'06e0      0x18  sensor_ui.o [1]
-  .rodata            const     0x808'06f8      0x18  set_up.o [1]
-  .text              ro code   0x808'0710      0x16  xprout.o [2]
-  .rodata            const     0x808'0726       0x2  lv_keyboard.o [1]
-  .text              ro code   0x808'0728       0xc  putchar.o [2]
-  .rodata            const     0x808'0734      0x14  adjust_pedal.o [1]
-  .rodata            const     0x808'0748      0x14  adjust_pedal.o [1]
-  .rodata            const     0x808'075c      0x14  battery_box.o [1]
-  .rodata            const     0x808'0770      0x14  bsp_touch.o [1]
-  .rodata            const     0x808'0784      0x14  bsp_touch.o [1]
-  .rodata            const     0x808'0798      0x14  msg_task.o [1]
-  .rodata            const     0x808'07ac      0x14  msg_task.o [1]
-  .rodata            const     0x808'07c0      0x14  msg_task.o [1]
-  .rodata            const     0x808'07d4      0x14  sd_diskio_dma.o [1]
-  .rodata            const     0x808'07e8      0x14  sensor_ui.o [1]
-  .rodata            const     0x808'07fc      0x14  tx_timer_initialize.o [1]
-  .text              ro code   0x808'0810      0x12  HardFaultHandler.o [1]
-  .rodata            const     0x808'0822       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'0824      0x10  about_phone_ui.o [1]
-  .rodata            const     0x808'0834      0x10  adjust_pedal.o [1]
-  .rodata            const     0x808'0844      0x10  bsp_key.o [1]
-  .rodata            const     0x808'0854      0x10  bsp_spi_flash.o [1]
-  .rodata            const     0x808'0864      0x10  bsp_tim_pwm.o [1]
-  .rodata            const     0x808'0874      0x10  bsp_touch.o [1]
-  .rodata            const     0x808'0884      0x10  cool_control.o [1]
-  .rodata            const     0x808'0894      0x10  ff.o [1]
-  .rodata            const     0x808'08a4      0x10  lv_draw_sw_letter.o [1]
-  .rodata            const     0x808'08b4      0x10  lv_font_montserrat_10.o [1]
-  .rodata            const     0x808'08c4      0x10  lv_font_montserrat_14.o [1]
-  .rodata            const     0x808'08d4      0x10  lv_font_montserrat_24.o [1]
-  .rodata            const     0x808'08e4      0x10  lv_font_montserrat_8.o [1]
-  .rodata            const     0x808'08f4      0x10  lv_fs_fatfs.o [1]
-  .rodata            const     0x808'0904      0x10  lv_img_decoder.o [1]
-  .rodata            const     0x808'0914      0x10  lv_refr.o [1]
-  .rodata            const     0x808'0924      0x10  msg_task.o [1]
-  .rodata            const     0x808'0934      0x10  msg_task.o [1]
-  .rodata            const     0x808'0944      0x10  msg_task.o [1]
-  .rodata            const     0x808'0954      0x10  msg_task.o [1]
-  .rodata            const     0x808'0964      0x10  msg_task.o [1]
-  .rodata            const     0x808'0974      0x10  msg_task.o [1]
-  .rodata            const     0x808'0984      0x10  system_stm32f4xx.o [1]
-  .rodata            const     0x808'0994      0x10  system_task_create.o [1]
-  .rodata            const     0x808'09a4      0x10  system_task_create.o [1]
-  .rodata            const     0x808'09b4      0x10  system_task_create.o [1]
-  .rodata            const     0x808'09c4      0x10  system_task_create.o [1]
-  .rodata            const     0x808'09d4      0x10  system_task_create.o [1]
-  .rodata            const     0x808'09e4      0x10  system_task_create.o [1]
-  .rodata            const     0x808'09f4      0x10  system_task_create.o [1]
-  .rodata            const     0x808'0a04      0x10  system_task_create.o [1]
-  .rodata            const     0x808'0a14      0x10  vehicle_status.o [1]
-  .text              ro code   0x808'0a24      0x10  startup_stm32f407xx.o [1]
-  .rodata            const     0x808'0a34       0xc  adjust_pedal.o [1]
-  .rodata            const     0x808'0a40       0xc  adjust_pedal.o [1]
-  .rodata            const     0x808'0a4c       0xc  adjust_pedal.o [1]
-  .rodata            const     0x808'0a58       0xc  bsp_lcd.o [1]
-  .rodata            const     0x808'0a64       0xc  bsp_spi_flash.o [1]
-  .rodata            const     0x808'0a70       0xc  bsp_spi_flash.o [1]
-  .rodata            const     0x808'0a7c       0xc  bsp_spi_flash.o [1]
-  .rodata            const     0x808'0a88       0xc  bsp_spi_flash.o [1]
-  .rodata            const     0x808'0a94       0xc  bsp_spi_flash.o [1]
-  .rodata            const     0x808'0aa0       0xc  bsp_touch.o [1]
-  .rodata            const     0x808'0aac       0xc  ff.o [1]
-  .rodata            const     0x808'0ab8       0xc  gui_task.o [1]
-  .rodata            const     0x808'0ac4       0xc  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0ad0       0xc  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0adc       0xc  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0ae8       0xc  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0af4       0xc  lv_checkbox.o [1]
-  .rodata            const     0x808'0b00       0xc  Monitor.o [1]
-  .rodata            const     0x808'0b0c       0xc  set_up.o [1]
-  .rodata            const     0x808'0b18       0xc  system_task_create.o [1]
-  .rodata            const     0x808'0b24       0xc  system_task_create.o [1]
-  .rodata            const     0x808'0b30       0xc  system_task_create.o [1]
-  .rodata            const     0x808'0b3c       0xc  system_task_create.o [1]
-  .text              ro code   0x808'0b48       0xc  stm32f4xx_it.o [1]
-  .rodata            const     0x808'0b54       0x8  adjust_pedal.o [1]
-  .rodata            const     0x808'0b5c       0x8  adjust_pedal.o [1]
-  .rodata            const     0x808'0b64       0x8  adjust_pedal.o [1]
-  .rodata            const     0x808'0b6c       0x8  adjust_pedal.o [1]
-  .rodata            const     0x808'0b74       0x8  bsp_touch.o [1]
-  .rodata            const     0x808'0b7c       0x8  ff.o [1]
-  .rodata            const     0x808'0b84       0x8  lv_btnmatrix.o [1]
-  .rodata            const     0x808'0b8c       0x8  lv_btnmatrix.o [1]
-  .rodata            const     0x808'0b94       0x8  lv_btnmatrix.o [1]
-  .rodata            const     0x808'0b9c       0x8  lv_btnmatrix.o [1]
-  .rodata            const     0x808'0ba4       0x8  lv_btnmatrix.o [1]
-  .rodata            const     0x808'0bac       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0bb4       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0bbc       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0bc4       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0bcc       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0bd4       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0bdc       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0be4       0x8  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0bec       0x8  lv_draw_img.o [1]
-  .rodata            const     0x808'0bf4       0x8  lv_draw_sw_polygon.o [1]
-  .rodata            const     0x808'0bfc       0x8  lv_keyboard.o [1]
-  .rodata            const     0x808'0c04       0x8  lv_label.o [1]
-  .rodata            const     0x808'0c0c       0x8  lv_printf.o [1]
-  .rodata            const     0x808'0c14       0x8  lv_printf.o [1]
-  .rodata            const     0x808'0c1c       0x8  lv_txt.o [1]
-  .rodata            const     0x808'0c24       0x8  sensor_ui.o [1]
-  .rodata            const     0x808'0c2c       0x8  sensor_ui.o [1]
-  .rodata            const     0x808'0c34       0x8  stm32f4xx_hal_dma.o [1]
-  .rodata            const     0x808'0c3c       0x8  system_stm32f4xx.o [1]
-  .rodata            const     0x808'0c44       0x8  xprintffull_nomb.o [2]
+  .rodata            const     0x808'0608      0x18  lv_font_montserrat_10.o [1]
+  .rodata            const     0x808'0620      0x18  lv_font_montserrat_14.o [1]
+  .rodata            const     0x808'0638      0x18  lv_font_montserrat_24.o [1]
+  .rodata            const     0x808'0650      0x18  lv_font_montserrat_8.o [1]
+  .rodata            const     0x808'0668      0x18  lv_fs_fatfs.o [1]
+  .rodata            const     0x808'0680      0x18  lv_theme_default.o [1]
+  .rodata            const     0x808'0698      0x18  Monitor.o [1]
+  .rodata            const     0x808'06b0      0x18  motor_control_ui.o [1]
+  .rodata            const     0x808'06c8      0x18  sensor_ui.o [1]
+  .rodata            const     0x808'06e0      0x18  set_up.o [1]
+  .text              ro code   0x808'06f8      0x16  xprout.o [2]
+  .rodata            const     0x808'070e       0x2  lv_keyboard.o [1]
+  .text              ro code   0x808'0710       0xc  putchar.o [2]
+  .rodata            const     0x808'071c      0x14  adjust_pedal.o [1]
+  .rodata            const     0x808'0730      0x14  adjust_pedal.o [1]
+  .rodata            const     0x808'0744      0x14  battery_box.o [1]
+  .rodata            const     0x808'0758      0x14  bsp_can_bus.o [1]
+  .rodata            const     0x808'076c      0x14  bsp_touch.o [1]
+  .rodata            const     0x808'0780      0x14  bsp_touch.o [1]
+  .rodata            const     0x808'0794      0x14  msg_task.o [1]
+  .rodata            const     0x808'07a8      0x14  msg_task.o [1]
+  .rodata            const     0x808'07bc      0x14  msg_task.o [1]
+  .rodata            const     0x808'07d0      0x14  sd_diskio_dma.o [1]
+  .rodata            const     0x808'07e4      0x14  sensor_ui.o [1]
+  .rodata            const     0x808'07f8      0x14  tx_timer_initialize.o [1]
+  .text              ro code   0x808'080c      0x12  HardFaultHandler.o [1]
+  .rodata            const     0x808'081e       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0820      0x10  about_phone_ui.o [1]
+  .rodata            const     0x808'0830      0x10  adjust_pedal.o [1]
+  .rodata            const     0x808'0840      0x10  bsp_key.o [1]
+  .rodata            const     0x808'0850      0x10  bsp_spi_flash.o [1]
+  .rodata            const     0x808'0860      0x10  bsp_tim_pwm.o [1]
+  .rodata            const     0x808'0870      0x10  bsp_touch.o [1]
+  .rodata            const     0x808'0880      0x10  cool_control.o [1]
+  .rodata            const     0x808'0890      0x10  ff.o [1]
+  .rodata            const     0x808'08a0      0x10  lv_draw_sw_letter.o [1]
+  .rodata            const     0x808'08b0      0x10  lv_font_montserrat_10.o [1]
+  .rodata            const     0x808'08c0      0x10  lv_font_montserrat_14.o [1]
+  .rodata            const     0x808'08d0      0x10  lv_font_montserrat_24.o [1]
+  .rodata            const     0x808'08e0      0x10  lv_font_montserrat_8.o [1]
+  .rodata            const     0x808'08f0      0x10  lv_fs_fatfs.o [1]
+  .rodata            const     0x808'0900      0x10  lv_img_decoder.o [1]
+  .rodata            const     0x808'0910      0x10  lv_refr.o [1]
+  .rodata            const     0x808'0920      0x10  msg_task.o [1]
+  .rodata            const     0x808'0930      0x10  msg_task.o [1]
+  .rodata            const     0x808'0940      0x10  msg_task.o [1]
+  .rodata            const     0x808'0950      0x10  msg_task.o [1]
+  .rodata            const     0x808'0960      0x10  msg_task.o [1]
+  .rodata            const     0x808'0970      0x10  msg_task.o [1]
+  .rodata            const     0x808'0980      0x10  system_stm32f4xx.o [1]
+  .rodata            const     0x808'0990      0x10  system_task_create.o [1]
+  .rodata            const     0x808'09a0      0x10  system_task_create.o [1]
+  .rodata            const     0x808'09b0      0x10  system_task_create.o [1]
+  .rodata            const     0x808'09c0      0x10  system_task_create.o [1]
+  .rodata            const     0x808'09d0      0x10  system_task_create.o [1]
+  .rodata            const     0x808'09e0      0x10  system_task_create.o [1]
+  .rodata            const     0x808'09f0      0x10  system_task_create.o [1]
+  .rodata            const     0x808'0a00      0x10  system_task_create.o [1]
+  .rodata            const     0x808'0a10      0x10  vehicle_status.o [1]
+  .text              ro code   0x808'0a20      0x10  startup_stm32f407xx.o [1]
+  .rodata            const     0x808'0a30       0xc  adjust_pedal.o [1]
+  .rodata            const     0x808'0a3c       0xc  adjust_pedal.o [1]
+  .rodata            const     0x808'0a48       0xc  adjust_pedal.o [1]
+  .rodata            const     0x808'0a54       0xc  bsp_lcd.o [1]
+  .rodata            const     0x808'0a60       0xc  bsp_spi_flash.o [1]
+  .rodata            const     0x808'0a6c       0xc  bsp_spi_flash.o [1]
+  .rodata            const     0x808'0a78       0xc  bsp_spi_flash.o [1]
+  .rodata            const     0x808'0a84       0xc  bsp_spi_flash.o [1]
+  .rodata            const     0x808'0a90       0xc  bsp_spi_flash.o [1]
+  .rodata            const     0x808'0a9c       0xc  bsp_touch.o [1]
+  .rodata            const     0x808'0aa8       0xc  ff.o [1]
+  .rodata            const     0x808'0ab4       0xc  gui_task.o [1]
+  .rodata            const     0x808'0ac0       0xc  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0acc       0xc  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0ad8       0xc  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0ae4       0xc  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0af0       0xc  lv_checkbox.o [1]
+  .rodata            const     0x808'0afc       0xc  Monitor.o [1]
+  .rodata            const     0x808'0b08       0xc  set_up.o [1]
+  .rodata            const     0x808'0b14       0xc  system_task_create.o [1]
+  .rodata            const     0x808'0b20       0xc  system_task_create.o [1]
+  .rodata            const     0x808'0b2c       0xc  system_task_create.o [1]
+  .rodata            const     0x808'0b38       0xc  system_task_create.o [1]
+  .text              ro code   0x808'0b44       0xc  stm32f4xx_it.o [1]
+  .rodata            const     0x808'0b50       0x8  adjust_pedal.o [1]
+  .rodata            const     0x808'0b58       0x8  adjust_pedal.o [1]
+  .rodata            const     0x808'0b60       0x8  adjust_pedal.o [1]
+  .rodata            const     0x808'0b68       0x8  adjust_pedal.o [1]
+  .rodata            const     0x808'0b70       0x8  bsp_touch.o [1]
+  .rodata            const     0x808'0b78       0x8  ff.o [1]
+  .rodata            const     0x808'0b80       0x8  lv_btnmatrix.o [1]
+  .rodata            const     0x808'0b88       0x8  lv_btnmatrix.o [1]
+  .rodata            const     0x808'0b90       0x8  lv_btnmatrix.o [1]
+  .rodata            const     0x808'0b98       0x8  lv_btnmatrix.o [1]
+  .rodata            const     0x808'0ba0       0x8  lv_btnmatrix.o [1]
+  .rodata            const     0x808'0ba8       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0bb0       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0bb8       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0bc0       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0bc8       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0bd0       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0bd8       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0be0       0x8  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0be8       0x8  lv_draw_img.o [1]
+  .rodata            const     0x808'0bf0       0x8  lv_draw_sw_polygon.o [1]
+  .rodata            const     0x808'0bf8       0x8  lv_keyboard.o [1]
+  .rodata            const     0x808'0c00       0x8  lv_label.o [1]
+  .rodata            const     0x808'0c08       0x8  lv_printf.o [1]
+  .rodata            const     0x808'0c10       0x8  lv_printf.o [1]
+  .rodata            const     0x808'0c18       0x8  lv_txt.o [1]
+  .rodata            const     0x808'0c20       0x8  sensor_ui.o [1]
+  .rodata            const     0x808'0c28       0x8  sensor_ui.o [1]
+  .rodata            const     0x808'0c30       0x8  stm32f4xx_hal_dma.o [1]
+  .rodata            const     0x808'0c38       0x8  system_stm32f4xx.o [1]
+  .rodata            const     0x808'0c40       0x8  xprintffull_nomb.o [2]
+  .rodata            const     0x808'0c48       0x4  adjust_pedal.o [1]
   .rodata            const     0x808'0c4c       0x4  adjust_pedal.o [1]
   .rodata            const     0x808'0c50       0x4  adjust_pedal.o [1]
   .rodata            const     0x808'0c54       0x4  adjust_pedal.o [1]
-  .rodata            const     0x808'0c58       0x4  adjust_pedal.o [1]
+  .rodata            const     0x808'0c58       0x4  lv_calendar.o [1]
   .rodata            const     0x808'0c5c       0x4  lv_calendar.o [1]
   .rodata            const     0x808'0c60       0x4  lv_calendar.o [1]
   .rodata            const     0x808'0c64       0x4  lv_calendar.o [1]
   .rodata            const     0x808'0c68       0x4  lv_calendar.o [1]
   .rodata            const     0x808'0c6c       0x4  lv_calendar.o [1]
   .rodata            const     0x808'0c70       0x4  lv_calendar.o [1]
-  .rodata            const     0x808'0c74       0x4  lv_calendar.o [1]
-  .rodata            const     0x808'0c78       0x4  lv_calendar_header_arrow.o [1]
-  .rodata            const     0x808'0c7c       0x4  lv_draw_sw_letter.o [1]
-  .rodata            const     0x808'0c80       0x4  lv_img_decoder.o [1]
+  .rodata            const     0x808'0c74       0x4  lv_calendar_header_arrow.o [1]
+  .rodata            const     0x808'0c78       0x4  lv_draw_sw_letter.o [1]
+  .rodata            const     0x808'0c7c       0x4  lv_img_decoder.o [1]
+  .rodata            const     0x808'0c80       0x4  lv_keyboard.o [1]
   .rodata            const     0x808'0c84       0x4  lv_keyboard.o [1]
   .rodata            const     0x808'0c88       0x4  lv_keyboard.o [1]
   .rodata            const     0x808'0c8c       0x4  lv_keyboard.o [1]
@@ -1123,15 +1115,15 @@ No sections matched the following patterns:
   .rodata            const     0x808'0c9c       0x4  lv_keyboard.o [1]
   .rodata            const     0x808'0ca0       0x4  lv_keyboard.o [1]
   .rodata            const     0x808'0ca4       0x4  lv_keyboard.o [1]
-  .rodata            const     0x808'0ca8       0x4  lv_keyboard.o [1]
+  .rodata            const     0x808'0ca8       0x4  lv_obj_pos.o [1]
   .rodata            const     0x808'0cac       0x4  lv_obj_pos.o [1]
-  .rodata            const     0x808'0cb0       0x4  lv_obj_pos.o [1]
+  .rodata            const     0x808'0cb0       0x4  lv_tlsf.o [1]
   .rodata            const     0x808'0cb4       0x4  lv_tlsf.o [1]
   .rodata            const     0x808'0cb8       0x4  lv_tlsf.o [1]
   .rodata            const     0x808'0cbc       0x4  lv_tlsf.o [1]
   .rodata            const     0x808'0cc0       0x4  lv_tlsf.o [1]
   .rodata            const     0x808'0cc4       0x4  lv_tlsf.o [1]
-  .rodata            const     0x808'0cc8       0x4  lv_tlsf.o [1]
+  .text              ro code   0x808'0cc8       0x4  startup_stm32f407xx.o [1]
   .text              ro code   0x808'0ccc       0x4  startup_stm32f407xx.o [1]
   .text              ro code   0x808'0cd0       0x4  startup_stm32f407xx.o [1]
   .text              ro code   0x808'0cd4       0x4  startup_stm32f407xx.o [1]
@@ -1198,7 +1190,8 @@ No sections matched the following patterns:
   .text              ro code   0x808'0dc8       0x4  startup_stm32f407xx.o [1]
   .text              ro code   0x808'0dcc       0x4  startup_stm32f407xx.o [1]
   .text              ro code   0x808'0dd0       0x4  startup_stm32f407xx.o [1]
-  .text              ro code   0x808'0dd4       0x4  startup_stm32f407xx.o [1]
+  .rodata            const     0x808'0dd4       0x2  lv_keyboard.o [1]
+  .rodata            const     0x808'0dd6       0x2  lv_keyboard.o [1]
   .rodata            const     0x808'0dd8       0x2  lv_keyboard.o [1]
   .rodata            const     0x808'0dda       0x2  lv_keyboard.o [1]
   .rodata            const     0x808'0ddc       0x2  lv_keyboard.o [1]
@@ -1226,17 +1219,15 @@ No sections matched the following patterns:
   .rodata            const     0x808'0e08       0x2  lv_keyboard.o [1]
   .rodata            const     0x808'0e0a       0x2  lv_keyboard.o [1]
   .rodata            const     0x808'0e0c       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'0e0e       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'0e10       0x2  lv_keyboard.o [1]
-  .rodata            const     0x808'0e12       0x2  lv_textarea.o [1]
-  .rodata            const     0x808'0e14       0x2  xlocale_c.o [2]
-  .rodata            const     0x808'0e16       0x1  lv_btnmatrix.o [1]
-  .rodata            const     0x808'0e17       0x1  lv_keyboard.o [1]
-  .rodata            const     0x808'0e18       0x1  xlocale_c.o [2]
-  .rodata            const     0x808'0e19       0x0  zero_init3.o [4]
-  .rodata            const     0x808'0e19       0x0  lz77_init_single.o [4]
-  Initializer bytes  const     0x808'0e19     0x1ac  <for P2-1>
-                             - 0x808'0fc5  0x8'0e3d
+  .rodata            const     0x808'0e0e       0x2  lv_textarea.o [1]
+  .rodata            const     0x808'0e10       0x2  xlocale_c.o [2]
+  .rodata            const     0x808'0e12       0x1  lv_btnmatrix.o [1]
+  .rodata            const     0x808'0e13       0x1  lv_keyboard.o [1]
+  .rodata            const     0x808'0e14       0x1  xlocale_c.o [2]
+  .rodata            const     0x808'0e15       0x0  zero_init3.o [4]
+  .rodata            const     0x808'0e15       0x0  lz77_init_single.o [4]
+  Initializer bytes  const     0x808'0e15     0x1ac  <for P2-1>
+                             - 0x808'0fc1  0x8'0e39
 
 "P2", part 1 of 3:                            0x6b3
   P2-1                        0x2000'0000     0x6b3  <Init block>
@@ -1617,7 +1608,7 @@ Unused ranges:
 
          From           To      Size
          ----           --      ----
-   0x808'0fc5   0x80f'ffff  0x7'f03b
+   0x808'0fc1   0x80f'ffff  0x7'f03f
   0x2000'06b3  0x2000'06b3       0x1
   0x2001'007c  0x2001'007f       0x4
   0x2001'0880  0x2001'ffff    0xf780
@@ -1637,7 +1628,7 @@ Zero (__iar_zero_init3)
 
 Copy/lz77 (__iar_lz77_init_single3)
     1 source range, total size 0x1ac (24% of destination):
-           0x808'0e19     0x1ac
+           0x808'0e15     0x1ac
     1 destination range, total size 0x6b3:
           0x2000'0000     0x6b3
 
@@ -1660,7 +1651,7 @@ D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj: [1]
     about_phone_ui.o                    1'022      498      132
     adjust_pedal.o                      4'312      540      226
     battery_box.o                       1'088      162       64
-    bsp_can_bus.o                         436       24       76
+    bsp_can_bus.o                         436       20       76
     bsp_dwt.o                             184                 4
     bsp_iic_bus.o                         632                84
     bsp_key.o                             794       16       48
@@ -1859,7 +1850,7 @@ D:\Ls_Monitor_Lower_SW\Xian_Template\EW-ARM(v8x)\Flash\Obj: [1]
     txe_timer_create.o                    232
     vehicle_status.o                      350       50       64
     -----------------------------------------------------------
-    Total:                            271'168  243'486  832'943
+    Total:                            271'168  243'482  832'943
 
 dl7M_tlf.a: [2]
     abort.o                                 6
@@ -1930,7 +1921,7 @@ shb_l.a: [5]
     Gaps                                             4        4
     Linker created                                  40    2'048
 ---------------------------------------------------------------
-    Grand Total:                      284'752  243'573  835'707
+    Grand Total:                      284'752  243'569  835'707
 
 
 *******************************************************************************
@@ -1951,8 +1942,8 @@ ADS1256_Send8Bit         0x805'ac1d      0x48  Code  Lc  bsp_spi_ads1256.o [1]
 ADS1256_SetChannal       0x805'ace1      0x1c  Code  Lc  bsp_spi_ads1256.o [1]
 ADS1256_WriteCmd         0x805'accb      0x16  Code  Lc  bsp_spi_ads1256.o [1]
 ADS1256_WriteReg         0x805'aca1      0x2a  Code  Lc  bsp_spi_ads1256.o [1]
-AHBPrescTable            0x808'0984      0x10  Data  Gb  system_stm32f4xx.o [1]
-APBPrescTable            0x808'0c3c       0x8  Data  Gb  system_stm32f4xx.o [1]
+AHBPrescTable            0x808'0980      0x10  Data  Gb  system_stm32f4xx.o [1]
+APBPrescTable            0x808'0c38       0x8  Data  Gb  system_stm32f4xx.o [1]
 About_Phone_In_Ui        0x806'06fd     0x268  Code  Lc  about_phone_ui.o [1]
 About_Phone_In_Ui::about_lines1
                         0x2000'0008      0x24  Data  Lc  about_phone_ui.o [1]
@@ -2057,7 +2048,7 @@ Battery_Box_Ui::style_pr
 Battery_Box_Ui::tr      0x2000'fb24      0x14  Data  Lc  battery_box.o [1]
 Battery_Box_Ui::tr_prop
                         0x2000'005c       0x8  Data  Lc  battery_box.o [1]
-BusFault_Handler         0x808'0b4d       0x2  Code  Gb  stm32f4xx_it.o [1]
+BusFault_Handler         0x808'0b49       0x2  Code  Gb  stm32f4xx_it.o [1]
 CAN1_RX0_IRQHandler      0x807'6dc3      0x18  Code  Gb  bsp_can_bus.o [1]
 CMD_RDX                 0x2000'06ae       0x1  Data  Gb  bsp_touch.o [1]
 CMD_RDY                 0x2000'06af       0x1  Data  Gb  bsp_touch.o [1]
@@ -2094,10 +2085,10 @@ DMA2_Stream6_IRQHandler
 DMA_CalcBaseAndBitshift
                          0x806'bab9      0x30  Code  Lc  stm32f4xx_hal_dma.o [1]
 DMA_CalcBaseAndBitshift::flagBitshiftOffset
-                         0x808'0c34       0x8  Data  Lc  stm32f4xx_hal_dma.o [1]
+                         0x808'0c30       0x8  Data  Lc  stm32f4xx_hal_dma.o [1]
 DMA_CheckFifoParam       0x806'baf5      0x88  Code  Lc  stm32f4xx_hal_dma.o [1]
 DMA_SetConfig            0x806'ba8b      0x2e  Code  Lc  stm32f4xx_hal_dma.o [1]
-DebugMon_Handler         0x808'0b53       0x2  Code  Gb  stm32f4xx_it.o [1]
+DebugMon_Handler         0x808'0b4f       0x2  Code  Gb  stm32f4xx_it.o [1]
 DispTaskInfo             0x806'3dd5      0x5e  Code  Gb  statistic_task.o [1]
 DriverX_Pos             0x2000'fbd8      0x10  Data  Gb  adjust_pedal.o [1]
 Driverpos1_Label_Cb      0x805'e149      0x38  Code  Lc  adjust_pedal.o [1]
@@ -2123,7 +2114,7 @@ GT9147_RD_Reg            0x807'4683      0x78  Code  Gb  bsp_touch.o [1]
 GT9147_Scan              0x807'4821     0x1ea  Code  Gb  bsp_touch.o [1]
 GT9147_Scan::t          0x2001'0064       0x1  Data  Lc  bsp_touch.o [1]
 GT9147_Send_Cfg          0x807'45c1      0x5a  Code  Gb  bsp_touch.o [1]
-GT9147_TPX_TBL           0x808'0aa0       0xc  Data  Gb  bsp_touch.o [1]
+GT9147_TPX_TBL           0x808'0a9c       0xc  Data  Gb  bsp_touch.o [1]
 GT9147_WR_Reg            0x807'461b      0x68  Code  Gb  bsp_touch.o [1]
 Gui_Monitor_App          0x805'ea27      0x5e  Code  Gb  Monitor.o [1]
 HAL_CAN_ActivateNotification
@@ -2224,7 +2215,7 @@ HEAP$$Base              0x2001'0480             --   Gb  - Linker created -
 HEAP$$Limit             0x2001'0880             --   Gb  - Linker created -
 HardFaultHandler         0x807'e2d5      0xb0  Code  Gb  SEGGER_HardFaultHandler.o [1]
 HardFaultRegs           0x2000'f72c      0x40  Data  Lc  SEGGER_HardFaultHandler.o [1]
-HardFault_Handler        0x808'0811            Code  Gb  HardFaultHandler.o [1]
+HardFault_Handler        0x808'080d            Code  Gb  HardFaultHandler.o [1]
 I2C_EE_BufferRead        0x805'f999      0x24  Code  Gb  bsp_iic_bus.o [1]
 I2C_EE_BufferWrite       0x805'fa0f     0x118  Code  Gb  bsp_iic_bus.o [1]
 I2C_EE_PageWrite         0x805'f9bd      0x52  Code  Gb  bsp_iic_bus.o [1]
@@ -2294,9 +2285,9 @@ LV_STYLE_GRID_ROW_ALIGN
                         0x2001'0044       0x2  Data  Gb  lv_grid.o [1]
 LV_STYLE_GRID_ROW_DSC_ARRAY
                         0x2001'0042       0x2  Data  Gb  lv_grid.o [1]
-LfnOfs                   0x808'0894      0x10  Data  Lc  ff.o [1]
+LfnOfs                   0x808'0890      0x10  Data  Lc  ff.o [1]
 MX_DMA_Init              0x807'3bc1      0xc2  Code  Gb  bsp_tim_pwm.o [1]
-MemManage_Handler        0x808'0b4b       0x2  Code  Gb  stm32f4xx_it.o [1]
+MemManage_Handler        0x808'0b47       0x2  Code  Gb  stm32f4xx_it.o [1]
 Monitor_Main_Style       0x805'ea85      0x84  Code  Lc  Monitor.o [1]
 Monitor_Main_Style::style_speed_meter
                         0x2000'fd54       0xc  Data  Lc  Monitor.o [1]
@@ -2311,7 +2302,7 @@ Motor_Control_Ui::style_pr
 Motor_Control_Ui::tr    0x2000'fb88      0x14  Data  Lc  motor_control_ui.o [1]
 Motor_Control_Ui::tr_prop
                         0x2000'05f8       0x8  Data  Lc  motor_control_ui.o [1]
-NMI_Handler              0x808'0b49       0x2  Code  Gb  stm32f4xx_it.o [1]
+NMI_Handler              0x808'0b45       0x2  Code  Gb  stm32f4xx_it.o [1]
 NVIC_EnableIRQ           0x806'3605      0x14  Code  Lc  stm32f4xx_hal_cortex.o [1]
 NVIC_EncodePriority      0x806'363d      0x3c  Code  Lc  stm32f4xx_hal_cortex.o [1]
 NVIC_GetPriorityGrouping
@@ -2386,7 +2377,7 @@ SD_DMAReceiveCplt        0x806'aa29      0x44  Code  Lc  stm32f4xx_hal_sd.o [1]
 SD_DMARxAbort            0x806'ab21      0x54  Code  Lc  stm32f4xx_hal_sd.o [1]
 SD_DMATransmitCplt       0x806'aa19      0x10  Code  Lc  stm32f4xx_hal_sd.o [1]
 SD_DMATxAbort            0x806'aacd      0x54  Code  Lc  stm32f4xx_hal_sd.o [1]
-SD_Driver                0x808'07d4      0x14  Data  Gb  sd_diskio_dma.o [1]
+SD_Driver                0x808'07d0      0x14  Data  Gb  sd_diskio_dma.o [1]
 SD_FindSCR               0x806'ae0f     0x11c  Code  Lc  stm32f4xx_hal_sd.o [1]
 SD_InitCard              0x806'ab75      0xea  Code  Lc  stm32f4xx_hal_sd.o [1]
 SD_PowerON               0x806'ac5f      0xd2  Code  Lc  stm32f4xx_hal_sd.o [1]
@@ -2414,7 +2405,7 @@ SPI_EndRxTxTransaction   0x807'7403      0x26  Code  Lc  stm32f4xx_hal_spi.o [1]
 SPI_WaitFlagStateUntilTimeout
                          0x807'7319      0xa0  Code  Lc  stm32f4xx_hal_spi.o [1]
 SRAM_Handler            0x2000'f5bc      0x50  Data  Gb  bsp_sram.o [1]
-SVC_Handler              0x808'0b51       0x2  Code  Gb  stm32f4xx_it.o [1]
+SVC_Handler              0x808'0b4d       0x2  Code  Gb  stm32f4xx_it.o [1]
 Sensor_In_Ui             0x806'14e9     0x450  Code  Lc  sensor_ui.o [1]
 Sensor_Ui                0x806'12ab      0xc6  Code  Gb  sensor_ui.o [1]
 Sensor_Ui::style_def    0x2000'fda8       0xc  Data  Lc  sensor_ui.o [1]
@@ -2472,7 +2463,7 @@ UartGetChar              0x806'012b      0x48  Code  Lc  bsp_usart_fifo.o [1]
 UartIRQ                  0x805'ff03      0xec  Code  Lc  bsp_usart_fifo.o [1]
 UartSend                 0x806'0065      0x8e  Code  Lc  bsp_usart_fifo.o [1]
 UartVarInit              0x805'fbb5      0xd2  Code  Lc  bsp_usart_fifo.o [1]
-UsageFault_Handler       0x808'0b4f       0x2  Code  Gb  stm32f4xx_it.o [1]
+UsageFault_Handler       0x808'0b4b       0x2  Code  Gb  stm32f4xx_it.o [1]
 Vehicle_Status_Ui        0x806'0b7f      0xbc  Code  Gb  vehicle_status.o [1]
 Vehicle_Status_Ui::style_def
                         0x2000'fdf0       0xc  Data  Lc  vehicle_status.o [1]
@@ -2487,7 +2478,7 @@ _Continue               0x2000'ff24       0x4  Data  Lc  SEGGER_HardFaultHandler
 _LitobFullNoMb           0x804'd875     0x10a  Code  Lc  xprintffull_nomb.o [2]
 _Locale_lconv           0x2000'0628      0x38  Data  Lc  xlocale_c.o [2]
 _PrintfFullNoMb          0x804'cab9     0xd98  Code  Gb  xprintffull_nomb.o [2]
-_Prout                   0x808'0711      0x16  Code  Gb  xprout.o [2]
+_Prout                   0x808'06f9      0x16  Code  Gb  xprout.o [2]
 _PutcharFullNoMb         0x804'd9e5      0x20  Code  Lc  xprintffull_nomb.o [2]
 _PutcharsFullNoMb        0x804'da05      0x2e  Code  Lc  xprintffull_nomb.o [2]
 _SNProut                 0x803'3be3      0x1a  Code  Gb  xsnprout.o [2]
@@ -2573,8 +2564,8 @@ _lv_area_is_out          0x804'103d      0xd4  Code  Gb  lv_area.o [1]
 _lv_area_is_point_on     0x804'0da5     0x182  Code  Gb  lv_area.o [1]
 _lv_area_join            0x804'0d3f      0x66  Code  Gb  lv_area.o [1]
 _lv_bpp1_opa_table       0x804'0186       0x2  Data  Gb  lv_draw_sw_letter.o [1]
-_lv_bpp2_opa_table       0x808'0c7c       0x4  Data  Gb  lv_draw_sw_letter.o [1]
-_lv_bpp4_opa_table       0x808'08a4      0x10  Data  Gb  lv_draw_sw_letter.o [1]
+_lv_bpp2_opa_table       0x808'0c78       0x4  Data  Gb  lv_draw_sw_letter.o [1]
+_lv_bpp4_opa_table       0x808'08a0      0x10  Data  Gb  lv_draw_sw_letter.o [1]
 _lv_bpp8_opa_table       0x807'd7ac     0x100  Data  Gb  lv_draw_sw_letter.o [1]
 _lv_circle_cache        0x2000'f218      0x70  Data  Gb  lv_gc.o [1]
 _lv_disp_ll             0x2000'fd00       0xc  Data  Gb  lv_gc.o [1]
@@ -2870,10 +2861,10 @@ auto_hide_characters     0x805'c161      0x54  Code  Lc  lv_textarea.o [1]
 block_absorb             0x803'b471      0x30  Code  Lc  lv_tlsf.o [1]
 block_can_split          0x803'b3d1      0x18  Code  Lc  lv_tlsf.o [1]
 block_from_ptr           0x803'b0ff       0xc  Code  Lc  lv_tlsf.o [1]
-block_header_free_bit    0x808'0cb4       0x4  Data  Lc  lv_tlsf.o [1]
-block_header_overhead    0x808'0cbc       0x4  Data  Lc  lv_tlsf.o [1]
+block_header_free_bit    0x808'0cb0       0x4  Data  Lc  lv_tlsf.o [1]
+block_header_overhead    0x808'0cb8       0x4  Data  Lc  lv_tlsf.o [1]
 block_header_prev_free_bit
-                         0x808'0cb8       0x4  Data  Lc  lv_tlsf.o [1]
+                         0x808'0cb4       0x4  Data  Lc  lv_tlsf.o [1]
 block_insert             0x803'b3af      0x22  Code  Lc  lv_tlsf.o [1]
 block_is_free            0x803'b0af       0xc  Code  Lc  lv_tlsf.o [1]
 block_is_last            0x803'b09b      0x14  Code  Lc  lv_tlsf.o [1]
@@ -2894,10 +2885,10 @@ block_set_prev_used      0x803'b0f1       0xe  Code  Lc  lv_tlsf.o [1]
 block_set_size           0x803'b07f      0x1c  Code  Lc  lv_tlsf.o [1]
 block_set_used           0x803'b0c9       0xe  Code  Lc  lv_tlsf.o [1]
 block_size               0x803'b06b      0x14  Code  Lc  lv_tlsf.o [1]
-block_size_max           0x808'0cc8       0x4  Data  Lc  lv_tlsf.o [1]
-block_size_min           0x808'0cc4       0x4  Data  Lc  lv_tlsf.o [1]
+block_size_max           0x808'0cc4       0x4  Data  Lc  lv_tlsf.o [1]
+block_size_min           0x808'0cc0       0x4  Data  Lc  lv_tlsf.o [1]
 block_split              0x803'b3e9      0x88  Code  Lc  lv_tlsf.o [1]
-block_start_offset       0x808'0cc0       0x4  Data  Lc  lv_tlsf.o [1]
+block_start_offset       0x808'0cbc       0x4  Data  Lc  lv_tlsf.o [1]
 block_to_ptr             0x803'b10b       0xa  Code  Lc  lv_tlsf.o [1]
 block_trim_free          0x803'b521      0x40  Code  Lc  lv_tlsf.o [1]
 block_trim_used          0x803'b561      0x42  Code  Lc  lv_tlsf.o [1]
@@ -3152,10 +3143,10 @@ find_volume              0x804'aa39     0x2dc  Code  Lc  ff.o [1]
 flex_update              0x804'6481     0x3b4  Code  Lc  lv_flex.o [1]
 focus_next_core          0x803'ea4b     0x154  Code  Lc  lv_group.o [1]
 follow_path              0x804'a8dd      0x96  Code  Lc  ff.o [1]
-font_dsc                 0x808'0620      0x18  Data  Lc  lv_font_montserrat_10.o [1]
-font_dsc                 0x808'0638      0x18  Data  Lc  lv_font_montserrat_14.o [1]
-font_dsc                 0x808'0650      0x18  Data  Lc  lv_font_montserrat_24.o [1]
-font_dsc                 0x808'0668      0x18  Data  Lc  lv_font_montserrat_8.o [1]
+font_dsc                 0x808'0608      0x18  Data  Lc  lv_font_montserrat_10.o [1]
+font_dsc                 0x808'0620      0x18  Data  Lc  lv_font_montserrat_14.o [1]
+font_dsc                 0x808'0638      0x18  Data  Lc  lv_font_montserrat_24.o [1]
+font_dsc                 0x808'0650      0x18  Data  Lc  lv_font_montserrat_8.o [1]
 forward_btn             0x2000'fe58       0x4  Data  Lc  adjust_pedal.o [1]
 fputc                    0x806'018d      0x14  Code  Gb  bsp_usart_fifo.o [1]
 free                     0x804'fd65       0x4  Code  Gb  heaptramp0.o [2]
@@ -3308,10 +3299,10 @@ kern_class_values        0x806'e558     0xbb0  Data  Lc  lv_font_montserrat_10.o
 kern_class_values        0x806'f108     0xbb0  Data  Lc  lv_font_montserrat_14.o [1]
 kern_class_values        0x806'fcb8     0xbb0  Data  Lc  lv_font_montserrat_24.o [1]
 kern_class_values        0x807'0868     0xbb0  Data  Lc  lv_font_montserrat_8.o [1]
-kern_classes             0x808'08b4      0x10  Data  Lc  lv_font_montserrat_10.o [1]
-kern_classes             0x808'08c4      0x10  Data  Lc  lv_font_montserrat_14.o [1]
-kern_classes             0x808'08d4      0x10  Data  Lc  lv_font_montserrat_24.o [1]
-kern_classes             0x808'08e4      0x10  Data  Lc  lv_font_montserrat_8.o [1]
+kern_classes             0x808'08b0      0x10  Data  Lc  lv_font_montserrat_10.o [1]
+kern_classes             0x808'08c0      0x10  Data  Lc  lv_font_montserrat_14.o [1]
+kern_classes             0x808'08d0      0x10  Data  Lc  lv_font_montserrat_24.o [1]
+kern_classes             0x808'08e0      0x10  Data  Lc  lv_font_montserrat_8.o [1]
 kern_left_class_mapping
                          0x807'e470      0xa0  Data  Lc  lv_font_montserrat_10.o [1]
 kern_left_class_mapping
@@ -5256,7 +5247,7 @@ position_to_selected     0x806'9299      0x58  Code  Lc  lv_dropdown.o [1]
 printf                   0x804'9535      0x28  Code  Gb  printf.o [2]
 put_fat                  0x804'99bb     0x122  Code  Lc  ff.o [1]
 put_lfn                  0x804'a00f      0x84  Code  Lc  ff.o [1]
-putchar                  0x808'0729       0xc  Code  Gb  putchar.o [2]
+putchar                  0x808'0711       0xc  Code  Gb  putchar.o [2]
 pwd_char_hider           0x805'b955      0x82  Code  Lc  lv_textarea.o [1]
 pwd_char_hider_anim      0x805'b949       0x2  Code  Lc  lv_textarea.o [1]
 pwd_char_hider_anim_ready
@@ -5284,7 +5275,7 @@ rgb_no_aa                0x807'4d93      0xce  Code  Lc  lv_draw_sw_transform.o 
 s_BaudRatePrescaler     0x2000'fe78       0x4  Data  Lc  bsp_spi_bus.o [1]
 s_CLKPhase              0x2000'fe7c       0x4  Data  Lc  bsp_spi_bus.o [1]
 s_CLKPolarity           0x2000'fe80       0x4  Data  Lc  bsp_spi_bus.o [1]
-s_gpio_list              0x808'0844      0x10  Data  Lc  bsp_key.o [1]
+s_gpio_list              0x808'0840      0x10  Data  Lc  bsp_key.o [1]
 s_style_common          0x2000'fc28       0xc  Data  Lc  about_phone_ui.o [1]
 s_style_common          0x2000'fcac       0xc  Data  Lc  battery_box.o [1]
 s_style_common          0x2000'fcd0       0xc  Data  Lc  cool_control.o [1]
@@ -5346,7 +5337,7 @@ style_init::trans_delayed
 style_init::trans_normal
                         0x2000'fb60      0x14  Data  Lc  lv_theme_default.o [1]
 style_init::trans_props
-                         0x808'0698      0x18  Data  Lc  lv_theme_default.o [1]
+                         0x808'0680      0x18  Data  Lc  lv_theme_default.o [1]
 style_init_reset         0x803'34b7      0x16  Code  Lc  lv_theme_default.o [1]
 style_radio             0x2000'fc4c       0xc  Data  Lc  adjust_pedal.o [1]
 style_radio_chk         0x2000'fc58       0xc  Data  Lc  adjust_pedal.o [1]
@@ -5412,7 +5403,7 @@ zero_mem                0x2000'05d0       0x4  Data  Lc  lv_mem.o [1]
 [5] = shb_l.a
 
   284'752 bytes of readonly  code memory
-  243'573 bytes of readonly  data memory
+  243'569 bytes of readonly  data memory
   835'707 bytes of readwrite data memory
 
 Errors: none

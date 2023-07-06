@@ -1,22 +1,22 @@
 /*
 *********************************************************************************************************
 *
-*	æ¨¡å—åç§° : TIMåŸºæœ¬å®šæ—¶ä¸­æ–­å’ŒPWMé©±åŠ¨æ¨¡å—
-*	æ–‡ä»¶åç§° : bsp_tim_pwm.c
-*	ç‰ˆ    æœ¬ : V1.6
-*	è¯´    æ˜Ž : åˆ©ç”¨STM32F429å†…éƒ¨TIMè¾“å‡ºPWMä¿¡å·ï¼Œ å¹¶å®žçŽ°åŸºæœ¬çš„å®šæ—¶ä¸­æ–­
-*	ä¿®æ”¹è®°å½• :
-*		ç‰ˆæœ¬å·  æ—¥æœŸ        ä½œè€…     è¯´æ˜Ž
-*		V1.0    2013-08-16 armfly  æ­£å¼å‘å¸ƒ
-*		V1.1	2014-06-15 armfly  å®Œå–„ bsp_SetTIMOutPWMï¼Œå½“å ç©ºæ¯”=0å’Œ100%æ—¶ï¼Œå…³é—­å®šæ—¶å™¨ï¼ŒGPIOé…ç½®ä¸ºè¾“å‡º
-*		V1.2	2015-05-08 armfly  è§£å†³TIM8ä¸èƒ½è¾“å‡ºPWMçš„é—®é¢˜ã€‚
-*		V1.3	2015-07-23 armfly  åˆå§‹åŒ–å®šæ—¶å™¨ï¼Œå¿…é¡»è®¾ç½® TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0x0000;		
-*								   TIM1 å’Œ TIM8 å¿…é¡»è®¾ç½®ã€‚å¦åˆ™èœ‚é¸£å™¨çš„æŽ§åˆ¶ä¸æ­£å¸¸ã€‚
-*		V1.4	2015-07-30 armfly  å¢žåŠ åç›¸å¼•è„šè¾“å‡ºPWMå‡½æ•° bsp_SetTIMOutPWM_N();
-*		V1.5	2016-02-01 armfly  åŽ»æŽ‰ TIM_OC1PreloadConfig(TIMx, TIM_OCPreload_Enable);
-*		V1.6	2016-02-27 armfly  è§£å†³TIM14æ— æ³•ä¸­æ–­çš„BUG, TIM8_TRG_COM_TIM14_IRQn
+*	Ä£¿éÃû³Æ : TIM»ù±¾¶¨Ê±ÖÐ¶ÏºÍPWMÇý¶¯Ä£¿é
+*	ÎÄ¼þÃû³Æ : bsp_tim_pwm.c
+*	°æ    ±¾ : V1.6
+*	Ëµ    Ã÷ : ÀûÓÃSTM32F429ÄÚ²¿TIMÊä³öPWMÐÅºÅ£¬ ²¢ÊµÏÖ»ù±¾µÄ¶¨Ê±ÖÐ¶Ï
+*	ÐÞ¸Ä¼ÇÂ¼ :
+*		°æ±¾ºÅ  ÈÕÆÚ        ×÷Õß     ËµÃ÷
+*		V1.0    2013-08-16 armfly  ÕýÊ½·¢²¼
+*		V1.1	2014-06-15 armfly  ÍêÉÆ bsp_SetTIMOutPWM£¬µ±Õ¼¿Õ±È=0ºÍ100%Ê±£¬¹Ø±Õ¶¨Ê±Æ÷£¬GPIOÅäÖÃÎªÊä³ö
+*		V1.2	2015-05-08 armfly  ½â¾öTIM8²»ÄÜÊä³öPWMµÄÎÊÌâ¡£
+*		V1.3	2015-07-23 armfly  ³õÊ¼»¯¶¨Ê±Æ÷£¬±ØÐëÉèÖÃ TIM_TimeBaseInitStruct.TIM_RepetitionCounter = 0x0000;		
+*								   TIM1 ºÍ TIM8 ±ØÐëÉèÖÃ¡£·ñÔò·äÃùÆ÷µÄ¿ØÖÆ²»Õý³£¡£
+*		V1.4	2015-07-30 armfly  Ôö¼Ó·´ÏàÒý½ÅÊä³öPWMº¯Êý bsp_SetTIMOutPWM_N();
+*		V1.5	2016-02-01 armfly  È¥µô TIM_OC1PreloadConfig(TIMx, TIM_OCPreload_Enable);
+*		V1.6	2016-02-27 armfly  ½â¾öTIM14ÎÞ·¨ÖÐ¶ÏµÄBUG, TIM8_TRG_COM_TIM14_IRQn
 *
-*	Copyright (C), 2018-2030, å®‰å¯ŒèŽ±ç”µå­ www.armfly.com
+*	Copyright (C), 2018-2030, °²¸»À³µç×Ó www.armfly.com
 *
 *********************************************************************************************************
 */
@@ -25,14 +25,14 @@
 
 
 /*
- 	å¯ä»¥è¾“å‡ºåˆ°GPIOçš„TIMé€šé“:
+ 	¿ÉÒÔÊä³öµ½GPIOµÄTIMÍ¨µÀ:
 
 	TIM1_CH1, PA8,	PE9,
 	TIM1_CH2, PA9,	PE11
 	TIM1_CH3, PA10,	PE13
 	TIM1_CH4, PA11,	PE14
 
-	TIM2_CH1, PA15 (ä»…é™429ï¼Œ439) 407æ²¡æœ‰æ­¤è„š
+	TIM2_CH1, PA15 (½öÏÞ429£¬439) 407Ã»ÓÐ´Ë½Å
 	TIM2_CH2, PA1,	PB3
 	TIM2_CH3, PA2,	PB10
 	TIM2_CH4, PA3,	PB11
@@ -70,12 +70,12 @@
 	TIM13_CH1, PA6,  PF8
 	TIM14_CH1, PA7,  PF9
 
-	APB1 å®šæ—¶å™¨æœ‰ TIM2, TIM3 ,TIM4, TIM5, TIM6, TIM7, TIM12, TIM13, TIM14 
-	APB2 å®šæ—¶å™¨æœ‰ TIM1, TIM8 ,TIM9, TIM10, TIM11
+	APB1 ¶¨Ê±Æ÷ÓÐ TIM2, TIM3 ,TIM4, TIM5, TIM6, TIM7, TIM12, TIM13, TIM14 
+	APB2 ¶¨Ê±Æ÷ÓÐ TIM1, TIM8 ,TIM9, TIM10, TIM11
 	
 
-	APB1 å®šæ—¶å™¨çš„è¾“å…¥æ—¶é’Ÿ TIMxCLK = SystemCoreClock / 2; 84M
-	APB2 å®šæ—¶å™¨çš„è¾“å…¥æ—¶é’Ÿ TIMxCLK = SystemCoreClock; 168M
+	APB1 ¶¨Ê±Æ÷µÄÊäÈëÊ±ÖÓ TIMxCLK = SystemCoreClock / 2; 84M
+	APB2 ¶¨Ê±Æ÷µÄÊäÈëÊ±ÖÓ TIMxCLK = SystemCoreClock; 168M
 */
 
 
@@ -84,10 +84,10 @@ TIM_HandleTypeDef  g_TimHandle = {0};
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: bsp_RCC_GPIO_Enable
-*	åŠŸèƒ½è¯´æ˜Ž: ä½¿èƒ½GPIOæ—¶é’Ÿ
-*	å½¢    å‚: GPIOx GPIOA - GPIOI
-*	è¿” å›ž å€¼: æ— 
+*	º¯ Êý Ãû: bsp_RCC_GPIO_Enable
+*	¹¦ÄÜËµÃ÷: Ê¹ÄÜGPIOÊ±ÖÓ
+*	ÐÎ    ²Î: GPIOx GPIOA - GPIOI
+*	·µ »Ø Öµ: ÎÞ
 *********************************************************************************************************
 */
 void bsp_RCC_GPIO_Enable(GPIO_TypeDef* GPIOx)
@@ -105,10 +105,10 @@ void bsp_RCC_GPIO_Enable(GPIO_TypeDef* GPIOx)
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: bsp_RCC_TIM_Enable
-*	åŠŸèƒ½è¯´æ˜Ž: ä½¿èƒ½TIM RCC æ—¶é’Ÿ
-*	å½¢    å‚: TIMx TIM1 - TIM14
-*	è¿” å›ž å€¼: æ— 
+*	º¯ Êý Ãû: bsp_RCC_TIM_Enable
+*	¹¦ÄÜËµÃ÷: Ê¹ÄÜTIM RCC Ê±ÖÓ
+*	ÐÎ    ²Î: TIMx TIM1 - TIM14
+*	·µ »Ø Öµ: ÎÞ
 *********************************************************************************************************
 */
 void bsp_RCC_TIM_Enable(TIM_TypeDef* TIMx)
@@ -135,17 +135,17 @@ void bsp_RCC_TIM_Enable(TIM_TypeDef* TIMx)
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: bsp_RCC_TIM_Disable
-*	åŠŸèƒ½è¯´æ˜Ž: å…³é—­TIM RCC æ—¶é’Ÿ
-*	å½¢    å‚: TIMx TIM1 - TIM14
-*	è¿” å›ž å€¼: TIMå¤–è®¾æ—¶é’Ÿå
+*	º¯ Êý Ãû: bsp_RCC_TIM_Disable
+*	¹¦ÄÜËµÃ÷: ¹Ø±ÕTIM RCC Ê±ÖÓ
+*	ÐÎ    ²Î: TIMx TIM1 - TIM14
+*	·µ »Ø Öµ: TIMÍâÉèÊ±ÖÓÃû
 *********************************************************************************************************
 */
 void bsp_RCC_TIM_Disable(TIM_TypeDef* TIMx)
 {
 	/*
-		APB1 å®šæ—¶å™¨æœ‰ TIM2, TIM3 ,TIM4, TIM5, TIM6, TIM7, TIM12, TIM13, TIM14 
-		APB2 å®šæ—¶å™¨æœ‰ TIM1, TIM8 ,TIM9, TIM10, TIM11
+		APB1 ¶¨Ê±Æ÷ÓÐ TIM2, TIM3 ,TIM4, TIM5, TIM6, TIM7, TIM12, TIM13, TIM14 
+		APB2 ¶¨Ê±Æ÷ÓÐ TIM1, TIM8 ,TIM9, TIM10, TIM11
 	*/
 	if (TIMx == TIM1) __HAL_RCC_TIM3_CLK_DISABLE();
 	else if (TIMx == TIM2) __HAL_RCC_TIM2_CLK_DISABLE();
@@ -169,10 +169,10 @@ void bsp_RCC_TIM_Disable(TIM_TypeDef* TIMx)
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: bsp_GetAFofTIM
-*	åŠŸèƒ½è¯´æ˜Ž: æ ¹æ®TIM å¾—åˆ°AFå¯„å­˜å™¨é…ç½®
-*	å½¢    å‚: TIMx TIM1 - TIM14
-*	è¿” å›ž å€¼: AFå¯„å­˜å™¨é…ç½®
+*	º¯ Êý Ãû: bsp_GetAFofTIM
+*	¹¦ÄÜËµÃ÷: ¸ù¾ÝTIM µÃµ½AF¼Ä´æÆ÷ÅäÖÃ
+*	ÐÎ    ²Î: TIMx TIM1 - TIM14
+*	·µ »Ø Öµ: AF¼Ä´æÆ÷ÅäÖÃ
 *********************************************************************************************************
 */
 uint8_t bsp_GetAFofTIM(TIM_TypeDef* TIMx)
@@ -204,22 +204,22 @@ uint8_t bsp_GetAFofTIM(TIM_TypeDef* TIMx)
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: bsp_ConfigTimGpio
-*	åŠŸèƒ½è¯´æ˜Ž: é…ç½®GPIOå’ŒTIMæ—¶é’Ÿï¼Œ GPIOè¿žæŽ¥åˆ°TIMè¾“å‡ºé€šé“
-*	å½¢    å‚: GPIOx : GPIOA - GPIOK
+*	º¯ Êý Ãû: bsp_ConfigTimGpio
+*	¹¦ÄÜËµÃ÷: ÅäÖÃGPIOºÍTIMÊ±ÖÓ£¬ GPIOÁ¬½Óµ½TIMÊä³öÍ¨µÀ
+*	ÐÎ    ²Î: GPIOx : GPIOA - GPIOK
 *			  GPIO_PinX : GPIO_PIN_0 - GPIO__PIN_15
 *			  TIMx : TIM1 - TIM14
-*	è¿” å›ž å€¼: æ— 
+*	·µ »Ø Öµ: ÎÞ
 *********************************************************************************************************
 */
 void bsp_ConfigTimGpio(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinX, TIM_TypeDef* TIMx)
 {
 	GPIO_InitTypeDef   GPIO_InitStruct;
 
-	/* ä½¿èƒ½GPIOæ—¶é’Ÿ */
+	/* Ê¹ÄÜGPIOÊ±ÖÓ */
 	bsp_RCC_GPIO_Enable(GPIOx);
 
-  	/* ä½¿èƒ½TIMæ—¶é’Ÿ */
+  	/* Ê¹ÄÜTIMÊ±ÖÓ */
 	bsp_RCC_TIM_Enable(TIMx);
 
 	GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -232,18 +232,18 @@ void bsp_ConfigTimGpio(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinX, TIM_TypeDef* TIM
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: bsp_ConfigGpioOut
-*	åŠŸèƒ½è¯´æ˜Ž: é…ç½®GPIOä¸ºæŽ¨æŒ½è¾“å‡ºã€‚ä¸»è¦ç”¨äºŽPWMè¾“å‡ºï¼Œå ç©ºæ¯”ä¸º0å’Œ100çš„æƒ…å†µã€‚
-*	å½¢    å‚: GPIOx : GPIOA - GPIOK
+*	º¯ Êý Ãû: bsp_ConfigGpioOut
+*	¹¦ÄÜËµÃ÷: ÅäÖÃGPIOÎªÍÆÍìÊä³ö¡£Ö÷ÒªÓÃÓÚPWMÊä³ö£¬Õ¼¿Õ±ÈÎª0ºÍ100µÄÇé¿ö¡£
+*	ÐÎ    ²Î: GPIOx : GPIOA - GPIOK
 *			  GPIO_PinX : GPIO_PIN_0 - GPIO__PIN_15
-*	è¿” å›ž å€¼: æ— 
+*	·µ »Ø Öµ: ÎÞ
 *********************************************************************************************************
 */
 void bsp_ConfigGpioOut(GPIO_TypeDef* GPIOx, uint16_t GPIO_PinX)
 {
 	GPIO_InitTypeDef   GPIO_InitStruct;
 
-	bsp_RCC_GPIO_Enable(GPIOx);		/* ä½¿èƒ½GPIOæ—¶é’Ÿ */
+	bsp_RCC_GPIO_Enable(GPIOx);		/* Ê¹ÄÜGPIOÊ±ÖÓ */
 
 	GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
 	GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -261,24 +261,24 @@ void MX_DMA_Init(void)
 {
 	
 		
-		__HAL_RCC_DMA1_CLK_ENABLE();//å¼€å¯DMA1æ—¶é’Ÿ
+		__HAL_RCC_DMA1_CLK_ENABLE();//¿ªÆôDMA1Ê±ÖÓ
 		__DMA1_CLK_ENABLE();
 		
 		hdma_ch1.Instance 					= DMA1_Stream4;
-		hdma_ch1.Init.Channel 				= DMA_CHANNEL_5;			//é€šé“é€‰æ‹©2--
-		hdma_ch1.Init.Direction				= DMA_MEMORY_TO_PERIPH;		//å­˜å‚¨å™¨åˆ°å¤–è®¾
-		hdma_ch1.Init.PeriphInc 			= DMA_PINC_DISABLE;			//å¤–è®¾éžå¢žé‡æ¨¡å¼
-		hdma_ch1.Init.MemInc				= DMA_MINC_ENABLE;			//å­˜å‚¨å™¨å¢žé‡æ¨¡å¼
-		hdma_ch1.Init.PeriphDataAlignment 	= DMA_PDATAALIGN_HALFWORD;		//å¤–è®¾æ•°æ®é•¿åº¦16ä½
-		hdma_ch1.Init.MemDataAlignment 		= DMA_MDATAALIGN_HALFWORD;		//å­˜å‚¨å™¨æ•°æ®é•¿åº¦16ä½
-		hdma_ch1.Init.Mode 					= DMA_CIRCULAR;				//å¤–è®¾å‘¨æœŸæ¨¡å¼å¯ä»¥å‘é€æ•°ç»„å†…çš„æ•°æ®ï¼Œæ­£å¸¸æ¨¡å¼åªä¼šå‘é€ç¬¬ä¸€ä¸ªæ•°æ®
-		hdma_ch1.Init.Priority 				= DMA_PRIORITY_LOW;			//ä¸­ç­‰ä¼˜å…ˆçº§
+		hdma_ch1.Init.Channel 				= DMA_CHANNEL_5;			//Í¨µÀÑ¡Ôñ2--
+		hdma_ch1.Init.Direction				= DMA_MEMORY_TO_PERIPH;		//´æ´¢Æ÷µ½ÍâÉè
+		hdma_ch1.Init.PeriphInc 			= DMA_PINC_DISABLE;			//ÍâÉè·ÇÔöÁ¿Ä£Ê½
+		hdma_ch1.Init.MemInc				= DMA_MINC_ENABLE;			//´æ´¢Æ÷ÔöÁ¿Ä£Ê½
+		hdma_ch1.Init.PeriphDataAlignment 	= DMA_PDATAALIGN_HALFWORD;		//ÍâÉèÊý¾Ý³¤¶È16Î»
+		hdma_ch1.Init.MemDataAlignment 		= DMA_MDATAALIGN_HALFWORD;		//´æ´¢Æ÷Êý¾Ý³¤¶È16Î»
+		hdma_ch1.Init.Mode 					= DMA_CIRCULAR;				//ÍâÉèÖÜÆÚÄ£Ê½¿ÉÒÔ·¢ËÍÊý×éÄÚµÄÊý¾Ý£¬Õý³£Ä£Ê½Ö»»á·¢ËÍµÚÒ»¸öÊý¾Ý
+		hdma_ch1.Init.Priority 				= DMA_PRIORITY_LOW;			//ÖÐµÈÓÅÏÈ¼¶
 		hdma_ch1.Init.FIFOMode 				= DMA_FIFOMODE_DISABLE;
 		hdma_ch1.Init.FIFOThreshold 		= DMA_FIFO_THRESHOLD_FULL;
-		hdma_ch1.Init.MemBurst 				= DMA_MBURST_SINGLE;		//å­˜å‚¨å™¨å•æ¬¡ä¼ è¾“
-		hdma_ch1.Init.PeriphBurst 			= DMA_MBURST_SINGLE;		//å¤–è®¾çªå‘å•æ¬¡ä¼ è¾“
+		hdma_ch1.Init.MemBurst 				= DMA_MBURST_SINGLE;		//´æ´¢Æ÷µ¥´Î´«Êä
+		hdma_ch1.Init.PeriphBurst 			= DMA_MBURST_SINGLE;		//ÍâÉèÍ»·¢µ¥´Î´«Êä
 		
-		__HAL_LINKDMA(&g_TimHandle,hdma[TIM_DMA_ID_CC1],hdma_ch1);//å°†DMAä¸ŽTIMè”ç³»èµ·æ¥	
+		__HAL_LINKDMA(&g_TimHandle,hdma[TIM_DMA_ID_CC1],hdma_ch1);//½«DMAÓëTIMÁªÏµÆðÀ´	
 		
 		if(HAL_DMA_DeInit(&hdma_ch1) != HAL_OK)
 			{
@@ -313,16 +313,16 @@ void TIM3_IRQHandler(void)
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: bsp_SetTIMOutPWM
-*	åŠŸèƒ½è¯´æ˜Ž: è®¾ç½®å¼•è„šè¾“å‡ºçš„PWMä¿¡å·çš„é¢‘çŽ‡å’Œå ç©ºæ¯”.  å½“é¢‘çŽ‡ä¸º0ï¼Œå¹¶ä¸”å ç©ºä¸º0æ—¶ï¼Œå…³é—­å®šæ—¶å™¨ï¼ŒGPIOè¾“å‡º0ï¼›
-*			  å½“é¢‘çŽ‡ä¸º0ï¼Œå ç©ºæ¯”ä¸º100%æ—¶ï¼ŒGPIOè¾“å‡º1.
-*	å½¢    å‚: GPIOx : GPIOA - GPIOK
+*	º¯ Êý Ãû: bsp_SetTIMOutPWM
+*	¹¦ÄÜËµÃ÷: ÉèÖÃÒý½ÅÊä³öµÄPWMÐÅºÅµÄÆµÂÊºÍÕ¼¿Õ±È.  µ±ÆµÂÊÎª0£¬²¢ÇÒÕ¼¿ÕÎª0Ê±£¬¹Ø±Õ¶¨Ê±Æ÷£¬GPIOÊä³ö0£»
+*			  µ±ÆµÂÊÎª0£¬Õ¼¿Õ±ÈÎª100%Ê±£¬GPIOÊä³ö1.
+*	ÐÎ    ²Î: GPIOx : GPIOA - GPIOK
 *			  GPIO_Pin : GPIO_PIN_0 - GPIO__PIN_15
 *			  TIMx : TIM1 - TIM14
-*             _ucChannelï¼šä½¿ç”¨çš„å®šæ—¶å™¨é€šé“ï¼ŒèŒƒå›´1 - 4
-*			  _ulFreq : PWMä¿¡å·é¢‘çŽ‡ï¼Œå•ä½Hz (å®žé™…æµ‹è¯•ï¼Œå¯ä»¥è¾“å‡º100MHzï¼‰ï¼Œ0 è¡¨ç¤ºç¦æ­¢è¾“å‡º
-*			  _ulDutyCycle : PWMä¿¡å·å ç©ºæ¯”ï¼Œå•ä½: ä¸‡åˆ†ä¹‹ä¸€ã€‚å¦‚5000ï¼Œè¡¨ç¤º50.00%çš„å ç©ºæ¯”
-*	è¿” å›ž å€¼: æ— 
+*             _ucChannel£ºÊ¹ÓÃµÄ¶¨Ê±Æ÷Í¨µÀ£¬·¶Î§1 - 4
+*			  _ulFreq : PWMÐÅºÅÆµÂÊ£¬µ¥Î»Hz (Êµ¼Ê²âÊÔ£¬¿ÉÒÔÊä³ö100MHz£©£¬0 ±íÊ¾½ûÖ¹Êä³ö
+*			  _ulDutyCycle : PWMÐÅºÅÕ¼¿Õ±È£¬µ¥Î»: Íò·ÖÖ®Ò»¡£Èç5000£¬±íÊ¾50.00%µÄÕ¼¿Õ±È
+*	·µ »Ø Öµ: ÎÞ
 *********************************************************************************************************
 */
 void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx, uint8_t _ucChannel,
@@ -367,64 +367,64 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 	
 	if (_ulDutyCycle == 0)
 	{		
-		//bsp_RCC_TIM_Disable(TIMx);		/* å…³é—­TIMæ—¶é’Ÿ, å¯èƒ½å½±å“å…¶ä»–é€šé“ */		
-		bsp_ConfigGpioOut(GPIOx, GPIO_Pin);	/* é…ç½®GPIOä¸ºæŽ¨æŒ½è¾“å‡º */				
+		//bsp_RCC_TIM_Disable(TIMx);		/* ¹Ø±ÕTIMÊ±ÖÓ, ¿ÉÄÜÓ°ÏìÆäËûÍ¨µÀ */		
+		bsp_ConfigGpioOut(GPIOx, GPIO_Pin);	/* ÅäÖÃGPIOÎªÍÆÍìÊä³ö */				
 		HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_RESET);	/* PWM = 0 */		
 		return;
 	}
 	else if (_ulDutyCycle == 10000)
 	{
-		//bsp_RCC_TIM_Disable(TIMx);		/* å…³é—­TIMæ—¶é’Ÿ, å¯èƒ½å½±å“å…¶ä»–é€šé“ */
-		bsp_ConfigGpioOut(GPIOx, GPIO_Pin);	/* é…ç½®GPIOä¸ºæŽ¨æŒ½è¾“å‡º */		
+		//bsp_RCC_TIM_Disable(TIMx);		/* ¹Ø±ÕTIMÊ±ÖÓ, ¿ÉÄÜÓ°ÏìÆäËûÍ¨µÀ */
+		bsp_ConfigGpioOut(GPIOx, GPIO_Pin);	/* ÅäÖÃGPIOÎªÍÆÍìÊä³ö */		
 		HAL_GPIO_WritePin(GPIOx, GPIO_Pin, GPIO_PIN_SET);	/* PWM = 1 */			
 		return;
 	}
 	
-	/* ä¸‹é¢æ˜¯PWMè¾“å‡º */
+	/* ÏÂÃæÊÇPWMÊä³ö */
 	
-	bsp_ConfigTimGpio(GPIOx, GPIO_Pin, TIMx);	/* ä½¿èƒ½GPIOå’ŒTIMæ—¶é’Ÿï¼Œå¹¶è¿žæŽ¥TIMé€šé“åˆ°GPIO */
+	bsp_ConfigTimGpio(GPIOx, GPIO_Pin, TIMx);	/* Ê¹ÄÜGPIOºÍTIMÊ±ÖÓ£¬²¢Á¬½ÓTIMÍ¨µÀµ½GPIO */
 	
 	if(TIMx == TIM3)
 		MX_DMA_Init();
 	/*-----------------------------------------------------------------------
-		system_stm32f4xx.c æ–‡ä»¶ä¸­ void SetSysClock(void) å‡½æ•°å¯¹æ—¶é’Ÿçš„é…ç½®å¦‚ä¸‹ï¼š
+		system_stm32f4xx.c ÎÄ¼þÖÐ void SetSysClock(void) º¯Êý¶ÔÊ±ÖÓµÄÅäÖÃÈçÏÂ£º
 
 		HCLK = SYSCLK / 1     (AHB1Periph)
 		PCLK2 = HCLK / 2      (APB2Periph)
 		PCLK1 = HCLK / 4      (APB1Periph)
 
-		å› ä¸ºAPB1 prescaler != 1, æ‰€ä»¥ APB1ä¸Šçš„TIMxCLK = PCLK1 x 2 = SystemCoreClock / 2;
-		å› ä¸ºAPB2 prescaler != 1, æ‰€ä»¥ APB2ä¸Šçš„TIMxCLK = PCLK2 x 2 = SystemCoreClock;
+		ÒòÎªAPB1 prescaler != 1, ËùÒÔ APB1ÉÏµÄTIMxCLK = PCLK1 x 2 = SystemCoreClock / 2;
+		ÒòÎªAPB2 prescaler != 1, ËùÒÔ APB2ÉÏµÄTIMxCLK = PCLK2 x 2 = SystemCoreClock;
 
-		APB1 å®šæ—¶å™¨æœ‰ TIM2, TIM3 ,TIM4, TIM5, TIM6, TIM7, TIM12, TIM13,TIM14
-		APB2 å®šæ—¶å™¨æœ‰ TIM1, TIM8 ,TIM9, TIM10, TIM11
+		APB1 ¶¨Ê±Æ÷ÓÐ TIM2, TIM3 ,TIM4, TIM5, TIM6, TIM7, TIM12, TIM13,TIM14
+		APB2 ¶¨Ê±Æ÷ÓÐ TIM1, TIM8 ,TIM9, TIM10, TIM11
 
 	----------------------------------------------------------------------- */
 	if ((TIMx == TIM1) || (TIMx == TIM8) || (TIMx == TIM9) || (TIMx == TIM10) || (TIMx == TIM11))
 	{
-		/* APB2 å®šæ—¶å™¨æ—¶é’Ÿ = 168M */
+		/* APB2 ¶¨Ê±Æ÷Ê±ÖÓ = 168M */
 		uiTIMxCLK = SystemCoreClock;
 	}
 	else	
 	{
-		/* APB1 å®šæ—¶å™¨ = 84M */
+		/* APB1 ¶¨Ê±Æ÷ = 84M */
 		uiTIMxCLK = SystemCoreClock / 2;
 	}
 
 	if (_ulFreq < 100)
 	{
-		usPrescaler = 10000 - 1;					/* åˆ†é¢‘æ¯” = 10000 */
-		usPeriod =  (uiTIMxCLK / 10000) / _ulFreq  - 1;		/* è‡ªåŠ¨é‡è£…çš„å€¼ */
+		usPrescaler = 10000 - 1;					/* ·ÖÆµ±È = 10000 */
+		usPeriod =  (uiTIMxCLK / 10000) / _ulFreq  - 1;		/* ×Ô¶¯ÖØ×°µÄÖµ */
 	}
 	else if (_ulFreq < 3000)
 	{
-		usPrescaler = 100 - 1;					/* åˆ†é¢‘æ¯” = 100 */
-		usPeriod =  (uiTIMxCLK / 100) / _ulFreq  - 1;		/* è‡ªåŠ¨é‡è£…çš„å€¼ */
+		usPrescaler = 100 - 1;					/* ·ÖÆµ±È = 100 */
+		usPeriod =  (uiTIMxCLK / 100) / _ulFreq  - 1;		/* ×Ô¶¯ÖØ×°µÄÖµ */
 	}
-	else	/* å¤§äºŽ4Kçš„é¢‘çŽ‡ï¼Œæ— éœ€åˆ†é¢‘ */
+	else	/* ´óÓÚ4KµÄÆµÂÊ£¬ÎÞÐè·ÖÆµ */
 	{
-		usPrescaler = 0;					/* åˆ†é¢‘æ¯” = 1 */
-		usPeriod = uiTIMxCLK / _ulFreq - 1;	/* è‡ªåŠ¨é‡è£…çš„å€¼ */
+		usPrescaler = 0;					/* ·ÖÆµ±È = 1 */
+		usPeriod = uiTIMxCLK / _ulFreq - 1;	/* ×Ô¶¯ÖØ×°µÄÖµ */
 	}
 	pulse = (_ulDutyCycle * usPeriod) / 10000;
 
@@ -434,7 +434,7 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 		HAL_TIM_PWM_DeInit(&TimHandle);
     if(TIMx == TIM3)
 		{
-			/*  PWMé¢‘çŽ‡ = TIMxCLK / usPrescaler + 1ï¼‰/usPeriod + 1ï¼‰*/
+			/*  PWMÆµÂÊ = TIMxCLK / usPrescaler + 1£©/usPeriod + 1£©*/
 			g_TimHandle.Instance = TIMx;
 			g_TimHandle.Init.Prescaler         = usPrescaler;
 			g_TimHandle.Init.Period            = usPeriod;
@@ -444,7 +444,7 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 			g_TimHandle.Init.AutoReloadPreload = 0;
 		}
 	else
-		{	/*  PWMé¢‘çŽ‡ = TIMxCLK / usPrescaler + 1ï¼‰/usPeriod + 1ï¼‰*/
+		{	/*  PWMÆµÂÊ = TIMxCLK / usPrescaler + 1£©/usPeriod + 1£©*/
 			TimHandle.Instance = TIMx;
 			TimHandle.Init.Prescaler         = usPrescaler;
 			TimHandle.Init.Period            = usPeriod;
@@ -471,7 +471,7 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 		}
 
 
-	/* é…ç½®å®šæ—¶å™¨PWMè¾“å‡ºé€šé“ */
+	/* ÅäÖÃ¶¨Ê±Æ÷PWMÊä³öÍ¨µÀ */
 	sConfig.OCMode       = TIM_OCMODE_PWM1;
 	sConfig.OCPolarity   = TIM_OCPOLARITY_HIGH;
 	sConfig.OCFastMode   = TIM_OCFAST_DISABLE;
@@ -479,7 +479,7 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 	sConfig.OCNIdleState = TIM_OCNIDLESTATE_RESET;
 	sConfig.OCIdleState  = TIM_OCIDLESTATE_RESET;
 
-	/* å ç©ºæ¯” */
+	/* Õ¼¿Õ±È */
 	sConfig.Pulse = pulse;
 	if(TIMx == TIM3)
 		{
@@ -497,10 +497,10 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 		}
 
 	
-	/* å¯åŠ¨PWMè¾“å‡º */
+	/* Æô¶¯PWMÊä³ö */
 	if(TIMx == TIM3)
 		{
-			if (HAL_TIM_PWM_Start_DMA(&g_TimHandle,TimChannel[_ucChannel],(uint32_t*)pwm_led4,sizeof(pwm_led4)/sizeof(pwm_led4[0])) != HAL_OK)//ä»¥DMAæ¨¡å¼å¼€å¯PWMç”Ÿæˆ
+			if (HAL_TIM_PWM_Start_DMA(&g_TimHandle,TimChannel[_ucChannel],(uint32_t*)pwm_led4,sizeof(pwm_led4)/sizeof(pwm_led4[0])) != HAL_OK)//ÒÔDMAÄ£Ê½¿ªÆôPWMÉú³É
 				{
 					printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 				}
@@ -517,23 +517,23 @@ void bsp_SetTIMOutPWM(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, TIM_TypeDef* TIMx,
 
 /*
 *********************************************************************************************************
-*	å‡½ æ•° å: bsp_SetTIMforInt
-*	åŠŸèƒ½è¯´æ˜Ž: é…ç½®TIMå’ŒNVICï¼Œç”¨äºŽç®€å•çš„å®šæ—¶ä¸­æ–­ï¼Œå¼€å¯å®šæ—¶ä¸­æ–­ã€‚å¦å¤–æ³¨æ„ä¸­æ–­æœåŠ¡ç¨‹åºéœ€è¦ç”±ç”¨æˆ·åº”ç”¨ç¨‹åºå®žçŽ°ã€‚
-*	å½¢    å‚: TIMx : å®šæ—¶å™¨
-*			  _ulFreq : å®šæ—¶é¢‘çŽ‡ ï¼ˆHzï¼‰ã€‚ 0 è¡¨ç¤ºå…³é—­ã€‚
-*			  _PreemptionPriority : æŠ¢å ä¼˜å…ˆçº§
-*			  _SubPriority : å­ä¼˜å…ˆçº§
-*	è¿” å›ž å€¼: æ— 
+*	º¯ Êý Ãû: bsp_SetTIMforInt
+*	¹¦ÄÜËµÃ÷: ÅäÖÃTIMºÍNVIC£¬ÓÃÓÚ¼òµ¥µÄ¶¨Ê±ÖÐ¶Ï£¬¿ªÆô¶¨Ê±ÖÐ¶Ï¡£ÁíÍâ×¢ÒâÖÐ¶Ï·þÎñ³ÌÐòÐèÒªÓÉÓÃ»§Ó¦ÓÃ³ÌÐòÊµÏÖ¡£
+*	ÐÎ    ²Î: TIMx : ¶¨Ê±Æ÷
+*			  _ulFreq : ¶¨Ê±ÆµÂÊ £¨Hz£©¡£ 0 ±íÊ¾¹Ø±Õ¡£
+*			  _PreemptionPriority : ÇÀÕ¼ÓÅÏÈ¼¶
+*			  _SubPriority : ×ÓÓÅÏÈ¼¶
+*	·µ »Ø Öµ: ÎÞ
 *********************************************************************************************************
 */
 /*	
-TIMå®šæ—¶ä¸­æ–­æœåŠ¡ç¨‹åºèŒƒä¾‹ï¼Œå¿…é¡»æ¸…ä¸­æ–­æ ‡å¿—
+TIM¶¨Ê±ÖÐ¶Ï·þÎñ³ÌÐò·¶Àý£¬±ØÐëÇåÖÐ¶Ï±êÖ¾
 void TIM6_DAC_IRQHandler(void)
 {
 	if((TIM6->SR & TIM_FLAG_UPDATE) != RESET)
 	{
 		TIM6->SR = ~ TIM_FLAG_UPDATE;
-		//æ·»åŠ ç”¨æˆ·ä»£ç 
+		//Ìí¼ÓÓÃ»§´úÂë
 	}
 }
 */
@@ -544,52 +544,52 @@ void bsp_SetTIMforInt(TIM_TypeDef* TIMx, uint32_t _ulFreq, uint8_t _PreemptionPr
 	uint16_t usPrescaler;
 	uint32_t uiTIMxCLK;
 	
-	/* ä½¿èƒ½TIMæ—¶é’Ÿ */
+	/* Ê¹ÄÜTIMÊ±ÖÓ */
 	bsp_RCC_TIM_Enable(TIMx);
 	
 	/*-----------------------------------------------------------------------
-		system_stm32f4xx.c æ–‡ä»¶ä¸­ void SetSysClock(void) å‡½æ•°å¯¹æ—¶é’Ÿçš„é…ç½®å¦‚ä¸‹ï¼š
+		system_stm32f4xx.c ÎÄ¼þÖÐ void SetSysClock(void) º¯Êý¶ÔÊ±ÖÓµÄÅäÖÃÈçÏÂ£º
 
 		HCLK = SYSCLK / 1     (AHB1Periph)
 		PCLK2 = HCLK / 2      (APB2Periph)
 		PCLK1 = HCLK / 4      (APB1Periph)
 
-		å› ä¸ºAPB1 prescaler != 1, æ‰€ä»¥ APB1ä¸Šçš„TIMxCLK = PCLK1 x 2 = SystemCoreClock / 2;
-		å› ä¸ºAPB2 prescaler != 1, æ‰€ä»¥ APB2ä¸Šçš„TIMxCLK = PCLK2 x 2 = SystemCoreClock;
+		ÒòÎªAPB1 prescaler != 1, ËùÒÔ APB1ÉÏµÄTIMxCLK = PCLK1 x 2 = SystemCoreClock / 2;
+		ÒòÎªAPB2 prescaler != 1, ËùÒÔ APB2ÉÏµÄTIMxCLK = PCLK2 x 2 = SystemCoreClock;
 
-		APB1 å®šæ—¶å™¨æœ‰ TIM2, TIM3 ,TIM4, TIM5, TIM6, TIM7, TIM12, TIM13,TIM14
-		APB2 å®šæ—¶å™¨æœ‰ TIM1, TIM8 ,TIM9, TIM10, TIM11
+		APB1 ¶¨Ê±Æ÷ÓÐ TIM2, TIM3 ,TIM4, TIM5, TIM6, TIM7, TIM12, TIM13,TIM14
+		APB2 ¶¨Ê±Æ÷ÓÐ TIM1, TIM8 ,TIM9, TIM10, TIM11
 
 	----------------------------------------------------------------------- */
 	if ((TIMx == TIM1) || (TIMx == TIM8) || (TIMx == TIM9) || (TIMx == TIM10) || (TIMx == TIM11))
 	{
-		/* APB2 å®šæ—¶å™¨æ—¶é’Ÿ = 168M */
+		/* APB2 ¶¨Ê±Æ÷Ê±ÖÓ = 168M */
 		uiTIMxCLK = SystemCoreClock;
 	}
 	else	
 	{
-		/* APB1 å®šæ—¶å™¨ = 84M */
+		/* APB1 ¶¨Ê±Æ÷ = 84M */
 		uiTIMxCLK = SystemCoreClock / 2;
 	}
 
 	if (_ulFreq < 100)
 	{
-		usPrescaler = 10000 - 1;					/* åˆ†é¢‘æ¯” = 10000 */
-		usPeriod =  (uiTIMxCLK / 10000) / _ulFreq  - 1;		/* è‡ªåŠ¨é‡è£…çš„å€¼ */
+		usPrescaler = 10000 - 1;					/* ·ÖÆµ±È = 10000 */
+		usPeriod =  (uiTIMxCLK / 10000) / _ulFreq  - 1;		/* ×Ô¶¯ÖØ×°µÄÖµ */
 	}
 	else if (_ulFreq < 3000)
 	{
-		usPrescaler = 100 - 1;					/* åˆ†é¢‘æ¯” = 100 */
-		usPeriod =  (uiTIMxCLK / 100) / _ulFreq  - 1;		/* è‡ªåŠ¨é‡è£…çš„å€¼ */
+		usPrescaler = 100 - 1;					/* ·ÖÆµ±È = 100 */
+		usPeriod =  (uiTIMxCLK / 100) / _ulFreq  - 1;		/* ×Ô¶¯ÖØ×°µÄÖµ */
 	}
-	else	/* å¤§äºŽ4Kçš„é¢‘çŽ‡ï¼Œæ— éœ€åˆ†é¢‘ */
+	else	/* ´óÓÚ4KµÄÆµÂÊ£¬ÎÞÐè·ÖÆµ */
 	{
-		usPrescaler = 0;					/* åˆ†é¢‘æ¯” = 1 */
-		usPeriod = uiTIMxCLK / _ulFreq - 1;	/* è‡ªåŠ¨é‡è£…çš„å€¼ */
+		usPrescaler = 0;					/* ·ÖÆµ±È = 1 */
+		usPeriod = uiTIMxCLK / _ulFreq - 1;	/* ×Ô¶¯ÖØ×°µÄÖµ */
 	}
 
 	/* 
-       å®šæ—¶å™¨ä¸­æ–­æ›´æ–°å‘¨æœŸ = TIMxCLK / usPrescaler + 1ï¼‰/usPeriod + 1ï¼‰
+       ¶¨Ê±Æ÷ÖÐ¶Ï¸üÐÂÖÜÆÚ = TIMxCLK / usPrescaler + 1£©/usPeriod + 1£©
 	*/
 	TimHandle.Instance = TIMx;
 	TimHandle.Init.Prescaler         = usPrescaler;
@@ -603,13 +603,13 @@ void bsp_SetTIMforInt(TIM_TypeDef* TIMx, uint32_t _ulFreq, uint8_t _PreemptionPr
 		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 	}
 
-	/* ä½¿èƒ½å®šæ—¶å™¨ä¸­æ–­  */
+	/* Ê¹ÄÜ¶¨Ê±Æ÷ÖÐ¶Ï  */
 	__HAL_TIM_ENABLE_IT(&TimHandle, TIM_IT_UPDATE);
 	
 
-	/* é…ç½®TIMå®šæ—¶æ›´æ–°ä¸­æ–­ (Update) */
+	/* ÅäÖÃTIM¶¨Ê±¸üÐÂÖÐ¶Ï (Update) */
 	{
-        uint8_t irq = 0;	/* ä¸­æ–­å·, å®šä¹‰åœ¨ stm32h7xx.h */
+        uint8_t irq = 0;	/* ÖÐ¶ÏºÅ, ¶¨ÒåÔÚ stm32h7xx.h */
 
         if (TIMx == TIM1) irq = TIM1_UP_TIM10_IRQn;
         else if (TIMx == TIM2) irq = TIM2_IRQn;
@@ -636,4 +636,4 @@ void bsp_SetTIMforInt(TIM_TypeDef* TIMx, uint32_t _ulFreq, uint8_t _PreemptionPr
 	HAL_TIM_Base_Start(&TimHandle);
 }
 
-/***************************** å®‰å¯ŒèŽ±ç”µå­ www.armfly.com (END OF FILE) *********************************/
+/***************************** °²¸»À³µç×Ó www.armfly.com (END OF FILE) *********************************/

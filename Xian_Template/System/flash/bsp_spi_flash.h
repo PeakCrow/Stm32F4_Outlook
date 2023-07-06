@@ -5,8 +5,8 @@
 
 #define SF_MAX_PAGE_SIZE    (4 * 1024)
 
-/* å®šä¹‰ä¸²è¡ŒFlash ID */
-/* æŸ¥çœ‹èŠ¯ç‰‡æ•°æ®æ‰‹å†Œ */
+/* ¶¨Òå´®ĞĞFlash ID */
+/* ²é¿´Ğ¾Æ¬Êı¾İÊÖ²á */
 enum
 {
     SST25VF016B_ID  = 0xBF2541,
@@ -18,10 +18,10 @@ enum
 
 typedef struct
 {
-	uint32_t 	ChipID;			/* èŠ¯ç‰‡ID */
-	char 		ChipName[16];	/* èŠ¯ç‰‡å‹å·å­—ç¬¦ä¸²ï¼Œä¸»è¦ç”¨äºæ˜¾ç¤º */
-	uint32_t 	TotalSize;		/* æ€»å®¹é‡ */
-	uint16_t 	SectorSize;		/* æ‰‡åŒºå¤§å° */
+	uint32_t 	ChipID;			/* Ğ¾Æ¬ID */
+	char 		ChipName[16];	/* Ğ¾Æ¬ĞÍºÅ×Ö·û´®£¬Ö÷ÒªÓÃÓÚÏÔÊ¾ */
+	uint32_t 	TotalSize;		/* ×ÜÈİÁ¿ */
+	uint16_t 	SectorSize;		/* ÉÈÇø´óĞ¡ */
 }SFLASH_T;
 
 void bsp_InitSFlash(void);

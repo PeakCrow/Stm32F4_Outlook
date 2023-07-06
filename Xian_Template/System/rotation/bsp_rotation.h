@@ -7,7 +7,7 @@
   * @brief
   * @attention
   * Modification History
-  * DATE         DESCRIPTIONï¼šè½®é€Ÿä¼ æ„Ÿå™¨åˆå§‹åŒ–
+  * DATE         DESCRIPTION£ºÂÖËÙ´«¸ÐÆ÷³õÊ¼»¯
   * ------------------------
   * - 2022-6-15  TRX Created
 *******************************************************************************/
