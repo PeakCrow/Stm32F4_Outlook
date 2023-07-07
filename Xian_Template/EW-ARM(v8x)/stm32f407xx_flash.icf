@@ -11,7 +11,7 @@ define symbol __ICFEDIT_region_RAM_end__      = 0x2001FFFF;
 define symbol __ICFEDIT_region_CCMRAM_start__ = 0x10000000;
 define symbol __ICFEDIT_region_CCMRAM_end__   = 0x1000FFFF;
 define symbol __ICFEDIT_region_EXTEN_start__  = 0x68000000;
-define symbol __ICFEDIT_region_EXTEN_end__    = 0x68100000;
+define symbol __ICFEDIT_region_EXTEN_end__    = 0x00100000;
 /*-Sizes-*/
 define symbol __ICFEDIT_size_cstack__ = 0x400;
 define symbol __ICFEDIT_size_heap__   = 0x400;
@@ -34,5 +34,8 @@ place at address mem:__ICFEDIT_intvec_start__ { readonly section .intvec };
 
 place in ROM_region   { readonly };
 place in RAM_region   { readwrite,block CSTACK, block HEAP };
-place in CCMRAM_region {readwrite object startup_stm32f407xx.o,readwrite object myfont36.o};
+place in CCMRAM_region {readwrite object startup_stm32f407xx.o,readwrite object myfont20.o,
+readwrite object Monitor.o,	readwrite object about_phone_ui.o,	readwrite object adjust_pedal.o,
+readwrite object battery_box.o,	readwrite object cool_control.o,	readwrite object motor_control.o,
+readwrite object sensor_ui.o,	readwrite object set_up.o,		readwrite object vehicle_status.o};
 place in EXTERN_SRAM_1   {readwrite section .EXTERN_SRAM};

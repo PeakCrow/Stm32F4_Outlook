@@ -12,6 +12,8 @@ Xian_Template/MDK-ARM(uV5)/Listings
 LVGL_Monitor/Debug
 #lvgl组件内的obj对象文件需要提交
 !LVGL_Monitor/lvgl/examples/widgets/obj
+#IAR 集成环境中的.hex文件需要提交
+!Xian_Template/EW-ARM(v8x)/Flash/Exe
 # Other files and folders
 *.o
 .settings
