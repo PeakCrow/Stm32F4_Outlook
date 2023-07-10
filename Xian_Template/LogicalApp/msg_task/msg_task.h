@@ -19,6 +19,16 @@ extern TX_MUTEX    AppPrintfSemp;				/* 用于printf互斥 */
 extern TX_EVENT_FLAGS_GROUP  EventGroup; 		/* 事件标志组 */
 extern TX_EVENT_FLAGS_GROUP  EventGroup; 		/* 事件标志组 */
 
+
+typedef struct _bsp_all_msg{
+    float * driver_pos_data[3];
+    float temp_data;
+    float rottation_data;
+    float * adc_data[3];
+    CAN_RxHeaderTypeDef * can_rx_msg;
+    uint8_t * g_canrxbuf;
+    uint8_t key_value;
+} bsp_all_msg;
 void  AppTaskMsgPro         (ULONG thread_input); 
 void  AppTaskUserIF         (ULONG thread_input);
 void  App_Printf 		    (const char *fmt, ...);

@@ -22,6 +22,10 @@
 #define		CAN1_BUS_BAUDE_250k		12
 #define		CAN1_BUS_BUUDE_RATE		CAN1_BUS_BAUDE_500k	/* 默认波特率 */
 
+extern CAN_RxHeaderTypeDef can_rx_msg;
+extern uint8_t g_canrxbuf[8];			/* 不能做成全局变量，不然无法触发中断(?????) */
+
+
 
 void bsp_InitCan1Bus(void);
 HAL_StatusTypeDef bsp_Can1_Send_buf(uint32_t _id,uint8_t _buf[], uint8_t _dlc);

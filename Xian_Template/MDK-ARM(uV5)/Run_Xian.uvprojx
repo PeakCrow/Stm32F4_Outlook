@@ -183,7 +183,7 @@
             <hadIRAM>1</hadIRAM>
             <hadXRAM>0</hadXRAM>
             <uocXRam>0</uocXRam>
-            <RvdsVP>2</RvdsVP>
+            <RvdsVP>1</RvdsVP>
             <RvdsMve>0</RvdsMve>
             <RvdsCdeCp>0</RvdsCdeCp>
             <hadIRAM2>1</hadIRAM2>
@@ -2624,6 +2624,21 @@
               <FileName>statistic_task.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\LogicalApp\statistic_task\statistic_task.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Segger/HardFault</GroupName>
+          <Files>
+            <File>
+              <FileName>SEGGER_HardFaultHandler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Segger\HardFaultHandlerMDK\SEGGER_HardFaultHandler.c</FilePath>
+            </File>
+            <File>
+              <FileName>HardFaultHandler.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>..\Segger\HardFaultHandlerMDK\HardFaultHandler.S</FilePath>
             </File>
           </Files>
         </Group>

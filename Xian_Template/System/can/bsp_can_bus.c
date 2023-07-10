@@ -3,8 +3,8 @@
 /* 使用最新的hal库提供的can外设文件 */
 /* 此文件中没有使用互斥量App_Printf函数 */
 CAN_HandleTypeDef hCAN;
-static CAN_RxHeaderTypeDef can_rx_msg;
-static uint8_t g_canrxbuf[8] = {0};			/* 不能做成全局变量，不然无法触发中断(?????) */
+CAN_RxHeaderTypeDef can_rx_msg;
+uint8_t g_canrxbuf[8] = {0};			/* 不能做成全局变量，不然无法触发中断(?????) */
 
 /*******************************************************************************
   * @FunctionName: bsp_InitCan1Bus

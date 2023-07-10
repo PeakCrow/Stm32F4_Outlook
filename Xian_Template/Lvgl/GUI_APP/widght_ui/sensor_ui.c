@@ -19,7 +19,7 @@ lv_chart_series_t * ser,*ser1,*ser2,*ser3;
 
 void Sensor_Ui(lv_obj_t *parent)
 {
-    /* 定义并创建图像按钮 */
+    /* 定义并创建图像按�?*/
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
@@ -69,10 +69,10 @@ static void Imgbtn_MC_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
 
     if(code == LV_EVENT_RELEASED)
-         Sensor_In_Ui(App_Common_Init((" 传感器数据 "),App_btn_Back_Cb));
+         Sensor_In_Ui(App_Common_Init((" 传感器数�?"),App_btn_Back_Cb));
 }
 /*************************应用代码************************************************/
-/* 图表回调函数，使用label来显示数据 */
+/* 图表回调函数，使用label来显示数�?*/
 static void event_chart_cb(lv_event_t* e)
 {
     lv_event_code_t code = lv_event_get_code(e);
@@ -201,7 +201,7 @@ static void Sensor_In_Ui(lv_obj_t * parent)
         lv_label_set_text(analog4_label,"value");
     }
 
-    /* 添加数据序列到图表 */
+    /* 添加数据序列到图�?*/
     ser = lv_chart_add_series(analog1,
                               lv_palette_main(LV_PALETTE_RED),
                               LV_CHART_AXIS_PRIMARY_Y);/* 左轴 */
@@ -214,7 +214,7 @@ static void Sensor_In_Ui(lv_obj_t * parent)
     ser3 = lv_chart_add_series(analog4,
                               lv_palette_main(LV_PALETTE_BROWN),
                               LV_CHART_AXIS_PRIMARY_Y);/* 左轴 */
-    /* 设置数据线上的点数 */
+    /* 设置数据线上的点�?*/
     lv_chart_set_point_count(analog1, 50);
     lv_chart_set_point_count(analog2, 50);
     lv_chart_set_point_count(analog3, 50);
@@ -244,19 +244,19 @@ static void Sensor_In_Ui(lv_obj_t * parent)
     lv_bar_set_range(bar, -20, 80);
     lv_obj_add_event_cb(bar,event_cb,LV_EVENT_DRAW_PART_END,NULL);
 
-//    lv_anim_t a;
-//    lv_anim_init(&a);
-//    lv_anim_set_exec_cb(&a, set_temp);
-//    lv_anim_set_time(&a, 3000);
-//    lv_anim_set_playback_time(&a, 3000);
-//    lv_anim_set_var(&a, bar);
-//    lv_anim_set_values(&a, -20, 80);
-//    lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
-//    lv_anim_start(&a);
+    lv_anim_t a;
+    lv_anim_init(&a);
+    lv_anim_set_exec_cb(&a, set_temp);
+    lv_anim_set_time(&a, 3000);
+    lv_anim_set_playback_time(&a, 3000);
+    lv_anim_set_var(&a, bar);
+    lv_anim_set_values(&a, -20, 80);
+    lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
+    lv_anim_start(&a);
 
 	/* 创建一个LVGL定时器定时添加chart数据 */
-	//Realtime_Sensor_timer = lv_timer_create(Realtime_Sensor_Cb,1000,NULL);
-	//lv_timer_set_cb(Realtime_Sensor_timer,Realtime_Sensor_Cb);	
+	Realtime_Sensor_timer = lv_timer_create(Realtime_Sensor_Cb,1000,NULL);
+	lv_timer_set_cb(Realtime_Sensor_timer,Realtime_Sensor_Cb);	
 
 
 }
@@ -273,7 +273,7 @@ static void set_temp(void * bar,int32_t temp)
 {
     lv_bar_set_value(bar,temp,LV_ANIM_ON);
 }
-/* 温度计的数值显示回调函数 */
+/* 温度计的数值显示回调函�?*/
 static void event_cb(lv_event_t * e)
 {
     /* 通过参数`LV_EVENT_DRAW_PART_BEGIN/END`获得部分区域描述 */
@@ -298,7 +298,7 @@ static void event_cb(lv_event_t * e)
     lv_area_t txt_area;
     /*If the indicator is long enough put the text inside on the right*/
     if(lv_area_get_width(dsc->draw_area) > txt_size.x + 20) {
-        /* 将个位数数值更偏向左边一点 */
+        /* 将个位数数值更偏向左边一�?*/
         //if((int)lv_bar_get_value(obj) < 10 && (int)lv_bar_get_value(obj) > 0)
 //            txt_area.x2 = dsc->draw_area->x2 - 16;
 //        else

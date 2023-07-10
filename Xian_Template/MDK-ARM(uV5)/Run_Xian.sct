@@ -28,7 +28,7 @@ LR_IROM1 0x08000000 0x00100000  {    ; load region size_region
 	vehicle_status.o				;|ui文件
 	myFont20.o						;从外部flash中查找字号20的字体
 	;myFont36.o						;从外部flash中查找字号36的字体
-  ;myfont36.o (+RW +ZI)
+    ;myfont36.o (+RW +ZI)
   }
   ;外部SRAM
   EXTERN_SRAM 0x68000000 0x00100000{
