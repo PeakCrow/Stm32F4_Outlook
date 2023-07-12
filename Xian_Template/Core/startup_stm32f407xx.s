@@ -56,7 +56,7 @@ __initial_sp									;紧挨着SPACE语句放置，表示栈的结束地址，�
 ; </h>
 
 
-Heap_Size      EQU     0x0200;				;堆的大小，这里同样分配了1k大小,这里可以开小点无所谓，因为malloc函数是从这里申请内存的
+Heap_Size      EQU     0x0400;				;堆的大小，这里同样分配了1k大小,这里可以开小点无所谓，因为malloc函数是从这里申请内存的
 
 
                 AREA    HEAP, NOINIT, READWRITE, ALIGN=3 ;AREA，一个新的数据段，HEAP是段名，不初始化，可读可写，8字节对齐

@@ -16,34 +16,22 @@ LR_IROM1 0x08000000 0x00100000  {    ; load region size_region
   ;但是只能分配变量，不能分配函数
   ;目前放了启动堆栈文件与字库索引文件
   CCM_SRAM 0x10000000 0x00010000 {
-	startup_stm32f407xx.o (+RW +ZI)	;stm32f407启动文件
-	Monitor.o						;|ui文件
-	about_phone_ui.o				;|
-	adjust_pedal.o					;|
-	battery_box.o					;|	
-	cool_control.o					;|
-	motor_control_ui.o				;|
-	sensor_ui.o						;|
-	set_up.o						;|
-	vehicle_status.o				;|ui文件
-	myFont20.o						;从外部flash中查找字号20的字体
-	;myFont36.o						;从外部flash中查找字号36的字体
-    ;myfont36.o (+RW +ZI)
+	startup_stm32f407xx.o (+RW +ZI) 	;stm32f407启动文件
   }
   ;外部SRAM
   EXTERN_SRAM 0x68000000 0x00100000{
     *(.EXTERN_SRAM)
   }
 }
-;36号宋体的外部falsh存储，size:6mb start addr:0
-LR_EROM1 0xC0000000 0x00800000  {
-  ER_ROM1 0xC0000000 0x00800000  {  ; load address = execution address
-    myFont36buf.o (+RO)
-  }
-}
-;20号宋体的外部falsh存储，size:2mb start addr:0x00c41970
-LR_EROM2 0xC0C41970 0x00800000  {
-  ER_ROM2 0xC0C41970 0x00800000  {  ; load address = execution address
-    myFont20buf.o (+RO)
-  }
-}
+;;36号宋体的外部falsh存储，size:6mb start addr:0
+;LR_EROM1 0xC0000000 0x00800000  {
+;  ER_ROM1 0xC0000000 0x00800000  {  ; load address = execution address
+;    myFont36buf.o (+RO)
+;  }
+;}
+;;20号宋体的外部falsh存储，size:2mb start addr:0x00c41970
+;LR_EROM2 0xC0C41970 0x00800000  {
+;  ER_ROM2 0xC0C41970 0x00800000  {  ; load address = execution address
+;    myFont20buf.o (+RO)
+;  }
+;}
