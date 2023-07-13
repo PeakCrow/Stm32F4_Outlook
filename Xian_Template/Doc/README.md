@@ -69,8 +69,7 @@
 ## 14.Keil进行debug的时候，代码跑到启动文件的193行,LDR R0, = SystemInit 这行代码会报错误，Cannot access target Shutting down debug session. 另外只下载程序也同样跑不起来？
 
 - [x] 同样的代码在IAR的环境却可以正常跑，而且不会进入硬件fault。使用问题6的方法可以在debug模式里跑，退出了反而不能跑，而且Command窗口会报错Memory verification error，使用IAR不下载程序只debug发现报了硬件故障，内容如下：处理器已将可配置优先级异常升级为HardFault，指令预取(CFSR.IBUSERR BFAR)上发现总线故障，故障位置0x8005abe，keil的问题是优化等级的问题，优化等级为0会造成threadx的性能站分析.c文件硬件故障，另外UI文件不能放在CCM RAM里，会无法运行TFT LCD任务
-
-![](/Doc/images/同样的程序iar可以跑,keil不行,死在LCD任务上.png)
+![输入图片说明](images/%E5%90%8C%E6%A0%B7%E7%9A%84%E7%A8%8B%E5%BA%8Fiar%E5%8F%AF%E4%BB%A5%E8%B7%91,keil%E4%B8%8D%E8%A1%8C,%E6%AD%BB%E5%9C%A8LCD%E4%BB%BB%E5%8A%A1%E4%B8%8A.png)
 
 ## 15.keil在debug状态下进行界面的切换不会打断整个系统的运行，也就是说看不到led灯停止闪烁的现象（与问题14相关联）！？
 
