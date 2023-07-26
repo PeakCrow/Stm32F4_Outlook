@@ -12,7 +12,10 @@ SAVE Estm32F407zet6TemplateXian_TemplateDocTraceX_Data.trx 0x20000548,0x2000043c
 
 MDK5编译：e:;cd E:\Ls_Monitor\Xian_Template\User;D:\Keil_v5\UV4\UV4.exe -b -j0 "Run_Xian.uvprojx" -o buildlog.txt;echo build completely system time:;time /t;type buildlog.txt;
 MDK5重新编译：e:;cd E:\Ls_Monitor\Xian_Template\User;D:\Keil_v5\UV4\UV4.exe -r -j0 "Run_Xian.uvprojx" -o rebuildlog.txt;echo rebuild completely system time:;time /t;type rebuildlog.txt;
-MDK5下载：e:;cd E:\Ls_Monitor\Xian_Template\User;D:\Keil_v5\UV4\UV4.exe -f -j0 "Run_Xian.uvprojx" -o loadlog.txt;type loadlog.txt;
+MDK5下载：e:;cd E:\Ls_Monitor\Xian_Template\User;D:\Keil_v5\UV4\UV4.exe -f -j0 "Run_Xian.uvprojx" -o loadlog.txt;type loadlog.txt;
+
+IAR编译：F:;cd F:\MCAL\generated_projects\e3640\E3_ref_gateway_E3640\iar_arm;IarBuild.exe E3_ref_gateway_E3640.ewp -make Debug -log info;echo make completely system time:;time /t;
+IAR重新编译：F:;cd F:\MCAL\generated_projects\e3640\E3_ref_gateway_E3640\iar_arm;IarBuild.exe E3_ref_gateway_E3640.ewp -build Debug -log info;echo build completely system time:;time /t;
 
 qt安装：
 1..run文件安装
