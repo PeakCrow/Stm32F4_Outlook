@@ -29,6 +29,7 @@ static void disp_init(void);
 
 static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p);
 
+static void dma_config(void);
 /**********************
  *  STATIC VARIABLES
  **********************/
@@ -134,13 +135,37 @@ void lv_port_disp_init(void)
  *   STATIC FUNCTIONS
  **********************/
 
+
 /*Initialize your display and the required peripherals.*/
 static void disp_init(void)
 {
     /*You code here*/
 	bsp_Initlcd();		/* 初始化LCD屏幕 */
+    dma_config();
 }
 
+static void dma_config()
+{
+    DMA_HandleTypeDef lvgl_dma_cfg;
+    
+    __DMA2_CLK_ENABLE();
+
+    lvgl_dma_cfg.Instance = DMA2_Stream0;
+    lvgl_dma_cfg.Init.Channel = DMA_CHANNEL_1;
+    lvgl_dma_cfg.Init.Direction = DMA_MEMORY_TO_MEMORY;
+    lvgl_dma_cfg.Init.PeriphInc = DMA_PINC_ENABLE;
+    lvgl_dma_cfg.Init.MemInc = DMA_MINC_ENABLE;
+    lvgl_dma_cfg.Init.PeriphDataAlignment = DMA_PDATAALIGN_HALFWORD;
+    lvgl_dma_cfg.Init.MemDataAlignment = DMA_MDATAALIGN_HALFWORD;
+    lvgl_dma_cfg.Init.Mode = DMA_NORMAL;
+    lvgl_dma_cfg.Init.Priority = DMA_PRIORITY_LOW;
+    lvgl_dma_cfg.Init.FIFOMode = DMA_FIFOMODE_DISABLE;
+    lvgl_dma_cfg.Init.FIFOThreshold = DMA_FIFO_THRESHOLD_HALFFULL;
+    lvgl_dma_cfg.Init.MemBurst = DMA_MBURST_SINGLE;
+    lvgl_dma_cfg.Init.PeriphBurst = DMA_PBURST_SINGLE;
+    
+    HAL_DMA_Init(&lvgl_dma_cfg);
+}
 /*Flush the content of the internal buffer the specific area on the display
  *You can use DMA or any hardware acceleration to do this operation in the background but
  *'lv_disp_flush_ready()' has to be called when finished.*/
@@ -157,6 +182,7 @@ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_colo
 //            color_p++;
 //        }
 //    }
+
 
 	//    /* 在指定区域内填充指定颜色块 */
     lcd_draw_fast_rgb_color(area->x1,area->y1,area->x2,area->y2,(uint16_t*)color_p);

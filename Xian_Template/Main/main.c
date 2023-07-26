@@ -25,7 +25,7 @@ int main(void)
 	HAL_Init();                    	 			/* 初始化HAL??*/   
 	Stm32_Clock_Init(336,8,2,7);   				/* 设置时钟,168Mhz */
 
-	/* 内核开启前关闭HAL的时间基??*/
+	/* 内核开启前关闭HAL的时间基 */
 	HAL_SuspendTick();
 	
     /* 进入ThreadX内核 */

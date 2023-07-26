@@ -51,7 +51,7 @@ void Sensor_Ui(lv_obj_t *parent)
     /* 设置按钮回调 */
     lv_obj_add_event_cb(Imgbtn_MC,Imgbtn_MC_cb,LV_EVENT_ALL,NULL);
 }
-static void App_btn_Back_Cb(lv_event_t* e)
+static void App_btn_Back_Cb(lv_event_t* e)   
 {
 	lv_event_code_t code = lv_event_get_code(e);
 	lv_obj_t* parent = lv_event_get_user_data(e);
@@ -69,10 +69,10 @@ static void Imgbtn_MC_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
 
     if(code == LV_EVENT_RELEASED)
-         Sensor_In_Ui(App_Common_Init((" 传感器数�?"),App_btn_Back_Cb));
+         Sensor_In_Ui(App_Common_Init((" 传感器数据 "),App_btn_Back_Cb));
 }
 /*************************应用代码************************************************/
-/* 图表回调函数，使用label来显示数�?*/
+/* 图表回调函数，使用label来�示数�?*/
 static void event_chart_cb(lv_event_t* e)
 {
     lv_event_code_t code = lv_event_get_code(e);
