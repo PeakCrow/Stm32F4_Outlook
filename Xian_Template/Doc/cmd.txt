@@ -165,3 +165,22 @@ sudo apt-get install libqt5serialport5-dev
 
 winscp连接树莓派虚拟机，提示网络错误拒绝，使用如下命令
 sudo /etc/init.d/ssh restart
+
+linux查看系统信息
+1.查看CPU信息
+cat /proc/cpuinfo
+2.查看内核版本
+cat /proc/version
+unmae -a
+3.查看内存信息
+cat /proc/meminfo
+free -h 此命令效果更直观
+4.查看FLASH存储器容量
+cat /proc/partitions
+lsblk 此命令效果更直观
+5.查看任务进程
+top 此命令类似于windows任务管理器，按下q或者ctrl+c退出
+6.查看支持的文件系统
+cat /proc/filesystems
+7.查看CPU当前主频
+cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
