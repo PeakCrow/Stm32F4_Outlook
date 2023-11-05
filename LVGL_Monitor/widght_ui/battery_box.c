@@ -9,12 +9,16 @@
 
 static void Imgbtn_MC_cb(lv_event_t * e);
 static lv_style_t s_style_common;
+static lv_obj_t *slider_1, *slider_2, *slider_3, *slider_4;
+static const char *two_line_map[] = {"#ff0000 CURRENT#","\n","#00ff00 VALUE#",""};
 static void Battery_Box_In_Ui(lv_obj_t * parent);
 static void wave_animation(lv_obj_t * TargetObject, int delay,int end_value);
 static void particle_animation(lv_obj_t * TargetObject, int delay_time,int end_value);
 static void ofs_set_y_anim(void * img, int32_t v);
 static void ofs_set_x_anim(void  * a, int32_t v);
 static void Battery_Lable_png(char* title,png_direction direction,lv_obj_t * parent,lv_obj_t * align_parent,lv_coord_t x_ofs,lv_coord_t y_ofs);
+static void Battery_Lable(const char * title[],lv_obj_t * parent,lv_obj_t * align_parent,lv_coord_t x_ofs,lv_coord_t y_ofs);
+static void slider_1_ofs_y(void * slider, int32_t v);
 /******************************************************************************/
 void Battery_Box_Ui(lv_obj_t *parent)
 {
@@ -289,13 +293,15 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
     lv_obj_set_style_bg_color(voltage_bar,lv_color_hex(0x00ff80),LV_PART_MAIN);
 
     /* 给每个数据显示添加标签说明 */
-    Battery_Lable_png("CURRENT VLAUE",horzi_direct_png,parent,current_bar,0,0);
+    //Battery_Lable_png("CURRENT VLAUE",horzi_direct_png,parent,current_bar,0,0);
     Battery_Lable_png("VOLTAGE VLAUE",horzi_direct_png,parent,voltage_bar,0,0);
     Battery_Lable_png("APPS1",verti_direct_png,parent,apps_slider1,0,15);
     Battery_Lable_png("APPS2",verti_direct_png,parent,apps_slider2,0,15);
     Battery_Lable_png("BREAK",verti_direct_png,parent,break_led,0,15);
     Battery_Lable_png("TSMS",verti_direct_png,parent,tsms_led,0,20);
     Battery_Lable_png(" SOC ",verti_direct_png,parent,ui_Image_Particle1,0,0);
+
+    Battery_Lable(two_line_map,parent,current_bar,0,-10);
 
 
 
@@ -309,6 +315,115 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
 
 }
 /********************************************************************************************/
+/* 这里的图片显示数据使用一个btnmatrix部件
+ * 1.使用两个btn进行上下或者左右排列，虚线边框，明显颜色
+ * 2.使用arc部件在下面用一个半圆作为承接
+ * 3.最后使用bar部件，多画几条线进行指示
+ * 4.同时其他的父对象对齐与位置偏移参数保留
+*/
+static void Battery_Lable(const char *title[],lv_obj_t * parent,lv_obj_t * align_parent,lv_coord_t x_ofs,lv_coord_t y_ofs)
+{
+    lv_obj_t *btn_matrix2, *arc_left, *arc_right;
+
+    /* 创建按键矩阵，2个按键 */
+    btn_matrix2 = lv_btnmatrix_create(parent);
+    /* 配置按键矩阵的大小 */
+    lv_obj_set_size(btn_matrix2, 150, 100);
+    /* 配置按键矩阵的颜色与背景色一致 */
+    lv_obj_set_style_bg_color(btn_matrix2,lv_obj_get_style_bg_color(parent,LV_PART_MAIN),LV_PART_MAIN);
+    /* 配置按键矩阵的边框颜色与背景色一致 */
+    lv_obj_set_style_border_color(btn_matrix2,lv_obj_get_style_bg_color(parent,LV_PART_MAIN),LV_PART_MAIN);
+    /* 配置按键矩阵的相对位置 */
+    lv_obj_align_to(btn_matrix2,align_parent,LV_ALIGN_OUT_TOP_MID,x_ofs,y_ofs);
+    /* 配置按键矩阵，给两个按键配置名字 */
+    lv_btnmatrix_set_map(btn_matrix2,title);
+    /* 配置按键矩阵，两个按键的宽度 */
+    lv_btnmatrix_set_btn_width(btn_matrix2,0,1);
+    lv_btnmatrix_set_btn_width(btn_matrix2,1,1);
+    /* 配置按键类型为禁用 */
+    lv_btnmatrix_set_btn_ctrl(btn_matrix2, 0, LV_BTNMATRIX_CTRL_CHECKED | LV_BTNMATRIX_CTRL_RECOLOR);
+    lv_btnmatrix_set_btn_ctrl(btn_matrix2, 1, LV_BTNMATRIX_CTRL_CHECKED | LV_BTNMATRIX_CTRL_RECOLOR);
+
+
+    /* 创建左边圆弧部件 */
+    arc_left = lv_arc_create(parent);
+    /* 配置背景弧的起始角度和终止角度 */
+    lv_arc_set_bg_angles(arc_left,135,250);
+    /* 配置前景弧的起始角度和终止角度 */
+    lv_arc_set_angles(arc_left,135,250);
+    /* 配置圆弧部件的大小 */
+    lv_obj_set_size(arc_left,50,50);
+    /* 将圆弧部件放在左下角 */
+    lv_obj_align_to(arc_left,btn_matrix2,LV_ALIGN_OUT_BOTTOM_LEFT,0,-40);
+    /* 去除旋钮 */
+    lv_obj_remove_style(arc_left,NULL,LV_PART_KNOB);
+    /* 配置圆弧指示色为橙色 */
+    lv_obj_set_style_arc_color(arc_left,lv_palette_main(LV_PALETTE_ORANGE),LV_PART_INDICATOR);
+    /* 配置圆弧背景色为紫色 */
+    lv_obj_set_style_arc_color(arc_left,lv_palette_main(LV_PALETTE_PURPLE),LV_PART_MAIN);
+    /* 配置圆弧一半的进度 */
+    lv_arc_set_value(arc_left,50);
+    /* 配置圆弧指示器的宽度 */
+    lv_obj_set_style_arc_width(arc_left,8,LV_PART_INDICATOR);
+    /* 配置圆弧背景的宽度 */
+    lv_obj_set_style_arc_width(arc_left,7,LV_PART_MAIN);
+
+    /* 创建右边圆弧部件 */
+    arc_right = lv_arc_create(parent);
+    /* 配置背景弧的起始角度和终止角度 */
+    lv_arc_set_bg_angles(arc_right,280,45);
+    /* 配置前景弧的起始角度和终止角度 */
+    lv_arc_set_angles(arc_right,280,45);
+    /* 配置圆弧部件的大小 */
+    lv_obj_set_size(arc_right,50,50);
+    /* 将圆弧部件放在左下角 */
+    lv_obj_align_to(arc_right,btn_matrix2,LV_ALIGN_OUT_BOTTOM_RIGHT,0,-40);
+    /* 去除旋钮 */
+    lv_obj_remove_style(arc_right,NULL,LV_PART_KNOB);
+    /* 配置圆弧背景色为橙色 */
+    lv_obj_set_style_arc_color(arc_right,lv_palette_main(LV_PALETTE_BROWN),LV_PART_MAIN);
+    /* 配置圆弧指示色为紫色 */
+    lv_obj_set_style_arc_color(arc_right,lv_palette_main(LV_PALETTE_LIME),LV_PART_INDICATOR);
+    /* 配置圆弧一半的进度 */
+    lv_arc_set_value(arc_right,50);
+    /* 配置圆弧指示器的宽度 */
+    lv_obj_set_style_arc_width(arc_right,8,LV_PART_INDICATOR);
+    /* 配置圆弧背景的宽度 */
+    lv_obj_set_style_arc_width(arc_right,7,LV_PART_MAIN);
+
+    /* 创建滑块部件1来进行动态展示 */
+    slider_1 = lv_slider_create(parent);
+    /* 放在按键矩阵的下面 */
+    lv_obj_align_to(slider_1,btn_matrix2,LV_ALIGN_OUT_BOTTOM_MID,150,-25);
+    /* 配置滑块部件1的大小 */
+    lv_obj_set_size(slider_1,10,40);
+    /* 去除旋钮 */
+    lv_obj_remove_style(slider_1,NULL,LV_PART_KNOB);
+    /* 配置指示器颜色为黄色 */
+    lv_obj_set_style_bg_color(slider_1,lv_palette_main(LV_PALETTE_LIME),LV_PART_INDICATOR);
+    /* 配置背景色与parent背景色一致 */
+    lv_obj_set_style_bg_color(slider_1,lv_obj_get_style_bg_color(parent,LV_PART_MAIN),LV_PART_MAIN);
+    /* 配置滑块部件的数值范围 */
+    lv_slider_set_range(slider_1,0,100);
+
+    //lv_obj_set_style_transform_angle(slider_1,450,0);
+
+    /* 将按钮矩阵置顶 */
+    //lv_obj_move_foreground(btn_matrix2);
+
+
+    /* 配置滑块部件1的动画属性 */
+    lv_anim_t a;
+    lv_anim_init(&a);
+    lv_anim_set_var(&a,slider_1);
+    lv_anim_set_time(&a,500);
+    lv_anim_set_values(&a,0,100);
+    lv_anim_set_repeat_count(&a,LV_ANIM_REPEAT_INFINITE);
+    lv_anim_set_playback_time(&a,500);
+    lv_anim_set_exec_cb(&a,(lv_anim_exec_xcb_t)slider_1_ofs_y);
+    lv_anim_start(&a);
+}
+
 static void Battery_Lable_png(char * title,png_direction direction,lv_obj_t * parent,lv_obj_t * align_parent,lv_coord_t x_ofs,lv_coord_t y_ofs)
 {
     lv_obj_t * png_direction;
@@ -382,5 +497,10 @@ static void ofs_set_x_anim(void  * a, int32_t v)
 {
     lv_img_set_offset_x(a, v);
     //printf("ofs x = %d\n",v);
+}
+static void slider_1_ofs_y(void * slider, int32_t v)
+{
+    lv_slider_set_value(slider, 100 - v,LV_ANIM_ON);
+    //printf("slider ofs y = %d\n",v);
 }
 /*******************************************************************************************/

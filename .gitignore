@@ -10,6 +10,9 @@ Xian_Template/EW-ARM(v8x)/Flash/Obj
 Xian_Template/EW-ARM(v8x)/settings
 Xian_Template/MDK-ARM(uV5)/Listings
 LVGL_Monitor/Debug
+LVGL_Monitor/debug
+LVGL_Monitor/.qtc_clangd
+LVGL_Monitor/release
 #lvgl组件内的obj对象文件需要提交
 !LVGL_Monitor/lvgl/examples/widgets/obj
 #IAR 集成环境中的.hex文件需要提交
@@ -38,3 +41,10 @@ Run_Xian.uvguix.Administrator
 Run_Xian.uvguix.TRX
 Run_Xian.uvoptix
 Run_Xian.dep
+Makefile
+Makefile.Debug
+Mkaefile.Release
+object_script.lvgl-qt-sim.Debug
+object_script.lvgl-qt-sim.Release
+.qmake.stash
+.gitmodulues
