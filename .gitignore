@@ -43,7 +43,7 @@ Run_Xian.uvoptix
 Run_Xian.dep
 Makefile
 Makefile.Debug
-Mkaefile.Release
+Makefile.Release
 object_script.lvgl-qt-sim.Debug
 object_script.lvgl-qt-sim.Release
 .qmake.stash
