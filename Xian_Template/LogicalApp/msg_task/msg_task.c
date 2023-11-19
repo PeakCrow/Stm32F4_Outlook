@@ -43,6 +43,7 @@ void AppTaskMsgPro(ULONG thread_input)
 					break;
 			}		
 		}
+
 		tx_thread_sleep(200);
 	}   
 }
@@ -79,6 +80,9 @@ void AppTaskUserIF(ULONG thread_input)
 						break;
 					case KEY_UP_DOWN:			/* kup按键按下 */
 						App_Printf("kup按键按下\r\n");
+                        App_Printf("serial test last data !!!\r\n");
+                        App_Printf("serial test last data !!!!!!\r\n");
+                        App_Printf("serial test last data !!!!!!!!!\r\n");
 						break;                    
 					case KEY_0_LONG:
 						App_Printf("k0按键长按\r\n");

@@ -75,3 +75,13 @@
 ## 15.keil在debug状态下进行界面的切换不会打断整个系统的运行，也就是说看不到led灯停止闪烁的现象（与问题14相关联）！？
 
 - [ ] 这个问题不是由于debug模式的原因，只要把LCD任务的优先级放到最低就可以不打断其他任务的运行，至少现象上是看不出来的，但是UI自身的卡顿就会暴露出来。
+
+
+
+## 16.外部flash中的字库会偶尔无法读取到lvgl组件中，另外sd卡中的图片的bin文件读取也会失败，需要重启才能正常加载出来？
+
+- [ ] 
+
+## 17.Wrong parameters value: file J:\Ls_Monitor_Lower\Xian_Template\System\spi\bsp_spi_bus.c on line 344 DMA搬运spi的外部flash字库会出现报错？使用DMA与INT模式都有问题，目前依托OS使用POLLING模式运行！！
+
+- [ ] 

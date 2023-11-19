@@ -29,8 +29,7 @@ static void Monitor_Main_label(void);
 void Gui_Monitor_App()
 {
 
-    uint16_t meter_height = 0;
-    meter_height = ((unsigned short)(scr_act_height() * 0.8));
+    /* 记得需要做按键矩阵的开机输入密码界面 */
     lv_obj_set_style_bg_color(lv_scr_act(),lv_color_hex(0x123456),LV_STATE_DEFAULT);
 #if 1
     Motor_Control_Ui(lv_scr_act());
