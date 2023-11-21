@@ -95,7 +95,6 @@ void lvglAppMain (void * arg)
 #else
     //lvgl_app_main();
     Gui_Monitor_App();
-
 #endif
 }
 

@@ -85,3 +85,7 @@
 ## 17.Wrong parameters value: file J:\Ls_Monitor_Lower\Xian_Template\System\spi\bsp_spi_bus.c on line 344 DMA搬运spi的外部flash字库会出现报错？使用DMA与INT模式都有问题，目前依托OS使用POLLING模式运行！！
 
 - [ ] 
+
+## 18.使用MDK编译的代码会使屏幕有条纹状的闪烁，但是IAR编译的代码却不会这样？
+
+- [ ] 
