@@ -7,33 +7,33 @@ TX_THREAD   AppTaskStatTCB;
 uint64_t    AppTaskStatStk[APP_CFG_TASK_STAT_STK_SIZE/8];
 
 
-__IO float     OSCPUUsage;   	    /* CPU°Ù·Ö±È */
-__IO uint8_t   OSStatRdy;      		/* Í³¼ÆÈÎÎñ¾ÍĞ÷±êÖ¾ */
-__IO uint32_t  OSIdleCtr;     	    /* ¿ÕÏĞÈÎÎñ¼ÆÊı */
-uint32_t       OSIdleCtrMax; 	    /* 1ÃëÄÚ×î´óµÄ¿ÕÏĞ¼ÆÊı */
-uint32_t       OSIdleCtrRun; 	    /* 1ÃëÄÚ¿ÕÏĞÈÎÎñµ±Ç°¼ÆÊı */
+__IO float     OSCPUUsage;   	    /* CPUç™¾åˆ†æ¯” */
+__IO uint8_t   OSStatRdy;      		/* ç»Ÿè®¡ä»»åŠ¡å°±ç»ªæ ‡å¿— */
+__IO uint32_t  OSIdleCtr;     	    /* ç©ºé—²ä»»åŠ¡è®¡æ•° */
+uint32_t       OSIdleCtrMax; 	    /* 1ç§’å†…æœ€å¤§çš„ç©ºé—²è®¡æ•° */
+uint32_t       OSIdleCtrRun; 	    /* 1ç§’å†…ç©ºé—²ä»»åŠ¡å½“å‰è®¡æ•° */
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: DispTaskInfo
-*	¹¦ÄÜËµÃ÷: ½«uCOS-IIIÈÎÎñĞÅÏ¢Í¨¹ı´®¿Ú´òÓ¡³öÀ´
-*	ĞÎ    ²Î £ºÎŞ
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: DispTaskInfo
+*	åŠŸèƒ½è¯´æ˜: å°†uCOS-IIIä»»åŠ¡ä¿¡æ¯é€šè¿‡ä¸²å£æ‰“å°å‡ºæ¥
+*	å½¢    å‚ ï¼šæ— 
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 void DispTaskInfo(void)
 {
-	TX_THREAD      *p_tcb;	        /* ¶¨ÒåÒ»¸öÈÎÎñ¿ØÖÆ¿éÖ¸Õë */
+	TX_THREAD      *p_tcb;	        /* å®šä¹‰ä¸€ä¸ªä»»åŠ¡æ§åˆ¶å—æŒ‡é’ˆ */
 
     p_tcb = &AppTaskStartTCB;
 	
-	/* ´òÓ¡±êÌâ */
+	/* æ‰“å°æ ‡é¢˜ */
 	App_Printf("===============================================================\r\n");
 	App_Printf("OS CPU Usage = %5.2f%%\r\n", OSCPUUsage);
 	App_Printf("===============================================================\r\n");
-	App_Printf(" ÈÎÎñÓÅÏÈ¼¶ ÈÎÎñÕ»´óĞ¡ µ±Ç°Ê¹ÓÃÕ»  ×î´óÕ»Ê¹ÓÃ   ÈÎÎñÃû\r\n");
+	App_Printf(" ä»»åŠ¡ä¼˜å…ˆçº§ ä»»åŠ¡æ ˆå¤§å° å½“å‰ä½¿ç”¨æ ˆ  æœ€å¤§æ ˆä½¿ç”¨   ä»»åŠ¡å\r\n");
 	App_Printf("   Prio     StackSize   CurStack    MaxStack   Taskname\r\n");
 
-	/* ±éÀúÈÎÎñ¿ØÖÆ¿éÁĞ?TCB list)£¬´òÓ¡ËùÓĞµÄÈÎÎñµÄÓÅÏÈ¼¶ºÍÃû?*/
+	/* éå†ä»»åŠ¡æ§åˆ¶å—åˆ—?TCB list)ï¼Œæ‰“å°æ‰€æœ‰çš„ä»»åŠ¡çš„ä¼˜å…ˆçº§å’Œå?*/
 	while (p_tcb != (TX_THREAD *)0) 
 	{
 		App_Printf("   %2d        %5d      %5d       %5d      %s\r\n", 
@@ -52,11 +52,11 @@ void DispTaskInfo(void)
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: AppTaskStatistic
-*	¹¦ÄÜËµÃ÷: Í³¼ÆÈÎÎñ£¬ÓÃÓÚÊµÏÖCPUÀûÓÃÂÊµÄÍ³¼Æ¡£ÎªÁË²âÊÔ¸ü¼Ó×¼È·£¬¿ÉÒÔ¿ªÆô×¢ÊÍµ÷ÓÃµÄÈ«¾ÖÖĞ¶Ï¿ª¹Ø
-*	ĞÎ    ²Î : thread_input ´´½¨¸ÃÈÎÎñÊ±´«µİµÄĞÎ²Î 
-*	·µ »Ø Öµ: ÎŞ
-*   ÓÅ ÏÈ ¼¶: 30
+*	å‡½ æ•° å: AppTaskStatistic
+*	åŠŸèƒ½è¯´æ˜: ç»Ÿè®¡ä»»åŠ¡ï¼Œç”¨äºå®ç°CPUåˆ©ç”¨ç‡çš„ç»Ÿè®¡ã€‚ä¸ºäº†æµ‹è¯•æ›´åŠ å‡†ç¡®ï¼Œå¯ä»¥å¼€å¯æ³¨é‡Šè°ƒç”¨çš„å…¨å±€ä¸­æ–­å¼€å…³
+*	å½¢    å‚ : thread_input åˆ›å»ºè¯¥ä»»åŠ¡æ—¶ä¼ é€’çš„å½¢å‚ 
+*	è¿” å› å€¼: æ— 
+*   ä¼˜ å…ˆ çº§: 30
 *********************************************************************************************************
 */
 void AppTaskStat(ULONG thread_input)
@@ -65,7 +65,7 @@ void AppTaskStat(ULONG thread_input)
 
     while (OSStatRdy == FALSE) 
 	{
-        tx_thread_sleep(200);     /* µÈ´ıÍ³¼ÆÈÎÎñ¾ÍĞ÷ */
+        tx_thread_sleep(200);     /* ç­‰å¾…ç»Ÿè®¡ä»»åŠ¡å°±ç»ª */
     }
 
     OSIdleCtrMax /= 100uL;
@@ -75,27 +75,27 @@ void AppTaskStat(ULONG thread_input)
     }
 	
     __disable_irq();
-    OSIdleCtr = OSIdleCtrMax * 100uL;  /* ÉèÖÃ³õÊ¼CPUÀûÓÃÂÊ 0% */
+    OSIdleCtr = OSIdleCtrMax * 100uL;  /* è®¾ç½®åˆå§‹CPUåˆ©ç”¨ç‡ 0% */
 	__enable_irq();
 	
     for (;;) 
 	{
         __disable_irq();
-        OSIdleCtrRun = OSIdleCtr;    /* »ñµÃ100msÄÚ¿ÕÏĞ¼ÆÊı */
-        OSIdleCtr    = 0uL;          /* ¸´Î»¿ÕÏĞ¼ÆÊı */
-        __enable_irq();            /* ¼ÆËã100msÄÚµÄCPUÀûÓÃÂÊ */
+        OSIdleCtrRun = OSIdleCtr;    /* è·å¾—100mså†…ç©ºé—²è®¡æ•° */
+        OSIdleCtr    = 0uL;          /* å¤ä½ç©ºé—²è®¡æ•° */
+        __enable_irq();            /* è®¡ç®—100mså†…çš„CPUåˆ©ç”¨ç‡ */
         OSCPUUsage   = (100uL - (float)OSIdleCtrRun / OSIdleCtrMax);
-        tx_thread_sleep(100);        /* Ã¿100msÍ³¼ÆÒ»´Î */
+        tx_thread_sleep(100);        /* æ¯100msç»Ÿè®¡ä¸€æ¬¡ */
     }
 }
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: AppTaskIDLE
-*	¹¦ÄÜËµÃ÷: ¿ÕÏĞÈÎÎñ
-*	ĞÎ    ²Î : thread_input ´´½¨¸ÃÈÎÎñÊ±´«µİµÄĞÎ²Î
-*	·µ »Ø Öµ: ÎŞ
-	ÓÅ ÏÈ ¼¶: 31
+*	å‡½ æ•° å: AppTaskIDLE
+*	åŠŸèƒ½è¯´æ˜: ç©ºé—²ä»»åŠ¡
+*	å½¢    å‚ : thread_input åˆ›å»ºè¯¥ä»»åŠ¡æ—¶ä¼ é€’çš„å½¢å‚
+*	è¿” å› å€¼: æ— 
+	ä¼˜ å…ˆ çº§: 31
 *********************************************************************************************************
 */
 void AppTaskIDLE(ULONG thread_input)
@@ -114,8 +114,8 @@ void AppTaskIDLE(ULONG thread_input)
 /*******************************************************************************
   * @FunctionName: OSStatInit
   * @Author:       trx
-  * @DateTime:     2022Äê5ÔÂ24ÈÕ23:52:39 
-  * @Purpose:      ¾ßÌåµÄ²Ù×÷ÄÚÈİ
+  * @DateTime:     2022å¹´5æœˆ24æ—¥23:52:39 
+  * @Purpose:      å…·ä½“çš„æ“ä½œå†…å®¹
   * @param:        void               
   * @return:       none
 *******************************************************************************/
@@ -123,16 +123,16 @@ void  OSStatInit (void)
 {
 	OSStatRdy = FALSE;
 	
-    tx_thread_sleep(2u);        /* Ê±ÖÓÍ¬²½ */
+    tx_thread_sleep(2u);        /* æ—¶é’ŸåŒæ­¥ */
 	
     __disable_irq();
-    OSIdleCtr    = 0uL;         /* Çå¿ÕÏĞ¼ÆÊı */
+    OSIdleCtr    = 0uL;         /* æ¸…ç©ºé—²è®¡æ•° */
 	__enable_irq();
 	
-    tx_thread_sleep(100);       /* Í³¼Æ100msÄÚ£¬×î´ó¿ÕÏĞ¼ÆÊı */
+    tx_thread_sleep(100);       /* ç»Ÿè®¡100mså†…ï¼Œæœ€å¤§ç©ºé—²è®¡æ•° */
 	
    	__disable_irq();
-    OSIdleCtrMax = OSIdleCtr;   /* ±£´æ×î´ó¿ÕÏĞ¼ÆÊı */
+    OSIdleCtrMax = OSIdleCtr;   /* ä¿å­˜æœ€å¤§ç©ºé—²è®¡æ•° */
     OSStatRdy    = TRUE;
 	__enable_irq();
 }

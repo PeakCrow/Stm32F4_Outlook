@@ -73,10 +73,7 @@
 #include "system_task_create.h"             /* threadx操作系统任务创建 */
 #include "bsp_sram.h"                       /* 外部1Msram模块 */
 #include "DEV_Config.h"						/* 墨水屏配置文件 */
-#include "data.h"							/* canfestival组件中所有必须的头文件 */
-#include "TestSlave_Data.h"					/* 图形化工具生成的对象字典头文件 */
-#include "timers.h"
-#include "canfestival.h"
+
 
 
 /*

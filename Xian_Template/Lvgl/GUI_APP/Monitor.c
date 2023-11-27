@@ -165,7 +165,44 @@ static void lv_example_Monitor_Speed_Meter(void)
                                                     -(short)(scr_act_height() / 22.5)
                                                     );
 
+    /* 设置指针动画 */
+    lv_anim_t a;
+    /* 初始化动画对象 */
+    lv_anim_init(&a);
+    /* 设置动画函数 */
+    lv_anim_set_exec_cb(&a, (lv_anim_exec_xcb_t)anim_2_indic_cb);
+    /* 设置动画的起始值和结束值 */
+    lv_anim_set_values(&a, 0, 100);
+    /* 重复前延迟，默认为0(禁用)[ms] */
+    lv_anim_set_repeat_delay(&a, 100);
+    /* 延迟后在回放，默认为0(禁用)[ms] */
+    lv_anim_set_playback_delay(&a, 100);
+    /* 重复的数量，默认数值为1，LV_ANIM_REPEAT_INFINITE用于无限重复 */
+    lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
+    /* 设置动画时间长度 */
+    lv_anim_set_time(&a, 2000);
+    /* 准备好后，按此持续时间倒放动画，默认为0(禁用)[ms] */
+    lv_anim_set_playback_time(&a, 500);
+    /* 设置动画的对象 */
+    lv_anim_set_var(&a, indic1);
+    /* 开始动画 */
+    lv_anim_start(&a);
 
+
+    /* 设置动画的时间长度 */
+    lv_anim_set_time(&a, 1000);
+    lv_anim_set_playback_time(&a, 1000);
+    lv_anim_set_var(&a, indic2);
+    lv_anim_start(&a);
+
+
+    lv_anim_set_time(&a, 1000);
+    lv_anim_set_playback_time(&a, 2000);
+    lv_anim_set_var(&a, indic3);
+    lv_anim_start(&a);
+
+    //创建样式
+    Monitor_Main_Style(Monitor_Speed_Meter);
     //创建速度值标签
     Monitor_Main_label();
 }
@@ -208,7 +245,7 @@ lv_obj_t* App_Common_Init(const char *title,App_btn_Back_Cb_Ptr App_btn_Back_Cb)
 	/* 创建返回按钮 */
 	lv_obj_t * App_btn_Back = NULL;
 	App_btn_Back = lv_imgbtn_create(parent);
-	lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,"0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin","0:/PICTURE/app_btn.bin");
+	lv_imgbtn_set_src(App_btn_Back,LV_IMGBTN_STATE_RELEASED,png_load_path(app_btn.bin),png_load_path(app_btn.bin),png_load_path(app_btn.bin));
 	lv_obj_set_size(App_btn_Back,40,40);
 	lv_obj_align_to(App_btn_Back,parent,LV_ALIGN_BOTTOM_MID,0,0);
 	lv_obj_add_event_cb(App_btn_Back,App_btn_Back_Cb,LV_EVENT_ALL,parent);	
@@ -281,7 +318,6 @@ static lv_obj_t *label_input;                       /* 输入框标签 */
 static lv_obj_t *obj_input;                         /* 输入框背景 */
 static char btnmap_buf[6];                          /* 按键输入值保存 */
 static lv_obj_t *password_error;                    /* 密码错误消息框 */
-static const char* btns[] = {"Yes","No",""};        /* 密码错误消息框下方两个按键 */
 /**
 * @brief 按钮矩阵事件回调
 * @param *e ：事件相关参数的集合，它包含了该事件的所有数据
@@ -296,9 +332,9 @@ static void btnm_event_cb(lv_event_t* e)
     if (code == LV_EVENT_VALUE_CHANGED)
     {
         id = lv_btnmatrix_get_selected_btn(target); /* 获取按键索引 */
-        if(btnmap_index == 6 || !(strcmp(lv_btnmatrix_get_btn_text(target, id),"#")))
+        if(btnmap_index == 6 || !(strcmp(lv_btnmatrix_get_btn_text(target, id),str_confirm)))
         {
-            if(!strcmp(btnmap_buf,"123456"))
+            if(!strcmp(btnmap_buf,str_password))
             {
                 lv_obj_clean(password_ui);
                 /* 将标志置1，打开主界面 */
@@ -306,7 +342,7 @@ static void btnm_event_cb(lv_event_t* e)
             }else
             {
                 /* 否则弹出密码错误的消息框 */
-                password_error = lv_msgbox_create(NULL,"ERROR","THE PASSWORD IS WRONG!",NULL,true);
+                password_error = lv_msgbox_create(NULL,str_msg_title,str_msg_body,NULL,true);
                 lv_obj_center(password_error);
                 memset(btnmap_buf,0,6);
                 btnmap_index = 0;
@@ -336,14 +372,14 @@ static lv_obj_t* lv_example_btnmatrix(lv_obj_t *parent)
     font = &lv_font_montserrat_24;
     /* 图片显示 */
     lv_obj_t *img = lv_img_create(parent);                                                      /* 创建图片部件 */
-    lv_img_set_src(img, "0:/PICTURE/user.bin");                                                 /* 设置图片源 */
+    lv_img_set_src(img, png_load_path(user.bin));                                               /* 设置图片源 */
     lv_obj_align(img, LV_ALIGN_CENTER, -scr_act_width()/4, -scr_act_height()/7);                /* 设置位置 */
     lv_obj_set_style_img_recolor(img, lv_color_hex(0xf2f2f2),0);                                /* 设置重新着色 */
     lv_obj_set_style_img_recolor_opa(img,100,0);                                                /* 设置着色透明度 */
 
     /* 用户标签 */
     lv_obj_t *label_user = lv_label_create(parent);                                             /* 创建标签 */
-    lv_label_set_text(label_user, "USER");                                                      /* 设置文本 */
+    lv_label_set_text(label_user, str_user_name);                                                      /* 设置文本 */
     lv_obj_set_style_text_font(label_user, font, LV_PART_MAIN);                                 /* 设置字体 */
     lv_obj_set_style_text_align(label_user, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);                /* 设置文本居中 */
     lv_obj_align_to(label_user, img, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);                           /* 设置位置 */

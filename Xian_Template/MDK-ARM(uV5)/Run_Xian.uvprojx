@@ -2369,11 +2369,6 @@
           <GroupName>LVGL/UI</GroupName>
           <Files>
             <File>
-              <FileName>Monitor.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Lvgl\GUI_APP\Monitor.c</FilePath>
-            </File>
-            <File>
               <FileName>about_phone_ui.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI_APP\widght_ui\about_phone_ui.c</FilePath>
@@ -2412,6 +2407,11 @@
               <FileName>vehicle_status.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Lvgl\GUI_APP\widght_ui\vehicle_status.c</FilePath>
+            </File>
+            <File>
+              <FileName>monitor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Lvgl\GUI_APP\monitor.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -494,19 +494,19 @@
                 </option>
                 <option>
                     <name>CCEncSource</name>
-                    <state>0</state>
+                    <state>2</state>
                 </option>
                 <option>
                     <name>CCEncOutput</name>
-                    <state>0</state>
+                    <state>2</state>
                 </option>
                 <option>
                     <name>CCEncOutputBom</name>
-                    <state>1</state>
+                    <state>0</state>
                 </option>
                 <option>
                     <name>CCEncInput</name>
-                    <state>0</state>
+                    <state>1</state>
                 </option>
                 <option>
                     <name>IccExceptions2</name>
@@ -1238,6 +1238,9 @@
         <file>
             <name>$PROJ_DIR$\..\LogicalApp\statistic_task\statistic_task.c</name>
         </file>
+        <file>
+            <name>$PROJ_DIR$\..\Main\system_task_create.c</name>
+        </file>
     </group>
     <group>
         <name>Lvgl/Fonts</name>
@@ -1690,9 +1693,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\Main\system_stm32f4xx.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Main\system_task_create.c</name>
         </file>
     </group>
     <group>

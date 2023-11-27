@@ -3,6 +3,11 @@
 #include "lvgl.h"
 #include "monitor.h"
 
+
+#define str_battery_box_title " µç³ØÏäÊı¾İ "
+
+
+
 void Battery_Box_Ui(lv_obj_t *parent);
 
 #endif // MOTOR_CONTROL_H

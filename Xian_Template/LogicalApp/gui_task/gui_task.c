@@ -3,24 +3,24 @@
 
 TX_THREAD	AppTaskTFTLCDTCB;
 uint64_t	AppTaskTFTLCDStk[APP_CFG_TASK_TFTLCD_STK_SIZE/8];
-TX_MUTEX AppLCDSemp;				/* ÓÃÓÚLVGL»¥³â */
+TX_MUTEX AppLCDSemp;				/* ç”¨äºLVGLäº’æ–¥ */
 
 /*******************************************************************************
   * @FunctionName: AppTaskTFTLCD
   * @Author:       trx
-  * @DateTime:     2022Äê6ÔÂ23ÈÕ21:03:00 
-  * @Purpose:      lcdÆÁÄ»²âÊÔÈÎÎñ
+  * @DateTime:     2022å¹´6æœˆ23æ—¥21:03:00 
+  * @Purpose:      lcdå±å¹•æµ‹è¯•ä»»åŠ¡
   * @param:        thread_input
   * @return:       none
 *******************************************************************************/
 void AppTaskTFTLCD    (ULONG thread_input)
 {
 	(VOID)thread_input;
-	uint8_t lcd_id[12];				/* ´æ·ÅLCD ID×Ö·û´® */
-	App_Printf((char*)lcd_id,"LCD ID:%04X",lcddev.id);
+	uint8_t lcd_id[12];				/* å­˜æ”¾LCD IDå­—ç¬¦ä¸² */
+	App_Printf((char*)lcd_id,"LCD ID:%04X\n",lcddev.id);
 	#if 1
 	tx_mutex_get(&AppLCDSemp, TX_WAIT_FOREVER);
-	Gui_Monitor_App();	/* ÔËĞĞlvglÀı³Ì */
+	Gui_Monitor_App();	/* è¿è¡Œlvglä¾‹ç¨‹ */
 	tx_mutex_put(&AppLCDSemp);
 	while(1)
 	{

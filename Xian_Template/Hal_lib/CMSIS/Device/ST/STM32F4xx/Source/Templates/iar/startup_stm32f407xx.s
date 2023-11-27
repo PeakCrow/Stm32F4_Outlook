@@ -1,4 +1,4 @@
-;********************************************************************************
+;/******************** (C) COPYRIGHT 2017 STMicroelectronics ********************
 ;* File Name          : startup_stm32f407xx.s
 ;* Author             : MCD Application Team
 ;* Description        : STM32F407xx devices vector table for EWARM toolchain.
@@ -11,16 +11,30 @@
 ;*                        calls main()).
 ;*                      After Reset the Cortex-M4 processor is in Thread mode,
 ;*                      priority is Privileged, and the Stack is set to Main.
-;*******************************************************************************
-;* @attention
+;********************************************************************************
+;* 
+;* Redistribution and use in source and binary forms, with or without modification,
+;* are permitted provided that the following conditions are met:
+;*   1. Redistributions of source code must retain the above copyright notice,
+;*      this list of conditions and the following disclaimer.
+;*   2. Redistributions in binary form must reproduce the above copyright notice,
+;*      this list of conditions and the following disclaimer in the documentation
+;*      and/or other materials provided with the distribution.
+;*   3. Neither the name of STMicroelectronics nor the names of its contributors
+;*      may be used to endorse or promote products derived from this software
+;*      without specific prior written permission.
 ;*
-;* Copyright (c) 2017 STMicroelectronics.
-;* All rights reserved.
-;*
-;* This software is licensed under terms that can be found in the LICENSE file
-;* in the root directory of this software component.
-;* If no LICENSE file comes with this software, it is provided AS-IS.
-;*
+;* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+;* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+;* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+;* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+;* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+;* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+;* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+;* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+;* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+;* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+;* 
 ;*******************************************************************************
 ;
 ;
@@ -39,20 +53,21 @@
 ; Cortex-M version
 ;
 
-        MODULE  ?cstartup
+        MODULE  ?cstartup					;MODULE 是用来指定模块开始的汇编指令 ?cstartup是模块的名称
 
         ;; Forward declaration of sections.
-        SECTION CSTACK:DATA:NOROOT(3)
-
-        SECTION .intvec:CODE:NOROOT(2)
-
+        SECTION CSTACK:DATA:NOROOT(3)		;SECTION 是一个汇编指令，用于在内存中声明一个区域， CSTACK是区域的名称，DATA 表示这个区域包含数据
+											;NOROOT(3) 表示这个区域不是根区域，它的优先级为3，通常用来存储堆栈数据
+        SECTION .intvec:CODE:NOROOT(2)		;SECTION 是一个汇编指令，用于在内存中声明一个区域，.intvec是区域的名称，CODE 表示这个区域包含代码
+											;NOROOT(2) 表示这个区域不是根区域，它的优先级为2
         EXTERN  __iar_program_start
-        EXTERN  SystemInit
-        PUBLIC  __vector_table
+        EXTERN  SystemInit					;EXTERN 用来引用外部符号
+        PUBLIC  __vector_table				;声明 __vector_table是全局的，这样可以在其他模块中使用
 
-        DATA
+        DATA								;将内部RAM的地址赋给了__vector_table符号名
 __vector_table
-        DCD     sfe(CSTACK)
+		;DCD 分配一个或者多个字节为单位的内存，以四字节对齐，并要求初始化这些内存，DCD分配了堆内存(?)，并且以ESR的入口地址初始化他们
+        DCD     sfe(CSTACK)					;表示一个32位常数，其值为CSTACK段的结束地址。 使用sfe操作符计算出CSTACK段的结束地址
         DCD     Reset_Handler             ; Reset Handler
 
         DCD     NMI_Handler               ; NMI Handler
@@ -158,20 +173,26 @@ __vector_table
 ;;
 ;; Default interrupt handlers.
 ;;
-        THUMB
-        PUBWEAK Reset_Handler
-        SECTION .text:CODE:REORDER:NOROOT(2)
+        THUMB									;表示后面的指令兼容THUMB指令集，16bit
+												;现在Cortex-M系列的都使用THUMB-2指令集，32bit，兼容16bit与32bit的指令，是THUMB的超集
+        PUBWEAK Reset_Handler					;声明Reset_Handler为全部弱符号，相当与keil中的weak
+        SECTION .text:CODE:REORDER:NOROOT(2)	;SECTION 是一个汇编指令，用来定义一个段， .text是段的名称，表示这是一个代码段
+        										;CODE 是代码段的类型，表示这是一个包含可执行代码的段。
+        										;REORDER 是一个标志，表示汇编器可以重新排序该段中的代码以优化性能
+        										;NOROOT(2) 是一个标志，表示该段不是根段，(2)表示该段按2字节对齐
 Reset_Handler
 
-        LDR     R0, =SystemInit
-        BLX     R0
-        LDR     R0, =__iar_program_start
-        BX      R0
-
+        LDR     R0, =SystemInit					;LDR 从存储器中加载一个字到一个寄存器中
+        BLX     R0								;跳转到由寄存器给出的地址，并根据寄存器的LSE确定处理器的状态，
+												;还要把跳转前的下条指令地址保存到LR   
+        LDR     R0, =__iar_program_start		     
+        BX      R0								;LDR 从存储器中加载一个字节到一个寄存器中
+												;跳转到由寄存器/标号给出的地址，不用返回
         PUBWEAK NMI_Handler
         SECTION .text:CODE:REORDER:NOROOT(1)
 NMI_Handler
-        B NMI_Handler
+        B NMI_Handler							;B 是一个汇编指令，表示无条件分支， NMI_Handler是一个符号名，表示分支的目标地址
+        										;这条指令的作用是将程序执行流程跳转到NMI_Handler标记的位置
 
         PUBWEAK HardFault_Handler
         SECTION .text:CODE:REORDER:NOROOT(1)
@@ -618,4 +639,5 @@ HASH_RNG_IRQHandler
 FPU_IRQHandler  
         B FPU_IRQHandler
 
-        END
+        END											;文件结束
+/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

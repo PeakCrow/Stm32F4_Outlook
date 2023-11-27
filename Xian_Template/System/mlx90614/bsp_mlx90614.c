@@ -3,11 +3,11 @@
 /*******************************************************************************
   * @FunctionName: bsp_Mlx90614_Write
   * @Author:       trx
-  * @DateTime:     2022Äê7ÔÂ2ÈÕ23:01:18 
-  * @Purpose:      mlx90614ºìÍâÎÂ¶È´«¸ĞÆ÷Êı¾İµÄĞ´Èë
-  * @param:        pBuffer£ºÒªĞ´ÈëÊı¾İµÄµØÖ·
-  * @param:        WriteAddr£ºmlx90614ºìÍâÎÂ¶È´«¸ĞÆ÷¼Ä´æÆ÷µÄµØÖ·
-  * @return:       IIC×ÜÏßµÄ×´Ì¬
+  * @DateTime:     2022å¹´7æœˆ2æ—¥23:01:18 
+  * @Purpose:      mlx90614çº¢å¤–æ¸©åº¦ä¼ æ„Ÿå™¨æ•°æ®çš„å†™å…¥
+  * @param:        pBufferï¼šè¦å†™å…¥æ•°æ®çš„åœ°å€
+  * @param:        WriteAddrï¼šmlx90614çº¢å¤–æ¸©åº¦ä¼ æ„Ÿå™¨å¯„å­˜å™¨çš„åœ°å€
+  * @return:       IICæ€»çº¿çš„çŠ¶æ€
 *******************************************************************************/
  uint32_t bsp_Mlx90614_Write(uint8_t * pBuffer, uint8_t WriteAddr)
  {
@@ -15,22 +15,22 @@
  
 	 status = HAL_I2C_Mem_Write(&iic_handle,SA,(uint16_t)WriteAddr,I2C_MEMADD_SIZE_8BIT,pBuffer,1,100);
  
-	 /* ¼ì²éÍ¨Ñ¶×´Ì¬ */
+	 /* æ£€æŸ¥é€šè®¯çŠ¶æ€ */
 	 if (status != HAL_OK)
 		 {
-			 /* Ö´ĞĞÓÃ»§¶¨ÒåµÄ³¬Ê±»Øµ÷º¯Êı */
+			 /* æ‰§è¡Œç”¨æˆ·å®šä¹‰çš„è¶…æ—¶å›è°ƒå‡½æ•° */
 		 }
 	 while (HAL_I2C_GetState(&iic_handle) != HAL_I2C_STATE_READY)
 		 {
 			 
 		 }
  
-	 /* ¼ì²éeepromĞ¾Æ¬ÊÇ·ñ×¼±¸ºÃ¶ÔÓÚÏÂÒ»¸öĞÂµÄ²Ù×÷ */
+	 /* æ£€æŸ¥eepromèŠ¯ç‰‡æ˜¯å¦å‡†å¤‡å¥½å¯¹äºä¸‹ä¸€ä¸ªæ–°çš„æ“ä½œ */
 	 while(HAL_I2C_IsDeviceReady(&iic_handle,SA,I2Cx_TIMEOUT_MAX,I2Cx_TIMEOUT_MAX) == HAL_TIMEOUT)
 		 {
 			 
 		 }
-	 /* µÈ´ıÊı¾İ´«Êä½áÊø */
+	 /* ç­‰å¾…æ•°æ®ä¼ è¾“ç»“æŸ */
 	 while(HAL_I2C_GetState(&iic_handle) != HAL_I2C_STATE_READY)
 		 {
 			 
@@ -41,12 +41,12 @@
 /*******************************************************************************
   * @FunctionName: bsp_Mlx90614_ReadBuf
   * @Author:       trx
-  * @DateTime:     2022Äê7ÔÂ2ÈÕ23:01:17 
-  * @Purpose:      mlx90614ºìÍâÎÂ¶È´«¸ĞÆ÷Êı¾İµÄ¶ÁÈ¡
-  * @param:        pBuffer£º´æ·ÅÊı¾İµÄÊı×éµØÖ·
-  * @param:        ReadAdder£ºÏëÒª¶ÁÈ¡µÄmlx90614ºìÍâÎÂ¶È´«¸ĞÆ÷¼Ä´æÆ÷µØÖ·
-  * @param:        NumByteToRead£º¶ÁÈ¡¼¸¸ö×Ö½Ú
-  * @return:       IIC×ÜÏßµÄ×´Ì¬
+  * @DateTime:     2022å¹´7æœˆ2æ—¥23:01:17 
+  * @Purpose:      mlx90614çº¢å¤–æ¸©åº¦ä¼ æ„Ÿå™¨æ•°æ®çš„è¯»å–
+  * @param:        pBufferï¼šå­˜æ”¾æ•°æ®çš„æ•°ç»„åœ°å€
+  * @param:        ReadAdderï¼šæƒ³è¦è¯»å–çš„mlx90614çº¢å¤–æ¸©åº¦ä¼ æ„Ÿå™¨å¯„å­˜å™¨åœ°å€
+  * @param:        NumByteToReadï¼šè¯»å–å‡ ä¸ªå­—èŠ‚
+  * @return:       IICæ€»çº¿çš„çŠ¶æ€
 *******************************************************************************/
  uint32_t bsp_Mlx90614_ReadBuf(uint8_t * pBuffer, uint8_t ReadAdder, uint16_t NumByteToRead)
 {
@@ -60,10 +60,10 @@
 /*******************************************************************************
   * @FunctionName: bsp_MLX90614_ReadTemp
   * @Author:       trx
-  * @DateTime:     2022Äê7ÔÂ2ÈÕ23:01:13 
-  * @Purpose:      »ñÈ¡mlx90614ºìÍâÎÂ¶È´«¸ĞÆ÷µÄÎÂ¶È
+  * @DateTime:     2022å¹´7æœˆ2æ—¥23:01:13 
+  * @Purpose:      è·å–mlx90614çº¢å¤–æ¸©åº¦ä¼ æ„Ÿå™¨çš„æ¸©åº¦
   * @param:        void
-  * @return:       Ğ¡Êıµã1Î»µÄÎÂ¶È
+  * @return:       å°æ•°ç‚¹1ä½çš„æ¸©åº¦
 *******************************************************************************/
 float bsp_MLX90614_ReadTemp(void)
 {
@@ -71,7 +71,7 @@ float bsp_MLX90614_ReadTemp(void)
 	uint8_t buf1[1] = {RAM_TOBJ1},buf_read[3];
 	if(bsp_Mlx90614_Write(buf1,SA) != HAL_OK)
 		{
-			printf("ºìÍâ´«¸ĞÆ÷°²×°´íÎó\r\n");
+			printf("çº¢å¤–ä¼ æ„Ÿå™¨å®‰è£…é”™è¯¯\r\n");
 			return temp;
 		}
 	bsp_Mlx90614_ReadBuf(buf_read,RAM_TOBJ1,3);

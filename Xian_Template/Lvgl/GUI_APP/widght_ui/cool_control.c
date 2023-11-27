@@ -16,7 +16,7 @@ void Cool_Control_Ui(lv_obj_t *parent)
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,"0:/PICTURE/cool_control.bin","0:/PICTURE/cool_control.bin",NULL);
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,png_load_path(cool_control.bin),png_load_path(cool_control.bin),NULL);
     /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,200,120);
     /* 设置按钮位置 */

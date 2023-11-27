@@ -16,10 +16,10 @@
 
 #include "sys.h"
 
-#define		I2C_OWN_ADDRESS7		0x0A	/* stm32自身的IIC器件地址 */
-#define		EEP_Firstpage				0x00	/* eeprom芯片数据起始地址 */
+#define		I2C_OWN_ADDRESS7		0x0A	/* stm32鑷韩鐨処IC鍣ㄤ欢鍦板潃 */
+#define		EEP_Firstpage				0x00	/* eeprom鑺墖鏁版嵁璧峰鍦板潃 */
 
-/* I2C引脚--PB8		PB9 */
+/* I2C寮曡剼--PB8		PB9 */
 #define		I2Cx						I2C1
 #define		I2Cx_CLK_ENABLE()			__HAL_RCC_I2C1_CLK_ENABLE()
 #define		I2Cx_SDA_GPIO_CLK_ENABLE()	__HAL_RCC_GPIOB_CLK_ENABLE()
@@ -36,7 +36,7 @@
 #define		I2Cx_SDA_GPIO_PORT			GPIOB
 #define		I2Cx_SDA_AF					GPIO_AF4_I2C1
 
-#define		I2CT_FLAG_TIMEOUT			((uint32_t)0x1000)		/* 等待超时时间 */
+#define		I2CT_FLAG_TIMEOUT			((uint32_t)0x1000)		/* 绛夊緟瓒呮椂鏃堕棿 */
 #define		I2CT_LONG_TIMEOUT			((uint32_t)(10 * I2CT_FLAG_TIMEOUT))
 
 #define		EEPROM_PAGESIZE				8
@@ -58,7 +58,7 @@ extern I2C_HandleTypeDef	iic_handle;
  * 1 0 1 0 0  0  0  0 = 0XA0
  * 1 0 1 0 0  0  0  1 = 0XA1 
  */
-#define		EEPROM_ADDRESS				0xA0	/* IIC从机地址 */
+#define		EEPROM_ADDRESS				0xA0	/* IIC浠庢満鍦板潃 */
 
 #define		EEPROM_Block0_ADDRESS		0xA0
 #define		EEPROM_Block1_ADDRESS		0xA2

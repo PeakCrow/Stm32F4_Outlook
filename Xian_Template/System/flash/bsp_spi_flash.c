@@ -383,9 +383,9 @@ void sf_ReadBuffer(uint8_t * _pBuf, uint32_t _uiReadAddr, uint32_t _uiSize)
 
 	/* 如果读取的数据长度为0或者超出串行flash地址空间，则直接返回 */
 	if ((_uiSize == 0) || (_uiReadAddr + _uiSize) > g_tSF.TotalSize)
-		{
-			return ;
-		}
+    {
+        return ;
+    }
 
 	/* 擦除扇区操作 */
 	sf_SetCS(0);								/* 使能片选 */
@@ -397,23 +397,23 @@ void sf_ReadBuffer(uint8_t * _pBuf, uint32_t _uiReadAddr, uint32_t _uiSize)
 	bsp_spi1Transfer();			/* 第一次发送0x03 */
 
 	/* 开始读数据，因为底层DMA缓冲区有限，必须分包读 */
-	for (i = 0; i < _uiSize / SPI_BUFFER_SIZE; ++i)
-		{
-			g_spiLen = SPI_BUFFER_SIZE;							/* 每次读取4k大小的扇区 */
-			bsp_spi1Transfer();	/* 第二次发送0x03 */
-			/* 从存储区g_spiRxBuf复制SPI_BUFFER_SIZE个字节到_pBuf */
-			/* 返回一个指向_pBuf存储区的指针 */
-			memcpy(_pBuf, g_spiRxBuf,SPI_BUFFER_SIZE);
-			_pBuf += SPI_BUFFER_SIZE;							/* 地址运算，将_pBuf指针指向下一个扇区的首地址 */
-		}
+	for (i = 0; i < _uiSize / SPI_BUFFER_SIZE; i++)
+    {
+        g_spiLen = SPI_BUFFER_SIZE;							/* 每次读取4k大小的扇区 */
+        bsp_spi1Transfer();	/* 第二次发送0x03 */
+        /* 从存储区g_spiRxBuf复制SPI_BUFFER_SIZE个字节到_pBuf */
+        /* 返回一个指向_pBuf存储区的指针 */
+        memcpy(_pBuf, g_spiRxBuf,SPI_BUFFER_SIZE);
+        _pBuf += SPI_BUFFER_SIZE;							/* 地址运算，将_pBuf指针指向下一个扇区的首地址 */
+    }
 	rem = _uiSize % SPI_BUFFER_SIZE;			/* 剩余字节，计算要读取的数据是否是整扇区 */
 
 	if (rem > 0)
-		{
-			g_spiLen = rem;
-			bsp_spi1Transfer();
-			memcpy(_pBuf,g_spiRxBuf,rem);		/* 将多余的字节再次进行复制 */
-		}
+    {
+        g_spiLen = rem;
+        bsp_spi1Transfer();
+        memcpy(_pBuf,g_spiRxBuf,rem);		/* 将多余的字节再次进行复制 */
+    }
 	sf_SetCS(1);								/* 禁止片选 */
 }
 /*******************************************************************************

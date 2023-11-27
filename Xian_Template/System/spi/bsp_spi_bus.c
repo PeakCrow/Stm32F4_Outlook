@@ -1,80 +1,6 @@
 #include "bsp_spi_bus.h"
 
 
-/* 
-Ê±ÖÓ£¬Òı½Å£¬DMA£¬ÖĞ¶ÏµÈºê¶¨Òå
-APB2 ¸ßËÙÊ±ÖÓ×î´óÆµÂÊÎª84MHz
-*/
-#define SPIx					SPI1
-#define SPIx_CLK_ENABLE()		__HAL_RCC_SPI1_CLK_ENABLE()
-
-#define DMAx_CLK_ENABLE()		__HAL_RCC_DMA2_CLK_ENABLE()
-
-#define SPIx_FORCE_RESET()		__HAL_RCC_SPI1_FORCE_RESET()
-#define SPIx_RELEASE_RESET()	__HAL_RCC_SPI1_RELEASE_RESET()
-/* PB3 */
-#define	SPIx_SCK_CLK_ENABLE()	__HAL_RCC_GPIOB_CLK_ENABLE()
-#define	SPIx_SCK_GPIO			GPIOB
-#define	SPIx_SCK_PIN			GPIO_PIN_3
-#define SPIx_SCK_AF				GPIO_AF5_SPI1
-
-/* PB4 */
-#define SPIx_MISO_CLK_ENABLE()	__HAL_RCC_GPIOB_CLK_ENABLE()
-#define SPIx_MISO_GPIO			GPIOB
-#define SPIx_MISO_PIN			GPIO_PIN_4
-#define SPIx_MISO_AF			GPIO_AF5_SPI1
-
-/* PB5 */
-#define SPIx_MOSI_CLK_ENABLE()	__HAL_RCC_GPIOB_CLK_ENABLE()
-#define SPIx_MOSI_GPIO			GPIOB
-#define SPIx_MOSI_PIN			GPIO_PIN_5
-#define SPIx_MOSI_AF			GPIO_AF5_SPI1
-
-/* DMA2 */
-#define SPIx_TX_DMA_CHANNEL		DMA_CHANNEL_3
-#define SPIx_TX_DMA_STREAM		DMA2_Stream5
-#define SPIx_RX_DMA_CHANNEL		DMA_CHANNEL_3
-#define SPIx_RX_DMA_STREAM		DMA2_Stream0
-
-/* ÖĞ¶Ï */
-#define SPIx_IRQn				SPI1_IRQn
-#define SPIx_IRQHandler			SPI1_IRQHandler
-#define SPIx_DMA_TX_IRQn		DMA2_Stream5_IRQn
-#define SPIx_DMA_RX_IRQn		DMA2_Stream0_IRQn
-#define SPIx_DMA_TX_IRQHandler	DMA2_Stream5_IRQHandler
-#define SPIx_DMA_RX_IRQHandler	DMA2_Stream0_IRQHandler
-
-/* Ê±ÖÓ¡¢Òı½Åºê¶¨Òå */
-#define SPIx_INK					SPI2
-#define	SPIx_INK_CLK_ENBALE()		__HAL_RCC_SPI2_CLK_ENABLE()
-
-/* PC2 */
-#define	SPIx_INK_MISO_CLK_ENBALE()	__HAL_RCC_GPIOC_CLK_ENABLE()
-#define	SPIx_INK_MISO_GPIO			GPIOC
-#define	SPIx_INK_MISO_PIN			GPIO_PIN_2
-#define	SPIx_INK_MISO_AF			GPIO_AF5_SPI2
-
-/* PC3 */
-#define SPIx_INK_MOSI_CLK_ENABLE()	__HAL_RCC_GPIOC_CLK_ENABLE()
-#define	SPIx_INK_MOSI_GPIO			GPIOC
-#define	SPIx_INK_MOSI_PIN			GPIO_PIN_3
-#define	SPIx_INK_MOSI_AF			GPIO_AF5_SPI2
-
-/* PB13 */
-#define	SPIx_INK_SCK_CLK_ENABLE()	__HAL_RCC_GPIOB_CLK_ENABLE()
-#define	SPIx_INK_SCK_GPIO			GPIOB
-#define	SPIx_INK_SCK_PIN			GPIO_PIN_13
-#define	SPIx_INK_SCK_AF				GPIO_AF5_SPI2
-
-
-
-
-enum{
-	TRANSFER_WAIT = 0,
-	TRANSFER_COMPLETE,
-	TRANSFER_ERROR
-};
-
 static SPI_HandleTypeDef hspi = {0};
 static DMA_HandleTypeDef hdma_tx;
 static DMA_HandleTypeDef hdma_rx;
@@ -82,7 +8,7 @@ static uint32_t s_BaudRatePrescaler;
 static uint32_t s_CLKPhase;
 static uint32_t s_CLKPolarity;
 uint32_t g_spiLen;
-uint8_t g_spi_busy;		/* SPIÃ¦×´Ì¬£¬0±íÊ¾²»Ã¦£¬1±íÊ¾Ã¦ */
+uint8_t g_spi_busy;		/* SPIçš„ç¹å¿™çŠ¶æ€ï¼Œ0è¡¨ç¤ºä¸å¿™ï¼Œ1è¡¨ç¤ºå¿™ */
 __IO uint32_t wTransferState = TRANSFER_WAIT;
 
 static SPI_HandleTypeDef ink_spi = {0};
@@ -92,39 +18,42 @@ uint8_t g_spiRxBuf[SPI_BUFFER_SIZE] = {0};
 
 void bsp_InitSPI1Bus(void)
 {
-	g_spi_busy = 0;
-	/*
-		Ê±ÖÓÏàÎ»£ºCPHA = 1£¬ÔÚ´®ĞĞÍ¬²½Ê±ÖÓµÄµÚ¶ş¸öÌø±äÑØ(ÉÏÉı»òÏÂ½µ)Êı¾İ±»²ÉÑù
-		Ê±ÖÓ¼«ĞÔ£ºCPOL = 1£¬ÔÚ´®ĞĞÍ¬²½Ê±ÖÓµÄ¿ÕÏĞ×´Ì¬Îª¸ßµçÆ½
-	*/
-	bsp_InitSPI1Param(SPI_BAUDRATEPRESCALER_328_125K,SPI_PHASE_2EDGE,SPI_POLARITY_HIGH);
+    g_spi_busy = 0;
+    /*
+        spié€Ÿåº¦ä¸º328.125k
+        é…ç½®åŒæ­¥æ—¶é’Ÿçš„ç©ºé—²çŠ¶æ€ä¸ºé«˜ç”µå¹³,CPOLæ—¶é’Ÿææ€§ 1
+        é…ç½®åŒæ­¥æ—¶é’Ÿçš„ç¬¬äºŒä¸ªè·³å˜æ²¿(ä¸Šå‡æˆ–ä¸‹é™)æ•°æ®è¢«é‡‡æ ·,CPHAæ—¶é’Ÿç›¸ä½ 1
+    */
+    bsp_InitSPI1Param(SPI_BAUDRATEPRESCALER_328_125K,SPI_PHASE_2EDGE,SPI_POLARITY_HIGH);
 }
 /*
-*	º¯ Êı Ãû: bsp_InitSPIBusParam
-*	¹¦ÄÜËµÃ÷: ÅäÖÃSPI×ÜÏß²ÎÊı£¬Ê±ÖÓ·ÖÆµ£¬Ê±ÖÓÏàÎ»ºÍÊ±ÖÓ¼«ĞÔ
-*	ĞÎ    ²Î: _BaudRatePrescaler  SPI×ÜÏßÊ±ÖÓ·ÖÆµÉèÖÃ£¬Ö§³ÖµÄ²ÎÊıÈçÏÂ£º
-*                                 SPI_BAUDRATEPRESCALER_2    2·ÖÆµ
-*                                 SPI_BAUDRATEPRESCALER_4    4·ÖÆµ
-*                                 SPI_BAUDRATEPRESCALER_8    8·ÖÆµ
-*                                 SPI_BAUDRATEPRESCALER_16   16·ÖÆµ
-*                                 SPI_BAUDRATEPRESCALER_32   32·ÖÆµ
-*                                 SPI_BAUDRATEPRESCALER_64   64·ÖÆµ
-*                                 SPI_BAUDRATEPRESCALER_128  128·ÖÆµ
-*                                 SPI_BAUDRATEPRESCALER_256  256·ÖÆµ
+*********************************************************************************************************
+*	å‡½ æ•° å: bsp_InitSPIParam
+*	åŠŸèƒ½è¯´æ˜: é…ç½®SPIæ€»çº¿å‚æ•°ï¼Œæ—¶é’Ÿåˆ†é¢‘ï¼Œæ—¶é’Ÿç›¸ä½å’Œæ—¶é’Ÿææ€§ã€‚
+*	å½¢    å‚: _BaudRatePrescaler  SPIæ€»çº¿æ—¶é’Ÿåˆ†é¢‘è®¾ç½®ï¼Œæ”¯æŒçš„å‚æ•°å¦‚ä¸‹ï¼š
+*                                 SPI_BAUDRATEPRESCALER_2    2åˆ†é¢‘
+*                                 SPI_BAUDRATEPRESCALER_4    4åˆ†é¢‘
+*                                 SPI_BAUDRATEPRESCALER_8    8åˆ†é¢‘
+*                                 SPI_BAUDRATEPRESCALER_16   16åˆ†é¢‘
+*                                 SPI_BAUDRATEPRESCALER_32   32åˆ†é¢‘
+*                                 SPI_BAUDRATEPRESCALER_64   64åˆ†é¢‘
+*                                 SPI_BAUDRATEPRESCALER_128  128åˆ†é¢‘
+*                                 SPI_BAUDRATEPRESCALER_256  256åˆ†é¢‘
 *                                                        
-*             _CLKPhase           Ê±ÖÓÏàÎ»£¬Ö§³ÖµÄ²ÎÊıÈçÏÂ£º
-*                                 SPI_PHASE_1EDGE     SCKÒı½ÅµÄµÚ1¸ö±ßÑØ²¶»ñ´«ÊäµÄµÚ1¸öÊı¾İ
-*                                 SPI_PHASE_2EDGE     SCKÒı½ÅµÄµÚ2¸ö±ßÑØ²¶»ñ´«ÊäµÄµÚ1¸öÊı¾İ
+*             _CLKPhase           æ—¶é’Ÿç›¸ä½ï¼Œæ”¯æŒçš„å‚æ•°å¦‚ä¸‹ï¼š
+*                                 SPI_PHASE_1EDGE     SCKå¼•è„šçš„ç¬¬1ä¸ªè¾¹æ²¿æ•è·ä¼ è¾“çš„ç¬¬1ä¸ªæ•°æ®
+*                                 SPI_PHASE_2EDGE     SCKå¼•è„šçš„ç¬¬2ä¸ªè¾¹æ²¿æ•è·ä¼ è¾“çš„ç¬¬1ä¸ªæ•°æ®
 *                                 
-*             _CLKPolarity        Ê±ÖÓ¼«ĞÔ£¬Ö§³ÖµÄ²ÎÊıÈçÏÂ£º
-*                                 SPI_POLARITY_LOW    SCKÒı½ÅÔÚ¿ÕÏĞ×´Ì¬´¦ÓÚµÍµçÆ½
-*                                 SPI_POLARITY_HIGH   SCKÒı½ÅÔÚ¿ÕÏĞ×´Ì¬´¦ÓÚ¸ßµçÆ½
-*	·µ »Ø Öµ: none
-*	Ê±¼ä£º2022Äê4ÔÂ22ÈÕ17µã53·Ö
+*             _CLKPolarity        æ—¶é’Ÿææ€§ï¼Œæ”¯æŒçš„å‚æ•°å¦‚ä¸‹ï¼š
+*                                 SPI_POLARITY_LOW    SCKå¼•è„šåœ¨ç©ºé—²çŠ¶æ€å¤„äºä½ç”µå¹³
+*                                 SPI_POLARITY_HIGH   SCKå¼•è„šåœ¨ç©ºé—²çŠ¶æ€å¤„äºé«˜ç”µå¹³
+*
+*	è¿” å› å€¼: æ— 
+*********************************************************************************************************
 */
 void bsp_InitSPI1Param(uint32_t _BaudRatePrescaler,uint32_t _CLKPhase,uint32_t _CLKPolarity)
 {
-	/* Ìá¸ßÖ´ĞĞĞ§ÂÊ£¬Ö»ÓĞÔÚSPIÓ²¼ş²ÎÊı·¢Éú±ä»¯Ê±£¬²ÅÖ´ĞĞHAL_Init */
+	/* æé«˜æ‰§è¡Œæ•ˆç‡ï¼Œåªæœ‰åœ¨spiç¡¬ä»¶å‚æ•°å‘ç”Ÿå˜åŒ–æ—¶ï¼Œæ‰æ‰§è¡Œåç»­æ“ä½œ */
 	if(s_BaudRatePrescaler == _BaudRatePrescaler && s_CLKPhase == _CLKPhase && s_CLKPolarity == _CLKPolarity)
 	{
 		return ;
@@ -134,28 +63,28 @@ void bsp_InitSPI1Param(uint32_t _BaudRatePrescaler,uint32_t _CLKPhase,uint32_t _
 	s_CLKPhase = _CLKPhase;
 	s_CLKPolarity = _CLKPolarity;
 	
-	/* ÉèÖÃSPI²ÎÊı */
-	hspi.Instance				= SPIx;						/* Ö¸¶¨SPI */
-	hspi.Init.BaudRatePrescaler = _BaudRatePrescaler;		/* ÉèÖÃ²¨ÌØÂÊ */
-	hspi.Init.Direction 		= SPI_DIRECTION_2LINES;		/* È«Ë«¹¤ */
-	hspi.Init.CLKPhase 			= _CLKPhase;				/* ÅäÖÃÊ±ÖÓÏàÎ» */
-	hspi.Init.CLKPolarity 		= _CLKPolarity;				/* ÅäÖÃÊ±ÖÓ¼«ĞÔ */
-	hspi.Init.DataSize			= SPI_DATASIZE_8BIT;		/* ÉèÖÃÊı¾İ¿í¶È */
-	hspi.Init.FirstBit 			= SPI_FIRSTBIT_MSB;			/* Êı¾İ¸ßÎ»ÔÚÇ° */
-	hspi.Init.TIMode			= SPI_TIMODE_DISABLE;		/* ½ûÖ¹TIÄ£Ê½ */
-	hspi.Init.CRCCalculation	= SPI_CRCCALCULATION_DISABLE;/* ½ûÖ¹CRCĞ£Ñé */
-	hspi.Init.CRCPolynomial		= 7;						/* ½ûÖ¹CRCºó£¬´ËÎªÎŞĞ§ */
-	hspi.Init.NSS				= SPI_NSS_SOFT;				/* Ê¹ÓÃÈí¼ş·½Ê½¹ÜÀíÆ¬Ñ¡Òı½Å */
-	hspi.Init.Mode 				= SPI_MODE_MASTER;			/* SPI1¹¤×÷ÔÚÖ÷¿ØÄ£Ê½ */
+
+	hspi.Instance				= SPIx;					        /* å®ä¾‹åŒ–SPI */
+	hspi.Init.BaudRatePrescaler = _BaudRatePrescaler;		    /* é…ç½®åˆ†é¢‘ç³»æ•° */
+	hspi.Init.Direction 		= SPI_DIRECTION_2LINES;         /* é…ç½®å…¨åŒå·¥æ¨¡å¼ */
+	hspi.Init.CLKPhase 			= _CLKPhase;			        /* é…ç½®æ—¶é’Ÿç›¸ä½ */
+	hspi.Init.CLKPolarity 		= _CLKPolarity;				    /* é…ç½®æ—¶é’Ÿææ€§ */
+	hspi.Init.DataSize			= SPI_DATASIZE_8BIT;		    /* é…ç½®æ•°æ®å®½åº¦ */
+	hspi.Init.FirstBit 			= SPI_FIRSTBIT_MSB;			    /* æ•°æ®ä¼ è¾“å…ˆä¼ é«˜ä½ */
+	hspi.Init.TIMode			= SPI_TIMODE_DISABLE;		    /* ç¦æ­¢TIæ¨¡å¼ */
+	hspi.Init.CRCCalculation	= SPI_CRCCALCULATION_DISABLE;   /* ç¦æ­¢CRCè¿ç®— */
+	hspi.Init.CRCPolynomial		= 7;						    /* é…ç½®CRCå¤šé¡¹å¼ï¼Œå½“ç„¶æ­¤æ—¶æ— æ•ˆ */
+	hspi.Init.NSS				= SPI_NSS_SOFT;				    /* ä½¿ç”¨è½¯ä»¶æ–¹å¼ç®¡ç†ç‰‡é€‰å¼•è„š */
+	hspi.Init.Mode 				= SPI_MODE_MASTER;			    /* é…ç½®masteræ¨¡å¼ */
 	
 		
-	/* ¸´Î»SPI */
+	/* å¤ä½SPI */
 	if(HAL_SPI_DeInit(&hspi) != HAL_OK)
 	{
 		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 	}
 	
-	/* ³õÊ¼»¯SPI */
+	/* åˆå§‹åŒ–SPI */
 	if(HAL_SPI_Init(&hspi) != HAL_OK)
 	{
 		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
@@ -165,22 +94,22 @@ void bsp_InitSPI1Param(uint32_t _BaudRatePrescaler,uint32_t _CLKPhase,uint32_t _
 }
 
 /*
-*	º¯ Êı Ãû: HAL_SPI_MspInit
-*	¹¦ÄÜËµÃ÷: ³õÊ¼»¯SPIµÄÒı½ÅÒÔ¼°DMAºÍIT,´Ëº¯ÊıÓÉHAL_SPI_DeInit()º¯Êı»Øµ÷
-*	ĞÎ    ²Î: _hspi£ºSPI¾ä±ú½á¹¹Ìå
-*	·µ »Ø Öµ: none
-*	Ê±¼ä£º2022Äê4ÔÂ22ÈÕ22µã11·Ö
+*********************************************************************************************************
+*	å‡½ æ•° å: bsp_InitSPIParam
+*	åŠŸèƒ½è¯´æ˜: é…ç½®SPIæ€»çº¿æ—¶é’Ÿï¼ŒGPIOï¼Œä¸­æ–­ï¼ŒDMAç­‰
+*	å½¢    å‚: SPI_HandleTypeDef ç±»å‹æŒ‡é’ˆå˜é‡
+*	è¿” å› å€¼: æ— 
+*********************************************************************************************************
 */
 void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 {
-//	printf("Òı½Å³õÊ¼»¯");
-	/* ÅäÖÃSPI×ÜÏßGPIO:SCK MOSI MISO */
-	/* ´ËÍâ»¹ÓĞÆ¬Ñ¡ĞÅºÅ */
+	/* é…ç½®SPIæ€»çº¿GPIO:SCK MOSI MISO */
+	/* åŒºåˆ†å¤–éƒ¨flashä¸inkscreen */
 	if(_hspi->Instance == SPIx)
 		{
 			GPIO_InitTypeDef	gpio_initstruct;
 			
-			/* SPI1 ºÍ GPIOÊ±ÖÓ */
+			/* SPI1 å¼•è„šæ—¶é’Ÿæ‰“å¼€ */
 			SPIx_SCK_CLK_ENABLE();
 			SPIx_MISO_CLK_ENABLE();
 			SPIx_MOSI_CLK_ENABLE();
@@ -208,7 +137,7 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 		{
 			GPIO_InitTypeDef gpio_initstruct;
 
-			/* SPI2 ºÍ GPIOÊ±ÖÓ */
+			/* SPI2 å¼•è„šæ—¶é’Ÿæ‰“å¼€ */
 			SPIx_INK_SCK_CLK_ENABLE();
 			SPIx_INK_MISO_CLK_ENBALE();
 			SPIx_INK_MOSI_CLK_ENABLE();
@@ -233,81 +162,81 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 			HAL_GPIO_Init(SPIx_INK_MOSI_GPIO,&gpio_initstruct);
 		}
 	
-	/* ÅäÖÃDMAºÍNVIC */
+	/* é…ç½®DMAä¸NVIC */
 	#ifdef	USE_SPI_DMA
 	{
-		/* Ê¹ÄÜDMAÊ±ÖÓ */
+		/* ä½¿èƒ½DMAæ—¶é’Ÿ */
 		DMAx_CLK_ENABLE();
 		
-		/* DMA·½ÏòÒÔ´æ´¢Æ÷SPI FLASHÎª×¼ */
-		/* SPI DMA·¢ËÍÅäÖÃ */
-		hdma_tx.Instance					= SPIx_TX_DMA_STREAM;		/* ³õÊ¼»¯·¢ËÍÊı¾İÁ÷ */
-		hdma_tx.Init.Channel				= SPIx_TX_DMA_CHANNEL;		/* DMAÍ¨µÀÅäÖÃ */
-		hdma_tx.Init.FIFOMode				= DMA_FIFOMODE_DISABLE;		/* ½ûÖ¹FIFO */
-		hdma_tx.Init.FIFOThreshold			= DMA_FIFO_THRESHOLD_FULL;	/* ½ûÖ¹FIFO´ËÎ»²»Æğ×÷ÓÃ£¬ÓÃÓÚÉèÖÃãĞÖµ */
-		hdma_tx.Init.MemBurst				= DMA_MBURST_SINGLE;		/* ½ûÖ¹FIFO´ËÎ»²»Æğ×÷ÓÃ£¬ÓÃÓÚ´æ´¢Æ÷Í»·¢ */
-		hdma_tx.Init.PeriphBurst			= DMA_PBURST_SINGLE;		/* ½ûÖ¹FIFO´ËÎ»²»Æğ×÷ÓÃ£¬ÓÃÓÚÍâÉèÍ»·¢ */
-		hdma_tx.Init.Direction				= DMA_MEMORY_TO_PERIPH;		/* ´«Êä·½ÏòÊÇ´Ó´æ´¢Æ÷µ½ÍâÉè */
-		hdma_tx.Init.PeriphInc				= DMA_PINC_DISABLE;			/* ÍâÉèµØÖ·×ÔÔö½ûÖ¹ */
-		hdma_tx.Init.MemInc					= DMA_MINC_ENABLE;			/* ´æ´¢Æ÷µØÖ·×ÔÔöÊ¹ÄÜ */
-		hdma_tx.Init.PeriphDataAlignment	= DMA_PDATAALIGN_BYTE;		/* ÍâÉèµØÖ·´«ÊäÎ»¿íÑ¡Ôñ×Ö½Ú£¬¼´8bit */
-		hdma_tx.Init.MemDataAlignment		= DMA_NORMAL;				/* Õı³£Ä£Ê½ */
-		hdma_tx.Init.Priority				= DMA_PRIORITY_LOW;			/* ÓÅÏÈ¼¶µÍ */
+		/* SPI DMA å‘é€é…ç½® */
+		hdma_tx.Instance					= SPIx_TX_DMA_STREAM;	    /* ç¤ºä¾‹åŒ–DMAä½¿ç”¨çš„æ•°æ®æµ */
+		hdma_tx.Init.Channel				= SPIx_TX_DMA_CHANNEL;	    /* é…ç½®DMAä½¿ç”¨çš„é€šé“ */
+		hdma_tx.Init.FIFOMode				= DMA_FIFOMODE_DISABLE;	    /* ç¦æ­¢FIFOæ¨¡å¼ */
+		hdma_tx.Init.FIFOThreshold			= DMA_FIFO_THRESHOLD_FULL;  /* ç¦æ­¢FIFOæ¨¡å¼æ­¤ä½ä¸èµ·ä½œç”¨ï¼Œç”¨äºé…ç½®é˜ˆå€¼ */
+		hdma_tx.Init.MemBurst				= DMA_MBURST_SINGLE;	    /* ç¦æ­¢FIFOæ¨¡å¼æ­¤ä½ä¸èµ·ä½œç”¨ï¼Œç”¨äºé…ç½®å­˜å‚¨å™¨çªå‘ */
+		hdma_tx.Init.PeriphBurst			= DMA_PBURST_SINGLE;	    /* ç¦æ­¢FIFOæ¨¡å¼æ­¤ä½ä¸èµ·ä½œç”¨ï¼Œç”¨äºå¤–è®¾çªå‘ */
+		hdma_tx.Init.Direction				= DMA_MEMORY_TO_PERIPH;	    /* é…ç½®ä¼ è¾“æ–¹å‘æ˜¯ä»å­˜å‚¨å™¨åˆ°å¤–è®¾ */
+		hdma_tx.Init.PeriphInc				= DMA_PINC_DISABLE;		    /* é…ç½®å¤–è®¾åœ°å€ç¦æ­¢è‡ªå¢ */
+		hdma_tx.Init.MemInc					= DMA_MINC_ENABLE;		    /* é…ç½®å­˜å‚¨å™¨åœ°å€è‡ªå¢ */
+		hdma_tx.Init.PeriphDataAlignment	= DMA_PDATAALIGN_BYTE;	    /* é…ç½®å¤–è®¾æ•°æ®ä¼ è¾“ä½å®½é€‰æ‹©å­—èŠ‚ï¼Œ8bit */
+		hdma_tx.Init.MemDataAlignment		= DMA_MDATAALIGN_BYTE;	    /* é…ç½®å­˜å‚¨å™¨æ•°æ®ä¼ è¾“ä½å®½é€‰æ‹©å­—èŠ‚ï¼Œ8bit */
+		hdma_tx.Init.Mode                   = DMA_NORMAL;               /* é…ç½®æ­£å¸¸æ¨¡å¼ */
+		hdma_tx.Init.Priority				= DMA_PRIORITY_LOW;		    /* é…ç½®ä¼˜å…ˆçº§ä½ */
 		
-		/* ¸´Î»DMA */
+		/* å¤ä½DMA */
 		if(HAL_DMA_DeInit(&hdma_tx) != HAL_OK)
 		{
 			printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 		}
 		
-		/* ³õÊ¼»¯DMA */
+		/* åˆå§‹åŒ–DMA */
 		if(HAL_DMA_Init(&hdma_tx) != HAL_OK)
 		{
 			printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 		}
 		
-		/* ¹ØÁªDMA¾ä±úµ½SPI */
+		/* å…³è”DMAå¥æŸ„åˆ°SPI */
 		__HAL_LINKDMA(_hspi,hdmatx,hdma_tx);
 		
 		
-		/* SPI DMA½ÓÊÕÅäÖÃ */
-		hdma_rx.Instance 				= SPIx_RX_DMA_STREAM;		/* ³õÊ¼»¯½ÓÊÕÊı¾İÁ÷ */
-		hdma_rx.Init.Channel			= SPIx_RX_DMA_CHANNEL;		/* DMAÍ¨µÀÅäÖÃ */
-		hdma_rx.Init.FIFOMode			= DMA_FIFOMODE_DISABLE;		/* ½ûÖ¹FIFO */
-		hdma_rx.Init.FIFOThreshold		= DMA_FIFO_THRESHOLD_FULL;	/* ½ûÖ¹FIFO´ËÎ»ÎŞĞ§£¬ÓÃÓÚÉèÖÃãĞÖµ */
-		hdma_rx.Init.MemBurst			= DMA_MBURST_SINGLE;		/* ½ûÖ¹FIFO´ËÎ»ÎŞĞ§£¬ÓÃÓÚ´æ´¢Æ÷Í»·¢ */
-		hdma_rx.Init.Direction			= DMA_PERIPH_TO_MEMORY;		/* ´«Êä·½Ïò´ÓÍâÉèµ½´æ´¢Æ÷ */
-		hdma_rx.Init.PeriphInc			= DMA_PINC_DISABLE;			/* ÍâÉèµØÖ·×ÔÔö½ûÖ¹ */
-		hdma_rx.Init.MemInc				= DMA_MINC_ENABLE;			/* ´æ´¢Æ÷µØÖ·×ÔÔöÊ¹ÄÜ */
-		hdma_rx.Init.PeriphDataAlignment= DMA_PDATAALIGN_BYTE;		/* ÍâÉèÊı¾İ´«ÊäÎ»¿íÑ¡Ôñ×Ö½Ú£¬¼´8bit */
-		hdma_rx.Init.MemDataAlignment	= DMA_MDATAALIGN_BYTE;		/* ´æ´¢Æ÷Êı¾İ´«ÊäÎ»¿íÑ¡Ôñ×Ö½Ú£¬¼´8bit */
-		hdma_rx.Init.Mode				= DMA_NORMAL;				/* Õı³£Ä£Ê½ */
-		hdma_rx.Init.Priority			= DMA_PRIORITY_HIGH;		/* ÓÅÏÈ¼¶µÍ */
+		/* SPI DMA æ¥æ”¶é…ç½® */
+		hdma_rx.Instance 				= SPIx_RX_DMA_STREAM;	    /* å®ä¾‹åŒ–ä½¿ç”¨çš„DMAæ•°æ®æµ */
+		hdma_rx.Init.Channel			= SPIx_RX_DMA_CHANNEL;	    /* é…ç½®DMAä½¿ç”¨çš„é€šé“ */
+		hdma_rx.Init.FIFOMode			= DMA_FIFOMODE_DISABLE;	    /* ç¦æ­¢FIFOæ¨¡å¼ */
+		hdma_rx.Init.FIFOThreshold		= DMA_FIFO_THRESHOLD_FULL;  /* ç¦æ­¢FIFOæ¨¡å¼æ­¤ä½ä¸èµ·ä½œç”¨ï¼Œç”¨äºé…ç½®é˜ˆå€¼ */
+		hdma_rx.Init.MemBurst			= DMA_MBURST_SINGLE;	    /* ç¦æ­¢FIFOæ¨¡å¼æ­¤ä½ä¸èµ·ä½œç”¨ï¼Œç”¨äºé…ç½®å­˜å‚¨å™¨çªå‘ */
+		hdma_rx.Init.Direction			= DMA_PERIPH_TO_MEMORY;	    /* ç¦æ­¢FIFOæ¨¡å¼æ­¤ä½ä¸èµ·ä½œç”¨ï¼Œç”¨äºå¤–è®¾çªå‘ */
+		hdma_rx.Init.PeriphInc			= DMA_PINC_DISABLE;		    /* é…ç½®å¤–è®¾åœ°å€ç¦æ­¢è‡ªå¢ */
+		hdma_rx.Init.MemInc				= DMA_MINC_ENABLE;		    /* é…ç½®å­˜å‚¨å™¨åœ°å€è‡ªå¢ */
+		hdma_rx.Init.PeriphDataAlignment= DMA_PDATAALIGN_BYTE;	    /* é…ç½®å¤–è®¾æ•°æ®ä¼ è¾“ä½å®½é€‰æ‹©å­—èŠ‚ï¼Œ8bit */
+		hdma_rx.Init.MemDataAlignment	= DMA_MDATAALIGN_BYTE;	    /* é…ç½®å­˜å‚¨å™¨æ•°æ®ä¼ è¾“ä½å®½é€‰æ‹©å­—èŠ‚ï¼Œ8bit */
+		hdma_rx.Init.Mode				= DMA_NORMAL;			    /* é…ç½®æ­£å¸¸æ¨¡å¼ */
+		hdma_rx.Init.Priority			= DMA_PRIORITY_HIGH;	    /* é…ç½®ä¼˜å…ˆçº§ä½ */
 		
-		/* ¸´Î»DMA */
+		/* å¤ä½DMA */
 		if(HAL_DMA_DeInit(&hdma_rx) != HAL_OK)
 		{
 			printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 		}
 		
-		/* ³õÊ¼»¯DMA */
+		/* åˆå§‹åŒ–DMA */
 		if(HAL_DMA_Init(&hdma_rx) != HAL_OK)
 		{
 			printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
 		}
 		
-		/* ¹ØÁªDMA¾ä±úµ½SPI */
+		/* å…³è”DMAå¥æŸ„åˆ°SPI */
 		__HAL_LINKDMA(_hspi,hdmarx,hdma_rx);
 		
-		/* ÅäÖÃDMA·¢ËÍÖĞ¶Ï */
+		/* é…ç½®DMAå‘é€ä¸­æ–­ */
 		HAL_NVIC_SetPriority(SPIx_DMA_TX_IRQn,1,0);
 		HAL_NVIC_EnableIRQ(SPIx_DMA_TX_IRQn);
 		
-		/* ÅäÖÃDMA½ÓÊÕÖĞ¶Ï */
+		/* é…ç½®DMAæ¥æ”¶ä¸­æ–­ */
 		HAL_NVIC_SetPriority(SPIx_DMA_RX_IRQn,1,0);
 		HAL_NVIC_EnableIRQ(SPIx_DMA_RX_IRQn);
 		
-		/* ÅäÖÃSPIÖĞ¶Ï */
+		/* é…ç½®SPIä¸­æ–­ */
 		HAL_NVIC_SetPriority(SPIx_IRQn,1,0);
 		HAL_NVIC_EnableIRQ(SPIx_IRQn);
 	}
@@ -315,44 +244,43 @@ void HAL_SPI_MspInit(SPI_HandleTypeDef *_hspi)
 	#endif
 	
 	#ifdef	USE_SPI_INT
-		{
-			/* ÅäÖÃSPIÖĞ¶Ï */
-			HAL_NVIC_SetPriority(SPIx_IRQn,1,0);
-			HAL_NVIC_EnableIRQ(SPIx_IRQn);
-		}
+    {
+        /* é…ç½®SPIä¸­æ–­ä¼˜å…ˆçº§å¹¶ä½¿èƒ½ä¸­æ–­ */
+        HAL_NVIC_SetPriority(SPIx_IRQn,1,0);
+        HAL_NVIC_EnableIRQ(SPIx_IRQn);
+    }
 	#endif
 }
 /*
-*	º¯ Êı Ãû: bsp_spiTransfer
-*	¹¦ÄÜËµÃ÷: spiÊı¾İ´«Êä
-*	ĞÎ    ²Î: none
-*	·µ »Ø Öµ: none
-*	Ê±¼ä£º2022Äê4ÔÂ22ÈÕ22µã11·Ö
+*********************************************************************************************************
+*	å‡½ æ•° å: bsp_spiTransfer
+*	åŠŸèƒ½è¯´æ˜: å¯åŠ¨æ•°æ®ä¼ è¾“
+*	å½¢    å‚: æ— 	
+*	è¿” å› å€¼: æ— 		return ;
+********************************************************************************************************
 */
 void bsp_spi1Transfer(void)
 {
-	if(g_spiLen > SPI_BUFFER_SIZE)
+	if (g_spiLen > SPI_BUFFER_SIZE)
 	{
-		return ;
+        return;
 	}
-	
-	/* DMA·½Ê½´«Êä */
-#ifdef	USE_SPI_DMA
+	/* DMAæ–¹å¼ä¼ è¾“ */
+#ifdef  USE_SPI_DMA
 	wTransferState = TRANSFER_WAIT;
 	if(HAL_SPI_TransmitReceive_DMA(&hspi,(uint8_t*)g_spiTxBuf,(uint8_t*)g_spiRxBuf,g_spiLen) != HAL_OK)
 	{
-		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+		printf("Wrong parameters value: file %s on line %d,spi state %d\r\n", __FILE__,__LINE__,HAL_SPI_GetState(&hspi));
 	}
 	while(wTransferState  == TRANSFER_WAIT)
 	{
 		;
 	}
-	
 #endif
-	
-	/* ÖĞ¶Ï·½Ê½´«Êä */
-#ifdef	USE_SPI_INT
+	/* ä¸­æ–­æ–¹å¼ä¼ è¾“ */
+#ifdef  USE_SPI_INT
 	wTransferState = TRANSFER_WAIT;
+    //SET_BIT(hspi.Instance->CR2,SPI_IT_TXE);
 	if(HAL_SPI_TransmitReceive_IT(&hspi,(uint8_t*)g_spiTxBuf,(uint8_t*)g_spiRxBuf,g_spiLen) != HAL_OK)
 	{
 		printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
@@ -363,47 +291,41 @@ void bsp_spi1Transfer(void)
 	}
 #endif
 	
-	/* ²éÑ¯·½Ê½´«Êä */
-#ifdef USE_SPI_POLL
-		if(HAL_SPI_TransmitReceive(&hspi,(uint8_t*)g_spiTxBuf,(uint8_t*)g_spiRxBuf,g_spiLen,1000) != HAL_OK)
-			{
-				printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
-			}
+	/* è½®è¯¢æ–¹å¼ä¼ è¾“ */
+#ifdef  USE_SPI_POLL
+	if(HAL_SPI_TransmitReceive(&hspi,(uint8_t*)g_spiTxBuf,(uint8_t*)g_spiRxBuf,g_spiLen,1000) != HAL_OK)
+	{
+        printf("Wrong parameters value: file %s on line %d\r\n", __FILE__,__LINE__);
+	}
 #endif
 }
 
-/******** ÏÂÃæÁ½¸ö»Øµ÷º¯ÊıÔÚHAL_SPI_TransmitReceive_DMAº¯ÊıÖĞ±»»Øµ÷ *******/
-
 /*
-*	º¯ Êı Ãû: HAL_SPI_TxRxCpltCallback
-*	¹¦ÄÜËµÃ÷: SPIÊı¾İ´«ÊäÍê³É»Øµ÷º¯Êı
-*	ĞÎ    ²Î: hspi£ºSPI³õÊ¼»¯¾ä±úÖ¸Õë
-*	·µ »Ø Öµ: none
-*	Ê±¼ä£º2022Äê4ÔÂ22ÈÕ22µã14·Ö
+*********************************************************************************************************
+*	å‡½ æ•° å: HAL_SPI_TxRxCpltCallbackï¼ŒHAL_SPI_ErrorCallback
+*	åŠŸèƒ½è¯´æ˜: SPIæ•°æ®ä¼ è¾“å®Œæˆå›è°ƒå’Œä¼ è¾“é”™è¯¯å›è°ƒ
+*	å½¢    å‚: SPI_HandleTypeDef ç±»å‹æŒ‡é’ˆå˜é‡
+*	è¿” å› å€¼: æ— 
+*********************************************************************************************************
 */
 void HAL_SPI_TxRxCpltCallback(SPI_HandleTypeDef* hspi)
 {
 	wTransferState = TRANSFER_COMPLETE;
 }
 
-/*
-*	º¯ Êı Ãû: HAL_SPI_ErrorCallback
-*	¹¦ÄÜËµÃ÷: SPIÊı¾İ´«Êä´íÎó»Øµ÷º¯Êı
-*	ĞÎ    ²Î: hspi£ºSPI³õÊ¼»¯¾ä±úÖ¸Õë
-*	·µ »Ø Öµ: none
-*	Ê±¼ä£º2022Äê4ÔÂ22ÈÕ22µã14·Ö
-*/
+
 void HAL_SPI_ErrorCallback(SPI_HandleTypeDef* hspi)
 {
 	wTransferState = TRANSFER_ERROR;
 }
 
 /*
-*	º¯ Êı Ãû: bsp_SpiBusEnter
-*	¹¦ÄÜËµÃ÷: Õ¼ÓÃSPI×ÜÏß
-*	ĞÎ    ²Î: none
-*	·µ »Ø Öµ: none
-*	Ê±¼ä£º2022Äê4ÔÂ22ÈÕ22µã27·Ö
+*********************************************************************************************************
+*	å‡½ æ•° å: bsp_SpiBusEnter
+*	åŠŸèƒ½è¯´æ˜: å ç”¨SPIæ€»çº¿
+*	å½¢    å‚: æ— 
+*	è¿” å› å€¼: 0 è¡¨ç¤ºä¸å¿™  1è¡¨ç¤ºå¿™
+*********************************************************************************************************
 */
 void bsp_Spi1BusEnter(void)
 {
@@ -411,22 +333,25 @@ void bsp_Spi1BusEnter(void)
 }
 
 /*
-*	º¯ Êı Ãû: bsp_SpiBusExit
-*	¹¦ÄÜËµÃ÷: ÊÍ·Å±»Õ¼ÓÃµÄSPI×ÜÏß
-*	ĞÎ    ²Î: none
-*	·µ »Ø Öµ: none
-*	Ê±¼ä£º2022Äê4ÔÂ22ÈÕ22µã28·Ö
+*********************************************************************************************************
+*	å‡½ æ•° å: bsp_SpiBusExit
+*	åŠŸèƒ½è¯´æ˜: é‡Šæ”¾å ç”¨çš„SPIæ€»çº¿
+*	å½¢    å‚: æ— 
+*	è¿” å› å€¼: 0 è¡¨ç¤ºä¸å¿™  1è¡¨ç¤ºå¿™
+*********************************************************************************************************
 */
 void bsp_Spi1BusExit(void)
 {
 	g_spi_busy = 0;
 }
+
 /*
-*	º¯ Êı Ãû: bsp_SpiBusBusy
-*	¹¦ÄÜËµÃ÷: ÅĞ¶ÏSPI×ÜÏßÊÇ·ñÃ¦£¬·½·¨ÊÇ¼ì²âÆäËûSPIĞ¾Æ¬µÄÆ¬Ñ¡ĞÅºÅÊÇ·ñÎª1
-*	ĞÎ    ²Î: none
-*	·µ »Ø Öµ: 0:±íÊ¾²»Ã¦£»1£º±íÊ¾ÔÚÃ¦
-*	Ê±¼ä£º2022Äê4ÔÂ22ÈÕ22µã30·Ö
+*********************************************************************************************************
+*	å‡½ æ•° å: bsp_SpiBusBusy
+*	åŠŸèƒ½è¯´æ˜: åˆ¤æ–­SPIæ€»çº¿å¿™ï¼Œæ–¹æ³•æ˜¯æ£€æµ‹å…¶ä»–SPIèŠ¯ç‰‡çš„ç‰‡é€‰ä¿¡å·æ˜¯å¦ä¸º1
+*	å½¢    å‚: æ— 
+*	è¿” å› å€¼: 0 è¡¨ç¤ºä¸å¿™  1è¡¨ç¤ºå¿™
+*********************************************************************************************************
 */
 uint8_t bsp_SpiBusBusy(void)
 {
@@ -434,11 +359,12 @@ uint8_t bsp_SpiBusBusy(void)
 }
 
 /*
-*	º¯ Êı Ãû: SPIx_IRQHandler
-*	¹¦ÄÜËµÃ÷: ÖĞ¶Ï·şÎñ³ÌĞò
-*	ĞÎ    ²Î: none
-*	·µ »Ø Öµ: none
-*	Ê±¼ä£º2022Äê4ÔÂ22ÈÕ22µã32·Ö
+*********************************************************************************************************
+*	å‡½ æ•° å: SPIx_IRQHandlerï¼ŒSPIx_DMA_RX_IRQHandlerï¼ŒSPIx_DMA_TX_IRQHandler
+*	åŠŸèƒ½è¯´æ˜: ä¸­æ–­æœåŠ¡ç¨‹åº
+*	å½¢    å‚: æ— 
+*	è¿” å› å€¼: æ— 
+*********************************************************************************************************
 */
 #ifdef USE_SPI_INT
 void SPIx_IRQHandler(void)
@@ -463,14 +389,6 @@ void SPIx_IRQHandler(void)
 
 #endif
 
-/*******************************************************************************
-  * @FunctionName: bsp_InitSPI2Bus
-  * @Author:       trx
-  * @DateTime:     2022Äê5ÔÂ10ÈÕ 18:01:58 
-  * @Purpose:      ³õÊ¼»¯SPI2£¬×÷ÎªÄ«Ë®ÆÁµÄÍ¨Ñ¶
-  * @param:        void
-  * @return:       none
-*******************************************************************************/
 void bsp_InitSPI2Bus(void)
 {
 	/*
@@ -480,16 +398,7 @@ void bsp_InitSPI2Bus(void)
 	bsp_InitSPI2Param(SPI_APB1_BAUDRATEPRESCALER_164_0625K,SPI_PHASE_1EDGE,SPI_POLARITY_LOW);
 }
 
-/*******************************************************************************
-  * @FunctionName: bsp_InitSPI2Param
-  * @Author:       trx
-  * @DateTime:     2022Äê5ÔÂ10ÈÕ 18:03:31 
-  * @Purpose:      spi2Í¨Ñ¶×ÜÏßµÄÍâÉèÅäÖÃ
-  * @param:        _BaudRatePrescaler£º·ÖÆµ
-  * @param:        _CLKPhase         £ºÊ±ÖÓ¼«ĞÔ
-  * @param:        _CLKPolarity      £ºÊ±ÖÓÏàÎ»
-  * @return:       none
-*******************************************************************************/
+
 void bsp_InitSPI2Param(uint32_t _BaudRatePrescaler, uint32_t _CLKPhase, uint32_t _CLKPolarity)
 {
 	/* ÉèÖÃSPI²ÎÊı */
@@ -523,14 +432,6 @@ void bsp_InitSPI2Param(uint32_t _BaudRatePrescaler, uint32_t _CLKPhase, uint32_t
 }
 
 
-/*******************************************************************************
-  * @FunctionName: bsp_spi2Transfer
-  * @Author:       trx
-  * @DateTime:     2022Äê5ÔÂ10ÈÕ 18:02:31 
-  * @Purpose:      spi2Êı¾İ·¢ËÍ£¬Ä«Ë®ÆÁÖ»½ÓÊÕÊı¾İ£¬²»·´À¡Êı¾İ
-  * @param:        _value£»×¼±¸·¢ËÍµÄ×Ö½ÚÊı¾İ
-  * @return:       none
-*******************************************************************************/
 void bsp_spi2Transfer(uint8_t _value)
 {
 	if (HAL_SPI_Transmit(&ink_spi,&_value,1,1000) != HAL_OK)

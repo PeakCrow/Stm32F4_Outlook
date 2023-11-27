@@ -1545,6 +1545,9 @@
         <file>
             <name>$PROJ_DIR$\..\LogicalApp\statistic_task\statistic_task.c</name>
         </file>
+        <file>
+            <name>$PROJ_DIR$\..\Main\system_task_create.c</name>
+        </file>
     </group>
     <group>
         <name>Lvgl/Fonts</name>
@@ -1997,9 +2000,6 @@
         </file>
         <file>
             <name>$PROJ_DIR$\..\Main\system_stm32f4xx.c</name>
-        </file>
-        <file>
-            <name>$PROJ_DIR$\..\Main\system_task_create.c</name>
         </file>
     </group>
     <group>

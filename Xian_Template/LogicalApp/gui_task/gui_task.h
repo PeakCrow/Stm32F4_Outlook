@@ -7,7 +7,7 @@
 #define  APP_CFG_TASK_TFTLCD_PRIO						30u
 extern   TX_THREAD	AppTaskTFTLCDTCB;
 extern   uint64_t	AppTaskTFTLCDStk[APP_CFG_TASK_TFTLCD_STK_SIZE/8];
-extern   TX_MUTEX AppLCDSemp;						/* ÓÃÓÚLVGL»¥³â */
+extern   TX_MUTEX AppLCDSemp;						/* ç”¨äºŽLVGLäº’æ–¥ */
 void  AppTaskTFTLCD			(ULONG thread_input);
 
 #endif

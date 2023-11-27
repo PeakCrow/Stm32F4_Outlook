@@ -15,7 +15,7 @@ void Set_Up_Ui(lv_obj_t *parent)
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"0:/PICTURE/set_up.bin","0:/PICTURE/set_up.bin");
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,png_load_path(set_up.bin),png_load_path(set_up.bin));
     /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,400,120);
     /* 设置按钮位置 */
@@ -48,7 +48,7 @@ static void Imgbtn_MC_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
 
     if(code == LV_EVENT_RELEASED)
-         (App_Common_Init((" 设置 "),App_btn_Back_Cb));
+         (App_Common_Init((" 设置  "),App_btn_Back_Cb));
 }
 
 static void App_btn_Back_Cb(lv_event_t* e)

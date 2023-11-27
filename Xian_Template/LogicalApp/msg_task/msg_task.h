@@ -15,9 +15,9 @@ extern TX_THREAD   AppTaskUserIFTCB;
 extern uint64_t    AppTaskUserIFStk[APP_CFG_TASK_USER_IF_STK_SIZE/8];
 extern TX_THREAD   AppTaskMsgProTCB;
 extern uint64_t    AppTaskMsgProStk[APP_CFG_TASK_MsgPro_STK_SIZE/8];
-extern TX_MUTEX    AppPrintfSemp;				/* ÓÃÓÚprintf»¥³â */
-extern TX_EVENT_FLAGS_GROUP  EventGroup; 		/* ÊÂ¼þ±êÖ¾×é */
-extern TX_EVENT_FLAGS_GROUP  EventGroup; 		/* ÊÂ¼þ±êÖ¾×é */
+extern TX_MUTEX    AppPrintfSemp;				/* ç”¨äºŽprintfäº’æ–¥ */
+extern TX_EVENT_FLAGS_GROUP  EventGroup; 		/* äº‹ä»¶æ ‡å¿—ç»„ */
+extern TX_EVENT_FLAGS_GROUP  EventGroup; 		/* äº‹ä»¶æ ‡å¿—ç»„ */
 
 
 typedef struct _bsp_all_msg{

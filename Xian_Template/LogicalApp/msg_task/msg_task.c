@@ -4,8 +4,8 @@ TX_THREAD   AppTaskUserIFTCB;
 uint64_t    AppTaskUserIFStk[APP_CFG_TASK_USER_IF_STK_SIZE/8];
 TX_THREAD   AppTaskMsgProTCB;
 uint64_t    AppTaskMsgProStk[APP_CFG_TASK_MsgPro_STK_SIZE/8];
-TX_MUTEX 	AppPrintfSemp;				/* ÓÃÓÚprintf»¥³â */
-TX_MUTEX 	App_PowerDownSave;			/* ÓÃÓÚµôµç±£´æ */ 
+TX_MUTEX 	AppPrintfSemp;				/* ç”¨äºprintfäº’æ–¥ */
+TX_MUTEX 	App_PowerDownSave;			/* ç”¨äºæ‰ç”µä¿å­˜ */ 
 
 
 void AppTaskMsgPro(ULONG thread_input)
@@ -15,11 +15,11 @@ void AppTaskMsgPro(ULONG thread_input)
 	UINT status;
 	while(1)
 	{				
-		status = tx_event_flags_get(&EventGroup,     /* ÊÂ¼ş±êÖ¾¿ØÖÆ¿é */
-									DRIVER_POS_ALL,  /* µÈ´ı±êÖ¾ */
-									TX_OR_CLEAR ,    /* µÈ´ıÈÎÒâbitÂú×ã¼´¿É */
-									&actual_events,  /* »ñÈ¡Êµ¼ÊÖµ */
-									TX_WAIT_FOREVER);/* ÓÀ¾ÃµÈ´ı */		
+		status = tx_event_flags_get(&EventGroup,     /* äº‹ä»¶æ ‡å¿—æ§åˆ¶å— */
+									DRIVER_POS_ALL,  /* ç­‰å¾…æ ‡å¿— */
+									TX_OR_CLEAR ,    /* ç­‰å¾…ä»»æ„bitæ»¡è¶³å³å¯ */
+									&actual_events,  /* è·å–å®é™…å€¼ */
+									TX_WAIT_FOREVER);/* æ°¸ä¹…ç­‰å¾… */		
 		if(status == TX_SUCCESS)
 		{
 			switch (actual_events)
@@ -49,18 +49,18 @@ void AppTaskMsgPro(ULONG thread_input)
 }
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: AppTaskUserIF
-*	¹¦ÄÜËµÃ÷: °´¼üÏûÏ¢´¦Àí
-*	ĞÎ    ²Î : thread_input ´´½¨¸ÃÈÎÎñÊ±´«µİµÄĞÎ²Î
-*	·µ »Ø Öµ: ÎŞ
-	ÓÅ ÏÈ ¼¶: 4
+*	å‡½ æ•° å: AppTaskUserIF
+*	åŠŸèƒ½è¯´æ˜: æŒ‰é”®æ¶ˆæ¯å¤„ç†
+*	å½¢    å‚ : thread_input åˆ›å»ºè¯¥ä»»åŠ¡æ—¶ä¼ é€’çš„å½¢å‚
+*	è¿” å› å€¼: æ— 
+	ä¼˜ å…ˆ çº§: 4
 *********************************************************************************************************
 */
 void AppTaskUserIF(ULONG thread_input)
 {
-	uint8_t ucKeyCode;	/* °´¼ü´úÂë */
+	uint8_t ucKeyCode;	/* æŒ‰é”®ä»£ç  */
 	(void)thread_input;
-    App_Printf("k0°´¼üµ¯Æğ\r\n");
+    App_Printf("æŒ‰é”®é©±åŠ¨åˆå§‹åŒ–!\n");
 	while(1)
 	{        
 		ucKeyCode = bsp_GetKey();
@@ -68,36 +68,33 @@ void AppTaskUserIF(ULONG thread_input)
 		{
 				switch(ucKeyCode)
 				{
-					case KEY_0_UP: 			  /* K1¼ü°´´òÓ¡ÈÎÎñÖ´ĞĞÇé¿ö */
-						App_Printf("k0°´¼üµ¯Æğ\r\n");
+					case KEY_0_UP: 			  /* K1é”®æŒ‰æ‰“å°ä»»åŠ¡æ‰§è¡Œæƒ…å†µ */
+						App_Printf("k0æŒ‰é”®å¼¹èµ·\r\n");
 					 	break;
-					case KEY_0_DOWN:			/* k0°´¼ü°´ÏÂ */
-						App_Printf("k0°´¼ü°´ÏÂ\r\n");
+					case KEY_0_DOWN:			/* k0æŒ‰é”®æŒ‰ä¸‹ */
+						App_Printf("k0æŒ‰é”®æŒ‰ä¸‹\r\n");
 						DispTaskInfo();
 						break;
 					case KEY_UP_UP:
-						App_Printf("kup°´¼üµ¯Æğ\r\n");
+						App_Printf("kupæŒ‰é”®å¼¹èµ·\r\n");
 						break;
-					case KEY_UP_DOWN:			/* kup°´¼ü°´ÏÂ */
-						App_Printf("kup°´¼ü°´ÏÂ\r\n");
-                        App_Printf("serial test last data !!!\r\n");
-                        App_Printf("serial test last data !!!!!!\r\n");
-                        App_Printf("serial test last data !!!!!!!!!\r\n");
+					case KEY_UP_DOWN:			/* kupæŒ‰é”®æŒ‰ä¸‹ */
+						App_Printf("kupæŒ‰é”®æŒ‰ä¸‹\r\n");
 						break;                    
 					case KEY_0_LONG:
-						App_Printf("k0°´¼ü³¤°´\r\n");
+						App_Printf("k0æŒ‰é”®é•¿æŒ‰\r\n");
 						break;
 					case KEY_UP_LONG:
-						App_Printf("kup°´¼ü³¤°´\r\n");
+						App_Printf("kupæŒ‰é”®é•¿æŒ‰\r\n");
 						break;
 					case KEY_MULTI_DOWM:
-						App_Printf("kmulti°´¼ü°´ÏÂ\r\n");
+						App_Printf("kmultiæŒ‰é”®æŒ‰ä¸‹\r\n");
 						break;
 					case KEY_MULTI_UP:
-						App_Printf("kmulti°´¼üµ¯Æğ\r\n");
+						App_Printf("kmultiæŒ‰é”®å¼¹èµ·\r\n");
 						break;
 					case KEY_MULTI_LONG:
-						App_Printf("kmulti°´¼ü³¤°´\r\n");
+						App_Printf("kmultiæŒ‰é”®é•¿æŒ‰\r\n");
 						break;
 				}
 		}
@@ -107,16 +104,16 @@ void AppTaskUserIF(ULONG thread_input)
 
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: App_Printf
-*	¹¦ÄÜËµÃ÷: Ïß³Ì°²È«µÄprintf·½Ê½		  			  
-*	ĞÎ    ²Î : Í¬printfµÄ²ÎÊı¡£
-*             ÔÚCÖĞ£¬µ±ÎŞ·¨ÁĞ³ö´«µİº¯ÊıµÄËùÓĞÊµ²ÎµÄÀàĞÍºÍÊıÄ¿Ê±,¿ÉÒÔÓÃÊ¡ÂÔºÅÖ¸¶¨²ÎÊı±í
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: App_Printf
+*	åŠŸèƒ½è¯´æ˜: çº¿ç¨‹å®‰å…¨çš„printfæ–¹å¼		  			  
+*	å½¢    å‚ : åŒprintfçš„å‚æ•°ã€‚
+*             åœ¨Cä¸­ï¼Œå½“æ— æ³•åˆ—å‡ºä¼ é€’å‡½æ•°çš„æ‰€æœ‰å®å‚çš„ç±»å‹å’Œæ•°ç›®æ—¶,å¯ä»¥ç”¨çœç•¥å·æŒ‡å®šå‚æ•°è¡¨
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 void  App_Printf(const char *fmt, ...)
 {
-    char  buf_str[200 + 1];/* ÌØ±ğ×¢Òâ£¬Èç¹ûprintfµÄ±äÁ¿½Ï¶à£¬×¢Òâ´Ë¾Ö²¿±äÁ¿µÄ´óĞ¡ÊÇ·ñ¹»ÓÃ */
+    char  buf_str[200 + 1];/* ç‰¹åˆ«æ³¨æ„ï¼Œå¦‚æœprintfçš„å˜é‡è¾ƒå¤šï¼Œæ³¨æ„æ­¤å±€éƒ¨å˜é‡çš„å¤§å°æ˜¯å¦å¤Ÿç”¨ */
     va_list   v_args;
     va_start(v_args, fmt);
    (void)vsnprintf((char       *)&buf_str[0],
@@ -124,22 +121,22 @@ void  App_Printf(const char *fmt, ...)
                    (char const *) fmt,
                                   v_args);
     va_end(v_args);
-	/* »¥³â²Ù×÷ */
+	/* äº’æ–¥æ“ä½œ */
     tx_mutex_get(&AppPrintfSemp, TX_WAIT_FOREVER);
     printf("%s", buf_str);
     tx_mutex_put(&AppPrintfSemp);
 }
 /*
 *********************************************************************************************************
-*	º¯ Êı Ãû: App_I2C_EE_BufferWrite
-*	¹¦ÄÜËµÃ÷: Ïß³Ì°²È«µÄeepromĞ´ÈË·½Ê½
-*	ĞÎ    ²Î : Í¬I2C_EE_BufferWriteµÄ²ÎÊı¡£
-*	·µ »Ø Öµ: ÎŞ
+*	å‡½ æ•° å: App_I2C_EE_BufferWrite
+*	åŠŸèƒ½è¯´æ˜: çº¿ç¨‹å®‰å…¨çš„eepromå†™äººæ–¹å¼
+*	å½¢    å‚ : åŒI2C_EE_BufferWriteçš„å‚æ•°ã€‚
+*	è¿” å› å€¼: æ— 
 *********************************************************************************************************
 */
 void    App_I2C_EE_BufferWrite(uint8_t* pBuffer, uint8_t WriteAddr,uint16_t NumByteToWrite)
 {
-	/* »¥³â²Ù×÷ */
+	/* äº’æ–¥æ“ä½œ */
     tx_mutex_get(&App_PowerDownSave, TX_WAIT_FOREVER);
     I2C_EE_BufferWrite(pBuffer,WriteAddr,NumByteToWrite);
     tx_mutex_put(&App_PowerDownSave);	
