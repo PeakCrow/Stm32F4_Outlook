@@ -164,7 +164,7 @@ static void lv_example_Monitor_Speed_Meter(void)
                                                     lv_palette_main(LV_PALETTE_BLUE),//蓝
                                                     -(short)(scr_act_height() / 22.5)
                                                     );
-
+#if LVGL_THREAD_X_ANIM == 1
     /* 设置指针动画 */
     lv_anim_t a;
     /* 初始化动画对象 */
@@ -200,7 +200,7 @@ static void lv_example_Monitor_Speed_Meter(void)
     lv_anim_set_playback_time(&a, 2000);
     lv_anim_set_var(&a, indic3);
     lv_anim_start(&a);
-
+#endif
     //创建样式
     Monitor_Main_Style(Monitor_Speed_Meter);
     //创建速度值标签
@@ -332,9 +332,9 @@ static void btnm_event_cb(lv_event_t* e)
     if (code == LV_EVENT_VALUE_CHANGED)
     {
         id = lv_btnmatrix_get_selected_btn(target); /* 获取按键索引 */
-        if(btnmap_index == 6 || !(strcmp(lv_btnmatrix_get_btn_text(target, id),str_confirm)))
+        if(btnmap_index == 6 || !(strcmp(lv_btnmatrix_get_btn_text(target, id),"#")))
         {
-            if(!strcmp(btnmap_buf,str_password))
+            if(!strcmp(btnmap_buf,"123456"))
             {
                 lv_obj_clean(password_ui);
                 /* 将标志置1，打开主界面 */
@@ -342,7 +342,7 @@ static void btnm_event_cb(lv_event_t* e)
             }else
             {
                 /* 否则弹出密码错误的消息框 */
-                password_error = lv_msgbox_create(NULL,str_msg_title,str_msg_body,NULL,true);
+                password_error = lv_msgbox_create(NULL,"ERROR","The Passwoed is Wrong!!",NULL,true);
                 lv_obj_center(password_error);
                 memset(btnmap_buf,0,6);
                 btnmap_index = 0;
@@ -379,7 +379,7 @@ static lv_obj_t* lv_example_btnmatrix(lv_obj_t *parent)
 
     /* 用户标签 */
     lv_obj_t *label_user = lv_label_create(parent);                                             /* 创建标签 */
-    lv_label_set_text(label_user, str_user_name);                                                      /* 设置文本 */
+    lv_label_set_text(label_user, "USER");                                                      /* 设置文本 */
     lv_obj_set_style_text_font(label_user, font, LV_PART_MAIN);                                 /* 设置字体 */
     lv_obj_set_style_text_align(label_user, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);                /* 设置文本居中 */
     lv_obj_align_to(label_user, img, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);                           /* 设置位置 */
@@ -423,6 +423,4 @@ static lv_obj_t* lv_example_btnmatrix(lv_obj_t *parent)
     
     return parent;
 }
-
-
 

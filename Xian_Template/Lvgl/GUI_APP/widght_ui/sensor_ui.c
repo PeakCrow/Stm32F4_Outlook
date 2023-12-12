@@ -19,14 +19,14 @@ lv_chart_series_t * ser,*ser1,*ser2,*ser3;
 
 void Sensor_Ui(lv_obj_t *parent)
 {
-    /* 瀹氫箟骞跺垱寤哄浘鍍忔寜閽?*/
+    /* 定义并创建图像按�?*/
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
-    /* 璁剧疆鎸夐挳閲婃斁鏃剁殑鍥惧儚 */
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,png_load_path(sensor.bin),png_load_path(sensor.bin));
-    /* 璁剧疆鎸夐挳澶у皬 */
+    /* 设置按钮释放时的图像 */
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"0:/PICTURE/sensor.bin","0:/PICTURE/sensor.bin");
+    /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,200,120);
-    /* 璁剧疆鎸夐挳浣嶇疆 */
+    /* 设置按钮位置 */
     lv_obj_align_to(Imgbtn_MC,parent,LV_ALIGN_LEFT_MID,0,60);
     /*Create a transition animation on width transformation and recolor.*/
     static lv_style_prop_t tr_prop[] = {LV_STYLE_TRANSFORM_WIDTH, LV_STYLE_IMG_RECOLOR_OPA, 0};
@@ -48,10 +48,10 @@ void Sensor_Ui(lv_obj_t *parent)
 
     lv_obj_add_style(Imgbtn_MC,&style_def,0);
     lv_obj_add_style(Imgbtn_MC,&style_pr,LV_STATE_PRESSED);
-    /* 璁剧疆鎸夐挳鍥炶皟 */
+    /* 设置按钮回调 */
     lv_obj_add_event_cb(Imgbtn_MC,Imgbtn_MC_cb,LV_EVENT_ALL,NULL);
 }
-static void App_btn_Back_Cb(lv_event_t* e)   
+static void App_btn_Back_Cb(lv_event_t* e)
 {
 	lv_event_code_t code = lv_event_get_code(e);
 	lv_obj_t* parent = lv_event_get_user_data(e);
@@ -69,10 +69,10 @@ static void Imgbtn_MC_cb(lv_event_t * e)
     lv_event_code_t code = lv_event_get_code(e);
 
     if(code == LV_EVENT_RELEASED)
-         Sensor_In_Ui(App_Common_Init((" 传感器数据 "),App_btn_Back_Cb));
+         Sensor_In_Ui(App_Common_Init(("Sensor UI"),App_btn_Back_Cb));
 }
-/*************************搴旂敤浠ｇ爜************************************************/
-/* 鍥捐〃鍥炶皟鍑芥暟锛屼娇鐢╨abel鏉ユ剧ず鏁版?*/
+/*************************应用代码************************************************/
+/* 图表回调函数，使用label来显示数�?*/
 static void event_chart_cb(lv_event_t* e)
 {
     lv_event_code_t code = lv_event_get_code(e);
@@ -201,20 +201,20 @@ static void Sensor_In_Ui(lv_obj_t * parent)
         lv_label_set_text(analog4_label,"value");
     }
 
-    /* 娣诲姞鏁版嵁搴忓垪鍒板浘琛?*/
+    /* 添加数据序列到图�?*/
     ser = lv_chart_add_series(analog1,
                               lv_palette_main(LV_PALETTE_RED),
-                              LV_CHART_AXIS_PRIMARY_Y);/* 宸﹁酱 */
+                              LV_CHART_AXIS_PRIMARY_Y);/* 左轴 */
     ser1 = lv_chart_add_series(analog2,
                               lv_palette_main(LV_PALETTE_GREEN),
-                              LV_CHART_AXIS_PRIMARY_Y);/* 宸﹁酱 */
+                              LV_CHART_AXIS_PRIMARY_Y);/* 左轴 */
     ser2 = lv_chart_add_series(analog3,
                               lv_palette_main(LV_PALETTE_CYAN),
-                              LV_CHART_AXIS_PRIMARY_Y);/* 宸﹁酱 */
+                              LV_CHART_AXIS_PRIMARY_Y);/* 左轴 */
     ser3 = lv_chart_add_series(analog4,
                               lv_palette_main(LV_PALETTE_BROWN),
-                              LV_CHART_AXIS_PRIMARY_Y);/* 宸﹁酱 */
-    /* 璁剧疆鏁版嵁绾夸笂鐨勭偣鏁?*/
+                              LV_CHART_AXIS_PRIMARY_Y);/* 左轴 */
+    /* 设置数据线上的点�?*/
     lv_chart_set_point_count(analog1, 50);
     lv_chart_set_point_count(analog2, 50);
     lv_chart_set_point_count(analog3, 50);
@@ -244,6 +244,7 @@ static void Sensor_In_Ui(lv_obj_t * parent)
     lv_bar_set_range(bar, -20, 80);
     lv_obj_add_event_cb(bar,event_cb,LV_EVENT_DRAW_PART_END,NULL);
 
+#if LVGL_THREAD_X_ANIM == 1    
     lv_anim_t a;
     lv_anim_init(&a);
     lv_anim_set_exec_cb(&a, set_temp);
@@ -253,8 +254,8 @@ static void Sensor_In_Ui(lv_obj_t * parent)
     lv_anim_set_values(&a, -20, 80);
     lv_anim_set_repeat_count(&a, LV_ANIM_REPEAT_INFINITE);
     lv_anim_start(&a);
-
-	/* 鍒涘缓涓€涓狶VGL瀹氭椂鍣ㄥ畾鏃舵坊鍔燾hart鏁版嵁 */
+#endif
+	/* 创建一个LVGL定时器定时添加chart数据 */
 	Realtime_Sensor_timer = lv_timer_create(Realtime_Sensor_Cb,1000,NULL);
 	lv_timer_set_cb(Realtime_Sensor_timer,Realtime_Sensor_Cb);	
 
@@ -273,10 +274,10 @@ static void set_temp(void * bar,int32_t temp)
 {
     lv_bar_set_value(bar,temp,LV_ANIM_ON);
 }
-/* 娓╁害璁＄殑鏁板€兼樉绀哄洖璋冨嚱鏁?*/
+/* 温度计的数值显示回调函�?*/
 static void event_cb(lv_event_t * e)
 {
-    /* 閫氳繃鍙傛暟`LV_EVENT_DRAW_PART_BEGIN/END`鑾峰緱閮ㄥ垎鍖哄煙鎻忚堪 */
+    /* 通过参数`LV_EVENT_DRAW_PART_BEGIN/END`获得部分区域描述 */
     lv_obj_draw_part_dsc_t * dsc = lv_event_get_draw_part_dsc(e);
     if(dsc->part != LV_PART_INDICATOR) return;
 
@@ -298,7 +299,7 @@ static void event_cb(lv_event_t * e)
     lv_area_t txt_area;
     /*If the indicator is long enough put the text inside on the right*/
     if(lv_area_get_width(dsc->draw_area) > txt_size.x + 20) {
-        /* 灏嗕釜浣嶆暟鏁板€兼洿鍋忓悜宸﹁竟涓€鐐?*/
+        /* 将个位数数值更偏向左边一�?*/
         //if((int)lv_bar_get_value(obj) < 10 && (int)lv_bar_get_value(obj) > 0)
 //            txt_area.x2 = dsc->draw_area->x2 - 16;
 //        else

@@ -5,6 +5,7 @@
 static void Imgbtn_MC_cb(lv_event_t * e);
 static lv_style_t s_style_common;
 static void About_Phone_In_Ui(lv_obj_t* parent);
+#define screen_left_pos 30
 static void App_btn_Back_Cb(lv_event_t* e);
 
 
@@ -14,7 +15,7 @@ void About_Phone_Ui(lv_obj_t *parent)
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,png_load_path(about_phone.bin),png_load_path(about_phone.bin),NULL);
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,"0:/PICTURE/about_phone.bin","0:/PICTURE/about_phone.bin",NULL);
     /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,400,120);
     /* 设置按钮位置 */
@@ -84,48 +85,49 @@ static void About_Phone_In_Ui(lv_obj_t* parent)
     lv_label_set_recolor(Lvgl_label,true);
     lv_obj_set_style_text_font(Lvgl_label,&lv_font_montserrat_24,LV_PART_MAIN);
     lv_obj_align(Lvgl_label,LV_ALIGN_TOP_LEFT,screen_left_pos,50);
-    lv_label_set_text_fmt(Lvgl_label,str_lvgl_version,LVGL_VERSION_MAJOR,LVGL_VERSION_MINOR,LVGL_VERSION_PATCH);
+    lv_label_set_text_fmt(Lvgl_label,"current_lvgl_version is #ff0000 %d.%d.%d#",LVGL_VERSION_MAJOR,LVGL_VERSION_MINOR,LVGL_VERSION_PATCH);
 
     Fatfs_label = lv_label_create(parent);
     lv_label_set_recolor(Fatfs_label,true);
     lv_obj_set_style_text_font(Fatfs_label,&lv_font_montserrat_24,LV_PART_MAIN);
     lv_obj_align(Fatfs_label,LV_ALIGN_TOP_LEFT,screen_left_pos,50+2*20);
-    lv_label_set_text_fmt(Fatfs_label,str_fatfs_version,_FATFS);
+    lv_label_set_text_fmt(Fatfs_label,"current_fatfs_revision_id is #ff0000 %d#",_FATFS);
 
     Threadx_label = lv_label_create(parent);
     lv_label_set_recolor(Threadx_label,true);
     lv_obj_set_style_text_font(Threadx_label,&lv_font_montserrat_24,LV_PART_MAIN);
     lv_obj_align(Threadx_label,LV_ALIGN_TOP_LEFT,screen_left_pos,50+4*20);
-    lv_label_set_text_fmt(Threadx_label,str_rtos_version,THREADX_MAJOR_VERSION,THREADX_MINOR_VERSION,THREADX_PATCH_VERSION);
+    lv_label_set_text_fmt(Threadx_label,"azure_rtos_threadx_version is #ff0000 %d.%d.%d#",THREADX_MAJOR_VERSION,THREADX_MINOR_VERSION,THREADX_PATCH_VERSION);
 
     Author_label = lv_label_create(parent);
     lv_label_set_recolor(Author_label,true);
     lv_obj_set_style_text_font(Author_label,&lv_font_montserrat_24,LV_PART_MAIN);
     lv_obj_align(Author_label,LV_ALIGN_TOP_LEFT,screen_left_pos,50+6*20);
-    lv_label_set_text_fmt(Author_label,str_author_version);
+    lv_label_set_text_fmt(Author_label,"software_and_hardware_author is #ff0000 runxian.tian#");
 
     Ls_label = lv_label_create(parent);
     lv_label_set_recolor(Ls_label,true);
     lv_obj_set_style_text_font(Ls_label,&lv_font_montserrat_24,LV_PART_MAIN);
     lv_obj_align(Ls_label,LV_ALIGN_TOP_LEFT,screen_left_pos,50+8*20);
-    lv_label_set_text_fmt(Ls_label,str_ls_racing_fleet);
+    lv_label_set_text_fmt(Ls_label,"ls_racing_fleet is #00ff00 E01#");
 
     Hadware_label = lv_label_create(parent);
     lv_label_set_recolor(Hadware_label,true);
     lv_obj_set_style_text_font(Hadware_label,&lv_font_montserrat_24,LV_PART_MAIN);
     lv_obj_align(Hadware_label,LV_ALIGN_TOP_LEFT,screen_left_pos,50+10*20);
-    lv_label_set_text_fmt(Hadware_label,str_board_hardware_version);
+    lv_label_set_text_fmt(Hadware_label,"onboard_hardware #ff0000 STM32F407|LCD|FLASH|CAN #\n"
+                                        "#ff0000                            MLX90614|ADS1256|WS2812B|EEPROM|SDIO#");
     Hallib_label = lv_label_create(parent);
     lv_label_set_recolor(Hallib_label,true);
     lv_obj_set_style_text_font(Hallib_label,&lv_font_montserrat_24,LV_PART_MAIN);
     lv_obj_align(Hallib_label,LV_ALIGN_TOP_LEFT,screen_left_pos,50+13*20);
-    lv_label_set_text_fmt(Hallib_label,str_cmsis_version,__STM32F4xx_CMSIS_VERSION_MAIN,__STM32F4xx_CMSIS_VERSION_SUB1,__STM32F4xx_CMSIS_VERSION_SUB2,__STM32F4xx_CMSIS_VERSION_RC);
+    lv_label_set_text_fmt(Hallib_label,"stm32f4xx_cmsis_version is #ff0000 %d.%d.%d.%d#",__STM32F4xx_CMSIS_VERSION_MAIN,__STM32F4xx_CMSIS_VERSION_SUB1,__STM32F4xx_CMSIS_VERSION_SUB2,__STM32F4xx_CMSIS_VERSION_RC);
 
     Monitor_label = lv_label_create(parent);
     lv_label_set_recolor(Monitor_label,true);
     lv_obj_set_style_text_font(Monitor_label,&lv_font_montserrat_24,LV_PART_MAIN);
     lv_obj_align(Monitor_label,LV_ALIGN_TOP_LEFT,screen_left_pos,42+15*20);
-    lv_label_set_text_fmt(Monitor_label,str_hardware_version,HARDWARE_MAJOR_VERSION,HARDWARE_MINOR_VERSION,HARDWARE_PATCH_VERSION);
+    lv_label_set_text_fmt(Monitor_label,"hardware_version is #ff0000 %d.%d.%d#",HARDWARE_MAJOR_VERSION,HARDWARE_MINOR_VERSION,HARDWARE_PATCH_VERSION);
 
 
     About_line1 = lv_line_create(parent);

@@ -1,7 +1,8 @@
 #include "adjust_pedal.h"
 #include "monitor.h"
 
-
+/*存储在EEPROM中的车手位置数据大小，一个位置数据占据两个字节*/
+#define Drive_Pos_Size 2
 
 /**********************样式变量必须做为全局变量**************************/
 //static lv_style_t s_style_common;
@@ -47,7 +48,7 @@ void Adjust_Pedal_Ui(lv_obj_t *parent)
 	lv_obj_t* Imgbtn_MC;	
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,png_load_path(adjust_pedal.bin),png_load_path(adjust_pedal.bin),NULL);
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,"0:/PICTURE/adjust_pedal.bin","0:/PICTURE/adjust_pedal.bin",NULL);
     /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,200,120);
     /* 设置按钮位置 */
@@ -74,6 +75,8 @@ void Adjust_Pedal_Ui(lv_obj_t *parent)
     lv_obj_add_style(Imgbtn_MC,&style_pr,LV_STATE_PRESSED);
     /* 设置按钮回调 */
     lv_obj_add_event_cb(Imgbtn_MC,Imgbtn_MC_cb,LV_EVENT_ALL,NULL);
+
+
 }
 
 
@@ -150,7 +153,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
 	lv_obj_align(pos_label,LV_ALIGN_CENTER,0,0);	
 	lv_obj_add_style(pos_label,&style_warning,0);
     NumberConuts = DriverX_Pos.current_pos;
-	lv_label_set_text_fmt(pos_label,str_pedal_pos,NumberConuts);	
+	lv_label_set_text_fmt(pos_label,"Pedal_Pos:%.2f",NumberConuts);	
 	lv_obj_add_event_cb(pos_label,Pos_Label_Cb,LV_EVENT_ALL,pos_label);
 	
 		
@@ -159,7 +162,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_set_size(forward_btn,160,100);
     lv_obj_align_to(forward_btn,parent,LV_ALIGN_CENTER,-150,-100);
     for_label = lv_label_create(parent);
-    lv_label_set_text(for_label,str_forward_btn);
+    lv_label_set_text(for_label,"FORWARD");
     lv_obj_set_style_bg_color(forward_btn,lv_palette_main(LV_PALETTE_YELLOW),LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(for_label,&lv_font_montserrat_24,LV_PART_MAIN);
     lv_obj_align_to(for_label,forward_btn,LV_ALIGN_CENTER,0,0);
@@ -172,7 +175,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_set_size(reverse_btn,160,100);
     lv_obj_align_to(reverse_btn,parent,LV_ALIGN_CENTER,150,-100);
     rev_label = lv_label_create(parent);
-    lv_label_set_text(rev_label,str_reverse_btn);
+    lv_label_set_text(rev_label,"REVERSE");
     lv_obj_set_style_bg_color(reverse_btn,lv_palette_main(LV_PALETTE_GREEN),LV_STATE_DEFAULT);
     lv_obj_set_style_text_font(rev_label,&lv_font_montserrat_24,LV_PART_MAIN);
     lv_obj_align_to(rev_label,reverse_btn,LV_ALIGN_CENTER,0,0);
@@ -186,7 +189,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_add_state(shild_switch, LV_STATE_CHECKED);
     sw_label = lv_label_create(parent);
     lv_obj_align_to(sw_label,shild_switch,LV_ALIGN_OUT_BOTTOM_MID,-25,0);
-    lv_label_set_text(sw_label,str_shild_switch);
+    lv_label_set_text(sw_label,"Adjust On");
     lv_obj_add_event_cb(shild_switch, Shild_Sw_Cb, LV_EVENT_VALUE_CHANGED, sw_label);
 
     /* 车手选择列表 */
@@ -204,7 +207,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_add_event_cb(cont2, Radio_Btn_Cb, LV_EVENT_CLICKED, &active_index_2);
 
     for(uint8_t i = 0; i < 3; i++) {
-        lv_snprintf(buf, sizeof(buf), str_driver_switch, (int)i + 1);
+        lv_snprintf(buf, sizeof(buf), "Driver %d", (int)i + 1);
 
         lv_obj_t * obj = lv_checkbox_create(cont2);
         lv_checkbox_set_text(obj, buf);
@@ -221,7 +224,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_set_size(record_button,lv_pct(20),lv_pct(15));
     lv_obj_align_to(record_button,pos_label,LV_ALIGN_OUT_LEFT_MID,-100,20);
     record_label = lv_label_create(parent);
-    lv_label_set_text(record_label,str_record_btn);
+    lv_label_set_text(record_label,"RECORD");
     lv_obj_align_to(record_label,record_button,LV_ALIGN_CENTER,0,0);
     lv_obj_add_style(record_button,&style_pr,LV_STATE_PRESSED);
     lv_obj_add_style(record_button,&style_def,0);
@@ -233,7 +236,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_set_size(zero_button,lv_pct(20),lv_pct(15));
     lv_obj_align_to(zero_button,record_button,LV_ALIGN_OUT_BOTTOM_MID,0,50);
     zero_label = lv_label_create(parent);
-    lv_label_set_text(zero_label,str_zero_btn);
+    lv_label_set_text(zero_label,"ZERO");
     lv_obj_align_to(zero_label,zero_button,LV_ALIGN_CENTER,0,0);
     lv_obj_add_style(zero_button,&style_pr,LV_STATE_PRESSED);
     lv_obj_add_style(zero_button,&style_def,0);
@@ -249,7 +252,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     driverpos_label1 = lv_label_create(parent);
     lv_obj_set_style_text_font(driverpos_label1,&lv_font_montserrat_24,LV_PART_MAIN);
 	I2C_EE_BufferRead(pos_buf,0x05,2);
-    lv_label_set_text_fmt(driverpos_label1,str_driver_pos,0+1,pos_buf[0],pos_buf[1]);
+    lv_label_set_text_fmt(driverpos_label1,"Driver %d Pos %d.%d ",0+1,pos_buf[0],pos_buf[1]);
 	DriverX_Pos.driver1_pos = pos_buf[0]+(float)(pos_buf[1]*1.0/100);
     lv_obj_add_style(driverpos_label1,&style_shadow,0);
     lv_obj_align_to(driverpos_label1,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(0+1)*40);	
@@ -258,7 +261,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     driverpos_label2 = lv_label_create(parent);
     lv_obj_set_style_text_font(driverpos_label2,&lv_font_montserrat_24,LV_PART_MAIN);
 	I2C_EE_BufferRead(pos_buf,0x05+1*Drive_Pos_Size,2);	
-    lv_label_set_text_fmt(driverpos_label2,str_driver_pos,1+1,pos_buf[0],pos_buf[1]);
+    lv_label_set_text_fmt(driverpos_label2,"Driver %d Pos %d.%d ",1+1,pos_buf[0],pos_buf[1]);
 	DriverX_Pos.driver2_pos = pos_buf[0]+(float)(pos_buf[1]*1.0/100);
     lv_obj_add_style(driverpos_label2,&style_shadow,0);
     lv_obj_align_to(driverpos_label2,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(1+1)*40);		
@@ -267,7 +270,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     driverpos_label3 = lv_label_create(parent);
     lv_obj_set_style_text_font(driverpos_label3,&lv_font_montserrat_24,LV_PART_MAIN);
 	I2C_EE_BufferRead(pos_buf,0x05+2*Drive_Pos_Size,2);	
-    lv_label_set_text_fmt(driverpos_label3,str_driver_pos,2+1,pos_buf[0],pos_buf[1]);
+    lv_label_set_text_fmt(driverpos_label3,"Driver %d Pos %d.%d ",2+1,pos_buf[0],pos_buf[1]);
 	DriverX_Pos.driver3_pos = pos_buf[0]+(float)(pos_buf[1]*1.0/100);
     lv_obj_add_style(driverpos_label3,&style_shadow,0);
     lv_obj_align_to(driverpos_label3,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(2+1)*40);	
@@ -337,7 +340,7 @@ static void Pos_Label_Cb(lv_event_t *e)
 		/* 更新标签文本值 */			
 		NumberConuts = PosQueue / 65535.00;
 		DriverX_Pos.current_pos = NumberConuts;
-		lv_label_set_text_fmt(pos_label,str_pedal_pos_,NumberConuts);
+		lv_label_set_text_fmt(pos_label,"Pedal_Pos : %.2f",NumberConuts);
 
 	}else if(code == LV_EVENT_RELEASED){
 		App_Printf("%d ",PosQueue);
@@ -351,12 +354,12 @@ static void Shild_Sw_Cb(lv_event_t * e)
     lv_obj_t * sw = lv_event_get_target(e);
     lv_obj_t * sw_label = lv_event_get_user_data(e);
     if(lv_obj_has_state(sw, LV_STATE_CHECKED)) {/* 关闭状态 */
-        lv_label_set_text(sw_label,str_adjust_on);
+        lv_label_set_text(sw_label,"Adjust On");
         lv_obj_add_flag(forward_btn,LV_OBJ_FLAG_CLICKABLE);
         lv_obj_add_flag(reverse_btn,LV_OBJ_FLAG_CLICKABLE);
     }
     else {/* 默认打开 */
-        lv_label_set_text(sw_label,str_adjust_off);
+        lv_label_set_text(sw_label,"Adjust Off");
         lv_obj_clear_flag(reverse_btn,LV_OBJ_FLAG_CLICKABLE);
         lv_obj_clear_flag(forward_btn,LV_OBJ_FLAG_CLICKABLE);
     }
@@ -497,7 +500,7 @@ static void Driverpos1_Label_Cb(lv_event_t * e)
 	(void)e;
 	lv_obj_t * act_cb = lv_event_get_user_data(e);
 	if((active_index_2+1) == 1){
-		lv_label_set_text_fmt(driverpos_label1,str_deriver_pos_label,1,NumberConuts);
+		lv_label_set_text_fmt(driverpos_label1,"Driver %d Pos %.2f ",1,NumberConuts);
 		lv_label_set_text(act_cb,lv_label_get_text(driverpos_label1));
 	}
 }
@@ -506,7 +509,7 @@ static void Driverpos2_Label_Cb(lv_event_t * e)
 	(void)e;
 	lv_obj_t * act_cb = lv_event_get_user_data(e);
 	if((active_index_2+1) == 2){
-		lv_label_set_text_fmt(driverpos_label2,str_deriver_pos_label,1,NumberConuts);
+		lv_label_set_text_fmt(driverpos_label2,"Driver %d Pos %.2f ",1,NumberConuts);
 		lv_label_set_text(act_cb,lv_label_get_text(driverpos_label2));
 	}
 }
@@ -515,7 +518,7 @@ static void Driverpos3_Label_Cb(lv_event_t * e)
 	(void)e;
 	lv_obj_t * act_cb = lv_event_get_user_data(e);
 	if((active_index_2+1) == 3){
-		lv_label_set_text_fmt(driverpos_label3,str_deriver_pos_label,1,NumberConuts);
+		lv_label_set_text_fmt(driverpos_label3,"Driver %d Pos %.2f ",1,NumberConuts);
 		lv_label_set_text(act_cb,lv_label_get_text(driverpos_label3));
 	}
 }
@@ -550,7 +553,7 @@ static void Realtime_MotorPos_Cb(lv_timer_t * e)
 	if(NumberConuts < 100.00)
 		DriverX_Pos.current_pos = NumberConuts;
 
-	lv_label_set_text_fmt(pos_label,str_pedal_pos_,DriverX_Pos.current_pos);
+	lv_label_set_text_fmt(pos_label,"Pedal_Pos : %.2f",DriverX_Pos.current_pos);
 	
     /* 要加一个延时将上面读取实时位置的命令发送和下面的电机停止命令分开 */
     /* 不然电机停止命令无效 */

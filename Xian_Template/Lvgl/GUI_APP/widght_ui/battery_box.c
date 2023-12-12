@@ -21,7 +21,7 @@ void Battery_Box_Ui(lv_obj_t *parent)
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,png_load_path(battery_box.bin),png_load_path(battery_box.bin));
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,NULL,"0:/PICTURE/battery_box.bin","0:/PICTURE/battery_box.bin");
     /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,200,120);
     /* 设置按钮位置 */
@@ -80,8 +80,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
 
 
     ui_Image_Battery_BG = lv_img_create(parent);
-	//lv_img_set_src(ui_Image_Battery_BG,"0:/PICTURE/battery_bg.bin");
-    lv_img_set_src(ui_Image_Battery_BG,png_load_path(battery_bg.bin));
+	lv_img_set_src(ui_Image_Battery_BG,"0:/PICTURE/battery_bg.bin");
     lv_obj_set_width(ui_Image_Battery_BG, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Image_Battery_BG, LV_SIZE_CONTENT);    /// 1
     lv_obj_set_align(ui_Image_Battery_BG, LV_ALIGN_CENTER);
@@ -92,27 +91,27 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
 
 	
     ui_Image_Particle1 = lv_img_create(parent);   
-    lv_img_set_src(ui_Image_Particle1,png_load_path(particle_1.bin));
+    lv_img_set_src(ui_Image_Particle1,"0:/PICTURE/particle_1.bin");
     lv_obj_set_height(ui_Image_Particle1, LV_SIZE_CONTENT);
     lv_obj_set_width(ui_Image_Particle1, LV_SIZE_CONTENT);   /// 1
 	lv_obj_align_to(ui_Image_Particle1,ui_Image_Battery_BG,LV_ALIGN_CENTER,0,0);
 	lv_obj_set_style_shadow_opa(ui_Image_Particle1, 255, LV_STATE_DEFAULT);
 
     ui_Image_Particle2 = lv_img_create(parent);
-    lv_img_set_src(ui_Image_Particle2,png_load_path(particle_2.bin));
+    lv_img_set_src(ui_Image_Particle2,"0:/PICTURE/particle_2.bin");
     lv_obj_set_height(ui_Image_Particle2, LV_SIZE_CONTENT);
     lv_obj_set_width(ui_Image_Particle2, LV_SIZE_CONTENT);   /// 1
     lv_obj_align_to(ui_Image_Particle2,ui_Image_Battery_BG,LV_ALIGN_CENTER,0,0);
 	lv_obj_set_style_shadow_opa(ui_Image_Particle2, 255, LV_STATE_DEFAULT );
 
     ui_Image_Particle3 = lv_img_create(parent);
-    lv_img_set_src(ui_Image_Particle3,png_load_path(particle_3.bin));
+    lv_img_set_src(ui_Image_Particle3,"0:/PICTURE/particle_3.bin");
     lv_obj_set_height(ui_Image_Particle3, LV_SIZE_CONTENT);
    	lv_obj_set_width(ui_Image_Particle3, LV_SIZE_CONTENT);   /// 1
     lv_obj_align_to(ui_Image_Particle3,ui_Image_Battery_BG,LV_ALIGN_CENTER,0,0);
 	lv_obj_set_style_shadow_opa(ui_Image_Particle3, 255, LV_STATE_DEFAULT);
 
-
+#if LVGL_THREAD_X_ANIM == 1
     lv_anim_t a;
     lv_anim_init(&a);
     lv_anim_set_var(&a, ui_Image_Particle1);
@@ -158,10 +157,8 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
 	lv_anim_set_repeat_count(&c, LV_ANIM_REPEAT_INFINITE);
 	lv_anim_set_repeat_delay(&c, 0);
 	lv_anim_set_early_apply(&c, false);
-	lv_anim_start(&c);
-
-    
-   	
+	lv_anim_start(&c);    
+#endif   	
 }
 
 

@@ -15,7 +15,7 @@ void Vehicle_Status_Ui(lv_obj_t *parent)
     lv_obj_t* Imgbtn_MC;
     Imgbtn_MC = lv_imgbtn_create(parent);
     /* 设置按钮释放时的图像 */
-    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,png_load_path(vehicle_status.bin),png_load_path(vehicle_status.bin),NULL);
+    lv_imgbtn_set_src(Imgbtn_MC,LV_STATE_DEFAULT,"0:/PICTURE/vehicle_status.bin","0:/PICTURE/vehicle_status.bin",NULL);
     /* 设置按钮大小 */
     lv_obj_set_size(Imgbtn_MC,400,120);
     /* 设置按钮位置 */
