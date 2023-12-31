@@ -66,11 +66,11 @@
 #if LV_MEM_CUSTOM == 0
     /*Size of the memory available for `lv_mem_alloc()` in bytes (>= 2kB)*/
 	/*可用于’lv_mem_alloc()'分配的内存大小，以字节为单位，大于等于2Kb*/
-    #define LV_MEM_SIZE (32U * 1024U)          /*[bytes]*/
+    #define LV_MEM_SIZE (128U * 1024U)          /*[bytes]*/
 
     /*Set an address for the memory pool instead of allocating it as a normal array. Can be in external SRAM too.*/
 	/*设置内存池的地址，而不是将其分配为普通数组，也可以在外部sram中.*/
-    #define LV_MEM_ADR  0    /*0: unused*/
+    #define LV_MEM_ADR  0x680bb800    /*0: unused*/
     /*Instead of an address give a memory allocator that will be called to get a memory pool for LVGL. E.g. my_malloc*/
 	/*代替地址给出一个内存分配器，他将被调用来获得LVGL的内存池，例如 my_malloc*/
     #if LV_MEM_ADR == 0
@@ -111,7 +111,7 @@
  *It removes the need to manually update the tick with `lv_tick_inc()`)*/
  /*使用以毫秒为单位表示经过时间的自定义刻度源.
  *他消除了使用`lv_tick_inc()`手动更新信号的需要*/
-#define LV_TICK_CUSTOM 1
+#define LV_TICK_CUSTOM 0
 #if LV_TICK_CUSTOM
     #define LV_TICK_CUSTOM_INCLUDE "sys.h"         /*Header for the system time function*/
     #define LV_TICK_CUSTOM_SYS_TIME_EXPR (tx_time_get())    /*Expression evaluating to current system time in ms*/
@@ -392,7 +392,7 @@
 
 /*Compiler prefix for a big array declaration in RAM*/
 /*RAM中大数组声明的编译器前缀*/
-#define LV_ATTRIBUTE_LARGE_RAM_ARRAY
+#define LV_ATTRIBUTE_LARGE_RAM_ARRAY __attribute__ ((section (".EXTERN_SRAM")))
 
 /*Place performance critical functions into a faster memory (e.g RAM)*/
 /*将性能关键功能放入速度更快的内存 (e.g RAM)*/
@@ -420,11 +420,11 @@
  *https://fonts.google.com/specimen/Montserrat*/
 /*Montserrat 字体，ASCII范围和一些符号使用bpp = 4
  *https://fonts.google.com/specimen/Montserrat*/
-#define LV_FONT_MONTSERRAT_8  1
-#define LV_FONT_MONTSERRAT_10 1
-#define LV_FONT_MONTSERRAT_12 1
-#define LV_FONT_MONTSERRAT_14 1
-#define LV_FONT_MONTSERRAT_16 1
+#define LV_FONT_MONTSERRAT_8  0
+#define LV_FONT_MONTSERRAT_10 0
+#define LV_FONT_MONTSERRAT_12 0
+#define LV_FONT_MONTSERRAT_14 0
+#define LV_FONT_MONTSERRAT_16 0
 #define LV_FONT_MONTSERRAT_18 0
 #define LV_FONT_MONTSERRAT_20 0
 #define LV_FONT_MONTSERRAT_22 0

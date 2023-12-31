@@ -33,7 +33,18 @@ static void dma_config(void);
 /**********************
  *  STATIC VARIABLES
  **********************/
-/* ���û������Ĵ�СΪ��Ļ��ȫ�ߴ��С */
+/* 将LVGL GUI显示的大内存放到外部sram中
+    需要配置fsmc与对应的linker文件以及
+    如下的宏定义才可以生效
+    目前显存大小为750k
+    另外显示小控件的内存开辟同样可以放到外部sram中
+    需要将如下两个conf.h中的宏定义进行修改
+    需要注意的是LV_MEM_ADR的其实地址要在现存的
+    750k地址之后，目前给显示小控件的内存开辟大小为
+    128k，整个外部sram中剩余内存为122k
+    #define LV_MEM_ADR  0x680bb800    
+    #define LV_ATTRIBUTE_LARGE_RAM_ARRAY __attribute__ ((section (".EXTERN_SRAM")))
+*/
 __attribute__((section(".EXTERN_SRAM")))   static lv_color_t buf_1[MY_DISP_HOR_RES * MY_DISP_VER_RES];  /*A buffer for 10 rows*/         
 /**********************
  *      MACROS

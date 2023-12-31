@@ -232,6 +232,7 @@ void HardFaultHandler(unsigned int* pStack) {
   HardFaultRegs.hfsr.byte       = NVIC_HFSR;    // Hard Fault Status Register
   HardFaultRegs.dfsr.byte       = NVIC_DFSR;    // Debug Fault Status Register
   HardFaultRegs.afsr            = NVIC_AFSR;    // Auxiliary Fault Status Register
+
   //
   // Halt execution
   // If NVIC registers indicate readable memory, change the variable value to != 0 to continue execution.
@@ -251,16 +252,16 @@ void HardFaultHandler(unsigned int* pStack) {
   HardFaultRegs.SavedRegs.pc       = pStack[6];  // Program counter PC
   HardFaultRegs.SavedRegs.psr.byte = pStack[7];  // Program status word PSR
   
-#if 0
+#if 1
   {
 	  const char *pError = ERR_INFO;
 	  uint8_t i;
 
 	  for (i = 0; i < strlen(ERR_INFO); i++)
 	  {
-		 USART1->TDR = pError[i];
+		 USART1->DR = pError[i];
 		 /* µÈ´ý·¢ËÍ½áÊø */
-		 while((USART1->ISR & USART_ISR_TC) == 0);
+		 while((USART1->SR & USART_SR_TC) == 0);
 	  }	
   }
 #endif

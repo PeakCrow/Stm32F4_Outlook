@@ -96,3 +96,7 @@
 ## 20.DispTaskInfo()接口目前无法正常跑出各个任务的数据来？
 
 - [ ] 
+
+## 21.adjust_pedal.c文件中的字体文件不能使用myFont20/myFont36的变量，会hardfaulthandler，但是使用lvgl自带的字体文件则没有问题？
+
+- [ ] 

@@ -5,7 +5,7 @@
 #define Drive_Pos_Size 2
 
 /**********************样式变量必须做为全局变量**************************/
-//static lv_style_t s_style_common;
+static lv_style_t s_style_common;
 static lv_style_t style_radio;
 static lv_style_t style_radio_chk;
 
@@ -43,7 +43,6 @@ static lv_timer_t * Realtime_Motorpos_timer;
 
 void Adjust_Pedal_Ui(lv_obj_t *parent)
 {
-	static lv_style_t s_style_common;
 	/* 定义并创建图像按钮 */
 	lv_obj_t* Imgbtn_MC;	
     Imgbtn_MC = lv_imgbtn_create(parent);
@@ -78,8 +77,20 @@ void Adjust_Pedal_Ui(lv_obj_t *parent)
 
 
 }
-
-
+static void App_btn_Back_Cb(lv_event_t* e)
+{
+    lv_event_code_t code = lv_event_get_code(e);
+    lv_obj_t* parent = lv_event_get_user_data(e);
+    switch ((uint8_t)code) {
+        case LV_EVENT_RELEASED:
+            {
+				/* 删除可调踏板界面中的定时器任务对象 */
+				lv_timer_del(Realtime_Motorpos_timer);
+                lv_obj_del(parent);
+            }
+            break;
+    }
+}
 static void Imgbtn_MC_cb(lv_event_t * e)
 {
     lv_event_code_t code = lv_event_get_code(e);
@@ -101,6 +112,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     char buf[12];
 	lv_obj_t * shadow_label1,*shadow_label2,*shadow_label3;
 	uint8_t pos_buf[2] = {0};
+	const lv_font_t *font = &myFont20;
 	
 	
     /* 样式配置 */
@@ -146,17 +158,16 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_style_set_shadow_opa(&style_warning, LV_OPA_50);
     lv_style_set_width(&style_warning, LV_SIZE_CONTENT);
     lv_style_set_height(&style_warning,LV_SIZE_CONTENT);
-	
-	/* 电机实时位置标签 */
-	pos_label = lv_label_create(parent);
-	lv_obj_align_to(pos_label,sw_label,LV_ALIGN_OUT_BOTTOM_MID,-50,100);
-	lv_obj_align(pos_label,LV_ALIGN_CENTER,0,0);	
-	lv_obj_add_style(pos_label,&style_warning,0);
+
+    /* 电机实时位置标签 */
+    pos_label = lv_label_create(parent);
+    lv_obj_align_to(pos_label,sw_label,LV_ALIGN_OUT_BOTTOM_MID,-50,100);
+    lv_obj_align(pos_label,LV_ALIGN_CENTER,0,0);	
+    lv_obj_add_style(pos_label,&style_warning,0);
     NumberConuts = DriverX_Pos.current_pos;
-	lv_label_set_text_fmt(pos_label,"Pedal_Pos:%.2f",NumberConuts);	
-	lv_obj_add_event_cb(pos_label,Pos_Label_Cb,LV_EVENT_ALL,pos_label);
-	
-		
+    lv_label_set_text_fmt(pos_label,"Pedal_Pos:%.2f",NumberConuts);	
+    lv_obj_add_event_cb(pos_label,Pos_Label_Cb,LV_EVENT_ALL,pos_label);
+
     /* 正转按钮 */
     forward_btn = lv_btn_create(parent);
     lv_obj_set_size(forward_btn,160,100);
@@ -164,7 +175,7 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     for_label = lv_label_create(parent);
     lv_label_set_text(for_label,"FORWARD");
     lv_obj_set_style_bg_color(forward_btn,lv_palette_main(LV_PALETTE_YELLOW),LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(for_label,&lv_font_montserrat_24,LV_PART_MAIN);
+    lv_obj_set_style_text_font(for_label,font,LV_PART_MAIN);
     lv_obj_align_to(for_label,forward_btn,LV_ALIGN_CENTER,0,0);
     lv_obj_add_event_cb(forward_btn,Forward_Btn_Cb,LV_EVENT_ALL,pos_label);
     lv_obj_add_style(forward_btn,&style_pr,LV_STATE_PRESSED);
@@ -177,13 +188,13 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     rev_label = lv_label_create(parent);
     lv_label_set_text(rev_label,"REVERSE");
     lv_obj_set_style_bg_color(reverse_btn,lv_palette_main(LV_PALETTE_GREEN),LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(rev_label,&lv_font_montserrat_24,LV_PART_MAIN);
+    lv_obj_set_style_text_font(rev_label,font,LV_PART_MAIN);
     lv_obj_align_to(rev_label,reverse_btn,LV_ALIGN_CENTER,0,0);
     lv_obj_add_event_cb(reverse_btn,Reverse_Btn_Cb,LV_EVENT_ALL,pos_label);
     lv_obj_add_style(reverse_btn,&style_pr,LV_STATE_PRESSED);
     lv_obj_add_style(reverse_btn,&style_def,0);	
-	
-	/* 正反转屏蔽按钮 */
+
+    /* 正反转屏蔽按钮 */
     shild_switch = lv_switch_create(parent);
     lv_obj_set_pos(shild_switch,650,40);
     lv_obj_add_state(shild_switch, LV_STATE_CHECKED);
@@ -244,79 +255,64 @@ static void Adjust_Pedal_In_Ui(lv_obj_t* parent)
     lv_obj_add_event_cb(zero_button,Zero_Btn_Cb,LV_EVENT_CLICKED,NULL);
 
     /* 车手位置label显示 */
-    lv_style_t style_shadow;
+    static lv_style_t style_shadow;
     lv_style_init(&style_shadow);
     lv_style_set_text_opa(&style_shadow,LV_OPA_30);
     lv_style_set_text_color(&style_shadow,lv_color_black());
-	
+
     driverpos_label1 = lv_label_create(parent);
     lv_obj_set_style_text_font(driverpos_label1,&lv_font_montserrat_24,LV_PART_MAIN);
-	I2C_EE_BufferRead(pos_buf,0x05,2);
+    I2C_EE_BufferRead(pos_buf,0x05,2);
     lv_label_set_text_fmt(driverpos_label1,"Driver %d Pos %d.%d ",0+1,pos_buf[0],pos_buf[1]);
-	DriverX_Pos.driver1_pos = pos_buf[0]+(float)(pos_buf[1]*1.0/100);
+    DriverX_Pos.driver1_pos = pos_buf[0]+(float)(pos_buf[1]*1.0/100);
     lv_obj_add_style(driverpos_label1,&style_shadow,0);
-    lv_obj_align_to(driverpos_label1,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(0+1)*40);	
-	//lv_obj_add_event_cb(driverpos_label1,Driverpos_Label_Cb,LV_EVENT_RELEASED,&NumberConuts);
+    lv_obj_align_to(driverpos_label1,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(0+1)*40);
 
     driverpos_label2 = lv_label_create(parent);
     lv_obj_set_style_text_font(driverpos_label2,&lv_font_montserrat_24,LV_PART_MAIN);
-	I2C_EE_BufferRead(pos_buf,0x05+1*Drive_Pos_Size,2);	
+    I2C_EE_BufferRead(pos_buf,0x05+1*Drive_Pos_Size,2);	
     lv_label_set_text_fmt(driverpos_label2,"Driver %d Pos %d.%d ",1+1,pos_buf[0],pos_buf[1]);
-	DriverX_Pos.driver2_pos = pos_buf[0]+(float)(pos_buf[1]*1.0/100);
+    DriverX_Pos.driver2_pos = pos_buf[0]+(float)(pos_buf[1]*1.0/100);
     lv_obj_add_style(driverpos_label2,&style_shadow,0);
-    lv_obj_align_to(driverpos_label2,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(1+1)*40);		
-	//lv_obj_add_event_cb(driverpos_label2,Driverpos_Label_Cb,LV_EVENT_RELEASED,&NumberConuts);
+    lv_obj_align_to(driverpos_label2,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(1+1)*40);
 
     driverpos_label3 = lv_label_create(parent);
     lv_obj_set_style_text_font(driverpos_label3,&lv_font_montserrat_24,LV_PART_MAIN);
-	I2C_EE_BufferRead(pos_buf,0x05+2*Drive_Pos_Size,2);	
+    I2C_EE_BufferRead(pos_buf,0x05+2*Drive_Pos_Size,2);	
     lv_label_set_text_fmt(driverpos_label3,"Driver %d Pos %d.%d ",2+1,pos_buf[0],pos_buf[1]);
-	DriverX_Pos.driver3_pos = pos_buf[0]+(float)(pos_buf[1]*1.0/100);
+    DriverX_Pos.driver3_pos = pos_buf[0]+(float)(pos_buf[1]*1.0/100);
     lv_obj_add_style(driverpos_label3,&style_shadow,0);
-    lv_obj_align_to(driverpos_label3,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(2+1)*40);	
-	//lv_obj_add_event_cb(driverpos_label3,Driverpos_Label_Cb,LV_EVENT_RELEASED,&NumberConuts);
+    lv_obj_align_to(driverpos_label3,pos_label,LV_ALIGN_OUT_BOTTOM_MID,0,(2+1)*40);
 
-	/* 阴影效果实现 */
+    /* 阴影效果实现 */
     {
-	    shadow_label1 = lv_label_create(parent);
-	    lv_obj_add_style(shadow_label1,&style_shadow,0);		
-	    lv_label_set_text(shadow_label1,lv_label_get_text(driverpos_label1));
-	    lv_obj_set_style_text_font(shadow_label1,&lv_font_montserrat_24,LV_PART_MAIN);
-	    lv_obj_align_to(shadow_label1,driverpos_label1,LV_ALIGN_TOP_LEFT,2,2);
+        shadow_label1 = lv_label_create(parent);
+        lv_style_set_text_opa(&style_shadow,LV_OPA_COVER);
+        lv_obj_add_style(shadow_label1,&style_shadow,0);		
+        lv_label_set_text(shadow_label1,lv_label_get_text(driverpos_label1));
+        lv_obj_set_style_text_font(shadow_label1,&lv_font_montserrat_24,LV_PART_MAIN);
+        lv_obj_align_to(shadow_label1,driverpos_label1,LV_ALIGN_TOP_LEFT,2,2);
 
-	    shadow_label2 = lv_label_create(parent);
-	    lv_obj_add_style(shadow_label2,&style_shadow,0);		
-	    lv_label_set_text(shadow_label2,lv_label_get_text(driverpos_label2));
-	    lv_obj_set_style_text_font(shadow_label2,&lv_font_montserrat_24,LV_PART_MAIN);
-	    lv_obj_align_to(shadow_label2,driverpos_label2,LV_ALIGN_TOP_LEFT,2,2);
-		
-	    shadow_label3 = lv_label_create(parent);	
-	    lv_obj_add_style(shadow_label3,&style_shadow,0);		
-	    lv_label_set_text(shadow_label3,lv_label_get_text(driverpos_label3));
-	    lv_obj_set_style_text_font(shadow_label3,&lv_font_montserrat_24,LV_PART_MAIN);
-	    lv_obj_align_to(shadow_label3,driverpos_label3,LV_ALIGN_TOP_LEFT,2,2);	
-		
-		lv_obj_add_event_cb(driverpos_label1,Driverpos1_Label_Cb,LV_EVENT_RELEASED,shadow_label1);
-		lv_obj_add_event_cb(driverpos_label2,Driverpos2_Label_Cb,LV_EVENT_RELEASED,shadow_label2);
-		lv_obj_add_event_cb(driverpos_label3,Driverpos3_Label_Cb,LV_EVENT_RELEASED,shadow_label3);
-	}
-	/* 创建一个LVGL定时器用来定时读取实时电机位置 */
-	Realtime_Motorpos_timer = lv_timer_create(Realtime_MotorPos_Cb,100,pos_label);
-	lv_timer_set_cb(Realtime_Motorpos_timer,Realtime_MotorPos_Cb);	
-}
-static void App_btn_Back_Cb(lv_event_t* e)
-{
-    lv_event_code_t code = lv_event_get_code(e);
-    lv_obj_t* parent = lv_event_get_user_data(e);
-    switch ((uint8_t)code) {
-        case LV_EVENT_RELEASED:
-            {
-				/* 删除可调踏板界面中的定时器任务对象 */
-				lv_timer_del(Realtime_Motorpos_timer);
-                lv_obj_del(parent);
-            }
-            break;
+        shadow_label2 = lv_label_create(parent);
+        lv_obj_add_style(shadow_label2,&style_shadow,0);		
+        lv_label_set_text(shadow_label2,lv_label_get_text(driverpos_label2));
+        lv_obj_set_style_text_font(shadow_label2,&lv_font_montserrat_24,LV_PART_MAIN);
+        lv_obj_align_to(shadow_label2,driverpos_label2,LV_ALIGN_TOP_LEFT,2,2);
+        
+        shadow_label3 = lv_label_create(parent);	
+        lv_obj_add_style(shadow_label3,&style_shadow,0);		
+        lv_label_set_text(shadow_label3,lv_label_get_text(driverpos_label3));
+        lv_obj_set_style_text_font(shadow_label3,&lv_font_montserrat_24,LV_PART_MAIN);
+        lv_obj_align_to(shadow_label3,driverpos_label3,LV_ALIGN_TOP_LEFT,2,2);	
+        
+        lv_obj_add_event_cb(driverpos_label1,Driverpos1_Label_Cb,LV_EVENT_RELEASED,shadow_label1);
+        lv_obj_add_event_cb(driverpos_label2,Driverpos2_Label_Cb,LV_EVENT_RELEASED,shadow_label2);
+        lv_obj_add_event_cb(driverpos_label3,Driverpos3_Label_Cb,LV_EVENT_RELEASED,shadow_label3);
     }
+    /* 创建一个LVGL定时器用来定时读取实时电机位置 */
+    Realtime_Motorpos_timer = lv_timer_create(Realtime_MotorPos_Cb,100,pos_label);
+    lv_timer_set_cb(Realtime_Motorpos_timer,Realtime_MotorPos_Cb);
+
 }
 
 /* 电机位置label显示回调函数 */

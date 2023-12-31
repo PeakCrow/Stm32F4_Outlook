@@ -9,13 +9,15 @@
 
 static void Imgbtn_MC_cb(lv_event_t * e);
 static lv_style_t s_style_common;
+static void Battery_Box_In_Ui(lv_obj_t * parent);
+static void App_btn_Back_Cb(lv_event_t* e);
+
 static lv_obj_t *slider_1, *slider_2, *slider_3;
 static const char *current_value_map[] = {"#ff0000 CURRENT#","\n","#00ff00 VALUE#",""};
 static const char *voltage_value_map[] = {"#ff0000 VOLTAGE#","\n","#00ff00 VALUE#",""};
 static const char *apps_value_map[] = {"#ff0000 APPS1/2#","\n","#00ff00 VALUE#",""};
 static const char *break_value_map[] = {"#ff0000 BREAK#","\n","#00ff00 VALUE#",""};
 static const char *tsms_value_map[] = {"#ff0000 TSMS#","\n","#00ff00 VALUE#",""};
-static void Battery_Box_In_Ui(lv_obj_t * parent);
 static void wave_animation(lv_obj_t * TargetObject, int delay,int end_value);
 static void particle_animation(lv_obj_t * TargetObject, int delay_time,int end_value);
 static void ofs_set_y_anim(void * img, int32_t v);
@@ -83,6 +85,7 @@ static void Battery_Box_In_Ui(lv_obj_t * parent)
     lv_obj_t * ui_Image_Particle2;
     lv_obj_t * ui_Image_Particle3;
     lv_obj_t * ui_Image_Battery_BG;
+
     lv_obj_t * ui_Wave2,* ui_Wave1;
     lv_obj_t * break_led,* tsms_led;
     lv_obj_t * apps_slider1,* apps_slider2;

@@ -18,15 +18,15 @@ static void lv_example_Monitor_Speed_Meter(void);
 static void Monitor_Main_Style(lv_obj_t* Monitor_Speed_Meter);
 static void Monitor_Main_label(void);
 //static void App_btn_Back_Cb(lv_event_t* e);
-static lv_obj_t* lv_example_btnmatrix(lv_obj_t *parent);
+static void lv_example_btnmatrix(lv_obj_t *parent);
 static void lv_gui_app_screen(void);
-static lv_obj_t *password_ui;
+
 
 void Gui_Monitor_App()
 {
     /* 记得需要做按键矩阵的开机输入密码界面 */
     lv_obj_set_style_bg_color(lv_scr_act(),lv_color_hex(0x123456),LV_STATE_DEFAULT);
-    password_ui = lv_example_btnmatrix(lv_scr_act());
+    lv_example_btnmatrix(lv_scr_act());
 }
 void lv_gui_app_screen()
 {
@@ -86,15 +86,7 @@ static void anim_2_indic_cb(lv_meter_indicator_t* indic, int32_t value)
 }
 static void lv_example_Monitor_Speed_Meter(void)
 {
-    const lv_font_t* font;
-
-    /* 根据屏幕大小设置字体 */
-    if (scr_act_width() <= 320)
-        font = &lv_font_montserrat_8;
-    else if (scr_act_width() < 480)
-        font = &lv_font_montserrat_10;
-    else
-        font = &lv_font_montserrat_24;
+    const lv_font_t* font = &myFont36;
 
     /* 定义并创建仪表 */
     Monitor_Speed_Meter = lv_meter_create(lv_scr_act());
@@ -129,17 +121,13 @@ static void lv_example_Monitor_Speed_Meter(void)
                                     4,//主刻度的宽度
                                     (unsigned short)(scr_act_height() / 13),//主刻度的长度
                                     lv_color_hex3(0xEEE),//主刻度的颜色
-                                    scr_act_height() / 40//刻度与标签之间的间隙
+                                    scr_act_height() / 15//刻度与标签之间的间隙
                                     );
     /* 设置仪表的角度和仪表的范围 */
-    lv_meter_set_scale_range(Monitor_Speed_Meter, scale, 0, 100, 270, 135);
+    lv_meter_set_scale_range(Monitor_Speed_Meter, scale, 0, 99, 270, 135);
     /* 添加指针 */
     lv_meter_indicator_t * indic = lv_meter_add_needle_line(Monitor_Speed_Meter,
-                             scale,
-                             6,
-                             lv_color_hex3(0xf34),
-                             -6
-                            );
+                             scale,6,lv_color_hex3(0xf34),-6);
     /* 设置指针指向的数值 */
     lv_meter_set_indicator_value(Monitor_Speed_Meter,
         indic,
@@ -213,13 +201,14 @@ void Monitor_Main_label()
     //设置速度值文本标签
     label_speed_value = lv_label_create(Monitor_Speed_Meter);
     //设置文本与颜色
-    lv_label_set_text(label_speed_value, "  33\nKm/h");
+    lv_label_set_text(label_speed_value, " 33\nkm/h");
+    lv_obj_set_style_text_color(label_speed_value,lv_color_hex(0x7fc241),LV_PART_MAIN);
     //设置文本对齐方式
-    lv_obj_align_to(label_speed_value,Monitor_Speed_Meter,LV_ALIGN_BOTTOM_MID,0,-10);
+    lv_obj_align_to(label_speed_value,Monitor_Speed_Meter,LV_ALIGN_BOTTOM_MID,0,0);
 }
 /**
  * @brief 创建界面公共函数，因为不同的界面的返回按键删除回调函数不同
- *			所以将按键删除函数作为参数传给界面创建公共函数
+ *          所以将按键删除函数作为参数传给界面创建公共函数
  * @param title:界面标题  App_btn_Back_Cb:界面删除函数
  * @param 返回一个满屏幕的容器，在此容器中创建子控件
 */
@@ -308,7 +297,7 @@ lv_obj_t* App_Common_Init(const char *title,App_btn_Back_Cb_Ptr App_btn_Back_Cb)
 static const char *num_map[] = { "1", "2", "3", "\n",
                                  "4", "5", "6", "\n",
                                  "7", "8", "9", "\n",
-                                 "#", "0", "%", "" };
+                                 "ok", "0", "no", "" };
 
 
 static lv_point_t points[] = {{0,0},{0,200}};       /* 线条坐标点数组 */
@@ -326,8 +315,12 @@ static lv_obj_t *password_error;                    /* 密码错误消息框 */
 static void btnm_event_cb(lv_event_t* e)
 {
     uint16_t id;
-    lv_event_code_t code = lv_event_get_code(e); /* 获取事件类型 */
-    lv_obj_t *target = lv_event_get_target(e); /* 获取触发源 */
+    lv_event_code_t code = lv_event_get_code(e);    /* 获取事件类型 */
+    lv_obj_t *target = lv_event_get_target(e);      /* 获取触发源 */
+    lv_obj_t* parent = lv_event_get_user_data(e);   /* 获取screen下的所有子对象 */
+    lv_obj_draw_part_dsc_t* dsc = lv_event_get_draw_part_dsc(e);
+    
+    
     static uint8_t btnmap_index = 0;
     if (code == LV_EVENT_VALUE_CHANGED)
     {
@@ -336,7 +329,10 @@ static void btnm_event_cb(lv_event_t* e)
         {
             if(!strcmp(btnmap_buf,"123456"))
             {
-                lv_obj_clean(password_ui);
+                /* 这里只能clean掉lv_scr_act屏幕下的所有obj，不能del
+                    因为会把lv_scr_act屏幕也del掉，会崩溃
+                */
+                lv_obj_clean(parent);
                 /* 将标志置1，打开主界面 */
                 lv_gui_app_screen();
             }else
@@ -366,10 +362,10 @@ static void btnm_event_cb(lv_event_t* e)
 * @param 无
 * @return 无
 */
-static lv_obj_t* lv_example_btnmatrix(lv_obj_t *parent)
+static void lv_example_btnmatrix(lv_obj_t *parent)
 {
     /* 根据屏幕宽度选择字体和图片缩放系数 */
-    font = &lv_font_montserrat_24;
+    font = &myFont36;
     /* 图片显示 */
     lv_obj_t *img = lv_img_create(parent);                                                      /* 创建图片部件 */
     lv_img_set_src(img, png_load_path(user.bin));                                               /* 设置图片源 */
@@ -381,6 +377,7 @@ static lv_obj_t* lv_example_btnmatrix(lv_obj_t *parent)
     lv_obj_t *label_user = lv_label_create(parent);                                             /* 创建标签 */
     lv_label_set_text(label_user, "USER");                                                      /* 设置文本 */
     lv_obj_set_style_text_font(label_user, font, LV_PART_MAIN);                                 /* 设置字体 */
+    lv_obj_set_style_text_color(label_user,lv_color_hex(0x7fc241),LV_PART_MAIN);                /* 字体为绿色 */
     lv_obj_set_style_text_align(label_user, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN);                /* 设置文本居中 */
     lv_obj_align_to(label_user, img, LV_ALIGN_OUT_BOTTOM_MID, 0, 10);                           /* 设置位置 */
 
@@ -419,8 +416,16 @@ static lv_obj_t* lv_example_btnmatrix(lv_obj_t *parent)
     lv_obj_set_style_bg_opa(btnm, 0, LV_PART_MAIN);                                             /* 设置主体背景透明度 */
     lv_obj_set_style_bg_opa(btnm, 0, LV_PART_ITEMS);                                            /* 设置按钮背景透明度 */
     lv_obj_set_style_shadow_width(btnm, 0, LV_PART_ITEMS);                                      /* 去除按钮阴影 */
-    lv_obj_add_event_cb(btnm, btnm_event_cb, LV_EVENT_VALUE_CHANGED, NULL);                     /* 设置按钮矩阵回调 */
-    
-    return parent;
+    lv_obj_set_style_text_color(btnm, lv_color_hex(0xffe897),LV_PART_MAIN | LV_PART_ITEMS);     /* 设置按键按钮的颜色 */
+    lv_obj_add_event_cb(btnm, btnm_event_cb, LV_EVENT_VALUE_CHANGED, parent);                   /* 设置按钮矩阵回调 */
 }
 
+/**
+* @brief lvgl组件的心跳时基，单位1ms
+* @param 无
+* @return 无
+*/
+void bsp_RunPer1ms()
+{
+    lv_tick_inc(1);
+}
