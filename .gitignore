@@ -41,6 +41,9 @@ Run_Xian.uvguix.Administrator
 Run_Xian.uvguix.TRX
 Run_Xian.uvoptix
 Run_Xian.dep
+Run_Xian.ewd
+Run_Xian.ewp
+Run_Xian.ewt
 Makefile
 Makefile.Debug
 Makefile.Release

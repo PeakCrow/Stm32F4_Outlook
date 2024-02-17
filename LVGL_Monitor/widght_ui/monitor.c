@@ -162,7 +162,6 @@ static void lv_example_Monitor_Speed_Meter(void)
     /* 开始动画 */
     lv_anim_start(&a);
 
-
     /* 设置动画的时间长度 */
     lv_anim_set_time(&a, 1000);
     lv_anim_set_playback_time(&a, 1000);
@@ -173,6 +172,11 @@ static void lv_example_Monitor_Speed_Meter(void)
     lv_anim_set_time(&a, 1000);
     lv_anim_set_playback_time(&a, 2000);
     lv_anim_set_var(&a, indic3);
+    lv_anim_start(&a);
+
+    lv_anim_set_time(&a, 3000);
+    lv_anim_set_playback_time(&a, 3000);
+    lv_anim_set_var(&a, indic);
     lv_anim_start(&a);
 
     //创建样式

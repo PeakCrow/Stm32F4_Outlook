@@ -16,7 +16,6 @@ static void lv_example_Monitor_Speed_Meter(void);
 #define scr_act_width()  lv_obj_get_width(lv_scr_act())
 
 static void Monitor_Main_Style(lv_obj_t* Monitor_Speed_Meter);
-static void Monitor_Main_label(void);
 //static void App_btn_Back_Cb(lv_event_t* e);
 static void lv_example_btnmatrix(lv_obj_t *parent);
 static void lv_gui_app_screen(void);
@@ -152,6 +151,17 @@ static void lv_example_Monitor_Speed_Meter(void)
                                                     lv_palette_main(LV_PALETTE_BLUE),//蓝
                                                     -(short)(scr_act_height() / 22.5)
                                                     );
+    //创建速度值标签
+    lv_obj_t* label_speed_value;
+
+    //设置速度值文本标签
+    label_speed_value = lv_label_create(Monitor_Speed_Meter);
+    //设置文本与颜色
+    lv_label_set_text(label_speed_value, " 33\nkm/h");
+    lv_obj_set_style_text_color(label_speed_value,lv_color_hex(0x7fc241),LV_PART_MAIN);
+    //设置文本对齐方式
+    lv_obj_align_to(label_speed_value,Monitor_Speed_Meter,LV_ALIGN_BOTTOM_MID,0,0);
+    
 #if LVGL_THREAD_X_ANIM == 1
     /* 设置指针动画 */
     lv_anim_t a;
@@ -188,24 +198,16 @@ static void lv_example_Monitor_Speed_Meter(void)
     lv_anim_set_playback_time(&a, 2000);
     lv_anim_set_var(&a, indic3);
     lv_anim_start(&a);
+    
+    lv_anim_set_time(&a, 3000);
+    lv_anim_set_playback_time(&a, 3000);
+    lv_anim_set_var(&a, indic);
+    lv_anim_start(&a);
 #endif
     //创建样式
     Monitor_Main_Style(Monitor_Speed_Meter);
-    //创建速度值标签
-    Monitor_Main_label();
 }
-void Monitor_Main_label()
-{
-    lv_obj_t* label_speed_value;
 
-    //设置速度值文本标签
-    label_speed_value = lv_label_create(Monitor_Speed_Meter);
-    //设置文本与颜色
-    lv_label_set_text(label_speed_value, " 33\nkm/h");
-    lv_obj_set_style_text_color(label_speed_value,lv_color_hex(0x7fc241),LV_PART_MAIN);
-    //设置文本对齐方式
-    lv_obj_align_to(label_speed_value,Monitor_Speed_Meter,LV_ALIGN_BOTTOM_MID,0,0);
-}
 /**
  * @brief 创建界面公共函数，因为不同的界面的返回按键删除回调函数不同
  *          所以将按键删除函数作为参数传给界面创建公共函数
