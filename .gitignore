@@ -3,12 +3,20 @@ build-qt_lvgl_simulink-Desktop_Qt_5_13_0_MinGW_64_bit-Debug/
 build-untitled-Desktop_Qt_5_13_0_MinGW_64_bit-Debug/
 debug_and_release/
 Out_Obj/
-Xian_Template/MDK-ARM(uV5)/Obj/
+Xian_Template_SW/MDK-ARM(uV5)/Obj/
 Run_Xian.uvguix.Administrator
 DebugConfig/
-Xian_Template/EW-ARM(v8x)/Flash/Obj
-Xian_Template/EW-ARM(v8x)/settings
-Xian_Template/MDK-ARM(uV5)/Listings
+Xian_Template_SW/EW-ARM(v8x)/Flash/Obj
+Xian_Template_SW/EW-ARM(v8x)/settings
+Xian_Template_SW/MDK-ARM(uV5)/Listings
+Xian_Template_HW/temp
+Xian_Template_HW/Core_Board_Pro/__Previews
+Xian_Template_HW/Core_Board_Pro/History
+Xian_Template_HW/Core_Board_Pro_EXTRA/__Previews
+Xian_Template_HW/Core_Board_Pro_EXTRS/History
+Xian_Template_HW/Core_Board_Pro/IC_DataSheet
+Xian_Template_HW/Project Outputs for Core_Boart_Pro
+Xian_Template_HW/Project logs for Core_Boart_Pro
 LVGL_Monitor/Debug
 LVGL_Monitor/debug
 LVGL_Monitor/.qtc_clangd
@@ -30,6 +38,7 @@ LVGL_Monitor/release
 *.axf
 *.chm
 *.user
+*.zip
 # Project files, i.e. `.project`, `.actionScriptProperties` and `.flexProperties`
 # should NOT be excluded as they contain compiler settings and other important
 # information for Eclipse / Flash Builder.
@@ -42,7 +51,6 @@ Run_Xian.uvguix.TRX
 Run_Xian.uvoptix
 Run_Xian.dep
 Run_Xian.ewd
-Run_Xian.ewp
 Run_Xian.ewt
 Makefile
 Makefile.Debug
