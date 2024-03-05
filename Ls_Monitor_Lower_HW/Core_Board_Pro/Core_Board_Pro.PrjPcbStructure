@@ -1,3 +1,0 @@
-Record=TopLevelDocument|FileName=MCU.SchDoc
-Record=SheetSymbol|SourceDocument=MCU.SchDoc|Designator=Designator|SchDesignator=Designator|FileName=Peripheral_Circuit_B.SchDoc|SymbolType=Normal|RawFileName=Peripheral_Circuit_B.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
-Record=SheetSymbol|SourceDocument=MCU.SchDoc|Designator=Designator1|SchDesignator=Designator1|FileName=Peripheral_Circuit_A.SchDoc|SymbolType=Normal|RawFileName=Peripheral_Circuit_A.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
