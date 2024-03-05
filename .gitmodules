@@ -1,0 +1,6 @@
+[submodule "Ls_Monitor_Lower_HW"]
+	path = Ls_Monitor_Lower_HW
+	url = https://gitee.com/tian-runxian/Ls_Monitor_Lower_HW
+[submodule "Ls_Monitor_Lower_SW"]
+	path = Ls_Monitor_Lower_SW
+	url = https://gitee.com/tian-runxian/Ls_Monitor_Lower_SW
