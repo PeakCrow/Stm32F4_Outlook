@@ -1,0 +1,186 @@
+本机型号：
+处理器：AMD Ryzen5 3600 6-Core 7nm
+内存：英睿达 DDR4 3000MHz 8GBx2 金士顿 DDR4 3200MHz 8GBx2
+显卡：AMD Radeon RX590 GME(8GB 华硕)
+主板：微星 B450M MORTAR MAX(MS-7B89)
+硬盘：西数 WDC WDS500G2B0C-00PXH0 500G
+硬盘：Zeeksys SSD 240G
+硬盘：希捷ST1000DM003-1CH162 1TB
+2023-04-05跑分：822475 击败74%
+
+SAVE Estm32F407zet6TemplateXian_TemplateDocTraceX_Data.trx 0x20000548,0x2000043c8
+
+MDK5编译：e:;cd E:\Ls_Monitor\Xian_Template\User;D:\Keil_v5\UV4\UV4.exe -b -j0 "Run_Xian.uvprojx" -o buildlog.txt;echo build completely system time:;time /t;type buildlog.txt;
+MDK5重新编译：e:;cd E:\Ls_Monitor\Xian_Template\User;D:\Keil_v5\UV4\UV4.exe -r -j0 "Run_Xian.uvprojx" -o rebuildlog.txt;echo rebuild completely system time:;time /t;type rebuildlog.txt;
+MDK5下载：e:;cd E:\Ls_Monitor\Xian_Template\User;D:\Keil_v5\UV4\UV4.exe -f -j0 "Run_Xian.uvprojx" -o loadlog.txt;type loadlog.txt;
+
+IAR编译：F:;cd F:\MCAL\generated_projects\e3640\E3_ref_gateway_E3640\iar_arm;IarBuild.exe E3_ref_gateway_E3640.ewp -make Debug -log info;echo make completely system time:;time /t;
+IAR重新编译：F:;cd F:\MCAL\generated_projects\e3640\E3_ref_gateway_E3640\iar_arm;IarBuild.exe E3_ref_gateway_E3640.ewp -build Debug -log info;echo build completely system time:;time /t;
+
+qt安装：
+1..run文件安装
+https://download.qt.io/archive/qt/
+chmod +x qt-opensource-linux-x64-5.12.3.run
+sudo ./qt-opensource-linux-x64-5.12.3.run
+2.安装其他依赖，新建hellowrld运行
+sudo apt-get install clang
+sudo apt-get install build-essential
+sudo apt-get install libgl1-mesa-dev
+3.运行qt
+runxian:/opt/Qt5.12.3/Tools/QtCreator/bin$ ./qtcreator
+
+git安装:
+1.安装
+sudo apt install git
+2.检查是否安装成功
+git version
+3.
+{
+					;远程子分支需要与本地分支同名，否则拒绝pull/push
+  git branch -r				;查看远程分支
+  git branch -a				;查看远程和本地分支
+  git rebase -i HEAD~4 			;合并前面4笔的提交，这样分支看起来会更干净
+  git push -u origin <分支名字> 		;远程创建一个分支
+  git push origin <本地分支名字>:<远程分支名字> 	;推送代码
+  git pull origin <远程分支名字>:<本地分支名字> 	;拉取代码
+  git push origin --delete <远程分支名字> 		;删除远程分支
+}
+git@gitee.com:tian-runxian/Ls_DashBoard_Demo.git
+安装vim
+1.安装
+sudo apt install vim
+2.查看是否安装成功
+vim --version
+
+修改文件权限
+1.对所有用户的权限将xxx.xxx改为可读写
+chmod a+rw xxx.xxx
+
+安装eclipse(注意安装C/C++版本即可)
+1.sudo tar -xzvf eclipse-cpp-2022-12-R-linux-gtk-x86_64.tar.gz -C /opt/eclipse
+
+eclipse-run-lvgl
+1.clone仓库
+git clone --recursive https://github.com/littlevgl/pc_simulator_sdl_eclipse.git
+2.安装SDL
+sudo apt-get update
+sudo apt-get install -y build-essential libsdl2-dev
+3.eclipse导入lvgl模拟器
+Open Eclipse CDT
+Click File->Import and choose General->Existing project into Workspace
+Browse the root directory of the project and click Finish
+Build your project and run it
+4.
+git clone git@gitee.com:tian-runxian/ls_monitor.git
+
+树莓派开启管理员权限
+1.sudo passwd root
+接着输入两次密码即可
+2.sudo passwd --status root
+返回P代表开启成功
+
+级联目录里的所有子目录与文件 到复制与改写权限
+1.sudo chmod -R 777 opt
+
+树莓派安装eclipse
+sudo apt-get install eclipse-cdt
+
+树莓派查看系统位数
+getconf LONG_BIT
+
+树莓派查看版本类型
+lsb_release -a
+
+uname -m 确定你使用的系统的架构
+
+树莓派换源
+1.sudo nano /etc/apt/sources.list
+# 默认注释了源码镜像以提高 apt update 速度，如有需要可自行取消注释
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-free
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-updates main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-backports main contrib non-free
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian/ bullseye-backports main contrib non-free
+deb https://mirrors.tuna.tsinghua.edu.cn/debian-security bullseye-security main contrib non-free
+# deb-src https://mirrors.tuna.tsinghua.edu.cn/debian-security bullseye-security main contrib non-free
+2.sudo nano /etc/apt/sources.list.d/raspi.list
+deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ bullseye main
+
+sudo apt-get update
+sudo apt-get upgrade
+sudo reboot
+
+树莓派安装cmake
+sudo apt-get install cmake
+
+安装gtk2
+sudo apt-get install libgtk2.0-dev
+
+终端进入eclipse安装目录
+./eclipse > /dev/null 2>&1 &
+
+有道翻译词典软件运行会造成qtcreater未响应
+
+ubuntu查看ip地址
+ip a
+
+winscp 从windows本地连接虚拟机
+1.虚拟机终端中输入 ip a 查看地址 >>inet 开始 ens33结尾的为正确的ip地址<<
+2.输入用户名 密码   runxiantian 134638  即可连接
+
+
+树莓派开始ssh服务
+1.sudo service ssh status 查看是否正在运行
+2.sudo service ssh start 启动ssh服务
+
+树莓派安装lua
+curl -R -O http://www.lua.org/ftp/lua-5.3.0.tar.gz
+tar zxf lua-5.3.0.tar.gz
+sudo apt -get install libreadline-dev
+cd lua-5.3.0
+make linux test
+make install
+
+树莓派安装中文输入法
+1.sudo apt-get update
+sudo apt-get install fcitx fcitx-googlepinyin
+sudo reboot
+2.在首选项中点击fcitx设置，点击+号
+3.将谷歌拼音放到第一位
+
+
+树莓派bullseye架构安装qt
+1.sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install qtbase5-dev qtchooser
+sudo apt-get install qt5-qmake qtbase5-dev-tools
+sudo apt-get install qtcreator
+sudo apt-get install qtdeclarative5-dev
+sudo apt-get install clang
+安装qt的串口模块
+sudo apt-get install libqt5serialport5
+sudo apt-get install libqt5serialport5-dev
+
+
+winscp连接树莓派虚拟机，提示网络错误拒绝，使用如下命令
+sudo /etc/init.d/ssh restart
+
+linux查看系统信息
+1.查看CPU信息
+cat /proc/cpuinfo
+2.查看内核版本
+cat /proc/version
+unmae -a
+3.查看内存信息
+cat /proc/meminfo
+free -h 此命令效果更直观
+4.查看FLASH存储器容量
+cat /proc/partitions
+lsblk 此命令效果更直观
+5.查看任务进程
+top 此命令类似于windows任务管理器，按下q或者ctrl+c退出
+6.查看支持的文件系统
+cat /proc/filesystems
+7.查看CPU当前主频
+cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
