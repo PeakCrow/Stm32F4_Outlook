@@ -6,6 +6,7 @@
 硬盘：西数 WDC WDS500G2B0C-00PXH0 500G
 硬盘：Zeeksys SSD 240G
 硬盘：希捷ST1000DM003-1CH162 1TB
+电源：安钛克 Antec NE750金牌全模组
 2023-04-05跑分：822475 击败74%
 
 SAVE Estm32F407zet6TemplateXian_TemplateDocTraceX_Data.trx 0x20000548,0x2000043c8
