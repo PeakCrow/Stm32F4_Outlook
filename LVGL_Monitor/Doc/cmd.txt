@@ -1,7 +1,7 @@
 本机型号：
 处理器：AMD Ryzen5 3600 6-Core 7nm
 内存：英睿达 DDR4 3000MHz 8GBx2 金士顿 DDR4 3200MHz 8GBx2
-显卡：AMD Radeon RX590 GME(8GB 华硕)
+显卡：AMD Radeon 6750 GRE(12GB 华硕)
 主板：微星 B450M MORTAR MAX(MS-7B89)
 硬盘：西数 WDC WDS500G2B0C-00PXH0 500G
 硬盘：Zeeksys SSD 240G

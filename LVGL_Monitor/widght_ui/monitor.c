@@ -310,7 +310,7 @@ lv_obj_t* App_Common_Init(const char *title,App_btn_Back_Cb_Ptr App_btn_Back_Cb)
 static const char *num_map[] = { "1", "2", "3", "\n",
                                  "4", "5", "6", "\n",
                                  "7", "8", "9", "\n",
-                                 "ok", "0", "del", "" };
+                                 "ok", "0", "x", "" };
 
 static lv_point_t points[] = {{0,0},{0,200}};       /* 线条坐标点数组 */
 
@@ -335,7 +335,7 @@ static void btnm_event_cb(lv_event_t* e)
     if (code == LV_EVENT_VALUE_CHANGED)
     {
         id = lv_btnmatrix_get_selected_btn(target); /* 获取按键索引 */
-        if(btnmap_index == 6 || !(strcmp(lv_btnmatrix_get_btn_text(target, id),"#")))
+        if(btnmap_index == 6 || !(strcmp(lv_btnmatrix_get_btn_text(target, id),"ok")))
         {
             LOG("btnmap_buf : %s\n",btnmap_buf);
             if(!strcmp(btnmap_buf,"123456"))
