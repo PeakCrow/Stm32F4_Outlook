@@ -4,10 +4,9 @@
 显卡：AMD Radeon 6750 GRE(12GB 华硕)
 主板：微星 B450M MORTAR MAX(MS-7B89)
 硬盘：西数 WDC WDS500G2B0C-00PXH0 500G
-硬盘：Zeeksys SSD 240G
-硬盘：希捷ST1000DM003-1CH162 1TB
+硬盘：宏碁掠夺者 GM7000 2T
 电源：安钛克 Antec NE750金牌全模组
-2023-04-05跑分：822475 击败74%
+2023-04-05跑分：1065232 击败66%
 
 SAVE Estm32F407zet6TemplateXian_TemplateDocTraceX_Data.trx 0x20000548,0x2000043c8
 
