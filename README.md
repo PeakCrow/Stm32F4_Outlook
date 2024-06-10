@@ -54,6 +54,22 @@
 ####  **LVGL模拟器效果** 
 ![输入图片说明](LVGL_Monitor/Doc/GIF/TFT%20Simulator.gif)
 
+#### 仓库拉取命令
+
+- ##### gitee地址：
+
+    - ```c
+        git clone https://gitee.com/tian-runxian/Ls_Monitor_Lower.git --recurse-submodules
+        ```
+
+- ##### github地址：
+
+    - ```c
+        git clone https://github.com/PeakCrow/Stm32F4_Outlook.git --recurse-submodules
+        ```
+
+    
+
 #### TO DO
 
 - bootloader
