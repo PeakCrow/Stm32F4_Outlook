@@ -100,3 +100,7 @@
 ## 21.adjust_pedal.c文件中的字体文件不能使用myFont20/myFont36的变量，会hardfaulthandler，但是使用lvgl自带的字体文件则没有问题？
 
 - [ ] 
+
+## 22.PB6 无法输出0v 3.3v，电压一直为1.6v？
+
+- [x] PB6被拿来用作PWM输出了，使用PB7初始化后，操作对应引脚的BSRR寄存器就可以拉低拉高
