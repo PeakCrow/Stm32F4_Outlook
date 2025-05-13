@@ -184,3 +184,11 @@ top 此命令类似于windows任务管理器，按下q或者ctrl+c退出
 cat /proc/filesystems
 7.查看CPU当前主频
 cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
+
+H7-TOOL远程连接配置
+H7-TOOL局域网IP: 192.168.1.4
+H7-TOOL UID: 004A0040 33325102 31383331
+服务器IP可选择 : 
+ 常州 61.160.207.173 
+ 北京 82.156.5.208 (强烈推荐 最稳定)
+ 香港 43.129.27.130
