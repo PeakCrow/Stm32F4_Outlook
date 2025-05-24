@@ -184,3 +184,27 @@ top 此命令类似于windows任务管理器，按下q或者ctrl+c退出
 cat /proc/filesystems
 7.查看CPU当前主频
 cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
+
+树莓派安装OS嵌入式交叉编译器
+sudo apt install build-essential
+sudo apt install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
+arm-linux-gnueabihf-gcc --version
+
+git生成本地公钥
+ssh-keygen -t rsa -n 4096 -C "your_email@example.com"
+查看公钥
+cat ~/.ssh/id_rsa.pub
+
+git初始化单个子仓库命令
+git submodule init
+git submodule update --remote
+
+
+cmake编译指令
+mkdir build
+cmake -G "Unix Makefiles" ..
+cmake -G "MinGW Makefiles" ..
+make
+
+树莓派安装嵌入式裸机交叉编译器
+sudo apt install gcc-arm-none-eabi
