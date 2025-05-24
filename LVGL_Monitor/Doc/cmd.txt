@@ -36,14 +36,14 @@ sudo apt install git
 git version
 3.
 {
-					;远程子分支需要与本地分支同名，否则拒绝pull/push
-  git branch -r				;查看远程分支
-  git branch -a				;查看远程和本地分支
-  git rebase -i HEAD~4 			;合并前面4笔的提交，这样分支看起来会更干净
-  git push -u origin <分支名字> 		;远程创建一个分支
-  git push origin <本地分支名字>:<远程分支名字> 	;推送代码
-  git pull origin <远程分支名字>:<本地分支名字> 	;拉取代码
-  git push origin --delete <远程分支名字> 		;删除远程分支
+    ;远程子分支需要与本地分支同名，否则拒绝pull/push
+    git branch -r                                ;查看远程分支
+    git branch -a                                ;查看远程和本地分支
+    git rebase -i HEAD~4                         ;合并前面4笔的提交，这样分支看起来会更干净
+    git push -u origin <分支名字>                 ;远程创建一个分支
+    git push origin <本地分支名字>:<远程分支名字>    ;推送代码
+    git pull origin <远程分支名字>:<本地分支名字>    ;拉取代码
+    git push origin --delete <远程分支名字>        ;删除远程分支
 }
 git@gitee.com:tian-runxian/Ls_DashBoard_Demo.git
 安装vim
@@ -185,6 +185,14 @@ cat /proc/filesystems
 7.查看CPU当前主频
 cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
 
+H7-TOOL远程连接配置
+H7-TOOL局域网IP: 192.168.1.4
+H7-TOOL UID: 004A0040 33325102 31383331
+服务器IP可选择 : 
+ 常州 61.160.207.173 
+ 北京 82.156.5.208 (强烈推荐 最稳定)
+ 香港 43.129.27.130
+
 树莓派安装OS嵌入式交叉编译器
 sudo apt install build-essential
 sudo apt install gcc-arm-linux-gnueabihf g++-arm-linux-gnueabihf
@@ -208,3 +216,4 @@ make
 
 树莓派安装嵌入式裸机交叉编译器
 sudo apt install gcc-arm-none-eabi
+
