@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# 定义项目根目录和自动编译脚本路径
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+
+AUTO_COMPILE_SCRIPT="$REPO_ROOT/Embedded_Test_Code/App_TestSample/GD32A7xx_MCAL_Project/GD32A71xx_MCAL_Project/GD32A71x_Mcal_Project/IAR_project_9_5/Project.ewp"
+
+# 调用自动编译脚本并传递 rebuild 参数
+AUTO_COMPILE_SCRIPT_WIN=$(cygpath -w "$AUTO_COMPILE_SCRIPT")
+echo "正在运行自动编译脚本 : $AUTO_COMPILE_SCRIPT_WIN rebuild"
+
+# 初始化编译状态标志
+COMPILE_SUCESS=false
+
+# 编译并直接在终端显示输出 同时检查是否成功
+if powershell.exe -Command "& {cd \"$(dirname "$AUTO_COMPILE_SCRIPT_WIN")\"; iarbuild.exe \"$(basename "$AUTO_COMPILE_SCRIPT_WIN")\" -build GD32A71xx -log errors}"\
+| tee /dev/tty | grep -q "Total number of errors: 0";then
+	COMPILE_SUCESS=true
+else
+	COMPILE_SUCESS=false
+fi
+
+# 根据编译状态决定是否允许 commit
+if [ "$COMPILE_SUCESS" = true ];then
+	echo "编译检查成功 允许 commit!"
+	exit 0
+else
+	echo "编译检查失败 禁止 commit!"
+	exit 1
+fi

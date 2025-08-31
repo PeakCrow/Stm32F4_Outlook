@@ -217,3 +217,8 @@ make
 树莓派安装嵌入式裸机交叉编译器
 sudo apt install gcc-arm-none-eabi
 
+Ls_Monitor_Lower_SW cmake 脚本编译命令
+mkdir build
+cd build
+cmake -G "Unix Makefiles" ..
+make 
