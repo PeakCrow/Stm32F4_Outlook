@@ -186,7 +186,7 @@ cat /proc/filesystems
 cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq
 
 H7-TOOL远程连接配置
-H7-TOOL局域网IP: 192.168.1.4
+H7-TOOL局域网192.168.10.112
 H7-TOOL UID: 004A0040 33325102 31383331
 服务器IP可选择 : 
  常州 61.160.207.173 
