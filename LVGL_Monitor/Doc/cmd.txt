@@ -221,5 +221,5 @@ Ls_Monitor_Lower_SW cmake 脚本编译命令
 mkdir build
 cd build
 cmake -DCMAKE_BUILD_TYPE=Debug -G "Unix Makefiles" ..
-make 
+make clean && make -j8
 

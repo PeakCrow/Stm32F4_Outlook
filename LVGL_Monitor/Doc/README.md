@@ -33,7 +33,7 @@
 
 ## 6.keil5无法debug，并且报错cannot access target. shutting down debug session？
 
-- [ ] 勾选Debug->Setting->Debug->Download Options->Verify Code Download/Download to Flash可以解决。
+- [x] 勾选Debug->Setting->Debug->Download Options->Verify Code Download/Download to Flash可以解决。
 
 ## 7.LVGL的定时器属性会打断RTOS的进程，就跟加载图片一样，但是动画属性也会，但是不如定时器属性明显，在传感器界面通过温度传感器和模拟量传感器数据的对比可以看出来？
 
@@ -95,7 +95,7 @@
 
 ## 20.DispTaskInfo()接口目前无法正常跑出各个任务的数据来？
 
-- [ ] 
+- [x] 主要是由于浮点打印和数据溢出的问题导致的数据消失
 
 ## 21.adjust_pedal.c文件中的字体文件不能使用myFont20/myFont36的变量，会hardfaulthandler，但是使用lvgl自带的字体文件则没有问题？
 
@@ -104,3 +104,7 @@
 ## 22.PB6 无法输出0v 3.3v，电压一直为1.6v？
 
 - [x] PB6被拿来用作PWM输出了，使用PB7初始化后，操作对应引脚的BSRR寄存器就可以拉低拉高
+
+## 23.打板后的LCD显示在显示几秒钟后无法维持？
+
+- [x] 原本的lcd reset pin被放在了mcu的reset pin上，这样可以正常使能，打板后没有配置lcd reset pin进行电平的正常维持，默认拉高后显示正常
